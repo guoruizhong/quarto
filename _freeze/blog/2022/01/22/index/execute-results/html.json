@@ -1,0 +1,16 @@
+{
+  "hash": "bccdbae303629b3117feaeda9c1d6748",
+  "result": {
+    "markdown": "---\ntitle: \"Use colorblind-friendly palette for visualization\"\ndate: 2022-01-22\nimage: colorblind_palette.jpg\ndescription: \"Use friendly colors in a graph with ggplot2\"\ncategories:\n  - r\n  - tidyverse\n  - ggplot2\n  - color\n---\n\n\n\n\n\n![](colorblind_palette.jpg)\n\n## Friendly palette\n\n\n::: {.cell layout-ncol=\"2\" layout-align=\"center\"}\n\n```{.r .cell-code}\n### friendly colors\n\ncbPalette <- c(\n    \"#000000\", \"#999999\", \"#E69F00\", \"#56B4E9\", \n    \"#009E73\", \"#F0E442\", \"#0072B2\", \"#D55E00\", \"#CC79A7\"\n)\n\nbarplot(1:8, col = cbPalette)\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-1-1.png){fig-align='center' width=85%}\n:::\n\n```{.r .cell-code}\n\n### gray colors\ncb <- c(\"gray\", \"lightgray\", \"darkgray\", \"black\")\nbarplot(1:4, col = cb)\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-1-2.png){fig-align='center' width=85%}\n:::\n:::\n\n\n## Use colors with ggplot2\n\n::: {.cell layout-ncol=\"2\" layout-align=\"center\"}\n\n```{.r .cell-code}\nlibrary(ggplot2)\n### To use for fills, add scale_fill_manual(values=cbPalette)\n### To use for line and point colors, add scale_colour_manual(values=cbPalette)\n### Generate a basic `ggplot2`. Map the color argument to a factor or grouping variable:\np1 <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) +\n  geom_point(aes(color = Species))\np1\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-2-1.png){fig-align='center' width=85%}\n:::\n\n```{.r .cell-code}\n## Set the color palette manually using a custom color scale:\np2 <- p1 + scale_color_manual(values = c(\"#00AFBB\", \"#E7B800\", \"#FC4E07\"))\np2\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-2-2.png){fig-align='center' width=85%}\n:::\n:::\n\n::: {.cell layout-ncol=\"2\" layout-align=\"center\"}\n\n```{.r .cell-code}\n## Use color blind-friendly palette:\ncbp1 <- c(\n  \"#999999\", \"#E69F00\", \"#56B4E9\", \"#009E73\",\n  \"#F0E442\", \"#0072B2\", \"#D55E00\", \"#CC79A7\"\n)\np3 <- p1 + scale_color_manual(values = cbp1)\np3\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-3-1.png){fig-align='center' width=85%}\n:::\n\n```{.r .cell-code}\n## Use RColorBrewer palettes:\np4 <- p1 + scale_color_brewer(palette = \"Dark2\")\np4\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-3-2.png){fig-align='center' width=85%}\n:::\n:::\n\n\n## Reference\n\n1. <http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/>\n2. <http://www.sthda.com/english/wiki/colors-in-r>\n3. <https://stackoverflow.com/questions/57153428/r-plot-color-combinations-that-are-colorblind-accessible>",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -1,0 +1,35 @@
+---
+title: "Blog"
+author: ""
+listing:
+  - id: posts_2022
+    contents: 
+      - "2022/**/index.qmd"
+      - "2022/**/index.md"
+    sort: "date desc"
+    template: ../html/blog/listing.ejs
+    categories: true
+  - id: posts_2021
+    contents: 
+      - "2021/**/index.qmd"
+      - "2021/**/index.md"
+    sort: "date desc"
+    template: ../html/blog/listing.ejs
+
+page-layout: full
+toc-title: Year
+toc-location: right
+date-format: "MMMM D, YYYY"
+code-tools: false
+comments: false
+---
+
+## 2022
+
+:::{#posts_2022}
+:::
+
+## 2021
+
+:::{#posts_2021}
+:::

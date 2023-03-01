@@ -1,0 +1,71 @@
+---
+title: "View data from 96/384 multi-well plates"
+date: 2022-08-01
+description: "plater makes it easy to work with data from experiments performed in plates."
+image: platetools.png
+categories:
+  - platetools
+  - R
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.width = 6, fig.height = 3.8,
+                      fig.align = "center", fig.retina = 3,
+                      out.width = "85%", collapse = TRUE)
+```
+
+```{r}
+#| warning: false
+# library(plater)
+library(platetools)
+library(ggplot2)
+library(viridis)
+```
+
+```{r}
+numbers <- 1:96
+num_to_well(numbers)
+```
+
+```{r}
+numbers <- 320:384
+num_to_well(numbers, plate = 384)
+```
+```{r}
+# example dataframe
+df <- data.frame(vals = rnorm(384),
+                 well = num_to_well(1:384, plate = 384))
+
+raw_map(data = df$vals,
+        well = df$well,
+        plate = 384) +
+    ggtitle("Example 384-well plate") +
+    theme_dark() +
+    scale_fill_viridis()
+```
+
+```{r}
+df01 <- data.frame(well = num_to_well(1:96),
+  vals = rnorm(96),
+  plate = 1)
+
+df02 <- data.frame(well = num_to_well(1:96),
+  vals = rnorm(96),
+  plate = 2)
+
+df <- rbind(df01, df02)
+
+raw_grid(data = df$vals,
+    well = df$well,
+    plate_id = df$plate,
+    plate = 96)
+
+```
+
+
+## Reference
+
+1. <https://gist.github.com/Swarchal/b938933ae9ded94b3c14d6485b27cf69>
+2. <https://rpubs.com/Swarchal/phenoScreen>
+3. <https://ropensci.org/blog/2017/02/06/plater-blog-post/>
+4. <https://cran.r-project.org/web/packages/plater/vignettes/plater-basics.html>

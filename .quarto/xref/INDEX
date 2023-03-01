@@ -1,0 +1,407 @@
+{
+  "index.qmd": {
+    "index.html": "b1fca97f"
+  },
+  "404.qmd": {
+    "404.html": "70b9a968"
+  },
+  "atom.qmd": {
+    "atom.html": "430b82ce"
+  },
+  "blog/2017/09/15/create-supply-and-demand-economics-curves-with-ggplot2/index.qmd": {
+    "index.html": "e9f33f0c"
+  },
+  "blog/2017/09/27/working-with-r-cairo-graphics-custom-fonts-and-ggplot/index.qmd": {
+    "index.html": "70e71073"
+  },
+  "blog/2018/02/15/derivatives-r-fun/index.qmd": {
+    "index.html": "9e04c7c6"
+  },
+  "blog/2018/03/07/amelia-tidy-melding/index.qmd": {
+    "index.html": "a150fc6a"
+  },
+  "blog/2018/03/08/amelia-broom-huxtable/index.qmd": {
+    "index.html": "ca05cd9c"
+  },
+  "blog/2018/07/30/disposable-supercomputer-future/index.qmd": {
+    "index.html": "420d7e32"
+  },
+  "blog/2018/12/05/test-any-hypothesis/index.qmd": {
+    "index.html": "58608683"
+  },
+  "blog/2018/12/17/academic-job-market-visualized/index.qmd": {
+    "index.html": "0dbc100b"
+  },
+  "blog/2019/01/29/diff-means-half-dozen-ways/index.qmd": {
+    "index.html": "a012de3a"
+  },
+  "blog/2019/02/16/algebra-calculus-r-yacas/index.qmd": {
+    "index.html": "40362959"
+  },
+  "blog/2019/10/09/convert-md-rtf-macos-services/index.qmd": {
+    "index.html": "3210fd47"
+  },
+  "blog/2020/01/01/flexdashboard-dynamic-data/index.qmd": {
+    "index.html": "b7e79e2c"
+  },
+  "blog/2020/01/10/makefile-subdirectory-zips/index.qmd": {
+    "index.html": "fcf7fc1a"
+  },
+  "blog/2020/02/25/closing-backdoors-dags/index.qmd": {
+    "index.html": "fc150857"
+  },
+  "blog/2020/03/12/emergency-online-teaching-resources/index.qmd": {
+    "index.html": "be7e8845"
+  },
+  "blog/2020/12/01/ipw-binary-continuous/index.qmd": {
+    "index.html": "50d64146"
+  },
+  "blog/2020/12/03/ipw-tscs-msm/index.qmd": {
+    "index.html": "4b34e90a"
+  },
+  "blog/2021/01/15/msm-gee-multilevel/index.qmd": {
+    "index.html": "a74be6ac"
+  },
+  "blog/2021/01/26/bayesian-cross-stitch-sampler/index.qmd": {
+    "index.html": "85850f1a"
+  },
+  "blog/2021/07/10/hex-cross-stitch/index.qmd": {
+    "index.html": "cda29d4f"
+  },
+  "blog/2021/07/20/afc-richmond-ted-lasso-cross-stitch/index.qmd": {
+    "index.html": "b47c4be0"
+  },
+  "blog/2021/08/21/r2-euler/index.qmd": {
+    "index.html": "e42670fa"
+  },
+  "blog/2021/08/25/twfe-diagnostics/index.qmd": {
+    "index.html": "c0e26248"
+  },
+  "blog/2021/08/27/tikz-knitr-html-svg-fun/index.qmd": {
+    "index.html": "77a87d05"
+  },
+  "blog/2021/09/07/do-calculus-backdoors/index.qmd": {
+    "index.html": "387703bb"
+  },
+  "blog/2021/11/08/beta-regression-guide/index.qmd": {
+    "index.html": "5b0d5a75"
+  },
+  "blog/2021/11/10/ame-bayes-re-guide/index.qmd": {
+    "index.html": "7efcb7ba"
+  },
+  "blog/2021/12/01/multilevel-models-panel-data-guide/index.qmd": {
+    "index.html": "b5fcbd0f"
+  },
+  "blog/2021/12/18/bayesian-propensity-scores-weights/index.qmd": {
+    "index.html": "f7919b1f"
+  },
+  "blog/2021/12/20/fully-bayesian-ate-iptw/index.qmd": {
+    "index.html": "ed96fb57"
+  },
+  "blog/2022/05/09/hurdle-lognormal-gaussian-brms/index.qmd": {
+    "index.html": "46b7dcbb"
+  },
+  "blog/2022/05/20/marginalia/index.qmd": {
+    "index.html": "cc33cf5c"
+  },
+  "blog/2022/06/23/long-labels-ggplot/index.qmd": {
+    "index.html": "2a8236ff"
+  },
+  "blog/2022/09/26/guide-visualizing-types-posteriors/index.qmd": {
+    "index.html": "40a89b36"
+  },
+  "blog/2022/11/29/conditional-marginal-marginaleffects/index.qmd": {
+    "index.html": "a1e4d9ab"
+  },
+  "blog/2022/12/08/log10-natural-log-scales-ggplot/index.qmd": {
+    "index.html": "07b2ef6e"
+  },
+  "blog/index.qmd": {
+    "index.html": "9852080c"
+  },
+  "cv/index.qmd": {
+    "index.html": "fe180f35"
+  },
+  "now/index.qmd": {
+    "index.html": "78b8c17f"
+  },
+  "research/articles/chaudhry-dotson-heiss-2021/index.qmd": {
+    "index.html": "32776052"
+  },
+  "research/articles/chaudhry-heiss-ngos-philanthropy/index.qmd": {
+    "index.html": "77e8f80e"
+  },
+  "research/articles/chaudhry-heiss-ngos-repression/index.qmd": {
+    "index.html": "9e33c323"
+  },
+  "research/articles/heiss-2012/index.qmd": {
+    "index.html": "8c111501"
+  },
+  "research/articles/heiss-2019-taking-control/index.qmd": {
+    "index.html": "cb9f0ce7"
+  },
+  "research/articles/heiss-johnson-2016/index.qmd": {
+    "index.html": "4d68e757"
+  },
+  "research/articles/heiss-kelley-2017/index.qmd": {
+    "index.html": "7deb6aa8"
+  },
+  "research/articles/heiss-kelley-2017a/index.qmd": {
+    "index.html": "05da1a8a"
+  },
+  "research/articles/peck-heiss-2021/index.qmd": {
+    "index.html": "2a18a9ce"
+  },
+  "research/articles/witesman-heiss-2016/index.qmd": {
+    "index.html": "cdf1a2d7"
+  },
+  "research/chapters/chaudhry-heiss-closing-space/index.qmd": {
+    "index.html": "76d36f6a"
+  },
+  "research/chapters/heiss-causal-inference-2021/index.qmd": {
+    "index.html": "46da994d"
+  },
+  "research/chapters/heiss-ngo-ir-2019/index.qmd": {
+    "index.html": "6fa1f542"
+  },
+  "research/chapters/johnson-heiss-2018/index.qmd": {
+    "index.html": "1a575f0b"
+  },
+  "research/dormant-working-papers/heiss-rogerson-discourse/index.qmd": {
+    "index.html": "81fdd33e"
+  },
+  "research/dormant-working-papers/heiss-rogerson-sources/index.qmd": {
+    "index.html": "75964eae"
+  },
+  "research/index.qmd": {
+    "index.html": "b3675379"
+  },
+  "research/reviews/heiss-death-idealism/index.qmd": {
+    "index.html": "794c97f5"
+  },
+  "research/reviews/heiss-voluntas-review-2014/index.qmd": {
+    "index.html": "0dc2d576"
+  },
+  "research/seminar-papers/heiss-ngo-cooperation/index.qmd": {
+    "index.html": "0e91d148"
+  },
+  "research/seminar-papers/heiss-undemocratic-leaders/index.qmd": {
+    "index.html": "38fc86d6"
+  },
+  "research/translations/heiss-abdel-samad-2011/index.qmd": {
+    "index.html": "92073920"
+  },
+  "research/translations/heiss-prince-2011/index.qmd": {
+    "index.html": "5ef224ca"
+  },
+  "research/working-papers/chaudhry-heiss-derogations/index.qmd": {
+    "index.html": "b379a7ea"
+  },
+  "research/working-papers/chaudhry-heiss-ngos-aid/index.qmd": {
+    "index.html": "6273eb77"
+  },
+  "research/working-papers/heiss-nafa-bayes-ipw/index.qmd": {
+    "index.html": "a163479d"
+  },
+  "research/working-papers/heiss-ye-np-causal-inference/index.qmd": {
+    "index.html": "2178a114"
+  },
+  "talks/index.qmd": {
+    "index.html": "01496ca0"
+  },
+  "teaching/index.qmd": {
+    "index.html": "3e65fe7b"
+  },
+  "uses/index.qmd": {
+    "index.html": "81726db2"
+  },
+  "blog/2007/09/17/using-arabic-in-indesign-without-indesign-me/index.md": {
+    "index.html": "8d9b3e2a"
+  },
+  "blog/2007/10/06/populating-a-livecycle-pdf-with-php-and-mysql/index.md": {
+    "index.html": "c28be81d"
+  },
+  "blog/2009/03/08/new-site-launched/index.md": {
+    "index.html": "b6161f8c"
+  },
+  "blog/2009/03/15/do-not-succumb-to-economic-stupidity/index.md": {
+    "index.html": "b392914d"
+  },
+  "blog/2009/03/18/libya-obsolete-paradigms-and-rip-van-winkle/index.md": {
+    "index.html": "ebcf18f8"
+  },
+  "blog/2009/04/26/typing-transliterated-arabic-quickly/index.md": {
+    "index.html": "5ba13f97"
+  },
+  "blog/2009/05/01/google-profile-business-cards/index.md": {
+    "index.html": "a139c94a"
+  },
+  "blog/2009/05/14/a-tale-of-three-taxis/index.md": {
+    "index.html": "869d1059"
+  },
+  "blog/2009/06/19/pdftk-php-officially-released/index.md": {
+    "index.html": "4b6f44f0"
+  },
+  "blog/2009/07/19/converting-a-blogger-blog-to-indesign-tagged-text/index.md": {
+    "index.html": "d5d4f0ad"
+  },
+  "blog/2009/07/28/on-narrowing-and-redefining-research/index.md": {
+    "index.html": "dd021fed"
+  },
+  "blog/2009/07/29/installing-pdftk-php/index.md": {
+    "index.html": "8727610e"
+  },
+  "blog/2009/07/30/alexandria-train-crash/index.md": {
+    "index.html": "67920690"
+  },
+  "blog/2009/08/01/using-google-voice-and-gizmo-project-together-internationally/index.md": {
+    "index.html": "5f14f566"
+  },
+  "blog/2009/08/18/itunes-plugin-for-flashbake/index.md": {
+    "index.html": "2276838d"
+  },
+  "blog/2009/09/23/flashbakectl-released/index.md": {
+    "index.html": "c939de12"
+  },
+  "blog/2010/02/28/queen-rania-at-auc/index.md": {
+    "index.html": "3f2b9551"
+  },
+  "blog/2010/09/24/ios4-multitasking-battery-life/index.md": {
+    "index.html": "26c7be50"
+  },
+  "blog/2011/01/27/mona-prince-on-egyptian-revolution/index.md": {
+    "index.html": "7cc72d11"
+  },
+  "blog/2011/02/03/in-tahrir-square/index.md": {
+    "index.html": "b44db955"
+  },
+  "blog/2011/06/19/fake-cloud-app-dropbox/index.md": {
+    "index.html": "656a36db"
+  },
+  "blog/2011/06/24/using-arabic-in-indesign-cs5-without-indesign-me/index.md": {
+    "index.html": "0d970063"
+  },
+  "blog/2011/06/25/world-ready-composer-not-perfect/index.md": {
+    "index.html": "4d232355"
+  },
+  "blog/2012/04/17/install-r-rstudio-r-commander-windows-osx/index.md": {
+    "index.html": "597af20a"
+  },
+  "blog/2012/07/02/gutenberg-ipsum/index.md": {
+    "index.html": "166961a2"
+  },
+  "blog/2013/03/15/side-by-side-page-numbers-indesign/index.md": {
+    "index.html": "26cbeda8"
+  },
+  "blog/2013/05/28/toggle-bluetooth-menu-applescript/index.md": {
+    "index.html": "5aaaed28"
+  },
+  "blog/2016/02/10/libreoffice-base-sqlite-odbc-osx/index.md": {
+    "index.html": "88118066"
+  },
+  "blog/2016/02/11/fauxcasts/index.md": {
+    "index.html": "6038d855"
+  },
+  "blog/2016/04/03/drone-sightings-in-the-us-visualized/index.md": {
+    "index.html": "0171ecf4"
+  },
+  "blog/2016/04/25/convert-logistic-regression-standard-errors-to-odds-ratios-with-r/index.md": {
+    "index.html": "b458001c"
+  },
+  "blog/2016/12/08/save-base-graphics-as-pseudo-objects-in-r/index.md": {
+    "index.html": "960997af"
+  },
+  "blog/2017/04/27/super-basic-practical-guide-to-docker-and-rstudio/index.md": {
+    "index.html": "522e9900"
+  },
+  "blog/2017/08/10/exploring-minards-1812-plot-with-ggplot2/index.md": {
+    "index.html": "ad52590e"
+  },
+  "blog/2017/08/26/quickly-play-with-polity-iv-and-oecd-data-and-see-the-danger-of-us-democracy/index.md": {
+    "index.html": "3f2bc8cf"
+  },
+  "blog/2018/12/26/tidytext-pos-john/index.md": {
+    "index.html": "f76c67a0"
+  },
+  "blog/2018/12/28/tidytext-pos-arabic/index.md": {
+    "index.html": "e22ed753"
+  },
+  "blog/2022/01/22/index.qmd": {
+    "index.html": "a27e3099"
+  },
+  "blog/2022/02/01/index.qmd": {
+    "index.html": "9a855429"
+  },
+  "blog/2022/05/02/index.qmd": {
+    "index.html": "57795ead"
+  },
+  "blog/2021/01/02/index.md": {
+    "index.html": "e39d1074"
+  },
+  "blog/2021/02/01/index.md": {
+    "index.html": "187575ba"
+  },
+  "blog/2021/03/16/index.md": {
+    "index.html": "8bcae6db"
+  },
+  "blog/2021/06/01/index.md": {
+    "index.html": "6e9b1440"
+  },
+  "blog/2022/10/01/mutation_nomenclature.md": {
+    "mutation_nomenclature.html": "a5fd43b8"
+  },
+  "blog/2022/11/01/T_lymphocytes_activation.md": {
+    "T_lymphocytes_activation.html": "3e909350"
+  },
+  "blog/2022/06/01/index.qmd": {
+    "index.html": "b10859e2"
+  },
+  "blog/2022/07/01/index.qmd": {
+    "index.html": "54dba83b"
+  },
+  "blog/2022/08/01/index.qmd": {
+    "index.html": "02125000"
+  },
+  "blog/2022/09/02/index.qmd": {
+    "index.html": "4a5335d7"
+  },
+  "blog/2022/10/01/index.md": {
+    "index.html": "dbb219ba"
+  },
+  "blog/2022/12/17/index.md": {
+    "index.html": "0bc6bd91"
+  },
+  "blog/2022/12/18/index.md": {
+    "index.html": "f1a414e7"
+  },
+  "etc/markdown/Amazon and Blogger.md": {
+    "Amazon and Blogger.html": "15334832"
+  },
+  "etc/presentations/code-cloud/plugin/markdown/example.md": {
+    "example.html": "86d415e3"
+  },
+  "etc/presentations/phd-data/plugin/markdown/example.md": {
+    "example.html": "6c6d5dab"
+  },
+  "blog/2022/12/19/index.md": {
+    "index.html": "2c24abb6"
+  },
+  "blog/2022/11/01/index.md": {
+    "index.html": "a5658c94"
+  },
+  "blog/2022/12/20/index.md": {
+    "index.html": "566e767f"
+  },
+  "blog/2022/12/24/index.qmd": {
+    "index.html": "510f7f10"
+  },
+  "blog/2022/12/21/index.qmd": {
+    "index.html": "8fe50595"
+  },
+  "blog/2022/12/24/index.md": {
+    "index.html": "9057ceaf"
+  },
+  "blog/2022/12/23/index.qmd": {
+    "index.html": "3e2bd688"
+  }
+}

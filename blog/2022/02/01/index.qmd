@@ -1,0 +1,125 @@
+---
+title: "Add errorbar and p-value on barplot with ggsignif"
+date: 2022-02-01
+description: ""
+image: barplot.png
+categories:
+  - ggsignif
+  - ggh4x
+  - ggplot2
+  - tidyverse
+  - R
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.width = 6, fig.height = 3.8,
+                      fig.align = "center", fig.retina = 3,
+                      out.width = "85%", collapse = TRUE)
+```
+
+
+## Prepare data
+```{r}
+#| warning: false
+library(tidyverse)
+library(ggsignif)
+library(ggh4x)
+dfb <- read.csv("221001_barplot.csv", header = FALSE)
+dfb
+dfb.1 <- dfb %>%
+    pivot_longer(!V1) %>%
+    select(V1, value) %>%
+    na.omit()
+dfb.1
+```
+
+## Define errorbar function
+```{r}
+ebtop <- function(x) {
+    return(mean(x) + sd(x) / sqrt(length(x)))
+}
+ebbottom <- function(x) {
+    return(mean(x) - sd(x) / sqrt(length(x)))
+}
+```
+
+## Add errorbar and p-value
+
+```{r}
+#| warning: false
+p <- ggplot(data = dfb.1, aes(x = V1, y = value)) +
+    stat_summary(
+        geom = "bar",
+        fun = mean,
+        fill = "#c6c3c3"
+    ) +
+    stat_summary(
+        geom = "errorbar",
+        fun.min = ebbottom,
+        fun.max = ebtop,
+        width = 0.2
+    ) +
+    geom_jitter(width = 0.3) +
+    geom_signif(
+        comparisons = list(
+            c("Control", "F5"),
+            c("Control", "pAtUbi3:CDS-Rps11-1"),
+            c("Control", "pAtUbi3:CDS-Rps11-2")
+        ),
+        test = t.test,
+        test.args = list(
+            var.equal = T,
+            alternative = "two.side"
+        ),
+        y_position = c(1.1, 1.3, 1.5),
+        annotations = c(""),
+        parse = T
+    ) +
+    annotate(
+        geom = "text",
+        x = 1.5, y = 1.15,
+        label = expression(italic(P) ~ "=" ~ 1.83 %*% 10^-6)
+    ) +
+    annotate(
+        geom = "text",
+        x = 2, y = 1.35,
+        label = expression(italic(P) ~ "=" ~ 2.71 %*% 10^-5)
+    ) +
+    annotate(
+        geom = "text",
+        x = 2.5, y = 1.55,
+        label = expression(italic(P) ~ "=" ~ 5.75 %*% 10^-8)
+    ) +
+    scale_y_continuous(
+        expand = c(0, 0),
+        limits = c(0, 1.6),
+        breaks = seq(0, 1, 0.2)
+    ) +
+    theme_minimal() +
+    theme(
+        panel.grid = element_blank(),
+        axis.line.y = element_line(),
+        axis.ticks.y = element_line(),
+        axis.title.y = element_text(
+            hjust = 0.25,
+            size = 15
+        ),
+        axis.text.x = element_text(
+            angle = 30,
+            hjust = 1,
+            size = 10
+        )
+    ) +
+    guides(y = guide_axis_truncated(
+        trunc_lower = 0,
+        trunc_upper = 1
+    )) +
+    labs(x = NULL, y = "Survival Rate")
+p
+```
+
+## Reference
+
+1. <https://www.nature.com/articles/s41467-021-26554-8#Sec23>
+2. <https://statisticsglobe.com/ggsignif-package-r>

@@ -1,0 +1,884 @@
+[
+  {
+    "objectID": "blog/2022/01/22/index.html#friendly-palette",
+    "href": "blog/2022/01/22/index.html#friendly-palette",
+    "title": "Use colorblind-friendly palette for visualization",
+    "section": "Friendly palette",
+    "text": "Friendly palette\n\n### friendly colors\n\ncbPalette <- c(\n    \"#000000\", \"#999999\", \"#E69F00\", \"#56B4E9\", \n    \"#009E73\", \"#F0E442\", \"#0072B2\", \"#D55E00\", \"#CC79A7\"\n)\n\nbarplot(1:8, col = cbPalette)\n### gray colors\ncb <- c(\"gray\", \"lightgray\", \"darkgray\", \"black\")\nbarplot(1:4, col = cb)"
+  },
+  {
+    "objectID": "blog/2022/01/22/index.html#use-colors-with-ggplot2",
+    "href": "blog/2022/01/22/index.html#use-colors-with-ggplot2",
+    "title": "Use colorblind-friendly palette for visualization",
+    "section": "Use colors with ggplot2",
+    "text": "Use colors with ggplot2\n\nlibrary(ggplot2)\n### To use for fills, add scale_fill_manual(values=cbPalette)\n### To use for line and point colors, add scale_colour_manual(values=cbPalette)\n### Generate a basic `ggplot2`. Map the color argument to a factor or grouping variable:\np1 <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) +\n  geom_point(aes(color = Species))\np1\n## Set the color palette manually using a custom color scale:\np2 <- p1 + scale_color_manual(values = c(\"#00AFBB\", \"#E7B800\", \"#FC4E07\"))\np2\n\n\n\n\n\n\n\n\n\n\n\n\n## Use color blind-friendly palette:\ncbp1 <- c(\n  \"#999999\", \"#E69F00\", \"#56B4E9\", \"#009E73\",\n  \"#F0E442\", \"#0072B2\", \"#D55E00\", \"#CC79A7\"\n)\np3 <- p1 + scale_color_manual(values = cbp1)\np3\n## Use RColorBrewer palettes:\np4 <- p1 + scale_color_brewer(palette = \"Dark2\")\np4"
+  },
+  {
+    "objectID": "blog/2022/01/22/index.html#reference",
+    "href": "blog/2022/01/22/index.html#reference",
+    "title": "Use colorblind-friendly palette for visualization",
+    "section": "Reference",
+    "text": "Reference\n\nhttp://www.cookbook-r.com/Graphs/Colors_(ggplot2)/\nhttp://www.sthda.com/english/wiki/colors-in-r\nhttps://stackoverflow.com/questions/57153428/r-plot-color-combinations-that-are-colorblind-accessible"
+  },
+  {
+    "objectID": "blog/2022/02/01/index.html",
+    "href": "blog/2022/02/01/index.html",
+    "title": "Add errorbar and p-value on barplot with ggsignif",
+    "section": "",
+    "text": "library(tidyverse)\nlibrary(ggsignif)\nlibrary(ggh4x)\ndfb <- read.csv(\"221001_barplot.csv\", header = FALSE)\ndfb\n\n                   V1   V2   V3   V4   V5   V6   V7 V8\n1             Control 0.06 0.00 0.39 0.22 0.22 0.36 NA\n2                  F5 0.99 1.00 0.95 0.97 0.97   NA NA\n3 pAtUbi3:CDS-Rps11-1 1.00 0.67 0.94 1.00 1.00   NA NA\n4 pAtUbi3:CDS-Rps11-2 0.94 1.00 0.94 0.94 1.00 1.00  1\n\ndfb.1 <- dfb %>%\n    pivot_longer(!V1) %>%\n    select(V1, value) %>%\n    na.omit()\ndfb.1\n\n# A tibble: 23 × 2\n   V1      value\n   <chr>   <dbl>\n 1 Control  0.06\n 2 Control  0   \n 3 Control  0.39\n 4 Control  0.22\n 5 Control  0.22\n 6 Control  0.36\n 7 F5       0.99\n 8 F5       1   \n 9 F5       0.95\n10 F5       0.97\n# … with 13 more rows"
+  },
+  {
+    "objectID": "blog/2022/02/01/index.html#define-errorbar-function",
+    "href": "blog/2022/02/01/index.html#define-errorbar-function",
+    "title": "Add errorbar and p-value on barplot with ggsignif",
+    "section": "Define errorbar function",
+    "text": "Define errorbar function\n\nebtop <- function(x) {\n    return(mean(x) + sd(x) / sqrt(length(x)))\n}\nebbottom <- function(x) {\n    return(mean(x) - sd(x) / sqrt(length(x)))\n}"
+  },
+  {
+    "objectID": "blog/2022/02/01/index.html#add-errorbar-and-p-value",
+    "href": "blog/2022/02/01/index.html#add-errorbar-and-p-value",
+    "title": "Add errorbar and p-value on barplot with ggsignif",
+    "section": "Add errorbar and p-value",
+    "text": "Add errorbar and p-value\n\np <- ggplot(data = dfb.1, aes(x = V1, y = value)) +\n    stat_summary(\n        geom = \"bar\",\n        fun = mean,\n        fill = \"#c6c3c3\"\n    ) +\n    stat_summary(\n        geom = \"errorbar\",\n        fun.min = ebbottom,\n        fun.max = ebtop,\n        width = 0.2\n    ) +\n    geom_jitter(width = 0.3) +\n    geom_signif(\n        comparisons = list(\n            c(\"Control\", \"F5\"),\n            c(\"Control\", \"pAtUbi3:CDS-Rps11-1\"),\n            c(\"Control\", \"pAtUbi3:CDS-Rps11-2\")\n        ),\n        test = t.test,\n        test.args = list(\n            var.equal = T,\n            alternative = \"two.side\"\n        ),\n        y_position = c(1.1, 1.3, 1.5),\n        annotations = c(\"\"),\n        parse = T\n    ) +\n    annotate(\n        geom = \"text\",\n        x = 1.5, y = 1.15,\n        label = expression(italic(P) ~ \"=\" ~ 1.83 %*% 10^-6)\n    ) +\n    annotate(\n        geom = \"text\",\n        x = 2, y = 1.35,\n        label = expression(italic(P) ~ \"=\" ~ 2.71 %*% 10^-5)\n    ) +\n    annotate(\n        geom = \"text\",\n        x = 2.5, y = 1.55,\n        label = expression(italic(P) ~ \"=\" ~ 5.75 %*% 10^-8)\n    ) +\n    scale_y_continuous(\n        expand = c(0, 0),\n        limits = c(0, 1.6),\n        breaks = seq(0, 1, 0.2)\n    ) +\n    theme_minimal() +\n    theme(\n        panel.grid = element_blank(),\n        axis.line.y = element_line(),\n        axis.ticks.y = element_line(),\n        axis.title.y = element_text(\n            hjust = 0.25,\n            size = 15\n        ),\n        axis.text.x = element_text(\n            angle = 30,\n            hjust = 1,\n            size = 10\n        )\n    ) +\n    guides(y = guide_axis_truncated(\n        trunc_lower = 0,\n        trunc_upper = 1\n    )) +\n    labs(x = NULL, y = \"Survival Rate\")\np"
+  },
+  {
+    "objectID": "blog/2022/02/01/index.html#reference",
+    "href": "blog/2022/02/01/index.html#reference",
+    "title": "Add errorbar and p-value on barplot with ggsignif",
+    "section": "Reference",
+    "text": "Reference\n\nhttps://www.nature.com/articles/s41467-021-26554-8#Sec23\nhttps://statisticsglobe.com/ggsignif-package-r\nhttps://mp.weixin.qq.com/s/JBxu9jeCduCy-UQ5MoHyKw"
+  },
+  {
+    "objectID": "blog/2022/05/02/index.html",
+    "href": "blog/2022/05/02/index.html",
+    "title": "How to plot scatter plot with truncated axis",
+    "section": "",
+    "text": "Load data\n\nlibrary(readxl)\nlibrary(tidyverse)\nlibrary(ggh4x)\nlibrary(latex2exp)\n\nfig1a <- read_excel(\"data.xlsx\", sheet = \"Figure_1A\")\nfig1a %>% head()\n\n# A tibble: 6 × 5\n  animal.number genotype Fat.mass Lean.Mass sex  \n          <dbl> <chr>       <dbl>     <dbl> <chr>\n1           109 WT           3.87      31.4 Male \n2           140 WT           6.98      28.0 Male \n3           141 WT           5.66      29.6 Male \n4           144 WT           4.37      30.8 Male \n5           145 WT           4.32      29.1 Male \n6           199 WT           1.62      27.7 Male \n\n\n\np1 <- fig1a %>%\n  filter(genotype == \"WT\") %>%\n  ggplot(aes(x = Lean.Mass, y = Fat.mass)) +\n  geom_point(shape = 21, size = 5, fill = \"#929292\", color = \"black\") +\n  scale_x_continuous(\n    limits = c(20, 40),\n    breaks = seq(20, 40, 5),\n    guide = \"axis_minor\",\n    minor_breaks = seq(22.5, 37.5, by = 5)\n  ) +\n  scale_y_continuous(\n    limits = c(0, 25),\n    breaks = seq(0, 25, 5),\n    guide = \"axis_minor\",\n    minor_breaks = c(8, 12)\n  ) +\n  theme_classic() +\n  theme(\n    ggh4x.axis.ticks.length.minor = rel(0.5),\n    axis.ticks.length.x = unit(0.5, \"lines\")\n  ) +\n  guides(\n    x = guide_axis_minor(trunc_lower = 20, trunc_upper = 40),\n    y = guide_axis_truncated(trunc_lower = 0, trunc_upper = 25)\n  ) +\n  geom_vline(xintercept = 32.5, lty = \"dashed\") +\n  geom_hline(yintercept = 10, lty = \"dashed\") +\n  labs(\n    x = NULL,\n    y = \"Fat mass (g)\"\n  ) +\n  annotate(geom = \"point\", x = 20, y = 23 + 1, shape = 21, size = 5, fill = \"#929292\") +\n  annotate(geom = \"text\", x = 20.5, y = 23 + 1, label = \"WT\", size = 5, hjust = 0) +\n  annotate(geom = \"point\", x = 20, y = 22 - 1, shape = 21, size = 5, fill = \"#0533ff\") +\n  annotate(geom = \"text\", x = 20.5, y = 22 - 1, label = TeX(r\"(\\textit{Nnat}${^+}{^/}{^-}{^p}$)\"), size = 5, hjust = 0)\n\n\np2 <- fig1a %>%\n  filter(genotype == \"Nnat+/-p\") %>%\n  ggplot(aes(x = Lean.Mass, y = Fat.mass)) +\n  geom_point(shape = 21, size = 5, fill = \"#0533ff\", color = \"black\") +\n  scale_x_continuous(\n    limits = c(20, 40),\n    breaks = seq(20, 40, 5),\n    guide = \"axis_minor\",\n    minor_breaks = seq(22.5, 37.5, by = 5)\n  ) +\n  scale_y_continuous(\n    limits = c(0, 25),\n    breaks = seq(0, 25, 5),\n    guide = \"axis_minor\",\n    minor_breaks = c(8, 12)\n  ) +\n  theme_classic() +\n  theme(\n    ggh4x.axis.ticks.length.minor = rel(0.5),\n    axis.ticks.length.x = unit(0.5, \"lines\"),\n    axis.line.y = element_blank(),\n    axis.ticks.y = element_blank(),\n    axis.text.y = element_blank()\n  ) +\n  guides(\n    x = guide_axis_minor(\n      trunc_lower = 20,\n      trunc_upper = 40\n    ),\n    y = guide_axis_truncated(\n      trunc_lower = 0,\n      trunc_upper = 25\n    )\n  ) +\n  geom_vline(xintercept = 32.5, lty = \"dashed\") +\n  geom_hline(yintercept = 10, lty = \"dashed\") +\n  labs(x = NULL, y = NULL)\n\nlibrary(patchwork)\np1 + p2 + labs(x = \"Lean mass (g)\") + theme(axis.title.x = element_text(hjust = -0.12))\n\nWarning in is.na(x): is.na() applied to non-(list or vector) of type\n'expression'"
+  },
+  {
+    "objectID": "blog/2022/06/01/index.html",
+    "href": "blog/2022/06/01/index.html",
+    "title": "Visualizing clusters with heatmaps",
+    "section": "",
+    "text": "library(pheatmap) ## for heatmap generation\nlibrary(tidyverse) ## for data wrangling\nlibrary(ggplotify) ## to convert pheatmap to ggplot2\nlibrary(heatmaply) ## for constructing interactive heatmap\nlibrary(ComplexHeatmap)"
+  },
+  {
+    "objectID": "blog/2022/06/01/index.html#prepare-data",
+    "href": "blog/2022/06/01/index.html#prepare-data",
+    "title": "Visualizing clusters with heatmaps",
+    "section": "Prepare data",
+    "text": "Prepare data\n\ntest <- matrix(rnorm(200), 20, 10)\ntest[1:10, seq(1, 10, 2)] <- test[1:10, seq(1, 10, 2)] + 3\ntest[11:20, seq(2, 10, 2)] <- test[11:20, seq(2, 10, 2)] + 2\ntest[15:20, seq(2, 10, 2)] <- test[15:20, seq(2, 10, 2)] + 4\ncolnames(test) <- paste(\"Test\", 1:10, sep = \"\")\nrownames(test) <- paste(\"Gene\", 1:20, sep = \"\")\ntest\n\n            Test1       Test2      Test3       Test4      Test5      Test6\nGene1   1.6101920 -0.36083185  2.9419856 -0.77843617  3.3601305  1.7155838\nGene2   1.7888341  0.25399548  3.2275570 -0.63279331  3.4230905  0.8322741\nGene3   3.7140276  1.38742541  2.2297897 -0.66596674  1.9400389  0.1852566\nGene4   2.3404101 -0.12534671  3.1307937 -0.27051326  3.9165792 -2.1516039\nGene5   2.4154800  1.38997339  4.6213946 -1.91931446  1.6072542  2.0194700\nGene6   4.3764934  0.01495267  1.8540463  0.41587290  3.3043292 -0.3496422\nGene7   2.5729961  0.20959449  3.3112268  1.07589995  2.7270495 -0.2211672\nGene8   2.7977074  1.13004408  1.8496947 -1.18815717  2.2768207 -0.9870381\nGene9   2.4753143  0.27392906  4.0437985  0.73601929  2.3160668  0.6751547\nGene10  3.7928631  0.08072923  2.5143368 -0.00498094  4.1076280 -0.2518542\nGene11 -0.3560912  2.86555081  1.1274958  2.04703001 -2.5874892  0.5933322\nGene12  0.7778166  1.42211819 -0.2889914  1.96542341 -0.3108358  1.4200012\nGene13  0.2092981  2.73473109 -0.1913925  1.02241547 -3.1603589  1.9805313\nGene14  0.9624349  2.80749442 -2.2040140  2.45535874  1.0724724  3.3352803\nGene15 -0.2520438  6.59794338  0.9711581  5.40530706  1.1725079  6.2781478\nGene16  0.9569997  5.09113523 -0.6873934  5.32550787  0.7611673  7.8612532\nGene17 -2.3975850  6.60513341 -1.1037555  5.51212146  0.5570226  4.0428877\nGene18 -0.8237663  5.05654057  0.5333799  5.50484026 -0.3289425  5.0955091\nGene19  0.7315109  6.95773144 -1.1014985  6.39877479 -0.5359625  5.1377011\nGene20 -1.2835494  6.87021888 -0.8186217  5.67954226  0.3043498  5.6519702\n            Test7      Test8       Test9     Test10\nGene1   3.6704358  0.7810713  2.59710019 -0.6639444\nGene2   2.2397840  0.8708925  3.64860275  0.7879721\nGene3   2.9355681  0.2587471  4.54197547  2.3937978\nGene4   1.2268859 -1.2187872  5.52687323  0.7331436\nGene5   3.9929190 -1.1033196  3.50401556  0.5616194\nGene6   3.1583987 -0.1998753  3.79265956 -1.4549084\nGene7   5.2525945  1.2405634  2.92927386 -0.1387731\nGene8   2.6089302 -1.2309571  4.01341245  1.0699240\nGene9   3.1017760 -0.4964436  3.08748087 -0.3586242\nGene10  3.3141882  1.3754729  4.48935332  0.2807511\nGene11 -1.3112621  3.0238229  0.64526084  3.9392547\nGene12  0.2515411  2.2402767  1.73604467  3.0443134\nGene13  0.6167012  2.2541606  0.20913017  0.3711738\nGene14  1.9832614 -0.2122922 -0.12479896  1.2863279\nGene15 -1.5473633  7.4548500 -0.39711393  5.5722074\nGene16  1.0397222  6.2104608  1.03863251  6.2886689\nGene17 -0.4315814  6.4424516  0.05465291  6.3328976\nGene18  0.8932720  5.0177915  0.59899716  5.1968273\nGene19  0.5575794  7.0525224  0.22005584  6.4387061\nGene20  1.8908738  5.4879034  0.69349838  6.4402674"
+  },
+  {
+    "objectID": "blog/2022/06/01/index.html#pheatmap",
+    "href": "blog/2022/06/01/index.html#pheatmap",
+    "title": "Visualizing clusters with heatmaps",
+    "section": "pheatmap",
+    "text": "pheatmap\n\n### Add anotation col\nannotation_col <- data.frame(\n  CellType = factor(rep(c(\"CT1\", \"CT2\"), 5)),\n  Time = 1:5\n)\nrownames(annotation_col) <- paste(\"Test\", 1:10, sep = \"\")\n\nannotation_row <- data.frame(\n  GeneClass = factor(rep(c(\"Path1\", \"Path2\", \"Path3\"), c(10, 4, 6)))\n)\nrownames(annotation_row) <- paste(\"Gene\", 1:20, sep = \"\")\n\nann_colors <- list(\n  Time = c(\"white\", \"firebrick\"),\n  CellType = c(CT1 = \"#1B9E77\", CT2 = \"#D95F02\"),\n  GeneClass = c(Path1 = \"#7570B3\", Path2 = \"#E7298A\", Path3 = \"#66A61E\")\n)\npheatmap(test,\n  annotation_col = annotation_col,\n  annotation_row = annotation_row,\n  annotation_colors = ann_colors\n)\n\n\n\n\n\n### split column and row\npheatmap(test,\n  annotation_col = annotation_col,\n  annotation_row = annotation_row,\n  annotation_colors = ann_colors,\n  row_split = annotation_row$GeneClass,\n  column_split = annotation_col$CellType\n)\n\n\n\n\n\n## Combine multiple heatmap\np1 <- pheatmap(test, name = \"mat1\")\np2 <- rowAnnotation(foo = anno_barplot(1:nrow(test)))\np3 <- pheatmap(test,\n  name = \"mat2\",\n  col = c(\"navy\", \"white\", \"firebrick3\")\n)\np1 + p2 + p3\n\n\n\n\n\n## Don't cluster\npheatmap(test,\n  annotation_col = annotation_col,\n  annotation_row = annotation_row,\n  annotation_colors = ann_colors,\n  row_split = annotation_row$GeneClass,\n  column_split = annotation_col$CellType,\n  cluster_rows = FALSE,\n  cluster_cols = FALSE\n)\n\n\n\n\nReference:\n\nhttps://jokergoo.github.io/ComplexHeatmap-reference/book/index.html\nhttps://jcoliver.github.io/learn-r/006-heatmaps.html\nhttps://statisticsglobe.com/draw-heatmap-like-plot-categorical-variables-r\nhttps://btep.ccr.cancer.gov/docs/data-visualization-with-r/Lesson5_intro_to_ggplot/"
+  },
+  {
+    "objectID": "blog/2022/07/01/index.html",
+    "href": "blog/2022/07/01/index.html",
+    "title": "Volano plot with ggvolcano",
+    "section": "",
+    "text": "library(ggVolcano)\n\n\ndata(deg_data)\nview(deg_data)\ndata <- add_regulate(deg_data,\n  log2FC_name = \"log2FoldChange\",\n  fdr_name = \"padj\", log2FC = 1, fdr = 0.05\n) # add column\n\nggvolcano(data,\n  x = \"log2FoldChange\", y = \"padj\",\n  label = \"row\", label_number = 10, output = FALSE\n)\n\n\n\n\n\n# Change the fill and color manually:\np1 <- ggvolcano(data,\n  x = \"log2FoldChange\", y = \"padj\",\n  fills = c(\"#e94234\", \"#b4b4d8\", \"#269846\"),\n  colors = c(\"#e94234\", \"#b4b4d8\", \"#269846\"),\n  label = \"row\", label_number = 10, output = FALSE\n)\n\np2 <- ggvolcano(data,\n  x = \"log2FoldChange\", y = \"padj\",\n  label = \"row\", label_number = 10, output = FALSE\n) +\n  ggsci::scale_color_aaas() +\n  ggsci::scale_fill_aaas()\n\nScale for colour is already present.\nAdding another scale for colour, which will replace the existing scale.\nScale for fill is already present.\nAdding another scale for fill, which will replace the existing scale.\n\n#> Scale for 'colour' is already present. Adding another scale for 'colour', which\n#> will replace the existing scale.\n#> Scale for 'fill' is already present. Adding another scale for 'fill', which\n#> will replace the existing scale.\n\nlibrary(patchwork)\np1 | p2"
+  },
+  {
+    "objectID": "blog/2022/07/01/index.html#gradual_volcano",
+    "href": "blog/2022/07/01/index.html#gradual_volcano",
+    "title": "Volano plot with ggvolcano",
+    "section": "gradual_volcano",
+    "text": "gradual_volcano\n\n# plot\ngradual_volcano(deg_data,\n  x = \"log2FoldChange\", y = \"padj\",\n  label = \"row\", label_number = 10, output = FALSE\n)\n\n\n\n\n\nlibrary(RColorBrewer)\n\n# Change the fill and color manually:\np1 <- gradual_volcano(data,\n  x = \"log2FoldChange\", y = \"padj\",\n  fills = brewer.pal(5, \"RdYlBu\"),\n  colors = brewer.pal(8, \"RdYlBu\"),\n  label = \"row\", label_number = 10, output = FALSE\n)\n\np2 <- gradual_volcano(data,\n  x = \"log2FoldChange\", y = \"padj\",\n  label = \"row\", label_number = 10, output = FALSE\n) +\n  ggsci::scale_color_gsea() +\n  ggsci::scale_fill_gsea()\n\nScale for colour is already present.\nAdding another scale for colour, which will replace the existing scale.\nScale for fill is already present.\nAdding another scale for fill, which will replace the existing scale.\n\n#> Scale for 'colour' is already present. Adding another scale for 'colour', which\n#> will replace the existing scale.\n#> Scale for 'fill' is already present. Adding another scale for 'fill', which\n#> will replace the existing scale.\n\nlibrary(patchwork)\np1 | p2"
+  },
+  {
+    "objectID": "blog/2022/07/01/index.html#term_volcano-for-go-pathway",
+    "href": "blog/2022/07/01/index.html#term_volcano-for-go-pathway",
+    "title": "Volano plot with ggvolcano",
+    "section": "term_volcano for go pathway",
+    "text": "term_volcano for go pathway\n\ndata(\"term_data\")\n\n# plot\nterm_volcano(deg_data, term_data,\n  x = \"log2FoldChange\", y = \"padj\",\n  label = \"row\", label_number = 10, output = FALSE\n)\n\n\n\n\n\nlibrary(RColorBrewer)\n\n# Change the fill and color manually:\ndeg_point_fill <- brewer.pal(5, \"RdYlBu\")\nnames(deg_point_fill) <- unique(term_data$term)\n\nterm_volcano(data, term_data,\n  x = \"log2FoldChange\", y = \"padj\",\n  normal_point_color = \"#75aadb\",\n  deg_point_fill = deg_point_fill,\n  deg_point_color = \"grey\",\n  legend_background_fill = \"#deeffc\",\n  label = \"row\", label_number = 10, output = FALSE\n)\n\n\n\n\nRef: 1. https://github.com/BioSenior/ggGantt"
+  },
+  {
+    "objectID": "blog/2022/08/01/index.html",
+    "href": "blog/2022/08/01/index.html",
+    "title": "View data from 96/384 multi-well plates",
+    "section": "",
+    "text": "# library(plater)\nlibrary(platetools)\nlibrary(ggplot2)\nlibrary(viridis)"
+  },
+  {
+    "objectID": "blog/2022/08/01/index.html#reference",
+    "href": "blog/2022/08/01/index.html#reference",
+    "title": "View data from 96/384 multi-well plates",
+    "section": "Reference",
+    "text": "Reference\n\nhttps://gist.github.com/Swarchal/b938933ae9ded94b3c14d6485b27cf69\nhttps://rpubs.com/Swarchal/phenoScreen\nhttps://ropensci.org/blog/2017/02/06/plater-blog-post/\nhttps://cran.r-project.org/web/packages/plater/vignettes/plater-basics.html"
+  },
+  {
+    "objectID": "blog/2022/09/02/index.html",
+    "href": "blog/2022/09/02/index.html",
+    "title": "Add experimental conditions to multi-well plates",
+    "section": "",
+    "text": "library(plater)"
+  },
+  {
+    "objectID": "blog/2022/09/02/index.html#reference",
+    "href": "blog/2022/09/02/index.html#reference",
+    "title": "Add experimental conditions to multi-well plates",
+    "section": "Reference",
+    "text": "Reference\n\n\nFrom a million nested ifelses to the plater package\nGetting started with plater"
+  },
+  {
+    "objectID": "blog/index.html",
+    "href": "blog/index.html",
+    "title": "Blog",
+    "section": "",
+    "text": "October 1, 2022\n        \n        \n            Nomenclature for the description of mutations and variations\n            \n                \n                    Nomenclature\n                \n            \n            \n        \n        \n            \n        \n    \n    \n                  \n            September 2, 2022\n        \n        \n            Add experimental conditions to multi-well plates\n            \n                \n                    plater\n                \n                \n                    R\n                \n            \n            Tools for interacting with data from experiments done in microtiter plates. Easily read in plate-shaped data and convert it to tidy format, combine plate-shaped data with tidy data, and view tidy data in plate shape.\n        \n        \n            \n        \n    \n    \n                  \n            August 1, 2022\n        \n        \n            View data from 96/384 multi-well plates\n            \n                \n                    platetools\n                \n                \n                    R\n                \n            \n            plater makes it easy to work with data from experiments performed in plates.\n        \n        \n            \n        \n    \n    \n                  \n            July 1, 2022\n        \n        \n            Volano plot with ggvolcano\n            \n                \n                    ggvolcano\n                \n                \n                    R\n                \n            \n            \n        \n        \n            \n        \n    \n    \n                  \n            June 1, 2022\n        \n        \n            Visualizing clusters with heatmaps\n            \n                \n                    pheatmap\n                \n                \n                    R\n                \n            \n            \n        \n        \n            \n        \n    \n    \n                  \n            May 2, 2022\n        \n        \n            How to plot scatter plot with truncated axis\n            \n                \n                    ggh4x\n                \n                \n                    ggplot2\n                \n                \n                    tidyverse\n                \n                \n                    R\n                \n            \n            \n        \n        \n            \n        \n    \n    \n                  \n            February 1, 2022\n        \n        \n            Add errorbar and p-value on barplot with ggsignif\n            \n                \n                    ggsignif\n                \n                \n                    ggh4x\n                \n                \n                    ggplot2\n                \n                \n                    tidyverse\n                \n                \n                    R\n                \n            \n            \n        \n        \n            \n        \n    \n    \n                  \n            January 22, 2022\n        \n        \n            Use colorblind-friendly palette for visualization\n            \n                \n                    r\n                \n                \n                    tidyverse\n                \n                \n                    ggplot2\n                \n                \n                    color\n                \n            \n            Use friendly colors in a graph with ggplot2\n        \n        \n            \n        \n    \n\n\nNo matching items"
+  },
+  {
+    "objectID": "blog/index.html#section-1",
+    "href": "blog/index.html#section-1",
+    "title": "Blog",
+    "section": "2021",
+    "text": "2021\n\n\n    \n                  \n            June 1, 2021\n        \n        \n            Using greek unicode in Inkscape\n            \n                \n                    Inkscape\n                \n                \n                    Greek letters\n                \n            \n            \n        \n        \n            \n        \n    \n    \n                  \n            March 16, 2021\n        \n        \n            Crop image and add scale bar with ImageJ/Fiji\n            \n                \n                    Fiji\n                \n                \n                    ImageJ\n                \n            \n            \n        \n        \n            \n        \n    \n    \n                  \n            February 1, 2021\n        \n        \n            Punctuation marks words\n            \n                \n                    Punctuation\n                \n            \n            I don't know why i can not remember this English punctuation marks\n        \n        \n            \n        \n    \n    \n                  \n            January 2, 2021\n        \n        \n            Markdown input greek letters\n            \n                \n                    greek letters\n                \n                \n                    Markdown\n                \n            \n            Commonly used greek letters when using markdown\n        \n        \n            \n        \n    \n\n\nNo matching items"
+  },
+  {
+    "objectID": "cv/index.html",
+    "href": "cv/index.html",
+    "title": "Curriculum vitæ",
+    "section": "",
+    "text": "Download current CV"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Hello there!",
+    "section": "",
+    "text": "I’m an post-doctoral research fellow at the Bioinformatics institute (BII), A*STAR. I received a PhD in public policy and political science from Duke University’s Sanford School of Public Policy in 2017.\nI study how international NGOs work in authoritarian countries, and I received the 2016–2018 Emerging Scholar Dissertation Award from the International Society for Third Sector Research (ISTR). I do research in public administration and policy, nonprofit management, international relations, and comparative politics.\nI teach courses on program evaluation and causal inference, statistics and data science, data visualization, economics, and science communication. I’m also a certified RStudio instructor and a Posit Academy mentor and absolutely love teaching how to use R and the tidyverse."
+  },
+  {
+    "objectID": "now/index.html",
+    "href": "now/index.html",
+    "title": "What I’m doing now",
+    "section": "",
+    "text": "As of December 16, 2022, I’m spending all my time on these things:\n\nEarning money to marry Miss Zhou Haiyan (She is doing her Ph.D in U[niversity of Hong Kong (HKU)(https://www.hku.hk/)])\nLiving in Singapore and working as an research fellow in the Complex Phenotype Analysis Group at the Bioinformatics institute (BII), A*STAR.\nLearning High-throughput phenotypic profiling from Dr. Loo Lit-Hsin\nLearning to write papers, grants and apply grant for independent research."
+  },
+  {
+    "objectID": "research/articles/chaudhry-dotson-heiss-2021/index.html#important-links",
+    "href": "research/articles/chaudhry-dotson-heiss-2021/index.html#important-links",
+    "title": "Who Cares About Crackdowns? Exploring the Role of Trust in Individual Philanthropy",
+    "section": "Important links",
+    "text": "Important links\n\nPaper (preprint)\nAppendix (preprint)\nStatistical analysis notebook\nGitHub repository\nExperiment preregistration (research question #2)"
+  },
+  {
+    "objectID": "research/articles/chaudhry-dotson-heiss-2021/index.html#abstract",
+    "href": "research/articles/chaudhry-dotson-heiss-2021/index.html#abstract",
+    "title": "Who Cares About Crackdowns? Exploring the Role of Trust in Individual Philanthropy",
+    "section": "Abstract",
+    "text": "Abstract\nThe phenomenon of closing civic space has adversely impacted INGO funding. We argue that individual private donors can be important in sustaining the operations of INGOs working in repressive contexts. Individual donors do not use the same performance-based metrics as official aid donors. Rather, trust can be an important component of individual donor support for nonprofits working towards difficult goals. How does trust in charitable organizations influence individuals’ preferences to donate, especially when these groups face crackdown? Using a simulated market for philanthropic donations based on data from a nationally representative sample of individuals in the United States who regularly donate to charity, we find that trust in INGOs matters substantially in shaping donor preferences. Donor profiles with high levels of social trust are likely to donate to INGOs with friendly relationships with host governments. This support holds steady if INGOs face criticism or crackdown. In contrast, donor profiles with lower levels of social trust prefer to donate to organizations that do not face criticism or crackdown abroad. The global crackdown on NGOs may thus possibly sour NGOs’ least trusting individual donors. Our findings have practical implications for INGOs raising funds from individuals amid closing civic space."
+  },
+  {
+    "objectID": "research/articles/chaudhry-dotson-heiss-2021/index.html#important-figure",
+    "href": "research/articles/chaudhry-dotson-heiss-2021/index.html#important-figure",
+    "title": "Who Cares About Crackdowns? Exploring the Role of Trust in Individual Philanthropy",
+    "section": "Important figure",
+    "text": "Important figure\nFigure 4: Average predicted donation market shares across all personas, segmented by persona public affairs knowledge, political ideology, and social trust across different NGO–host government relationships\n\n\n\nFigure 4: Average predicted donation market shares across all personas, segmented by persona public affairs knowledge, political ideology, and social trust across different NGO–host government relationships"
+  },
+  {
+    "objectID": "research/articles/chaudhry-dotson-heiss-2021/index.html#data-and-code",
+    "href": "research/articles/chaudhry-dotson-heiss-2021/index.html#data-and-code",
+    "title": "Who Cares About Crackdowns? Exploring the Role of Trust in Individual Philanthropy",
+    "section": "Data and code",
+    "text": "Data and code\nThe project is reproducible with R code available at GitHub. Follow the instructions there to install all supporting files and R packages.\nThis project includes the following data files:\n\ndata/raw_data/final_data.rds: Original results from the Qualtrics survey. This is hosted at OSF because of its size. Running targets::tar_make(survey_results_file) will download the .rds file from OSF and place it in data/raw_data. The code for cleaning and processing this data is part of a separate project, “Why Donors Donate”.\ndata/derived_data/survey_results.csv: CSV version of the survey data.\ndata/derived_data/survey_results.yaml: YAML metadata describing the syntax of the survey data.\ndata/raw_data/posterior_draws/public_political_social_charity_demo.rds: Gamma (Γ) coefficients from our multilevel Bayesian model. This is hosted at OSF because of its size. Running targets::tar_make(gamma_draws_file) will download the .rds file from OSF and place it in data/raw_data/posterior_draws. The code for running this model is part of a separate project, “Why Donors Donate”.\ndata/raw_data/Market Simulator Version 01.xlsx: An interactive Excel version of the market simulator to help demonstrate the intuition behind all the moving parts of the simulation."
+  },
+  {
+    "objectID": "research/articles/chaudhry-dotson-heiss-2021/index.html#bibtex-citation",
+    "href": "research/articles/chaudhry-dotson-heiss-2021/index.html#bibtex-citation",
+    "title": "Who Cares About Crackdowns? Exploring the Role of Trust in Individual Philanthropy",
+    "section": "BibTeX citation",
+    "text": "BibTeX citation\n@article{ChaudhryDotsonHeiss:2021,\n    Author = {Suparna Chaudhry and Marc Dotson and Andrew Heiss},\n    Doi = {10.1111/1758-5899.12984},\n    Journal = {Global Policy},\n    Month = {7},\n    Number = {S5},\n    Pages = {45--58},\n    Title = {Who Cares About Crackdowns? Exploring the Role of Trust in Individual Philanthropy},\n    Volume = {12},\n    Year = {2021}}"
+  },
+  {
+    "objectID": "research/articles/chaudhry-heiss-ngos-philanthropy/index.html#important-links",
+    "href": "research/articles/chaudhry-heiss-ngos-philanthropy/index.html#important-links",
+    "title": "Dynamics of International Giving: How Heuristics Shape Individual Donor Preferences",
+    "section": "Important links",
+    "text": "Important links\n\nPaper (preprint)\nSupplement (preprint)\nStatistical analysis notebook\nGitHub repository\nExperiment preregistration"
+  },
+  {
+    "objectID": "research/articles/chaudhry-heiss-ngos-philanthropy/index.html#media-coverage",
+    "href": "research/articles/chaudhry-heiss-ngos-philanthropy/index.html#media-coverage",
+    "title": "Dynamics of International Giving: How Heuristics Shape Individual Donor Preferences",
+    "section": "Media coverage",
+    "text": "Media coverage\n\n“Donors grow more generous when they support nonprofits facing hostile environments abroad,” The Conversation, December 7, 2020"
+  },
+  {
+    "objectID": "research/articles/chaudhry-heiss-ngos-philanthropy/index.html#abstract",
+    "href": "research/articles/chaudhry-heiss-ngos-philanthropy/index.html#abstract",
+    "title": "Dynamics of International Giving: How Heuristics Shape Individual Donor Preferences",
+    "section": "Abstract",
+    "text": "Abstract\nState restrictions on non-governmental organizations (NGOs) have become increasingly pervasive across the globe. While this crackdown has been shown to have a negative impact on public funding flows, we know little about how it impacts private philanthropy. How does information about crackdown abroad, as well as organizational attributes of nonprofits affect individual donors’ willingness to donate internationally? Using a survey experiment, we find that learning about repressive NGO environments increases generosity in that already-likely donors are willing to donate substantially more to legally besieged nonprofits. This generosity persists when mediated by two organizational-level heuristics: NGO issue areas and main funding sources. We discuss the implications of our results on how nonprofits can use different framing appeals to increase fundraising at a time when traditional public donor funding to such organizations is decreasing."
+  },
+  {
+    "objectID": "research/articles/chaudhry-heiss-ngos-philanthropy/index.html#important-figures",
+    "href": "research/articles/chaudhry-heiss-ngos-philanthropy/index.html#important-figures",
+    "title": "Dynamics of International Giving: How Heuristics Shape Individual Donor Preferences",
+    "section": "Important figures",
+    "text": "Important figures\nFigures 2 & 3: Difference in likelihood of donation across crackdown and no crackdown groups, conditioned by other experimental frames + difference in amount donated across crackdown and no crackdown groups, conditioned by other experimental frames\n\n\n\nFigures 2 & 3: Difference in likelihood of donation across crackdown and no crackdown groups, conditioned by other experimental frames + difference in amount donated across crackdown and no crackdown groups, conditioned by other experimental frames"
+  },
+  {
+    "objectID": "research/articles/chaudhry-heiss-ngos-philanthropy/index.html#bibtex-citation",
+    "href": "research/articles/chaudhry-heiss-ngos-philanthropy/index.html#bibtex-citation",
+    "title": "Dynamics of International Giving: How Heuristics Shape Individual Donor Preferences",
+    "section": "BibTeX citation",
+    "text": "BibTeX citation\n@article{ChaudhryHeiss:2021,\n    Author = {Suparna Chaudhry and Andrew Heiss},\n    Doi = {10.1177/0899764020971045},\n    Journal = {Nonprofit and Voluntary Sector Quarterly},\n    Month = {6},\n    Number = {3},\n    Pages = {481--505},\n    Title = {Dynamics of International Giving: How Heuristics Shape Individual Donor Preferences},\n    Volume = {50},\n    Year = {2021}}"
+  },
+  {
+    "objectID": "research/articles/chaudhry-heiss-ngos-repression/index.html",
+    "href": "research/articles/chaudhry-heiss-ngos-repression/index.html",
+    "title": "NGO Repression as a Predictor of Worsening Human Rights Abuses",
+    "section": "",
+    "text": "Paper (preprint)\nStatistical analysis notebook\nGitHub repository"
+  },
+  {
+    "objectID": "research/articles/chaudhry-heiss-ngos-repression/index.html#abstract",
+    "href": "research/articles/chaudhry-heiss-ngos-repression/index.html#abstract",
+    "title": "NGO Repression as a Predictor of Worsening Human Rights Abuses",
+    "section": "Abstract",
+    "text": "Abstract\nAn increasing number of countries have recently cracked down on non-governmental organizations (NGOs). Much of this crackdown is sanctioned by law and represents a bureaucratic form of repression that could indicate more severe human rights abuses in the future. This is especially the case for democracies, which unlike autocracies, may not aggressively attack civic space. We explore if crackdowns on NGOs predict broader human rights repression. Anti-NGO laws are among the most subtle means of repression and attract lesser domestic and international condemnation compared to the use of violence. Using original data on NGO repression, we test whether NGO crackdown is a predictor of political terror, and violations of physical integrity rights and civil liberties. We find that while de jure anti-NGO laws provide little information in predicting future repression, their patterns of implementation—or de facto civil society repression—predicts worsening respect for physical integrity rights and civil liberties."
+  },
+  {
+    "objectID": "research/articles/chaudhry-heiss-ngos-repression/index.html#important-figures",
+    "href": "research/articles/chaudhry-heiss-ngos-repression/index.html#important-figures",
+    "title": "NGO Repression as a Predictor of Worsening Human Rights Abuses",
+    "section": "Important figures",
+    "text": "Important figures\n\n\n\nFigure 6: Marginal effects of changing levels of civil society repression on the probability of specific levels of political terror and predicted latent human rights values\n\n\n\n\n\nFigure 7: The disconnect between Egypt’s de jure 2002 law and the widespread de facto repression of civil society a decade later"
+  },
+  {
+    "objectID": "research/articles/chaudhry-heiss-ngos-repression/index.html#bibtex-citation",
+    "href": "research/articles/chaudhry-heiss-ngos-repression/index.html#bibtex-citation",
+    "title": "NGO Repression as a Predictor of Worsening Human Rights Abuses",
+    "section": "BibTeX citation",
+    "text": "BibTeX citation\n@article{ChaudhryHeiss:2022,\n    Author = {Suparna Chaudhry and Andrew Heiss},\n    Doi = {10.1080/14754835.2022.2030205},\n    Journal = {Journal of Human Rights},\n    Number = {2},\n    Pages = {123--140},\n    Title = {NGO Repression as a Predictor of Worsening Human Rights Abuses},\n    Volume = {21},\n    Year = {2022}}"
+  },
+  {
+    "objectID": "research/articles/heiss-2012/index.html",
+    "href": "research/articles/heiss-2012/index.html",
+    "title": "The Failed Management of a Dying Regime: Hosni Mubarak, Egypt’s National Democratic Party, and the January 25 Revolution",
+    "section": "",
+    "text": "In the weeks since the January 25 revolution there have been dozens of explanations for Mubarak’s downfall. Political scientists, diplomats, economists, sociologists, and even international aid workers have proposed theories to explain the economic, political, historical, and social causes of the Egyptian revolution. Despite the plethora of interdisciplinary theories in the press and in academia, few—if any—have analyzed Mubarak’s resignation in the light of managerial dynamics and behavior.\nIn addition to a ripe political environment, horrible economic conditions, and a mobilized and angry population, Mubarak’s fall from power can be attributed to his failure as a public manager. This paper analyzes Mubarak’s managerial strategy throughout the course of his presidency by (1) reviewing the structure of the National Democratic Party (NDP) and Mubarak’s relationship with it; (2) analyzing the foundational principles and assumptions of his strategy‚ both as the leader of Egypt and as the chairman of the NDP; and (3) tracing the application of that strategy and determining its effectiveness in confronting “the management challenge” over a period of 30 years."
+  },
+  {
+    "objectID": "research/articles/heiss-2012/index.html#figure",
+    "href": "research/articles/heiss-2012/index.html#figure",
+    "title": "The Failed Management of a Dying Regime: Hosni Mubarak, Egypt’s National Democratic Party, and the January 25 Revolution",
+    "section": "Figure",
+    "text": "Figure\nFigure 1: NDP Leadership Organizational Chart, 2010 (based on original chart by The Arabist)\n\n\n\nFigure 1: NDP Leadership Organizational Chart, 2010"
+  },
+  {
+    "objectID": "research/articles/heiss-2012/index.html#bibtex-citation",
+    "href": "research/articles/heiss-2012/index.html#bibtex-citation",
+    "title": "The Failed Management of a Dying Regime: Hosni Mubarak, Egypt’s National Democratic Party, and the January 25 Revolution",
+    "section": "BibTeX citation",
+    "text": "BibTeX citation\n@article{Heiss:2012,\n    Author = {Andrew Heiss},\n    Issue = {Spring},\n    Journal = {Journal of Third World Studies},\n    Number = {1},\n    Pages = {155-171},\n    Title = {The Failed Management of a Dying Regime: {Hosni Mubarak}, {Egypt's National Democratic Party}, and the {January} 25 Revolution},\n    Volume = {28},\n    Year = {2012}}"
+  },
+  {
+    "objectID": "research/articles/heiss-2019-taking-control/index.html",
+    "href": "research/articles/heiss-2019-taking-control/index.html",
+    "title": "Taking Control of Regulations: How International Advocacy NGOs Shape the Regulatory Environments of their Target Countries",
+    "section": "",
+    "text": "Paper (preprint)\nGitHub repository\nRead-only PDF"
+  },
+  {
+    "objectID": "research/articles/heiss-2019-taking-control/index.html#abstract",
+    "href": "research/articles/heiss-2019-taking-control/index.html#abstract",
+    "title": "Taking Control of Regulations: How International Advocacy NGOs Shape the Regulatory Environments of their Target Countries",
+    "section": "Abstract",
+    "text": "Abstract\nA wave of legislative and regulatory crackdown on international nongovernmental organizations (INGOs) has constricted the legal environment for foreign advocacy groups interested in influencing domestic and global policy. Although the legal space for advocacy is shrinking, many INGOs have continued their work and found creative ways to adapt to these restrictions, sometimes even reshaping the regulatory environments of their target countries in their favor. In this article, I explore what enables INGOs to cope with and reshape their regulatory environments. I bridge international relations and interest group literatures to examine the interaction between INGO resource configurations and institutional arrangements. I argue that specific resource and managerial characteristics provide organizations with ‘programmatic flexibility’ that enables groups to adjust their strategies without changing their core mission. I illustrate and test this argument with case studies of Article 19 and AMERA International and demonstrate how organizations with high programmatic flexibility can navigate regulations and shape policy in their target country, while those without this flexibility are shut out of policy discussions and often the target country itself. I conclude by exploring how the interaction between internal characteristics and institutional environments shape and constrain the effects of interest groups in global governance."
+  },
+  {
+    "objectID": "research/articles/heiss-2019-taking-control/index.html#important-figures",
+    "href": "research/articles/heiss-2019-taking-control/index.html#important-figures",
+    "title": "Taking Control of Regulations: How International Advocacy NGOs Shape the Regulatory Environments of their Target Countries",
+    "section": "Important figures",
+    "text": "Important figures\nFigure 1: Relationship between institutional constraints, resource configurations, programmatic flexibility, and advocacy effects\n\n\n\nFigure 1: Relationship between institutional constraints, resource configurations, programmatic flexibility, and advocacy effects"
+  },
+  {
+    "objectID": "research/articles/heiss-2019-taking-control/index.html#bibtex-citation",
+    "href": "research/articles/heiss-2019-taking-control/index.html#bibtex-citation",
+    "title": "Taking Control of Regulations: How International Advocacy NGOs Shape the Regulatory Environments of their Target Countries",
+    "section": "BibTeX citation",
+    "text": "BibTeX citation\n@article{Heiss:2019,\n    Author = {Andrew Heiss},\n    Doi = {10.1057/s41309-019-00061-0},\n    Journal = {Interest Groups and Advocacy},\n    Month = {9},\n    Number = {3},\n    Pages = {356--375},\n    Title = {Taking Control of Regulations: How International Advocacy {NGOs} Shape the Regulatory Environments of their Target Countries},\n    Volume = {8},\n    Year = {2019}}"
+  },
+  {
+    "objectID": "research/articles/heiss-johnson-2016/index.html",
+    "href": "research/articles/heiss-johnson-2016/index.html",
+    "title": "Internal, Interactive, and Institutional Factors: Towards a Unified Theory of INGO Behavior",
+    "section": "",
+    "text": "Recent scholarship works to open the “black box” of international non-governmental organizations (INGOs), explaining their activities without conventional assumptions of altruism and high-mindedness. We review Borders Among Activists by Sarah Stroup, The Opening up of International Organizations by Jonas Tallberg, et al., and Internal Affairs by Wendy Wong and pinpoint how each book makes important contributions to understanding the determinants of INGO activities. After developing an organizing framework that permits careful analysis of the internal, interactive, and institutional factors that influence policy outcomes, we demonstrate the merits of the framework by applying it to each book. We evaluate each work’s contributions to individual layers in the framework, locating each book within its intended scholarly context. We identify ties between books, examining how each work implicitly treats the other layers of our framework. The conclusion identifies a new research agenda for INGO studies and outlines promising avenues for future INGO scholarship."
+  },
+  {
+    "objectID": "research/articles/heiss-johnson-2016/index.html#important-figures",
+    "href": "research/articles/heiss-johnson-2016/index.html#important-figures",
+    "title": "Internal, Interactive, and Institutional Factors: Towards a Unified Theory of INGO Behavior",
+    "section": "Important figures",
+    "text": "Important figures\nFigure 1 from the paper, showing a unified framework for understanding the types of influences on INGO behavior and policy outcomes. The triangular shape conveys the specificity of the layers: from narrow “micro” phenomena at the internal layer to much wider “macro” phenomena at the institutional layer.\n\n\n\nFigure 1: A Unified Framework for Analyzing INGO Behavior and Outputs"
+  },
+  {
+    "objectID": "research/articles/heiss-johnson-2016/index.html#books-reviewed",
+    "href": "research/articles/heiss-johnson-2016/index.html#books-reviewed",
+    "title": "Internal, Interactive, and Institutional Factors: Towards a Unified Theory of INGO Behavior",
+    "section": "Books reviewed",
+    "text": "Books reviewed\n\nSarah S. Stroup, Borders among Activists: International NGOs in the United States, Britain, and France (Ithaca, New York: Cornell University Press, 2012), doi: 10.7591/9780801464256.\nJonas Tallberg, Thomas Sommerer, Theresa Squatrito, and Christer Jönsson, The Opening Up of International Organizations: Transnational Access in Global Governance (Cambridge: Cambridge University Press, 2013), doi: 10.1017/cbo9781107325135.\nWendy H. Wong, Internal Affairs: How the Structure of NGOs Transforms Human Rights (Ithaca: Cornell University Press, 2012), doi: 10.7591/9780801466069."
+  },
+  {
+    "objectID": "research/articles/heiss-johnson-2016/index.html#bibtex-citation",
+    "href": "research/articles/heiss-johnson-2016/index.html#bibtex-citation",
+    "title": "Internal, Interactive, and Institutional Factors: Towards a Unified Theory of INGO Behavior",
+    "section": "BibTeX citation",
+    "text": "BibTeX citation\n@article{HeissJohnson:2016,\n    Author = {Andrew Heiss and Tana Johnson},\n    Doi = {10.1093/isr/viv014},\n    Journal = {International Studies Review},\n    Month = {9},\n    Number = {3},\n    Pages = {528--41},\n    Title = {Internal, Interactive, and Institutional Factors: Towards a Unified Theory of {INGO} Behavior},\n    Volume = {18},\n    Year = {2016}}"
+  },
+  {
+    "objectID": "research/articles/heiss-kelley-2017/index.html",
+    "href": "research/articles/heiss-kelley-2017/index.html",
+    "title": "Between a Rock and a Hard Place: International NGOs and the Dual Pressures of Donors and Host Governments",
+    "section": "",
+    "text": "How do the preferences and behavior of both donor organizations and host countries affect the strategies, activities, and effectiveness of international NGOs (INGOs)? Recent books by Sarah Bush, Jessica Teets, and Amanda Murdie bring unique ideas and empirical evidence to illustrate different parts of this question. To discuss the arguments in each book, as well as explore incidental ties between the three, we suggest a simple framework for organizing and understanding the dual institutional constraints on INGOs. In this essay, we use this framework to identify how each book addresses these influences on INGOs and how, in some cases, INGOs can reverse the direction of influence."
+  },
+  {
+    "objectID": "research/articles/heiss-kelley-2017/index.html#figure",
+    "href": "research/articles/heiss-kelley-2017/index.html#figure",
+    "title": "Between a Rock and a Hard Place: International NGOs and the Dual Pressures of Donors and Host Governments",
+    "section": "Figure",
+    "text": "Figure\nFigure 2: The dual environmental constraints confronting INGOs\n\n\n\nFigure 2: The dual environmental constraints confronting INGOs"
+  },
+  {
+    "objectID": "research/articles/heiss-kelley-2017/index.html#books-reviewed",
+    "href": "research/articles/heiss-kelley-2017/index.html#books-reviewed",
+    "title": "Between a Rock and a Hard Place: International NGOs and the Dual Pressures of Donors and Host Governments",
+    "section": "Books reviewed",
+    "text": "Books reviewed\n\nSarah Sunn Bush, The Taming of Democracy Assistance: Why Democracy Promotion Does Not Confront Dictators (Cambridge, UK: Cambridge University Press, 2015), doi: 10.1017/cbo9781107706934.\nJessica C. Teets, Civil Society under Authoritarianism: The China Model (New York: Cambridge University Press, 2014), doi: 10.1017/cbo9781139839396.\nAmanda Murdie, Help or Harm: The Human Security Effects of International NGOs (Stanford: Stanford University Press, 2014), doi: 10.2307/j.ctvqsdpq8."
+  },
+  {
+    "objectID": "research/articles/heiss-kelley-2017/index.html#bibtex-citation",
+    "href": "research/articles/heiss-kelley-2017/index.html#bibtex-citation",
+    "title": "Between a Rock and a Hard Place: International NGOs and the Dual Pressures of Donors and Host Governments",
+    "section": "BibTeX citation",
+    "text": "BibTeX citation\n@article{HeissKelley:2017,\n    Author = {Andrew Heiss and Judith G. Kelley},\n    Doi = {10.1086/691218},\n    Journal = {Journal of Politics},\n    Month = {4},\n    Number = {2},\n    Pages = {732--41},\n    Title = {Between a Rock and a Hard Place: International {NGOs} and the Dual Pressures of Donors and Host Governments},\n    Volume = {79},\n    Year = {2017}}"
+  },
+  {
+    "objectID": "research/articles/heiss-kelley-2017a/index.html",
+    "href": "research/articles/heiss-kelley-2017a/index.html",
+    "title": "From the Trenches: A Global Survey of Anti-TIP NGOs and their Views of US Efforts",
+    "section": "",
+    "text": "Amid the academic and policy critiques of the United States 15-year push to eliminate human trafficking, the perspective of the nongovernmental organizations (NGOs) working with anti-trafficking advocacy and services has been largely ignored. This article presents the results of a global survey of nearly 500 anti-trafficking NGOs in working in 133 countries, and is the first NGO-focused survey of its kind. Based on the results of the survey, we provide an overview of the anti-trafficking NGO sector as a whole, detail the relationship between anti-trafficking NGOs and the US, and account for some of the variation in NGO opinions of US efforts. Notably, we find that NGOs are remarkably satisfied with US-led efforts—despite their acknowledged flaws—and that NGOs believe that American anti-TIP policies are important and, on balance, helpful. These results also provide a warning for the future of the United States’ anti-trafficking advocacy, suggesting that the US avoid politicizing its annual Trafficking in Persons Report."
+  },
+  {
+    "objectID": "research/articles/heiss-kelley-2017a/index.html#important-figures",
+    "href": "research/articles/heiss-kelley-2017a/index.html#important-figures",
+    "title": "From the Trenches: A Global Survey of Anti-TIP NGOs and their Views of US Efforts",
+    "section": "Important figures",
+    "text": "Important figures\nFigure 1: Countries where NGOs work, excluding NGOs working only in the US\n\n\n\nFigure 1: Countries where NGOs work, excluding NGOs working only in the US\n\n\nFigure 4: Embassies or foreign governments NGOs reported as active partners in the fight against human trafficking\n\n\n\nFigure 4: Embassies or foreign governments NGOs reported as active partners in the fight against human trafficking\n\n\nFigure 7: Average importance and positivity of US anti-TIP efforts across regions\n\n\n\nFigure 7: Average importance and positivity of US anti-TIP efforts across regions"
+  },
+  {
+    "objectID": "research/articles/heiss-kelley-2017a/index.html#bibtex-citation",
+    "href": "research/articles/heiss-kelley-2017a/index.html#bibtex-citation",
+    "title": "From the Trenches: A Global Survey of Anti-TIP NGOs and their Views of US Efforts",
+    "section": "BibTeX citation",
+    "text": "BibTeX citation\n@article{HeissKelley:2017,\n  Author = {Andrew Heiss and Judith G. Kelley},\n  Doi = {10.1080/23322705.2016.1199241},\n  Journal = {Journal of Human Trafficking},\n  Number = {3},\n  Pages = {231--254},\n  Title = {From the Trenches: A Global Survey of Anti-{TIP} {NGOs} and their Views of {US} Efforts},\n  Volume = {3},\n  Year = {2017}}"
+  },
+  {
+    "objectID": "research/articles/peck-heiss-2021/index.html",
+    "href": "research/articles/peck-heiss-2021/index.html",
+    "title": "Can Constraint Closure Provide a Generalized Understanding of Community Dynamics in Ecosystems?",
+    "section": "",
+    "text": "Paper (preprint)\nStatistical analysis notebook\nGitHub repository"
+  },
+  {
+    "objectID": "research/articles/peck-heiss-2021/index.html#abstract",
+    "href": "research/articles/peck-heiss-2021/index.html#abstract",
+    "title": "Can Constraint Closure Provide a Generalized Understanding of Community Dynamics in Ecosystems?",
+    "section": "Abstract",
+    "text": "Abstract\nEcological theorists have generated several yet unresolved disputes that try to untangle the difficulty in understanding the nature of complex ecological communities. In this paper, we combine two recent theoretical approaches that used together suggest a promising way to consider how evolutionary and ecological processes may be used to frame a general theory of community ecology and its functional stability. First, we consider the theoretical proposal by Mark Vellend (2016) to focus on a small set of higher-level evolutionary and ecological processes that act on species within an ecological community. These processes provide a basis for ecological theory similar to the way in which theoretical population genetics has focused on a small set of mathematical descriptions to undergird its theory. Second, we explore ideas that might be applied to ecosystem functioning developed by Alvaro Moreno and Matteo Mossio’s (2015) work on how biologically autonomous systems emerge from closure of relevant constraints. To explore the possibility that combining these two ideas may provide a more general theoretical understanding of ecological communities, we have developed a stochastic, agent-based model, with agents representing species, that explores the potential of using evolutionary and ecological processes as a constraint on the flow of species through an ecosystem. We explore how these ideas help illuminate aspects of stability found in many ecological communities. These agent-based modeling results provide in-principle arguments that suggest that constraint closure, using evolutionary and ecological processes, explains general features of ecological communities. In particular, we find that our model suggests a perspective useful in explaining repeated patterns of stability in ecological evenness, species turnover, species richness, and in measures of fitness."
+  },
+  {
+    "objectID": "research/articles/peck-heiss-2021/index.html#important-figure",
+    "href": "research/articles/peck-heiss-2021/index.html#important-figure",
+    "title": "Can Constraint Closure Provide a Generalized Understanding of Community Dynamics in Ecosystems?",
+    "section": "Important figure",
+    "text": "Important figure\nFigure 4: Boxplots show ecological measures across parameter space for different numbers of constraints generated by 2000 iterations of the simulation model across all 64 possible permutations of the proposed constraints being present or absent, and with uniform random values of parameters pulled from their possible values in the model iterations. The whiskers in the box plot show the range of variation. The actual data used to construct the boxplots are shown as fine gray dots to the right of each box plot. (a) Effect of the number of constraints on landscape fitness. (b) Effect of the number of constraints on ecological evenness. (c) Effect of the number of constraints on the average cell species richness (number of species defined as functional groups) present in the cell-niche. (d) Effect of the number of constraints on the difference between turnover in mutualistic linked and unlinked species. The turnover rate is the number of new species created at each time step in each cell.\n\n\n\nFigure 4: Boxplots show ecological measures across parameter space for different numbers of constraints generated by 2000 iterations of the simulation model across all 64 possible permutations of the proposed constraints being present or absent"
+  },
+  {
+    "objectID": "research/articles/peck-heiss-2021/index.html#bibtex-citation",
+    "href": "research/articles/peck-heiss-2021/index.html#bibtex-citation",
+    "title": "Can Constraint Closure Provide a Generalized Understanding of Community Dynamics in Ecosystems?",
+    "section": "BibTeX citation",
+    "text": "BibTeX citation\n@article{PeckHeiss:2021,\n    Author = {Steven L. Peck and Andrew Heiss},\n    Doi = {10.1111/oik.07621},\n    Journal = {Oikos},\n    Month = {9},\n    Number = {9},\n    Pages = {1425--1439},\n    Title = {Can Constraint Closure Provide a Generalized Understanding of Community Dynamics in Ecosystems?},\n    Volume = {130},\n    Year = {2021}}"
+  },
+  {
+    "objectID": "research/articles/witesman-heiss-2016/index.html",
+    "href": "research/articles/witesman-heiss-2016/index.html",
+    "title": "Nonprofit collaboration and the resurrection of market failure: How a resource sharing environment can suppress social objectives",
+    "section": "",
+    "text": "Collaboration and its promotion by funders continue to accelerate. Although research has identified significant transaction costs associated with collaboration, little empirical work has examined the broader, societal-level economic outcomes of a resource-sharing environment. Does an environment that encourages collaboration shift our focus toward certain types of social objectives and away from others? This paper uses agent-based Monte Carlo simulation to demonstrate that collaboration is particularly useful when resources are rare but a social objective is commonly held. However, collaboration can lead to bad outcomes when the objective is not commonly shared; in such cases, markets outperform collaborative arrangements. These findings suggest that encouraging a resource-sharing environment can lead to inefficiencies even worse than market failure. We also demonstrate that failure to account for transaction costs when prescribing collaboration can result in quantifiably lower outcome levels than expected."
+  },
+  {
+    "objectID": "research/articles/witesman-heiss-2016/index.html#figure",
+    "href": "research/articles/witesman-heiss-2016/index.html#figure",
+    "title": "Nonprofit collaboration and the resurrection of market failure: How a resource sharing environment can suppress social objectives",
+    "section": "Figure",
+    "text": "Figure\nFigure 1: Simulation results\n\n\n\nFigure 1: Simulation results"
+  },
+  {
+    "objectID": "research/articles/witesman-heiss-2016/index.html#bibtex-citation",
+    "href": "research/articles/witesman-heiss-2016/index.html#bibtex-citation",
+    "title": "Nonprofit collaboration and the resurrection of market failure: How a resource sharing environment can suppress social objectives",
+    "section": "BibTeX citation",
+    "text": "BibTeX citation\n@article{WitesmanHeiss:2016,\n    Author = {Eva Witesman and Andrew Heiss},\n    Doi = {10.1007/s11266-016-9684-5},\n    Journal = {Voluntas: International Journal of Voluntary and Nonprofit Organizations},\n    Month = {8},\n    Number = {4},\n    Pages = {1500--1528},\n    Title = {Nonprofit Collaboration and the Resurrection of Market Failure: How a Resource-Sharing Environment Can Suppress Social Objectives},\n    Volume = {28},\n    Year = {2016}}"
+  },
+  {
+    "objectID": "research/chapters/chaudhry-heiss-closing-space/index.html",
+    "href": "research/chapters/chaudhry-heiss-closing-space/index.html",
+    "title": "Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on NGOs",
+    "section": "",
+    "text": "Figure 1: 2017 CIVICUS Monitor civic space ratings\n\n\n\nFigure 1: 2017 CIVICUS Monitor civic space ratings"
+  },
+  {
+    "objectID": "research/chapters/chaudhry-heiss-closing-space/index.html#bibtex-citation",
+    "href": "research/chapters/chaudhry-heiss-closing-space/index.html#bibtex-citation",
+    "title": "Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on NGOs",
+    "section": "BibTeX citation",
+    "text": "BibTeX citation\n@incollection{ChaudhryHeiss:2022,\n    Address = {Tuscaloosa, AL},\n    Author = {Suparna Chaudhry and Andrew Heiss},\n    Booktitle = {Beyond the Boomerang: New Patterns in Transcalar Advocacy},\n    Editor = {Christopher L. Pallas and Elizabeth Bloodgood},\n    Publisher = {University of Alabama Press},\n    Title = {Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on {NGOs}},\n    Chapter = {2},\n    Year = {2022}}"
+  },
+  {
+    "objectID": "research/chapters/heiss-causal-inference-2021/index.html",
+    "href": "research/chapters/heiss-causal-inference-2021/index.html",
+    "title": "Causal Inference",
+    "section": "",
+    "text": "One of the most repeated phrases in any introductory statistics class is the warning that “correlation is not causation.” This chapter presents new non-statistical language for creating, measuring, and evaluating causal stories and relationships using observational (i.e. non-experimental) data. It introduces the concept of causal directed acyclic graphs (DAGs) that allow us to formally encode our understanding of causal stories. With well-crafted DAGs, one can use a set of rules called do-calculus to make specific adjustments to statistical models and isolate or identify causal relationships between variables of interest. Edges (or arrows) transmit associations between nodes. Following the fundamental problem of causal inference, answering causal questions without an experiment appears impossible. The chapter explores different methods of making adjustments using synthetic data. Instead of throwing away potentially useful data, one can use other methods to create matches that are less discrete and more informative."
+  },
+  {
+    "objectID": "research/chapters/heiss-causal-inference-2021/index.html#important-figures",
+    "href": "research/chapters/heiss-causal-inference-2021/index.html#important-figures",
+    "title": "Causal Inference",
+    "section": "Important figures",
+    "text": "Important figures\nFigure 6: More complicated DAG showing the relationship between campaign spending and votes won in an election\n\n\n\nFigure 6: More complicated DAG showing the relationship between campaign spending and votes won in an election\n\n\nFigure 17: Adjustment set to identify the relationship between mosquito net use and malaria risk\n\n\n\nFigure 17: Adjustment set to identify the relationship between mosquito net use and malaria risk"
+  },
+  {
+    "objectID": "research/chapters/heiss-causal-inference-2021/index.html#bibtex-citation",
+    "href": "research/chapters/heiss-causal-inference-2021/index.html#bibtex-citation",
+    "title": "Causal Inference",
+    "section": "BibTeX citation",
+    "text": "BibTeX citation\n@incollection{Heiss:2021,\n    address = {Boca Raton, Florida},\n    author = {Andrew Heiss},\n    booktitle = {R for Political Data Science: A Practical Guide},\n    chapter = {10},\n    editor = {Francisco Urdinez and Andr{\\'e}s Cruz},\n    pages = {235--274},\n    publisher = {{Chapman and Hall} / CRC},\n    title = {Causal Inference},\n    year = {2021}}"
+  },
+  {
+    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html",
+    "href": "research/chapters/heiss-ngo-ir-2019/index.html",
+    "title": "NGOs and Authoritarianism",
+    "section": "",
+    "text": "Authoritarian restrictions on domestic and international civil society have increased over the past decade, but authoritarian states continue to allow—and even invite—NGOs to work in their countries. Though the services and advocacy provided by NGOs can challenge the legitimacy and power of authoritarian regimes, the majority of autocratic states allow NGO activities, and NGOs in turn continue to work in these countries in spite of the heavy legal restrictions and attempts to limit their activities. This chapter examines the theories about and the experiences of domestic and international NGOs working in authoritarian countries. The review is premised on the theory of authoritarian institutions: dictators delegate political authority to democratic-appearing institutions in order to remain in power and maintain stability. After providing a brief overview of authoritarian institutionalism and balancing, I discuss how domestic and international NGOs fit into authoritarian stability-seeking calculus. I then look at three forms of state–NGO relationships in the context of authoritarianism and explore how autocrats have addressed and regulated international NGOs in particular. Finally, I conclude with suggestions for future research on NGOs and their relationship with and role in authoritarian regimes."
+  },
+  {
+    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html#figure",
+    "href": "research/chapters/heiss-ngo-ir-2019/index.html#figure",
+    "title": "NGOs and Authoritarianism",
+    "section": "Figure",
+    "text": "Figure\nFigure 2: Civil society repression and regulations\n\n\n\nFigure 2: Civil society repression and regulations"
+  },
+  {
+    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html#bibtex-citation",
+    "href": "research/chapters/heiss-ngo-ir-2019/index.html#bibtex-citation",
+    "title": "NGOs and Authoritarianism",
+    "section": "BibTeX citation",
+    "text": "BibTeX citation\n@incollection{Heiss:2019,\n    Address = {London},\n    Author = {Andrew Heiss},\n    Booktitle = {Routledge Handbook of {NGOs} and International Relations},\n    Editor = {Thomas Davies},\n    Publisher = {Routledge},\n    Title = {{NGOs} and Authoritarianism},\n    Chapter = {38},\n    Year = {2019}}"
+  },
+  {
+    "objectID": "research/chapters/johnson-heiss-2018/index.html",
+    "href": "research/chapters/johnson-heiss-2018/index.html",
+    "title": "Liberal Institutionalism",
+    "section": "",
+    "text": "Liberal institutionalism presumes that domestic and international institutions play central roles in facilitating cooperation and peace between states. But currently, this influential approach to thinking and practice appears to be in jeopardy. The United Kingdom seeks to be the first state ever to withdraw from the European Union (EU). The United States threatens to renegotiate or leave several international arrangements that it has recently signed or long supported. Meanwhile, China hints that it would be happy to take on greater global leadership if the United States retreats from this traditional role."
+  },
+  {
+    "objectID": "research/chapters/johnson-heiss-2018/index.html#bibtex-citation",
+    "href": "research/chapters/johnson-heiss-2018/index.html#bibtex-citation",
+    "title": "Liberal Institutionalism",
+    "section": "BibTeX citation",
+    "text": "BibTeX citation\n@incollection{JohnsonHeiss:2018,\n    Address = {London},\n    Author = {Tana Johnson and Andrew Heiss},\n    Booktitle = {International Organization and Global Governance},\n    Chapter = {8},\n    Doi = {10.4324/9781315301914},\n    Edition = {2},\n    Editor = {Thomas G. Weiss and Rorden Wilkinson},\n    Pages = {123--34},\n    Publisher = {Routledge},\n    Title = {Liberal Institutionalism},\n    Year = {2018}}"
+  },
+  {
+    "objectID": "research/index.html",
+    "href": "research/index.html",
+    "title": "Research",
+    "section": "",
+    "text": "My research spans public policy, nonprofit management, political science, and international relations. I study human rights and international nonprofit management and I focus on authoritarian regulation of civil society and international NGO responses to administrative crackdown. I also research causal inference methods, particularly using panel data."
+  },
+  {
+    "objectID": "research/index.html#journal-articles",
+    "href": "research/index.html#journal-articles",
+    "title": "Research",
+    "section": "Journal articles",
+    "text": "Journal articles\n\n\n\n\n        \n            \n                Suparna Chaudhry and Andrew Heiss, “NGO Repression as a Predictor of Worsening Human Rights Abuses,” Journal of Human Rights, 21, no. 2 (2022): 123–140, doi: 10.1080/14754835.2022.2030205\n            \n            \n                    \n                            Human rights\n                        \n                    \n                            INGOs\n                        \n                    \n                            Civil society\n                        \n                    \n                            Bayes\n                        \n                    \n                            NGO regulations\n                        \n            \n            \n                Look at state actions\n                 / —not formal NGO laws—\n                 / to predict abuse.\n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             Preprint\n                        \n                    \n                    \n                        \n                             Final version\n                        \n                    \n                    \n                        \n                             Code and data\n                        \n                    \n                \n            \n        \n        \n            \n                Suparna Chaudhry, Marc Dotson, and Andrew Heiss, “Who Cares About Crackdowns? Exploring the Role of Trust in Individual Philanthropy,” Global Policy 12, no. S5 (July 2021): 45–58, doi: 10.1111/1758-5899.12984\n            \n            \n                    \n                            Philanthropy\n                        \n                    \n                            Experiment\n                        \n                    \n                            Conjoint analysis\n                        \n                    \n                            Simulation\n                        \n                    \n                            Bayes\n                        \n                    \n                            INGOs\n                        \n            \n            \n                When seeing crackdown,\n                 / people with low social trust\n                 / are fairweather friends.\n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             Preprint\n                        \n                    \n                    \n                        \n                             Final version\n                        \n                    \n                    \n                        \n                             Code\n                        \n                    \n                    \n                        \n                             Data\n                        \n                    \n                \n            \n        \n        \n            \n                Steven L. Peck and Andrew Heiss, “Can Constraint Closure Provide a Generalized Understanding of Community Dynamics in Ecosystems?” Oikos 130, no. 9 (September 2021): 1425–1439, doi: 10.1111/oik.07621\n            \n            \n                    \n                            Data visualization\n                        \n                    \n                            Ecology\n                        \n                    \n                            Simulation\n                        \n            \n            \n                Fitness, turnover,\n                 / stability, evenness—\n                 / all due to constraints.\n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             Preprint\n                        \n                    \n                    \n                        \n                             Final version\n                        \n                    \n                    \n                        \n                             Code\n                        \n                    \n                \n            \n        \n        \n            \n                Suparna Chaudhry and Andrew Heiss, “Dynamics of International Giving: How Heuristics Shape Individual Donor Preferences,” Nonprofit and Voluntary Sector Quarterly 50, no. 3 (June 2021): 481–505, doi: 10.1177/0899764020971045\n            \n            \n                    \n                            Philanthropy\n                        \n                    \n                            Experiment\n                        \n                    \n                            Bayes\n                        \n                    \n                            INGOs\n                        \n            \n            \n                In trouble abroad?\n                 / Crackdown may be heuristic—\n                 / those who give give more.\n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             Preprint\n                        \n                    \n                    \n                        \n                             Final version\n                        \n                    \n                    \n                        \n                             Code\n                        \n                    \n                    \n                        \n                             Data\n                        \n                    \n                \n            \n        \n        \n            \n                Andrew Heiss, “Taking Control of Regulations: How International Advocacy NGOs Shape the Regulatory Environments of their Target Countries,” Interest Groups and Advocacy 8, no. 3 (September 2019): 356–75, doi: 10.1057/s41309-019-00061-0\n            \n            \n                    \n                            INGOs\n                        \n                    \n                            Civil society\n                        \n                    \n                            NGO regulations\n                        \n                    \n                            Institutions\n                        \n                    \n                            Mixed methods\n                        \n                    \n                            Survey\n                        \n            \n            \n                Flexibility—\n                 / what lets NGOs reshape\n                 / host environment.\n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             Preprint\n                        \n                    \n                    \n                        \n                             Final version\n                        \n                    \n                    \n                        \n                             Code\n                        \n                    \n                    \n                        \n                             Data\n                        \n                    \n                \n            \n        \n        \n            \n                Andrew Heiss and Judith G. Kelley, “Between a Rock and a Hard Place: International NGOs and the Dual Pressures of Donors and Host Governments,” Journal of Politics 79, no. 2 (April 2017): 732–41, doi: 10.1086/691218.\n            \n            \n                    \n                            INGOs\n                        \n                    \n                            NGO regulations\n                        \n                    \n                            Civil society\n                        \n            \n            \n                Donors and targets:\n                 / institutional constraints\n                 / limit NGOs.\n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             Preprint\n                        \n                    \n                    \n                        \n                             Final version\n                        \n                    \n                    \n                        \n                             Code\n                        \n                    \n                \n            \n        \n        \n            \n                Andrew Heiss and Judith G. Kelley, “From the Trenches: A Global Survey of Anti-TIP NGOs and their Views of US Efforts,” Journal of Human Trafficking 3, no. 3 (2017): 1500–1528, doi: 10.1080/23322705.2016.1199241.\n            \n            \n                    \n                            INGOs\n                        \n                    \n                            Survey\n                        \n                    \n                            Human trafficking\n                        \n            \n            \n                Big sector survey—\n                 / NGOs like U.S. work\n                 / fighting trafficking.\n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             Preprint\n                        \n                    \n                    \n                        \n                             Final version\n                        \n                    \n                    \n                        \n                             Code\n                        \n                    \n                    \n                        \n                             Data\n                        \n                    \n                \n            \n        \n        \n            \n                Andrew Heiss and Tana Johnson, “Internal, Interactive, and Institutional Factors: Towards a Unified Theory of INGO Behavior,” International Studies Review 18, no. 3 (September 2016): 528–41, doi: 10.1093/isr/viv014.\n            \n            \n                    \n                            INGOs\n                        \n                    \n                            Institutions\n                        \n            \n            \n                Study NGOs?\n                 / View behavior; policy\n                 / with a new framework.\n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             Preprint\n                        \n                    \n                    \n                        \n                             Final version\n                        \n                    \n                \n            \n        \n        \n            \n                Eva Witesman and Andrew Heiss, “Nonprofit Collaboration and the Resurrection of Market Failure: How a Resource-Sharing Environment Can Suppress Social Objectives,” Voluntas: International Journal of Voluntary and Nonprofit Organizations 28, no. 4 (August 2017): 1500–1528, doi: 10.1007/s11266-016-9684-5.\n            \n            \n                    \n                            Nonprofits\n                        \n                    \n                            Simulation\n                        \n                    \n                            Institutions\n                        \n            \n            \n                When money is scarce;\n                 / when objectives are not shared—\n                 / don’t collaborate.\n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             Preprint\n                        \n                    \n                    \n                        \n                             Final version\n                        \n                    \n                    \n                        \n                             Code\n                        \n                    \n                \n            \n        \n        \n            \n                Andrew Heiss, “The Failed Management of a Dying Regime: Hosni Mubarak, Egypt’s National Democratic Party, and the January 25 Revolution,” Journal of Third World Studies 28, no. 1 (Spring 2012): 155–171, no doi.\n            \n            \n                    \n                            Management\n                        \n                    \n                            Egypt\n                        \n            \n            \n                Management theory\n                 / meets political science:\n                 / Mubarak messed up.\n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             Preprint\n                        \n                    \n                    \n                        \n                             Final version\n                        \n                    \n                    \n                        \n                             Final version (PDF)\n                        \n                    \n                \n            \n        \n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "research/index.html#working-papers",
+    "href": "research/index.html#working-papers",
+    "title": "Research",
+    "section": "Working papers",
+    "text": "Working papers\n\n\n\n        \n            \n                Andrew Heiss and A. Jordan Nafa, “Taking Uncertainty Seriously: Bayesian Marginal Structural Models for Causal Inference in Political Science”\n            \n            \n                    \n                            Causal inference\n                        \n                    \n                            Bayes\n                        \n                    \n                            Panel data\n                        \n                    \n                            Methods\n                        \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             Code\n                        \n                    \n                \n            \n        \n        \n            \n                Andrew Heiss and Meng Ye, “Causal Inference in Nonprofit Management and Public Administration”\n            \n            \n                    \n                            Causal inference\n                        \n                    \n                            Nonprofits\n                        \n                    \n                            Methods\n                        \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             Code\n                        \n                    \n                \n            \n        \n        \n            \n                Suparna Chaudhry and Andrew Heiss, “Derogations and Democratic Backsliding: Exploring the Pandemic’s Effects on Civic Spaces”\n            \n            \n                    \n                            Human rights\n                        \n                    \n                            Civil society\n                        \n                    \n                            NGO regulations\n                        \n                    \n                            COVID-19\n                        \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             PDF\n                        \n                    \n                    \n                        \n                             Code\n                        \n                    \n                \n            \n        \n        \n            \n                Suparna Chaudhry and Andrew Heiss, “Are Donors Really Responding? Analyzing the Impact of Global Restrictions on NGOs”\n            \n            \n                    \n                            Civil society\n                        \n                    \n                            NGO regulations\n                        \n                    \n                            Foreign aid\n                        \n                    \n                            Causal inference\n                        \n                    \n                            Panel data\n                        \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             PDF\n                        \n                    \n                    \n                        \n                             Code\n                        \n                    \n                \n            \n        \n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "research/index.html#book-chapters",
+    "href": "research/index.html#book-chapters",
+    "title": "Research",
+    "section": "Book chapters",
+    "text": "Book chapters\n\n\n\n        \n            \n                Suparna Chaudhry and Andrew Heiss, “Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on NGOs,” chap. 2 in Beyond the Boomerang: New Patterns in Transcalar Advocacy, eds. Christopher L. Pallas and Elizabeth Bloodgood (Tuscaloosa, AL: University of Alabama Press, 2022).\n            \n            \n                    \n                            Civil society\n                        \n                    \n                            NGO regulations\n                        \n                    \n                            Human rights\n                        \n            \n            \n                Governments threatened—\n                 / NGO regulations\n                 / shift funding; missions.\n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             Preprint (PDF)\n                        \n                    \n                    \n                        \n                             Preprint (HTML)\n                        \n                    \n                    \n                        \n                             Analysis notebook\n                        \n                    \n                    \n                        \n                             Complete code\n                        \n                    \n                \n            \n        \n        \n            \n                Andrew Heiss, “Causal Inference,” chap. 10 in R for Political Data Science: A Practical Guide, ed. Francisco Urdinez and Andrés Cruz (Boca Raton, Florida: Chapman and Hall / CRC, 2021), 235–274, doi: 10.1201/9781003010623.\n            \n            \n                    \n                            Causal inference\n                        \n                    \n                            Methods\n                        \n            \n            \n                DAGs, inference, R!\n                 / Observational data?\n                 / Tell causal stories!\n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             Preprint\n                        \n                    \n                    \n                        \n                             Final version\n                        \n                    \n                    \n                        \n                             Code\n                        \n                    \n                \n            \n        \n        \n            \n                Andrew Heiss, “NGOs and Authoritarianism,” chap. 38 in Routledge Handbook of NGOs and International Relations, ed. Thomas Davies (London: Routledge, 2019).\n            \n            \n                    \n                            NGOs\n                        \n                    \n                            Civil society\n                        \n                    \n                            Institutions\n                        \n                    \n                            Authoritarianism\n                        \n            \n            \n                It’s complicated.\n                 / Dictators love NGOs,\n                 / but also they don’t.\n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             Preprint\n                        \n                    \n                    \n                        \n                             Code\n                        \n                    \n                \n            \n        \n        \n            \n                Tana Johnson and Andrew Heiss, “Liberal Institutionalism,” chap. 8 in International Organization and Global Governance, 2nd ed., ed. Thomas G. Weiss and Rorden Wilkinson (London: Routledge, 2018), 123–34, doi: 10.4324/9781315301914.\n            \n            \n                    \n                            International relations\n                        \n                    \n                            Institutions\n                        \n            \n            \n                Stuck between “ism”s,\n                 / liberal global theory\n                 / has rich past; future.\n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             Preprint\n                        \n                    \n                    \n                        \n                             Final version\n                        \n                    \n                \n            \n        \n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "research/index.html#reviews",
+    "href": "research/index.html#reviews",
+    "title": "Research",
+    "section": "Reviews",
+    "text": "Reviews\n\n\n\n        \n            \n                Andrew Heiss, review of Meghan Elizabeth Kallman, The Death of Idealism: Development and Anti-Politics in the Peace Corps, Contemporary Sociology, 50, no. 6 (November 2021): 486–88, doi: 10.1177/00943061211050046g.\n            \n            \n                    \n                            International development\n                        \n                    \n                            Foreign aid\n                        \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             Preprint (PDF)\n                        \n                    \n                    \n                        \n                             Preprint (HTML)\n                        \n                    \n                    \n                        \n                             Final version\n                        \n                    \n                    \n                        \n                             Code\n                        \n                    \n                \n            \n        \n        \n            \n                Andrew Heiss, review of Taco Brandsen, Willem Trommel, and Bram Verschuere (eds.), Manufacturing Civil Society: Principles, Practices, and Effects, Voluntas: International Journal of Voluntary and Nonprofit Organizations 26, no. 2 (April 2014): 728–30, doi: 10.1007/s11266-014-9541-3.\n            \n            \n                    \n                            Civil society\n                        \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             Preprint\n                        \n                    \n                    \n                        \n                             Final version\n                        \n                    \n                \n            \n        \n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "research/index.html#dormant-working-papers",
+    "href": "research/index.html#dormant-working-papers",
+    "title": "Research",
+    "section": "Dormant working papers",
+    "text": "Dormant working papers\n\n\n\n        \n            \n                \"Sources of Advocacy: When Does the Media Give Voice to Egyptian Advocacy NGOs?\" (with Ken Rogerson, Duke University)\n            \n            \n                    \n                            Egypt\n                        \n                    \n                            Text analysis\n                        \n                    \n                            Topic modeling\n                        \n                    \n                            NGOs\n                        \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             PDF\n                        \n                    \n                    \n                        \n                             Code\n                        \n                    \n                \n            \n        \n        \n            \n                \"Discovering Discourse: The Relationship between Media and NGOs in Egypt between 2011–13\" (with Ken Rogerson, Duke University)\n            \n            \n                    \n                            Egypt\n                        \n                    \n                            Text analysis\n                        \n                    \n                            Topic modeling\n                        \n                    \n                            NGOs\n                        \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             PDF\n                        \n                    \n                    \n                        \n                             Code\n                        \n                    \n                \n            \n        \n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "research/index.html#selected-seminar-papers",
+    "href": "research/index.html#selected-seminar-papers",
+    "title": "Research",
+    "section": "Selected seminar papers",
+    "text": "Selected seminar papers\n\n\n\n        \n            \n                “Do Democracies Discourage NGO Cooperation?\"Replication and extension of Amanda Murdie. 2014. “Scrambling for Contact: The Determinants of Inter-NGO Cooperation in Non-Western Countries.\" Review of International Organizations 9, no. 3 (September): 309–31.\n            \n            \n                    \n                            INGOs\n                        \n                    \n                            NGOs\n                        \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             PDF\n                        \n                    \n                    \n                        \n                             Code\n                        \n                    \n                \n            \n        \n        \n            \n                “Explaining Support for Undemocratic Leaders in Democracies in the Middle East”Replication and extension of Amaney Jamal and Mark Tessler. 2008. “Attitudes in the Arab World.\" Journal of Democracy 19, no. 1 (January): 97–110.\n            \n            \n                    \n                            Authoritarianism\n                        \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             PDF\n                        \n                    \n                    \n                        \n                             Code\n                        \n                    \n                    \n                        \n                             Raw output\n                        \n                    \n                    \n                        \n                             Poster\n                        \n                    \n                \n            \n        \n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "research/index.html#translations",
+    "href": "research/index.html#translations",
+    "title": "Research",
+    "section": "Translations",
+    "text": "Translations\n\n\n\n        \n            \n                Abdel Samad, Hamid. 2011. \"Farewell, Heaven (Wadaʿan Ayatuha al-Samaaʾ / وداعا أيتها السماء).\" In The Literary Life of Cairo: One Hundred Years in the Heart of the City, edited by Samia Mehrez, translated by Andrew Heiss, 347–50. Cairo: American University in Cairo Press.\n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             Book\n                        \n                    \n                    \n                        \n                             PDF\n                        \n                    \n                \n            \n        \n        \n            \n                Prince, Mona. 2011. \"Three Suitcases for Departure (Thalatha Haqaʾib lil-Safar / ثلاثة حقائب للسفر).\" In The Literary Life of Cairo: One Hundred Years in the Heart of the City, edited by Samia Mehrez, translated by Andrew Heiss, 212–13. Cairo: American University in Cairo Press.\n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                             Book\n                        \n                    \n                    \n                        \n                             PDF\n                        \n                    \n                \n            \n        \n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "research/reviews/heiss-death-idealism/index.html",
+    "href": "research/reviews/heiss-death-idealism/index.html",
+    "title": "What Kills Idealism? Review of The Death of Idealism: Development and Anti-Politics in the Peace Corps, by Meghan Elizabeth Kallman",
+    "section": "",
+    "text": "@article{Heiss:20211,\n    author = {Andrew Heiss},\n    doi = {10.1177/00943061211050046g},\n    journal = {Contemporary Sociology},\n    number = {6},\n    pages = {486--488},\n    titleaddon = {\\bibstring{reviewof} Meghan Elizabeth Kallman, \\mkbibemph{The Death of Idealism: Development and Anti-Politics in the Peace Corps}},\n    volume = {50},\n    year = {2021}}"
+  },
+  {
+    "objectID": "research/reviews/heiss-voluntas-review-2014/index.html",
+    "href": "research/reviews/heiss-voluntas-review-2014/index.html",
+    "title": "Review of Manufacturing Civil Society: Principles, Practices, and Effects, ed. Taco Brandsen, Willem Trommel, and Bram Verschuere",
+    "section": "",
+    "text": "@article{Heiss:2015,\n    author = {Andrew Heiss},\n    doi = {10.1007/s11266-014-9541-3},\n    journal = {Voluntas: International Journal of Voluntary and Nonprofit Organizations},\n    pages = {728--730},\n    titleaddon = {\\bibstring{reviewof} Taco Brandsen, Willem Trommel, and Bram Verschuere (eds.), \\mkbibemph{Manufacturing Civil Society: Principles, Practices, and Effects}},\n    volume = {26},\n    year = {2015}}"
+  },
+  {
+    "objectID": "research/working-papers/chaudhry-heiss-derogations/index.html",
+    "href": "research/working-papers/chaudhry-heiss-derogations/index.html",
+    "title": "Derogations and Democratic Backsliding: Exploring the Pandemic’s Effects on Civic Spaces",
+    "section": "",
+    "text": "Paper (preprint)\nStatistical analysis notebook\nGitHub repository"
+  },
+  {
+    "objectID": "research/working-papers/chaudhry-heiss-derogations/index.html#abstract",
+    "href": "research/working-papers/chaudhry-heiss-derogations/index.html#abstract",
+    "title": "Derogations and Democratic Backsliding: Exploring the Pandemic’s Effects on Civic Spaces",
+    "section": "Abstract",
+    "text": "Abstract\nIn an effort to combat the COVID-19 pandemic, most governments have imposed restrictions on movement, association, and other civic freedoms in the interest of public health. In many cases, such as New Zealand, these emergency measures have been temporary and respect for human rights has returned to normal. In many other instances, however, governments have used these restrictions to suppress opposition and more permanently restrict civic space. Systematically measuring the consequences of COVID restrictions, however, is a difficult task. We will examine two possible quantitative measures of the relationship between of COVID restrictions and civil society space. First, we will use the Variety of Democracy project’s newly released Pandemic Violations of Democratic Standards Index to explore if and how civil society restrictions predict pandemic backsliding. Second, while many countries sign international human rights treaties that ostensibly bind states to respect rights, several treaties allow for emergency derogations from these obligations. We will tabulate formal human rights treaty derogations due to the pandemic and explore whether these emergency measures led to lasting declines in associational and human rights. We hope that our exploration of these two measures will provide rich data-based descriptions of the relationship between COVID restrictions and civic space that will allow for more causal work in the future."
+  },
+  {
+    "objectID": "research/working-papers/chaudhry-heiss-derogations/index.html#important-figure",
+    "href": "research/working-papers/chaudhry-heiss-derogations/index.html#important-figure",
+    "title": "Derogations and Democratic Backsliding: Exploring the Pandemic’s Effects on Civic Spaces",
+    "section": "Important figure",
+    "text": "Important figure\nFigure 5: Derogation decisions across pandemic violations and pandemic backsliding\n\n\n\nFigure 5: Derogation decisions across pandemic violations and pandemic backsliding"
+  },
+  {
+    "objectID": "research/working-papers/chaudhry-heiss-derogations/index.html#bibtex-citation",
+    "href": "research/working-papers/chaudhry-heiss-derogations/index.html#bibtex-citation",
+    "title": "Derogations and Democratic Backsliding: Exploring the Pandemic’s Effects on Civic Spaces",
+    "section": "BibTeX citation",
+    "text": "BibTeX citation\n@unpublished{ChaudhryHeiss:2021,\n    Author = {Suparna Chaudhry and Andrew Heiss},\n    Note = {Working paper},\n    Title = {Derogations and Democratic Backsliding: Exploring the Pandemic's Effects on Civic Spaces},\n    Year = {2021}}"
+  },
+  {
+    "objectID": "research/working-papers/chaudhry-heiss-ngos-aid/index.html",
+    "href": "research/working-papers/chaudhry-heiss-ngos-aid/index.html",
+    "title": "Are Donors Really Responding? Analyzing the Impact of Global Restrictions on NGOs",
+    "section": "",
+    "text": "Paper (preprint)\nSupplement (preprint)\nStatistical analysis notebook\nGitHub repository"
+  },
+  {
+    "objectID": "research/working-papers/chaudhry-heiss-ngos-aid/index.html#abstract",
+    "href": "research/working-papers/chaudhry-heiss-ngos-aid/index.html#abstract",
+    "title": "Are Donors Really Responding? Analyzing the Impact of Global Restrictions on NGOs",
+    "section": "Abstract",
+    "text": "Abstract\nForeign donors routinely use nongovernmental organizations (NGOs) to deliver foreign aid. However, states are increasingly relying on repressive legislation to crack down on NGOs within their borders. How have foreign aid donors responded to this legal crackdown on NGOs? Using original data from all countries that received aid from 1981–2012, we assess the impact of anti-NGO laws on total flows of official foreign aid, the nature of projects funded, and the channels used for distributing this aid. Overall, we find that donors scale back their operations in repressive countries. However, rather than completely withdraw, we find that donors redirect funds within restrictive countries by decreasing funds for politically sensitive issues, and channeling more aid through domestic rather than foreign NGOs. While our findings challenge existing notions of foreign aid running on “autopilot,” they also have worrying implications for Western donors and domestic NGOs working on contentious issues."
+  },
+  {
+    "objectID": "research/working-papers/chaudhry-heiss-ngos-aid/index.html#figure",
+    "href": "research/working-papers/chaudhry-heiss-ngos-aid/index.html#figure",
+    "title": "Are Donors Really Responding? Analyzing the Impact of Global Restrictions on NGOs",
+    "section": "Figure",
+    "text": "Figure\nFigure 5: Predicted ODA (foreign aid) across a range of differences from average number of anti-NGO laws in an average country; dark line shows average of 500 draws from posterior distribution.\n\n\n\nFigure 5: Predicted ODA (foreign aid) across a range of differences from average number of anti-NGO laws in an average country; dark line shows average of 500 draws from posterior distribution."
+  },
+  {
+    "objectID": "research/working-papers/chaudhry-heiss-ngos-aid/index.html#bibtex-citation",
+    "href": "research/working-papers/chaudhry-heiss-ngos-aid/index.html#bibtex-citation",
+    "title": "Are Donors Really Responding? Analyzing the Impact of Global Restrictions on NGOs",
+    "section": "BibTeX citation",
+    "text": "BibTeX citation\n@unpublished{ChaudhryHeiss:2018,\n    Author = {Suparna Chaudhry and Andrew Heiss},\n    Note = {Working paper},\n    Title = {Are Donors Really Responding? Analyzing the Impact of Global Restrictions on {NGO}s},\n    Year = {2018}}"
+  },
+  {
+    "objectID": "research/working-papers/heiss-nafa-bayes-ipw/index.html",
+    "href": "research/working-papers/heiss-nafa-bayes-ipw/index.html",
+    "title": "Taking Uncertainty Seriously: Bayesian Marginal Structural Models for Causal Inference in Political Science",
+    "section": "",
+    "text": "GitHub repository"
+  },
+  {
+    "objectID": "research/working-papers/heiss-nafa-bayes-ipw/index.html#abstract",
+    "href": "research/working-papers/heiss-nafa-bayes-ipw/index.html#abstract",
+    "title": "Taking Uncertainty Seriously: Bayesian Marginal Structural Models for Causal Inference in Political Science",
+    "section": "Abstract",
+    "text": "Abstract\nThe past two decades have been characterized by considerable progress in developing approaches to causal inference in situations where true experimental manipulation is either impractical or impossible. With few exceptions, however, commonly employed techniques in political science have developed largely within the frequentist framework (i.e., Blackwell and Glynn 2018; Imai and Kim 2019; Torres 2020). In this article, we argue that common approaches rest fundamentally upon assumptions that are difficult to defend in many areas of political research and highlight the benefits of quantifying uncertainty in the estimation of causal effects (Gill 1999; Gill and Heuberger 2020; Schrodt 2014; Western and Jackman 1994). Extending the approach to causal inference for cross-sectional time series and panel data under selection on observables introduced by Blackwell and Glynn (2018), we develop a two-step Bayesian approach to the estimation of marginal structural models. We demonstrate our proposed procedure in the context of parametric survival analysis and linear mixed effects models via a simulation study and two empirical examples. Finally, we provide flexible open-source software implementing the proposed method."
+  },
+  {
+    "objectID": "research/working-papers/heiss-nafa-bayes-ipw/index.html#bibtex-citation",
+    "href": "research/working-papers/heiss-nafa-bayes-ipw/index.html#bibtex-citation",
+    "title": "Taking Uncertainty Seriously: Bayesian Marginal Structural Models for Causal Inference in Political Science",
+    "section": "BibTeX citation",
+    "text": "BibTeX citation\n@unpublished{HeissNafa:2022,\n    Author = {Andrew Heiss and A. Jordan Nafa},\n    Note = {Working paper},\n    Title = {Taking Uncertainty Seriously: Bayesian Marginal Structural Models for Causal Inference in Political Science},\n    Year = {2022}}"
+  },
+  {
+    "objectID": "research/working-papers/heiss-ye-np-causal-inference/index.html",
+    "href": "research/working-papers/heiss-ye-np-causal-inference/index.html",
+    "title": "Causal Inference in Nonprofit Management and Public Administration",
+    "section": "",
+    "text": "GitHub repository"
+  },
+  {
+    "objectID": "research/working-papers/heiss-ye-np-causal-inference/index.html#abstract",
+    "href": "research/working-papers/heiss-ye-np-causal-inference/index.html#abstract",
+    "title": "Causal Inference in Nonprofit Management and Public Administration",
+    "section": "Abstract",
+    "text": "Abstract\nThe “causal revolution” in the broader social sciences has led to a new field of observational causal inference. However, these advancements have been less used among nonprofit scholars and practitioners. In this article, we provide a methodological guide for applying causal inference tools within nonprofit studies. We walk through practical examples of model-based and design-based approaches from epidemiology and econometrics to observational causal inference, including causal models, inverse probability weighting, difference-in-differences, regression discontinuity, and instrumental variables. We include empirical illustrations of these approaches by replicating existing nonprofit research and program evaluations. We conclude with a call for more careful and explicit attempts at making causal claims in nonprofit studies."
+  },
+  {
+    "objectID": "talks/index.html",
+    "href": "talks/index.html",
+    "title": "Talks",
+    "section": "",
+    "text": "This page contains the source code, links, and slides for various workshops, talks, lectures, and presentations I’ve given. Research presentations given at conferences are typically stored in their respective repositories on GitHub; one-off workshops and talks can all be found in a catch-all GitHub repository."
+  },
+  {
+    "objectID": "talks/index.html#section",
+    "href": "talks/index.html#section",
+    "title": "Talks",
+    "section": "2022",
+    "text": "2022\n\n\n    \n                  \n            September 12, 2022\n        \n        \n            APIs and web scraping with R\n            Workshop for SEACEN's September 2022 online course on \"Data Analytics for Macroeconomic Surveillance\" | Kuala Lumpur, Malaysia (via Zoom)\n            \n                \n                    \n                         Companion site, slides, and materials\n                    \n                \n                \n                    \n                         GitHub repository\n                    \n                \n            \n        \n    \n    \n                  \n            February 22, 2022\n        \n        \n            Putting everything out there as a researcher\n            Workshop for EPID 9100 (PhD/MS seminar), Department of Epidemiology & Biostatistics, University of Georgia | Athens, Georgia\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         Handout page\n                    \n                \n                \n                    \n                         GitHub repository for talk\n                    \n                \n            \n        \n    \n\n\nNo matching items"
+  },
+  {
+    "objectID": "talks/index.html#section-1",
+    "href": "talks/index.html#section-1",
+    "title": "Talks",
+    "section": "2021",
+    "text": "2021\n\n\n    \n                  \n            November 16, 2021\n        \n        \n            Introduction to the tidyverse + data visualization with ggplot2\n            Two sessions for SEACEN's November 2021 online course on \"Data Analytics for Macroeconomic Surveillance\" | Kuala Lumpur, Malaysia (via Zoom)\n            \n                \n                    \n                         Companion site, slides, and materials\n                    \n                \n                \n                    \n                         GitHub repository\n                    \n                \n            \n        \n    \n    \n                  \n            August 17, 2021\n        \n        \n            Making documents, websites, and dashboards with R\n            Workshop for the Georgia Policy Labs at the Andrew Young School of Policy Studies | Atlanta, Georgia (via Zoom)\n            \n                \n                    \n                         Companion site and slides\n                    \n                \n            \n        \n    \n    \n                  \n            July 13, 2021\n        \n        \n            Introduction to Geographic Information Systems (GIS) data with R\n            Workshop for the Georgia Policy Labs at the Andrew Young School of Policy Studies | Atlanta, Georgia (via Zoom)\n            \n                \n                    \n                         Companion site and slides\n                    \n                \n            \n        \n    \n    \n                  \n            June 29, 2021\n        \n        \n            Graphic design for public administrators\n            Workshop for the Georgia Policy Labs at the Andrew Young School of Policy Studies | Atlanta, Georgia (via Zoom)\n            \n                \n                    \n                         Companion site and slides\n                    \n                \n            \n        \n    \n    \n                  \n            March 4, 2021\n        \n        \n            Universal documents and reproducibility\n            Workshop for EPID 9100 (PhD/MS seminar), Department of Epidemiology & Biostatistics, University of Georgia | Athens, Georgia (via Zoom)\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         Companion site\n                    \n                \n                \n                    \n                         GitHub repository for talk\n                    \n                \n            \n        \n    \n    \n                  \n            February 5, 2021\n        \n        \n            What does the internet say about you?\n            Workshop for the Political Science Graduate Student Association, Department of Political Science, Georgia State University | Atlanta, Georgia (via Zoom)\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         Handout page\n                    \n                \n                \n                    \n                         GitHub repository for talk\n                    \n                \n            \n        \n    \n\n\nNo matching items"
+  },
+  {
+    "objectID": "talks/index.html#section-2",
+    "href": "talks/index.html#section-2",
+    "title": "Talks",
+    "section": "2020",
+    "text": "2020\n\n\n    \n                  \n            October 29, 2020\n        \n        \n            The US and the 2020 Election\n            Guest lecture for KIEN 2263 (English Academic and Professional Skills II), Centre for Language & Communication Studies, University of Turku | Turku, Finland (via Zoom)\n            \n        \n    \n    \n                  \n            October 23, 2020\n        \n        \n            Universal documents and reproducibility\n            \"Unpacking the Hidden Curriculum\": Graduate Student Professionalization Workshop, Department of Political Science, University of Utah | Salt Lake City, Utah (via Zoom)\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         Companion site\n                    \n                \n                \n                    \n                         GitHub repository for talk\n                    \n                \n            \n        \n    \n    \n                  \n            October 23, 2020\n        \n        \n            What does the internet say about you?\n            \"Unpacking the Hidden Curriculum\": Graduate Student Professionalization Workshop, Department of Political Science, University of Utah | Salt Lake City, Utah (via Zoom)\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         Handout page\n                    \n                \n                \n                    \n                         GitHub repository for talk\n                    \n                \n            \n        \n    \n    \n                  \n            September 17, 2020\n        \n        \n            Truth, beauty, and data: Why data visualization matters in research\n            Methods workshop in the Département de science politique, Université de Montréal | Montréal, Canada (via Zoom)\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         Handout page\n                    \n                \n                \n                    \n                         GitHub repository for talk\n                    \n                \n            \n        \n    \n    \n                  \n            August 21, 2020\n        \n        \n            Program evaluation and causal inference with R\n            Workshop for the Georgia Policy Labs at the Andrew Young School of Policy Studies | Atlanta, Georgia (via Zoom)\n            \n                \n                    \n                         Slides and materials\n                    \n                \n            \n        \n    \n    \n                  \n            July 20, 2020\n        \n        \n            Data visualization with R\n            Workshop for the Georgia Policy Labs at the Andrew Young School of Policy Studies | Atlanta, Georgia (via Zoom)\n            \n                \n                    \n                         Slides and materials\n                    \n                \n            \n        \n    \n    \n                  \n            July 16, 2020\n        \n        \n            What does the internet say about you?\n            Workshop for members of the International Society for Third-Sector Research (ISTR) | Online workshop via Zoom\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         GitHub repository for talk\n                    \n                \n            \n        \n    \n    \n                  \n            July 9, 2020\n        \n        \n            Welcome to the tidyverse: Introduction to R and tidy data analysis\n            Workshop for the Georgia Policy Labs at the Andrew Young School of Policy Studies | Atlanta, Georgia (via Zoom)\n            \n                \n                    \n                         Slides and materials\n                    \n                \n            \n        \n    \n    \n                  \n            July 7, 2020\n        \n        \n            Truth, Beauty, and Data\n            Workshop on data visualization for employees of the Church of Jesus Christ of Latter-day Saints | Salt Lake City, Utah (via Zoom)\n            \n                \n                    \n                         Slides\n                    \n                \n            \n        \n    \n\n\nNo matching items"
+  },
+  {
+    "objectID": "talks/index.html#section-3",
+    "href": "talks/index.html#section-3",
+    "title": "Talks",
+    "section": "2019",
+    "text": "2019\n\n\n    \n                  \n            November 21, 2019\n        \n        \n            Why Donors Donate: Disentangling Organizational and Structural Heuristics for International Philanthropy\n            2019 Conference for the Association for Research on Nonprofit Organizations and Voluntary Action (ARNOVA) | San Diego, California\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         GitHub repository\n                    \n                \n            \n        \n    \n    \n                  \n            November 5, 2019\n        \n        \n            NGOs and authoritarianism\n            Guest lecture for International NGOs (PMAP 8201) | Atlanta, Georgia\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         GitHub repository\n                    \n                \n            \n        \n    \n    \n                  \n            October 18, 2019\n        \n        \n            Open source resources for teaching data public service-focused data science courses\n            2019 Conference for the Network of Schools of Public Policy, Affairs, and Administration (NASPAA) | Los Angeles, California\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         GitHub repository\n                    \n                \n                \n                    \n                         Handout page\n                    \n                \n            \n        \n    \n    \n                  \n            October 10, 2019\n        \n        \n            Data Science, Open Source, and Radical Transparency\n            Brown bag presentation to PhD students in the Andrew Young School of Policy Studies | Atlanta, Georgia\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         GitHub repository\n                    \n                \n            \n        \n    \n    \n                  \n            September 19, 2019\n        \n        \n            Curiosity, Transparency, and Failure\n            Guest talk to epidemiology PhD students at the University of Georgia | Athens, Georgia\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         GitHub repository\n                    \n                \n            \n        \n    \n    \n                  \n            May 14, 2019\n        \n        \n            \"Why won't this run again?!\": Making R analysis more reproducible\n            Utah County R Users Group | Provo, Utah\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         GitHub repository for talk\n                    \n                \n                \n                    \n                         Handout page\n                    \n                \n            \n        \n    \n\n\nNo matching items"
+  },
+  {
+    "objectID": "talks/index.html#section-4",
+    "href": "talks/index.html#section-4",
+    "title": "Talks",
+    "section": "2018",
+    "text": "2018\n\n\n    \n                  \n            September 19, 2018\n        \n        \n            A lightning quick introduction to data visualization\n            Utah Valley University Department of Biology Seminar | Orem, Utah\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         GitHub repository\n                    \n                \n                \n                    \n                         Handout page\n                    \n                \n            \n        \n    \n    \n                  \n            July 11, 2018\n        \n        \n            Introduction to data visualization with R\n            Utah R Users Group | Salt Lake City, Utah\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         GitHub repository for talk\n                    \n                \n                \n                    \n                         Resources and code examples\n                    \n                \n                \n                    \n                         Video\n                    \n                \n            \n        \n    \n    \n                  \n            June 12, 2018\n        \n        \n            Taking Control of Regulations: How International Advocacy NGOs Shape the Regulatory Environments of their Target Countries\n            Interest Groups, International Organizations, and Global Problem-solving Capacity workshop | Stockholm, Sweden\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         GitHub repository for paper\n                    \n                \n            \n        \n    \n    \n                  \n            April 27, 2018\n        \n        \n            A lightning quick introduction to data visualization\n            West Coast Nonprofit Data Conference | Salt Lake City, Utah\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         GitHub repository for talk\n                    \n                \n                \n                    \n                         Handout page\n                    \n                \n            \n        \n    \n\n\nNo matching items"
+  },
+  {
+    "objectID": "talks/index.html#section-5",
+    "href": "talks/index.html#section-5",
+    "title": "Talks",
+    "section": "2016",
+    "text": "2016\n\n\n    \n                  \n            March 7, 2016\n        \n        \n            Telling Stories with Data\n            MPP workshop at the Sanford School of Public Policy, Duke University | Durham, North Carolina\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         GitHub repository\n                    \n                \n            \n        \n    \n\n\nNo matching items"
+  },
+  {
+    "objectID": "talks/index.html#section-6",
+    "href": "talks/index.html#section-6",
+    "title": "Talks",
+    "section": "2015",
+    "text": "2015\n\n\n    \n                  \n            October 16, 2015\n        \n        \n            Enhancing basic statistical figures: Make pretty pictures like the New York Times\n            MPP workshop at the Sanford School of Public Policy | Durham, North Carolina\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         GitHub repository\n                    \n                \n            \n        \n    \n    \n                  \n            October 2, 2015\n        \n        \n            Graphic Design for Non-Designers\n            MPP workshop at the Sanford School of Public Policy | Durham, North Carolina\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         GitHub repository\n                    \n                \n            \n        \n    \n    \n                  \n            September 15, 2015\n        \n        \n            A Very Brief Overview of Topics in Data Visualization\n            MPP workshop at the Sanford School of Public Policy | Durham, North Carolina\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         GitHub repository\n                    \n                \n            \n        \n    \n    \n                  \n            April 17, 2015\n        \n        \n            Telling Stories with Data\n            PhD workshop at the Sanford School of Public Policy | Durham, North Carolina\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         GitHub repository\n                    \n                \n            \n        \n    \n\n\nNo matching items"
+  },
+  {
+    "objectID": "talks/index.html#section-7",
+    "href": "talks/index.html#section-7",
+    "title": "Talks",
+    "section": "2014",
+    "text": "2014\n\n\n    \n                  \n            September 11, 2014\n        \n        \n            Data Visualization and Exploratory Data Analysis\n            MPP workshop at the Sanford School of Public Policy | Durham, North Carolina\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         GitHub repository\n                    \n                \n            \n        \n    \n    \n                  \n            September 2, 2014\n        \n        \n            Practically Perfect Professional Policy Presentations\n            MPP workshop at the Sanford School of Public Policy | Durham, North Carolina\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         GitHub repository\n                    \n                \n            \n        \n    \n    \n                  \n            January 22, 2014\n        \n        \n            Data Visualization and Exploratory Data Analysis\n            MPP workshop at the Sanford School of Public Policy | Durham, North Carolina\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         GitHub repository\n                    \n                \n            \n        \n    \n\n\nNo matching items"
+  },
+  {
+    "objectID": "talks/index.html#section-8",
+    "href": "talks/index.html#section-8",
+    "title": "Talks",
+    "section": "2013",
+    "text": "2013\n\n\n    \n                  \n            September 12, 2013\n        \n        \n            Telling Stories with Data\n            MPP workshop at the Sanford School of Public Policy | Durham, North Carolina\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         GitHub repository\n                    \n                \n            \n        \n    \n    \n                  \n            September 12, 2013\n        \n        \n            Practically Perfect Professional Policy Presentations\n            MPP workshop at the Sanford School of Public Policy | Durham, North Carolina\n            \n                \n                    \n                         Slides\n                    \n                \n                \n                    \n                         GitHub repository\n                    \n                \n            \n        \n    \n\n\nNo matching items"
+  },
+  {
+    "objectID": "teaching/index.html",
+    "href": "teaching/index.html",
+    "title": "Teaching",
+    "section": "",
+    "text": "Program Evaluation for Public Service \n            \n            \n                PMAP 8521 | \n                Georgia State University\n            \n            Combine research design, causal inference, and econometric tools to measure the effects of social programs\n            \n                 Fall 2022\n            \n        \n    \n    \n        \n            \n        \n        \n            \n                Bayesian Statistics Readings \n            \n            \n                PMAP 8911 | \n                Georgia State University\n            \n            Independent readings course on Bayesian statistics with R and Stan\n            \n                 Fall 2022\n            \n        \n    \n    \n        \n            \n        \n        \n            \n                Introduction to Nonprofits \n            \n            \n                PMAP 3210 | \n                Georgia State University\n            \n            Discover what nonprofit organizations are, how they work, and how they can improve communities (and the world!)\n            \n                 Fall 2022\n            \n        \n    \n\n\nNo matching items"
+  },
+  {
+    "objectID": "teaching/index.html#section-1",
+    "href": "teaching/index.html#section-1",
+    "title": "Teaching",
+    "section": "2021–22",
+    "text": "2021–22\n\n\n    \n        \n            \n        \n        \n            \n                Program Evaluation for Public Service \n            \n            \n                PMAP 8521 | \n                Georgia State University\n            \n            Combine research design, causal inference, and econometric tools to measure the effects of social programs\n            \n                 Spring 2022\n                 Fall 2021\n            \n        \n    \n    \n        \n            \n        \n        \n            \n                Introduction to Nonprofits \n            \n            \n                PMAP 3210 | \n                Georgia State University\n            \n            Discover what nonprofit organizations are, how they work, and how they can improve communities (and the world!)\n            \n                 Spring 2022\n            \n        \n    \n    \n        \n            \n        \n        \n            \n                Data Visualization with R \n            \n            \n                PMAP 8921 | \n                Georgia State University\n            \n            Use R, ggplot2, and the principles of graphic design to create beautiful and truthful visualizations of data\n            \n                 Summer 2022 (asynchronous online)\n            \n        \n    \n    \n        \n            \n        \n        \n            \n                Microeconomics for Public Policy \n            \n            \n                PMAP 8141 | \n                Georgia State University\n            \n            Learn how to understand, speak, and do economics in the public sector\n            \n                 Summer 2022 (asynchronous online)\n            \n        \n    \n\n\nNo matching items"
+  },
+  {
+    "objectID": "teaching/index.html#section-2",
+    "href": "teaching/index.html#section-2",
+    "title": "Teaching",
+    "section": "2020–21",
+    "text": "2020–21\n\n\n    \n        \n            \n        \n        \n            \n                Program Evaluation for Public Service \n            \n            \n                PMAP 8521 | \n                Georgia State University\n            \n            Combine research design, causal inference, and econometric tools to measure the effects of social programs\n            \n                 Spring 2021 (asynchronous online)\n                 Fall 2020 (asynchronous online)\n            \n        \n    \n    \n        \n            \n        \n        \n            \n                Data Visualization with R \n            \n            \n                PMAP 8921 | \n                Georgia State University\n            \n            Use R, ggplot2, and the principles of graphic design to create beautiful and truthful visualizations of data\n            \n                 Summer 2021 (asynchronous online)\n            \n        \n    \n    \n        \n            \n        \n        \n            \n                Microeconomics for Public Policy \n            \n            \n                PMAP 8141 | \n                Georgia State University\n            \n            Learn how to understand, speak, and do economics in the public sector\n            \n                 Summer 2021 (asynchronous online)\n                 Spring 2021 (asynchronous online)\n                 Fall 2020 (asynchronous online)\n            \n        \n    \n\n\nNo matching items"
+  },
+  {
+    "objectID": "teaching/index.html#section-3",
+    "href": "teaching/index.html#section-3",
+    "title": "Teaching",
+    "section": "2019–20",
+    "text": "2019–20\n\n\n    \n        \n            \n        \n        \n            \n                Data Visualization with R \n            \n            \n                PMAP 8921 | \n                Georgia State University\n            \n            Use R, ggplot2, and the principles of graphic design to create beautiful and truthful visualizations of data\n            \n                 May 2020 (asynchronous online)\n            \n        \n    \n    \n        \n            \n        \n        \n            \n                Program Evaluation for Public Service \n            \n            \n                PMAP 8521 | \n                Georgia State University\n            \n            Combine research design, causal inference, and econometric tools to measure the effects of social programs\n            \n                 Spring 2020\n                 Fall 2019\n            \n        \n    \n    \n        \n            \n        \n        \n            \n                Microeconomics for Public Policy \n            \n            \n                PMAP 8141 | \n                Georgia State University\n            \n            Learn how to understand, speak, and do economics in the public sector\n            \n                 Summer 2020 (asynchronous online)\n                 Fall 2019\n            \n        \n    \n\n\nNo matching items"
+  },
+  {
+    "objectID": "teaching/index.html#section-4",
+    "href": "teaching/index.html#section-4",
+    "title": "Teaching",
+    "section": "2017–19",
+    "text": "2017–19\n\n\n    \n        \n            \n        \n        \n            \n                Economy, Society, and Public Policy \n            \n            \n                MPA 612 | \n                Brigham Young University\n            \n            \n            \n                 Winter 2019\n                 Winter 2019 (executive MPA)\n            \n        \n    \n    \n        \n            \n        \n        \n            \n                Data Science and Statistics for Public Management \n            \n            \n                MPA 630 | \n                Brigham Young University\n            \n            \n            \n                 Fall 2018\n            \n        \n    \n    \n        \n            \n        \n        \n            \n                Data Visualization \n            \n            \n                MPA 635 | \n                Brigham Young University\n            \n            \n            \n                 Fall 2018\n            \n        \n    \n    \n        \n            \n        \n        \n            \n                Economic Decision Making for Managers \n            \n            \n                MPA 612 | \n                Brigham Young University\n            \n            \n            \n                 Winter 2018\n            \n        \n    \n    \n        \n            \n        \n        \n            \n                Telling Stories with Data \n            \n            \n                Bus M 491R | \n                Brigham Young University\n            \n            \n            \n                 Fall 2017\n            \n        \n    \n    \n        \n            \n        \n        \n            \n                Data Visualization \n            \n            \n                MPA 635 | \n                Brigham Young University\n            \n            \n            \n                 Fall 2017\n            \n        \n    \n\n\nNo matching items"
+  },
+  {
+    "objectID": "teaching/index.html#section-5",
+    "href": "teaching/index.html#section-5",
+    "title": "Teaching",
+    "section": "2007–15",
+    "text": "2007–15\n\n\n    \n        \n            \n        \n        \n            \n                Stats in Real Life \n            \n            \n                PubPol 590 | \n                Duke University\n                | TA, as PhD student\n            \n            \n            \n                 Fall 2014\n                 Spring 2014\n            \n        \n    \n    \n        \n            \n        \n        \n            \n                Policy Analysis \n            \n            \n                PubPol 803/807 | \n                Duke University\n                | TA, as PhD student\n            \n            \n            \n                 Fall 2015\n                 Fall 2013\n            \n        \n    \n    \n        \n            \n        \n        \n            \n                Statistical Analysis for Public Administrators \n            \n            \n                PMGT 630 | \n                Brigham Young University\n                | TA, as MPA student\n            \n            \n            \n                 Summer 2012\n            \n        \n    \n    \n        \n            \n        \n        \n            \n                International Development Field Study \n            \n            \n                PubPol 803/807 | \n                Brigham Young University\n                | TA, as MPA student\n            \n            \n            \n                 Winter and Spring 2012\n            \n        \n    \n    \n        \n            \n        \n        \n            \n                Decision Modeling and Analysis \n            \n            \n                PubPol 803/807 | \n                Brigham Young University\n                | TA, as MPA student\n            \n            \n            \n                 Winter 2012\n                 Fall 2011\n            \n        \n    \n    \n        \n            \n        \n        \n            \n                Print Publishing \n            \n            \n                CHum 260 | \n                Brigham Young University\n                | Instructor, as undergraduate\n            \n            \n            \n                 Winter 2008\n            \n        \n    \n    \n        \n            \n        \n        \n            \n                First-year Arabic \n            \n            \n                Arabic 101 | \n                Brigham Young University\n                | Instructor, as undergraduate\n            \n            \n            \n                 Winter 2007\n                 Fall 2006\n            \n        \n    \n\n\nNo matching items"
+  },
+  {
+    "objectID": "uses/index.html",
+    "href": "uses/index.html",
+    "title": "What I use in my research workflow",
+    "section": "",
+    "text": "Personally, I think research tools are quite important in the research and working. I spent many years on the finding the best tools for me, and kept the following list that I used daily\nI do both wet-lab and dry-lab for my research and work. So my setup should support the following well:"
+  },
+  {
+    "objectID": "uses/index.html#writing",
+    "href": "uses/index.html#writing",
+    "title": "What I use in my research workflow",
+    "section": "Writing",
+    "text": "Writing\n\nPowerPoint - for all my presentations.\nWord - for paper, report, grant writing.\nTypora - For writting notebooks using Markdown.\nZotero - for research and reference management. I use the jianguoyun to sync the attachment files, so that I can read the papers anytime and anywhere on my Iphone or Mac."
+  },
+  {
+    "objectID": "uses/index.html#development",
+    "href": "uses/index.html#development",
+    "title": "What I use in my research workflow",
+    "section": "Development",
+    "text": "Development\n\nR and RStudio - for most of my statistical computing and visualization. Now I shifting my R coding environment to , and I’m a dedicated devotee of the tidyverse. In the interest of full reproducibility and transparency.\nPython - I also learning machnine learning to use python as a beginner, but I’m far more comfortable with R for scientific computing.\nGitHub - for website deploy. I start to write notebooks and deploy it to Github.\nRemote server - I normally access my remote files through SSH in a terminal as everything is on the remote virtual machine"
+  },
+  {
+    "objectID": "uses/index.html#hardware",
+    "href": "uses/index.html#hardware",
+    "title": "What I use in my research workflow",
+    "section": "Hardware",
+    "text": "Hardware\n\nI use a 2021 14″ M1 Pro MacBook Pro, Studio Display, and an iPhone 14."
+  },
+  {
+    "objectID": "blog/2021/01/02/index.html",
+    "href": "blog/2021/01/02/index.html",
+    "title": "Markdown input greek letters",
+    "section": "",
+    "text": "inline-equation: \\(xyz\\)\ninsert an equation to a new line and settled in the middle: \\[xyz\\]"
+  },
+  {
+    "objectID": "blog/2021/02/01/index.html",
+    "href": "blog/2021/02/01/index.html",
+    "title": "Punctuation marks words",
+    "section": "",
+    "text": "Full Stop / Period (.)\nComma (,)\nQuestion Mark (?)\nExclamation Mark (!)\nQuotation Marks / Speech Marks (” “)\nApostrophe (’)\nHyphen (-)\nDash (– or —)\nColon (:)\nSemicolon (;)\nParentheses ()\nBrackets []\nEllipsis (…)\nSlash (/)"
+  },
+  {
+    "objectID": "blog/2021/03/16/index.html",
+    "href": "blog/2021/03/16/index.html",
+    "title": "Crop image and add scale bar with ImageJ/Fiji",
+    "section": "",
+    "text": "Edit -> Selection -> Specify\nimage -> Crop"
+  },
+  {
+    "objectID": "blog/2021/03/16/index.html#crop-same-area-from-different-images",
+    "href": "blog/2021/03/16/index.html#crop-same-area-from-different-images",
+    "title": "Crop image and add scale bar with ImageJ/Fiji",
+    "section": "Crop same area from different images",
+    "text": "Crop same area from different images\n\nSelect the area on the first image\nAnalyze -> Tools -> ROI manager -> Add [t]\nClick the second image, select and click the parameters on the ROI manager"
+  },
+  {
+    "objectID": "blog/2021/03/16/index.html#set-scale-and-add-scale-bar",
+    "href": "blog/2021/03/16/index.html#set-scale-and-add-scale-bar",
+    "title": "Crop image and add scale bar with ImageJ/Fiji",
+    "section": "Set scale and add scale bar",
+    "text": "Set scale and add scale bar\n\nAnalyze -> Set Scale\n\nNikon:\n\n0.16 um/pixel (40x object)\n6.25 pixel/um (40x object)\n12.5 pixel/um (when exported with 200% zoom in using cellXpress)\n3.2 pixel/um (20x object)\n5 um/16 pixel (20x object)\n12.8 pixel/um (when exported with 400% zoom in using cellXpress)\n5uM = 16 pixels, if exported as 4x, then 5uM = 64 pixels)\n\nTC microscope:\n\nphysical length of a pixel: 3.4375 um\n10x: 0.34375 um/pixel = 2.91 pixel/um\n20x: 0.171875 um/pixel = 5.82 pixel/um\n\n\nAnalyze -> Tools -> Scale bar\nFile save as png format."
+  },
+  {
+    "objectID": "blog/2021/06/01/index.html",
+    "href": "blog/2021/06/01/index.html",
+    "title": "Using greek unicode in Inkscape",
+    "section": "",
+    "text": "To get Greek letters in Inkscape, go into text mode and type Ctrl+U and the 4-digit unicode for the desired Greek letter.\n\n\n\ngreekscape"
+  },
+  {
+    "objectID": "blog/2022/10/01/index.html",
+    "href": "blog/2022/10/01/index.html",
+    "title": "Nomenclature for the description of mutations and variations",
+    "section": "",
+    "text": "DNA:\n\nc. → coding DNA\ng. → genomic DNA\nm. → mitochondrial DNA\n\nRNA:\n\nr. → RNA\n\nProtein:\n\np. → protein"
+  },
+  {
+    "objectID": "blog/2022/10/01/index.html#code",
+    "href": "blog/2022/10/01/index.html#code",
+    "title": "Nomenclature for the description of mutations and variations",
+    "section": "Code",
+    "text": "Code\n\n\n\nSubstitution (for bases)\n>\n\n\n\n\nrange\n-\n\n\nmore change in one allele\n;\n\n\nmore transcripts / mosaicism\n,\n\n\nuncertain\n()\n\n\nallele\n[ ]\n\n\ndeletion\ndel\n\n\nduplication\ndup\n\n\ninsertion\nins\n\n\ninversion\ninv\n\n\nconversion\ncon\n\n\nextension\next\n\n\nstop codon\nX\n\n\nframe shift\nfsX\n\n\nopposite strand\no\n\n\ntranslocation\nt"
+  },
+  {
+    "objectID": "blog/2022/10/01/index.html#mutation",
+    "href": "blog/2022/10/01/index.html#mutation",
+    "title": "Nomenclature for the description of mutations and variations",
+    "section": "Mutation",
+    "text": "Mutation\nA mutation is a change in the DNA sequence of an organism. Mutations can result from errors in DNA replication during cell division, exposure to mutagens or a viral infection.\nGermline mutations (that occur in eggs and sperm) can be passed on to offspring, while somatic mutations (that occur in body cells) are not passed on.\n\nThe translation of disrupted sequence can be checked via Expasy\n\nSubstitution\nSubstitution, as related to genomics, is a type of mutation in which one nucleotide is replaced by a different nucleotide. The term can also refer to the replacement of one amino acid in a protein with a different amino acid.\n\nc.123A>G: on cDNA, A in 123 is replaced by G\np.P252R: on protein, proline (P) replaced by arginine (R)\n\n\n\n\nPoint mutation\nA point mutation occurs in a genome when a single base pair is added, deleted or changed. While most point mutations are benign, they can also have various functional consequences, including changes in gene expression or alterations in encoded proteins.\nA point mutation is when a single base pair is altered. Point mutations can have one of three effects.\n\nFirst, the base substitution can be a silent mutation where the altered codon corresponds to the same amino acid.\nSecond, the base substitution can be a missense mutation where the altered codon corresponds to a different amino acid.\nOr third, the base substitution can be a nonsense mutation where the altered codon corresponds to a stop signal.\n\n\nA missense mutation is a DNA change that results in different amino acids being encoded at a particular position in the resulting protein. Some missense mutations alter the function of the resulting protein.\n\nA nonsense mutation occurs in DNA when a sequence change gives rise to a stop codon rather than a codon specifying an amino acid. The presence of the new stop codon results in the production of a shortened protein that is likely non-functional.\n\n\n\nDeletion\nDeletion, as related to genomics, is a type of mutation that involves the loss of one or more nucleotides from a segment of DNA. A deletion can involve the loss of any number of nucleotides, from a single nucleotide to an entire piece of a chromosome.\n\nc.546delT, deletion of T in 546\nc.586_591del, for six bases deleted\np.F508del, deletion of phenylalanine (F) in 508\n\n\n\n\nDuplication\nDuplication, as related to genomics, refers to a type of mutation in which one or more copies of a DNA segment (which can be as small as a few bases or as large as a major chromosomal region) is produced. Duplications occur in all organisms. For example, they are especially prominent in plants, although they can also cause genetic diseases in humans. Duplications have been an important mechanism in the evolution of the genomes of humans and other organisms.\n\nc.546dupT, duplication of T in 546\nc.586_591dup, duplication of the segment 586 to 591\np.G4_Q6dup, duplication of the segment from glycine (G) in 4 to glutamine (Q) in 6\n\n\n\n\nInsertion\nAn insertion, as related to genomics, is a type of mutation that involves the addition of one or more nucleotides into a segment of DNA. An insertion can involve the addition of any number of nucleotides, from a single nucleotide to an entire piece of a chromosome.\n\nc.546_547insT, insertion of T between 546 and 547\nc.1086_1087insGCGTGA, insertion of GCGTGA\np.K2_L3insQS, insertion of glutamine serine between lysine (K) in 2 and leucine (L) in 3\n\n\n\n\nInversion\nAn inversion in a chromosome occurs when a segment breaks off and reattaches within the same chromosome, but in reverse orientation. DNA may or may not be lost in the process.\n\nc.546_2031inv, segment 546 to 2031 inverted\n\n\n\n\nFrameshift\nA frameshift mutation in a gene refers to the insertion or deletion of nucleotide bases in numbers that are not multiples of three. This is important because a cell reads a gene’s code in groups of three bases when making a protein. Each of these “triplet codons” corresponds to one of 20 different amino acids used to build a protein. If a mutation disrupts this normal reading frame, then the entire gene sequence following the mutation will be incorrectly read. This can result in the addition of the wrong amino acids to the protein and/or the creation of a codon that stops the protein from growing longer.\n\np.R83SfsX15, arginine (R) is the first amino acid changed, it is in position 83, it makes serine (S) instead, the length of the shift frame is 15, including the stop codon (X)"
+  },
+  {
+    "objectID": "blog/2022/10/01/index.html#example",
+    "href": "blog/2022/10/01/index.html#example",
+    "title": "Nomenclature for the description of mutations and variations",
+    "section": "Example",
+    "text": "Example\n\nReference\n\n\nhttps://atlasgeneticsoncology.org/teaching/30067/nomenclature-for-the-description-of-mutations-and-other-sequence-variations\nhttps://www.ncbi.nlm.nih.gov/pmc/articles/PMC1867422/\nhttps://www.genome.gov/genetics-glossary/Mutation"
+  },
+  {
+    "objectID": "blog/2022/11/01/T_lymphocytes_activation.html#reference",
+    "href": "blog/2022/11/01/T_lymphocytes_activation.html#reference",
+    "title": "T cell activation, proliferation and cytokine release",
+    "section": "Reference",
+    "text": "Reference\n\nhttps://www.sartorius.com/en/applications/life-science-research/cell-analysis/flow-cytometry/immune-cell-function/t-cell-activation\nhttps://basicmedicalkey.com/t-cell-mediated-immunity-activation-of-t-lymphocytes/"
+  }
+]

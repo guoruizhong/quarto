@@ -1,0 +1,110 @@
+---
+title: "How to plot scatter plot with truncated axis"
+date: 2022-05-02
+description: ""
+image: truncated.png
+categories:
+  - ggh4x
+  - ggplot2
+  - tidyverse
+  - R
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.width = 6, fig.height = 3.8,
+                      fig.align = "center", fig.retina = 3,
+                      out.width = "85%", collapse = TRUE)
+```
+
+
+# Load data
+```{r}
+#| warning: false
+library(readxl)
+library(tidyverse)
+library(ggh4x)
+library(latex2exp)
+
+fig1a <- read_excel("data.xlsx", sheet = "Figure_1A")
+fig1a %>% head()
+```
+```{r}
+p1 <- fig1a %>%
+  filter(genotype == "WT") %>%
+  ggplot(aes(x = Lean.Mass, y = Fat.mass)) +
+  geom_point(shape = 21, size = 5, fill = "#929292", color = "black") +
+  scale_x_continuous(
+    limits = c(20, 40),
+    breaks = seq(20, 40, 5),
+    guide = "axis_minor",
+    minor_breaks = seq(22.5, 37.5, by = 5)
+  ) +
+  scale_y_continuous(
+    limits = c(0, 25),
+    breaks = seq(0, 25, 5),
+    guide = "axis_minor",
+    minor_breaks = c(8, 12)
+  ) +
+  theme_classic() +
+  theme(
+    ggh4x.axis.ticks.length.minor = rel(0.5),
+    axis.ticks.length.x = unit(0.5, "lines")
+  ) +
+  guides(
+    x = guide_axis_minor(trunc_lower = 20, trunc_upper = 40),
+    y = guide_axis_truncated(trunc_lower = 0, trunc_upper = 25)
+  ) +
+  geom_vline(xintercept = 32.5, lty = "dashed") +
+  geom_hline(yintercept = 10, lty = "dashed") +
+  labs(
+    x = NULL,
+    y = "Fat mass (g)"
+  ) +
+  annotate(geom = "point", x = 20, y = 23 + 1, shape = 21, size = 5, fill = "#929292") +
+  annotate(geom = "text", x = 20.5, y = 23 + 1, label = "WT", size = 5, hjust = 0) +
+  annotate(geom = "point", x = 20, y = 22 - 1, shape = 21, size = 5, fill = "#0533ff") +
+  annotate(geom = "text", x = 20.5, y = 22 - 1, label = TeX(r"(\textit{Nnat}${^+}{^/}{^-}{^p}$)"), size = 5, hjust = 0)
+
+
+p2 <- fig1a %>%
+  filter(genotype == "Nnat+/-p") %>%
+  ggplot(aes(x = Lean.Mass, y = Fat.mass)) +
+  geom_point(shape = 21, size = 5, fill = "#0533ff", color = "black") +
+  scale_x_continuous(
+    limits = c(20, 40),
+    breaks = seq(20, 40, 5),
+    guide = "axis_minor",
+    minor_breaks = seq(22.5, 37.5, by = 5)
+  ) +
+  scale_y_continuous(
+    limits = c(0, 25),
+    breaks = seq(0, 25, 5),
+    guide = "axis_minor",
+    minor_breaks = c(8, 12)
+  ) +
+  theme_classic() +
+  theme(
+    ggh4x.axis.ticks.length.minor = rel(0.5),
+    axis.ticks.length.x = unit(0.5, "lines"),
+    axis.line.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.text.y = element_blank()
+  ) +
+  guides(
+    x = guide_axis_minor(
+      trunc_lower = 20,
+      trunc_upper = 40
+    ),
+    y = guide_axis_truncated(
+      trunc_lower = 0,
+      trunc_upper = 25
+    )
+  ) +
+  geom_vline(xintercept = 32.5, lty = "dashed") +
+  geom_hline(yintercept = 10, lty = "dashed") +
+  labs(x = NULL, y = NULL)
+
+library(patchwork)
+p1 + p2 + labs(x = "Lean mass (g)") + theme(axis.title.x = element_text(hjust = -0.12))
+```

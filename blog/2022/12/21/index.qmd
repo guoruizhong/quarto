@@ -1,0 +1,36 @@
+---
+title: "Working with R graphics and fonts "
+date: 2022-12-21
+# image: macfuse.png
+categories:
+  - R
+  - ggplot2
+---
+
+
+```r
+# Save the plot as a PDF with ggsave and Cairo
+# R will want to autocomplete cairo_pdf to cairo_pdf() (note the parentheses)
+# This will not work with the parentheses; ensure there aren't any
+ggsave(p, filename = "example.pdf", device = cairo_pdf,
+       width = 4, height = 3, units = "in")
+
+# You can also save the plot as a high resolution PNG using Cairo
+# Note the difference here; instead of using device = cairo_pdf, you use
+# type = "cairo". It's confusing and weird and that's just life.
+ggsave(p, filename = "example.png", dpi = 300, type = "cairo",
+       width = 4, height = 3, units = "in")
+
+ggsave(p, filename = "example_no_cairo.png", dpi = 300,
+       width = 4, height = 3, units = "in")
+```
+
+Reference
+
+1. [Understanding text size and resolution in ggplot2](https://www.christophenicault.com/post/understand_size_dimension_ggplot2/)
+
+2. [Most excellent figures in R with ggplot2](https://ben-williams.github.io/updated_ggplot_figures.html) 
+
+3. [Taking Control of Plot Scaling](https://www.tidyverse.org/blog/2020/08/taking-control-of-plot-scaling/)
+
+4. [Working with R, Cairo graphics, custom fonts, and ggplot](https://www.andrewheiss.com/blog/2017/09/27/working-with-r-cairo-graphics-custom-fonts-and-ggplot/index.html)

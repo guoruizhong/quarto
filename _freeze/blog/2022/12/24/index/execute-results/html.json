@@ -1,0 +1,11 @@
+{
+  "hash": "89039a617996fe955cdf199768099c7f",
+  "result": {
+    "markdown": "---\ntitle: \"Setup remote working \"\ndate: 2022-12-24\n# image: ggvolcano.png\ncategories:\n  - remote server\n# draft: true\n---\n\n## Setup SSH Remote Keys\n\nLogin to server without using password with SSH remote key \n1. on the local machine:\n\n```bash\nlocal> cd ~/.ssh\nlocal> ssh-keygen -t ed25519\nlocal> ls\n```\n2. On the remote machine:\n```bash\nremote> cd ~\nremote> chown -R chase:users .ssh\nremote> chmod 700 .ssh\nremote> scp username@local://home/user/.ssh/id_ed25519.pub .ssh/authorized_keys\nremote> chmod 644 .ssh/authorized_keys\n```\n## Adding colors to Bash scripts\n\nAdd the following to the `~/.bashrc`\n\n```{bash}\n### color bash\nPS1='\\[\\033[1;36m\\]\\u\\[\\033[1;37m\\]@\\[\\033[1;32m\\]\\h:\\[\\033[1;33m\\] \\w\\[\\033[0;97m [\\t]\\[\\033[0;97m \\n\\[\\033[1;35m\\]\\$\\[\\033[0m\\] '\n```\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

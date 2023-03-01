@@ -1,0 +1,71 @@
+[
+  {
+    "listing": "/atom.html",
+    "items": [
+      "/blog/2022/02/01/index.html",
+      "/blog/2022/09/02/index.html",
+      "/blog/index.html",
+      "/blog/2022/05/02/index.html",
+      "/blog/2022/01/22/index.html",
+      "/blog/2022/08/01/index.html",
+      "/blog/2022/06/01/index.html",
+      "/blog/2022/07/01/index.html"
+    ]
+  },
+  {
+    "listing": "/blog/index.html",
+    "items": [
+      "/blog/2022/10/01/index.html",
+      "/blog/2022/09/02/index.html",
+      "/blog/2022/08/01/index.html",
+      "/blog/2022/07/01/index.html",
+      "/blog/2022/06/01/index.html",
+      "/blog/2022/05/02/index.html",
+      "/blog/2022/02/01/index.html",
+      "/blog/2022/01/22/index.html",
+      "/blog/2021/06/01/index.html",
+      "/blog/2021/03/16/index.html",
+      "/blog/2021/02/01/index.html",
+      "/blog/2021/01/02/index.html"
+    ]
+  },
+  {
+    "listing": "/research/index.html",
+    "items": [
+      "/research/articles/chaudhry-heiss-ngos-repression/index.html",
+      "/research/articles/chaudhry-dotson-heiss-2021/index.html",
+      "/research/articles/peck-heiss-2021/index.html",
+      "/research/articles/chaudhry-heiss-ngos-philanthropy/index.html",
+      "/research/articles/heiss-2019-taking-control/index.html",
+      "/research/articles/heiss-kelley-2017/index.html",
+      "/research/articles/heiss-kelley-2017a/index.html",
+      "/research/articles/heiss-johnson-2016/index.html",
+      "/research/articles/witesman-heiss-2016/index.html",
+      "/research/articles/heiss-2012/index.html",
+      "/research/working-papers/heiss-nafa-bayes-ipw/index.html",
+      "/research/working-papers/heiss-ye-np-causal-inference/index.html",
+      "/research/working-papers/chaudhry-heiss-derogations/index.html",
+      "/research/working-papers/chaudhry-heiss-ngos-aid/index.html",
+      "/research/chapters/chaudhry-heiss-closing-space/index.html",
+      "/research/chapters/heiss-causal-inference-2021/index.html",
+      "/research/chapters/heiss-ngo-ir-2019/index.html",
+      "/research/chapters/johnson-heiss-2018/index.html",
+      "/research/reviews/heiss-death-idealism/index.html",
+      "/research/reviews/heiss-voluntas-review-2014/index.html",
+      "/research/dormant-working-papers/heiss-rogerson-sources/index.html",
+      "/research/dormant-working-papers/heiss-rogerson-discourse/index.html",
+      "/research/seminar-papers/heiss-ngo-cooperation/index.html",
+      "/research/seminar-papers/heiss-undemocratic-leaders/index.html",
+      "/research/translations/heiss-abdel-samad-2011/index.html",
+      "/research/translations/heiss-prince-2011/index.html"
+    ]
+  },
+  {
+    "listing": "/talks/index.html",
+    "items": []
+  },
+  {
+    "listing": "/teaching/index.html",
+    "items": []
+  }
+]

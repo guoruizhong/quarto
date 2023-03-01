@@ -1,0 +1,131 @@
+---
+title: "Volano plot with ggvolcano"
+date: 2022-07-01
+image: ggvolcano.png
+categories:
+  - ggvolcano
+  - R
+# draft: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.width = 6, fig.height = 3.8,
+                      fig.align = "center", fig.retina = 3,
+                      out.width = "85%", collapse = TRUE)
+```
+
+
+## ggvolcano
+
+
+```{r}
+#| warning: false
+library(ggVolcano)
+```
+
+```{r}
+data(deg_data)
+view(deg_data)
+data <- add_regulate(deg_data,
+  log2FC_name = "log2FoldChange",
+  fdr_name = "padj", log2FC = 1, fdr = 0.05
+) # add column
+
+ggvolcano(data,
+  x = "log2FoldChange", y = "padj",
+  label = "row", label_number = 10, output = FALSE
+)
+```
+
+```{r}
+# Change the fill and color manually:
+p1 <- ggvolcano(data,
+  x = "log2FoldChange", y = "padj",
+  fills = c("#e94234", "#b4b4d8", "#269846"),
+  colors = c("#e94234", "#b4b4d8", "#269846"),
+  label = "row", label_number = 10, output = FALSE
+)
+
+p2 <- ggvolcano(data,
+  x = "log2FoldChange", y = "padj",
+  label = "row", label_number = 10, output = FALSE
+) +
+  ggsci::scale_color_aaas() +
+  ggsci::scale_fill_aaas()
+#> Scale for 'colour' is already present. Adding another scale for 'colour', which
+#> will replace the existing scale.
+#> Scale for 'fill' is already present. Adding another scale for 'fill', which
+#> will replace the existing scale.
+
+library(patchwork)
+p1 | p2
+```
+
+## gradual_volcano
+
+```{r}
+# plot
+gradual_volcano(deg_data,
+  x = "log2FoldChange", y = "padj",
+  label = "row", label_number = 10, output = FALSE
+)
+```
+
+```{r}
+library(RColorBrewer)
+
+# Change the fill and color manually:
+p1 <- gradual_volcano(data,
+  x = "log2FoldChange", y = "padj",
+  fills = brewer.pal(5, "RdYlBu"),
+  colors = brewer.pal(8, "RdYlBu"),
+  label = "row", label_number = 10, output = FALSE
+)
+
+p2 <- gradual_volcano(data,
+  x = "log2FoldChange", y = "padj",
+  label = "row", label_number = 10, output = FALSE
+) +
+  ggsci::scale_color_gsea() +
+  ggsci::scale_fill_gsea()
+#> Scale for 'colour' is already present. Adding another scale for 'colour', which
+#> will replace the existing scale.
+#> Scale for 'fill' is already present. Adding another scale for 'fill', which
+#> will replace the existing scale.
+
+library(patchwork)
+p1 | p2
+```
+
+## term_volcano for go pathway
+
+```{r}
+data("term_data")
+
+# plot
+term_volcano(deg_data, term_data,
+  x = "log2FoldChange", y = "padj",
+  label = "row", label_number = 10, output = FALSE
+)
+```
+
+```{r}
+library(RColorBrewer)
+
+# Change the fill and color manually:
+deg_point_fill <- brewer.pal(5, "RdYlBu")
+names(deg_point_fill) <- unique(term_data$term)
+
+term_volcano(data, term_data,
+  x = "log2FoldChange", y = "padj",
+  normal_point_color = "#75aadb",
+  deg_point_fill = deg_point_fill,
+  deg_point_color = "grey",
+  legend_background_fill = "#deeffc",
+  label = "row", label_number = 10, output = FALSE
+)
+```
+
+## Reference
+
+1. <https://github.com/BioSenior/ggGantt>

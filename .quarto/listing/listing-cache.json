@@ -1,0 +1,13 @@
+{
+  "listingMap": {
+    "atom.qmd": [
+      "blog/**/index.qmd"
+    ],
+    "blog/index.qmd": [
+      "2022/**/index.qmd",
+      "2022/**/index.md",
+      "2021/**/index.qmd",
+      "2021/**/index.md"
+    ]
+  }
+}
