@@ -1,1 +1,17 @@
+# R stuff
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Quarto stuff
+/.quarto/
+_site/
+**/*_cache/*
+
+# Miscellaneous stuff
+design-assets/*
+static/etc/*
+.DS_Store
+
 /.luarc.json

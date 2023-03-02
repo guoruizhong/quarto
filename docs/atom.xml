@@ -8,7 +8,7 @@
 <title>Guorui Zhong</title>
 <link>https://guoruizhong.github.io/atom.html</link>
 <atom:link href="https://guoruizhong.github.io/atom.xml" rel="self" type="application/rss+xml"/>
-<description>Guorui Zhong is an assistant professor at Georgia State University, researching international NGOs and teaching data science &amp; economics.</description>
+<description>Guorui Zhong</description>
 <generator>quarto-1.2.335</generator>
 <lastBuildDate>Thu, 22 Dec 2022 16:00:00 GMT</lastBuildDate>
 <item>
@@ -1006,7 +1006,7 @@
 <h2 class="anchored" data-anchor-id="section">2022</h2>
 <div id="listing-posts_2022" class="quarto-listing quarto-listing-container-custom">
 <div class="list blog">
-    <div class="blog-entry" data-index="0" data-categories="R,Linux,VSCode" data-listing-date-sort="1671811200000" data-listing-file-modified-sort="1677380984610" data-listing-reading-time-sort="6.045">
+    <div class="blog-entry" data-index="0" data-categories="R,Linux,VSCode" data-listing-date-sort="1671811200000" data-listing-file-modified-sort="1677756235965" data-listing-reading-time-sort="3.745">
         <div class="metadata">          
             <p class="date listing-date">December 24, 2022</p>
         </div>
@@ -1029,7 +1029,7 @@
             <img src="https://guoruizhong.github.io/blog/2022/12/24/vscode.jpg" alt="Setup working pipeline" title="Setup working pipeline">
         </div>
     </div>
-    <div class="blog-entry" data-index="1" data-categories="boxplot,R" data-listing-date-sort="1671724800000" data-listing-file-modified-sort="1672492806000" data-listing-reading-time-sort="1.94">
+    <div class="blog-entry" data-index="1" data-categories="boxplot,R" data-listing-date-sort="1671724800000" data-listing-file-modified-sort="1677683952125" data-listing-reading-time-sort="1.94">
         <div class="metadata">          
             <p class="date listing-date">December 23, 2022</p>
         </div>
@@ -1049,7 +1049,7 @@
             <img src="https://guoruizhong.github.io/blog/2022/12/23/boxplot.png" alt="boxplot with p-value" title="boxplot with p-value">
         </div>
     </div>
-    <div class="blog-entry" data-index="2" data-categories="R,ggplot2" data-listing-date-sort="1671552000000" data-listing-file-modified-sort="1672493053000" data-listing-reading-time-sort="0.77">
+    <div class="blog-entry" data-index="2" data-categories="R,ggplot2" data-listing-date-sort="1671552000000" data-listing-file-modified-sort="1677683952125" data-listing-reading-time-sort="0.77">
         <div class="metadata">          
             <p class="date listing-date">December 21, 2022</p>
         </div>
@@ -1066,7 +1066,7 @@
             <p class="description listing-description"><!-- desc(5A0113B34292)[max=175]:blog/2022/12/21/index.html --></p>
         </div>
     </div>
-    <div class="blog-entry" data-index="3" data-categories="Linux" data-listing-date-sort="1671379200000" data-listing-file-modified-sort="1676781344000" data-listing-reading-time-sort="30.17">
+    <div class="blog-entry" data-index="3" data-categories="Linux" data-listing-date-sort="1671379200000" data-listing-file-modified-sort="1677683952124" data-listing-reading-time-sort="30.17">
         <div class="metadata">          
             <p class="date listing-date">December 19, 2022</p>
         </div>
@@ -1083,7 +1083,7 @@
             <img src="https://guoruizhong.github.io/blog/2022/12/19/linux.png" alt="Learn Linux basic for computing" title="Learn Linux basic for computing">
         </div>
     </div>
-    <div class="blog-entry" data-index="4" data-categories="ggplot2 theme,R" data-listing-date-sort="1671292800000" data-listing-file-modified-sort="1672492407000" data-listing-reading-time-sort="0.415">
+    <div class="blog-entry" data-index="4" data-categories="ggplot2 theme,R" data-listing-date-sort="1671292800000" data-listing-file-modified-sort="1677683952108" data-listing-reading-time-sort="0.415">
         <div class="metadata">          
             <p class="date listing-date">December 18, 2022</p>
         </div>
@@ -1103,7 +1103,7 @@
             <img src="https://guoruizhong.github.io/blog/2022/12/18/index.png" alt="ggplot2 Theme Elements" title="ggplot2 Theme Elements">
         </div>
     </div>
-    <div class="blog-entry" data-index="5" data-categories="T cell" data-listing-date-sort="1667232000000" data-listing-file-modified-sort="1671454616000" data-listing-reading-time-sort="0.06">
+    <div class="blog-entry" data-index="5" data-categories="T cell" data-listing-date-sort="1667232000000" data-listing-file-modified-sort="1677683952107" data-listing-reading-time-sort="0.06">
         <div class="metadata">          
             <p class="date listing-date">November 1, 2022</p>
         </div>
@@ -1120,7 +1120,7 @@
             <img src="https://guoruizhong.github.io/blog/2022/11/01/T_cell.png" alt="T cell activation, proliferation and cytokine release" title="T cell activation, proliferation and cytokine release">
         </div>
     </div>
-    <div class="blog-entry" data-index="6" data-categories="Nomenclature" data-listing-date-sort="1664553600000" data-listing-file-modified-sort="1672492405000" data-listing-reading-time-sort="6">
+    <div class="blog-entry" data-index="6" data-categories="Nomenclature" data-listing-date-sort="1664553600000" data-listing-file-modified-sort="1677683952107" data-listing-reading-time-sort="6">
         <div class="metadata">          
             <p class="date listing-date">October 1, 2022</p>
         </div>
@@ -1137,7 +1137,7 @@
             <img src="https://guoruizhong.github.io/blog/2022/10/01/Mutation.jpg" alt="Nomenclature for the description of mutations and variations" title="Nomenclature for the description of mutations and variations">
         </div>
     </div>
-    <div class="blog-entry" data-index="7" data-categories="plater,R" data-listing-date-sort="1662048000000" data-listing-file-modified-sort="1672492031000" data-listing-reading-time-sort="0.52">
+    <div class="blog-entry" data-index="7" data-categories="plater,R" data-listing-date-sort="1662048000000" data-listing-file-modified-sort="1677683952106" data-listing-reading-time-sort="0.52">
         <div class="metadata">          
             <p class="date listing-date">September 2, 2022</p>
         </div>
@@ -1157,7 +1157,7 @@
             <img src="https://guoruizhong.github.io/blog/2022/09/02/f1.jpg" alt="Add experimental conditions to multi-well plates" title="Add experimental conditions to multi-well plates">
         </div>
     </div>
-    <div class="blog-entry" data-index="8" data-categories="platetools,R" data-listing-date-sort="1659283200000" data-listing-file-modified-sort="1672492012000" data-listing-reading-time-sort="0.945">
+    <div class="blog-entry" data-index="8" data-categories="platetools,R" data-listing-date-sort="1659283200000" data-listing-file-modified-sort="1677683952106" data-listing-reading-time-sort="0.945">
         <div class="metadata">          
             <p class="date listing-date">August 1, 2022</p>
         </div>
@@ -1177,7 +1177,7 @@
             <img src="https://guoruizhong.github.io/blog/2022/08/01/platetools.png" alt="View data from 96/384 multi-well plates" title="View data from 96/384 multi-well plates">
         </div>
     </div>
-    <div class="blog-entry" data-index="9" data-categories="ggvolcano,R" data-listing-date-sort="1656604800000" data-listing-file-modified-sort="1672491980000" data-listing-reading-time-sort="1.915">
+    <div class="blog-entry" data-index="9" data-categories="ggvolcano,R" data-listing-date-sort="1656604800000" data-listing-file-modified-sort="1677683952106" data-listing-reading-time-sort="1.915">
         <div class="metadata">          
             <p class="date listing-date">July 1, 2022</p>
         </div>
@@ -1197,7 +1197,7 @@
             <img src="https://guoruizhong.github.io/blog/2022/07/01/ggvolcano.png" alt="Volano plot with ggvolcano" title="Volano plot with ggvolcano">
         </div>
     </div>
-    <div class="blog-entry" data-index="10" data-categories="pheatmap,R" data-listing-date-sort="1654012800000" data-listing-file-modified-sort="1672491951000" data-listing-reading-time-sort="1.485">
+    <div class="blog-entry" data-index="10" data-categories="pheatmap,R" data-listing-date-sort="1654012800000" data-listing-file-modified-sort="1677683952105" data-listing-reading-time-sort="1.485">
         <div class="metadata">          
             <p class="date listing-date">June 1, 2022</p>
         </div>
@@ -1217,7 +1217,7 @@
             <img src="https://guoruizhong.github.io/blog/2022/06/01/pheatmap.png" alt="Visualizing clusters with heatmaps" title="Visualizing clusters with heatmaps">
         </div>
     </div>
-    <div class="blog-entry" data-index="11" data-categories="ggh4x,ggplot2,tidyverse,R" data-listing-date-sort="1651420800000" data-listing-file-modified-sort="1671975583000" data-listing-reading-time-sort="2.86">
+    <div class="blog-entry" data-index="11" data-categories="ggh4x,ggplot2,tidyverse,R" data-listing-date-sort="1651420800000" data-listing-file-modified-sort="1677683952105" data-listing-reading-time-sort="2.86">
         <div class="metadata">          
             <p class="date listing-date">May 2, 2022</p>
         </div>
@@ -1243,7 +1243,7 @@
             <img src="https://guoruizhong.github.io/blog/2022/05/02/truncated.png" alt="How to plot scatter plot with truncated axis" title="How to plot scatter plot with truncated axis">
         </div>
     </div>
-    <div class="blog-entry" data-index="12" data-categories="ggsignif,ggh4x,ggplot2,tidyverse,R" data-listing-date-sort="1643644800000" data-listing-file-modified-sort="1672491861000" data-listing-reading-time-sort="3.795">
+    <div class="blog-entry" data-index="12" data-categories="ggsignif,ggh4x,ggplot2,tidyverse,R" data-listing-date-sort="1643644800000" data-listing-file-modified-sort="1677683952105" data-listing-reading-time-sort="3.795">
         <div class="metadata">          
             <p class="date listing-date">February 1, 2022</p>
         </div>
@@ -1272,7 +1272,7 @@
             <img src="https://guoruizhong.github.io/blog/2022/02/01/barplot.png" alt="Add errorbar and p-value on barplot with ggsignif" title="Add errorbar and p-value on barplot with ggsignif">
         </div>
     </div>
-    <div class="blog-entry" data-index="13" data-categories="r,tidyverse,ggplot2,color" data-listing-date-sort="1642780800000" data-listing-file-modified-sort="1672491807000" data-listing-reading-time-sort="0.98">
+    <div class="blog-entry" data-index="13" data-categories="r,tidyverse,ggplot2,color" data-listing-date-sort="1642780800000" data-listing-file-modified-sort="1677683952104" data-listing-reading-time-sort="0.98">
         <div class="metadata">          
             <p class="date listing-date">January 22, 2022</p>
         </div>
@@ -1308,7 +1308,7 @@ No matching items
 <h2 class="anchored" data-anchor-id="section-1">2021</h2>
 <div id="listing-posts_2021" class="quarto-listing quarto-listing-container-custom">
 <div class="list blog">
-    <div class="blog-entry" data-index="0" data-categories="Inkscape,Greek letters" data-listing-date-sort="1622476800000" data-listing-file-modified-sort="1671113017000" data-listing-reading-time-sort="0.11">
+    <div class="blog-entry" data-index="0" data-categories="Inkscape,Greek letters" data-listing-date-sort="1622476800000" data-listing-file-modified-sort="1677683952104" data-listing-reading-time-sort="0.11">
         <div class="metadata">          
             <p class="date listing-date">June 1, 2021</p>
         </div>
@@ -1328,7 +1328,7 @@ No matching items
             <img src="https://guoruizhong.github.io/blog/2021/06/01/greekscape.jpg" alt="Using greek unicode in Inkscape" title="Using greek unicode in Inkscape">
         </div>
     </div>
-    <div class="blog-entry" data-index="1" data-categories="Fiji,ImageJ" data-listing-date-sort="1615824000000" data-listing-file-modified-sort="1671160259000" data-listing-reading-time-sort="1.05">
+    <div class="blog-entry" data-index="1" data-categories="Fiji,ImageJ" data-listing-date-sort="1615824000000" data-listing-file-modified-sort="1677683952104" data-listing-reading-time-sort="1.05">
         <div class="metadata">          
             <p class="date listing-date">March 16, 2021</p>
         </div>
@@ -1348,7 +1348,7 @@ No matching items
             <img src="https://guoruizhong.github.io/blog/2021/03/16/f4.png" alt="Crop image and add scale bar with ImageJ/Fiji" title="Crop image and add scale bar with ImageJ/Fiji">
         </div>
     </div>
-    <div class="blog-entry" data-index="2" data-categories="Punctuation" data-listing-date-sort="1612108800000" data-listing-file-modified-sort="1671112262000" data-listing-reading-time-sort="0.205">
+    <div class="blog-entry" data-index="2" data-categories="Punctuation" data-listing-date-sort="1612108800000" data-listing-file-modified-sort="1677683952104" data-listing-reading-time-sort="0.205">
         <div class="metadata">          
             <p class="date listing-date">February 1, 2021</p>
         </div>
@@ -1365,7 +1365,7 @@ No matching items
             <img src="https://guoruizhong.github.io/blog/2021/02/01/punctuation.jpg" alt="Punctuation marks words" title="Punctuation marks words">
         </div>
     </div>
-    <div class="blog-entry" data-index="3" data-categories="greek letters,Markdown" data-listing-date-sort="1609516800000" data-listing-file-modified-sort="1671160034000" data-listing-reading-time-sort="0.08">
+    <div class="blog-entry" data-index="3" data-categories="greek letters,Markdown" data-listing-date-sort="1609516800000" data-listing-file-modified-sort="1677683952104" data-listing-reading-time-sort="0.08">
         <div class="metadata">          
             <p class="date listing-date">January 2, 2021</p>
         </div>
@@ -1397,7 +1397,7 @@ No matching items
 
  ]]></description>
   <guid>https://guoruizhong.github.io/blog/index.html</guid>
-  <pubDate>Wed, 01 Mar 2023 14:15:24 GMT</pubDate>
+  <pubDate>Thu, 02 Mar 2023 11:24:03 GMT</pubDate>
 </item>
 </channel>
 </rss>

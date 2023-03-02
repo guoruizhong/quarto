@@ -24,15 +24,7 @@ Login to server without using password with SSH remote key
  ```
 2. **Generate public key**
 ```bash
-### Windows
-local> cd ~/.ssh
-local> ssh-keygen -t ed25519
-local> ls
-local> more id_ed25519.pub 
-```
-
-```bash
-### Mac
+### 
 local> cd ~/.ssh
 local> ssh-keygen -t ed25519
 local> ls
@@ -47,20 +39,17 @@ remote> chown -R chase:users .ssh
 remote> chmod 700 .ssh
 remote> scp username@local://home/user/.ssh/id_ed25519.pub .ssh/authorized_keys
 remote> chmod 644 .ssh/authorized_keys
-```
 
-```bash
-### Or on local machine
 ### Windows
-# local> scp id_ed25519.pub remote:/home/user/.ssh/authorized_keys
-
+local> scp id_ed25519.pub remote:/home/user/.ssh/authorized_keys
 ### Mac
 ### Also copy the key to authorized_keys in the remote sever
 local> cat id_ed25519.pub
 ```
+
 ![](key.jpg)
 
-## Adding colors to Bash scripts
+## Bash with colors 
 
 In the remote server, add the following script to the `~/.bashrc`
 
@@ -68,7 +57,7 @@ In the remote server, add the following script to the `~/.bashrc`
 PS1='\[\033[1;36m\]\u\[\033[1;37m\] @\[\033[1;32m\] \h:\[\033[1;33m\] \w\[\033[0;97m [\t]\[\033[0;97m \n\[\033[1;35m\]\$\[\033[0m\] '
 ```
 
-## Supercharge Terminal
+## Make Terminal powerful
 
 ```bash
 ### Install [Home-brew](https://brew.sh/)
@@ -92,7 +81,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 
 
 ### make oh-my-zsh plugins working
-open ~/.zshrc
+vim ~/.zshrc
 
 plugins=(
   git
@@ -106,9 +95,7 @@ plugins=(
 source ~/.zshrc
 ```
 
-
-
-## Mount a remote files 
+## Mount remote files on mac
 
 ![](macfuse.png)
 
@@ -151,7 +138,6 @@ install.packages("languageserver")
 install.packages("httpgd")
 install.packages("IRkernel")      
 install.packages("rmarkdown")
-install.packages("jsonlite")
 ```
 
 ```bash
@@ -171,18 +157,19 @@ pip install -U radian
 
 3. **Settings and keyboard shortcut**
 
-- Add to User `settings.json`:
+- User `settings.json`:
 
 ```json
-{
-    "files.associations": {
-        "*.Rmd": "rmd"
+{ "files.associations": {
+        "*.Rmd": "rmd",
+        "*.R": "r"
     },
     "security.workspace.trust.untrustedFiles": "open",
     "editor.fontSize": 14,
+    "editor.rulers": [80],
     "explorer.confirmDelete": false,
-    // "r.rterm.mac": "/opt/homebrew/bin/radian",
-    "r.rterm.mac": "/opt/homebrew/Caskroom/miniforge/base/bin/radian",
+    "r.rterm.mac": "/opt/homebrew/bin/radian",
+    // "r.rterm.mac": "/opt/homebrew/Caskroom/miniforge/base/bin/radian",
     "r.rpath.mac": "/usr/local/bin/R",
     // "r.rpath.mac": "/opt/homebrew/Caskroom/miniforge/base/bin/R",
     // "r.rterm.windows": "C:\\Program Files\\R\\R-4.2.1\\bin\\R.exe",
@@ -191,16 +178,14 @@ pip install -U radian
     "r.plot.useHttpgd": true,
     "r.rterm.option": [],
     "r.bracketedPaste": true,
-    "r.alwaysUseActiveTerminal": true,
     "r.sessionWatcher": true,
-    "quarto.mathjax.theme": "dark",
+    "r.alwaysUseActiveTerminal": true,
     "quarto.render.previewType": "external",
     // "terminal.integrated.fontSize": 15,
     // "terminal.integrated.defaultProfile.windows": "Git Bash",
     "terminal.integrated.defaultProfile.windows": "R Terminal",
     // "terminal.integrated.defaultProfile.osx": "R Terminal",
     "terminal.integrated.defaultProfile.osx": "zsh",
-    "terminal.integrated.enableMultiLinePasteWarning": false,
     "workbench.iconTheme": "vscode-icons",
     "r.helpPanel.cacheIndexFiles": "Global",
     "workbench.preferredDarkColorTheme": "Monokai",
@@ -212,7 +197,6 @@ pip install -U radian
     "python.analysis.completeFunctionParens": true,
     "editor.minimap.enabled": false,
     "explorer.confirmDragAndDrop": false,
-    "window.zoomLevel": 1,
     "window.restoreWindows": "none",
     "remote.SSH.remotePlatform": {
         "nucleus": "linux"
@@ -226,111 +210,25 @@ pip install -U radian
         "editorBracketHighlight.foreground5": "#bb80b3",
         "editorBracketHighlight.foreground6": "#98C379",
     },
-    "editor.guides.highlightActiveBracketPair": false,
     "editor.parameterHints.enabled": false,
-    "task.quickOpen.history": 5,
+    "task.quickOpen.history": 3,
     "terminal.integrated.tabs.enableAnimation": false,
     "terminal.integrated.tabs.enabled": false,
-    "Lua.workspace.supportScheme": [
-        "file",
-        "default"
-    ],
-    "terminal.integrated.fontSize": 14
+    "terminal.integrated.fontSize": 13,
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.tabCompletion": "on",
+    "editor.guides.indentation": false,
+    "vsicons.dontShowNewVersionMessage": true,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true
+
+    }
 }
-```
-- Add to `keybindings.json`:
-
-```json
-[
-  {
-    "key": "alt+-",
-    "command": "type",
-    // "when": "editorLangId == r && editorTextFocus || editorLangId == rmd && editorTextFocus",
-    // if you want using quarto, try this
-    "when": "editorLangId =~ /r|rmd|qmd/ && editorTextFocus",
-    "args": {"text": " <- "}
-  },
-  {
-    "key": "ctrl+shift+m",
-    "command": "type",
-    // "when": "editorLangId == r && editorTextFocus || editorLangId == rmd && editorTextFocus",
-    "when": "editorLangId =~ /r|rmd|qmd/ && editorTextFocus",
-    "args": {"text": " %>% "}
-  },
-  {
-    "key": "ctrl+shift+m",
-    "command": "-workbench.actions.view.problems"
-  },
-
-  // input indicative of r markdown code chunk
-  {
-    "key": "ctrl+shift+i",
-    "command": "editor.action.insertSnippet",
-    "when": "editorTextFocus && editorLangId == 'rmd'",
-    "args": {
-        "snippet": "```{r}\n${TM_SELECTED_TEXT}$0\n```"
-    },
-    "label": "input indicative of r markdown code chunk"
-  },
-
-  // you can also input indicative of code chunk in `r` file by inserting "# %% ":
-  // specifics in `https://github.com/REditorSupport/vscode-R/pull/662`
-  {
-    "key": "ctrl+shift+i",
-    "command": "editor.action.insertSnippet",
-    "when": "editorTextFocus && editorLangId == 'r'",
-    "args": {
-        "snippet": "$LINE_COMMENT %% "
-    },
-    "label": "input indicative of code chunk"
-  },
-
-  // open help panel for selection
-  {
-    "key": "f1",
-    "command": "r.helpPanel.openForSelection",
-    "when": "editorTextFocus && editorLangId == 'r' || editorTextFocus && editorLangId == 'rmd'"
-  },
-
-  // RStudio keybinding for R Package development
-  // {
-  //   "key": "ctrl+shift+b",
-  //   "command": "r.install",
-  //   "when": "resourceLangId == 'r'"
-  // },
-  // {
-  //   "key": "ctrl+shift+e",
-  //   "command": "r.check",
-  //   "when": "resourceLangId == 'r'"
-  // },
-  // {
-  //   "key": "ctrl+shift+t",
-  //   "command": "r.test",
-  //   "when": "resourceLangId == 'r'"
-  // },
-  // {
-  //   "key": "ctrl+shift+d",
-  //   "command": "r.document",
-  //   "when": "resourceLangId == 'r'"
-  // },
-  // {
-  //   "key": "ctrl+shift+l",
-  //   "command": "r.loadAll",
-  //   "when": "resourceLangId == 'r'"
-  // },
-  // {
-  //   "key": "ctrl+alt+p",
-  //   "command": "r.runCommand",
-  //   "when": "editorTextFocus && editorLangId == 'r'",
-  //   "args": ".vsc.browser(httpgd::hgd_url(), viewer = \"Beside\")"
-  // },
-  {
-    "key": "tab",
-    "command": "-acceptSelectedSuggestion",
-    "when": "suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && textInputFocus"
-  }
-]
-
 ```
 -  `settings.json` for Remote [SSH:nucleus]
   
