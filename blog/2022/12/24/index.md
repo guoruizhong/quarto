@@ -10,9 +10,9 @@ categories:
 
 ## Setup SSH Remote Keys
 
-Login to server without using password with SSH remote key 
+The following setup will help to ogin to server without using password and IP address with SSH remote key 
 
-1. **Add the host into the hosts folder**
+1. Add remote server host into lost hosts files
 
 -  Mac: `code /etc/hosts` 
 -  Windows: `C:\Windows\System32\drivers\etc\hosts`
@@ -22,7 +22,8 @@ Login to server without using password with SSH remote key
 172.20.***.** nucleus.ccpa nucleus
 172.20.***.** lipid-droplets.ccpa lipid-droplets
  ```
-2. **Generate public key**
+2. Generate public key
+   
 ```bash
 ### 
 local> cd ~/.ssh
@@ -30,7 +31,7 @@ local> ssh-keygen -t ed25519
 local> ls
 local> cat id_ed25519.pub 
 ```
-3. **Add the public key to remote server**
+3. Add the public key to remote server
 
 ```bash
 ###  On the remote server
@@ -39,17 +40,12 @@ remote> chown -R chase:users .ssh
 remote> chmod 700 .ssh
 remote> scp username@local://home/user/.ssh/id_ed25519.pub .ssh/authorized_keys
 remote> chmod 644 .ssh/authorized_keys
-
-### Windows
-local> scp id_ed25519.pub remote:/home/user/.ssh/authorized_keys
-### Mac
-### Also copy the key to authorized_keys in the remote sever
+### For multiple machines, add the publick key to the authorized_keys in a new line
 local> cat id_ed25519.pub
 ```
-
 ![](key.jpg)
 
-## Bash with colors 
+## Make Bash with colors 
 
 In the remote server, add the following script to the `~/.bashrc`
 
@@ -79,10 +75,9 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
-
 ### make oh-my-zsh plugins working
 vim ~/.zshrc
-
+### then add following 
 plugins=(
   git
   zsh-autosuggestions
@@ -90,11 +85,9 @@ plugins=(
   colored-man-pages
   colorize
 )
-
 ### Make it working
 source ~/.zshrc
 ```
-
 ## Mount remote files on mac
 
 ![](macfuse.png)
@@ -117,14 +110,7 @@ $ umount ~/mount/mountpoint
 ```
 ![](mount.jpg)
 
-## VScode SSH using Keys
-open `.ssh/config`, add the following
-```bash
-Host nucleus
-    HostName 172.20.***.** ## host ip address
-    User usr_name
-    IdentityFile "Users/usr_name/.ssh/id_******" ### private key
-```
+
 ## Using R in VSCode
 
 The details refer to: <https://github.com/REditorSupport/vscode-R>
@@ -155,7 +141,15 @@ pip install -U radian
 - Remote Development
 - LiveShare
 
-3. **Settings and keyboard shortcut**
+3. VScode SSH using Keys
+open `Users/zhonggr/.ssh/config`, add the following
+```bash
+Host nucleus
+    HostName 172.20.***.** ## host ip address
+    User zhonggr
+
+```
+4. **Settings and keyboard shortcut**
 
 - User `settings.json`:
 
@@ -230,7 +224,7 @@ pip install -U radian
     }
 }
 ```
--  `settings.json` for Remote [SSH:nucleus]
+-  [SSH:nucleus] `settings.json`
   
 ```json
 {

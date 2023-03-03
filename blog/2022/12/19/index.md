@@ -379,15 +379,17 @@ If want to restore screen 10835.pts-0, then
 screen -r 10835
 ```
 
-## Vim manual
-
-### Basics
+## Vim Basics
 
 ```bash
 vim <my_file_name> # open/create file with vim
 ```
+- Once you are in Vim the most important commands are `i` , `:` and `ESC`. 
+- `i` key brings you into the insert mode for typing. 
+- `ESC` brings you out of there.
+- `:` key starts the command mode at the bottom of the screen. 
 
-Once you are in Vim the most important commands are `i` , `:` and `ESC`. The `i` key brings you into the insert mode for typing. `ESC` brings you out of there. And the `:` key starts the command mode at the bottom of the screen. In the following text, all commands starting with `:` need to be typed in the command mode. All other commands are typed in the normal mode after hitting the `ESC` key.
+In the following text, all commands starting with `:` need to be typed in the command mode. All other commands are typed in the normal mode after hitting the `ESC` key.
 
 ### Modifiers
 
@@ -406,7 +408,6 @@ q:                  # History of commands (from NORMAL MODE!), to reexecute one 
 :#,#w new_filename  # Saves specific lines (#,#) to new file
 :#                  # Go to specified line number
 ```
-
 ### Moving Around
 
 ```bash

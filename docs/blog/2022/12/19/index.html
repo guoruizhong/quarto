@@ -239,9 +239,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables">Variables</a></li>
   <li><a href="#process-management" id="toc-process-management" class="nav-link" data-scroll-target="#process-management">Process management</a></li>
   <li><a href="#screen-session" id="toc-screen-session" class="nav-link" data-scroll-target="#screen-session">Screen session</a></li>
-  <li><a href="#vim-manual" id="toc-vim-manual" class="nav-link" data-scroll-target="#vim-manual">Vim manual</a>
+  <li><a href="#vim-basics" id="toc-vim-basics" class="nav-link" data-scroll-target="#vim-basics">Vim Basics</a>
   <ul>
-  <li><a href="#basics" id="toc-basics" class="nav-link" data-scroll-target="#basics">Basics</a></li>
   <li><a href="#modifiers" id="toc-modifiers" class="nav-link" data-scroll-target="#modifiers">Modifiers</a></li>
   <li><a href="#moving-around" id="toc-moving-around" class="nav-link" data-scroll-target="#moving-around">Moving Around</a></li>
   <li><a href="#lines" id="toc-lines" class="nav-link" data-scroll-target="#lines">Lines</a></li>
@@ -614,13 +613,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>If want to restore screen 10835.pts-0, then</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-r</span> 10835</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="vim-manual" class="level2">
-<h2 class="anchored" data-anchor-id="vim-manual">Vim manual</h2>
-<section id="basics" class="level3">
-<h3 class="anchored" data-anchor-id="basics">Basics</h3>
+<section id="vim-basics" class="level2">
+<h2 class="anchored" data-anchor-id="vim-basics">Vim Basics</h2>
 <div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> <span class="op">&lt;</span>my_file_name<span class="op">&gt;</span> # open/create file with vim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Once you are in Vim the most important commands are <code>i</code> , <code>:</code> and <code>ESC</code>. The <code>i</code> key brings you into the insert mode for typing. <code>ESC</code> brings you out of there. And the <code>:</code> key starts the command mode at the bottom of the screen. In the following text, all commands starting with <code>:</code> need to be typed in the command mode. All other commands are typed in the normal mode after hitting the <code>ESC</code> key.</p>
-</section>
+<ul>
+<li>Once you are in Vim the most important commands are <code>i</code> , <code>:</code> and <code>ESC</code>.</li>
+<li><code>i</code> key brings you into the insert mode for typing.</li>
+<li><code>ESC</code> brings you out of there.</li>
+<li><code>:</code> key starts the command mode at the bottom of the screen.</li>
+</ul>
+<p>In the following text, all commands starting with <code>:</code> need to be typed in the command mode. All other commands are typed in the normal mode after hitting the <code>ESC</code> key.</p>
 <section id="modifiers" class="level3">
 <h3 class="anchored" data-anchor-id="modifiers">Modifiers</h3>
 <div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i</span>                   <span class="co"># INSERT MODE</span></span>
