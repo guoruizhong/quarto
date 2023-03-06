@@ -14,5 +14,5 @@ quarto render
 # Add to the local git repository then push to the remote repository
 
 git add .
-git commit -m "update pipeline"
+git commit -m "R colors and barplot with same width"
 git push -u guoruizhong.github.io main

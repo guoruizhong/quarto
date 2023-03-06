@@ -5,6 +5,7 @@
       "/blog/2022/02/01/index.html",
       "/blog/2022/09/02/index.html",
       "/blog/index.html",
+      "/blog/2023/03/01/index.html",
       "/blog/2022/05/02/index.html",
       "/blog/2022/01/22/index.html",
       "/blog/2022/08/01/index.html",
@@ -17,6 +18,7 @@
   {
     "listing": "/blog/index.html",
     "items": [
+      "/blog/2023/03/01/index.html",
       "/blog/2022/12/24/index.html",
       "/blog/2022/12/23/index.html",
       "/blog/2022/12/21/index.html",

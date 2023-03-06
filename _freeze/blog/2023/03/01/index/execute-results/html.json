@@ -1,0 +1,16 @@
+{
+  "hash": "aac786afb987ac65b19f7eb4370fb7cb",
+  "result": {
+    "markdown": "---\ntitle: \"Equalizing Bar Widths\"\ndate: 2023-03-06\ncategories:\n  - barplot\n  - R\nimage: borplot.png\n---\n\n::: {.cell}\n\n```{.r .cell-code}\n### ---------\nlibrary(ggplot2)\nlibrary(ggsci)\n\ntheme_set(\n    theme(\n        text = element_text(size = 10, family = \"Arial\"),\n        panel.background = element_rect(fill = NA, color = NA),\n        axis.title = element_text(size = 10, color = \"black\"),\n        axis.text = element_text(size = 10, color = \"black\"),\n        # axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1),\n        axis.ticks.length.x = unit(0.3, \"lines\"),\n        axis.line = element_line(colour = \"Black\"),\n        axis.ticks = element_line(colour = \"black\", linewidth = 0.6),\n        plot.title = element_text(face = \"bold\", hjust = 0.5, size = 10)\n    )\n)\n# Create a sample dataframe\ndf <- data.frame(\n    group = c(\"A\", \"B\", \"B\", \"C\", \"C\"),\n    variant = c(\"v1\", \"v1\", \"v2\", \"v1\", \"v2\"),\n    value = c(10, 20, 30, 15, 25)\n)\n\n# Specify the widths for each group and variant\nwidths <- data.frame(\n    group = c(\"A\", \"B\", \"C\"),\n    v1 = c(0.4, 0.8, 0.8),\n    v2 = c(0, 0.8, 0.8) # set width to 0 for variant v2 in group A\n)\n\n# Create the barplot with position_dodge2\nggplot(df, aes(x = group, y = value, fill = variant)) +\n    geom_bar(\n        stat = \"identity\",\n        position = position_dodge2(preserve = \"single\", width = widths)\n    ) +\n    scale_fill_jco() +\n    scale_y_continuous(\n        expand = expansion(mult = c(0, 0.1))\n    ) +\n    scale_x_discrete(breaks = c(\"A\", \"B\", \"C\")) # Ensure all groups are displayed in x-axis\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n\n```{.r .cell-code}\n# ggsave(\n#   plot = p,\n#   filename = \"barplot.png\",\n#   width = 4,\n#   height = 3,\n# )\n```\n:::\n\n\nIn this example, we set widths to be a data frame that specifies the widths for each group and variant. We set the width for v2 in group A to 0 to hide the bar for that variant. Then, we use position_dodge2 with preserve = \"single\" and the width argument set to widths to create the barplot with different bar widths for each group and variant.\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

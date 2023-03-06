@@ -10,7 +10,75 @@
 <atom:link href="https://guoruizhong.github.io/atom.xml" rel="self" type="application/rss+xml"/>
 <description>Guorui Zhong</description>
 <generator>quarto-1.2.335</generator>
-<lastBuildDate>Thu, 22 Dec 2022 16:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 05 Mar 2023 16:00:00 GMT</lastBuildDate>
+<item>
+  <title>Equalizing Bar Widths</title>
+  <dc:creator>Guorui Zhong</dc:creator>
+  <link>https://guoruizhong.github.io/blog/2023/03/01/index.html</link>
+  <description><![CDATA[ <div class="cell">
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;">### ---------</span></span>
+<span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://nanx.me/ggsci/">ggsci</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>        text <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op" style="color: #5E5E5E;">(</span>size <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">10</span>, family <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"Arial"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>        panel.background <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op" style="color: #5E5E5E;">(</span>fill <span class="op" style="color: #5E5E5E;">=</span> <span class="cn" style="color: #8f5902;">NA</span>, color <span class="op" style="color: #5E5E5E;">=</span> <span class="cn" style="color: #8f5902;">NA</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>        axis.title <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op" style="color: #5E5E5E;">(</span>size <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">10</span>, color <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"black"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>        axis.text <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op" style="color: #5E5E5E;">(</span>size <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">10</span>, color <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"black"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>        <span class="co" style="color: #5E5E5E;"># axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1),</span></span>
+<span>        axis.ticks.length.x <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">0.3</span>, <span class="st" style="color: #20794D;">"lines"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>        axis.line <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op" style="color: #5E5E5E;">(</span>colour <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"Black"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>        axis.ticks <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op" style="color: #5E5E5E;">(</span>colour <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"black"</span>, linewidth <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">0.6</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>        plot.title <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op" style="color: #5E5E5E;">(</span>face <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"bold"</span>, hjust <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">0.5</span>, size <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">10</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span>    <span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="co" style="color: #5E5E5E;"># Create a sample dataframe</span></span>
+<span><span class="va" style="color: #111111;">df</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>    group <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"A"</span>, <span class="st" style="color: #20794D;">"B"</span>, <span class="st" style="color: #20794D;">"B"</span>, <span class="st" style="color: #20794D;">"C"</span>, <span class="st" style="color: #20794D;">"C"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>    variant <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"v1"</span>, <span class="st" style="color: #20794D;">"v1"</span>, <span class="st" style="color: #20794D;">"v2"</span>, <span class="st" style="color: #20794D;">"v1"</span>, <span class="st" style="color: #20794D;">"v2"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>    value <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">10</span>, <span class="fl" style="color: #AD0000;">20</span>, <span class="fl" style="color: #AD0000;">30</span>, <span class="fl" style="color: #AD0000;">15</span>, <span class="fl" style="color: #AD0000;">25</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="co" style="color: #5E5E5E;"># Specify the widths for each group and variant</span></span>
+<span><span class="va" style="color: #111111;">widths</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>    group <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"A"</span>, <span class="st" style="color: #20794D;">"B"</span>, <span class="st" style="color: #20794D;">"C"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>    v1 <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">0.4</span>, <span class="fl" style="color: #AD0000;">0.8</span>, <span class="fl" style="color: #AD0000;">0.8</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>    v2 <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">0</span>, <span class="fl" style="color: #AD0000;">0.8</span>, <span class="fl" style="color: #AD0000;">0.8</span><span class="op" style="color: #5E5E5E;">)</span> <span class="co" style="color: #5E5E5E;"># set width to 0 for variant v2 in group A</span></span>
+<span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="co" style="color: #5E5E5E;"># Create the barplot with position_dodge2</span></span>
+<span><span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">df</span>, <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op" style="color: #5E5E5E;">(</span>x <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">group</span>, y <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">value</span>, fill <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">variant</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>        stat <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"identity"</span>,</span>
+<span>        position <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge2</a></span><span class="op" style="color: #5E5E5E;">(</span>preserve <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"single"</span>, width <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">widths</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span>    <span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://nanx.me/ggsci/reference/scale_jco.html">scale_fill_jco</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>        expand <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/expansion.html">expansion</a></span><span class="op" style="color: #5E5E5E;">(</span>mult <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">0</span>, <span class="fl" style="color: #AD0000;">0.1</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span>    <span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op" style="color: #5E5E5E;">(</span>breaks <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"A"</span>, <span class="st" style="color: #20794D;">"B"</span>, <span class="st" style="color: #20794D;">"C"</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span> <span class="co" style="color: #5E5E5E;"># Ensure all groups are displayed in x-axis</span></span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://guoruizhong.github.io/blog/2023/03/01/index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># ggsave(</span></span>
+<span><span class="co" style="color: #5E5E5E;">#   plot = p,</span></span>
+<span><span class="co" style="color: #5E5E5E;">#   filename = "barplot.png",</span></span>
+<span><span class="co" style="color: #5E5E5E;">#   width = 4,</span></span>
+<span><span class="co" style="color: #5E5E5E;">#   height = 3,</span></span>
+<span><span class="co" style="color: #5E5E5E;"># )</span></span></code></pre></div>
+</div>
+<p>In this example, we set widths to be a data frame that specifies the widths for each group and variant. We set the width for v2 in group A to 0 to hide the bar for that variant. Then, we use position_dodge2 with preserve = “single” and the width argument set to widths to create the barplot with different bar widths for each group and variant.</p>
+
+
+
+ ]]></description>
+  <category>barplot</category>
+  <category>R</category>
+  <guid>https://guoruizhong.github.io/blog/2023/03/01/index.html</guid>
+  <pubDate>Sun, 05 Mar 2023 16:00:00 GMT</pubDate>
+  <media:content url="https://guoruizhong.github.io/blog/2023/03/01/borplot.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>boxplot with p-value</title>
   <dc:creator>Guorui Zhong</dc:creator>
@@ -888,49 +956,32 @@
   <dc:creator>Guorui Zhong</dc:creator>
   <link>https://guoruizhong.github.io/blog/2022/01/22/index.html</link>
   <description><![CDATA[ <p><img src="https://guoruizhong.github.io/blog/2022/01/22/colorblind_palette.jpg" class="img-fluid"></p>
-<section id="friendly-palette" class="level2"><h2 class="anchored" data-anchor-id="friendly-palette">Friendly palette</h2>
-<div>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;">### friendly colors</span></span>
-<span></span>
-<span><span class="va" style="color: #111111;">cbPalette</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
-<span>    <span class="st" style="color: #20794D;">"#000000"</span>, <span class="st" style="color: #20794D;">"#999999"</span>, <span class="st" style="color: #20794D;">"#E69F00"</span>, <span class="st" style="color: #20794D;">"#56B4E9"</span>, </span>
-<span>    <span class="st" style="color: #20794D;">"#009E73"</span>, <span class="st" style="color: #20794D;">"#F0E442"</span>, <span class="st" style="color: #20794D;">"#0072B2"</span>, <span class="st" style="color: #20794D;">"#D55E00"</span>, <span class="st" style="color: #20794D;">"#CC79A7"</span></span>
-<span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span></span>
-<span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">:</span><span class="fl" style="color: #AD0000;">8</span>, col <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">cbPalette</span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span></span>
-<span><span class="co" style="color: #5E5E5E;">### gray colors</span></span>
+<section id="gray-colors" class="level2"><h2 class="anchored" data-anchor-id="gray-colors">Gray colors</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;">### gray colors</span></span>
 <span><span class="va" style="color: #111111;">cb</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"gray"</span>, <span class="st" style="color: #20794D;">"lightgray"</span>, <span class="st" style="color: #20794D;">"darkgray"</span>, <span class="st" style="color: #20794D;">"black"</span><span class="op" style="color: #5E5E5E;">)</span></span>
 <span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">:</span><span class="fl" style="color: #AD0000;">4</span>, col <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">cb</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2022/01/22/index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2022/01/22/index_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid figure-img"></p>
+<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2022/01/22/index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-</div>
-</div>
-</section><section id="use-colors-with-ggplot2" class="level2"><h2 class="anchored" data-anchor-id="use-colors-with-ggplot2">Use colors with ggplot2</h2>
+</section><section id="friendly-colors" class="level2"><h2 class="anchored" data-anchor-id="friendly-colors">Friendly colors</h2>
 <div>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span><span class="co" style="color: #5E5E5E;">### To use for fills, add scale_fill_manual(values=cbPalette)</span></span>
-<span><span class="co" style="color: #5E5E5E;">### To use for line and point colors, add scale_colour_manual(values=cbPalette)</span></span>
-<span><span class="co" style="color: #5E5E5E;">### Generate a basic `ggplot2`. Map the color argument to a factor or grouping variable:</span></span>
-<span><span class="va" style="color: #111111;">p1</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">iris</span>, <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">Sepal.Length</span>, <span class="va" style="color: #111111;">Sepal.Width</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
-<span>  <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op" style="color: #5E5E5E;">(</span>color <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">Species</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span><span class="va" style="color: #111111;">p1</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Set the color palette manually using a custom color scale:</span></span>
-<span><span class="va" style="color: #111111;">p2</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">p1</span> <span class="op" style="color: #5E5E5E;">+</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op" style="color: #5E5E5E;">(</span>values <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"#00AFBB"</span>, <span class="st" style="color: #20794D;">"#E7B800"</span>, <span class="st" style="color: #20794D;">"#FC4E07"</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span><span class="va" style="color: #111111;">p2</span></span></code></pre></div>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;">## Use color blind-friendly palette:</span></span>
+<span><span class="va" style="color: #111111;">cbp1</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>  <span class="st" style="color: #20794D;">"#999999"</span>, </span>
+<span>  <span class="st" style="color: #20794D;">"#E69F00"</span>, </span>
+<span>  <span class="st" style="color: #20794D;">"#56B4E9"</span>, </span>
+<span>  <span class="st" style="color: #20794D;">"#009E73"</span>,</span>
+<span>  <span class="st" style="color: #20794D;">"#F0E442"</span>, </span>
+<span>  <span class="st" style="color: #20794D;">"#0072B2"</span>, </span>
+<span>  <span class="st" style="color: #20794D;">"#D55E00"</span>, </span>
+<span>  <span class="st" style="color: #20794D;">"#CC79A7"</span></span>
+<span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">:</span><span class="fl" style="color: #AD0000;">8</span>, col <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">cbp1</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
@@ -939,56 +990,63 @@
 </figure>
 </div>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2022/01/22/index_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid figure-img"></p>
-</figure>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;">## Use color blind-friendly palette:</span></span>
-<span><span class="va" style="color: #111111;">cbp1</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
-<span>  <span class="st" style="color: #20794D;">"#999999"</span>, <span class="st" style="color: #20794D;">"#E69F00"</span>, <span class="st" style="color: #20794D;">"#56B4E9"</span>, <span class="st" style="color: #20794D;">"#009E73"</span>,</span>
-<span>  <span class="st" style="color: #20794D;">"#F0E442"</span>, <span class="st" style="color: #20794D;">"#0072B2"</span>, <span class="st" style="color: #20794D;">"#D55E00"</span>, <span class="st" style="color: #20794D;">"#CC79A7"</span></span>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;">### friendly colors</span></span>
+<span><span class="va" style="color: #111111;">cbPalette</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>    <span class="st" style="color: #20794D;">"#000000"</span>, </span>
+<span>    <span class="st" style="color: #20794D;">"#999999"</span>, </span>
+<span>    <span class="st" style="color: #20794D;">"#E69F00"</span>, </span>
+<span>    <span class="st" style="color: #20794D;">"#56B4E9"</span>, </span>
+<span>    <span class="st" style="color: #20794D;">"#009E73"</span>, </span>
+<span>    <span class="st" style="color: #20794D;">"#F0E442"</span>, </span>
+<span>    <span class="st" style="color: #20794D;">"#0072B2"</span>, </span>
+<span>    <span class="st" style="color: #20794D;">"#D55E00"</span>, </span>
+<span>    <span class="st" style="color: #20794D;">"#CC79A7"</span></span>
 <span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span><span class="va" style="color: #111111;">p3</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">p1</span> <span class="op" style="color: #5E5E5E;">+</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op" style="color: #5E5E5E;">(</span>values <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">cbp1</span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span><span class="va" style="color: #111111;">p3</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Use RColorBrewer palettes:</span></span>
-<span><span class="va" style="color: #111111;">p4</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">p1</span> <span class="op" style="color: #5E5E5E;">+</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_color_brewer</a></span><span class="op" style="color: #5E5E5E;">(</span>palette <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"Dark2"</span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span><span class="va" style="color: #111111;">p4</span></span></code></pre></div>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">:</span><span class="fl" style="color: #AD0000;">8</span>, col <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">cbPalette</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2022/01/22/index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2022/01/22/index_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img"></p>
+<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2022/01/22/index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
 </figure>
 </div>
 </div>
 </div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="va" style="color: #111111;">friendly_colors</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>  <span class="st" style="color: #20794D;">"#4C72B0"</span>, </span>
+<span>  <span class="st" style="color: #20794D;">"#55A868"</span>, </span>
+<span>  <span class="st" style="color: #20794D;">"#C44E52"</span>, </span>
+<span>  <span class="st" style="color: #20794D;">"#8172B2"</span>, </span>
+<span>  <span class="st" style="color: #20794D;">"#CCB974"</span>, </span>
+<span>  <span class="st" style="color: #20794D;">"#64B5CD"</span></span>
+<span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="co" style="color: #5E5E5E;"># Create example data frame</span></span>
+<span><span class="va" style="color: #111111;">df</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>    group <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"A"</span>, <span class="st" style="color: #20794D;">"B"</span>, <span class="st" style="color: #20794D;">"C"</span>, <span class="st" style="color: #20794D;">"D"</span>, <span class="st" style="color: #20794D;">"E"</span>, <span class="st" style="color: #20794D;">"F"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>    value <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">10</span>, <span class="fl" style="color: #AD0000;">20</span>, <span class="fl" style="color: #AD0000;">15</span>, <span class="fl" style="color: #AD0000;">25</span>, <span class="fl" style="color: #AD0000;">30</span>, <span class="fl" style="color: #AD0000;">35</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="co" style="color: #5E5E5E;"># Create plot with friendly colors</span></span>
+<span><span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">df</span>, <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op" style="color: #5E5E5E;">(</span>x <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">group</span>, y <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">value</span>, fill <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">group</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op" style="color: #5E5E5E;">(</span>stat <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"identity"</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op" style="color: #5E5E5E;">(</span>values <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">friendly_colors</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2022/01/22/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
+</figure>
 </div>
 </div>
-</section><section id="reference" class="level2"><h2 class="anchored" data-anchor-id="reference">Reference</h2>
-<ol type="1">
-<li><a href="http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/" class="uri">http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/</a></li>
-<li><a href="http://www.sthda.com/english/wiki/colors-in-r" class="uri">http://www.sthda.com/english/wiki/colors-in-r</a></li>
-<li><a href="https://stackoverflow.com/questions/57153428/r-plot-color-combinations-that-are-colorblind-accessible" class="uri">https://stackoverflow.com/questions/57153428/r-plot-color-combinations-that-are-colorblind-accessible</a></li>
-</ol>
+</div>
 
 
 </section> ]]></description>
-  <category>r</category>
-  <category>tidyverse</category>
-  <category>ggplot2</category>
-  <category>color</category>
+  <category>R</category>
+  <category>colors</category>
   <guid>https://guoruizhong.github.io/blog/2022/01/22/index.html</guid>
   <pubDate>Fri, 21 Jan 2022 16:00:00 GMT</pubDate>
   <media:content url="https://guoruizhong.github.io/blog/2022/01/22/colorblind_palette.jpg" medium="image" type="image/jpeg"/>
@@ -1272,24 +1330,18 @@
             <img src="https://guoruizhong.github.io/blog/2022/02/01/barplot.png" alt="Add errorbar and p-value on barplot with ggsignif" title="Add errorbar and p-value on barplot with ggsignif">
         </div>
     </div>
-    <div class="blog-entry" data-index="13" data-categories="r,tidyverse,ggplot2,color" data-listing-date-sort="1642780800000" data-listing-file-modified-sort="1677683952104" data-listing-reading-time-sort="0.98">
+    <div class="blog-entry" data-index="13" data-categories="R,colors" data-listing-date-sort="1642780800000" data-listing-file-modified-sort="1678110168748" data-listing-reading-time-sort="1.165">
         <div class="metadata">          
             <p class="date listing-date">January 22, 2022</p>
         </div>
         <div class="body">
             <p class="title listing-title"><a href="../blog/2022/01/22/index.html">Use colorblind-friendly palette for visualization</a></p>
             <div class="post-categories listing-categories">
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('r'); return false;">
-                    r
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('R'); return false;">
+                    R
                 </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('tidyverse'); return false;">
-                    tidyverse
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('ggplot2'); return false;">
-                    ggplot2
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('color'); return false;">
-                    color
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('colors'); return false;">
+                    colors
                 </div>
             </div>
             <p class="description listing-description">Use friendly colors in a graph with ggplot2</p>
@@ -1305,7 +1357,13 @@ No matching items
 </div>
 </section>
 <section id="section-1" class="level2">
-<h2 class="anchored" data-anchor-id="section-1">2021</h2>
+<h2 class="anchored" data-anchor-id="section-1">2022</h2>
+<div id="posts_2022">
+
+</div>
+</section>
+<section id="section-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-2">2021</h2>
 <div id="listing-posts_2021" class="quarto-listing quarto-listing-container-custom">
 <div class="list blog">
     <div class="blog-entry" data-index="0" data-categories="Inkscape,Greek letters" data-listing-date-sort="1622476800000" data-listing-file-modified-sort="1677683952104" data-listing-reading-time-sort="0.11">
@@ -1395,9 +1453,35 @@ No matching items
 
 </section>
 
- ]]></description>
+<div class="quarto-listing quarto-listing-container-custom" id="listing-posts_2023">
+<div class="list blog">
+    <div class="blog-entry" data-index="0" data-categories="barplot,R" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1678110867935" data-listing-reading-time-sort="2.02">
+        <div class="metadata">          
+            <p class="date listing-date">March 6, 2023</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2023/03/01/index.html">Equalizing Bar Widths</a></p>
+            <div class="post-categories listing-categories">
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('barplot'); return false;">
+                    barplot
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('R'); return false;">
+                    R
+                </div>
+            </div>
+            <p class="description listing-description"><!-- desc(5A0113B34292)[max=175]:blog/2023/03/01/index.html --></p>
+        </div>
+        <div class="thumbnail">
+            <img src="https://guoruizhong.github.io/blog/2023/03/01/borplot.png" alt="Equalizing Bar Widths" title="Equalizing Bar Widths">
+        </div>
+    </div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div> ]]></description>
   <guid>https://guoruizhong.github.io/blog/index.html</guid>
-  <pubDate>Fri, 03 Mar 2023 15:01:55 GMT</pubDate>
+  <pubDate>Mon, 06 Mar 2023 13:55:43 GMT</pubDate>
 </item>
 </channel>
 </rss>
