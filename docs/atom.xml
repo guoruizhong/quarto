@@ -1061,7 +1061,37 @@
 
 
 <section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section">2022</h2>
+<h2 class="anchored" data-anchor-id="section">2023</h2>
+<div id="listing-posts_2023" class="quarto-listing quarto-listing-container-custom">
+<div class="list blog">
+    <div class="blog-entry" data-index="0" data-categories="barplot,R" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1678110867935" data-listing-reading-time-sort="2.02">
+        <div class="metadata">          
+            <p class="date listing-date">March 6, 2023</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2023/03/01/index.html">Equalizing Bar Widths</a></p>
+            <div class="post-categories listing-categories">
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('barplot'); return false;">
+                    barplot
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('R'); return false;">
+                    R
+                </div>
+            </div>
+            <p class="description listing-description"><!-- desc(5A0113B34292)[max=175]:blog/2023/03/01/index.html --></p>
+        </div>
+        <div class="thumbnail">
+            <img src="https://guoruizhong.github.io/blog/2023/03/01/borplot.png" alt="Equalizing Bar Widths" title="Equalizing Bar Widths">
+        </div>
+    </div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</section>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1">2022</h2>
 <div id="listing-posts_2022" class="quarto-listing quarto-listing-container-custom">
 <div class="list blog">
     <div class="blog-entry" data-index="0" data-categories="R,Linux,VSCode" data-listing-date-sort="1671811200000" data-listing-file-modified-sort="1677855707895" data-listing-reading-time-sort="3.78">
@@ -1356,12 +1386,6 @@ No matching items
 </div>
 </div>
 </section>
-<section id="section-1" class="level2">
-<h2 class="anchored" data-anchor-id="section-1">2022</h2>
-<div id="posts_2022">
-
-</div>
-</section>
 <section id="section-2" class="level2">
 <h2 class="anchored" data-anchor-id="section-2">2021</h2>
 <div id="listing-posts_2021" class="quarto-listing quarto-listing-container-custom">
@@ -1453,35 +1477,9 @@ No matching items
 
 </section>
 
-<div class="quarto-listing quarto-listing-container-custom" id="listing-posts_2023">
-<div class="list blog">
-    <div class="blog-entry" data-index="0" data-categories="barplot,R" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1678110867935" data-listing-reading-time-sort="2.02">
-        <div class="metadata">          
-            <p class="date listing-date">March 6, 2023</p>
-        </div>
-        <div class="body">
-            <p class="title listing-title"><a href="../blog/2023/03/01/index.html">Equalizing Bar Widths</a></p>
-            <div class="post-categories listing-categories">
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('barplot'); return false;">
-                    barplot
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('R'); return false;">
-                    R
-                </div>
-            </div>
-            <p class="description listing-description"><!-- desc(5A0113B34292)[max=175]:blog/2023/03/01/index.html --></p>
-        </div>
-        <div class="thumbnail">
-            <img src="https://guoruizhong.github.io/blog/2023/03/01/borplot.png" alt="Equalizing Bar Widths" title="Equalizing Bar Widths">
-        </div>
-    </div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div> ]]></description>
+ ]]></description>
   <guid>https://guoruizhong.github.io/blog/index.html</guid>
-  <pubDate>Mon, 06 Mar 2023 13:55:43 GMT</pubDate>
+  <pubDate>Mon, 06 Mar 2023 14:12:04 GMT</pubDate>
 </item>
 </channel>
 </rss>
