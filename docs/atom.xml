@@ -77,7 +77,7 @@
   <category>R</category>
   <guid>https://guoruizhong.github.io/blog/2023/03/01/index.html</guid>
   <pubDate>Sun, 05 Mar 2023 16:00:00 GMT</pubDate>
-  <media:content url="https://guoruizhong.github.io/blog/2023/03/01/borplot.png" medium="image" type="image/png"/>
+  <media:content url="https://guoruizhong.github.io/blog/2023/03/01/barplot.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
   <title>boxplot with p-value</title>
@@ -969,7 +969,7 @@
 </div>
 </div>
 </section><section id="friendly-colors" class="level2"><h2 class="anchored" data-anchor-id="friendly-colors">Friendly colors</h2>
-<div>
+<div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;">## Use color blind-friendly palette:</span></span>
 <span><span class="va" style="color: #111111;">cbp1</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
 <span>  <span class="st" style="color: #20794D;">"#999999"</span>, </span>
@@ -982,14 +982,10 @@
 <span>  <span class="st" style="color: #20794D;">"#CC79A7"</span></span>
 <span><span class="op" style="color: #5E5E5E;">)</span></span>
 <span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">:</span><span class="fl" style="color: #AD0000;">8</span>, col <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">cbp1</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2022/01/22/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img"></p>
+<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2022/01/22/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
 </figure>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -1016,6 +1012,21 @@
 </div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>        text <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op" style="color: #5E5E5E;">(</span>size <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">10</span>, family <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"Arial"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>        panel.background <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op" style="color: #5E5E5E;">(</span>fill <span class="op" style="color: #5E5E5E;">=</span> <span class="cn" style="color: #8f5902;">NA</span>, color <span class="op" style="color: #5E5E5E;">=</span> <span class="cn" style="color: #8f5902;">NA</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>        axis.title <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op" style="color: #5E5E5E;">(</span>size <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">10</span>, color <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"black"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>        axis.text <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op" style="color: #5E5E5E;">(</span>size <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">10</span>, color <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"black"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>        <span class="co" style="color: #5E5E5E;"># axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1),</span></span>
+<span>        axis.ticks.length.x <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">0.3</span>, <span class="st" style="color: #20794D;">"lines"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>        axis.line <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op" style="color: #5E5E5E;">(</span>colour <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"Black"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>        axis.ticks <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op" style="color: #5E5E5E;">(</span>colour <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"black"</span>, linewidth <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">0.6</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>        plot.title <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op" style="color: #5E5E5E;">(</span>face <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"bold"</span>, hjust <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">0.5</span>, size <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">10</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span>    <span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
 <span><span class="va" style="color: #111111;">friendly_colors</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
 <span>  <span class="st" style="color: #20794D;">"#4C72B0"</span>, </span>
 <span>  <span class="st" style="color: #20794D;">"#55A868"</span>, </span>
@@ -1064,7 +1075,7 @@
 <h2 class="anchored" data-anchor-id="section">2023</h2>
 <div id="listing-posts_2023" class="quarto-listing quarto-listing-container-custom">
 <div class="list blog">
-    <div class="blog-entry" data-index="0" data-categories="barplot,R" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1678110867935" data-listing-reading-time-sort="2.02">
+    <div class="blog-entry" data-index="0" data-categories="barplot,R" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1678114424653" data-listing-reading-time-sort="2.02">
         <div class="metadata">          
             <p class="date listing-date">March 6, 2023</p>
         </div>
@@ -1081,7 +1092,7 @@
             <p class="description listing-description"><!-- desc(5A0113B34292)[max=175]:blog/2023/03/01/index.html --></p>
         </div>
         <div class="thumbnail">
-            <img src="https://guoruizhong.github.io/blog/2023/03/01/borplot.png" alt="Equalizing Bar Widths" title="Equalizing Bar Widths">
+            <img src="https://guoruizhong.github.io/blog/2023/03/01/barplot.png" alt="Equalizing Bar Widths" title="Equalizing Bar Widths">
         </div>
     </div>
 </div>
@@ -1360,7 +1371,7 @@ No matching items
             <img src="https://guoruizhong.github.io/blog/2022/02/01/barplot.png" alt="Add errorbar and p-value on barplot with ggsignif" title="Add errorbar and p-value on barplot with ggsignif">
         </div>
     </div>
-    <div class="blog-entry" data-index="13" data-categories="R,colors" data-listing-date-sort="1642780800000" data-listing-file-modified-sort="1678110168748" data-listing-reading-time-sort="1.165">
+    <div class="blog-entry" data-index="13" data-categories="R,colors" data-listing-date-sort="1642780800000" data-listing-file-modified-sort="1678111969114" data-listing-reading-time-sort="1.87">
         <div class="metadata">          
             <p class="date listing-date">January 22, 2022</p>
         </div>
@@ -1479,7 +1490,7 @@ No matching items
 
  ]]></description>
   <guid>https://guoruizhong.github.io/blog/index.html</guid>
-  <pubDate>Mon, 06 Mar 2023 14:12:04 GMT</pubDate>
+  <pubDate>Mon, 06 Mar 2023 14:53:56 GMT</pubDate>
 </item>
 </channel>
 </rss>

@@ -27,7 +27,6 @@ barplot(1:4, col = cb)
 ## Friendly colors
 
 ```{r}
-#| layout-ncol: 2
 ## Use color blind-friendly palette:
 cbp1 <- c(
   "#999999", 
@@ -59,6 +58,21 @@ barplot(1:8, col = cbPalette)
 
 ```{r}
 library(ggplot2)
+
+theme_set(
+    theme(
+        text = element_text(size = 10, family = "Arial"),
+        panel.background = element_rect(fill = NA, color = NA),
+        axis.title = element_text(size = 10, color = "black"),
+        axis.text = element_text(size = 10, color = "black"),
+        # axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1),
+        axis.ticks.length.x = unit(0.3, "lines"),
+        axis.line = element_line(colour = "Black"),
+        axis.ticks = element_line(colour = "black", linewidth = 0.6),
+        plot.title = element_text(face = "bold", hjust = 0.5, size = 10)
+    )
+)
+
 friendly_colors <- c(
   "#4C72B0", 
   "#55A868", 
