@@ -1,0 +1,199 @@
+---
+title: "ggplot2 with p-value and significant level"
+date: 2023-03-06
+categories:
+  - barplot
+  - R
+image: plot.png
+---
+
+```{r}
+library(tidyverse)
+library(rstatix)
+library(ggprism)
+library(ggpubr)
+library(ggsci)
+
+# package.list=c("tidyverse","rstatix","ggtext")
+
+# for (package in package.list) {
+#   if (!require(package,character.only=T, quietly=T)) {
+#     install.packages(package)
+#     library(package, character.only=T)
+#   }
+# }
+```
+
+```{r}
+df <- ToothGrowth %>%
+  mutate(dose=as.factor(dose)) %>% 
+  group_by(dose) %>%
+  summarise(value_mean=mean(len),sd=sd(len),se=sd(len)/sqrt(n()))
+```
+
+```{r}
+stat.test <- ToothGrowth %>% t_test(data =., len ~ dose, ref.group  =  "0.5") %>% 
+  mutate(p.adj.signif = replace_na(p.adj.signif,""),across("p.adj.signif",str_replace,"ns","")) %>% 
+  select(group1,group2,p.adj,p.adj.signif) %>% 
+  left_join(.,df,by=c("group2"="dose")) %>% 
+  mutate(y.position=value_mean+sd+0.3)
+```
+
+```{r}
+theme_niwot <- function(){
+  theme_minimal() +
+    theme(axis.title.x = element_blank(),
+          axis.line = element_line(color = "#3D4852"),
+          axis.ticks = element_line(color = "#3D4852"),
+          panel.grid.major.y = element_line(color = "#DAE1E7"),
+          panel.grid.major.x = element_blank(),
+          plot.margin = unit(rep(0.2,4),"cm"),
+          axis.text = element_text(size = 12, color = "#22292F"),
+          axis.title = element_text(size = 12, hjust = 1),
+          axis.title.y = element_text(margin = margin(r = 12)),
+          axis.text.y = element_text(margin = margin(r = 5)),
+          axis.text.x = element_text(margin = margin(t = 5)),
+          legend.position = "non")
+}
+```
+
+```{r}
+df %>% ggplot(.,aes(dose,value_mean))+
+  geom_errorbar(aes(ymax = value_mean + sd, ymin = value_mean - sd),width = 0.1,color = "grey30")+
+  geom_col(width=0.4,aes(fill=dose))+
+  add_pvalue(stat.test,label = "p.adj.signif",label.size=6,
+             coord.flip = TRUE, remove.bracket = TRUE)+
+  scale_y_continuous(expand=c(0,0),limits = c(0,33)) +
+  theme_niwot()+
+  scale_fill_brewer(palette="Blues")
+
+```
+
+```{r}
+ df %>% ggplot(.,aes(dose,value_mean))+
+  geom_errorbar(aes(ymax = value_mean + sd, ymin = value_mean - sd),width = 0.1,color = "grey30")+
+  geom_col(width=0.4,aes(fill=dose))+
+  stat_pvalue_manual(stat.test %>% slice(1),label = "p.adj.signif",
+                     label.size=6,tip.length = c(0.35,0.003),linetype=2)+
+  add_pvalue(stat.test %>% slice(2),label = "p.adj.signif",label.size=6,tip.length = c(0.1,0.003))+
+  scale_y_continuous(expand=c(0,0),limits = c(0,33)) +
+  theme_niwot()+
+  scale_fill_brewer(palette="Blues")
+# ggsave(
+#     here("blog", "2023", "03", "06", "plot.png")
+# )
+```
+
+
+```{r}
+stat.test2 <- ToothGrowth %>% mutate(dose=as.factor(dose)) %>% group_by(dose) %>% 
+  t_test(len ~ supp) %>%
+  adjust_pvalue() %>% add_significance("p.adj") %>% add_xy_position(x="dose") 
+
+stat.test3 <- ToothGrowth %>% 
+  t_test(len ~ dose,p.adjust.method = "bonferroni") %>%
+  adjust_pvalue() %>% add_significance("p.adj") %>% add_xy_position()
+
+res.aov <- ToothGrowth %>% mutate(dose=as.factor(dose)) %>% anova_test(len ~ dose)
+
+stat.test4 <- ToothGrowth %>% mutate(dose=as.factor(dose)) %>% tukey_hsd(len ~ dose) %>% 
+  add_xy_position("dose")
+```
+
+```{r}
+ToothGrowth %>% mutate(dose=as.factor(dose)) %>% 
+  ggplot(aes(dose,len))+
+  stat_boxplot(geom = "errorbar",width=0.2,aes(fill = supp),position = position_dodge(1)) +
+  geom_boxplot(aes(fill= supp),position = position_dodge(1))+
+  stat_pvalue_manual(stat.test4,label = "p.adj.signif",label.size=6,hide.ns = T)+
+  labs(subtitle = get_test_label(res.aov, detailed = TRUE))+
+  scale_y_continuous(expand=c(0,0),limits = c(0,42))+
+  theme_niwot()+
+  scale_fill_jco()
+```
+
+```{r}
+ToothGrowth %>%
+    mutate(dose = as.factor(dose)) %>%
+    ggplot(aes(dose, len)) +
+    stat_boxplot(geom = "errorbar", width = 0.2, aes(fill = supp), position = position_dodge(1)) +
+    geom_boxplot(aes(fill = supp), position = position_dodge(1)) +
+    stat_pvalue_manual(stat.test2, label = "p.adj.signif", label.size = 6, hide.ns = T) +
+    stat_pvalue_manual(stat.test3, label = "p.adj.signif", label.size = 6, hide.ns = T) +
+    labs(subtitle = get_test_label(res.aov, detailed = TRUE)) +
+    scale_y_continuous(expand = c(0, 0), limits = c(0, 42)) +
+    theme_niwot() +
+    scale_fill_jco()
+```
+
+
+
+
+## Multiple group barplot with significant 
+
+```{r}
+stat.test <- iris %>%
+    pivot_longer(-Species) %>%
+    filter(Species != "versicolor") %>%
+    mutate(group = str_sub(name, start = 1, end = 5)) %>%
+    group_by(group, name) %>%
+    t_test(value ~ Species) %>%
+    adjust_pvalue() %>%
+    add_significance("p.adj") %>%
+    add_xy_position(x = "name", scales = "free", fun = "max") %>%
+    select(-3, -6, -7, -8, -9, -10) %>%
+    mutate(
+        across("xmin", str_replace, "2.8", "0.8"),
+        across("xmin", str_replace, "3.8", "1.8"),
+        across("xmax", str_replace, "3.2", "1.2"),
+        across("xmax", str_replace, "4.2", "2.2")
+    ) %>%
+    mutate(xmin = as.numeric(xmin), xmax = as.numeric(xmax))
+
+stat.test
+```
+
+```{r}
+iris %>%
+    pivot_longer(-Species) %>%
+    filter(Species != "versicolor") %>%
+    mutate(group = str_sub(name, start = 1, end = 5)) %>%
+    ggplot(., aes(x = name, y = value)) +
+    stat_summary(geom = "bar", position = "dodge", aes(fill = Species)) +
+    stat_summary(
+        geom = "errorbar", fun.data = "mean_sdl",
+        fun.args = list(mult = 1),
+        aes(fill = Species),
+        position = position_dodge(0.9), width = 0.2, color = "black"
+    ) +
+    stat_pvalue_manual(stat.test,
+        label = "p.adj.signif", label.size = 6, hide.ns = T,
+        tip.length = 0.01
+    ) +
+    facet_wrap(. ~ group, scale = "free_x", nrow = 1) +
+    labs(x = NULL, y = NULL) +
+    scale_fill_manual(values = c("#BA7A70", "#829BAB")) +
+    scale_y_continuous(limits = c(0, 9), expand = c(0, 0)) +
+    theme(
+        axis.title.x = element_blank(),
+        axis.title.y = element_text(color = "black", size = 12, margin = margin(r = 3)),
+        axis.ticks.x = element_blank(),
+        axis.text.y = element_text(color = "black", size = 10, margin = margin(r = 2)),
+        axis.text.x = element_text(color = "black"),
+        panel.background = element_rect(fill = NA, color = NA),
+        panel.grid.minor = element_line(size = 0.2, color = "#e5e5e5"),
+        panel.grid.major = element_line(size = 0.2, color = "#e5e5e5"),
+        panel.border = element_rect(fill = NA, color = "black", size = 0.3, linetype = "solid"),
+        legend.key = element_blank(),
+        legend.title = element_blank(),
+        legend.text = element_text(color = "black", size = 8),
+        legend.spacing.x = unit(0.1, "cm"),
+        legend.key.width = unit(0.5, "cm"),
+        legend.key.height = unit(0.5, "cm"),
+        legend.position = c(1, 1), legend.justification = c(1, 1),
+        legend.background = element_blank(),
+        legend.box.margin = margin(0, 0, 0, 0),
+        strip.text = element_text(color = "black", size = 10),
+        panel.spacing.x = unit(0.3, "cm")
+    )
+```
