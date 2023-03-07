@@ -89,6 +89,8 @@ gapminder_plot <- pp +
         )
     ) +
     theme(
+        panel.background = element_rect(fill = "white"),
+        plot.background = element_rect(fill = "white"),
         plot.margin = unit(rep(1, 4), "cm"),
         panel.grid.minor = element_blank(),
         panel.grid.major = element_line(

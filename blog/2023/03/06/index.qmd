@@ -47,6 +47,8 @@ theme_niwot <- function(){
           axis.ticks = element_line(color = "#3D4852"),
           panel.grid.major.y = element_line(color = "#DAE1E7"),
           panel.grid.major.x = element_blank(),
+          panel.background = element_rect(fill = "white"),
+          plot.background = element_rect(fill = "white"),
           plot.margin = unit(rep(0.2,4),"cm"),
           axis.text = element_text(size = 12, color = "#22292F"),
           axis.title = element_text(size = 12, hjust = 1),

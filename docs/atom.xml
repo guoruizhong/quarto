@@ -343,6 +343,8 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 <span>          axis.ticks <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op" style="color: #5E5E5E;">(</span>color <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"#3D4852"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
 <span>          panel.grid.major.y <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op" style="color: #5E5E5E;">(</span>color <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"#DAE1E7"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
 <span>          panel.grid.major.x <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>          panel.background <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op" style="color: #5E5E5E;">(</span>fill <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"white"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>          plot.background <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op" style="color: #5E5E5E;">(</span>fill <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"white"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
 <span>          plot.margin <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">0.2</span>,<span class="fl" style="color: #AD0000;">4</span><span class="op" style="color: #5E5E5E;">)</span>,<span class="st" style="color: #20794D;">"cm"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
 <span>          axis.text <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op" style="color: #5E5E5E;">(</span>size <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">12</span>, color <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"#22292F"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
 <span>          axis.title <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op" style="color: #5E5E5E;">(</span>size <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">12</span>, hjust <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
@@ -536,7 +538,7 @@ No summary function supplied, defaulting to `mean_se()`</code></pre>
   <category>R</category>
   <guid>https://guoruizhong.github.io/blog/2023/03/06/index.html</guid>
   <pubDate>Sun, 05 Mar 2023 16:00:00 GMT</pubDate>
-  <media:content url="https://guoruizhong.github.io/blog/2023/03/06/plot.png" medium="image" type="image/png" height="92" width="144"/>
+  <media:content url="https://guoruizhong.github.io/blog/2023/03/06/plot.png" medium="image" type="image/png" height="106" width="144"/>
 </item>
 <item>
   <title>Scatter plot with ggplot2</title>
@@ -661,6 +663,8 @@ of ggplot2 3.3.4.</code></pre>
 <span>        <span class="op" style="color: #5E5E5E;">)</span></span>
 <span>    <span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
 <span>    <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>        panel.background <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op" style="color: #5E5E5E;">(</span>fill <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"white"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>        plot.background <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op" style="color: #5E5E5E;">(</span>fill <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"white"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
 <span>        plot.margin <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">1</span>, <span class="fl" style="color: #AD0000;">4</span><span class="op" style="color: #5E5E5E;">)</span>, <span class="st" style="color: #20794D;">"cm"</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
 <span>        panel.grid.minor <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
 <span>        panel.grid.major <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
@@ -773,7 +777,7 @@ $ continent &lt;fct&gt; Americas, Americas, Americas, …</code></pre>
   <category>R</category>
   <guid>https://guoruizhong.github.io/blog/2023/03/05/index.html</guid>
   <pubDate>Sat, 04 Mar 2023 16:00:00 GMT</pubDate>
-  <media:content url="https://guoruizhong.github.io/blog/2023/03/05/plot.png" medium="image" type="image/png" height="94" width="144"/>
+  <media:content url="https://guoruizhong.github.io/blog/2023/03/05/plot.png" medium="image" type="image/png" height="106" width="144"/>
 </item>
 <item>
   <title>Working with R graphics and fonts</title>
@@ -1716,7 +1720,7 @@ $ continent &lt;fct&gt; Americas, Americas, Americas, …</code></pre>
             <img src="https://guoruizhong.github.io/blog/2023/03/01/barplot.png" alt="Equalizing Bar Widths" title="Equalizing Bar Widths">
         </div>
     </div>
-    <div class="blog-entry" data-index="2" data-categories="barplot,R" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1678197383486" data-listing-reading-time-sort="5.865">
+    <div class="blog-entry" data-index="2" data-categories="barplot,R" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1678197959207" data-listing-reading-time-sort="6.005">
         <div class="metadata">          
             <p class="date listing-date">March 6, 2023</p>
         </div>
@@ -1736,7 +1740,7 @@ $ continent &lt;fct&gt; Americas, Americas, Americas, …</code></pre>
             <img src="https://guoruizhong.github.io/blog/2023/03/06/plot.png" alt="ggplot2 with p-value and significant level" title="ggplot2 with p-value and significant level">
         </div>
     </div>
-    <div class="blog-entry" data-index="3" data-categories="scatter plot,R" data-listing-date-sort="1677945600000" data-listing-file-modified-sort="1678197195787" data-listing-reading-time-sort="5.52">
+    <div class="blog-entry" data-index="3" data-categories="scatter plot,R" data-listing-date-sort="1677945600000" data-listing-file-modified-sort="1678197966165" data-listing-reading-time-sort="5.64">
         <div class="metadata">          
             <p class="date listing-date">March 5, 2023</p>
         </div>
@@ -2131,7 +2135,7 @@ No matching items
 
  ]]></description>
   <guid>https://guoruizhong.github.io/blog/index.html</guid>
-  <pubDate>Tue, 07 Mar 2023 13:58:04 GMT</pubDate>
+  <pubDate>Tue, 07 Mar 2023 14:07:13 GMT</pubDate>
 </item>
 </channel>
 </rss>
