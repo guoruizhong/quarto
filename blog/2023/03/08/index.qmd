@@ -1,0 +1,83 @@
+---
+title: "Ridgeline plots in ggplot2"
+date: 2023-03-08
+categories:
+  - ggridges
+  - R
+image: plot.png
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+            # fig.width = 6, 
+            # fig.height = 3.8,
+                      fig.align = "center", fig.retina = 3,
+                      out.width = "85%", collapse = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(ggsci)
+library(ggridges)
+library(ggtext)
+library(ggh4x)
+library(gapminder)
+library(here)
+```
+
+```{r}
+### subset data
+df <- gapminder %>% filter(continent %in% c("Asia","Europe"))
+df
+```
+
+```{r}
+ggplot(df, aes(y = country, x = lifeExp, fill = continent)) +
+    geom_density_ridges(size = .15, color = "black") +
+    scale_x_continuous(
+        ### converse x axis
+        trans = "log10", expand = c(0, 0),
+        labels = scales::comma_format(suffix = "k", scale = 1e-4)
+    ) +
+    scale_y_discrete(expand = c(0, 0)) +
+    scale_fill_futurama(alpha = .95) +
+    ### facet continent
+    facet_wrap(vars(continent), scales = "free_y") +
+    coord_cartesian(clip = "off") +
+    theme_minimal() +
+    theme(
+        legend.position = "bottom",
+        legend.justification = "right",
+        axis.title.x = element_text(margin = margin(t = 10), color = "black"),
+        axis.title.y = element_blank(),
+        axis.text.x = element_text(size = 8, color = "black"),
+        axis.text.y = element_text(face = "bold", color = "black"),
+        panel.grid.minor = element_blank(),
+        panel.grid.major.x = element_line(
+            linewidth = .3, linetype = "dashed",
+            color = "grey75"
+        ),
+        panel.grid.major.y = element_blank(),
+        axis.ticks.x = element_line(linewidth = .3, color = "black"),
+        panel.spacing = unit(1, "lines"),
+        strip.text = element_text(
+            face = "bold", margin = margin(b = 10),
+            color = "black", size = 12
+        ),
+        plot.background = element_rect(fill = "white", color = NA),
+        plot.margin = margin(20, 20, 20, 20),
+        legend.title = element_blank()
+    ) +
+    guides(fill = guide_legend(
+        override.aes = list(color = NA),
+        label.theme = element_text(color = "white", size = 8)
+    ))
+
+# ggsave(
+#     here("blog", "2023", "03", "08", "plot.png")
+#     # width = 6,
+#     # height = 3.8
+#     # units = "in",
+#     # type = "cairo"
+# )
+```
