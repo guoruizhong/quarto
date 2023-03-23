@@ -1,0 +1,50 @@
+---
+title: "Change tick labels"
+date: 2023-03-15
+categories:
+  - barplot
+  - R
+image: plot.png
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+            # fig.width = 6, 
+            # fig.height = 3.8,
+                      fig.align = "center", fig.retina = 3,
+                      out.width = "85%", collapse = TRUE)
+```
+
+
+```{r}
+library(ggplot2)
+library(ggtext)
+
+# create example data
+df <- data.frame(
+  group = factor(rep(c("A", "B"), each = 3)),
+  x = factor(rep(c("X", "Y", "Z"), 2), levels = c("X", "Y", "Z")),
+  value = c(3, 2, 5, 2, 1, 4)
+)
+
+# define colors for groups
+group_colors <- c("A" = "blue", "B" = "red")
+
+# create barplot
+ggplot(df, aes(x, value, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  
+  # set fill colors for groups
+  scale_fill_manual(values = group_colors) +
+  
+  # set colors for x-axis tick labels using ggtext
+  theme(axis.text.x = element_text(
+    color = ifelse(df$group == "A", "blue", "red")
+  )) +
+  
+  # customize plot theme
+  theme_minimal()
+
+
+```

@@ -7,7 +7,7 @@ categories:
 image: barplot.png
 ---
 
-```{r}
+```{r, load-libraries-data, warning=FALSE, message=FALSE}
 ### ---------
 library(ggplot2)
 library(ggsci)

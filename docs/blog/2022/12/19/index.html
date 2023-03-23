@@ -593,23 +593,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-ls</span>               <span class="co"># list the current running screen session</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Common commands for managing Linux Screen Windows:</p>
 <ul>
-<li>Ctrl + A C # create a new window (with shell).</li>
-<li>Ctrl + A ” # list all windows.</li>
-<li>Ctrl + A 0 # switch to window 0 (by number).</li>
-<li>Ctrl + A A # rename the current window.</li>
-<li>Ctrl + A S # split current region horizontally into two regions.</li>
-<li>Ctrl + A | # split current region vertically into two regions.</li>
-<li>Ctrl + A Tab # switch the input focus to the next region.</li>
-<li>Ctrl + A Ctrl + A # toggle between the current and previous windows</li>
-<li>Ctrl + A Q # close all regions but the current one.</li>
-<li>Ctrl + A X # close the current region.</li>
-<li>Ctrl + A D # detach from linux screen session</li>
+<li>Ctrl + A + C # create a new window (with shell).</li>
+<li>Ctrl + A + ” # list all windows.</li>
+<li>Ctrl + A + 0 # switch to window 0 (by number).</li>
+<li>Ctrl + A + A # rename the current window.</li>
+<li>Ctrl + A + S # split current region horizontally into two regions.</li>
+<li>Ctrl + A + | # split current region vertically into two regions.</li>
+<li>Ctrl + A + Tab # switch the input focus to the next region.</li>
+<li>Ctrl + A + Ctrl + A # toggle between the current and previous windows</li>
+<li>Ctrl + A + Q # close all regions but the current one.</li>
+<li>Ctrl + A + X # close the current region.</li>
+<li>Ctrl + A + D # detach from linux screen session</li>
 </ul>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Output</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">There</span> are screens on:</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">10835.pts-0.linuxize-desktop</span>   <span class="er">(</span><span class="ex">Detached</span><span class="kw">)</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">10366.pts-0.linuxize-desktop</span>   <span class="er">(</span><span class="ex">Detached</span><span class="kw">)</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span> Sockets in /run/screens/S-linuxize.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-ls</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">## Output</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="ex">There</span> are screens on:</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">10835.pts-0.linuxize-desktop</span>   <span class="er">(</span><span class="ex">Detached</span><span class="kw">)</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">10366.pts-0.linuxize-desktop</span>   <span class="er">(</span><span class="ex">Detached</span><span class="kw">)</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span> Sockets in /run/screens/S-linuxize.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If want to restore screen 10835.pts-0, then</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-r</span> 10835</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>

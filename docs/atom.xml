@@ -10,13 +10,65 @@
 <atom:link href="https://guoruizhong.github.io/atom.xml" rel="self" type="application/rss+xml"/>
 <description>Guorui Zhong</description>
 <generator>quarto-1.2.335</generator>
-<lastBuildDate>Tue, 07 Mar 2023 16:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 14 Mar 2023 16:00:00 GMT</lastBuildDate>
 <item>
-  <title>Ridgeline plots in ggplot2</title>
+  <title>Change tick labels</title>
   <dc:creator>Guorui Zhong</dc:creator>
-  <link>https://guoruizhong.github.io/blog/2023/03/08/index.html</link>
+  <link>https://guoruizhong.github.io/blog/2023/03/15/index.html</link>
   <description><![CDATA[ <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://wilkelab.org/ggtext/">ggtext</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="co" style="color: #5E5E5E;"># create example data</span></span>
+<span><span class="va" style="color: #111111;">df</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>  group <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"A"</span>, <span class="st" style="color: #20794D;">"B"</span><span class="op" style="color: #5E5E5E;">)</span>, each <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>  x <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"X"</span>, <span class="st" style="color: #20794D;">"Y"</span>, <span class="st" style="color: #20794D;">"Z"</span><span class="op" style="color: #5E5E5E;">)</span>, <span class="fl" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">)</span>, levels <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"X"</span>, <span class="st" style="color: #20794D;">"Y"</span>, <span class="st" style="color: #20794D;">"Z"</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>  value <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">3</span>, <span class="fl" style="color: #AD0000;">2</span>, <span class="fl" style="color: #AD0000;">5</span>, <span class="fl" style="color: #AD0000;">2</span>, <span class="fl" style="color: #AD0000;">1</span>, <span class="fl" style="color: #AD0000;">4</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="co" style="color: #5E5E5E;"># define colors for groups</span></span>
+<span><span class="va" style="color: #111111;">group_colors</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"A"</span> <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"blue"</span>, <span class="st" style="color: #20794D;">"B"</span> <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"red"</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="co" style="color: #5E5E5E;"># create barplot</span></span>
+<span><span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">df</span>, <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">x</span>, <span class="va" style="color: #111111;">value</span>, fill <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">group</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op" style="color: #5E5E5E;">(</span>stat <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"identity"</span>, position <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"dodge"</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>  </span>
+<span>  <span class="co" style="color: #5E5E5E;"># set fill colors for groups</span></span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op" style="color: #5E5E5E;">(</span>values <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">group_colors</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>  </span>
+<span>  <span class="co" style="color: #5E5E5E;"># set colors for x-axis tick labels using ggtext</span></span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op" style="color: #5E5E5E;">(</span>axis.text.x <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>    color <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">df</span><span class="op" style="color: #5E5E5E;">$</span><span class="va" style="color: #111111;">group</span> <span class="op" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">"A"</span>, <span class="st" style="color: #20794D;">"blue"</span>, <span class="st" style="color: #20794D;">"red"</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span>  <span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>  </span>
+<span>  <span class="co" style="color: #5E5E5E;"># customize plot theme</span></span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Warning: Vectorized input to `element_text()` is not officially supported.</span></span>
+<span><span class="co" style="color: #5E5E5E;">## ℹ Results may be unexpected or may change in future versions of ggplot2.</span></span></code></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/15/index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>barplot</category>
+  <category>R</category>
+  <guid>https://guoruizhong.github.io/blog/2023/03/15/index.html</guid>
+  <pubDate>Tue, 14 Mar 2023 16:00:00 GMT</pubDate>
+  <media:content url="https://guoruizhong.github.io/blog/2023/03/15/plot.png" medium="image" type="image/png"/>
+</item>
+<item>
+  <title>Barplot with negative and positive value</title>
+  <dc:creator>Guorui Zhong</dc:creator>
+  <link>https://guoruizhong.github.io/blog/2023/03/11/index.html</link>
+  <description><![CDATA[ <div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
 <span><span class="co" style="color: #5E5E5E;">## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──</span></span>
 <span><span class="co" style="color: #5E5E5E;">## ✔ dplyr     1.1.0     ✔ readr     2.1.4</span></span>
 <span><span class="co" style="color: #5E5E5E;">## ✔ forcats   1.0.0     ✔ stringr   1.5.0</span></span>
@@ -27,13 +79,85 @@
 <span><span class="co" style="color: #5E5E5E;">## ✖ dplyr::filter() masks stats::filter()</span></span>
 <span><span class="co" style="color: #5E5E5E;">## ✖ dplyr::lag()    masks stats::lag()</span></span>
 <span><span class="co" style="color: #5E5E5E;">## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</span></span>
+<span></span>
+<span><span class="va" style="color: #111111;">x</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"Vcam1"</span>, <span class="st" style="color: #20794D;">"Pecam1"</span>, <span class="st" style="color: #20794D;">"Alcam"</span>, <span class="st" style="color: #20794D;">"Icam1"</span>, <span class="st" style="color: #20794D;">"Gja4"</span>, <span class="st" style="color: #20794D;">"Gja5"</span>, <span class="st" style="color: #20794D;">"F11r"</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="va" style="color: #111111;">y</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">0.1</span>, <span class="fl" style="color: #AD0000;">0.05</span>, <span class="op" style="color: #5E5E5E;">-</span><span class="fl" style="color: #AD0000;">0.08</span>, <span class="op" style="color: #5E5E5E;">-</span><span class="fl" style="color: #AD0000;">0.12</span>, <span class="fl" style="color: #AD0000;">0.15</span>, <span class="op" style="color: #5E5E5E;">-</span><span class="fl" style="color: #AD0000;">0.18</span>, <span class="fl" style="color: #AD0000;">0.2</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="va" style="color: #111111;">fig3r.df</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">x</span>, <span class="va" style="color: #111111;">y</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span></span>
+<span><span class="va" style="color: #111111;">fig3r.df</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op" style="color: #5E5E5E;">(</span>x<span class="op" style="color: #5E5E5E;">=</span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">x</span>,levels <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"Vcam1"</span>,<span class="st" style="color: #20794D;">"Pecam1"</span>,<span class="st" style="color: #20794D;">"Alcam"</span>,<span class="st" style="color: #20794D;">"Icam1"</span>,<span class="st" style="color: #20794D;">"Gja4"</span>,<span class="st" style="color: #20794D;">"Gja5"</span>,<span class="st" style="color: #20794D;">"F11r"</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">x</span>, <span class="va" style="color: #111111;">y</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op" style="color: #5E5E5E;">(</span>fill <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">y</span> <span class="op" style="color: #5E5E5E;">&lt;</span> <span class="fl" style="color: #AD0000;">0</span>, <span class="st" style="color: #20794D;">"Negative"</span>, <span class="st" style="color: #20794D;">"Positive"</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span>, color <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"black"</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op" style="color: #5E5E5E;">(</span>y <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">y</span> <span class="op" style="color: #5E5E5E;">&lt;</span> <span class="fl" style="color: #AD0000;">0</span>, <span class="va" style="color: #111111;">y</span> <span class="op" style="color: #5E5E5E;">-</span> <span class="fl" style="color: #AD0000;">0.02</span>, <span class="va" style="color: #111111;">y</span> <span class="op" style="color: #5E5E5E;">+</span> <span class="fl" style="color: #AD0000;">0.02</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>                label <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">x</span>, color <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">y</span> <span class="op" style="color: #5E5E5E;">&lt;</span> <span class="fl" style="color: #AD0000;">0</span>, <span class="st" style="color: #20794D;">"Negative"</span>, <span class="st" style="color: #20794D;">"Positive"</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>            angle <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">90</span>, hjust <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">y</span> <span class="op" style="color: #5E5E5E;">&lt;</span> <span class="fl" style="color: #AD0000;">0</span>, <span class="fl" style="color: #AD0000;">1</span>, <span class="fl" style="color: #AD0000;">0</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op" style="color: #5E5E5E;">(</span>values <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"Positive"</span> <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"#ee7770"</span>, <span class="st" style="color: #20794D;">"Negative"</span> <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"#77b5fe"</span><span class="op" style="color: #5E5E5E;">)</span>, </span>
+<span>                    guide <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"none"</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op" style="color: #5E5E5E;">(</span>values <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"Positive"</span> <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"#ee7770"</span>, <span class="st" style="color: #20794D;">"Negative"</span> <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"#77b5fe"</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op" style="color: #5E5E5E;">(</span>axis.line.x <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>        axis.text.x <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>        axis.ticks.x <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>        legend.position <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"none"</span>,</span>
+<span>        panel.grid.major.y <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>        plot.title <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op" style="color: #5E5E5E;">(</span>hjust <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">0.5</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op" style="color: #5E5E5E;">(</span>limits <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">-</span><span class="fl" style="color: #AD0000;">0.25</span>,<span class="fl" style="color: #AD0000;">0.25</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>                     breaks <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">-</span><span class="fl" style="color: #AD0000;">0.25</span>,<span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">-</span><span class="fl" style="color: #AD0000;">0.2</span>,<span class="fl" style="color: #AD0000;">0.2</span>,by<span class="op" style="color: #5E5E5E;">=</span><span class="fl" style="color: #AD0000;">0.1</span><span class="op" style="color: #5E5E5E;">)</span>,<span class="fl" style="color: #AD0000;">0.25</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>                     expand <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/expansion.html">expansion</a></span><span class="op" style="color: #5E5E5E;">(</span>mult <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">0</span>,<span class="fl" style="color: #AD0000;">0</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>                     labels <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">""</span>,<span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">-</span><span class="fl" style="color: #AD0000;">0.2</span>,<span class="fl" style="color: #AD0000;">0.2</span>,by<span class="op" style="color: #5E5E5E;">=</span><span class="fl" style="color: #AD0000;">0.1</span><span class="op" style="color: #5E5E5E;">)</span>,<span class="st" style="color: #20794D;">""</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op" style="color: #5E5E5E;">(</span>x <span class="op" style="color: #5E5E5E;">=</span> <span class="cn" style="color: #8f5902;">NULL</span>, y <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"log(FC)"</span>, title <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"Art"</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/11/index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>barplot</category>
+  <category>R</category>
+  <guid>https://guoruizhong.github.io/blog/2023/03/11/index.html</guid>
+  <pubDate>Fri, 10 Mar 2023 16:00:00 GMT</pubDate>
+  <media:content url="https://guoruizhong.github.io/blog/2023/03/11/plot.png" medium="image" type="image/png"/>
+</item>
+<item>
+  <title>Simple statistical tests with rstatix</title>
+  <dc:creator>Guorui Zhong</dc:creator>
+  <link>https://guoruizhong.github.io/blog/2023/03/09/index.html</link>
+  <description><![CDATA[ <div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://here.r-lib.org/">here</a></span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+
+
+
+ ]]></description>
+  <category>rstatix</category>
+  <category>R</category>
+  <guid>https://guoruizhong.github.io/blog/2023/03/09/index.html</guid>
+  <pubDate>Wed, 08 Mar 2023 16:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Ridgeline plots in ggplot2</title>
+  <dc:creator>Guorui Zhong</dc:creator>
+  <link>https://guoruizhong.github.io/blog/2023/03/08/index.html</link>
+  <description><![CDATA[ <div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
 <span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://nanx.me/ggsci/">ggsci</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
 <span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://wilkelab.org/ggridges/">ggridges</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
 <span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://wilkelab.org/ggtext/">ggtext</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
 <span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://github.com/teunbrand/ggh4x">ggh4x</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
 <span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://github.com/jennybc/gapminder">gapminder</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://here.r-lib.org/">here</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span><span class="co" style="color: #5E5E5E;">## here() starts at /Users/zhonggr/guoruizhong.github.io</span></span></code></pre></div>
+<span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://here.r-lib.org/">here</a></span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;">### subset data</span></span>
@@ -99,7 +223,7 @@
 <span><span class="co" style="color: #5E5E5E;">## Picking joint bandwidth of 0.0125</span></span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/08/index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/08/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
 </figure>
 </div>
 </div>
@@ -225,7 +349,7 @@
 <span><span class="co" style="color: #5E5E5E;">## ℹ Please use `after_stat(lower)` instead.</span></span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/07/index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/07/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
 </figure>
 </div>
 </div>
@@ -263,7 +387,7 @@
 <span>    <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html">coord_cartesian</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/07/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/07/index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
 </figure>
 </div>
 </div>
@@ -311,7 +435,7 @@
 <span><span class="co" style="color: #5E5E5E;">## `geom_smooth()` using formula = 'y ~ x'</span></span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/07/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/07/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
 </figure>
 </div>
 </div>
@@ -373,7 +497,7 @@
 <span>    <span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
 <span>    <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op" style="color: #5E5E5E;">(</span>breaks <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"A"</span>, <span class="st" style="color: #20794D;">"B"</span>, <span class="st" style="color: #20794D;">"C"</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span> <span class="co" style="color: #5E5E5E;"># Ensure all groups are displayed in x-axis</span></span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://guoruizhong.github.io/blog/2023/03/01/index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://guoruizhong.github.io/blog/2023/03/01/index_files/figure-html/load-libraries-data-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># ggsave(</span></span>
 <span><span class="co" style="color: #5E5E5E;">#   plot = p,</span></span>
@@ -399,23 +523,7 @@
   <link>https://guoruizhong.github.io/blog/2023/03/06/index.html</link>
   <description><![CDATA[ <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✔ dplyr     1.1.0     ✔ readr     2.1.4</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✔ forcats   1.0.0     ✔ stringr   1.5.0</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✔ ggplot2   3.4.1     ✔ tibble    3.1.8</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✔ purrr     1.0.1     </span></span>
-<span><span class="co" style="color: #5E5E5E;">## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✖ dplyr::filter() masks stats::filter()</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✖ dplyr::lag()    masks stats::lag()</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</span></span>
 <span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span><span class="co" style="color: #5E5E5E;">## </span></span>
-<span><span class="co" style="color: #5E5E5E;">## Attaching package: 'rstatix'</span></span>
-<span><span class="co" style="color: #5E5E5E;">## </span></span>
-<span><span class="co" style="color: #5E5E5E;">## The following object is masked from 'package:stats':</span></span>
-<span><span class="co" style="color: #5E5E5E;">## </span></span>
-<span><span class="co" style="color: #5E5E5E;">##     filter</span></span>
 <span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://csdaw.github.io/ggprism/">ggprism</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
 <span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
 <span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://nanx.me/ggsci/">ggsci</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
@@ -489,7 +597,7 @@
 <span>    <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span><span class="op" style="color: #5E5E5E;">(</span>palette <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"Blues"</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/06/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/06/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
 </figure>
 </div>
 </div>
@@ -508,7 +616,7 @@
 <span>     <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span><span class="op" style="color: #5E5E5E;">(</span>palette <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"Blues"</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/06/index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/06/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
 </figure>
 </div>
 </div>
@@ -599,7 +707,7 @@
 <span><span class="co" style="color: #5E5E5E;">## No summary function supplied, defaulting to `mean_se()`</span></span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/06/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/06/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
 </figure>
 </div>
 </div>
@@ -619,33 +727,15 @@
   <link>https://guoruizhong.github.io/blog/2023/03/05/index.html</link>
   <description><![CDATA[ <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✔ dplyr     1.1.0     ✔ readr     2.1.4</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✔ forcats   1.0.0     ✔ stringr   1.5.0</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✔ ggplot2   3.4.1     ✔ tibble    3.1.8</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✔ purrr     1.0.1     </span></span>
-<span><span class="co" style="color: #5E5E5E;">## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✖ dplyr::filter() masks stats::filter()</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✖ dplyr::lag()    masks stats::lag()</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</span></span>
 <span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
 <span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://csdaw.github.io/ggprism/">ggprism</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
 <span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
 <span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://nanx.me/ggsci/">ggsci</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
 <span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://github.com/jennybc/gapminder">gapminder</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
 <span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://here.r-lib.org/">here</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span><span class="co" style="color: #5E5E5E;">## here() starts at /Users/zhonggr/guoruizhong.github.io</span></span>
 <span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://github.com/jrnold/ggthemes">ggthemes</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
 <span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://vincentarelbundock.github.io/countrycode/">countrycode</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">mapproj</span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Loading required package: maps</span></span>
-<span><span class="co" style="color: #5E5E5E;">## </span></span>
-<span><span class="co" style="color: #5E5E5E;">## Attaching package: 'maps'</span></span>
-<span><span class="co" style="color: #5E5E5E;">## </span></span>
-<span><span class="co" style="color: #5E5E5E;">## The following object is masked from 'package:purrr':</span></span>
-<span><span class="co" style="color: #5E5E5E;">## </span></span>
-<span><span class="co" style="color: #5E5E5E;">##     map</span></span></code></pre></div>
+<span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">mapproj</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;">### subset data</span></span>
@@ -750,7 +840,7 @@
 <span><span class="co" style="color: #5E5E5E;">## Warning: Transformation introduced infinite values in continuous x-axis</span></span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/05/index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/05/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
 </figure>
 </div>
 </div>
@@ -1670,7 +1760,64 @@
 <h2 class="anchored" data-anchor-id="section">2023</h2>
 <div id="listing-posts_2023" class="quarto-listing quarto-listing-container-custom">
 <div class="list blog">
-    <div class="blog-entry" data-index="0" data-categories="ggridges,R" data-listing-date-sort="1678204800000" data-listing-file-modified-sort="1678283133027" data-listing-reading-time-sort="2.785">
+    <div class="blog-entry" data-index="0" data-categories="barplot,R" data-listing-date-sort="1678809600000" data-listing-file-modified-sort="1678972212390" data-listing-reading-time-sort="0.99">
+        <div class="metadata">          
+            <p class="date listing-date">March 15, 2023</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2023/03/15/index.html">Change tick labels</a></p>
+            <div class="post-categories listing-categories">
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('barplot'); return false;">
+                    barplot
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('R'); return false;">
+                    R
+                </div>
+            </div>
+            <p class="description listing-description"><!-- desc(5A0113B34292)[max=175]:blog/2023/03/15/index.html --></p>
+        </div>
+        <div class="thumbnail">
+            <img src="https://guoruizhong.github.io/blog/2023/03/15/plot.png" alt="Change tick labels" title="Change tick labels">
+        </div>
+    </div>
+    <div class="blog-entry" data-index="1" data-categories="barplot,R" data-listing-date-sort="1678464000000" data-listing-file-modified-sort="1678547164863" data-listing-reading-time-sort="1.895">
+        <div class="metadata">          
+            <p class="date listing-date">March 11, 2023</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2023/03/11/index.html">Barplot with negative and positive value</a></p>
+            <div class="post-categories listing-categories">
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('barplot'); return false;">
+                    barplot
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('R'); return false;">
+                    R
+                </div>
+            </div>
+            <p class="description listing-description"><!-- desc(5A0113B34292)[max=175]:blog/2023/03/11/index.html --></p>
+        </div>
+        <div class="thumbnail">
+            <img src="https://guoruizhong.github.io/blog/2023/03/11/plot.png" alt="Barplot with negative and positive value" title="Barplot with negative and positive value">
+        </div>
+    </div>
+    <div class="blog-entry" data-index="2" data-categories="rstatix,R" data-listing-date-sort="1678291200000" data-listing-file-modified-sort="1678795260471" data-listing-reading-time-sort="0.3">
+        <div class="metadata">          
+            <p class="date listing-date">March 9, 2023</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2023/03/09/index.html">Simple statistical tests with rstatix</a></p>
+            <div class="post-categories listing-categories">
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('rstatix'); return false;">
+                    rstatix
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('R'); return false;">
+                    R
+                </div>
+            </div>
+            <p class="description listing-description"><!-- desc(5A0113B34292)[max=175]:blog/2023/03/09/index.html --></p>
+        </div>
+    </div>
+    <div class="blog-entry" data-index="3" data-categories="ggridges,R" data-listing-date-sort="1678204800000" data-listing-file-modified-sort="1678366346214" data-listing-reading-time-sort="2.8">
         <div class="metadata">          
             <p class="date listing-date">March 8, 2023</p>
         </div>
@@ -1690,7 +1837,7 @@
             <img src="https://guoruizhong.github.io/blog/2023/03/08/plot.png" alt="Ridgeline plots in ggplot2" title="Ridgeline plots in ggplot2">
         </div>
     </div>
-    <div class="blog-entry" data-index="1" data-categories="boxplot,R" data-listing-date-sort="1678118400000" data-listing-file-modified-sort="1678283126159" data-listing-reading-time-sort="6.045">
+    <div class="blog-entry" data-index="4" data-categories="boxplot,R" data-listing-date-sort="1678118400000" data-listing-file-modified-sort="1678366363785" data-listing-reading-time-sort="6.06">
         <div class="metadata">          
             <p class="date listing-date">March 7, 2023</p>
         </div>
@@ -1710,7 +1857,7 @@
             <img src="https://guoruizhong.github.io/blog/2023/03/07/plot.png" alt="Add p-value and significant level at facet boxplot" title="Add p-value and significant level at facet boxplot">
         </div>
     </div>
-    <div class="blog-entry" data-index="2" data-categories="barplot,R" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1678114424653" data-listing-reading-time-sort="2.02">
+    <div class="blog-entry" data-index="5" data-categories="barplot,R" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1678366388648" data-listing-reading-time-sort="2.035">
         <div class="metadata">          
             <p class="date listing-date">March 6, 2023</p>
         </div>
@@ -1730,7 +1877,7 @@
             <img src="https://guoruizhong.github.io/blog/2023/03/01/barplot.png" alt="Equalizing Bar Widths" title="Equalizing Bar Widths">
         </div>
     </div>
-    <div class="blog-entry" data-index="3" data-categories="barplot,R" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1678283068544" data-listing-reading-time-sort="6.445">
+    <div class="blog-entry" data-index="6" data-categories="barplot,R" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1678366373660" data-listing-reading-time-sort="6.46">
         <div class="metadata">          
             <p class="date listing-date">March 6, 2023</p>
         </div>
@@ -1750,7 +1897,7 @@
             <img src="https://guoruizhong.github.io/blog/2023/03/06/plot.png" alt="ggplot2 with p-value and significant level" title="ggplot2 with p-value and significant level">
         </div>
     </div>
-    <div class="blog-entry" data-index="4" data-categories="scatter plot,R" data-listing-date-sort="1677945600000" data-listing-file-modified-sort="1678281680042" data-listing-reading-time-sort="4.68">
+    <div class="blog-entry" data-index="7" data-categories="scatter plot,R" data-listing-date-sort="1677945600000" data-listing-file-modified-sort="1678366379917" data-listing-reading-time-sort="4.695">
         <div class="metadata">          
             <p class="date listing-date">March 5, 2023</p>
         </div>
@@ -1820,7 +1967,7 @@ No matching items
             <p class="description listing-description"><!-- desc(5A0113B34292)[max=175]:blog/2022/12/21/index.html --></p>
         </div>
     </div>
-    <div class="blog-entry" data-index="2" data-categories="Linux" data-listing-date-sort="1671379200000" data-listing-file-modified-sort="1677855074395" data-listing-reading-time-sort="30.165">
+    <div class="blog-entry" data-index="2" data-categories="Linux" data-listing-date-sort="1671379200000" data-listing-file-modified-sort="1678795245921" data-listing-reading-time-sort="30.115">
         <div class="metadata">          
             <p class="date listing-date">December 19, 2022</p>
         </div>
@@ -2145,7 +2292,7 @@ No matching items
 
  ]]></description>
   <guid>https://guoruizhong.github.io/blog/index.html</guid>
-  <pubDate>Wed, 08 Mar 2023 13:46:14 GMT</pubDate>
+  <pubDate>Thu, 23 Mar 2023 15:40:26 GMT</pubDate>
 </item>
 </channel>
 </rss>

@@ -1,0 +1,26 @@
+---
+title: "Simple statistical tests with rstatix"
+date: 2023-03-09
+categories:
+  - rstatix
+  - R
+# image: plot.png
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+                      fig.align = "center", fig.retina = 3,
+                      out.width = "85%", collapse = TRUE)
+```
+
+```{r, load-libraries-data, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(rstatix)
+library(here)
+```
+
+
+```{r}
+
+
+```

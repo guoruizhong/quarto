@@ -1,0 +1,16 @@
+{
+  "hash": "0d59c86ac4fdd607bbfb6e61d968ae20",
+  "result": {
+    "markdown": "---\ntitle: \"Change tick labels\"\ndate: 2023-03-15\ncategories:\n  - barplot\n  - R\nimage: plot.png\n---\n\n\n\n::: {.cell layout-align=\"center\"}\n\n```{.r .cell-code}\nlibrary(ggplot2)\nlibrary(ggtext)\n\n# create example data\ndf <- data.frame(\n  group = factor(rep(c(\"A\", \"B\"), each = 3)),\n  x = factor(rep(c(\"X\", \"Y\", \"Z\"), 2), levels = c(\"X\", \"Y\", \"Z\")),\n  value = c(3, 2, 5, 2, 1, 4)\n)\n\n# define colors for groups\ngroup_colors <- c(\"A\" = \"blue\", \"B\" = \"red\")\n\n# create barplot\nggplot(df, aes(x, value, fill = group)) +\n  geom_bar(stat = \"identity\", position = \"dodge\") +\n  \n  # set fill colors for groups\n  scale_fill_manual(values = group_colors) +\n  \n  # set colors for x-axis tick labels using ggtext\n  theme(axis.text.x = element_text(\n    color = ifelse(df$group == \"A\", \"blue\", \"red\")\n  )) +\n  \n  # customize plot theme\n  theme_minimal()\n## Warning: Vectorized input to `element_text()` is not officially supported.\n## ℹ Results may be unexpected or may change in future versions of ggplot2.\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-1-1.png){fig-align='center' width=85%}\n:::\n:::",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

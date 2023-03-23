@@ -354,19 +354,20 @@ screen -ls               # list the current running screen session
 ```
 Common commands for managing Linux Screen Windows:
 
-- Ctrl + A  C            # create a new window (with shell).
-- Ctrl + A  "            # list all windows.
-- Ctrl + A  0            # switch to window 0 (by number).
-- Ctrl + A  A            # rename the current window.
-- Ctrl + A  S            # split current region horizontally into two regions.
-- Ctrl + A  |            # split current region vertically into two regions.
-- Ctrl + A  Tab          # switch the input focus to the next region.
-- Ctrl + A  Ctrl + A     # toggle between the current and previous windows
-- Ctrl + A  Q            # close all regions but the current one.
-- Ctrl + A  X            # close the current region.
-- Ctrl + A  D            # detach from linux screen session
+- Ctrl + A + C           # create a new window (with shell).
+- Ctrl + A + "           # list all windows.
+- Ctrl + A + 0           # switch to window 0 (by number).
+- Ctrl + A + A           # rename the current window.
+- Ctrl + A + S           # split current region horizontally into two regions.
+- Ctrl + A + |           # split current region vertically into two regions.
+- Ctrl + A + Tab         # switch the input focus to the next region.
+- Ctrl + A + Ctrl + A    # toggle between the current and previous windows
+- Ctrl + A + Q           # close all regions but the current one.
+- Ctrl + A + X           # close the current region.
+- Ctrl + A + D           # detach from linux screen session
 
 ```bash
+screen -ls
 ## Output
 There are screens on:
     10835.pts-0.linuxize-desktop   (Detached)

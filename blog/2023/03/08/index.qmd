@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
                       out.width = "85%", collapse = TRUE)
 ```
 
-```{r}
+```{r, load-libraries-data, warning=FALSE, message=FALSE}
 library(tidyverse)
 library(ggsci)
 library(ggridges)

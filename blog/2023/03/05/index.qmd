@@ -11,7 +11,7 @@ knitr::opts_chunk$set(fig.width = 6, fig.height = 3.8,
                       fig.align = "center", fig.retina = 3,
                       out.width = "85%", collapse = TRUE)
 ```
-```{r}
+```{r, load-libraries-data, warning=FALSE, message=FALSE}
 library(tidyverse)
 library(ggpubr)
 library(ggprism)

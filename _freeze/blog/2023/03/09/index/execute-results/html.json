@@ -1,0 +1,14 @@
+{
+  "hash": "01eb24bb76b5440f5751219901dd0802",
+  "result": {
+    "markdown": "---\ntitle: \"Simple statistical tests with rstatix\"\ndate: 2023-03-09\ncategories:\n  - rstatix\n  - R\n# image: plot.png\n---\n\n\n\n::: {.cell layout-align=\"center\"}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(rstatix)\nlibrary(here)\n```\n:::\n\n::: {.cell layout-align=\"center\"}\n\n:::",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
