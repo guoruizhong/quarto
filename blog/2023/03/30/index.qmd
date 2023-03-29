@@ -1,0 +1,39 @@
+---
+title: "Add p-values onto barplot or boxplot"
+date: 2023-03-29
+categories:
+- R
+- ggplot2
+- p-value
+image: plot.png
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    # fig.width = 6,
+    # fig.height = 3.8,
+    fig.align = "center",
+    fig.retina = 3,
+    out.width = "85%",
+    collapse = TRUE
+)
+```
+
+```{r}
+library(tidyverse)
+library(ggpubr)      # creat easily publication plots
+library(rstatix)     # pipe-friendly tools for easy statistical analyses
+ ```
+
+
+```{r}
+
+df <- ToothGrowth
+
+df$dose <- as.factor(df$dose)
+
+### comparing two means using t_test() (parametric) or wicox_text() 
+```
+
+### Reference

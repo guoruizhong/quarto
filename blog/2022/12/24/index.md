@@ -240,3 +240,108 @@ Host nucleus
     "r.plot.useHttpgd": true
 }
 ```
+ - keyboard shortcut
+```json
+// Feb 28, 2023 updated
+[
+    {
+        "key": "alt+-",
+        "command": "type",
+        // "when": "editorLangId == r && editorTextFocus || editorLangId == rmd && editorTextFocus",
+        // if you want using quarto, try this
+        "when": "editorLangId =~ /r|rmd|qmd/ && editorTextFocus",
+        "args": {
+            "text": " <- "
+        }
+    },
+    {
+        "key": "ctrl+shift+m",
+        "command": "type",
+        // "when": "editorLangId == r && editorTextFocus || editorLangId == rmd && editorTextFocus",
+        "when": "editorLangId =~ /r|rmd|qmd/ && editorTextFocus",
+        "args": {
+            "text": " %>% "
+        }
+    },
+    {
+        "key": "ctrl+shift+m",
+        "command": "-workbench.actions.view.problems"
+    },
+    // input indicative of r markdown code chunk
+    {
+        "key": "ctrl+shift+i",
+        "command": "editor.action.insertSnippet",
+        "when": "editorTextFocus && editorLangId == 'rmd'",
+        "args": {
+            "snippet": "```{r}\n${TM_SELECTED_TEXT}$0\n```"
+        },
+        "label": "input indicative of r markdown code chunk"
+    },
+    // you can also input indicative of code chunk in `r` file by inserting "# %% ":
+    // specifics in `https://github.com/REditorSupport/vscode-R/pull/662`
+    {
+        "key": "ctrl+shift+i",
+        "command": "editor.action.insertSnippet",
+        "when": "editorTextFocus && editorLangId == 'r'",
+        "args": {
+            "snippet": "$LINE_COMMENT %% "
+        },
+        "label": "input indicative of code chunk"
+    },
+    // open help panel for selection
+    {
+        "key": "f1",
+        "command": "r.helpPanel.openForSelection",
+        "when": "editorTextFocus && editorLangId == 'r' || editorTextFocus && editorLangId == 'rmd'"
+    },
+    // RStudio keybinding for R Package development
+    {
+        "key": "ctrl+shift+b",
+        "command": "r.install",
+        "when": "resourceLangId == 'r'"
+    },
+    {
+        "key": "ctrl+shift+e",
+        "command": "r.check",
+        "when": "resourceLangId == 'r'"
+    },
+    {
+        "key": "ctrl+shift+t",
+        "command": "r.test",
+        "when": "resourceLangId == 'r'"
+    },
+    {
+        "key": "ctrl+shift+d",
+        "command": "r.document",
+        "when": "resourceLangId == 'r'"
+    },
+    // {
+    //     "key": "ctrl+shift+l",
+    //     "command": "r.loadAll",
+    //     "when": "resourceLangId == 'r'"
+    // },
+    {
+        "key": "ctrl+alt+p",
+        "command": "r.runCommand",
+        "when": "editorTextFocus && editorLangId == 'r'",
+        "args": ".vsc.browser(httpgd::hgd_url(), viewer = \"Beside\")"
+    },
+    // terminal settings
+    {
+        "key": "alt+-", // or whatever keybinding you want
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": " <- "
+        },
+        "when": "terminalFocus && !terminalTextSelected"
+    },
+    {
+        "key": "ctrl+shift+m",
+        "command": "workbench.action.terminal.sendSequence",
+        "when": "terminalFocus && !terminalTextSelected",
+        "args": {
+            "text": " %>% "
+        }
+    }
+]
+```

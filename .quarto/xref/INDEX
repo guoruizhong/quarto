@@ -427,5 +427,14 @@
   },
   "blog/2023/03/15/index.qmd": {
     "index.html": "81e2bfef"
+  },
+  "blog/2023/03/29/index.md": {
+    "index.html": "68550f89"
+  },
+  "blog/2023/03/29/index.qmd": {
+    "index.html": "1d12c217"
+  },
+  "blog/2023/03/30/index.qmd": {
+    "index.html": "600031f0"
   }
 }
