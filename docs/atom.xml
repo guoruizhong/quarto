@@ -17,34 +17,282 @@
   <link>https://guoruizhong.github.io/blog/2023/03/30/index.html</link>
   <description><![CDATA[ <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✔ dplyr     1.1.0     ✔ readr     2.1.4</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✔ forcats   1.0.0     ✔ stringr   1.5.0</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✔ ggplot2   3.4.1     ✔ tibble    3.1.8</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✔ purrr     1.0.1     </span></span>
-<span><span class="co" style="color: #5E5E5E;">## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✖ dplyr::filter() masks stats::filter()</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✖ dplyr::lag()    masks stats::lag()</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</span></span>
 <span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op" style="color: #5E5E5E;">)</span>      <span class="co" style="color: #5E5E5E;"># creat easily publication plots</span></span>
-<span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op" style="color: #5E5E5E;">)</span>     <span class="co" style="color: #5E5E5E;"># pipe-friendly tools for easy statistical analyses</span></span>
-<span><span class="co" style="color: #5E5E5E;">## </span></span>
-<span><span class="co" style="color: #5E5E5E;">## Attaching package: 'rstatix'</span></span>
-<span><span class="co" style="color: #5E5E5E;">## </span></span>
-<span><span class="co" style="color: #5E5E5E;">## The following object is masked from 'package:stats':</span></span>
-<span><span class="co" style="color: #5E5E5E;">## </span></span>
-<span><span class="co" style="color: #5E5E5E;">##     filter</span></span></code></pre></div>
+<span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op" style="color: #5E5E5E;">)</span>    <span class="co" style="color: #5E5E5E;"># pipe-friendly tools for easy statistical analyses</span></span>
+<span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+</div>
+<section id="boxplot-with-p-value" class="level2"><h2 class="anchored" data-anchor-id="boxplot-with-p-value">Boxplot with p-value</h2>
+<section id="comparing-two-means" class="level4"><h4 class="anchored" data-anchor-id="comparing-two-means">Comparing two means</h4>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># Transform `dose` into factor variable</span></span>
+<span><span class="va" style="color: #111111;">df</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">ToothGrowth</span></span>
+<span><span class="va" style="color: #111111;">df</span><span class="op" style="color: #5E5E5E;">$</span><span class="va" style="color: #111111;">dose</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">df</span><span class="op" style="color: #5E5E5E;">$</span><span class="va" style="color: #111111;">dose</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">df</span>, <span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="co" style="color: #5E5E5E;">##    len supp dose</span></span>
+<span><span class="co" style="color: #5E5E5E;">## 1  4.2   VC  0.5</span></span>
+<span><span class="co" style="color: #5E5E5E;">## 2 11.5   VC  0.5</span></span>
+<span><span class="co" style="color: #5E5E5E;">## 3  7.3   VC  0.5</span></span>
+<span></span>
+<span><span class="co" style="color: #5E5E5E;">### statistical test to compare two independent groups</span></span>
+<span></span>
+<span><span class="va" style="color: #111111;">stat_test</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">df</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">len</span> <span class="op" style="color: #5E5E5E;">~</span> <span class="va" style="color: #111111;">supp</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/add_significance.html">add_significance</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_pvalue_position.html">add_xy_position</a></span><span class="op" style="color: #5E5E5E;">(</span>x <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"supp"</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="va" style="color: #111111;">stat_test</span></span>
+<span><span class="co" style="color: #5E5E5E;">## # A tibble: 1 × 13</span></span>
+<span><span class="co" style="color: #5E5E5E;">##   .y.   group1 group2    n1    n2 statistic    df      p p.signif y.pos…¹ groups</span></span>
+<span><span class="co" style="color: #5E5E5E;">##   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;name&gt;</span></span>
+<span><span class="co" style="color: #5E5E5E;">## 1 len   OJ     VC        30    30      1.92  55.3 0.0606 ns          34.3 &lt;chr&gt; </span></span>
+<span><span class="co" style="color: #5E5E5E;">## # … with 2 more variables: xmin &lt;dbl&gt;, xmax &lt;dbl&gt;, and abbreviated variable</span></span>
+<span><span class="co" style="color: #5E5E5E;">## #   name ¹​y.position</span></span>
+<span></span>
+<span><span class="va" style="color: #111111;">p1</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggboxplot.html">ggboxplot</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">df</span>, x <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"supp"</span>, y <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"len"</span>, fill <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"#00AFBB"</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_pvalue_manual.html">stat_pvalue_manual</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">stat_test</span>, label <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"p"</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="co" style="color: #5E5E5E;">### Customize p-value labels using glue expression</span></span>
+<span><span class="va" style="color: #111111;">p2</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggboxplot.html">ggboxplot</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">df</span>, x <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"supp"</span>, y <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"len"</span>, fill <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"#00AFBB"</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_pvalue_manual.html">stat_pvalue_manual</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>        <span class="va" style="color: #111111;">stat_test</span>, </span>
+<span>        label <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"T-test, p = {p}"</span>, </span>
+<span>        vjust <span class="op" style="color: #5E5E5E;">=</span> <span class="op" style="color: #5E5E5E;">-</span><span class="fl" style="color: #AD0000;">1</span>, <span class="co" style="color: #5E5E5E;">#vertically adjust the position of the p-values labels </span></span>
+<span>        bracket.nudge.y <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">1</span> <span class="co" style="color: #5E5E5E;"># move up or to move down the brackets. </span></span>
+<span>        <span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op" style="color: #5E5E5E;">(</span>expand <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/expansion.html">expansion</a></span><span class="op" style="color: #5E5E5E;">(</span>mult <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">0.05</span>, <span class="fl" style="color: #AD0000;">0.15</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="va" style="color: #111111;">p1</span> <span class="op" style="color: #5E5E5E;">+</span> <span class="va" style="color: #111111;">p2</span></span></code></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/30/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="va" style="color: #111111;">df</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">ToothGrowth</span></span>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;">### grouped data</span></span>
+<span><span class="va" style="color: #111111;">stat_test</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">df</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">dose</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">len</span> <span class="op" style="color: #5E5E5E;">~</span> <span class="va" style="color: #111111;">supp</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/adjust_pvalue.html">adjust_pvalue</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/add_significance.html">add_significance</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_pvalue_position.html">add_xy_position</a></span><span class="op" style="color: #5E5E5E;">(</span>x <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"supp"</span><span class="op" style="color: #5E5E5E;">)</span></span>
 <span></span>
-<span><span class="va" style="color: #111111;">df</span><span class="op" style="color: #5E5E5E;">$</span><span class="va" style="color: #111111;">dose</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">df</span><span class="op" style="color: #5E5E5E;">$</span><span class="va" style="color: #111111;">dose</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="va" style="color: #111111;">stat_test</span></span>
+<span><span class="co" style="color: #5E5E5E;">## # A tibble: 3 × 15</span></span>
+<span><span class="co" style="color: #5E5E5E;">##   dose  .y.   group1 group2    n1    n2 statistic    df       p   p.adj p.adj.…¹</span></span>
+<span><span class="co" style="color: #5E5E5E;">##   &lt;fct&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   </span></span>
+<span><span class="co" style="color: #5E5E5E;">## 1 0.5   len   OJ     VC        10    10    3.17    15.0 0.00636 0.0127  *       </span></span>
+<span><span class="co" style="color: #5E5E5E;">## 2 1     len   OJ     VC        10    10    4.03    15.4 0.00104 0.00312 **      </span></span>
+<span><span class="co" style="color: #5E5E5E;">## 3 2     len   OJ     VC        10    10   -0.0461  14.0 0.964   0.964   ns      </span></span>
+<span><span class="co" style="color: #5E5E5E;">## # … with 4 more variables: y.position &lt;dbl&gt;, groups &lt;named list&gt;, xmin &lt;dbl&gt;,</span></span>
+<span><span class="co" style="color: #5E5E5E;">## #   xmax &lt;dbl&gt;, and abbreviated variable name ¹​p.adj.signif</span></span>
 <span></span>
-<span><span class="co" style="color: #5E5E5E;">### comparing two means using t_test() (parametric) or wicox_text() </span></span></code></pre></div>
+<span><span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggboxplot.html">ggboxplot</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">df</span>,</span>
+<span>    x <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"supp"</span>, y <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"len"</span>, fill <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"#00AFBB"</span>,</span>
+<span>    facet.by <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"dose"</span></span>
+<span>    <span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_pvalue_manual.html">stat_pvalue_manual</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">stat_test</span>, label <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"p.adj"</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op" style="color: #5E5E5E;">(</span>expand <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/expansion.html">expansion</a></span><span class="op" style="color: #5E5E5E;">(</span>mult <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">0.05</span>, <span class="fl" style="color: #AD0000;">0.10</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/30/index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
-<section id="reference" class="level3"><h3 class="anchored" data-anchor-id="reference">Reference</h3>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;">### Show p-values if significant otherwise show ns</span></span>
+<span><span class="va" style="color: #111111;">stat_test</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">df</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">dose</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">len</span> <span class="op" style="color: #5E5E5E;">~</span> <span class="va" style="color: #111111;">supp</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/adjust_pvalue.html">adjust_pvalue</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/add_significance.html">add_significance</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_pvalue_position.html">add_xy_position</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"supp"</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="va" style="color: #111111;">stat_test</span><span class="op" style="color: #5E5E5E;">$</span><span class="va" style="color: #111111;">custom_label</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">stat_test</span><span class="op" style="color: #5E5E5E;">$</span><span class="va" style="color: #111111;">p.adj</span> <span class="op" style="color: #5E5E5E;">&lt;=</span> <span class="fl" style="color: #AD0000;">0.05</span>, <span class="va" style="color: #111111;">stat_test</span><span class="op" style="color: #5E5E5E;">$</span><span class="va" style="color: #111111;">p.adj</span>, <span class="st" style="color: #20794D;">"ns"</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="va" style="color: #111111;">stat_test</span></span>
+<span><span class="co" style="color: #5E5E5E;">## # A tibble: 3 × 16</span></span>
+<span><span class="co" style="color: #5E5E5E;">##   dose  .y.   group1 group2    n1    n2 statistic    df       p   p.adj p.adj.…¹</span></span>
+<span><span class="co" style="color: #5E5E5E;">##   &lt;fct&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   </span></span>
+<span><span class="co" style="color: #5E5E5E;">## 1 0.5   len   OJ     VC        10    10    3.17    15.0 0.00636 0.0127  *       </span></span>
+<span><span class="co" style="color: #5E5E5E;">## 2 1     len   OJ     VC        10    10    4.03    15.4 0.00104 0.00312 **      </span></span>
+<span><span class="co" style="color: #5E5E5E;">## 3 2     len   OJ     VC        10    10   -0.0461  14.0 0.964   0.964   ns      </span></span>
+<span><span class="co" style="color: #5E5E5E;">## # … with 5 more variables: y.position &lt;dbl&gt;, groups &lt;named list&gt;, xmin &lt;dbl&gt;,</span></span>
+<span><span class="co" style="color: #5E5E5E;">## #   xmax &lt;dbl&gt;, custom_label &lt;chr&gt;, and abbreviated variable name ¹​p.adj.signif</span></span>
+<span></span>
+<span><span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggboxplot.html">ggboxplot</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">df</span>,</span>
+<span>    x <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"supp"</span>, y <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"len"</span>, fill <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"#00AFBB"</span>,</span>
+<span>    facet.by <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"dose"</span></span>
+<span>    <span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_pvalue_manual.html">stat_pvalue_manual</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">stat_test</span>, label <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"custom_label"</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op" style="color: #5E5E5E;">(</span>expand <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/expansion.html">expansion</a></span><span class="op" style="color: #5E5E5E;">(</span>mult <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">0.05</span>, <span class="fl" style="color: #AD0000;">0.10</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/30/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;">### Compare paired samples</span></span>
+<span><span class="co" style="color: #5E5E5E;"># Statistical test</span></span>
+<span><span class="va" style="color: #111111;">stat_test</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">df</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">len</span> <span class="op" style="color: #5E5E5E;">~</span> <span class="va" style="color: #111111;">supp</span>, paired <span class="op" style="color: #5E5E5E;">=</span> <span class="cn" style="color: #8f5902;">TRUE</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/add_significance.html">add_significance</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_pvalue_position.html">add_xy_position</a></span><span class="op" style="color: #5E5E5E;">(</span>x <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"supp"</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="co" style="color: #5E5E5E;">### boxplot with pvalue</span></span>
+<span><span class="va" style="color: #111111;">p1</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggpaired.html">ggpaired</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">df</span>, x <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"supp"</span>, y <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"len"</span>, fill <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"#E7B800"</span>,</span>
+<span>                 line.color <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"gray"</span>, line.size <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">0.4</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">+</span></span>
+<span>                 <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_pvalue_manual.html">stat_pvalue_manual</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">stat_test</span>, label <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"p.signif"</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">+</span></span>
+<span>                 <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op" style="color: #5E5E5E;">(</span>expand <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/expansion.html">expansion</a></span><span class="op" style="color: #5E5E5E;">(</span>mult <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">0.05</span>, <span class="fl" style="color: #AD0000;">0.10</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="co" style="color: #5E5E5E;">### combined with significane level</span></span>
+<span><span class="va" style="color: #111111;">p2</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggpaired.html">ggpaired</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">df</span>,</span>
+<span>    x <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"supp"</span>, y <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"len"</span>, fill <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"#E7B800"</span>,</span>
+<span>    line.color <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"gray"</span>, line.size <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">0.4</span></span>
+<span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_pvalue_manual.html">stat_pvalue_manual</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">stat_test</span>, label <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"{p}{p.signif}"</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op" style="color: #5E5E5E;">(</span>expand <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/expansion.html">expansion</a></span><span class="op" style="color: #5E5E5E;">(</span>mult <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">0.05</span>, <span class="fl" style="color: #AD0000;">0.10</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="va" style="color: #111111;">p1</span> <span class="op" style="color: #5E5E5E;">+</span> <span class="va" style="color: #111111;">p2</span></span></code></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/30/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="pairwise-comparisons" class="level4"><h4 class="anchored" data-anchor-id="pairwise-comparisons">Pairwise comparisons</h4>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;">### boxplot</span></span>
+<span><span class="va" style="color: #111111;">stat_test</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">df</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">len</span> <span class="op" style="color: #5E5E5E;">~</span> <span class="va" style="color: #111111;">dose</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_pvalue_position.html">add_xy_position</a></span><span class="op" style="color: #5E5E5E;">(</span>x <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"dose"</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="va" style="color: #111111;">bxp</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggboxplot.html">ggboxplot</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">df</span>,</span>
+<span>    x <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"dose"</span>, y <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"len"</span>, fill <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"dose"</span>,</span>
+<span>    palette <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"#00AFBB"</span>, <span class="st" style="color: #20794D;">"#E7B800"</span>, <span class="st" style="color: #20794D;">"#FC4E07"</span><span class="op" style="color: #5E5E5E;">)</span> <span class="co" style="color: #5E5E5E;"># Box plots</span></span>
+<span>    <span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span> </span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_pvalue_manual.html">stat_pvalue_manual</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>      <span class="va" style="color: #111111;">stat_test</span>,</span>
+<span>      label <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"p.adj.signif"</span>,</span>
+<span>      tip.length <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">0.01</span></span>
+<span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="co" style="color: #5E5E5E;">### Specify manually the y position of p-value labels and shorten the width of the brackets</span></span>
+<span><span class="va" style="color: #111111;">bxp_man</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">bxp</span> <span class="op" style="color: #5E5E5E;">+</span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_pvalue_manual.html">stat_pvalue_manual</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>    <span class="va" style="color: #111111;">stat_test</span>, label <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"p.adj.signif"</span>, tip.length <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">0.01</span>,</span>
+<span>    y.position <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">35</span>, <span class="fl" style="color: #AD0000;">40</span>, <span class="fl" style="color: #AD0000;">35</span><span class="op" style="color: #5E5E5E;">)</span>, bracket.shorten <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">0.05</span></span>
+<span>    <span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="co" style="color: #5E5E5E;">### Bar plot</span></span>
+<span><span class="va" style="color: #111111;">stat_test</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">df</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">len</span> <span class="op" style="color: #5E5E5E;">~</span> <span class="va" style="color: #111111;">dose</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  </span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_pvalue_position.html">add_xy_position</a></span><span class="op" style="color: #5E5E5E;">(</span>fun <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"mean_sd"</span>, x <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"dose"</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="co" style="color: #5E5E5E;"># Bar plots showing mean +/- SD</span></span>
+<span><span class="va" style="color: #111111;">bp</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggbarplot.html">ggbarplot</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">df</span>,</span>
+<span>        x <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"dose"</span>, y <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"len"</span>, add <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"mean_sd"</span>, fill <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"dose"</span>,</span>
+<span>        palette <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"#00AFBB"</span>, <span class="st" style="color: #20794D;">"#E7B800"</span>, <span class="st" style="color: #20794D;">"#FC4E07"</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span>    <span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_pvalue_manual.html">stat_pvalue_manual</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>        <span class="va" style="color: #111111;">stat_test</span>, </span>
+<span>        label <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"p.adj.signif"</span>, </span>
+<span>        tip.length <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">0.01</span></span>
+<span>        <span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="va" style="color: #111111;">bxp</span> <span class="op" style="color: #5E5E5E;">+</span> <span class="va" style="color: #111111;">bxp_man</span> <span class="op" style="color: #5E5E5E;">+</span> <span class="va" style="color: #111111;">bp</span></span></code></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/30/index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="comparsions-against-reference-groups" class="level4"><h4 class="anchored" data-anchor-id="comparsions-against-reference-groups">Comparsions against reference groups</h4>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">stat_test</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">df</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">len</span> <span class="op" style="color: #5E5E5E;">~</span> <span class="va" style="color: #111111;">dose</span>, ref.group <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"0.5"</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_pvalue_position.html">add_xy_position</a></span><span class="op" style="color: #5E5E5E;">(</span>x <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"dose"</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="va" style="color: #111111;">bxp</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggboxplot.html">ggboxplot</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">df</span>,</span>
+<span>    x <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"dose"</span>, y <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"len"</span>, fill <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"dose"</span>,</span>
+<span>    palette <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"#00AFBB"</span>, <span class="st" style="color: #20794D;">"#E7B800"</span>, <span class="st" style="color: #20794D;">"#FC4E07"</span><span class="op" style="color: #5E5E5E;">)</span> <span class="co" style="color: #5E5E5E;"># Box plots</span></span>
+<span>    <span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span> </span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_pvalue_manual.html">stat_pvalue_manual</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>      <span class="va" style="color: #111111;">stat_test</span>,</span>
+<span>      label <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"p.adj.signif"</span>,</span>
+<span>      tip.length <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">0.01</span></span>
+<span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="va" style="color: #111111;">bp</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggbarplot.html">ggbarplot</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">df</span>,</span>
+<span>        x <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"dose"</span>, y <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"len"</span>, add <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"mean_sd"</span>, fill <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"dose"</span>,</span>
+<span>        palette <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"#00AFBB"</span>, <span class="st" style="color: #20794D;">"#E7B800"</span>, <span class="st" style="color: #20794D;">"#FC4E07"</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span>    <span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_pvalue_manual.html">stat_pvalue_manual</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>        <span class="va" style="color: #111111;">stat_test</span>, </span>
+<span>        label <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"p.adj.signif"</span>, </span>
+<span>        tip.length <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">0.01</span></span>
+<span>        <span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="va" style="color: #111111;">bxp</span> <span class="op" style="color: #5E5E5E;">+</span> <span class="va" style="color: #111111;">bp</span></span></code></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/30/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="comparsions-against-all-basemean" class="level3"><h3 class="anchored" data-anchor-id="comparsions-against-all-basemean">Comparsions against all (basemean)</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">stat_test</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">df</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">len</span> <span class="op" style="color: #5E5E5E;">~</span> <span class="va" style="color: #111111;">dose</span>, ref.group <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"all"</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_pvalue_position.html">add_xy_position</a></span><span class="op" style="color: #5E5E5E;">(</span>x <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"dose"</span><span class="op" style="color: #5E5E5E;">)</span> </span>
+<span></span>
+<span><span class="va" style="color: #111111;">bxp</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggboxplot.html">ggboxplot</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">df</span>,</span>
+<span>    x <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"dose"</span>, y <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"len"</span>, fill <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"dose"</span>,</span>
+<span>    palette <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"#00AFBB"</span>, <span class="st" style="color: #20794D;">"#E7B800"</span>, <span class="st" style="color: #20794D;">"#FC4E07"</span><span class="op" style="color: #5E5E5E;">)</span> <span class="co" style="color: #5E5E5E;"># Box plots</span></span>
+<span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_pvalue_manual.html">stat_pvalue_manual</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>        <span class="va" style="color: #111111;">stat_test</span>,</span>
+<span>        label <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"p.adj.signif"</span>,</span>
+<span>        y.position <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">35</span></span>
+<span>    <span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="va" style="color: #111111;">stat_test</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">df</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">len</span> <span class="op" style="color: #5E5E5E;">~</span> <span class="va" style="color: #111111;">dose</span>, ref.group <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"all"</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_pvalue_position.html">add_xy_position</a></span><span class="op" style="color: #5E5E5E;">(</span>fun <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"mean_sd"</span>, x <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"dose"</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="va" style="color: #111111;">bp</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggbarplot.html">ggbarplot</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">df</span>,</span>
+<span>    x <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"dose"</span>, y <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"len"</span>, add <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"mean_sd"</span>, fill <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"dose"</span>,</span>
+<span>    palette <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"#00AFBB"</span>, <span class="st" style="color: #20794D;">"#E7B800"</span>, <span class="st" style="color: #20794D;">"#FC4E07"</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
+<span>    <span class="fu" style="color: #4758AB;"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_pvalue_manual.html">stat_pvalue_manual</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
+<span>        <span class="va" style="color: #111111;">stat_test</span>,</span>
+<span>        label <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"p.adj.signif"</span></span>
+<span></span>
+<span>    <span class="op" style="color: #5E5E5E;">)</span></span>
+<span></span>
+<span><span class="va" style="color: #111111;">bxp</span> <span class="op" style="color: #5E5E5E;">+</span> <span class="va" style="color: #111111;">bp</span></span></code></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/30/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section></section><section id="reference" class="level2"><h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<ol type="1">
+<li><a href="https://www.datanovia.com/en/blog/how-to-add-p-values-onto-basic-ggplots/">How to Add P-Values onto Basic GGPLOTS</a></li>
+<li><a href="https://www.datanovia.com/en/blog/how-to-add-p-values-onto-horizontal-ggplots/">How to Add P-Values onto Horizontal GGPLOTS</a></li>
+<li><a href="https://www.datanovia.com/en/blog/how-to-add-p-values-onto-a-grouped-ggplot-using-the-ggpubr-r-package/">How to Add P-Values onto a Grouped GGPLOT using the GGPUBR R Package</a></li>
+<li><a href="https://www.datanovia.com/en/blog/how-to-add-p-values-to-ggplot-facets/">How to Add P-values to GGPLOT Facets</a></li>
+<li><a href="https://www.datanovia.com/en/blog/add-p-values-to-ggplot-facets-with-different-scales/">Add P-values to GGPLOT Facets with Different Scales</a></li>
+<li><a href="https://www.datanovia.com/en/blog/ggpubr-how-to-add-p-values-generated-elsewhere-to-a-ggplot/">GGPUBR: How to Add P-Values Generated Elsewhere to a GGPLOT</a></li>
+<li><a href="https://www.datanovia.com/en/blog/ggplot-facet-how-to-add-space-between-labels-on-the-top-of-the-chart-and-the-plot-border/">GGPLOT Facet: How to Add Space Between Labels on the Top of the Chart and the Plot Border</a></li>
+</ol>
 
 
 </section> ]]></description>
@@ -123,58 +371,7 @@
   <category>VScode</category>
   <guid>https://guoruizhong.github.io/blog/2023/03/29/index.html</guid>
   <pubDate>Tue, 28 Mar 2023 16:00:00 GMT</pubDate>
-  <media:content url="https://guoruizhong.github.io/blog/2023/03/29/keyboard.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>Change tick labels</title>
-  <dc:creator>Guorui Zhong</dc:creator>
-  <link>https://guoruizhong.github.io/blog/2023/03/15/index.html</link>
-  <description><![CDATA[ <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://wilkelab.org/ggtext/">ggtext</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span></span>
-<span><span class="co" style="color: #5E5E5E;"># create example data</span></span>
-<span><span class="va" style="color: #111111;">df</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
-<span>  group <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"A"</span>, <span class="st" style="color: #20794D;">"B"</span><span class="op" style="color: #5E5E5E;">)</span>, each <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
-<span>  x <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"X"</span>, <span class="st" style="color: #20794D;">"Y"</span>, <span class="st" style="color: #20794D;">"Z"</span><span class="op" style="color: #5E5E5E;">)</span>, <span class="fl" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">)</span>, levels <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"X"</span>, <span class="st" style="color: #20794D;">"Y"</span>, <span class="st" style="color: #20794D;">"Z"</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
-<span>  value <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">3</span>, <span class="fl" style="color: #AD0000;">2</span>, <span class="fl" style="color: #AD0000;">5</span>, <span class="fl" style="color: #AD0000;">2</span>, <span class="fl" style="color: #AD0000;">1</span>, <span class="fl" style="color: #AD0000;">4</span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span></span>
-<span><span class="co" style="color: #5E5E5E;"># define colors for groups</span></span>
-<span><span class="va" style="color: #111111;">group_colors</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"A"</span> <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"blue"</span>, <span class="st" style="color: #20794D;">"B"</span> <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"red"</span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span></span>
-<span><span class="co" style="color: #5E5E5E;"># create barplot</span></span>
-<span><span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">df</span>, <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">x</span>, <span class="va" style="color: #111111;">value</span>, fill <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">group</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
-<span>  <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op" style="color: #5E5E5E;">(</span>stat <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"identity"</span>, position <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"dodge"</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
-<span>  </span>
-<span>  <span class="co" style="color: #5E5E5E;"># set fill colors for groups</span></span>
-<span>  <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op" style="color: #5E5E5E;">(</span>values <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">group_colors</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
-<span>  </span>
-<span>  <span class="co" style="color: #5E5E5E;"># set colors for x-axis tick labels using ggtext</span></span>
-<span>  <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op" style="color: #5E5E5E;">(</span>axis.text.x <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op" style="color: #5E5E5E;">(</span></span>
-<span>    color <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">df</span><span class="op" style="color: #5E5E5E;">$</span><span class="va" style="color: #111111;">group</span> <span class="op" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">"A"</span>, <span class="st" style="color: #20794D;">"blue"</span>, <span class="st" style="color: #20794D;">"red"</span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span>  <span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">+</span></span>
-<span>  </span>
-<span>  <span class="co" style="color: #5E5E5E;"># customize plot theme</span></span>
-<span>  <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Warning: Vectorized input to `element_text()` is not officially supported.</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ℹ Results may be unexpected or may change in future versions of ggplot2.</span></span></code></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/15/index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-
-
-
- ]]></description>
-  <category>barplot</category>
-  <category>R</category>
-  <guid>https://guoruizhong.github.io/blog/2023/03/15/index.html</guid>
-  <pubDate>Tue, 14 Mar 2023 16:00:00 GMT</pubDate>
-  <media:content url="https://guoruizhong.github.io/blog/2023/03/15/plot.png" medium="image" type="image/png"/>
+  <media:content url="https://guoruizhong.github.io/blog/2023/03/29/keyboard.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Barplot with negative and positive value</title>
@@ -183,16 +380,6 @@
   <description><![CDATA[ <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
 <span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✔ dplyr     1.1.0     ✔ readr     2.1.4</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✔ forcats   1.0.0     ✔ stringr   1.5.0</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✔ ggplot2   3.4.1     ✔ tibble    3.1.8</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✔ purrr     1.0.1     </span></span>
-<span><span class="co" style="color: #5E5E5E;">## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✖ dplyr::filter() masks stats::filter()</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ✖ dplyr::lag()    masks stats::lag()</span></span>
-<span><span class="co" style="color: #5E5E5E;">## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</span></span>
 <span></span>
 <span><span class="va" style="color: #111111;">x</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"Vcam1"</span>, <span class="st" style="color: #20794D;">"Pecam1"</span>, <span class="st" style="color: #20794D;">"Alcam"</span>, <span class="st" style="color: #20794D;">"Icam1"</span>, <span class="st" style="color: #20794D;">"Gja4"</span>, <span class="st" style="color: #20794D;">"Gja5"</span>, <span class="st" style="color: #20794D;">"F11r"</span><span class="op" style="color: #5E5E5E;">)</span></span>
 <span><span class="va" style="color: #111111;">y</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">0.1</span>, <span class="fl" style="color: #AD0000;">0.05</span>, <span class="op" style="color: #5E5E5E;">-</span><span class="fl" style="color: #AD0000;">0.08</span>, <span class="op" style="color: #5E5E5E;">-</span><span class="fl" style="color: #AD0000;">0.12</span>, <span class="fl" style="color: #AD0000;">0.15</span>, <span class="op" style="color: #5E5E5E;">-</span><span class="fl" style="color: #AD0000;">0.18</span>, <span class="fl" style="color: #AD0000;">0.2</span><span class="op" style="color: #5E5E5E;">)</span></span>
@@ -224,7 +411,7 @@
 <span>  <span class="fu" style="color: #4758AB;"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op" style="color: #5E5E5E;">(</span>x <span class="op" style="color: #5E5E5E;">=</span> <span class="cn" style="color: #8f5902;">NULL</span>, y <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"log(FC)"</span>, title <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"Art"</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/11/index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figure class="figure"><p><img src="https://guoruizhong.github.io/blog/2023/03/11/index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -237,28 +424,7 @@
   <category>R</category>
   <guid>https://guoruizhong.github.io/blog/2023/03/11/index.html</guid>
   <pubDate>Fri, 10 Mar 2023 16:00:00 GMT</pubDate>
-  <media:content url="https://guoruizhong.github.io/blog/2023/03/11/plot.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>Simple statistical tests with rstatix</title>
-  <dc:creator>Guorui Zhong</dc:creator>
-  <link>https://guoruizhong.github.io/blog/2023/03/09/index.html</link>
-  <description><![CDATA[ <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
-<span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://here.r-lib.org/">here</a></span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
-</div>
-<div class="cell" data-layout-align="center">
-
-</div>
-
-
-
- ]]></description>
-  <category>rstatix</category>
-  <category>R</category>
-  <guid>https://guoruizhong.github.io/blog/2023/03/09/index.html</guid>
-  <pubDate>Wed, 08 Mar 2023 16:00:00 GMT</pubDate>
+  <media:content url="https://guoruizhong.github.io/blog/2023/03/11/plot.png" medium="image" type="image/png" height="103" width="144"/>
 </item>
 <item>
   <title>Ridgeline plots in ggplot2</title>
@@ -1874,7 +2040,7 @@
 <h2 class="anchored" data-anchor-id="section">2023</h2>
 <div id="listing-posts_2023" class="quarto-listing quarto-listing-container-custom">
 <div class="list blog">
-    <div class="blog-entry" data-index="0" data-categories="VScode" data-listing-date-sort="1680019200000" data-listing-file-modified-sort="1680094599632" data-listing-reading-time-sort="3.385">
+    <div class="blog-entry" data-index="0" data-categories="VScode" data-listing-date-sort="1680019200000" data-listing-file-modified-sort="1680180823120" data-listing-reading-time-sort="3.385">
         <div class="metadata">          
             <p class="date listing-date">March 29, 2023</p>
         </div>
@@ -1888,10 +2054,10 @@
             <p class="description listing-description"><!-- desc(5A0113B34292)[max=175]:blog/2023/03/29/index.html --></p>
         </div>
         <div class="thumbnail">
-            <img src="https://guoruizhong.github.io/blog/2023/03/29/keyboard.png" alt="VSCode Keyboard Shortcut Cheat Sheet" title="VSCode Keyboard Shortcut Cheat Sheet">
+            <img src="https://guoruizhong.github.io/blog/2023/03/29/keyboard.jpg" alt="VSCode Keyboard Shortcut Cheat Sheet" title="VSCode Keyboard Shortcut Cheat Sheet">
         </div>
     </div>
-    <div class="blog-entry" data-index="1" data-categories="R,ggplot2,p-value" data-listing-date-sort="1680019200000" data-listing-file-modified-sort="1680095958405" data-listing-reading-time-sort="0.34">
+    <div class="blog-entry" data-index="1" data-categories="R,ggplot2,p-value" data-listing-date-sort="1680019200000" data-listing-file-modified-sort="1680185963050" data-listing-reading-time-sort="5.905">
         <div class="metadata">          
             <p class="date listing-date">March 29, 2023</p>
         </div>
@@ -1914,27 +2080,7 @@
             <img src="https://guoruizhong.github.io/blog/2023/03/30/plot.png" alt="Add p-values onto barplot or boxplot" title="Add p-values onto barplot or boxplot">
         </div>
     </div>
-    <div class="blog-entry" data-index="2" data-categories="barplot,R" data-listing-date-sort="1678809600000" data-listing-file-modified-sort="1678972212390" data-listing-reading-time-sort="0.99">
-        <div class="metadata">          
-            <p class="date listing-date">March 15, 2023</p>
-        </div>
-        <div class="body">
-            <p class="title listing-title"><a href="../blog/2023/03/15/index.html">Change tick labels</a></p>
-            <div class="post-categories listing-categories">
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('barplot'); return false;">
-                    barplot
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('R'); return false;">
-                    R
-                </div>
-            </div>
-            <p class="description listing-description"><!-- desc(5A0113B34292)[max=175]:blog/2023/03/15/index.html --></p>
-        </div>
-        <div class="thumbnail">
-            <img src="https://guoruizhong.github.io/blog/2023/03/15/plot.png" alt="Change tick labels" title="Change tick labels">
-        </div>
-    </div>
-    <div class="blog-entry" data-index="3" data-categories="barplot,R" data-listing-date-sort="1678464000000" data-listing-file-modified-sort="1678547164863" data-listing-reading-time-sort="1.895">
+    <div class="blog-entry" data-index="2" data-categories="barplot,R" data-listing-date-sort="1678464000000" data-listing-file-modified-sort="1680186150675" data-listing-reading-time-sort="2.06">
         <div class="metadata">          
             <p class="date listing-date">March 11, 2023</p>
         </div>
@@ -1954,24 +2100,7 @@
             <img src="https://guoruizhong.github.io/blog/2023/03/11/plot.png" alt="Barplot with negative and positive value" title="Barplot with negative and positive value">
         </div>
     </div>
-    <div class="blog-entry" data-index="4" data-categories="rstatix,R" data-listing-date-sort="1678291200000" data-listing-file-modified-sort="1678795260471" data-listing-reading-time-sort="0.3">
-        <div class="metadata">          
-            <p class="date listing-date">March 9, 2023</p>
-        </div>
-        <div class="body">
-            <p class="title listing-title"><a href="../blog/2023/03/09/index.html">Simple statistical tests with rstatix</a></p>
-            <div class="post-categories listing-categories">
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('rstatix'); return false;">
-                    rstatix
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('R'); return false;">
-                    R
-                </div>
-            </div>
-            <p class="description listing-description"><!-- desc(5A0113B34292)[max=175]:blog/2023/03/09/index.html --></p>
-        </div>
-    </div>
-    <div class="blog-entry" data-index="5" data-categories="ggridges,R" data-listing-date-sort="1678204800000" data-listing-file-modified-sort="1678366346214" data-listing-reading-time-sort="2.8">
+    <div class="blog-entry" data-index="3" data-categories="ggridges,R" data-listing-date-sort="1678204800000" data-listing-file-modified-sort="1680186274074" data-listing-reading-time-sort="2.8">
         <div class="metadata">          
             <p class="date listing-date">March 8, 2023</p>
         </div>
@@ -1991,7 +2120,7 @@
             <img src="https://guoruizhong.github.io/blog/2023/03/08/plot.png" alt="Ridgeline plots in ggplot2" title="Ridgeline plots in ggplot2">
         </div>
     </div>
-    <div class="blog-entry" data-index="6" data-categories="boxplot,R" data-listing-date-sort="1678118400000" data-listing-file-modified-sort="1678366363785" data-listing-reading-time-sort="6.06">
+    <div class="blog-entry" data-index="4" data-categories="boxplot,R" data-listing-date-sort="1678118400000" data-listing-file-modified-sort="1678366363785" data-listing-reading-time-sort="6.06">
         <div class="metadata">          
             <p class="date listing-date">March 7, 2023</p>
         </div>
@@ -2011,7 +2140,7 @@
             <img src="https://guoruizhong.github.io/blog/2023/03/07/plot.png" alt="Add p-value and significant level at facet boxplot" title="Add p-value and significant level at facet boxplot">
         </div>
     </div>
-    <div class="blog-entry" data-index="7" data-categories="barplot,R" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1678366388648" data-listing-reading-time-sort="2.035">
+    <div class="blog-entry" data-index="5" data-categories="barplot,R" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1678366388648" data-listing-reading-time-sort="2.035">
         <div class="metadata">          
             <p class="date listing-date">March 6, 2023</p>
         </div>
@@ -2031,7 +2160,7 @@
             <img src="https://guoruizhong.github.io/blog/2023/03/01/barplot.png" alt="Equalizing Bar Widths" title="Equalizing Bar Widths">
         </div>
     </div>
-    <div class="blog-entry" data-index="8" data-categories="barplot,R" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1678366373660" data-listing-reading-time-sort="6.46">
+    <div class="blog-entry" data-index="6" data-categories="barplot,R" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1678366373660" data-listing-reading-time-sort="6.46">
         <div class="metadata">          
             <p class="date listing-date">March 6, 2023</p>
         </div>
@@ -2051,7 +2180,7 @@
             <img src="https://guoruizhong.github.io/blog/2023/03/06/plot.png" alt="ggplot2 with p-value and significant level" title="ggplot2 with p-value and significant level">
         </div>
     </div>
-    <div class="blog-entry" data-index="9" data-categories="scatter plot,R" data-listing-date-sort="1677945600000" data-listing-file-modified-sort="1678366379917" data-listing-reading-time-sort="4.695">
+    <div class="blog-entry" data-index="7" data-categories="scatter plot,R" data-listing-date-sort="1677945600000" data-listing-file-modified-sort="1678366379917" data-listing-reading-time-sort="4.695">
         <div class="metadata">          
             <p class="date listing-date">March 5, 2023</p>
         </div>
@@ -2446,7 +2575,7 @@ No matching items
 
  ]]></description>
   <guid>https://guoruizhong.github.io/blog/index.html</guid>
-  <pubDate>Wed, 29 Mar 2023 13:19:47 GMT</pubDate>
+  <pubDate>Thu, 30 Mar 2023 14:24:51 GMT</pubDate>
 </item>
 </channel>
 </rss>

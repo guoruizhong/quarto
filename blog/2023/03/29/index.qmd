@@ -3,7 +3,7 @@ title: "VSCode Keyboard Shortcut Cheat Sheet"
 date: 2023-03-29
 categories:
 - VScode
-image: keyboard.png
+image: keyboard.jpg
 ---
 
 

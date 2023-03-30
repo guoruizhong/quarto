@@ -11,11 +11,14 @@ image: plot.png
 knitr::opts_chunk$set(
             # fig.width = 6, 
             # fig.height = 3.8,
-                      fig.align = "center", fig.retina = 3,
-                      out.width = "85%", collapse = TRUE)
+            fig.align = "center", 
+            fig.retina = 3,
+            # out.width = "85%", 
+            collapse = TRUE
+                      )
 ```
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 library(readxl)
 library(tidyverse)
 

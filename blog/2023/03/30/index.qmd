@@ -15,25 +15,235 @@ knitr::opts_chunk$set(
     # fig.height = 3.8,
     fig.align = "center",
     fig.retina = 3,
-    out.width = "85%",
-    collapse = TRUE
+    # out.width = "85%",
+    collapse = TRUE,
+    warning = FALSE
 )
 ```
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 library(tidyverse)
 library(ggpubr)      # creat easily publication plots
-library(rstatix)     # pipe-friendly tools for easy statistical analyses
- ```
-
-
-```{r}
-
-df <- ToothGrowth
-
-df$dose <- as.factor(df$dose)
-
-### comparing two means using t_test() (parametric) or wicox_text() 
+library(rstatix)    # pipe-friendly tools for easy statistical analyses
+library(patchwork)
 ```
 
-### Reference
+
+
+## Boxplot with p-value
+
+#### Comparing two means
+```{r}
+# Transform `dose` into factor variable
+df <- ToothGrowth
+df$dose <- as.factor(df$dose)
+head(df, 3)
+
+### statistical test to compare two independent groups
+
+stat_test <- df %>% 
+    t_test(len ~ supp) %>%
+    add_significance() %>% 
+    add_xy_position(x = "supp")
+
+stat_test
+
+p1 <- ggboxplot(df, x = "supp", y = "len", fill = "#00AFBB") +
+    stat_pvalue_manual(stat_test, label = "p")
+
+### Customize p-value labels using glue expression
+p2 <- ggboxplot(df, x = "supp", y = "len", fill = "#00AFBB") +
+    stat_pvalue_manual(
+        stat_test, 
+        label = "T-test, p = {p}", 
+        vjust = -1, #vertically adjust the position of the p-values labels 
+        bracket.nudge.y = 1 # move up or to move down the brackets. 
+        ) +
+    scale_y_continuous(expand = expansion(mult = c(0.05, 0.15)))
+p1 + p2
+
+```
+
+```{r}
+### grouped data
+stat_test <- df %>%
+    group_by(dose) %>%
+    t_test(len ~ supp) %>%
+    adjust_pvalue() %>%
+    add_significance() %>% 
+    add_xy_position(x = "supp")
+
+stat_test
+
+ggboxplot(df,
+    x = "supp", y = "len", fill = "#00AFBB",
+    facet.by = "dose"
+    ) +
+    stat_pvalue_manual(stat_test, label = "p.adj") +
+    scale_y_continuous(expand = expansion(mult = c(0.05, 0.10)))
+
+```
+
+```{r}
+### Show p-values if significant otherwise show ns
+stat_test <- df %>%
+    group_by(dose) %>%
+    t_test(len ~ supp) %>%
+    adjust_pvalue() %>%
+    add_significance() %>%
+    add_xy_position("supp")
+
+stat_test$custom_label <- ifelse(stat_test$p.adj <= 0.05, stat_test$p.adj, "ns")
+
+stat_test
+
+ggboxplot(df,
+    x = "supp", y = "len", fill = "#00AFBB",
+    facet.by = "dose"
+    ) +
+    stat_pvalue_manual(stat_test, label = "custom_label") +
+    scale_y_continuous(expand = expansion(mult = c(0.05, 0.10)))
+
+```
+
+```{r}
+### Compare paired samples
+# Statistical test
+stat_test <- df %>%
+  t_test(len ~ supp, paired = TRUE) %>%
+  add_significance() %>% 
+  add_xy_position(x = "supp")
+
+### boxplot with pvalue
+p1 <- ggpaired(df, x = "supp", y = "len", fill = "#E7B800",
+                 line.color = "gray", line.size = 0.4)+
+                 stat_pvalue_manual(stat_test, label = "p.signif")+
+                 scale_y_continuous(expand = expansion(mult = c(0.05, 0.10)))
+
+### combined with significane level
+p2 <- ggpaired(df,
+    x = "supp", y = "len", fill = "#E7B800",
+    line.color = "gray", line.size = 0.4
+) +
+    stat_pvalue_manual(stat_test, label = "{p}{p.signif}") +
+    scale_y_continuous(expand = expansion(mult = c(0.05, 0.10)))
+
+p1 + p2
+```
+#### Pairwise comparisons
+
+```{r}
+### boxplot
+stat_test <- df %>% t_test(len ~ dose) %>% 
+    add_xy_position(x = "dose")
+
+bxp <- ggboxplot(df,
+    x = "dose", y = "len", fill = "dose",
+    palette = c("#00AFBB", "#E7B800", "#FC4E07") # Box plots
+    ) + 
+    stat_pvalue_manual(
+      stat_test,
+      label = "p.adj.signif",
+      tip.length = 0.01
+)
+
+### Specify manually the y position of p-value labels and shorten the width of the brackets
+bxp_man <- bxp + 
+  stat_pvalue_manual(
+    stat_test, label = "p.adj.signif", tip.length = 0.01,
+    y.position = c(35, 40, 35), bracket.shorten = 0.05
+    )
+
+### Bar plot
+stat_test <- df %>% 
+    t_test(len ~ dose) %>%  
+    add_xy_position(fun = "mean_sd", x = "dose")
+
+# Bar plots showing mean +/- SD
+bp <- ggbarplot(df,
+        x = "dose", y = "len", add = "mean_sd", fill = "dose",
+        palette = c("#00AFBB", "#E7B800", "#FC4E07")
+    ) +
+    stat_pvalue_manual(
+        stat_test, 
+        label = "p.adj.signif", 
+        tip.length = 0.01
+        )
+
+bxp + bxp_man + bp
+```
+#### Comparsions against reference groups
+
+```{r}
+stat_test <- df %>% 
+    t_test(len ~ dose, ref.group = "0.5") %>% 
+    add_xy_position(x = "dose")
+
+bxp <- ggboxplot(df,
+    x = "dose", y = "len", fill = "dose",
+    palette = c("#00AFBB", "#E7B800", "#FC4E07") # Box plots
+    ) + 
+    stat_pvalue_manual(
+      stat_test,
+      label = "p.adj.signif",
+      tip.length = 0.01
+)
+
+bp <- ggbarplot(df,
+        x = "dose", y = "len", add = "mean_sd", fill = "dose",
+        palette = c("#00AFBB", "#E7B800", "#FC4E07")
+    ) +
+    stat_pvalue_manual(
+        stat_test, 
+        label = "p.adj.signif", 
+        tip.length = 0.01
+        )
+
+bxp + bp
+```
+### Comparsions against all (basemean)
+
+```{r}
+stat_test <- df %>% 
+    t_test(len ~ dose, ref.group = "all") %>% 
+    add_xy_position(x = "dose") 
+
+bxp <- ggboxplot(df,
+    x = "dose", y = "len", fill = "dose",
+    palette = c("#00AFBB", "#E7B800", "#FC4E07") # Box plots
+) +
+    stat_pvalue_manual(
+        stat_test,
+        label = "p.adj.signif",
+        y.position = 35
+    )
+
+stat_test <- df %>% 
+    t_test(len ~ dose, ref.group = "all") %>% 
+    add_xy_position(fun = "mean_sd", x = "dose")
+
+bp <- ggbarplot(df,
+    x = "dose", y = "len", add = "mean_sd", fill = "dose",
+    palette = c("#00AFBB", "#E7B800", "#FC4E07")
+) +
+    stat_pvalue_manual(
+        stat_test,
+        label = "p.adj.signif"
+
+    )
+
+bxp + bp
+```
+
+
+
+
+## Reference
+
+1. [How to Add P-Values onto Basic GGPLOTS](https://www.datanovia.com/en/blog/how-to-add-p-values-onto-basic-ggplots/)
+2. [How to Add P-Values onto Horizontal GGPLOTS](https://www.datanovia.com/en/blog/how-to-add-p-values-onto-horizontal-ggplots/)
+3. [How to Add P-Values onto a Grouped GGPLOT using the GGPUBR R Package](https://www.datanovia.com/en/blog/how-to-add-p-values-onto-a-grouped-ggplot-using-the-ggpubr-r-package/)
+4. [How to Add P-values to GGPLOT Facets](https://www.datanovia.com/en/blog/how-to-add-p-values-to-ggplot-facets/)
+5. [Add P-values to GGPLOT Facets with Different Scales](https://www.datanovia.com/en/blog/add-p-values-to-ggplot-facets-with-different-scales/) 
+6. [GGPUBR: How to Add P-Values Generated Elsewhere to a GGPLOT](https://www.datanovia.com/en/blog/ggpubr-how-to-add-p-values-generated-elsewhere-to-a-ggplot/)
+7. [GGPLOT Facet: How to Add Space Between Labels on the Top of the Chart and the Plot Border](https://www.datanovia.com/en/blog/ggplot-facet-how-to-add-space-between-labels-on-the-top-of-the-chart-and-the-plot-border/)
