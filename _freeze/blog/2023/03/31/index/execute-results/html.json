@@ -1,0 +1,16 @@
+{
+  "hash": "28920213e418e6ec401ea531b0bdedfd",
+  "result": {
+    "markdown": "---\ntitle: \"Add p-values to horizontal ggplot2\"\ndate: 2023-03-31\ncategories:\n- R\n- ggplot2\n- p-value\nimage: plot.png\n---\n\n\n\n::: {.cell layout-align=\"center\"}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(ggpubr)      # creat easily publication plots\nlibrary(rstatix)    # pipe-friendly tools for easy statistical analyses\nlibrary(patchwork)\n```\n:::\n\n\n## Add p-values to horizontal ggplots\n\n\n::: {.cell layout-align=\"center\"}\n\n```{.r .cell-code}\n# Transform `dose` into factor variable\ndf <- ToothGrowth\ndf$dose <- as.factor(df$dose)\n\nhead(df, 3)\n##    len supp dose\n## 1  4.2   VC  0.5\n## 2 11.5   VC  0.5\n## 3  7.3   VC  0.5\n\nstat_test <- df %>% \n    t_test(len ~ dose) %>%\n    add_significance() %>% \n    add_xy_position(x = \"dose\")\n\nstat_test\n## # A tibble: 3 × 14\n##   .y.   group1 group2    n1    n2 statistic    df        p    p.adj p.adj.signif\n##   <chr> <chr>  <chr>  <int> <int>     <dbl> <dbl>    <dbl>    <dbl> <chr>       \n## 1 len   0.5    1         20    20     -6.48  38.0 1.27e- 7 2.54e- 7 ****        \n## 2 len   0.5    2         20    20    -11.8   36.9 4.4 e-14 1.32e-13 ****        \n## 3 len   1      2         20    20     -4.90  37.1 1.91e- 5 1.91e- 5 ****        \n## # … with 4 more variables: y.position <dbl>, groups <named list>, xmin <dbl>,\n## #   xmax <dbl>\n\n# Box plots\nggboxplot(df,\n    x = \"dose\", y = \"len\", fill = \"dose\",\n    palette = c(\"#00AFBB\", \"#E7B800\", \"#FC4E07\")\n) +\n    stat_pvalue_manual(\n        stat_test,\n        # use the adjusted p-value significance levels as labels\n        label = \"p.adj.signif\", tip.length = 0.01,\n        coord.flip = TRUE\n    ) +\n    coord_flip()\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-2-1.png){fig-align='center' width=672}\n:::\n\n```{.r .cell-code}\n\nggboxplot(df,\n    x = \"dose\", y = \"len\", fill = \"dose\",\n    palette = c(\"#00AFBB\", \"#E7B800\", \"#FC4E07\")\n) +\n    stat_pvalue_manual(\n        stat_test,\n        ### use adjusted p-values as labels\n        label = \"p.adj\", tip.length = 0.01,\n        coord.flip = TRUE\n    ) +\n    coord_flip()\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-2-2.png){fig-align='center' width=672}\n:::\n:::",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

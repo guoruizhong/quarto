@@ -1,5 +1,5 @@
 ---
-title: "Add p-values onto barplot or boxplot"
+title: "Add p-values onto basic barplot or boxplot"
 date: 2023-03-29
 categories:
 - R
@@ -30,7 +30,7 @@ library(patchwork)
 
 
 
-## Boxplot with p-value
+## Basic Barplot or Boxplot with p-value
 
 #### Comparing two means
 ```{r}
@@ -237,6 +237,10 @@ bxp + bp
 
 
 
+
+```{r}
+
+```
 
 ## Reference
 
