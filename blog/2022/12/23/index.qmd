@@ -7,6 +7,14 @@ image: keyboard.jpg
 ---
 
 
+
+
+
+
+
+
+
+
 ```bash
 
 ######################## --------- General
@@ -15,12 +23,40 @@ Ctrl + ,                # user setting
 Ctrl + Shift + P        # command palette
 Ctrl + K Ctrl + S       # keyboard shortcuts
 
+Ctrl + B                # toggle sidebar
 Ctrl + P                # quick open, go to target file
 Ctrl + Shift + N        # open a new vscode window
 Ctrl + Shift + W        # close window
 Ctrl + W                # close tab
 Ctrl + K + W            # close all tabs
-Ctrl + B                # toggle sidebar
+
+######################## --------- Editor
+
+Ctrl + D                # select the word  
+Ctrl + L                # Select current line
+Ctrl + Shift + L        # select all same selection
+
+Ctrl + Alt + ↑ / ↓      # Insert multiple cursor above / below, Escape exit mode
+
+Ctrl + U                # Undo last cursor operation
+
+Shift + Alt + L         # Split editor
+CMD + \                 # Split editor 
+Alt + 1/2/3             # go to different tab of editor in the same window 
+Ctrl + 1/2/3            # go to different editor
+
+Alt + ↑ / ↓             # move line up or down
+Alt + Shift + Up / Down     # copy line up or down
+Ctrl + Shift + K
+        # delete current code line
+Ctrl + Shift + ] / [    # code folding
+Ctrl + ] / [            # Indent/outdent line
+Ctrl + ← / →            # mouve cursor left or right between words
+Ctrl + ↑ / ↓            # scroll screen
+Ctrl + Shift + ← / →    # select left or right between words
+
+Ctrl + Home or          # Go to beginning or end of file
+Ctrl + /                # comment or uncomment
 
 ######################## --------- Terminal
 
@@ -31,28 +67,7 @@ Ctrl + PgDn   | Cmd + shift + [           # Move to next terminal
 
 Ctrl + K                # clean the terminal but remain the history information, or use clear  in the terminal, clean command history
 
-######################## --------- Editor
 
-Alt + 1/2/3             # go to different tab of editor in the same window 
-Ctrl + 1/2/3            # go to different editor
-
-Alt + ↑ / ↓             # move line up or down
-Alt + Shift + ↑ / ↓     # copy line up or down
-Ctrl + Shift + K        # delete current code line
-Ctrl + ] / [            # Indent/outdent line
-Ctrl + ← / →            # mouve cursor left or right between words
-Ctrl + ↑ / ↓            # scroll screen
-Ctrl + Shift + ← / →    # select left or right between words
-
-Ctrl + Home or          # Go to beginning or end of file
-Ctrl + /                # comment or uncomment
-
-Ctrl + L                # Select current line
-Ctrl + Shift + L        # select all same selection
-Ctrl + Alt + ↑ / ↓      # Insert multiple cursor above / below, Escape exit mode
-Ctrl + U                # Undo last cursor operation
-
-Ctrl + D                # select the same item from current line one by one
 
 
 ######################## --------- Search & Replace

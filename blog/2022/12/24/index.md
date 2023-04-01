@@ -120,10 +120,16 @@ The details refer to: <https://github.com/REditorSupport/vscode-R>
 ### Install r packages
    
 ```r
-install.packages("languageserver")
-install.packages("httpgd")
-install.packages("IRkernel")      
-install.packages("rmarkdown")
+install.packages(
+        c(
+            "languageserver", 
+            "httpgd",
+            "IRkernel",
+            "rmarkdown"
+    ), 
+    dependencies = TRUE
+)
+
 ```
 
 ```bash
@@ -141,10 +147,11 @@ pip install -U radian
 - vscode-icons
 - Remote Development
 - LiveShare
-- Excel Viewer
+- Excel Viewer 
 - Project Manager
 - Quarto
-- Path Intellisense 
+- Path Intellisense
+- Codesnap  
 - Git Graph
 
 ### SSH using Keys
