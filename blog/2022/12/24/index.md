@@ -117,7 +117,7 @@ The details refer to: <https://github.com/REditorSupport/vscode-R>
 
 ![](vscode.jpg)
 
-1. **Install r packages**
+### Install r packages
    
 ```r
 install.packages("languageserver")
@@ -131,17 +131,23 @@ install.packages("rmarkdown")
 pip install -U radian
 ```
 
-2. **Intall VSCode extensions**
+### Intall VSCode extensions
 
 - vscode-R
 - R Debugger
 - Error lens
 - Live Preview
 - vscode-pdf
+- vscode-icons
 - Remote Development
 - LiveShare
+- Excel Viewer
+- Project Manager
+- Quarto
+- Path Intellisense 
+- Git Graph
 
-3. VScode SSH using Keys
+### SSH using Keys
 open `Users/zhonggr/.ssh/config`, add the following
 ```bash
 Host nucleus
@@ -149,7 +155,7 @@ Host nucleus
     User zhonggr
 
 ```
-4. **Settings and keyboard shortcut**
+### User Settings
 
 - User `settings.json`:
 
@@ -224,7 +230,9 @@ Host nucleus
     }
 }
 ```
--  [SSH:nucleus] `settings.json`
+### Server settings
+
+[SSH:nucleus] `settings.json`
   
 ```json
 {
@@ -240,7 +248,7 @@ Host nucleus
     "r.plot.useHttpgd": true
 }
 ```
- - keyboard shortcut
+### Keyboard settings
 ```json
 // Feb 28, 2023 updated
 [
@@ -344,4 +352,21 @@ Host nucleus
         }
     }
 ]
+```
+### Toning down code linting
+
+creating a ~/.lintr file in the project folder
+
+```bash
+linters: with_defaults(
+  line_length_linter = NULL,
+  open_curly_linter = NULL, 
+  object_usage_linter = NULL,
+  commented_code_linter = NULL,
+  object_name_linter = NULL,
+  object_length_lnter = NULL,
+  infix_spaces_linter = NULL,
+  commas_linter = NULL,
+  function_left_parentheses_linter = NULL,
+  trailing_whitespace_linter = NULL)
 ```

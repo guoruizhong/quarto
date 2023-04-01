@@ -233,7 +233,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#make-bash-with-colors" id="toc-make-bash-with-colors" class="nav-link" data-scroll-target="#make-bash-with-colors">Make Bash with colors</a></li>
   <li><a href="#make-terminal-powerful" id="toc-make-terminal-powerful" class="nav-link" data-scroll-target="#make-terminal-powerful">Make Terminal powerful</a></li>
   <li><a href="#mount-remote-files-on-mac" id="toc-mount-remote-files-on-mac" class="nav-link" data-scroll-target="#mount-remote-files-on-mac">Mount remote files on mac</a></li>
-  <li><a href="#using-r-in-vscode" id="toc-using-r-in-vscode" class="nav-link" data-scroll-target="#using-r-in-vscode">Using R in VSCode</a></li>
+  <li><a href="#using-r-in-vscode" id="toc-using-r-in-vscode" class="nav-link" data-scroll-target="#using-r-in-vscode">Using R in VSCode</a>
+  <ul>
+  <li><a href="#install-r-packages" id="toc-install-r-packages" class="nav-link" data-scroll-target="#install-r-packages">Install r packages</a></li>
+  <li><a href="#intall-vscode-extensions" id="toc-intall-vscode-extensions" class="nav-link" data-scroll-target="#intall-vscode-extensions">Intall VSCode extensions</a></li>
+  <li><a href="#ssh-using-keys" id="toc-ssh-using-keys" class="nav-link" data-scroll-target="#ssh-using-keys">SSH using Keys</a></li>
+  <li><a href="#user-settings" id="toc-user-settings" class="nav-link" data-scroll-target="#user-settings">User Settings</a></li>
+  <li><a href="#server-settings" id="toc-server-settings" class="nav-link" data-scroll-target="#server-settings">Server settings</a></li>
+  <li><a href="#keyboard-settings" id="toc-keyboard-settings" class="nav-link" data-scroll-target="#keyboard-settings">Keyboard settings</a></li>
+  <li><a href="#toning-down-code-linting" id="toc-toning-down-code-linting" class="nav-link" data-scroll-target="#toning-down-code-linting">Toning down code linting</a></li>
+  </ul></li>
   </ul>
 </nav>
 </nav>
@@ -341,36 +350,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="anchored" data-anchor-id="using-r-in-vscode">Using R in VSCode</h2>
 <p>The details refer to: <a href="https://github.com/REditorSupport/vscode-R" class="uri">https://github.com/REditorSupport/vscode-R</a></p>
 <p><img src="vscode.jpg" class="img-fluid"></p>
-<ol type="1">
-<li><strong>Install r packages</strong></li>
-</ol>
+<section id="install-r-packages" class="level3">
+<h3 class="anchored" data-anchor-id="install-r-packages">Install r packages</h3>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"languageserver"</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"httpgd"</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"IRkernel"</span>)      </span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"rmarkdown"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">### A modern R console from python</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-U</span> radian</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="2" type="1">
-<li><strong>Intall VSCode extensions</strong></li>
-</ol>
+</section>
+<section id="intall-vscode-extensions" class="level3">
+<h3 class="anchored" data-anchor-id="intall-vscode-extensions">Intall VSCode extensions</h3>
 <ul>
 <li>vscode-R</li>
 <li>R Debugger</li>
 <li>Error lens</li>
 <li>Live Preview</li>
 <li>vscode-pdf</li>
+<li>vscode-icons</li>
 <li>Remote Development</li>
 <li>LiveShare</li>
+<li>Excel Viewer</li>
+<li>Project Manager</li>
+<li>Quarto</li>
+<li>Path Intellisense</li>
+<li>Git Graph</li>
 </ul>
-<ol start="3" type="1">
-<li>VScode SSH using Keys open <code>Users/zhonggr/.ssh/config</code>, add the following</li>
-</ol>
+</section>
+<section id="ssh-using-keys" class="level3">
+<h3 class="anchored" data-anchor-id="ssh-using-keys">SSH using Keys</h3>
+<p>open <code>Users/zhonggr/.ssh/config</code>, add the following</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Host</span> nucleus</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">HostName</span> 172.20.<span class="pp">***</span>.<span class="pp">**</span> <span class="co">## host ip address</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">User</span> zhonggr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="4" type="1">
-<li><strong>Settings and keyboard shortcut</strong></li>
-</ol>
+</section>
+<section id="user-settings" class="level3">
+<h3 class="anchored" data-anchor-id="user-settings">User Settings</h3>
 <ul>
 <li>User <code>settings.json</code>:</li>
 </ul>
@@ -443,9 +458,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
 <span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>[SSH:nucleus] <code>settings.json</code></li>
-</ul>
+</section>
+<section id="server-settings" class="level3">
+<h3 class="anchored" data-anchor-id="server-settings">Server settings</h3>
+<p>[SSH:nucleus] <code>settings.json</code></p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"r.rterm.linux"</span><span class="fu">:</span> <span class="st">"/home/zhonggr/.local/bin/radian"</span><span class="fu">,</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="er">//</span> <span class="dt">"r.rterm.linux"</span><span class="fu">:</span> <span class="st">"/bin/R"</span><span class="fu">,</span></span>
@@ -458,9 +474,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"terminal.integrated.defaultProfile.linux"</span><span class="fu">:</span> <span class="st">"bash"</span><span class="fu">,</span></span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"r.plot.useHttpgd"</span><span class="fu">:</span> <span class="kw">true</span></span>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>keyboard shortcut</li>
-</ul>
+</section>
+<section id="keyboard-settings" class="level3">
+<h3 class="anchored" data-anchor-id="keyboard-settings">Keyboard settings</h3>
 <div class="sourceCode" id="cb14"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="er">//</span> <span class="er">Feb</span> <span class="er">28,</span> <span class="er">2023</span> <span class="er">updated</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
@@ -563,8 +579,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a>        <span class="fu">}</span></span>
 <span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
 <span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="toning-down-code-linting" class="level3">
+<h3 class="anchored" data-anchor-id="toning-down-code-linting">Toning down code linting</h3>
+<p>creating a ~/.lintr file in the project folder</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">linters:</span> with_defaults<span class="er">(</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">line_length_linter</span> = NULL,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">open_curly_linter</span> = NULL, </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">object_usage_linter</span> = NULL,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">commented_code_linter</span> = NULL,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">object_name_linter</span> = NULL,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">object_length_lnter</span> = NULL,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="ex">infix_spaces_linter</span> = NULL,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="ex">commas_linter</span> = NULL,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="ex">function_left_parentheses_linter</span> = NULL,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="ex">trailing_whitespace_linter</span> = NULL<span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

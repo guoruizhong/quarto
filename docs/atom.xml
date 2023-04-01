@@ -1186,7 +1186,7 @@ Note
 <item>
   <title>VSCode Keyboard Shortcut Cheat Sheet</title>
   <dc:creator>Guorui Zhong</dc:creator>
-  <link>https://guoruizhong.github.io/blog/2022/12/29/index.html</link>
+  <link>https://guoruizhong.github.io/blog/2022/12/23/index.html</link>
   <description><![CDATA[ 
 
 
@@ -1249,9 +1249,9 @@ Note
 
  ]]></description>
   <category>VScode</category>
-  <guid>https://guoruizhong.github.io/blog/2022/12/29/index.html</guid>
-  <pubDate>Wed, 28 Dec 2022 16:00:00 GMT</pubDate>
-  <media:content url="https://guoruizhong.github.io/blog/2022/12/29/keyboard.jpg" medium="image" type="image/jpeg"/>
+  <guid>https://guoruizhong.github.io/blog/2022/12/23/index.html</guid>
+  <pubDate>Thu, 22 Dec 2022 16:00:00 GMT</pubDate>
+  <media:content url="https://guoruizhong.github.io/blog/2022/12/23/keyboard.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Add experimental conditions to multi-well plates</title>
@@ -2268,24 +2268,7 @@ No matching items
 <h2 class="anchored" data-anchor-id="section-1">2022</h2>
 <div id="listing-posts_2022" class="quarto-listing quarto-listing-container-custom">
 <div class="list blog">
-    <div class="blog-entry" data-index="0" data-categories="VScode" data-listing-date-sort="1672243200000" data-listing-file-modified-sort="1680318434360" data-listing-reading-time-sort="3.385">
-        <div class="metadata">          
-            <p class="date listing-date">December 29, 2022</p>
-        </div>
-        <div class="body">
-            <p class="title listing-title"><a href="../blog/2022/12/29/index.html">VSCode Keyboard Shortcut Cheat Sheet</a></p>
-            <div class="post-categories listing-categories">
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('VScode'); return false;">
-                    VScode
-                </div>
-            </div>
-            <p class="description listing-description"><!-- desc(5A0113B34292)[max=175]:blog/2022/12/29/index.html --></p>
-        </div>
-        <div class="thumbnail">
-            <img src="https://guoruizhong.github.io/blog/2022/12/29/keyboard.jpg" alt="VSCode Keyboard Shortcut Cheat Sheet" title="VSCode Keyboard Shortcut Cheat Sheet">
-        </div>
-    </div>
-    <div class="blog-entry" data-index="1" data-categories="R,Linux,VSCode" data-listing-date-sort="1671811200000" data-listing-file-modified-sort="1679662718434" data-listing-reading-time-sort="8.235">
+    <div class="blog-entry" data-index="0" data-categories="R,Linux,VSCode" data-listing-date-sort="1671811200000" data-listing-file-modified-sort="1680324191545" data-listing-reading-time-sort="8.535">
         <div class="metadata">          
             <p class="date listing-date">December 24, 2022</p>
         </div>
@@ -2306,6 +2289,23 @@ No matching items
         </div>
         <div class="thumbnail">
             <img src="https://guoruizhong.github.io/blog/2022/12/24/vscode.jpg" alt="Setup working pipeline" title="Setup working pipeline">
+        </div>
+    </div>
+    <div class="blog-entry" data-index="1" data-categories="VScode" data-listing-date-sort="1671724800000" data-listing-file-modified-sort="1680324013016" data-listing-reading-time-sort="3.385">
+        <div class="metadata">          
+            <p class="date listing-date">December 23, 2022</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2022/12/23/index.html">VSCode Keyboard Shortcut Cheat Sheet</a></p>
+            <div class="post-categories listing-categories">
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('VScode'); return false;">
+                    VScode
+                </div>
+            </div>
+            <p class="description listing-description"><!-- desc(5A0113B34292)[max=175]:blog/2022/12/23/index.html --></p>
+        </div>
+        <div class="thumbnail">
+            <img src="https://guoruizhong.github.io/blog/2022/12/23/keyboard.jpg" alt="VSCode Keyboard Shortcut Cheat Sheet" title="VSCode Keyboard Shortcut Cheat Sheet">
         </div>
     </div>
     <div class="blog-entry" data-index="2" data-categories="Linux" data-listing-date-sort="1671379200000" data-listing-file-modified-sort="1678795245921" data-listing-reading-time-sort="30.115">
@@ -2633,7 +2633,7 @@ No matching items
 
  ]]></description>
   <guid>https://guoruizhong.github.io/blog/index.html</guid>
-  <pubDate>Sat, 01 Apr 2023 03:24:22 GMT</pubDate>
+  <pubDate>Sat, 01 Apr 2023 04:43:26 GMT</pubDate>
 </item>
 </channel>
 </rss>
