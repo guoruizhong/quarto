@@ -7,6 +7,7 @@ image: keyboard.jpg
 tbl-colwidths: [40, 30, 30]
 ---
 
+The most useful VSCode shotcuts that can boost my productivity!
 
 
 | Description                        | Mac                            | Windows                       |

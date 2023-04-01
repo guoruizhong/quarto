@@ -1,5 +1,5 @@
 ---
-title: "Setup working pipeline"
+title: "Setup My Working Pipeline"
 date: 2022-12-24
 image: vscode.jpg
 categories:
@@ -53,7 +53,7 @@ In the remote server, add the following script to the `~/.bashrc`
 PS1='\[\033[1;36m\]\u\[\033[1;37m\] @\[\033[1;32m\] \h:\[\033[1;33m\] \w\[\033[0;97m [\t]\[\033[0;97m \n\[\033[1;35m\]\$\[\033[0m\] '
 ```
 
-## Make Terminal powerful
+## Powerful Terminal
 
 ```bash
 ### Install [Home-brew](https://brew.sh/)
