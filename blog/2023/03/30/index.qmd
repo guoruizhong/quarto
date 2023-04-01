@@ -1,10 +1,10 @@
 ---
 title: "Add p-values onto basic barplot or boxplot"
-date: 2023-03-29
+date: 2023-03-30
 categories:
 - R
 - ggplot2
-- p-value
+- ggpubr
 image: plot.png
 ---
 
@@ -20,11 +20,21 @@ knitr::opts_chunk$set(
     warning = FALSE
 )
 ```
+:::{.callout-note}
+1. Compute easily statistical tests (`t_test()` or `wilcox_test()`) using the `rstatix` package
+2. Auto-compute p-value label positions using the function `add_xy_position()` [in rstatix package].
+3. Add the p-values to the plot using the function `stat_pvalue_manual()` [in ggpubr package]. The following key options are illustrated in some of the examples:
+- The option `bracket.nudge.y` is used to move up or to move down the brackets.
+- The option `step.increase` is used to add more space between brackets.
+- The option `vjust` is used to vertically adjust the position of the p-values labels
+
+4. In some situations, the p-value labels are partially hidden by the plot top border. In these cases, the ggplot2 function `scale_y_continuous(expand = expansion(mult = c(0, 0.1)))` can be used to add more spaces between labels and the plot top border. The option mult = c(0, 0.1) indicates that 0% and 10% spaces are respectively added at the bottom and the top of the plot. 
+:::
 
 ```{r, warning = FALSE, message = FALSE}
 library(tidyverse)
-library(ggpubr)      # creat easily publication plots
-library(rstatix)    # pipe-friendly tools for easy statistical analyses
+library(ggpubr)         # creat easily publication plots
+library(rstatix)        # pipe-friendly tools for easy statistical analyses
 library(patchwork)
 ```
 
@@ -32,7 +42,7 @@ library(patchwork)
 
 ## Basic Barplot or Boxplot with p-value
 
-#### Comparing two means
+### Comparing two means
 ```{r}
 # Transform `dose` into factor variable
 df <- ToothGrowth
@@ -130,7 +140,7 @@ p2 <- ggpaired(df,
 
 p1 + p2
 ```
-#### Pairwise comparisons
+### Pairwise comparisons
 
 ```{r}
 ### boxplot
@@ -172,7 +182,7 @@ bp <- ggbarplot(df,
 
 bxp + bxp_man + bp
 ```
-#### Comparsions against reference groups
+### Comparsions against reference groups
 
 ```{r}
 stat_test <- df %>% 
@@ -236,11 +246,50 @@ bxp + bp
 ```
 
 
-
+## Add p-values to horizontal ggplots
 
 ```{r}
+# Transform `dose` into factor variable
+df <- ToothGrowth
+df$dose <- as.factor(df$dose)
+
+head(df, 3)
+
+stat_test <- df %>% 
+    t_test(len ~ dose) %>%
+    add_significance() %>% 
+    add_xy_position(x = "dose")
+
+stat_test
+
+# Box plots
+ggboxplot(df,
+    x = "dose", y = "len", fill = "dose",
+    palette = c("#00AFBB", "#E7B800", "#FC4E07")
+) +
+    stat_pvalue_manual(
+        stat_test,
+        # use the adjusted p-value significance levels as labels
+        label = "p.adj.signif", tip.length = 0.01,
+        coord.flip = TRUE
+    ) +
+    coord_flip()
+
+ggboxplot(df,
+    x = "dose", y = "len", fill = "dose",
+    palette = c("#00AFBB", "#E7B800", "#FC4E07")
+) +
+    stat_pvalue_manual(
+        stat_test,
+        ### use adjusted p-values as labels
+        label = "p.adj", tip.length = 0.01,
+        coord.flip = TRUE
+    ) +
+    coord_flip()
 
 ```
+
+
 
 ## Reference
 

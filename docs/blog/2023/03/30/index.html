@@ -181,7 +181,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
                                 <div class="quarto-categories">
                 <div class="quarto-category">R</div>
                 <div class="quarto-category">ggplot2</div>
-                <div class="quarto-category">p-value</div>
+                <div class="quarto-category">ggpubr</div>
               </div>
                   </div>
   </div>
@@ -199,7 +199,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Wednesday, March 29, 2023</p>
+        <p class="date">Thursday, March 30, 2023</p>
       </div>
     </div>
     
@@ -221,19 +221,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#comparsions-against-all-basemean" id="toc-comparsions-against-all-basemean" class="nav-link" data-scroll-target="#comparsions-against-all-basemean">Comparsions against all (basemean)</a></li>
   </ul>
 </li>
+  <li><a href="#add-p-values-to-horizontal-ggplots" id="toc-add-p-values-to-horizontal-ggplots" class="nav-link" data-scroll-target="#add-p-values-to-horizontal-ggplots">Add p-values to horizontal ggplots</a></li>
   <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
   </ul></nav>
 </nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content"><div class="cell" data-layout-align="center">
+<main class="content quarto-banner-title-block" id="quarto-document-content"><div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Compute easily statistical tests (<code><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test()</a></code> or <code><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">wilcox_test()</a></code>) using the <code>rstatix</code> package</li>
+<li>Auto-compute p-value label positions using the function <code><a href="https://rpkgs.datanovia.com/rstatix/reference/get_pvalue_position.html">add_xy_position()</a></code> [in rstatix package].</li>
+<li>Add the p-values to the plot using the function <code><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_pvalue_manual.html">stat_pvalue_manual()</a></code> [in ggpubr package]. The following key options are illustrated in some of the examples:</li>
+</ol>
+<ul>
+<li>The option <code>bracket.nudge.y</code> is used to move up or to move down the brackets.</li>
+<li>The option <code>step.increase</code> is used to add more space between brackets.</li>
+<li>The option <code>vjust</code> is used to vertically adjust the position of the p-values labels</li>
+</ul>
+<ol start="4" type="1">
+<li>In some situations, the p-value labels are partially hidden by the plot top border. In these cases, the ggplot2 function <code>scale_y_continuous(expand = expansion(mult = c(0, 0.1)))</code> can be used to add more spaces between labels and the plot top border. The option mult = c(0, 0.1) indicates that 0% and 10% spaces are respectively added at the bottom and the top of the plot.</li>
+</ol>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op">)</span>      <span class="co"># creat easily publication plots</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op">)</span>    <span class="co"># pipe-friendly tools for easy statistical analyses</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op">)</span>         <span class="co"># creat easily publication plots</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op">)</span>        <span class="co"># pipe-friendly tools for easy statistical analyses</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="basic-barplot-or-boxplot-with-p-value" class="level2"><h2 class="anchored" data-anchor-id="basic-barplot-or-boxplot-with-p-value">Basic Barplot or Boxplot with p-value</h2>
-<section id="comparing-two-means" class="level4"><h4 class="anchored" data-anchor-id="comparing-two-means">Comparing two means</h4>
+<section id="comparing-two-means" class="level3"><h3 class="anchored" data-anchor-id="comparing-two-means">Comparing two means</h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Transform `dose` into factor variable</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">ToothGrowth</span></span>
@@ -375,7 +401,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-</section><section id="pairwise-comparisons" class="level4"><h4 class="anchored" data-anchor-id="pairwise-comparisons">Pairwise comparisons</h4>
+</section><section id="pairwise-comparisons" class="level3"><h3 class="anchored" data-anchor-id="pairwise-comparisons">Pairwise comparisons</h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### boxplot</span></span>
 <span><span class="va">stat_test</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op">(</span><span class="va">len</span> <span class="op">~</span> <span class="va">dose</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -422,7 +448,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-</section><section id="comparsions-against-reference-groups" class="level4"><h4 class="anchored" data-anchor-id="comparsions-against-reference-groups">Comparsions against reference groups</h4>
+</section><section id="comparsions-against-reference-groups" class="level3"><h3 class="anchored" data-anchor-id="comparsions-against-reference-groups">Comparsions against reference groups</h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">stat_test</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op">(</span><span class="va">len</span> <span class="op">~</span> <span class="va">dose</span>, ref.group <span class="op">=</span> <span class="st">"0.5"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -494,10 +520,71 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
+</section></section><section id="add-p-values-to-horizontal-ggplots" class="level2"><h2 class="anchored" data-anchor-id="add-p-values-to-horizontal-ggplots">Add p-values to horizontal ggplots</h2>
 <div class="cell" data-layout-align="center">
-
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Transform `dose` into factor variable</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">ToothGrowth</span></span>
+<span><span class="va">df</span><span class="op">$</span><span class="va">dose</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">dose</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">##    len supp dose</span></span>
+<span><span class="co">## 1  4.2   VC  0.5</span></span>
+<span><span class="co">## 2 11.5   VC  0.5</span></span>
+<span><span class="co">## 3  7.3   VC  0.5</span></span>
+<span></span>
+<span><span class="va">stat_test</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op">(</span><span class="va">len</span> <span class="op">~</span> <span class="va">dose</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/add_significance.html">add_significance</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_pvalue_position.html">add_xy_position</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"dose"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">stat_test</span></span>
+<span><span class="co">## # A tibble: 3 × 14</span></span>
+<span><span class="co">##   .y.   group1 group2    n1    n2 statistic    df        p    p.adj p.adj.signif</span></span>
+<span><span class="co">##   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       </span></span>
+<span><span class="co">## 1 len   0.5    1         20    20     -6.48  38.0 1.27e- 7 2.54e- 7 ****        </span></span>
+<span><span class="co">## 2 len   0.5    2         20    20    -11.8   36.9 4.4 e-14 1.32e-13 ****        </span></span>
+<span><span class="co">## 3 len   1      2         20    20     -4.90  37.1 1.91e- 5 1.91e- 5 ****        </span></span>
+<span><span class="co">## # … with 4 more variables: y.position &lt;dbl&gt;, groups &lt;named list&gt;, xmin &lt;dbl&gt;,</span></span>
+<span><span class="co">## #   xmax &lt;dbl&gt;</span></span>
+<span></span>
+<span><span class="co"># Box plots</span></span>
+<span><span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggboxplot.html">ggboxplot</a></span><span class="op">(</span><span class="va">df</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"dose"</span>, y <span class="op">=</span> <span class="st">"len"</span>, fill <span class="op">=</span> <span class="st">"dose"</span>,</span>
+<span>    palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_pvalue_manual.html">stat_pvalue_manual</a></span><span class="op">(</span></span>
+<span>        <span class="va">stat_test</span>,</span>
+<span>        <span class="co"># use the adjusted p-value significance levels as labels</span></span>
+<span>        label <span class="op">=</span> <span class="st">"p.adj.signif"</span>, tip.length <span class="op">=</span> <span class="fl">0.01</span>,</span>
+<span>        coord.flip <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    <span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
-</section></section><section id="reference" class="level2"><h2 class="anchored" data-anchor-id="reference">Reference</h2>
+</div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggboxplot.html">ggboxplot</a></span><span class="op">(</span><span class="va">df</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"dose"</span>, y <span class="op">=</span> <span class="st">"len"</span>, fill <span class="op">=</span> <span class="st">"dose"</span>,</span>
+<span>    palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_pvalue_manual.html">stat_pvalue_manual</a></span><span class="op">(</span></span>
+<span>        <span class="va">stat_test</span>,</span>
+<span>        <span class="co">### use adjusted p-values as labels</span></span>
+<span>        label <span class="op">=</span> <span class="st">"p.adj"</span>, tip.length <span class="op">=</span> <span class="fl">0.01</span>,</span>
+<span>        coord.flip <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    <span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="reference" class="level2"><h2 class="anchored" data-anchor-id="reference">Reference</h2>
 <ol type="1">
 <li><a href="https://www.datanovia.com/en/blog/how-to-add-p-values-onto-basic-ggplots/">How to Add P-Values onto Basic GGPLOTS</a></li>
 <li><a href="https://www.datanovia.com/en/blog/how-to-add-p-values-onto-horizontal-ggplots/">How to Add P-Values onto Horizontal GGPLOTS</a></li>
