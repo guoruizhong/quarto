@@ -21,69 +21,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -234,65 +171,197 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">######################## --------- General</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + ,                <span class="co"># user setting</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + P        <span class="co"># command palette</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + K Ctrl + S       <span class="co"># keyboard shortcuts</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B                <span class="co"># toggle sidebar</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + P                <span class="co"># quick open, go to target file</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + N        <span class="co"># open a new vscode window</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + W        <span class="co"># close window</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + W                <span class="co"># close tab</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + K + W            <span class="co"># close all tabs</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">######################## --------- Editor</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + D                <span class="co"># select the word  </span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + L                <span class="co"># Select current line</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + L        <span class="co"># select all same selection</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Alt + ↑ / ↓      <span class="co"># Insert multiple cursor above / below, Escape exit mode</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + U                <span class="co"># Undo last cursor operation</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="ex">Shift</span> + Alt + L         <span class="co"># Split editor</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ex">CMD</span> + <span class="dt">\ </span>                <span class="co"># Split editor </span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="ex">Alt</span> + 1/2/3             <span class="co"># go to different tab of editor in the same window </span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + 1/2/3            <span class="co"># go to different editor</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="ex">Alt</span> + ↑ / ↓             <span class="co"># move line up or down</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="ex">Alt</span> + Shift + Up / Down     <span class="co"># copy line up or down</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + K</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>        <span class="co"># delete current code line</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + ] / [    <span class="co"># code folding</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + ] / [            <span class="co"># Indent/outdent line</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + ← / →            <span class="co"># mouve cursor left or right between words</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + ↑ / ↓            <span class="co"># scroll screen</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + ← / →    <span class="co"># select left or right between words</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Home or          <span class="co"># Go to beginning or end of file</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + /                <span class="co"># comment or uncomment</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co">######################## --------- Terminal</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + <span class="kw">`</span>                                  <span class="co"># Show integrated terminal</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + <span class="kw">`</span>                          <span class="co"># Create new terminal</span></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + PgUp   <span class="kw">|</span> <span class="ex">Cmd</span> + Shift + ]           <span class="co"># Move to previous terminal</span></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + PgDn   <span class="kw">|</span> <span class="ex">Cmd</span> + shift + [           <span class="co"># Move to next terminal</span></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + K                <span class="co"># clean the terminal but remain the history information, or use clear  in the terminal, clean command history</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="co">######################## --------- Search &amp; Replace</span></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + H <span class="co"># replace, Enter replace oen by one, Ctrl + Alt + Enter replace all </span></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + F <span class="co"># look up</span></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="ex">CMD</span> + G <span class="co"># replcace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="table">
+<colgroup>
+<col style="width: 40%">
+<col style="width: 30%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Description</th>
+<th>Mac</th>
+<th>Windows</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><em>General</em></strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Command Palette</td>
+<td><code>Cmd</code> + <code>Shift</code> + <code>P</code></td>
+<td><code>Ctrl</code> + <code>Shift</code> + <code>P</code></td>
+</tr>
+<tr class="odd">
+<td>Open settings</td>
+<td><code>Cmd</code> + <code>,</code></td>
+<td><code>Ctrl</code> + <code>,</code></td>
+</tr>
+<tr class="even">
+<td>Keyboard shoutcuts</td>
+<td><code>Cmd</code> + <code>K</code> <code>Cmd</code> + <code>S</code></td>
+<td><code>Ctrl</code> + <code>K</code> <code>Ctrl</code> + <code>S</code></td>
+</tr>
+<tr class="odd">
+<td>Toggle sidebar</td>
+<td><code>Cmd</code> + <code>B</code></td>
+<td><code>Ctrl</code> + <code>B</code></td>
+</tr>
+<tr class="even">
+<td>Open new window</td>
+<td><code>Cmd</code> + <code>Shift</code> + <code>N</code></td>
+<td><code>Ctrl</code> + <code>Shift</code> + <code>N</code></td>
+</tr>
+<tr class="odd">
+<td>Close window</td>
+<td><code>Cmd</code> + <code>Shift</code> + <code>W</code></td>
+<td><code>Ctrl</code> + <code>Shift</code> + <code>W</code></td>
+</tr>
+<tr class="even">
+<td>Close tab</td>
+<td><code>Cmd</code> + <code>W</code></td>
+<td><code>Ctrl</code> + <code>W</code></td>
+</tr>
+<tr class="odd">
+<td>Open the terminal</td>
+<td><code>Cmd</code> + <code>J</code></td>
+<td><code>Ctrl</code> + <code>J</code></td>
+</tr>
+<tr class="even">
+<td><strong><em>Editor</em></strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Split view</td>
+<td><code>Cmd</code> + <code>\</code></td>
+<td><code>Ctrl</code> + \</td>
+</tr>
+<tr class="even">
+<td>Navigate tabs</td>
+<td><code>Cmd</code> + <code>Shift</code> + <code>Tab</code></td>
+<td><code>Ctrl</code> + <code>Shift</code> + <code>Tab</code></td>
+</tr>
+<tr class="odd">
+<td>Navigate tab groups</td>
+<td><code>Cmd</code> + <code>1</code> / <code>2</code> / <code>3</code></td>
+<td><code>Ctrl</code> + <code>1</code> / <code>2</code> / <code>3</code></td>
+</tr>
+<tr class="even">
+<td>Multiple cursor</td>
+<td><code>Cmd</code> + <code>Opt</code> + <code>↑</code> / <code>↓</code></td>
+<td><code>Cmd</code> + <code>Opt</code> + <code>↑</code> / <code>↓</code></td>
+</tr>
+<tr class="odd">
+<td>Select text</td>
+<td><code>Cmd</code> + <code>Shift</code> + <code>↑</code> / <code>↓</code></td>
+<td><code>Ctrl</code> + <code>Shift</code> + <code>↑</code> / <code>↓</code></td>
+</tr>
+<tr class="even">
+<td>Delete previous word</td>
+<td><code>Cmd</code> + <code>Backspace</code></td>
+<td><code>Ctrl</code> + <code>Backspace</code></td>
+</tr>
+<tr class="odd">
+<td>Move the line Up / Down</td>
+<td><code>Opt</code> + <code>↑</code> / <code>↓</code></td>
+<td><code>Alt</code> + <code>↑</code> / <code>↓</code></td>
+</tr>
+<tr class="even">
+<td>Copy line Up / Down</td>
+<td><code>Shift</code> + <code>Opt</code> + <code>↑</code> / <code>↓</code></td>
+<td><code>Shift</code> + <code>Alt</code> + <code>↑</code> / <code>↓</code></td>
+</tr>
+<tr class="odd">
+<td>Select word</td>
+<td><code>Cmd</code> + <code>D</code></td>
+<td><code>Ctrl</code> + <code>D</code></td>
+</tr>
+<tr class="even">
+<td>Select current line</td>
+<td><code>Cmd</code> + <code>L</code></td>
+<td><code>Ctrl</code> + <code>L</code></td>
+</tr>
+<tr class="odd">
+<td>Select similar occurrences</td>
+<td><code>Cmd</code> + <code>Shift</code> + <code>L</code></td>
+<td><code>Ctrl</code> + <code>Shift</code> + <code>L</code></td>
+</tr>
+<tr class="even">
+<td>Delete current line</td>
+<td><code>Cmd</code> + <code>Shift</code> + <code>K</code></td>
+<td><code>Ctrl</code> + <code>Shift</code> + <code>K</code></td>
+</tr>
+<tr class="odd">
+<td>Comment lines</td>
+<td><code>Cmd</code> + <code>/</code></td>
+<td><code>Ctrl</code> + <code>/</code></td>
+</tr>
+<tr class="even">
+<td>Navigate to line</td>
+<td><code>Cmd</code> + <code>G</code></td>
+<td><code>Ctrl</code> + <code>G</code></td>
+</tr>
+<tr class="odd">
+<td>Code folding</td>
+<td><code>Cmd</code> + <code>Opt</code> + <code>[</code> / <code>]</code></td>
+<td><code>Ctrl</code> + <code>Shift</code> + <code>[</code> / <code>]</code></td>
+</tr>
+<tr class="even">
+<td>Indent / outdent lines</td>
+<td><code>Cmd</code> + <code>[</code> / <code>]</code></td>
+<td><code>Ctrl</code> + <code>[</code> / <code>]</code></td>
+</tr>
+<tr class="odd">
+<td>Format selected code</td>
+<td><code>Cmd</code> + <code>K</code> <code>Cmd</code> + <code>F</code></td>
+<td><code>Ctrl</code> + <code>K</code> <code>Ctrl</code> + <code>F</code></td>
+</tr>
+<tr class="even">
+<td>Format document</td>
+<td><code>Shift</code> + <code>Opt</code> + <code>F</code></td>
+<td><code>Shift</code> + <code>Alt</code> + <code>F</code></td>
+</tr>
+<tr class="odd">
+<td>Go to the start / end of the word</td>
+<td><code>Opt</code> + <code>←</code> / <code>→</code></td>
+<td><code>Alt</code> + <code>←</code> / <code>→</code></td>
+</tr>
+<tr class="even">
+<td>Go to the start / end of the line</td>
+<td><code>Cmd</code> + <code>←</code> / <code>→</code></td>
+<td><code>Ctrl</code> + <code>←</code> / <code>→</code></td>
+</tr>
+<tr class="odd">
+<td>Go to beginning or end of file</td>
+<td><code>Cmd</code> + <code>↑</code> / <code>↓</code></td>
+<td><code>Ctrl</code> + <code>↑</code> / <code>↓</code></td>
+</tr>
+<tr class="even">
+<td><strong><em>Search and Replace</em></strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Search files</td>
+<td><code>Cmd</code> + <code>Shift</code> + <code>F</code></td>
+<td><code>Ctrl</code> + <code>Shift</code> + <code>F</code></td>
+</tr>
+<tr class="even">
+<td>Find text</td>
+<td><code>Cmd</code> + <code>F</code></td>
+<td><code>Ctrl</code> + <code>F</code></td>
+</tr>
+<tr class="odd">
+<td>Replace text</td>
+<td><code>Cmd</code> + <code>Opt</code> + <code>F</code></td>
+<td><code>Ctrl</code> + <code>H</code></td>
+</tr>
+</tbody>
+</table>
 
 
 
