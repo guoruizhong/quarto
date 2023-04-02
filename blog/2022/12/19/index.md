@@ -2,7 +2,7 @@
 title: "Learn Linux basic for computing"
 date: 2022-12-19
 description: ""
-image: linux.png
+image: linux.jpg
 categories:
   - Linux
 ---
