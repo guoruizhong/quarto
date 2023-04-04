@@ -1,0 +1,51 @@
+[
+  {
+    "listing": "/atom.html",
+    "items": [
+      "/blog/2022/02/01/index.html",
+      "/blog/2022/09/02/index.html",
+      "/blog/2023/03/31/index.html",
+      "/blog/2023/03/30/index.html",
+      "/blog/2023/03/11/index.html",
+      "/blog/index.html",
+      "/blog/2023/03/01/index.html",
+      "/blog/2022/05/02/index.html",
+      "/blog/2023/03/08/index.html",
+      "/blog/2023/03/05/index.html",
+      "/blog/2022/01/22/index.html",
+      "/blog/2022/08/01/index.html",
+      "/blog/2023/04/01/index.html",
+      "/blog/2022/07/01/index.html",
+      "/blog/2023/03/06/index.html"
+    ]
+  },
+  {
+    "listing": "/blog/index.html",
+    "items": [
+      "/blog/2023/04/01/index.html",
+      "/blog/2023/03/31/index.html",
+      "/blog/2023/03/30/index.html",
+      "/blog/2023/03/11/index.html",
+      "/blog/2023/03/08/index.html",
+      "/blog/2023/03/01/index.html",
+      "/blog/2023/03/06/index.html",
+      "/blog/2023/03/05/index.html",
+      "/blog/2022/12/24/index.html",
+      "/blog/2022/12/23/index.html",
+      "/blog/2022/12/19/index.html",
+      "/blog/2022/12/18/index.html",
+      "/blog/2022/11/01/index.html",
+      "/blog/2022/10/01/index.html",
+      "/blog/2022/09/02/index.html",
+      "/blog/2022/08/01/index.html",
+      "/blog/2022/07/01/index.html",
+      "/blog/2022/05/02/index.html",
+      "/blog/2022/02/01/index.html",
+      "/blog/2022/01/22/index.html",
+      "/blog/2021/06/01/index.html",
+      "/blog/2021/03/16/index.html",
+      "/blog/2021/02/01/index.html",
+      "/blog/2021/01/02/index.html"
+    ]
+  }
+]
