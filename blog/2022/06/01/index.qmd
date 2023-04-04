@@ -8,9 +8,14 @@ categories:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(fig.width = 6, fig.height = 3.8,
-                      fig.align = "center", fig.retina = 3,
-                      out.width = "85%", collapse = TRUE)
+knitr::opts_chunk$set(
+    # fig.width = 6,
+    # fig.height = 3.8,
+    fig.align = "center",
+    # fig.retina = 3,
+    out.width = "100%",
+    collapse = TRUE
+)
 ```
 
 ## Heatmap packages 
