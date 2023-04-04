@@ -1,10 +1,10 @@
 ---
 title: "Visualizing clusters with heatmaps"
 image: pheatmap.png
-date: 2022-06-01
+date: 2023-04-01
 categories:
-  - pheatmap
   - R
+  - ComplexHeatmap
 ---
 
 ```{r setup, include=FALSE}

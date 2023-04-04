@@ -10,16 +10,17 @@
 <atom:link href="https://guoruizhong.github.io/atom.xml" rel="self" type="application/rss+xml"/>
 <description>Guorui Zhong</description>
 <generator>quarto-1.2.335</generator>
-<lastBuildDate>Sun, 02 Apr 2023 16:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 31 Mar 2023 16:00:00 GMT</lastBuildDate>
 <item>
-  <title>{B4F502887207:/blog/2023/04/03/index.html}</title>
+  <title>{B4F502887207:/blog/2023/04/01/index.html}</title>
   <dc:creator>Guorui Zhong</dc:creator>
-  <link>https://guoruizhong.github.io/blog/2023/04/03/index.html</link>
-  <description>{B4F502887207:/blog/2023/04/03/index.html}</description>
+  <link>https://guoruizhong.github.io/blog/2023/04/01/index.html</link>
+  <description>{B4F502887207:/blog/2023/04/01/index.html}</description>
   <category>R</category>
   <category>ComplexHeatmap</category>
-  <guid>https://guoruizhong.github.io/blog/2023/04/03/index.html</guid>
-  <pubDate>Sun, 02 Apr 2023 16:00:00 GMT</pubDate>
+  <guid>https://guoruizhong.github.io/blog/2023/04/01/index.html</guid>
+  <pubDate>Fri, 31 Mar 2023 16:00:00 GMT</pubDate>
+  <media:content url="https://guoruizhong.github.io/blog/2023/04/01/pheatmap.png" medium="image" type="image/png" height="103" width="144"/>
 </item>
 <item>
   <title>{B4F502887207:/blog/2023/03/31/index.html}</title>
@@ -133,17 +134,6 @@
   <media:content url="https://guoruizhong.github.io/blog/2022/07/01/ggvolcano.png" medium="image" type="image/png" height="103" width="144"/>
 </item>
 <item>
-  <title>{B4F502887207:/blog/2022/06/01/index.html}</title>
-  <dc:creator>Guorui Zhong</dc:creator>
-  <link>https://guoruizhong.github.io/blog/2022/06/01/index.html</link>
-  <description>{B4F502887207:/blog/2022/06/01/index.html}</description>
-  <category>pheatmap</category>
-  <category>R</category>
-  <guid>https://guoruizhong.github.io/blog/2022/06/01/index.html</guid>
-  <pubDate>Tue, 31 May 2022 16:00:00 GMT</pubDate>
-  <media:content url="https://guoruizhong.github.io/blog/2022/06/01/pheatmap.png" medium="image" type="image/png" height="103" width="144"/>
-</item>
-<item>
   <title>{B4F502887207:/blog/2022/05/02/index.html}</title>
   <dc:creator>Guorui Zhong</dc:creator>
   <link>https://guoruizhong.github.io/blog/2022/05/02/index.html</link>
@@ -187,7 +177,7 @@
   <link>https://guoruizhong.github.io/blog/index.html</link>
   <description>{B4F502887207:/blog/index.html}</description>
   <guid>https://guoruizhong.github.io/blog/index.html</guid>
-  <pubDate>Tue, 04 Apr 2023 14:28:08 GMT</pubDate>
+  <pubDate>Tue, 04 Apr 2023 14:33:58 GMT</pubDate>
 </item>
 </channel>
 </rss>
