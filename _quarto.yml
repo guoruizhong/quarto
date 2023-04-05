@@ -89,9 +89,9 @@ website:
       #   aria-label: youtube
       #   href: https://www.youtube.com/andrewheiss
       #   # rel: me
-      # - icon: postage-heart-fill
-      #   aria-label: family
-      #   href: https://www.heissatopia.com/
+      - icon: journal-check
+        aria-label: journal-check
+        href: https://scholar.google.com/citations?user=g0MfTPMAAAAJ&hl=en
       - icon: linkedin
         aria-label: linkedin
         href: https://www.linkedin.com/in/guorui-zhong-754761185/
