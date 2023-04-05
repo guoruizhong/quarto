@@ -29,7 +29,7 @@ execute:
 website:
   title: "Guorui Zhong"
   description: "Guorui Zhong"
-  favicon: "/files/profiles/android-chrome-512x512.png"
+  favicon: "/files/profiles/z_512x512.png"
   site-url: "https://guoruizhong.github.io/"
   repo-url: "https://github.com/guoruizhong/guoruizhong.github.io"
 
@@ -48,25 +48,28 @@ website:
   navbar:
     pinned: true
 
-    left:
-      - text: "About"
-        href: "index.qmd"
+    right:
+      - icon: activity
+        aria-label: activity
+        # text: "Learning"
+        href: "now/index.qmd"
+      # - text: "Uses"
+      #   file: uses/index.qmd
+      # - text: "About"
+      #   href: "index.qmd"
       # - text: "CV"
       #   href: "cv/index.qmd"
-      - text: "Blog"
-        file: blog/index.qmd
+      # - text: "Posts"
+      #   file: "blog/index.qmd"
+        # file: "blog/index.qmd"
       # - text: "Research"
       #   file: research/index.qmd
       # - text: "Teaching"
       #   href: "teaching/index.qmd"
       # - text: "Talks"
       #   href: "talks/index.qmd"
-      - text: "Learning"
-        href: now/index.qmd
-      - text: "Uses"
-        file: uses/index.qmd
     
-    right:
+    # right:
       # - icon: rss
       #   aria-label: rss
       #   href: atom.xml
@@ -99,11 +102,11 @@ website:
   
   page-footer:
     center: |
-      <span class="faux-block">{{< fa brands creative-commons >}} 2021-2022 Guorui Zhong ~ Made with {{< fa brands r-project >}} and [Quarto](https://quarto.org/)</span>
+      <span class="faux-block">{{< fa brands creative-commons >}} 2021-2023 Guorui Zhong ~ Made with {{< fa brands r-project >}} and [Quarto](https://quarto.org/)</span>
 
 format:
   html:
-    theme: 
+    theme:
       - html/me.scss
     toc: false
     code-link: true

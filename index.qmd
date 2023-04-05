@@ -1,22 +1,49 @@
 ---
-title: "Hello there!"
-image: files/profiles/profile.jpg
-about: 
-  template: jolla
-  links:
-  - icon: linkedin
-    aria-label: linkedin
-    href: https://www.linkedin.com/in/guorui-zhong-754761185/
-  - icon: envelope
-    aria-label: email
-    href: "mailto:zhonggr@bii.a-star.edu.sg"
-  - icon: github
-    aria-label: github
-    href: https://github.com/guoruizhong
+title: ""
+author: ""
+listing:
+  - id: posts_2023
+    contents: 
+      - "2023/**/index.qmd"
+      - "2023/**/index.md"
+    sort: "date desc"
+    template: html/blog/listing.ejs
+    categories: true
+  - id: posts_2022
+    contents: 
+      - "2022/**/index.qmd"
+      - "2022/**/index.md"
+    sort: "date desc"
+    template: html/blog/listing.ejs
+    categories: true
+  - id: posts_2021
+    contents: 
+      - "2021/**/index.qmd"
+      - "2021/**/index.md"
+    sort: "date desc"
+    template: html/blog/listing.ejs
+    categories: true
 
+page-layout: full
+title-block-banner: true
+toc-title: Year
+toc-location: right
+date-format: "MMMM D, YYYY"
+code-tools: false
+comments: false
 ---
 
+## 2023
 
-I'm an post-doctoral research fellow at the [Bioinformatics institute (BII)](https://www.a-star.edu.sg/bii), [A*STAR](https://www.a-star.edu.sg/). The purpose of this blog is to record the things I learned during my research work.
+:::{#posts_2023}
+:::
 
+## 2022
 
+:::{#posts_2022}
+:::
+
+## 2021
+
+:::{#posts_2021}
+:::

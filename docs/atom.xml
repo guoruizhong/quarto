@@ -32,48 +32,48 @@
 <span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">test</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"Test"</span>, <span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">:</span><span class="fl" style="color: #AD0000;">10</span>, sep <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">""</span><span class="op" style="color: #5E5E5E;">)</span></span>
 <span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">test</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"Gene"</span>, <span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">:</span><span class="fl" style="color: #AD0000;">20</span>, sep <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">""</span><span class="op" style="color: #5E5E5E;">)</span></span>
 <span><span class="va" style="color: #111111;">test</span></span>
-<span><span class="co" style="color: #5E5E5E;">##               Test1      Test2       Test3      Test4      Test5      Test6</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene1   4.861668270 -0.5051159  3.93845180  0.9664389  3.7438022 -0.5073941</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene2   2.373995330  0.9063518  3.11532116  1.3277886  2.4637457  0.5249083</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene3   2.711947048 -1.7361168  5.02706278 -0.4930589  3.6982848  0.4212815</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene4   3.647363299 -0.6195029  3.04952892  1.0444707  1.4099221 -1.2432041</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene5   2.252065909 -0.3386798  4.24089997 -1.4839476  2.9039635  0.7543826</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene6   4.109199823 -0.2476436  2.76721474 -2.1326980  2.5225711 -0.8734084</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene7   3.443810799 -0.9104235  2.49600137  0.7559908  2.1420516 -0.9395086</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene8   1.970122608  0.6594349  3.34199030  1.2296365  3.9101233 -1.0251450</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene9   5.684400621 -0.6428587  2.13544417  0.8097229  2.6628695 -1.1961657</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene10  3.344764484  0.1935486  3.37951563 -1.5077618  4.2672070 -0.7884927</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene11  0.146687304  3.7892100 -0.29322508  2.8530017 -0.5974328  3.4100331</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene12  0.454880131  2.6426894 -0.36101258  2.4399500 -0.8696708  1.4354002</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene13  0.000381652  2.3888174  0.00545211  1.1733526  0.7906997  1.5494709</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene14 -0.499287509  3.4330473  1.16694868  1.7647298  0.4407301  1.3344971</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene15  0.967074953  6.2520114 -1.06965303  5.5201361  1.0428284  6.0027938</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene16  1.414414886  5.8490995 -0.60074614  6.3145327 -0.9560424  5.9722033</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene17 -1.513040587  5.4403998 -0.40607388  5.3505966 -0.6185127  5.9477998</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene18  0.767934688  6.6047827 -2.18915530  6.3317123  1.2883888  6.8671976</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene19 -0.742241171  5.0375032  0.08065459  6.0032370 -0.4962871  5.9811265</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene20 -0.429764004  5.7708220 -0.12374645  5.7932064  3.0555533  6.9870373</span></span>
-<span><span class="co" style="color: #5E5E5E;">##             Test7       Test8      Test9      Test10</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene1   2.1397689  0.76897562  3.0111816  0.85070550</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene2   2.7936812  1.34194219  3.1799133  0.20682266</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene3   3.4085650  1.04194696  3.5968554 -0.01565175</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene4   3.4587861  0.92282498  4.6664928  1.20700033</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene5   4.3545106  2.17212840  2.3878184  2.20410251</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene6   4.7535916  0.03974777  3.4008398 -0.16593072</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene7   3.2633652  0.02711899  0.7383688  0.59775911</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene8   3.9844373  1.07046219  3.6179702  1.62680553</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene9   3.4743194 -0.27405628  5.5268112  1.69721088</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene10  1.6176495 -0.04896510  3.3221610  0.72055194</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene11  0.9232877  3.43604617 -0.7002682  2.90208988</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene12 -0.6082481  3.41962434  0.3624348  1.17622925</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene13  1.2649929  2.54303022 -0.4443426  0.33077885</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene14  0.3400465  2.41576088 -1.0180667  2.69854197</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene15 -1.0722244  4.99305656  0.9791859  5.59986665</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene16 -1.1855263  4.56175880 -0.1057987  6.18259038</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene17 -1.1323598  4.97007383  0.9791506  5.58948317</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene18 -0.1388911  5.36709462 -1.8581529  7.78048305</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene19 -1.6743603  6.21354720 -0.1729392  6.97119096</span></span>
-<span><span class="co" style="color: #5E5E5E;">## Gene20  0.4286925  6.09719099  0.2891176  3.45676835</span></span></code></pre></div>
+<span><span class="co" style="color: #5E5E5E;">##             Test1       Test2       Test3       Test4       Test5        Test6</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene1   4.5069372  1.01079181  3.16717046 -0.82011139  4.09509514  0.479901597</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene2   2.5290174 -0.83489822  3.32685798  0.01874428  2.04343578 -0.007898155</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene3   3.2124017  0.35050685  0.97833708  0.69868790  4.23792686 -0.670537778</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene4   3.5399941  1.35844917  2.47924617  0.99155390  3.16778717  0.744394760</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene5   4.2807385  0.41442653  3.37963545  0.03933052  4.01684789 -0.485570117</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene6   3.8687303  0.87990164  3.86096588  0.21762612  3.29081872 -1.847654400</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene7   2.7955018  0.58035760  3.12633121  0.01583202  2.69396972  1.022510146</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene8   3.5730370 -0.07456227  2.09858620  1.86198148  3.80085319 -1.628415113</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene9   4.1302300 -1.01692978  3.46820792 -0.88789471  2.44920728 -0.372169744</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene10  3.3084941 -0.18305988  4.27695102 -0.74264230  3.32436930 -0.617832490</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene11  1.3833557  1.65706904 -0.04206143  1.98565045 -0.42624252  2.187434915</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene12 -0.6624558  0.53509020 -1.99243426  0.99083432 -0.06168184  1.569093635</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene13  1.9206939  1.26626428 -1.70038383  1.62559544  0.73896040  1.825630035</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene14 -0.5761231  2.64508132 -0.65118823  0.88121867 -1.12032436  3.432755322</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene15  0.4218073  7.48923064  0.27465747  5.58753405 -0.86825052  5.719383026</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene16 -0.5560136  7.42383331  0.89710655  5.78744658 -0.54979255  6.820903417</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene17  0.5002894  7.20981075  0.21633716  7.17142505  2.75011484  6.171851307</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene18  0.7795018  7.03581344 -0.60718592  7.28140927  1.25553830  5.379498267</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene19 -0.4516096  5.04650538  0.84050591  3.70213612 -0.22369315  5.552112390</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene20  0.4650555  5.73791932 -0.29936062  5.36620778 -0.93784580  8.345592489</span></span>
+<span><span class="co" style="color: #5E5E5E;">##             Test7       Test8       Test9     Test10</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene1   4.2404964 -1.00030373  4.84071133  0.2102302</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene2   4.3352062  1.58878394  3.84667859 -0.9567581</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene3   4.2379378  0.28072561  2.39896311  0.5734633</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene4   3.0245511  0.05343261  3.71199369  0.2690240</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene5   5.3012798  0.93845236  2.76162442 -0.9298352</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene6   3.5632788 -0.77398959  2.65761581  0.1490087</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene7   1.3873455 -0.55183584  2.64445421 -0.2672683</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene8   3.8490793 -0.02686096  3.15550177  0.2536909</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene9   2.6434883  0.55298424  2.79662470  0.1673223</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene10  3.9237466 -0.02589508  2.72049657  0.7148307</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene11  0.8928614  3.35638622  0.47181810  1.8415557</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene12 -0.7238769  0.92874950  1.36511471  0.6401960</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene13  0.2260606  3.74463528 -0.17806858  3.9626363</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene14 -0.3555210  1.79406608 -0.44342537  1.4222950</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene15 -0.5130012  7.65329304 -0.13584347  5.4297202</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene16 -1.6194229  6.47965512 -0.07352917  5.9908136</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene17 -1.1359213  6.27519242  1.46345037  6.1057468</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene18  0.2274075  7.21407728  0.68311898  6.0863468</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene19  1.7132170  5.82408745 -0.07188135  5.8055540</span></span>
+<span><span class="co" style="color: #5E5E5E;">## Gene20 -1.2277874  6.77613696  1.17737260  6.0539356</span></span></code></pre></div>
 </div>
 </section><section id="pheatmap" class="level2"><h2 class="anchored" data-anchor-id="pheatmap">pheatmap</h2>
 <div class="cell" data-layout-align="center">
@@ -2033,7 +2033,7 @@ Note
   <media:content url="https://guoruizhong.github.io/blog/2022/01/22/colorblind_palette.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
-  <title>Blog</title>
+  <title>Posts</title>
   <dc:creator>Guorui Zhong</dc:creator>
   <link>https://guoruizhong.github.io/blog/index.html</link>
   <description><![CDATA[ 
@@ -2045,7 +2045,7 @@ Note
 <h2 class="anchored" data-anchor-id="section">2023</h2>
 <div id="listing-posts_2023" class="quarto-listing quarto-listing-container-custom">
 <div class="list blog">
-    <div class="blog-entry" data-index="0" data-categories="R,ComplexHeatmap" data-listing-date-sort="1680278400000" data-listing-file-modified-sort="1680619229796" data-listing-reading-time-sort="1.385">
+    <div class="blog-entry" data-index="0" data-categories="R,ComplexHeatmap" data-listing-date-sort="1680278400000" data-listing-file-modified-sort="1680698573497" data-listing-reading-time-sort="1.385">
         <div class="metadata">          
             <p class="date listing-date">April 1, 2023</p>
         </div>
@@ -2563,7 +2563,7 @@ No matching items
 
  ]]></description>
   <guid>https://guoruizhong.github.io/blog/index.html</guid>
-  <pubDate>Tue, 04 Apr 2023 14:41:45 GMT</pubDate>
+  <pubDate>Wed, 05 Apr 2023 13:36:04 GMT</pubDate>
 </item>
 </channel>
 </rss>
