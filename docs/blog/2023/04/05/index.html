@@ -8,7 +8,7 @@
 
 <meta name="author" content="Guorui Zhong">
 
-<title>Guorui Zhong - Pipeline for Working with remote server</title>
+<title>Guorui Zhong - Normalize and Standardize Data in R for Heatmap Visualization</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -184,11 +184,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Pipeline for Working with remote server</h1>
+      <h1 class="title">Normalize and Standardize Data in R for Heatmap Visualization</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">R</div>
-                <div class="quarto-category">Linux</div>
-                <div class="quarto-category">VSCode</div>
+                <div class="quarto-category">ComplexHeatmap</div>
               </div>
                   </div>
   </div>
@@ -206,10 +205,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Saturday, December 24, 2022</p>
+        <p class="date">Wednesday, April 5, 2023</p>
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">Wednesday, April 5, 2023</p>
+      </div>
+    </div>
       
     </div>
     
@@ -221,10 +226,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#setup-ssh-remote-keys" id="toc-setup-ssh-remote-keys" class="nav-link active" data-scroll-target="#setup-ssh-remote-keys">Setup SSH Remote Keys</a></li>
-  <li><a href="#make-bash-with-colors" id="toc-make-bash-with-colors" class="nav-link" data-scroll-target="#make-bash-with-colors">Make Bash with colors</a></li>
-  <li><a href="#powerful-terminal" id="toc-powerful-terminal" class="nav-link" data-scroll-target="#powerful-terminal">Powerful Terminal</a></li>
-  <li><a href="#mount-remote-files-on-mac" id="toc-mount-remote-files-on-mac" class="nav-link" data-scroll-target="#mount-remote-files-on-mac">Mount remote files on mac</a></li>
+  <li><a href="#standard-scaling" id="toc-standard-scaling" class="nav-link active" data-scroll-target="#standard-scaling">Standard scaling</a></li>
+  <li><a href="#normalization" id="toc-normalization" class="nav-link" data-scroll-target="#normalization">Normalization</a></li>
   </ul>
 </nav>
 </nav>
@@ -237,96 +240,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<section id="setup-ssh-remote-keys" class="level2">
-<h2 class="anchored" data-anchor-id="setup-ssh-remote-keys">Setup SSH Remote Keys</h2>
-<p>The following setup will help to ogin to server without using password and IP address with SSH remote key</p>
-<ol type="1">
-<li>Add remote server host into lost hosts files</li>
-</ol>
-<ul>
-<li>Mac: <code>code /etc/hosts</code></li>
-<li>Windows: <code>C:\Windows\System32\drivers\etc\hosts</code></li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">### On the local machine: </span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">172.20.***.**</span> nucleus.ccpa nucleus</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">172.20.***.**</span> lipid-droplets.ccpa lipid-droplets</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="2" type="1">
-<li>Generate public key</li>
-</ol>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">### </span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">local</span><span class="op">&gt;</span> cd ~/.ssh</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">local</span><span class="op">&gt;</span> ssh-keygen <span class="at">-t</span> ed25519</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">local</span><span class="op">&gt;</span> ls</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">local</span><span class="op">&gt;</span> cat id_ed25519.pub </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="3" type="1">
-<li>Add the public key to remote server</li>
-</ol>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">###  On the remote server</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">remote</span><span class="op">&gt;</span> cd ~/.ssh</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">remote</span><span class="op">&gt;</span> chown <span class="at">-R</span> chase:users .ssh</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">remote</span><span class="op">&gt;</span> chmod 700 .ssh</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">remote</span><span class="op">&gt;</span> scp username@local://home/user/.ssh/id_ed25519.pub .ssh/authorized_keys</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">remote</span><span class="op">&gt;</span> chmod 644 .ssh/authorized_keys</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">### For multiple machines, add the publick key to the authorized_keys in a new line</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">local</span><span class="op">&gt;</span> cat id_ed25519.pub</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="key.jpg" class="img-fluid"></p>
+<p>Data normalization methods are used to make variables, measured in different scales, have comparable values. This preprocessing steps is important for clustering and heatmap visualization, principal component analysis and other machine learning algorithms based on distance measures.</p>
+<p>This article describes the following data rescaling approaches:</p>
+<pre><code>Standard scaling or standardization
+Normalization or Min-Max scaling
+Percentile transformation</code></pre>
+<section id="standard-scaling" class="level2">
+<h2 class="anchored" data-anchor-id="standard-scaling">Standard scaling</h2>
+<p><strong>Standard scaling</strong>, also known as standardization or Z-score normalization, consists of subtracting the mean and divide by the standard deviation. In such a case, each value would reflect the distance from the mean in units of standard deviation.</p>
+<p>If we would assume all variables come from some normal distribution, then scaling would bring them all close to the standard normal distribution. The resulting distribution has a mean of 0 and a standard deviation of 1.</p>
+<p><strong>Standard scaling formula</strong>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Transformed.Values = <span class="fu">\frac</span>{Values - Mean}{Standard.Deviation}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>An alternative to standardization is the <strong>mean normalization</strong>, which resulting distribution will have between -1 and 1 with mean = 0.</p>
+<p><strong>Mean normalization formula</strong>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode tex code-with-copy"><code class="sourceCode latex"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Transformed.Values = <span class="fu">\frac</span>{Values - Mean}{Maximum - Minimum}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Standardization and Mean Normalization can be used for algorithms that assumes zero centric data like <em>Principal Component Analysis</em>(PCA).</p>
 </section>
-<section id="make-bash-with-colors" class="level2">
-<h2 class="anchored" data-anchor-id="make-bash-with-colors">Make Bash with colors</h2>
-<p>In the remote server, add the following script to the <code>~/.bashrc</code></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="va">PS1</span><span class="op">=</span><span class="st">'\[\033[1;36m\]\u\[\033[1;37m\] @\[\033[1;32m\] \h:\[\033[1;33m\] \w\[\033[0;97m [\t]\[\033[0;97m \n\[\033[1;35m\]\$\[\033[0m\] '</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="powerful-terminal" class="level2">
-<h2 class="anchored" data-anchor-id="powerful-terminal">Powerful Terminal</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Install [Home-brew](https://brew.sh/)</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/bin/bash</span> <span class="at">-c</span> <span class="st">"</span><span class="va">$(</span><span class="ex">curl</span> <span class="at">-fsSL</span> https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="va">)</span><span class="st">"</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">### Change default shell from bash to zsh</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">chsh</span> <span class="at">-s</span> <span class="va">$(</span><span class="fu">which</span> zsh<span class="va">)</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">### Install oh-my-zsh in the terminal</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sh</span> <span class="at">-c</span> <span class="st">"</span><span class="va">$(</span><span class="ex">curl</span> <span class="at">-fsSL</span> https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh<span class="va">)</span><span class="st">"</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">###  change default theme to ys</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> ~/.zshrc</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="va">ZSH_THEME</span><span class="op">=</span><span class="st">"ys"</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">### install oh-my-zsh plugins</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/zsh-users/zsh-syntax-highlighting.git <span class="va">${ZSH_CUSTOM</span><span class="op">:-</span>~/.oh-my-zsh/custom<span class="va">}</span>/plugins/zsh-syntax-highlighting</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/zsh-users/zsh-autosuggestions <span class="va">${ZSH_CUSTOM</span><span class="op">:-</span>~/.oh-my-zsh/custom<span class="va">}</span>/plugins/zsh-autosuggestions</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">### make oh-my-zsh plugins working</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> ~/.zshrc</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">### then add following </span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="va">plugins</span><span class="op">=</span><span class="va">(</span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  git</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  zsh-autosuggestions</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  zsh-syntax-highlighting</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>  colored-man-pages</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  colorize</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="va">)</span></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="co">### Make it working</span></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.zshrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="mount-remote-files-on-mac" class="level2">
-<h2 class="anchored" data-anchor-id="mount-remote-files-on-mac">Mount remote files on mac</h2>
-<p><img src="macfuse.png" class="img-fluid"></p>
-<ol type="1">
-<li><p>Install <code>macFUSE</code> and <code>SSHFS</code>: <a href="https://osxfuse.github.io/" class="uri">https://osxfuse.github.io/</a></p></li>
-<li><p>Create mount directory in local</p></li>
-</ol>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mkdir ~/mount/mountpoint</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="3" type="1">
-<li>Mount directory</li>
-</ol>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sshfs</span> «user»@«host»: «mountpoint»</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="4" type="1">
-<li>Un-mounting the remote volume</li>
-</ol>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> umount ~/mount/mountpoint</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="mount.jpg" class="img-fluid"></p>
+<section id="normalization" class="level2">
+<h2 class="anchored" data-anchor-id="normalization">Normalization</h2>
+<p>When variables in the data comes from possibly different (and non-normal) distributions, other transformations may be in order. Another possibility is to normalize the variables to brings data to the 0 to 1 scale by subtracting the minimum and dividing by the maximum of all observations.</p>
+<p>This preserves the shape of each variable’s distribution while making them easily comparable on the same “scale”.</p>
+<p><strong>Formula to normalize data between 0 and 1</strong> :</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode tex code-with-copy"><code class="sourceCode latex"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Transformed.Values = <span class="fu">\frac</span>{Values - Minimum}{Maximum - Minimum}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Formula to rescale the data between an arbitrary set of values [a, b]</strong>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode tex code-with-copy"><code class="sourceCode latex"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Transformed.Values = a + <span class="fu">\frac</span>{(Values - Minimum)(b-a)}{Maximum - Minimum}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>where <code>a,b</code> are the min-max values.</p>
+<p><strong>Normalize data in R</strong>. Using the Min-Max normalization function on <code>mtcars</code> data easily reveals columns with only two (<code>am</code>, <code>vs</code>) or three (<code>gear</code>, <code>cyl</code>) variables compared with variables that have a higher resolution of possible values:</p>
 
 
 </section>

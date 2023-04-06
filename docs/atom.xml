@@ -10,7 +10,52 @@
 <atom:link href="https://guoruizhong.github.io/atom.xml" rel="self" type="application/rss+xml"/>
 <description>Guorui Zhong</description>
 <generator>quarto-1.2.335</generator>
-<lastBuildDate>Fri, 31 Mar 2023 16:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 04 Apr 2023 16:00:00 GMT</lastBuildDate>
+<item>
+  <title>Normalize and Standardize Data in R for Heatmap Visualization</title>
+  <dc:creator>Guorui Zhong</dc:creator>
+  <link>https://guoruizhong.github.io/blog/2023/04/05/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Data normalization methods are used to make variables, measured in different scales, have comparable values. This preprocessing steps is important for clustering and heatmap visualization, principal component analysis and other machine learning algorithms based on distance measures.</p>
+<p>This article describes the following data rescaling approaches:</p>
+<pre><code>Standard scaling or standardization
+Normalization or Min-Max scaling
+Percentile transformation</code></pre>
+<section id="standard-scaling" class="level2">
+<h2 class="anchored" data-anchor-id="standard-scaling">Standard scaling</h2>
+<p><strong>Standard scaling</strong>, also known as standardization or Z-score normalization, consists of subtracting the mean and divide by the standard deviation. In such a case, each value would reflect the distance from the mean in units of standard deviation.</p>
+<p>If we would assume all variables come from some normal distribution, then scaling would bring them all close to the standard normal distribution. The resulting distribution has a mean of 0 and a standard deviation of 1.</p>
+<p><strong>Standard scaling formula</strong>:</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb2-1">Transformed.Values = <span class="fu" style="color: #4758AB;">\frac</span>{Values - Mean}{Standard.Deviation}</span></code></pre></div>
+<p>An alternative to standardization is the <strong>mean normalization</strong>, which resulting distribution will have between -1 and 1 with mean = 0.</p>
+<p><strong>Mean normalization formula</strong>:</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode tex code-with-copy"><code class="sourceCode latex"><span id="cb3-1">Transformed.Values = <span class="fu" style="color: #4758AB;">\frac</span>{Values - Mean}{Maximum - Minimum}</span></code></pre></div>
+<p>Standardization and Mean Normalization can be used for algorithms that assumes zero centric data like <em>Principal Component Analysis</em>(PCA).</p>
+</section>
+<section id="normalization" class="level2">
+<h2 class="anchored" data-anchor-id="normalization">Normalization</h2>
+<p>When variables in the data comes from possibly different (and non-normal) distributions, other transformations may be in order. Another possibility is to normalize the variables to brings data to the 0 to 1 scale by subtracting the minimum and dividing by the maximum of all observations.</p>
+<p>This preserves the shape of each variable’s distribution while making them easily comparable on the same “scale”.</p>
+<p><strong>Formula to normalize data between 0 and 1</strong> :</p>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode tex code-with-copy"><code class="sourceCode latex"><span id="cb4-1">Transformed.Values = <span class="fu" style="color: #4758AB;">\frac</span>{Values - Minimum}{Maximum - Minimum}</span></code></pre></div>
+<p><strong>Formula to rescale the data between an arbitrary set of values [a, b]</strong>:</p>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode tex code-with-copy"><code class="sourceCode latex"><span id="cb5-1">Transformed.Values = a + <span class="fu" style="color: #4758AB;">\frac</span>{(Values - Minimum)(b-a)}{Maximum - Minimum}</span></code></pre></div>
+<p>where <code>a,b</code> are the min-max values.</p>
+<p><strong>Normalize data in R</strong>. Using the Min-Max normalization function on <code>mtcars</code> data easily reveals columns with only two (<code>am</code>, <code>vs</code>) or three (<code>gear</code>, <code>cyl</code>) variables compared with variables that have a higher resolution of possible values:</p>
+
+
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <category>ComplexHeatmap</category>
+  <guid>https://guoruizhong.github.io/blog/2023/04/05/index.html</guid>
+  <pubDate>Tue, 04 Apr 2023 16:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Visualizing clusters with heatmaps</title>
   <dc:creator>Guorui Zhong</dc:creator>
@@ -2045,7 +2090,24 @@ Note
 <h2 class="anchored" data-anchor-id="section">2023</h2>
 <div id="listing-posts_2023" class="quarto-listing quarto-listing-container-custom">
 <div class="list blog">
-    <div class="blog-entry" data-index="0" data-categories="R,ComplexHeatmap" data-listing-date-sort="1680278400000" data-listing-file-modified-sort="1680702578165" data-listing-reading-time-sort="1.385">
+    <div class="blog-entry" data-index="0" data-categories="R,ComplexHeatmap" data-listing-date-sort="1680624000000" data-listing-file-modified-sort="1680703800009" data-listing-reading-time-sort="1.66">
+        <div class="metadata">          
+            <p class="date listing-date">April 5, 2023</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2023/04/05/index.html">Normalize and Standardize Data in R for Heatmap Visualization</a></p>
+            <div class="post-categories listing-categories">
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('R'); return false;">
+                    R
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('ComplexHeatmap'); return false;">
+                    ComplexHeatmap
+                </div>
+            </div>
+            <p class="description listing-description"><!-- desc(5A0113B34292)[max=175]:blog/2023/04/05/index.html --></p>
+        </div>
+    </div>
+    <div class="blog-entry" data-index="1" data-categories="R,ComplexHeatmap" data-listing-date-sort="1680278400000" data-listing-file-modified-sort="1680702578165" data-listing-reading-time-sort="1.385">
         <div class="metadata">          
             <p class="date listing-date">April 1, 2023</p>
         </div>
@@ -2065,7 +2127,7 @@ Note
             <img src="https://guoruizhong.github.io/blog/2023/04/01/pheatmap.png" alt="Visualizing clusters with heatmaps" title="Visualizing clusters with heatmaps">
         </div>
     </div>
-    <div class="blog-entry" data-index="1" data-categories="boxplot,R" data-listing-date-sort="1680192000000" data-listing-file-modified-sort="1680319449821" data-listing-reading-time-sort="6.725">
+    <div class="blog-entry" data-index="2" data-categories="boxplot,R" data-listing-date-sort="1680192000000" data-listing-file-modified-sort="1680319449821" data-listing-reading-time-sort="6.725">
         <div class="metadata">          
             <p class="date listing-date">March 31, 2023</p>
         </div>
@@ -2085,7 +2147,7 @@ Note
             <img src="https://guoruizhong.github.io/blog/2023/03/31/plot.png" alt="Add p-value and significant level at facet boxplot" title="Add p-value and significant level at facet boxplot">
         </div>
     </div>
-    <div class="blog-entry" data-index="2" data-categories="R,ggplot2,ggpubr" data-listing-date-sort="1680105600000" data-listing-file-modified-sort="1680318360809" data-listing-reading-time-sort="7.685">
+    <div class="blog-entry" data-index="3" data-categories="R,ggplot2,ggpubr" data-listing-date-sort="1680105600000" data-listing-file-modified-sort="1680318360809" data-listing-reading-time-sort="7.685">
         <div class="metadata">          
             <p class="date listing-date">March 30, 2023</p>
         </div>
@@ -2108,7 +2170,7 @@ Note
             <img src="https://guoruizhong.github.io/blog/2023/03/30/plot.png" alt="Add p-values onto basic barplot or boxplot" title="Add p-values onto basic barplot or boxplot">
         </div>
     </div>
-    <div class="blog-entry" data-index="3" data-categories="barplot,R" data-listing-date-sort="1678464000000" data-listing-file-modified-sort="1680186150675" data-listing-reading-time-sort="2.06">
+    <div class="blog-entry" data-index="4" data-categories="barplot,R" data-listing-date-sort="1678464000000" data-listing-file-modified-sort="1680186150675" data-listing-reading-time-sort="2.06">
         <div class="metadata">          
             <p class="date listing-date">March 11, 2023</p>
         </div>
@@ -2128,7 +2190,7 @@ Note
             <img src="https://guoruizhong.github.io/blog/2023/03/11/plot.png" alt="Barplot with negative and positive value" title="Barplot with negative and positive value">
         </div>
     </div>
-    <div class="blog-entry" data-index="4" data-categories="ggridges,R" data-listing-date-sort="1678204800000" data-listing-file-modified-sort="1680186274074" data-listing-reading-time-sort="2.8">
+    <div class="blog-entry" data-index="5" data-categories="ggridges,R" data-listing-date-sort="1678204800000" data-listing-file-modified-sort="1680186274074" data-listing-reading-time-sort="2.8">
         <div class="metadata">          
             <p class="date listing-date">March 8, 2023</p>
         </div>
@@ -2148,7 +2210,7 @@ Note
             <img src="https://guoruizhong.github.io/blog/2023/03/08/plot.png" alt="Ridgeline plots in ggplot2" title="Ridgeline plots in ggplot2">
         </div>
     </div>
-    <div class="blog-entry" data-index="5" data-categories="barplot,R" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1678366388648" data-listing-reading-time-sort="2.035">
+    <div class="blog-entry" data-index="6" data-categories="barplot,R" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1678366388648" data-listing-reading-time-sort="2.035">
         <div class="metadata">          
             <p class="date listing-date">March 6, 2023</p>
         </div>
@@ -2168,7 +2230,7 @@ Note
             <img src="https://guoruizhong.github.io/blog/2023/03/01/barplot.png" alt="Equalizing Bar Widths" title="Equalizing Bar Widths">
         </div>
     </div>
-    <div class="blog-entry" data-index="6" data-categories="barplot,R" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1678366373660" data-listing-reading-time-sort="6.46">
+    <div class="blog-entry" data-index="7" data-categories="barplot,R" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1678366373660" data-listing-reading-time-sort="6.46">
         <div class="metadata">          
             <p class="date listing-date">March 6, 2023</p>
         </div>
@@ -2188,7 +2250,7 @@ Note
             <img src="https://guoruizhong.github.io/blog/2023/03/06/plot.png" alt="ggplot2 with p-value and significant level" title="ggplot2 with p-value and significant level">
         </div>
     </div>
-    <div class="blog-entry" data-index="7" data-categories="scatter plot,R" data-listing-date-sort="1677945600000" data-listing-file-modified-sort="1678366379917" data-listing-reading-time-sort="4.695">
+    <div class="blog-entry" data-index="8" data-categories="scatter plot,R" data-listing-date-sort="1677945600000" data-listing-file-modified-sort="1678366379917" data-listing-reading-time-sort="4.695">
         <div class="metadata">          
             <p class="date listing-date">March 5, 2023</p>
         </div>
@@ -2218,12 +2280,12 @@ No matching items
 <h2 class="anchored" data-anchor-id="section-1">2022</h2>
 <div id="listing-posts_2022" class="quarto-listing quarto-listing-container-custom">
 <div class="list blog">
-    <div class="blog-entry" data-index="0" data-categories="R,Linux,VSCode" data-listing-date-sort="1671811200000" data-listing-file-modified-sort="1680348565558" data-listing-reading-time-sort="8.855">
+    <div class="blog-entry" data-index="0" data-categories="R,Linux,VSCode" data-listing-date-sort="1671811200000" data-listing-file-modified-sort="1680784700672" data-listing-reading-time-sort="1.11">
         <div class="metadata">          
             <p class="date listing-date">December 24, 2022</p>
         </div>
         <div class="body">
-            <p class="title listing-title"><a href="../blog/2022/12/24/index.html">Setup My Working Pipeline</a></p>
+            <p class="title listing-title"><a href="../blog/2022/12/24/index.html">Pipeline for Working with remote server</a></p>
             <div class="post-categories listing-categories">
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('R'); return false;">
                     R
@@ -2238,7 +2300,7 @@ No matching items
             <p class="description listing-description"><!-- desc(5A0113B34292)[max=175]:blog/2022/12/24/index.html --></p>
         </div>
         <div class="thumbnail">
-            <img src="https://guoruizhong.github.io/blog/2022/12/24/vscode.jpg" alt="Setup My Working Pipeline" title="Setup My Working Pipeline">
+            <img src="https://guoruizhong.github.io/blog/2022/12/24/macfuse.png" alt="Pipeline for Working with remote server" title="Pipeline for Working with remote server">
         </div>
     </div>
     <div class="blog-entry" data-index="1" data-categories="VSCode" data-listing-date-sort="1671724800000" data-listing-file-modified-sort="1680702064564" data-listing-reading-time-sort="10.6">
@@ -2258,7 +2320,27 @@ No matching items
             <img src="https://guoruizhong.github.io/blog/2022/12/23/keyboard.jpg" alt="VSCode Keyboard Shortcut Cheat Sheet" title="VSCode Keyboard Shortcut Cheat Sheet">
         </div>
     </div>
-    <div class="blog-entry" data-index="2" data-categories="Linux" data-listing-date-sort="1671379200000" data-listing-file-modified-sort="1680424658916" data-listing-reading-time-sort="30.115">
+    <div class="blog-entry" data-index="2" data-categories="R,VSCode" data-listing-date-sort="1671465600000" data-listing-file-modified-sort="1680784496733" data-listing-reading-time-sort="7.715">
+        <div class="metadata">          
+            <p class="date listing-date">December 20, 2022</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2022/12/20/index.html">Using R in VSCode</a></p>
+            <div class="post-categories listing-categories">
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('R'); return false;">
+                    R
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('VSCode'); return false;">
+                    VSCode
+                </div>
+            </div>
+            <p class="description listing-description"><!-- desc(5A0113B34292)[max=175]:blog/2022/12/20/index.html --></p>
+        </div>
+        <div class="thumbnail">
+            <img src="https://guoruizhong.github.io/blog/2022/12/20/vscode.jpg" alt="Using R in VSCode" title="Using R in VSCode">
+        </div>
+    </div>
+    <div class="blog-entry" data-index="3" data-categories="Linux" data-listing-date-sort="1671379200000" data-listing-file-modified-sort="1680424658916" data-listing-reading-time-sort="30.115">
         <div class="metadata">          
             <p class="date listing-date">December 19, 2022</p>
         </div>
@@ -2275,7 +2357,7 @@ No matching items
             <img src="https://guoruizhong.github.io/blog/2022/12/19/linux.jpg" alt="Learn Linux basic for computing" title="Learn Linux basic for computing">
         </div>
     </div>
-    <div class="blog-entry" data-index="3" data-categories="ggplot2 theme,R" data-listing-date-sort="1671292800000" data-listing-file-modified-sort="1677683952108" data-listing-reading-time-sort="0.415">
+    <div class="blog-entry" data-index="4" data-categories="ggplot2 theme,R" data-listing-date-sort="1671292800000" data-listing-file-modified-sort="1677683952108" data-listing-reading-time-sort="0.415">
         <div class="metadata">          
             <p class="date listing-date">December 18, 2022</p>
         </div>
@@ -2295,7 +2377,7 @@ No matching items
             <img src="https://guoruizhong.github.io/blog/2022/12/18/index.png" alt="ggplot2 Theme Elements" title="ggplot2 Theme Elements">
         </div>
     </div>
-    <div class="blog-entry" data-index="4" data-categories="T cell" data-listing-date-sort="1667232000000" data-listing-file-modified-sort="1677683952107" data-listing-reading-time-sort="0.06">
+    <div class="blog-entry" data-index="5" data-categories="T cell" data-listing-date-sort="1667232000000" data-listing-file-modified-sort="1677683952107" data-listing-reading-time-sort="0.06">
         <div class="metadata">          
             <p class="date listing-date">November 1, 2022</p>
         </div>
@@ -2312,7 +2394,7 @@ No matching items
             <img src="https://guoruizhong.github.io/blog/2022/11/01/T_cell.png" alt="T cell activation, proliferation and cytokine release" title="T cell activation, proliferation and cytokine release">
         </div>
     </div>
-    <div class="blog-entry" data-index="5" data-categories="Nomenclature" data-listing-date-sort="1664553600000" data-listing-file-modified-sort="1677683952107" data-listing-reading-time-sort="6">
+    <div class="blog-entry" data-index="6" data-categories="Nomenclature" data-listing-date-sort="1664553600000" data-listing-file-modified-sort="1677683952107" data-listing-reading-time-sort="6">
         <div class="metadata">          
             <p class="date listing-date">October 1, 2022</p>
         </div>
@@ -2329,7 +2411,7 @@ No matching items
             <img src="https://guoruizhong.github.io/blog/2022/10/01/Mutation.jpg" alt="Nomenclature for the description of mutations and variations" title="Nomenclature for the description of mutations and variations">
         </div>
     </div>
-    <div class="blog-entry" data-index="6" data-categories="plater,R" data-listing-date-sort="1662048000000" data-listing-file-modified-sort="1677683952106" data-listing-reading-time-sort="0.52">
+    <div class="blog-entry" data-index="7" data-categories="plater,R" data-listing-date-sort="1662048000000" data-listing-file-modified-sort="1677683952106" data-listing-reading-time-sort="0.52">
         <div class="metadata">          
             <p class="date listing-date">September 2, 2022</p>
         </div>
@@ -2349,7 +2431,7 @@ No matching items
             <img src="https://guoruizhong.github.io/blog/2022/09/02/f1.jpg" alt="Add experimental conditions to multi-well plates" title="Add experimental conditions to multi-well plates">
         </div>
     </div>
-    <div class="blog-entry" data-index="7" data-categories="platetools,R" data-listing-date-sort="1659283200000" data-listing-file-modified-sort="1677683952106" data-listing-reading-time-sort="0.945">
+    <div class="blog-entry" data-index="8" data-categories="platetools,R" data-listing-date-sort="1659283200000" data-listing-file-modified-sort="1677683952106" data-listing-reading-time-sort="0.945">
         <div class="metadata">          
             <p class="date listing-date">August 1, 2022</p>
         </div>
@@ -2369,7 +2451,7 @@ No matching items
             <img src="https://guoruizhong.github.io/blog/2022/08/01/platetools.png" alt="View data from 96/384 multi-well plates" title="View data from 96/384 multi-well plates">
         </div>
     </div>
-    <div class="blog-entry" data-index="8" data-categories="ggvolcano,R" data-listing-date-sort="1656604800000" data-listing-file-modified-sort="1677683952106" data-listing-reading-time-sort="1.915">
+    <div class="blog-entry" data-index="9" data-categories="ggvolcano,R" data-listing-date-sort="1656604800000" data-listing-file-modified-sort="1677683952106" data-listing-reading-time-sort="1.915">
         <div class="metadata">          
             <p class="date listing-date">July 1, 2022</p>
         </div>
@@ -2389,7 +2471,7 @@ No matching items
             <img src="https://guoruizhong.github.io/blog/2022/07/01/ggvolcano.png" alt="Volano plot with ggvolcano" title="Volano plot with ggvolcano">
         </div>
     </div>
-    <div class="blog-entry" data-index="9" data-categories="ggh4x,ggplot2,tidyverse,R" data-listing-date-sort="1651420800000" data-listing-file-modified-sort="1677683952105" data-listing-reading-time-sort="2.86">
+    <div class="blog-entry" data-index="10" data-categories="ggh4x,ggplot2,tidyverse,R" data-listing-date-sort="1651420800000" data-listing-file-modified-sort="1677683952105" data-listing-reading-time-sort="2.86">
         <div class="metadata">          
             <p class="date listing-date">May 2, 2022</p>
         </div>
@@ -2415,7 +2497,7 @@ No matching items
             <img src="https://guoruizhong.github.io/blog/2022/05/02/truncated.png" alt="How to plot scatter plot with truncated axis" title="How to plot scatter plot with truncated axis">
         </div>
     </div>
-    <div class="blog-entry" data-index="10" data-categories="ggsignif,ggh4x,ggplot2,tidyverse,R" data-listing-date-sort="1643644800000" data-listing-file-modified-sort="1677683952105" data-listing-reading-time-sort="3.795">
+    <div class="blog-entry" data-index="11" data-categories="ggsignif,ggh4x,ggplot2,tidyverse,R" data-listing-date-sort="1643644800000" data-listing-file-modified-sort="1677683952105" data-listing-reading-time-sort="3.795">
         <div class="metadata">          
             <p class="date listing-date">February 1, 2022</p>
         </div>
@@ -2444,7 +2526,7 @@ No matching items
             <img src="https://guoruizhong.github.io/blog/2022/02/01/barplot.png" alt="Add errorbar and p-value on barplot with ggsignif" title="Add errorbar and p-value on barplot with ggsignif">
         </div>
     </div>
-    <div class="blog-entry" data-index="11" data-categories="R,colors" data-listing-date-sort="1642780800000" data-listing-file-modified-sort="1678111969114" data-listing-reading-time-sort="1.87">
+    <div class="blog-entry" data-index="12" data-categories="R,colors" data-listing-date-sort="1642780800000" data-listing-file-modified-sort="1678111969114" data-listing-reading-time-sort="1.87">
         <div class="metadata">          
             <p class="date listing-date">January 22, 2022</p>
         </div>
@@ -2563,7 +2645,7 @@ No matching items
 
  ]]></description>
   <guid>https://guoruizhong.github.io/blog/index.html</guid>
-  <pubDate>Wed, 05 Apr 2023 13:52:18 GMT</pubDate>
+  <pubDate>Thu, 06 Apr 2023 13:23:15 GMT</pubDate>
 </item>
 </channel>
 </rss>
