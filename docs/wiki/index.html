@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2022-12-26">
+<meta name="dcterms.date" content="2023-04-08">
 
-<title>Guorui Zhong - What I use in my research workflow</title>
+<title>Guorui Zhong - Wiki</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -87,9 +87,14 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
+    <a class="nav-link active" href="../wiki/index.html" aria-current="page"><i class="bi bi-wikipedia" role="img" aria-label="wikipedia">
+</i> 
+ <span class="menu-text">Wiki</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../now/index.html"><i class="bi bi-activity" role="img" aria-label="activity">
 </i> 
- <span class="menu-text">What I’m trying to do now</span></a>
+ <span class="menu-text">Now</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="mailto:zhonggr@bii.a-star.edu.sg"><i class="bi bi-envelope" role="img" aria-label="email">
@@ -121,7 +126,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">What I use in my research workflow</h1>
+      <h1 class="title">Wiki</h1>
                       </div>
   </div>
     
@@ -132,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Last updated</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">December 26, 2022</p>
+        <p class="date">April 8, 2023</p>
       </div>
     </div>
     
@@ -147,8 +152,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#writing" id="toc-writing" class="nav-link active" data-scroll-target="#writing">Writing</a></li>
-  <li><a href="#development" id="toc-development" class="nav-link" data-scroll-target="#development">Development</a></li>
+  <li><a href="#data-analysis" id="toc-data-analysis" class="nav-link active" data-scroll-target="#data-analysis">Data Analysis</a></li>
+  <li><a href="#tools" id="toc-tools" class="nav-link" data-scroll-target="#tools">Tools</a></li>
+  <li><a href="#linux" id="toc-linux" class="nav-link" data-scroll-target="#linux">Linux</a></li>
+  <li><a href="#sequencing" id="toc-sequencing" class="nav-link" data-scroll-target="#sequencing">Sequencing</a></li>
+  <li><a href="#crispr" id="toc-crispr" class="nav-link" data-scroll-target="#crispr">CRISPR</a></li>
+  <li><a href="#imaging" id="toc-imaging" class="nav-link" data-scroll-target="#imaging">Imaging</a></li>
+  <li><a href="#researh-labs" id="toc-researh-labs" class="nav-link" data-scroll-target="#researh-labs">Researh Labs</a></li>
+  <li><a href="#proposal" id="toc-proposal" class="nav-link" data-scroll-target="#proposal">Proposal</a></li>
   </ul>
 </nav>
 </nav>
@@ -161,33 +172,72 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>I do both wet-lab and dry-lab for my research and work. So my setup should support the following well:</p>
-<section id="writing" class="level2">
-<h2 class="anchored" data-anchor-id="writing">Writing</h2>
+<p>These are the collections of things that I beleived useful in my daily researh work.</p>
+<section id="data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="data-analysis">Data Analysis</h2>
 <ul>
-<li><a href="https://www.office.com/">Microsoft 365</a> - Prepare presentations using Powerpoint; Write paper, report, grant writing using Word as required.</li>
-<li><a href="https://www.libreoffice.org/">LibreOffice</a> - Draw schematics for specific workflow in research.</li>
-<li><a href="https://www.eudic.net/v4/en/app/eudic">Eudic</a> - For lookup and translation.</li>
-<li><a href="https://www.snipaste.com/">Snipaste</a> - For screenshot.</li>
-<li><a href="https://typora.io/">Typora</a> - For writting notebooks using Markdown.</li>
-<li><a href="https://www.zotero.org/">Zotero</a> - For research and reference management, and <a href="https://www.jianguoyun.com/">jianguoyun</a> to sync the attachment files.<br>
-</li>
-<li><a href="https://www.notion.so">Notion</a> - Save some web bookmark and notebook</li>
-<li><a href="https://inkscape.org/">Inkscape</a> - Edit figures for publication</li>
-<li><a href="https://imagej.net/software/fiji/">Fiji/ImageJ</a> and <a href="https://www.gimp.org/">GIMP</a> - Edit images for publication</li>
-<li><a href="https://cellxpress.org/">cellXpress</a> - Cellular and tissue image process</li>
+<li><a href="https://www.statlearning.com/">An Introduction to Statistical Learning</a></li>
+<li><a href="https://r4ds.hadley.nz/">R for Data Science (2e)</a></li>
+<li><a href="https://ggplot2-book.org/">ggplot2</a></li>
+<li><a href="https://epirhandbook.com/en/index.html">The Epidemiologist R Handbook</a></li>
+<li><a href="https://web.stanford.edu/class/bios221/book/">Modern Statistics for Modern Biology</a></li>
+<li><a href="http://rafalab.dfci.harvard.edu/dsbook/">Data Analysis and Prediction Algorithms with R</a></li>
+<li><a href="https://bioinformatics.ccr.cancer.gov/btep/">Bioinformatics Training &amp; Education Program</a></li>
+<li><a href="https://www.jumpingrivers.com/blog/r-graphics-cairo-png-pdf-saving/">Saving R Graphics across OSs</a></li>
+<li><a href="http://r-statistics.co/">Tutorial on Advanced Stats and Machine Learning with R</a></li>
+<li><a href="https://jeweljohnsonj.github.io/jeweljohnson.github.io/project7.html">Publication ready plots using ggpubr</a></li>
+<li><a href="https://www.datanovia.com/en/">datanovia</a></li>
+<li><a href="https://girke.bioinformatics.ucr.edu/GEN242/">Data Analysis in Genome Biology</a></li>
 </ul>
 </section>
-<section id="development" class="level2">
-<h2 class="anchored" data-anchor-id="development">Development</h2>
+<section id="tools" class="level2">
+<h2 class="anchored" data-anchor-id="tools">Tools</h2>
 <ul>
-<li><a href="https://www.r-project.org/">R</a> - For most of my statistical computing and visualization.</li>
-<li><a href="https://www.python.org/">Python</a> - Learning machnine learning to use python as a beginner.</li>
-<li><a href="https://code.visualstudio.com/">Visual Studio Code</a> - R coding environment<br>
-</li>
-<li><a href="https://github.com/guoruizhong">GitHub</a> - For website deploy. I start to write notebooks and deploy it to Github.</li>
-<li><a href="https://osxfuse.github.io/">macFUSE</a> - To mount remote files from Remote server via SSHFS</li>
-<li><a href="https://quarto.org/">Quarto</a> - Write notebook and make website</li>
+<li><a href="https://proteinpaint.stjude.org/">ProteinPaint</a></li>
+<li><a href="https://www.flaticon.com/">Free Icons and Stickers</a></li>
+<li><a href="https://icons.getbootstrap.com/">Bootstrap Icons</a></li>
+</ul>
+</section>
+<section id="linux" class="level2">
+<h2 class="anchored" data-anchor-id="linux">Linux</h2>
+<ul>
+<li><a href="https://www.guru99.com/linux-commands-cheat-sheet.html">Linux Command Cheat Sheet</a></li>
+<li><a href="https://linuxize.com/post/how-to-use-linux-screen/">How To Use Linux Screen</a></li>
+</ul>
+</section>
+<section id="sequencing" class="level2">
+<h2 class="anchored" data-anchor-id="sequencing">Sequencing</h2>
+<ul>
+<li><a href="http://education.knoweng.org/sequenceng/">SequencEnG - An interactive learning resource for next-generation sequencing (NGS) techniques</a></li>
+</ul>
+</section>
+<section id="crispr" class="level2">
+<h2 class="anchored" data-anchor-id="crispr">CRISPR</h2>
+<ul>
+<li><a href="https://chopchop.cbu.uib.no">CHOPCHOP</a></li>
+<li><a href="https://www.cuimc.columbia.edu/news/new-crispr-method-allows-scientists-understand-impact-subtle-mutations">New CRISPR Method Allows Scientists to Understand Impact of Subtle Mutations</a></li>
+<li><a href="https://www.synthego.com/guide/how-to-use-crispr/transfection-protocols">CRISPR Transfection Protocols Guide: How To Select The Best Method</a></li>
+<li><a href="https://www.synthego.com/guide/how-to-use-crispr">How To Use CRISPR: Your Guide to Successful Genome Engineering</a></li>
+<li><a href="https://www.synthego.com/learn/crispr">The Ultimate Guide To CRISPR: Mechanism, Applications, Methods &amp; More</a></li>
+<li><a href="https://www.synthego.com/blog/crispr-irregular-protein-expression">Irregular Protein Expression After CRISPR Edits: Troubleshooting Tips</a></li>
+</ul>
+</section>
+<section id="imaging" class="level2">
+<h2 class="anchored" data-anchor-id="imaging">Imaging</h2>
+</section>
+<section id="researh-labs" class="level2">
+<h2 class="anchored" data-anchor-id="researh-labs">Researh Labs</h2>
+<ul>
+<li><a href="https://blainey.mit.edu/" class="uri">https://blainey.mit.edu/</a></li>
+<li><a href="https://zlab.bio/" class="uri">https://zlab.bio/</a></li>
+</ul>
+</section>
+<section id="proposal" class="level2">
+<h2 class="anchored" data-anchor-id="proposal">Proposal</h2>
+<ul>
+<li><p><a href="https://www.nmrc.gov.sg/grants/competitive-research-grants/of-yirg">NMRC | Open Fund - Young Individual Research Grant</a></p></li>
+<li><p><a href="https://www.pennmedicine.org/cancer/cancer-research/for-researchers/investigators-only/funding-opportunities">Funding Opportunities - Abramson Cancer Center | Penn Medicine</a></p></li>
+<li><p><a href="https://www.niaid.nih.gov/grants-contracts/write-research-plan">Write Your Research Plan</a></p></li>
 </ul>
 
 

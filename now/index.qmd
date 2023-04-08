@@ -1,5 +1,5 @@
 ---
-title: What I'm trying to do now
+title: Now
 date: 2022-12-26
 # description-meta: Guorui is working on a bunch of exciting and groundbreaking projects
 published-title: Last updated
@@ -13,19 +13,9 @@ toc-title: "Contents"
 
 Living in Singapore and working as an research fellow in the Complex Phenotype Analysis Group at the [Bioinformatics institute (BII)](https://www.a-star.edu.sg/bii), [A*STAR](https://www.a-star.edu.sg/).
 
-### Try to to
 - Earning money to marry Miss Zhou Haiyan (She is doing her Ph.D in [University of Hong Kong](https://www.hku.hk/)).
 - Learning High-throughput phenotypic profiling from mentor [Dr. Loo Lit-Hsin](http://web.bii.a-star.edu.sg/~loolh/).
 - Learning to write papers, grants and apply grant for independent research.
 - Improving R coding skills.
-### Reading
-- [An Introduction to Statistical Learning](https://www.statlearning.com/)
-- [Data Analysis and Prediction Algorithms with R](http://rafalab.dfci.harvard.edu/dsbook/)
 
-## 2022
 
-### Read
-
-- [ggplot2](https://ggplot2-book.org/)
-- [R for Data Science](https://r4ds.hadley.nz/)
-- [Modern Statistics for Modern Biology](https://web.stanford.edu/class/bios221/book/)

@@ -303,37 +303,72 @@
   {
     "objectID": "now/index.html",
     "href": "now/index.html",
-    "title": "What I’m trying to do now",
+    "title": "Now",
     "section": "",
-    "text": "Living in Singapore and working as an research fellow in the Complex Phenotype Analysis Group at the Bioinformatics institute (BII), A*STAR.\n\n\n\nEarning money to marry Miss Zhou Haiyan (She is doing her Ph.D in University of Hong Kong).\nLearning High-throughput phenotypic profiling from mentor Dr. Loo Lit-Hsin.\nLearning to write papers, grants and apply grant for independent research.\nImproving R coding skills. ### Reading\nAn Introduction to Statistical Learning\nData Analysis and Prediction Algorithms with R"
+    "text": "Living in Singapore and working as an research fellow in the Complex Phenotype Analysis Group at the Bioinformatics institute (BII), A*STAR.\n\nEarning money to marry Miss Zhou Haiyan (She is doing her Ph.D in University of Hong Kong).\nLearning High-throughput phenotypic profiling from mentor Dr. Loo Lit-Hsin.\nLearning to write papers, grants and apply grant for independent research.\nImproving R coding skills."
   },
   {
-    "objectID": "now/index.html#section-1",
-    "href": "now/index.html#section-1",
-    "title": "What I’m trying to do now",
-    "section": "2022",
-    "text": "2022\n\nRead\n\nggplot2\nR for Data Science\nModern Statistics for Modern Biology"
-  },
-  {
-    "objectID": "uses/index.html",
-    "href": "uses/index.html",
-    "title": "What I use in my research workflow",
+    "objectID": "wiki/index.html",
+    "href": "wiki/index.html",
+    "title": "Wiki",
     "section": "",
-    "text": "I do both wet-lab and dry-lab for my research and work. So my setup should support the following well:"
+    "text": "These are the collections of things that I beleived useful in my daily researh work."
   },
   {
-    "objectID": "uses/index.html#writing",
-    "href": "uses/index.html#writing",
-    "title": "What I use in my research workflow",
-    "section": "Writing",
-    "text": "Writing\n\nMicrosoft 365 - Prepare presentations using Powerpoint; Write paper, report, grant writing using Word as required.\nLibreOffice - Draw schematics for specific workflow in research.\nEudic - For lookup and translation.\nSnipaste - For screenshot.\nTypora - For writting notebooks using Markdown.\nZotero - For research and reference management, and jianguoyun to sync the attachment files.\n\nNotion - Save some web bookmark and notebook\nInkscape - Edit figures for publication\nFiji/ImageJ and GIMP - Edit images for publication\ncellXpress - Cellular and tissue image process"
+    "objectID": "wiki/index.html#data-analysis",
+    "href": "wiki/index.html#data-analysis",
+    "title": "Wiki",
+    "section": "Data Analysis",
+    "text": "Data Analysis\n\nAn Introduction to Statistical Learning\nR for Data Science (2e)\nggplot2\nThe Epidemiologist R Handbook\nModern Statistics for Modern Biology\nData Analysis and Prediction Algorithms with R\nBioinformatics Training & Education Program\nSaving R Graphics across OSs\nTutorial on Advanced Stats and Machine Learning with R\nPublication ready plots using ggpubr\ndatanovia\nData Analysis in Genome Biology"
   },
   {
-    "objectID": "uses/index.html#development",
-    "href": "uses/index.html#development",
-    "title": "What I use in my research workflow",
-    "section": "Development",
-    "text": "Development\n\nR - For most of my statistical computing and visualization.\nPython - Learning machnine learning to use python as a beginner.\nVisual Studio Code - R coding environment\n\nGitHub - For website deploy. I start to write notebooks and deploy it to Github.\nmacFUSE - To mount remote files from Remote server via SSHFS\nQuarto - Write notebook and make website"
+    "objectID": "wiki/index.html#tools",
+    "href": "wiki/index.html#tools",
+    "title": "Wiki",
+    "section": "Tools",
+    "text": "Tools\n\nProteinPaint\nFree Icons and Stickers\nBootstrap Icons"
+  },
+  {
+    "objectID": "wiki/index.html#linux",
+    "href": "wiki/index.html#linux",
+    "title": "Wiki",
+    "section": "Linux",
+    "text": "Linux\n\nLinux Command Cheat Sheet\nHow To Use Linux Screen"
+  },
+  {
+    "objectID": "wiki/index.html#sequencing",
+    "href": "wiki/index.html#sequencing",
+    "title": "Wiki",
+    "section": "Sequencing",
+    "text": "Sequencing\n\nSequencEnG - An interactive learning resource for next-generation sequencing (NGS) techniques"
+  },
+  {
+    "objectID": "wiki/index.html#crispr",
+    "href": "wiki/index.html#crispr",
+    "title": "Wiki",
+    "section": "CRISPR",
+    "text": "CRISPR\n\nCHOPCHOP\nNew CRISPR Method Allows Scientists to Understand Impact of Subtle Mutations\nCRISPR Transfection Protocols Guide: How To Select The Best Method\nHow To Use CRISPR: Your Guide to Successful Genome Engineering\nThe Ultimate Guide To CRISPR: Mechanism, Applications, Methods & More\nIrregular Protein Expression After CRISPR Edits: Troubleshooting Tips"
+  },
+  {
+    "objectID": "wiki/index.html#imaging",
+    "href": "wiki/index.html#imaging",
+    "title": "Wiki",
+    "section": "Imaging",
+    "text": "Imaging"
+  },
+  {
+    "objectID": "wiki/index.html#researh-labs",
+    "href": "wiki/index.html#researh-labs",
+    "title": "Wiki",
+    "section": "Researh Labs",
+    "text": "Researh Labs\n\nhttps://blainey.mit.edu/\nhttps://zlab.bio/"
+  },
+  {
+    "objectID": "wiki/index.html#proposal",
+    "href": "wiki/index.html#proposal",
+    "title": "Wiki",
+    "section": "Proposal",
+    "text": "Proposal\n\nNMRC | Open Fund - Young Individual Research Grant\nFunding Opportunities - Abramson Cancer Center | Penn Medicine\nWrite Your Research Plan"
   },
   {
     "objectID": "blog/2021/01/02/index.html",

@@ -1,0 +1,67 @@
+---
+title: Wiki
+date: 2023-04-08
+title-block-banner: "#212529"
+published-title: Last updated
+toc: true
+toc-location: left
+toc-title: "Contents"
+---
+
+These are the collections of things that I beleived useful in my daily researh work.
+  
+
+## Data Analysis
+
+- [An Introduction to Statistical Learning](https://www.statlearning.com/)
+- [R for Data Science (2e)](https://r4ds.hadley.nz/)
+- [ggplot2](https://ggplot2-book.org/)
+- [The Epidemiologist R Handbook](https://epirhandbook.com/en/index.html)
+- [Modern Statistics for Modern Biology](https://web.stanford.edu/class/bios221/book/)
+- [Data Analysis and Prediction Algorithms with R](http://rafalab.dfci.harvard.edu/dsbook/)
+- [Bioinformatics Training & Education Program](https://bioinformatics.ccr.cancer.gov/btep/)
+- [Saving R Graphics across OSs](https://www.jumpingrivers.com/blog/r-graphics-cairo-png-pdf-saving/) 
+- [Tutorial on Advanced Stats and Machine Learning with R](http://r-statistics.co/)
+- [Publication ready plots using ggpubr](https://jeweljohnsonj.github.io/jeweljohnson.github.io/project7.html)
+- [datanovia](https://www.datanovia.com/en/)
+- [Data Analysis in Genome Biology](https://girke.bioinformatics.ucr.edu/GEN242/)
+
+## Tools
+
+- [ProteinPaint](https://proteinpaint.stjude.org/)
+- [Free Icons and Stickers](https://www.flaticon.com/)
+- [Bootstrap Icons](https://icons.getbootstrap.com/)
+
+## Linux
+
+- [Linux Command Cheat Sheet](https://www.guru99.com/linux-commands-cheat-sheet.html)
+- [How To Use Linux Screen](https://linuxize.com/post/how-to-use-linux-screen/)
+
+## Sequencing
+
+- [SequencEnG - An interactive learning resource for next-generation sequencing (NGS) techniques](http://education.knoweng.org/sequenceng/)
+
+## CRISPR
+
+- [CHOPCHOP](https://chopchop.cbu.uib.no)
+- [New CRISPR Method Allows Scientists to Understand Impact of Subtle Mutations](https://www.cuimc.columbia.edu/news/new-crispr-method-allows-scientists-understand-impact-subtle-mutations)
+- [CRISPR Transfection Protocols Guide: How To Select The Best Method](https://www.synthego.com/guide/how-to-use-crispr/transfection-protocols)
+- [How To Use CRISPR: Your Guide to Successful Genome Engineering](https://www.synthego.com/guide/how-to-use-crispr)
+- [The Ultimate Guide To CRISPR: Mechanism, Applications, Methods & More](https://www.synthego.com/learn/crispr)
+- [Irregular Protein Expression After CRISPR Edits: Troubleshooting Tips](https://www.synthego.com/blog/crispr-irregular-protein-expression)
+
+## Imaging
+
+
+## Researh Labs
+
+- <https://blainey.mit.edu/>
+- <https://zlab.bio/>
+
+## Proposal
+
+- [NMRC | Open Fund - Young Individual Research Grant](https://www.nmrc.gov.sg/grants/competitive-research-grants/of-yirg)
+
+- [Funding Opportunities - Abramson Cancer Center | Penn Medicine](https://www.pennmedicine.org/cancer/cancer-research/for-researchers/investigators-only/funding-opportunities)
+
+- [Write Your Research Plan](https://www.niaid.nih.gov/grants-contracts/write-research-plan)

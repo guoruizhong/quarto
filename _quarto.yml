@@ -49,12 +49,13 @@ website:
     pinned: true
 
     right:
+      - icon: wikipedia
+        aria-label: wikipedia
+        href: "wiki/index.qmd"
       - icon: activity
         aria-label: activity
         # text: "Learning"
         href: "now/index.qmd"
-      # - text: "Uses"
-      #   file: uses/index.qmd
       # - text: "About"
       #   href: "index.qmd"
       # - text: "CV"
