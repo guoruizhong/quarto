@@ -27,9 +27,9 @@ execute:
 # author-meta: "Guorui Zhong"
 
 website:
-  title: "Guorui Zhong"
-  description: "Guorui Zhong"
-  favicon: "/files/profiles/z_512x512.png"
+  title: ""
+  description: ""
+  # favicon: "/files/profiles/z_512x512.png"
   site-url: "https://guoruizhong.github.io/"
   repo-url: "https://github.com/guoruizhong/guoruizhong.github.io"
 
@@ -49,6 +49,8 @@ website:
     pinned: true
 
     right:
+      - text: "Posts"
+        file: "blog/index.qmd"
       - icon: wikipedia
         aria-label: wikipedia
         href: "wiki/index.qmd"
@@ -60,8 +62,6 @@ website:
       #   href: "index.qmd"
       # - text: "CV"
       #   href: "cv/index.qmd"
-      # - text: "Posts"
-      #   file: "blog/index.qmd"
         # file: "blog/index.qmd"
       # - text: "Research"
       #   file: research/index.qmd
