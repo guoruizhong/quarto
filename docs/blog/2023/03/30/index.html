@@ -134,11 +134,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
 <li class="nav-item">
     <a class="nav-link" href="../../../../blog/index.html">
- <span class="menu-text">Posts</span></a>
+ <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../wiki/index.html"><i class="bi bi-wikipedia" role="img" aria-label="wikipedia">
-</i> 
+    <a class="nav-link" href="../../../../wiki/index.html">
  <span class="menu-text">Wiki</span></a>
   </li>  
   <li class="nav-item">
@@ -222,7 +221,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content"><div class="callout-note callout callout-style-default callout-captioned">
+<main class="content quarto-banner-title-block" id="quarto-document-content"><p>How to compute and add p-values to basic ggplots using the rstatix and the ggpubr R packages.</p>
+<ul>
+<li>Perform pairwise mean comparisons and add the p-values onto basic box plots and bar plots.</li>
+<li>Display adjusted p-values and the significance levels onto the plots</li>
+<li>Format the p-value labels</li>
+<li>Specify manually the y position of p-value labels and shorten the width of the brackets</li>
+</ul>
+<div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -274,11 +280,10 @@ Note
 <span></span>
 <span><span class="va">stat_test</span></span>
 <span><span class="co">## # A tibble: 1 × 13</span></span>
-<span><span class="co">##   .y.   group1 group2    n1    n2 statistic    df      p p.signif y.pos…¹ groups</span></span>
-<span><span class="co">##   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;name&gt;</span></span>
-<span><span class="co">## 1 len   OJ     VC        30    30      1.92  55.3 0.0606 ns          34.3 &lt;chr&gt; </span></span>
-<span><span class="co">## # … with 2 more variables: xmin &lt;dbl&gt;, xmax &lt;dbl&gt;, and abbreviated variable</span></span>
-<span><span class="co">## #   name ¹​y.position</span></span>
+<span><span class="co">##   .y.   group1 group2    n1    n2 statistic    df      p p.signif y.position</span></span>
+<span><span class="co">##   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;</span></span>
+<span><span class="co">## 1 len   OJ     VC        30    30      1.92  55.3 0.0606 ns             34.3</span></span>
+<span><span class="co">## # ℹ 3 more variables: groups &lt;named list&gt;, xmin &lt;dbl&gt;, xmax &lt;dbl&gt;</span></span>
 <span></span>
 <span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggboxplot.html">ggboxplot</a></span><span class="op">(</span><span class="va">df</span>, x <span class="op">=</span> <span class="st">"supp"</span>, y <span class="op">=</span> <span class="st">"len"</span>, fill <span class="op">=</span> <span class="st">"#00AFBB"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_pvalue_manual.html">stat_pvalue_manual</a></span><span class="op">(</span><span class="va">stat_test</span>, label <span class="op">=</span> <span class="st">"p"</span><span class="op">)</span></span>
@@ -311,13 +316,13 @@ Note
 <span></span>
 <span><span class="va">stat_test</span></span>
 <span><span class="co">## # A tibble: 3 × 15</span></span>
-<span><span class="co">##   dose  .y.   group1 group2    n1    n2 statistic    df       p   p.adj p.adj.…¹</span></span>
-<span><span class="co">##   &lt;fct&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   </span></span>
-<span><span class="co">## 1 0.5   len   OJ     VC        10    10    3.17    15.0 0.00636 0.0127  *       </span></span>
-<span><span class="co">## 2 1     len   OJ     VC        10    10    4.03    15.4 0.00104 0.00312 **      </span></span>
-<span><span class="co">## 3 2     len   OJ     VC        10    10   -0.0461  14.0 0.964   0.964   ns      </span></span>
-<span><span class="co">## # … with 4 more variables: y.position &lt;dbl&gt;, groups &lt;named list&gt;, xmin &lt;dbl&gt;,</span></span>
-<span><span class="co">## #   xmax &lt;dbl&gt;, and abbreviated variable name ¹​p.adj.signif</span></span>
+<span><span class="co">##   dose  .y.   group1 group2    n1    n2 statistic    df       p   p.adj</span></span>
+<span><span class="co">##   &lt;fct&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span></span>
+<span><span class="co">## 1 0.5   len   OJ     VC        10    10    3.17    15.0 0.00636 0.0127 </span></span>
+<span><span class="co">## 2 1     len   OJ     VC        10    10    4.03    15.4 0.00104 0.00312</span></span>
+<span><span class="co">## 3 2     len   OJ     VC        10    10   -0.0461  14.0 0.964   0.964  </span></span>
+<span><span class="co">## # ℹ 5 more variables: p.adj.signif &lt;chr&gt;, y.position &lt;dbl&gt;,</span></span>
+<span><span class="co">## #   groups &lt;named list&gt;, xmin &lt;dbl&gt;, xmax &lt;dbl&gt;</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggboxplot.html">ggboxplot</a></span><span class="op">(</span><span class="va">df</span>,</span>
 <span>    x <span class="op">=</span> <span class="st">"supp"</span>, y <span class="op">=</span> <span class="st">"len"</span>, fill <span class="op">=</span> <span class="st">"#00AFBB"</span>,</span>
@@ -345,13 +350,13 @@ Note
 <span></span>
 <span><span class="va">stat_test</span></span>
 <span><span class="co">## # A tibble: 3 × 16</span></span>
-<span><span class="co">##   dose  .y.   group1 group2    n1    n2 statistic    df       p   p.adj p.adj.…¹</span></span>
-<span><span class="co">##   &lt;fct&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   </span></span>
-<span><span class="co">## 1 0.5   len   OJ     VC        10    10    3.17    15.0 0.00636 0.0127  *       </span></span>
-<span><span class="co">## 2 1     len   OJ     VC        10    10    4.03    15.4 0.00104 0.00312 **      </span></span>
-<span><span class="co">## 3 2     len   OJ     VC        10    10   -0.0461  14.0 0.964   0.964   ns      </span></span>
-<span><span class="co">## # … with 5 more variables: y.position &lt;dbl&gt;, groups &lt;named list&gt;, xmin &lt;dbl&gt;,</span></span>
-<span><span class="co">## #   xmax &lt;dbl&gt;, custom_label &lt;chr&gt;, and abbreviated variable name ¹​p.adj.signif</span></span>
+<span><span class="co">##   dose  .y.   group1 group2    n1    n2 statistic    df       p   p.adj</span></span>
+<span><span class="co">##   &lt;fct&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span></span>
+<span><span class="co">## 1 0.5   len   OJ     VC        10    10    3.17    15.0 0.00636 0.0127 </span></span>
+<span><span class="co">## 2 1     len   OJ     VC        10    10    4.03    15.4 0.00104 0.00312</span></span>
+<span><span class="co">## 3 2     len   OJ     VC        10    10   -0.0461  14.0 0.964   0.964  </span></span>
+<span><span class="co">## # ℹ 6 more variables: p.adj.signif &lt;chr&gt;, y.position &lt;dbl&gt;,</span></span>
+<span><span class="co">## #   groups &lt;named list&gt;, xmin &lt;dbl&gt;, xmax &lt;dbl&gt;, custom_label &lt;chr&gt;</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggboxplot.html">ggboxplot</a></span><span class="op">(</span><span class="va">df</span>,</span>
 <span>    x <span class="op">=</span> <span class="st">"supp"</span>, y <span class="op">=</span> <span class="st">"len"</span>, fill <span class="op">=</span> <span class="st">"#00AFBB"</span>,</span>
@@ -537,9 +542,9 @@ Note
 <span><span class="co">##   .y.   group1 group2    n1    n2 statistic    df        p    p.adj p.adj.signif</span></span>
 <span><span class="co">##   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       </span></span>
 <span><span class="co">## 1 len   0.5    1         20    20     -6.48  38.0 1.27e- 7 2.54e- 7 ****        </span></span>
-<span><span class="co">## 2 len   0.5    2         20    20    -11.8   36.9 4.4 e-14 1.32e-13 ****        </span></span>
+<span><span class="co">## 2 len   0.5    2         20    20    -11.8   36.9 4.40e-14 1.32e-13 ****        </span></span>
 <span><span class="co">## 3 len   1      2         20    20     -4.90  37.1 1.91e- 5 1.91e- 5 ****        </span></span>
-<span><span class="co">## # … with 4 more variables: y.position &lt;dbl&gt;, groups &lt;named list&gt;, xmin &lt;dbl&gt;,</span></span>
+<span><span class="co">## # ℹ 4 more variables: y.position &lt;dbl&gt;, groups &lt;named list&gt;, xmin &lt;dbl&gt;,</span></span>
 <span><span class="co">## #   xmax &lt;dbl&gt;</span></span>
 <span></span>
 <span><span class="co"># Box plots</span></span>
@@ -726,7 +731,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
-      <div class="nav-footer-center"><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2021-2023 Guorui Zhong ~ Made with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a></span></div>
+      <div class="nav-footer-center"><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2021-2023 Guorui Zhong ~ Made with <a href="https://www.r-project.org/"><i class="fa-brands fa-r-project" aria-label="r-project"></i></a> and <a href="https://quarto.org/">Quarto</a></span></div>
   </div>
 </footer>
 

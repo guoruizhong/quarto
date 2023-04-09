@@ -12,6 +12,8 @@ knitr::opts_chunk$set(
                       fig.align = "center", fig.retina = 3,
                       out.width = "85%", collapse = TRUE)
 ```
+A sample example to add p-value and significant level to barpot.
+
 ```{r, load-libraries-data, warning=FALSE, message=FALSE}
 library(tidyverse)
 library(rstatix)

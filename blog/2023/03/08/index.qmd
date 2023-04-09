@@ -14,6 +14,7 @@ knitr::opts_chunk$set(
                       fig.align = "center", fig.retina = 3,
                       out.width = "85%", collapse = TRUE)
 ```
+Visualizing changes in distributions over time or space nicely usning ggrigges.
 
 ```{r, load-libraries-data, warning=FALSE, message=FALSE}
 library(tidyverse)

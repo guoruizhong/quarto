@@ -7,6 +7,8 @@ categories:
 image: barplot.png
 ---
 
+Make the widths of bars to be same when the level of subgroups are not equal
+
 ```{r, load-libraries-data, warning=FALSE, message=FALSE}
 ### ---------
 library(ggplot2)

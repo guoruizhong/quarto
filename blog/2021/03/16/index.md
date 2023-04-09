@@ -26,25 +26,23 @@ categories:
 
 1. Analyze -> Set Scale
 
-   - Nikon: 
+- Nikon (20x object): 
 
-     - 0.16 um/pixel (40x object)
-
-     - 6.25 pixel/um (40x object)
-
-     - 12.5 pixel/um (when exported with 200% zoom in using cellXpress)
-
-       
-
-     - 3.2 pixel/um (20x object)
-
-     - 5 um/16 pixel (20x object)
-
+     - 3.2 pixel/um, 5 um/16 pixel
+     - 5uM = 16 pixels (cellxpress exported as 100%) 
+     - 5uM = 32 pixels (cellxpress exported as 200%) 
+     - 5uM = 64 pixels (cellxpress exported as 400%) 
      - 12.8 pixel/um (when exported with 400% zoom in using cellXpress)
-     
-     - 5uM = 16 pixels, if exported as 4x, then 5uM = 64 pixels)
 
-   - TC microscope:
+- Nikon (40x object): 
+
+     - 6.25 pixel/um, 0.16 um/pixel
+     - 1um = 6.25 pixel (cellxpress exported as 100%)
+     - 1um = 12.5 pixel (cellxpress exported as 200%)
+     - 1um = 25 pixel (cellxpress exported as 400%)
+     - 5uM = 125 pixels (cellxpress exported as 400%) 
+
+- TC microscope:
      - physical length of a pixel: 3.4375 um
      - 10x: 0.34375 um/pixel = 2.91 pixel/um
      - 20x: 0.171875 um/pixel = 5.82 pixel/um

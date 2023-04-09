@@ -17,6 +17,8 @@ knitr::opts_chunk$set(
     collapse = TRUE
 )
 ```
+How to compute and add p-values to basic ggplots using the rstatix and the ggpubr R packages.
+
 :::{.callout-note}
 1. Compute easily statistical tests (`t_test()` or `wilcox_test()`) using the `rstatix` package
 2. Auto-compute p-value label positions using the function `add_xy_position()` [in rstatix package].

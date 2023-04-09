@@ -82,11 +82,10 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="../../../../blog/index.html">
- <span class="menu-text">Posts</span></a>
+ <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../wiki/index.html"><i class="bi bi-wikipedia" role="img" aria-label="wikipedia">
-</i> 
+    <a class="nav-link" href="../../../../wiki/index.html">
  <span class="menu-text">Wiki</span></a>
   </li>  
   <li class="nav-item">
@@ -195,17 +194,24 @@ ul.task-list li input[type="checkbox"] {
 <section id="set-scale-and-add-scale-bar" class="level2">
 <h2 class="anchored" data-anchor-id="set-scale-and-add-scale-bar">Set scale and add scale bar</h2>
 <ol type="1">
-<li><p>Analyze -&gt; Set Scale</p>
+<li>Analyze -&gt; Set Scale</li>
+</ol>
 <ul>
-<li><p>Nikon:</p>
+<li><p>Nikon (20x object):</p>
 <ul>
-<li><p>0.16 um/pixel (40x object)</p></li>
-<li><p>6.25 pixel/um (40x object)</p></li>
-<li><p>12.5 pixel/um (when exported with 200% zoom in using cellXpress)</p></li>
-<li><p>3.2 pixel/um (20x object)</p></li>
-<li><p>5 um/16 pixel (20x object)</p></li>
-<li><p>12.8 pixel/um (when exported with 400% zoom in using cellXpress)</p></li>
-<li><p>5uM = 16 pixels, if exported as 4x, then 5uM = 64 pixels)</p></li>
+<li>3.2 pixel/um, 5 um/16 pixel</li>
+<li>5uM = 16 pixels (cellxpress exported as 100%)</li>
+<li>5uM = 32 pixels (cellxpress exported as 200%)</li>
+<li>5uM = 64 pixels (cellxpress exported as 400%)</li>
+<li>12.8 pixel/um (when exported with 400% zoom in using cellXpress)</li>
+</ul></li>
+<li><p>Nikon (40x object):</p>
+<ul>
+<li>6.25 pixel/um, 0.16 um/pixel</li>
+<li>1um = 6.25 pixel (cellxpress exported as 100%)</li>
+<li>1um = 12.5 pixel (cellxpress exported as 200%)</li>
+<li>1um = 25 pixel (cellxpress exported as 400%)</li>
+<li>5uM = 125 pixels (cellxpress exported as 400%)</li>
 </ul></li>
 <li><p>TC microscope:</p>
 <ul>
@@ -213,7 +219,8 @@ ul.task-list li input[type="checkbox"] {
 <li>10x: 0.34375 um/pixel = 2.91 pixel/um</li>
 <li>20x: 0.171875 um/pixel = 5.82 pixel/um</li>
 </ul></li>
-</ul></li>
+</ul>
+<ol start="2" type="1">
 <li><p>Analyze -&gt; Tools -&gt; Scale bar</p></li>
 <li><p>File save as png format.</p></li>
 </ol>
@@ -360,7 +367,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center"><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2021-2023 Guorui Zhong ~ Made with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a></span></div>
+      <div class="nav-footer-center"><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2021-2023 Guorui Zhong ~ Made with <a href="https://www.r-project.org/"><i class="fa-brands fa-r-project" aria-label="r-project"></i></a> and <a href="https://quarto.org/">Quarto</a></span></div>
   </div>
 </footer>
 

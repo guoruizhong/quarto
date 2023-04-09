@@ -17,6 +17,8 @@ knitr::opts_chunk$set(
             collapse = TRUE
                       )
 ```
+Coloring Negative and Positive Bars Differently using ggplot2
+
 
 ```{r, warning = FALSE, message = FALSE}
 library(readxl)
@@ -54,3 +56,6 @@ fig3r.df %>%
 
 ```
 
+## Reference
+
+- <https://r-graphics.org/recipe-bar-graph-color-neg>

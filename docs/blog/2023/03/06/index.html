@@ -134,11 +134,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
 <li class="nav-item">
     <a class="nav-link" href="../../../../blog/index.html">
- <span class="menu-text">Posts</span></a>
+ <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../wiki/index.html"><i class="bi bi-wikipedia" role="img" aria-label="wikipedia">
-</i> 
+    <a class="nav-link" href="../../../../wiki/index.html">
  <span class="menu-text">Wiki</span></a>
   </li>  
   <li class="nav-item">
@@ -212,7 +211,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content"><div class="cell" data-layout-align="center">
+<main class="content quarto-banner-title-block" id="quarto-document-content"><p>A sample example to add p-value and significant level to barpot.</p>
+<div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://csdaw.github.io/ggprism/">ggprism</a></span><span class="op">)</span></span>
@@ -337,13 +337,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span></span>
 <span><span class="va">stat.test</span></span>
 <span><span class="co">## # A tibble: 4 × 11</span></span>
-<span><span class="co">##   name     group group1 group2    p.adj p.adj…¹ y.pos…² groups     x  xmin  xmax</span></span>
-<span><span class="co">##   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;name&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">## 1 Petal.L… Petal setosa virgi… 3.71e-49 ****       7.5  &lt;chr&gt;      1   0.8   1.2</span></span>
-<span><span class="co">## 2 Petal.W… Petal setosa virgi… 7.32e-48 ****       2.73 &lt;chr&gt;      2   1.8   2.2</span></span>
-<span><span class="co">## 3 Sepal.L… Sepal setosa virgi… 7.94e-25 ****       8.15 &lt;chr&gt;      3   0.8   1.2</span></span>
-<span><span class="co">## 4 Sepal.W… Sepal setosa virgi… 4.57e- 9 ****       4.47 &lt;chr&gt;      4   1.8   2.2</span></span>
-<span><span class="co">## # … with abbreviated variable names ¹​p.adj.signif, ²​y.position</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">##   name   group group1 group2    p.adj p.adj.signif y.position groups     x  xmin</span></span>
+<span><span class="co">##   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;             &lt;dbl&gt; &lt;name&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">## 1 Petal… Petal setosa virgi… 3.71e-49 ****               7.5  &lt;chr&gt;      1   0.8</span></span>
+<span><span class="co">## 2 Petal… Petal setosa virgi… 7.32e-48 ****               2.73 &lt;chr&gt;      2   1.8</span></span>
+<span><span class="co">## 3 Sepal… Sepal setosa virgi… 7.94e-25 ****               8.15 &lt;chr&gt;      3   0.8</span></span>
+<span><span class="co">## 4 Sepal… Sepal setosa virgi… 4.57e- 9 ****               4.47 &lt;chr&gt;      4   1.8</span></span>
+<span><span class="co">## # ℹ 1 more variable: xmax &lt;dbl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -540,7 +540,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
-      <div class="nav-footer-center"><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2021-2023 Guorui Zhong ~ Made with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a></span></div>
+      <div class="nav-footer-center"><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2021-2023 Guorui Zhong ~ Made with <a href="https://www.r-project.org/"><i class="fa-brands fa-r-project" aria-label="r-project"></i></a> and <a href="https://quarto.org/">Quarto</a></span></div>
   </div>
 </footer>
 

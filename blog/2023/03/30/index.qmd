@@ -20,6 +20,14 @@ knitr::opts_chunk$set(
     warning = FALSE
 )
 ```
+How to compute and add p-values to basic ggplots using the rstatix and the ggpubr R packages.
+
+- Perform pairwise mean comparisons and add the p-values onto basic box plots and bar plots.
+- Display adjusted p-values and the significance levels onto the plots
+- Format the p-value labels
+- Specify manually the y position of p-value labels and shorten the width of the brackets
+
+
 :::{.callout-note}
 1. Compute easily statistical tests (`t_test()` or `wilcox_test()`) using the `rstatix` package
 2. Auto-compute p-value label positions using the function `add_xy_position()` [in rstatix package].
