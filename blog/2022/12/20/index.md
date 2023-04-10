@@ -132,7 +132,7 @@ Host nucleus
     }
 }
 ```
-### Server settings
+### Remote Server Settings
 
 [SSH:nucleus] `settings.json`
   
@@ -150,9 +150,9 @@ Host nucleus
     "r.plot.useHttpgd": true
 }
 ```
-### Keyboard settings
+### Keyboard Shortcuts
 ```json
-// Feb 28, 2023 updated
+// April 09, 2023 updated
 [
     {
         "key": "alt+-",
@@ -170,7 +170,7 @@ Host nucleus
         // "when": "editorLangId == r && editorTextFocus || editorLangId == rmd && editorTextFocus",
         "when": "editorLangId =~ /r|rmd|qmd/ && editorTextFocus",
         "args": {
-            "text": " %>% "
+            "text": " |> "
         }
     },
     {
@@ -205,26 +205,26 @@ Host nucleus
         "when": "editorTextFocus && editorLangId == 'r' || editorTextFocus && editorLangId == 'rmd'"
     },
     // RStudio keybinding for R Package development
-    {
-        "key": "ctrl+shift+b",
-        "command": "r.install",
-        "when": "resourceLangId == 'r'"
-    },
-    {
-        "key": "ctrl+shift+e",
-        "command": "r.check",
-        "when": "resourceLangId == 'r'"
-    },
-    {
-        "key": "ctrl+shift+t",
-        "command": "r.test",
-        "when": "resourceLangId == 'r'"
-    },
-    {
-        "key": "ctrl+shift+d",
-        "command": "r.document",
-        "when": "resourceLangId == 'r'"
-    },
+    // {
+    //     "key": "ctrl+shift+b",
+    //     "command": "r.install",
+    //     "when": "resourceLangId == 'r'"
+    // },
+    // {
+    //     "key": "ctrl+shift+e",
+    //     "command": "r.check",
+    //     "when": "resourceLangId == 'r'"
+    // },
+    // {
+    //     "key": "ctrl+shift+t",
+    //     "command": "r.test",
+    //     "when": "resourceLangId == 'r'"
+    // },
+    // {
+    //     "key": "ctrl+shift+d",
+    //     "command": "r.document",
+    //     "when": "resourceLangId == 'r'"
+    // },
     // {
     //     "key": "ctrl+shift+l",
     //     "command": "r.loadAll",
@@ -250,7 +250,7 @@ Host nucleus
         "command": "workbench.action.terminal.sendSequence",
         "when": "terminalFocus && !terminalTextSelected",
         "args": {
-            "text": " %>% "
+            "text": " |> "
         }
     }
 ]

@@ -457,5 +457,8 @@
   },
   "wiki/index.qmd": {
     "index.html": "ee9e8d93"
+  },
+  "blog/2023/04/10/index.qmd": {
+    "index.html": "2d73be10"
   }
 }
