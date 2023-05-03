@@ -1,0 +1,68 @@
+---
+title: "Leanning ComplexHeatmap"
+date: 2023-05-03
+# date-modified: 2023-04-05
+categories:
+  - ComplexHeatmap
+image: heatmap.png
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    # fig.width = 6, 
+    # fig.height = 3.8,
+    fig.align = "center", 
+    # fig.retina = 3,
+    # out.width = "85%", 
+    collapse = TRUE
+)
+```
+A heatmap (or heat map) is another way to visualize hierarchical clustering. It’s also called a false colored image, where data values are transformed to color scale.
+
+Heat maps allow us to simultaneously visualize clusters of samples and features. First hierarchical clustering is done of both the rows and the columns of the data matrix. The columns/rows of the data matrix are re-ordered according to the hierarchical clustering result, putting similar observations close to each other. The blocks of ‘high’ and ‘low’ values are adjacent in the data matrix. Finally, a color scheme is applied for the visualization and the data matrix is displayed. Visualizing the data matrix in this way can help to find the variables that appear to be characteristic for each sample cluster.
+
+```{r, load-libraries-data, warning=FALSE, message=FALSE}
+library(tidyverse)
+require(RColorBrewer)
+require(ComplexHeatmap)
+require(circlize)
+require(digest)
+require(cluster)
+```
+
+```{r}
+library(ComplexHeatmap)
+library(circlize)
+
+expr <- readRDS(system.file(package = "ComplexHeatmap", "extdata", "gene_expression.rds"))
+mat <- as.matrix(expr[, grep("cell", colnames(expr))])
+base_mean <- rowMeans(mat)
+mat_scaled <- t(apply(mat, 1, scale))
+
+type = gsub("s\\d+_", "", colnames(mat))
+ha = HeatmapAnnotation(type = type, annotation_name_side = "left")
+
+ht_list = Heatmap(mat_scaled, name = "expression", row_km = 5, 
+    col = colorRamp2(c(-2, 0, 2), c("green", "white", "red")),
+    top_annotation = ha, 
+    show_column_names = FALSE, row_title = NULL, show_row_dend = FALSE) +
+Heatmap(base_mean, name = "base mean", 
+    top_annotation = HeatmapAnnotation(summary = anno_summary(gp = gpar(fill = 2:6), 
+        height = unit(2, "cm"))),
+    width = unit(15, "mm")) +
+rowAnnotation(length = anno_points(expr$length, pch = 16, size = unit(1, "mm"), 
+    axis_param = list(at = c(0, 2e5, 4e5, 6e5), 
+        labels = c("0kb", "200kb", "400kb", "600kb")),
+    width = unit(2, "cm"))) +
+Heatmap(expr$type, name = "gene type", 
+    top_annotation = HeatmapAnnotation(summary = anno_summary(height = unit(2, "cm"))),
+    width = unit(15, "mm"))
+
+ht_list = rowAnnotation(block = anno_block(gp = gpar(fill = 2:6, col = NA)), 
+    width = unit(2, "mm")) + ht_list
+
+draw(ht_list)
+```
+## Reference
+1. [ComplexHeatmap Complete Reference](https://jokergoo.github.io/ComplexHeatmap-reference/book/index.html)
+2. [Heatmap in R: Static and Interactive Visualization](https://www.datanovia.com/en/lessons/heatmap-in-r-static-and-interactive-visualization/#r-packagesfunctions-for-drawing-heatmaps)
+3. <https://github.com/kevinblighe/E-MTAB-6141>

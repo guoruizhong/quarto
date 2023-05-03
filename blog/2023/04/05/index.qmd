@@ -69,3 +69,7 @@ Transformed.Values = a + \frac{(Values - Minimum)(b-a)}{Maximum - Minimum}
 where `a,b` are the min-max values.
 
 **Normalize data in R**. Using the Min-Max normalization function on `mtcars` data easily reveals columns with only two (`am`, `vs`) or three (`gear`, `cyl`) variables compared with variables that have a higher resolution of possible values:
+
+## Reference
+
+1. <https://www.datanovia.com/en/lessons/heatmap-in-r-static-and-interactive-visualization/>
