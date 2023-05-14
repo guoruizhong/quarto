@@ -14,5 +14,5 @@ quarto render
 # Add to the local git repository then push to the remote repository
 
 git add .
-git commit -m "add complexheatmap"
+git commit -m "PCA"
 git push -u guoruizhong.github.io main

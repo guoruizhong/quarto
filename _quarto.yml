@@ -53,9 +53,8 @@ website:
         file: "blog/index.qmd"
       - text: "Wiki"
         file: "wiki/index.qmd"
-      - icon: activity
-        aria-label: activity
-        href: "now/index.qmd"
+      - text: "Now"
+        file: "now/index.qmd"
     
     # right:
       # - icon: rss
