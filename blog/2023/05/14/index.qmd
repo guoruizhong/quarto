@@ -1,5 +1,5 @@
 ---
-title: "PCA"
+title: "Essentials for Principal Component Analysis "
 date: 2023-05-14
 # date-modified: 2023-04-05
 categories:
@@ -16,42 +16,65 @@ knitr::opts_chunk$set(
     collapse = TRUE
 )
 ```
+![](pca.png)
+
 Principle component methods are used to summarize and viusalize the information contained in a large multivariate datasets.
 
 Principle component analysis is used to extract the important information from a multivariate data table and to express this information as a set of few new variables called principle components. These new variables correspond to a linear combination of the originals. The number of principal components is less than or equal to the number of original variables.
 
-![](pca.png)
+PCA assumes that the directions with the largest variances are the most “important” (i.e, the most principal).
 
-## R packages
+Technically speaking, the amount of variance retained by each principal component is measured by the so-called eigenvalue.
 
-```{r}
-library(tidyverse)
-library(FactoMineR) # compute principal component methods
-library(factoextra) # extract, visualize and interpretate the results
-``` 
+Note that, the PCA method is particularly useful when the variables within the data set are highly correlated. Correlation indicates that there is redundancy in the data. Due to this redundancy, PCA can be used to reduce the original variables into a smaller number of new variables ( = principal components) explaining most of the variance in the original variables.
+
+
+
+Taken together, the main purpose of principal component analysis is to:
+
+  - identify hidden pattern in a data set,
+  - reduce the dimensionnality of the data by removing the noise and redundancy in the data,
+  - identify correlated variables
+
 ![](pca2.png)
 
-## PCA for continuous variables
+## Compute PCA
 
 ```{r}
-data(decathlon2)
-head(decathlon2)
-```
-
-```{r}
-### subset data
-decathlon2_active <- decathlon2[1:23, 1:10]
-### standardize data and PCA
-res_pca <- PCA(
-   decathlon2_active, 
-   scale.unit = TRUE,
-   graph = FALSE 
+### Load packages
+library(pacman)
+p_load(
+    tidyverse,  # tidy data
+    FactoMineR, # compute principal component methods
+    factoextra  # extract, visualize and interpretate the results
 )
-### extract the eigenvalues/variances of principal components
+
+### subset active individuals and active variables
+data(decathlon2)
+decathlon2_active <- decathlon2[1:23, 1:10]
+head(decathlon2_active[, 1:6], 4)
+
+### compute pca
+res_pca <- PCA(decathlon2_active, graph = FALSE)
+res_pca
+``` 
+
+
+## Visualization and interpretation
+
+### Eigenvalues/Variances
+```{r}
+### eigenvalues measure the amount of variation retained by each principal component
 eig_val <- get_eigenvalue(res_pca)
 eig_val
 
+### scree plot
 fviz_eig(res_pca, addlabels = TRUE, ylim = c(0, 50))
+```
+
+### Variables
+
+```{r}
 
 var <- get_pca_var(res_pca)
 # Coordinates
@@ -248,5 +271,4 @@ fviz_pca_biplot(
 
 ## Reference
 
-1. [Principal Component Methods in R: Practical Guide](http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/)
-2. [Principal Component Analysis in R: prcomp vs princomp](http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/118-principal-component-analysis-in-r-prcomp-vs-princomp/)
+1. [Principal Component Methods in R: Practical Guide](http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials/)
