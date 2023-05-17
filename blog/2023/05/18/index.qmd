@@ -1,0 +1,196 @@
+---
+title: "PCA Graph Customization"
+date: 2023-05-18
+# date-modified: 2023-04-05
+categories:
+  - PCA
+image: pca_biplot.png
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    # fig.width = 6, 
+    # fig.height = 3.8,
+    fig.align = "center", 
+    # fig.retina = 3,
+    # out.width = "85%", 
+    collapse = TRUE
+)
+```
+Arguments to customize the PCA graph of variables and individuals.
+
+## Compute PCA
+
+```{r}
+### Load packages
+library(pacman)
+p_load(
+    tidyverse,  # tidy data
+    FactoMineR, # compute principal component methods
+    factoextra,  # extract, visualize and interpretate the results
+    corrplot  # visualize cos2 of variables
+)
+
+### compute pca
+head(iris, 3)
+# The variable Species (index = 5) is removed
+# before PCA analysis
+iris_pca <- PCA(iris[,-5], graph = FALSE)
+iris_pca
+``` 
+## Color individuals by groups
+
+```{r}
+fviz_pca_ind(
+  iris_pca,
+  geom.ind = "point", # show points only (nbut not "text")
+  col.ind = iris$Species, # color by groups
+  palette = c("#00AFBB", "#E7B800", "#FC4E07"),
+  addEllipses = TRUE, # Concentration ellipses
+  legend.title = "Groups"
+)
+```
+## Add confidence ellipses
+
+```{r}
+fviz_pca_ind(
+  iris_pca, 
+  geom.ind = "point", 
+  col.ind = iris$Species, 
+  palette = c("#00AFBB", "#E7B800", "#FC4E07"),
+  addEllipses = TRUE, ellipse.type = "confidence",
+  legend.title = "Groups"
+)
+
+### use color from jco
+fviz_pca_ind(
+  iris_pca,
+  label = "none", # hide individual labels
+  habillage = iris$Species, # color by groups
+  addEllipses = TRUE, # Concentration ellipses
+  palette = "jco"
+)
+
+# Add confidence ellipses
+fviz_pca_ind(
+  iris_pca, 
+  geom.ind = "point", 
+  col.ind = iris$Species, # color by groups
+  palette = c("#00AFBB", "#E7B800", "#FC4E07"),
+  addEllipses = TRUE, 
+  ellipse.type = "confidence",
+  legend.title = "Groups"
+)
+
+# Convex hull
+fviz_pca_ind(
+  iris_pca, 
+  geom.ind = "point",
+  col.ind = iris$Species, # color by groups
+  palette = c("#00AFBB", "#E7B800", "#FC4E07"),
+  addEllipses = TRUE, 
+  ellipse.type = "convex",
+  legend.title = "Groups"
+)
+```
+
+## Group mean points
+
+```{r}
+fviz_pca_ind(
+  iris_pca,
+  geom.ind = "point", # show points only (but not "text")
+  group.ind = iris$Species, # color by groups
+  legend.title = "Groups",
+  mean.point = FALSE
+)
+```
+## Graphical parameters
+
+To change easily the graphical of any ggplots, you can use the function ggpar() [ggpubr package]
+
+The graphical parameters that can be changed using ggpar() include:
+
+- Main titles, axis labels and legend titles
+- Legend position. Possible values: “top”, “bottom”, “left”, “right”, “none”.
+- Color palette.
+- Themes. Allowed values include: theme_gray(), theme_bw(), theme_minimal(), theme_classic(), theme_void().
+
+```{r}
+ind_p <- fviz_pca_ind(iris_pca, geom = "point", col.ind = iris$Species)
+
+ggpubr::ggpar(ind_p,
+              title = "Principal Component Analysis",
+              subtitle = "Iris data set",
+              caption = "Source: factoextra",
+              xlab = "PC1", ylab = "PC2",
+              legend.title = "Species", legend.position = "top",
+              ggtheme = theme_gray(), palette = "jco"
+              )
+```
+## Biplot
+
+```{r}
+fviz_pca_biplot(
+  res_pca, 
+  repel = TRUE,
+  col.var = "#2E9FDF", # Variables color
+  col.ind = "#696969"  # Individuals color
+)
+
+fviz_pca_biplot(
+  iris_pca, 
+  col.ind = iris$Species, 
+  palette = "jco", 
+  addEllipses = TRUE, 
+  label = "var",
+  col.var = "black", 
+  repel = TRUE,
+  legend.title = "Species"
+) 
+```
+## Color by groups
+
+```{r}
+fviz_pca_biplot(
+  iris_pca, 
+  # Fill individuals by groups
+  geom.ind = "point",
+  pointshape = 21,
+  pointsize = 2.5,
+  fill.ind = iris$Species,
+  col.ind = "black",
+  # Color variable by groups
+  col.var = factor(c("sepal", "sepal", "petal", "petal")),
+  legend.title = list(fill = "Species", color = "Clusters"),
+  repel = TRUE        # Avoid label overplotting
+) +
+  ggpubr::fill_palette("jco")+      # Indiviual fill color
+  ggpubr::color_palette("npg")      # Variable colors
+```
+
+```{r}
+fviz_pca_biplot(
+  iris_pca, 
+  # Individuals
+  geom.ind = "point",
+  fill.ind = iris$Species, 
+  col.ind = "black",
+  pointshape = 21, 
+  pointsize = 2,
+  palette = "jco",
+  addEllipses = TRUE,
+  # Variables
+  alpha.var ="contrib", 
+  col.var = "contrib",
+  gradient.cols = "RdYlBu",
+  legend.title = list(
+    fill = "Species", 
+    color = "Contrib", 
+    alpha = "Contrib"
+    )
+)
+```
+
+## Reference
+
+- [Principal Component Methods in R: Practical Guide](http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials/)

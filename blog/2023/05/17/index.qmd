@@ -1,0 +1,241 @@
+---
+title: "Perform Principal Component Analysis"
+date: 2023-05-17
+# date-modified: 2023-04-05
+categories:
+  - PCA
+image: p.png
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    # fig.width = 6, 
+    # fig.height = 3.8,
+    fig.align = "center", 
+    # fig.retina = 3,
+    # out.width = "85%", 
+    collapse = TRUE
+)
+```
+![](pca.png)
+
+Principle component methods are used to summarize and viusalize the information contained in a large multivariate datasets.
+
+Principle component analysis is used to extract the important information from a multivariate data table and to express this information as a set of few new variables called principle components. These new variables correspond to a linear combination of the originals. The number of principal components is less than or equal to the number of original variables.
+
+PCA assumes that the directions with the largest variances are the most “important” (i.e, the most principal).
+
+Technically speaking, the amount of variance retained by each principal component is measured by the so-called eigenvalue.
+
+Note that, the PCA method is particularly useful when the variables within the data set are highly correlated. Correlation indicates that there is redundancy in the data. Due to this redundancy, PCA can be used to reduce the original variables into a smaller number of new variables ( = principal components) explaining most of the variance in the original variables.
+
+
+
+Taken together, the main purpose of principal component analysis is to:
+
+  - identify hidden pattern in a data set,
+  - reduce the dimensionnality of the data by removing the noise and redundancy in the data,
+  - identify correlated variables
+
+![](pca2.png)
+
+## Compute PCA
+
+```{r}
+### Load packages
+library(pacman)
+p_load(
+    tidyverse,  # tidy data
+    FactoMineR, # compute principal component methods
+    factoextra,  # extract, visualize and interpretate the results
+    corrplot  # visualize cos2 of variables
+)
+
+### subset active individuals and active variables
+data(decathlon2)
+decathlon2_active <- decathlon2[1:23, 1:10]
+head(decathlon2_active[, 1:6], 4)
+
+### compute pca
+res_pca <- PCA(decathlon2_active, graph = FALSE)
+res_pca
+``` 
+
+
+## Variances
+
+```{r}
+### eigenvalues measure the amount of variation retained by each principal component
+eig_val <- get_eigenvalue(res_pca)
+eig_val
+
+### scree plot to visualize the eigenvalues
+fviz_eig(res_pca, addlabels = TRUE, ylim = c(0, 50))
+```
+
+## Variables
+
+```{r}
+### graph of variables
+var <- get_pca_var(res_pca)
+var
+### coordinates of variables to create a scatter plot
+head(var$coord)
+
+### represents the quality of representation for variables on the factor map. 
+### It’s calculated as the squared coordinates: var.cos2 = var.coord * var.coord.
+head(var$cos2)
+
+### contains the contributions (in percentage) of the variables to the principal components. 
+### The contribution of a variable (var) to a given principal component is (in percentage) : (var.cos2 * 100) / (total cos2 of the component).
+head(var$contrib)
+
+### plot variables. it shows the relationship between all variables
+fviz_pca_var(res_pca, col.var = "black")
+
+### quality of representation
+head(var$cos2, 4)
+corrplot(var$cos2, is.corr=FALSE)
+
+### bar plot total cos2 of variables on Dim.1 and Dim.2
+fviz_cos2(res_pca, choice = "var", axes = 1:2)
+
+### Color by cos2 values: quality on the factor map
+fviz_pca_var(
+  res_pca, 
+  col.var = "cos2",
+  gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), 
+  repel = TRUE # Avoid text overlapping
+)
+
+### Change the transparency by cos2 values
+fviz_pca_var(res_pca, alpha.var = "cos2")
+
+### contribution of variables to PCs
+head(var$contrib, 4)
+
+### highlight the most contributing variables for each dimension
+corrplot(var$contrib, is.corr=FALSE)
+
+# Contributions of variables to PC1
+fviz_contrib(res_pca, choice = "var", axes = 1, top = 10)
+
+# Contributions of variables to PC2
+fviz_contrib(res_pca, choice = "var", axes = 2, top = 10)
+
+### total contribution to PC1 and PC2 
+fviz_contrib(res_pca, choice = "var", axes = 1:2, top = 10)
+
+### highlight most important variables on the correlation plot
+fviz_pca_var(
+  res_pca, 
+  col.var = "contrib",
+  gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07")
+)
+
+### Change the transparency by contrib values
+fviz_pca_var(res_pca, alpha.var = "contrib")
+
+### color variables by custom continus variable
+# Create a random continuous variable of length 10
+set.seed(123)
+my_cont_var <- rnorm(10)
+### Color variables by the continuous variable
+fviz_pca_var(
+  res_pca, 
+  col.var = my_cont_var,
+  gradient.cols = c("blue", "yellow", "red"),
+  legend.title = "Cont.Var"
+)
+
+### color by groups, create a grouping variables using kmeans
+set.seed(123)
+res_km <- kmeans(var$coord, centers = 3, nstart = 25)
+grp <- as.factor(res_km$cluster)
+
+# Color variables by groups
+fviz_pca_var(
+  res_pca, 
+  col.var = grp, 
+  palette = c("#0073C2FF", "#EFC000FF", "#868686FF"),
+  legend.title = "Cluster"
+)
+
+### dimension description
+res_desc <- dimdesc(res_pca, axes = c(1,2), proba = 0.05)
+# Description of dimension 1
+res_desc$Dim.1
+# Description of dimension 2
+res_desc$Dim.2
+```
+
+## Individuals
+
+```{r}
+### extract results for individuals
+ind <- get_pca_ind(res_pca)
+ind
+# Coordinates of individuals
+head(ind$coord)
+### Quality of individuals
+head(ind$cos2)
+### Contributions of individuals
+head(ind$contrib)
+
+### quality and contribution
+### individuals that are similar are grouped together on the plot
+fviz_pca_ind(
+  res_pca, 
+  col.ind = "cos2", 
+  gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+  repel = TRUE # Avoid text overlapping (slow if many points)
+)
+
+### change the point size according to the cos2 of corresponding individuals
+fviz_pca_ind(
+  res_pca, 
+  pointsize = "cos2", 
+  pointshape = 21, 
+  fill = "#E7B800",
+  repel = TRUE # Avoid text overlapping (slow if many points)
+)
+
+### change both point size and color by cos2
+fviz_pca_ind(
+  res_pca, 
+  col.ind = "cos2", 
+  pointsize = "cos2",
+  gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+  repel = TRUE # Avoid text overlapping (slow if many points)
+)
+
+### total contribution on PC1 and PC2
+fviz_contrib(res_pca, choice = "ind", axes = 1:2)
+
+### color by custom continus variable
+set.seed(123)
+my_cont_var <- rnorm(23)
+# Color individuals by the continuous variable
+fviz_pca_ind(
+  res_pca, 
+  col.ind = my_cont_var,
+  gradient.cols = c("blue", "yellow", "red"),
+  legend.title = "Cont.Var"
+)
+```
+
+## Other Dimensions
+
+```{r}
+### visualize variables/individuals on dimension 2 and 3
+
+# Variables on dimensions 2 and 3
+fviz_pca_var(res_pca, axes = c(2, 3))
+# Individuals on dimensions 2 and 3
+fviz_pca_ind(res_pca, axes = c(2, 3))
+```
+
+
+
+## Reference
+
+- [Principal Component Methods in R: Practical Guide](http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials/)
