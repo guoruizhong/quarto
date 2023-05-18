@@ -4,14 +4,14 @@ date: 2023-04-10
 # date-modified: 2023-04-05
 categories:
   - Linux
-# image: pheatmap.png
+image: tmux_introduction.png
 ---
 The solution is to set the default terminal provider on the remote settings to be tmux, and have it attach to either an existing session named main, or create a new one if it doesn't exist. 
 
 ## Tmux shortcuts
 
 <!-- ![](simple-tmux-cheatsheet.jpg) -->
-![](tmux-printer.png)
+![](tmux.png)
 
 [Advanced commands & shortcodes](https://quickref.me/tmux)
 
@@ -92,3 +92,4 @@ The solution is to set the default terminal provider on the remote settings to b
 ## Reference
 
 - <https://www.zdyn.net/system/hacks/2020/09/19/vscode-term-session.html>
+- <>
