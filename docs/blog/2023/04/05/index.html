@@ -8,7 +8,7 @@
 
 <meta name="author" content="Guorui Zhong">
 
-<title>Normalize and Standardize Data in R for Heatmap Visualization</title>
+<title>Normalize and Standardize Data in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -101,6 +67,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       }
 </style>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -159,7 +127,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Normalize and Standardize Data in R for Heatmap Visualization</h1>
+      <h1 class="title">Normalize and Standardize Data in R</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">R</div>
                 <div class="quarto-category">ComplexHeatmap</div>
@@ -222,15 +190,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>Standard scaling or standardization
 Normalization or Min-Max scaling
 Percentile transformation</code></pre>
+<p><img src="scale.png" class="img-fluid"></p>
 <section id="standard-scaling" class="level2">
 <h2 class="anchored" data-anchor-id="standard-scaling">Standard scaling</h2>
 <p><strong>Standard scaling</strong>, also known as standardization or Z-score normalization, consists of subtracting the mean and divide by the standard deviation. In such a case, each value would reflect the distance from the mean in units of standard deviation.</p>
 <p>If we would assume all variables come from some normal distribution, then scaling would bring them all close to the standard normal distribution. The resulting distribution has a mean of 0 and a standard deviation of 1.</p>
 <p><strong>Standard scaling formula</strong>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Transformed.Values = <span class="fu">\frac</span>{Values - Mean}{Standard.Deviation}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="math inline">\(Transformed.Values = \frac{Values - Mean}{Standard.Deviation}\)</span></p>
 <p>An alternative to standardization is the <strong>mean normalization</strong>, which resulting distribution will have between -1 and 1 with mean = 0.</p>
 <p><strong>Mean normalization formula</strong>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode tex code-with-copy"><code class="sourceCode latex"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Transformed.Values = <span class="fu">\frac</span>{Values - Mean}{Maximum - Minimum}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="math inline">\(Transformed.Values = \frac{Values - Mean}{Maximum - Minimum}\)</span></p>
 <p>Standardization and Mean Normalization can be used for algorithms that assumes zero centric data like <em>Principal Component Analysis</em>(PCA).</p>
 </section>
 <section id="normalization" class="level2">
@@ -238,9 +207,9 @@ Percentile transformation</code></pre>
 <p>When variables in the data comes from possibly different (and non-normal) distributions, other transformations may be in order. Another possibility is to normalize the variables to brings data to the 0 to 1 scale by subtracting the minimum and dividing by the maximum of all observations.</p>
 <p>This preserves the shape of each variable’s distribution while making them easily comparable on the same “scale”.</p>
 <p><strong>Formula to normalize data between 0 and 1</strong> :</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode tex code-with-copy"><code class="sourceCode latex"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Transformed.Values = <span class="fu">\frac</span>{Values - Minimum}{Maximum - Minimum}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="math inline">\(Transformed.Values = \frac{Values - Minimum}{Maximum - Minimum}\)</span></p>
 <p><strong>Formula to rescale the data between an arbitrary set of values [a, b]</strong>:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode tex code-with-copy"><code class="sourceCode latex"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Transformed.Values = a + <span class="fu">\frac</span>{(Values - Minimum)(b-a)}{Maximum - Minimum}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="math inline">\(Transformed.Values = a + \frac{(Values - Minimum)(b-a)}{Maximum - Minimum}\)</span></p>
 <p>where <code>a,b</code> are the min-max values.</p>
 <p><strong>Normalize data in R</strong>. Using the Min-Max normalization function on <code>mtcars</code> data easily reveals columns with only two (<code>am</code>, <code>vs</code>) or three (<code>gear</code>, <code>cyl</code>) variables compared with variables that have a higher resolution of possible values:</p>
 </section>

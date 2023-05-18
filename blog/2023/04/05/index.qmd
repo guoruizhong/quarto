@@ -1,11 +1,11 @@
 ---
-title: "Normalize and Standardize Data in R for Heatmap Visualization"
+title: "Normalize and Standardize Data in R "
 date: 2023-04-05
 date-modified: 2023-04-05
 categories:
   - R
   - ComplexHeatmap
-# image: pheatmap.png
+image: scale.png
 ---
 
 Data normalization methods are used to make variables, measured in different scales, have comparable values. This preprocessing steps is important for clustering and heatmap visualization, principal component analysis and other machine learning algorithms based on distance measures.
@@ -15,6 +15,8 @@ This article describes the following data rescaling approaches:
     Standard scaling or standardization
     Normalization or Min-Max scaling
     Percentile transformation
+
+![](scale.png)
 
 ## Standard scaling
 
@@ -26,11 +28,7 @@ If we would assume all variables come from some normal distribution,  then scali
 
 
 
-```latex
-Transformed.Values = \frac{Values - Mean}{Standard.Deviation}
-```
-
-
+$Transformed.Values = \frac{Values - Mean}{Standard.Deviation}$
 
 
 
@@ -40,9 +38,8 @@ An alternative to standardization is the **mean normalization**, which resulting
 
 
 
-```tex
-Transformed.Values = \frac{Values - Mean}{Maximum - Minimum}
-```
+$Transformed.Values = \frac{Values - Mean}{Maximum - Minimum}$
+
 
 Standardization and Mean Normalization can be used for algorithms that assumes zero centric data like *Principal Component Analysis*(PCA).
 
@@ -56,15 +53,15 @@ This preserves the shape of each variable’s distribution while making them eas
 
 **Formula to normalize data between 0 and 1** :
 
-```tex
-Transformed.Values = \frac{Values - Minimum}{Maximum - Minimum}
-```
+
+$Transformed.Values = \frac{Values - Minimum}{Maximum - Minimum}$
+
 
 **Formula to rescale the data between an arbitrary set of values [a, b]**:
 
-```tex
-Transformed.Values = a + \frac{(Values - Minimum)(b-a)}{Maximum - Minimum}
-```
+
+$Transformed.Values = a + \frac{(Values - Minimum)(b-a)}{Maximum - Minimum}$
+
 
 where `a,b` are the min-max values.
 
