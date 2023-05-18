@@ -131,13 +131,6 @@ ggpubr::ggpar(ind_p,
 
 ```{r}
 fviz_pca_biplot(
-  res_pca, 
-  repel = TRUE,
-  col.var = "#2E9FDF", # Variables color
-  col.ind = "#696969"  # Individuals color
-)
-
-fviz_pca_biplot(
   iris_pca, 
   col.ind = iris$Species, 
   palette = "jco", 
