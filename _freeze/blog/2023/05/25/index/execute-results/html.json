@@ -1,0 +1,14 @@
+{
+  "hash": "11f2341828f8358a95538050a6dab793",
+  "result": {
+    "markdown": "---\ntitle: \"Batch effec removal\"\ndate: 2023-05-25\n# date-modified: 2023-04-05\ncategories:\n  - PCA\n# image: pca_biplot.png\n---\n\n\n\n::: {.cell layout-align=\"center\"}\n\n```{.r .cell-code}\npacman::p_load(\n    sva,\n    limma,\n    edgeR   \n)\n```\n:::\n\n::: {.cell layout-align=\"center\"}\n\n```{.r .cell-code}\n# url <- \"http://bioinf.wehi.edu.au/edgeR/UserGuideData/arab.rds\"\n# destfile <- \"blog/2023/05/25/arab.rds\"\n# download.file(url,destfile = destfile)\n# Import the input r dataset\n# raw_counts_matrix <- readRDS(destfile)\n# head(raw_counts_matrix)\n```\n:::\n\n\n\n\n## Reference\n\n- [Insights from a billion correlations](https://peterlangfelder.com/2018/12/02/removal-of-unwanted-variation-based-on-a-subset-of-samples/)\n\n- [Transformation, Normalization, and Batch Effect Removal](https://bio-protocol.org/exchange/protocoldetail?id=4462&type=1)",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -475,5 +475,14 @@
   },
   "blog/2023/05/18/index.qmd": {
     "index.html": "19334bec"
+  },
+  "about.qmd": {
+    "about.html": "652df83b"
+  },
+  "blog/about.qmd": {
+    "about.html": "6f2726c3"
+  },
+  "blog/2023/05/25/index.qmd": {
+    "index.html": "66ea22c1"
   }
 }

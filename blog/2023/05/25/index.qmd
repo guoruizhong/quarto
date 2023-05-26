@@ -1,0 +1,44 @@
+---
+title: "Batch effec removal"
+date: 2023-05-25
+# date-modified: 2023-04-05
+categories:
+  - PCA
+# image: pca_biplot.png
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    # fig.width = 6, 
+    # fig.height = 3.8,
+    fig.align = "center", 
+    # fig.retina = 3,
+    # out.width = "85%", 
+    collapse = TRUE
+)
+```
+
+```{r}
+pacman::p_load(
+    sva,
+    limma,
+    edgeR   
+)
+```
+
+
+```{r}
+# url <- "http://bioinf.wehi.edu.au/edgeR/UserGuideData/arab.rds"
+# destfile <- "blog/2023/05/25/arab.rds"
+# download.file(url,destfile = destfile)
+# Import the input r dataset
+# raw_counts_matrix <- readRDS(destfile)
+# head(raw_counts_matrix)
+```
+
+
+
+## Reference
+
+- [Insights from a billion correlations](https://peterlangfelder.com/2018/12/02/removal-of-unwanted-variation-based-on-a-subset-of-samples/)
+
+- [Transformation, Normalization, and Batch Effect Removal](https://bio-protocol.org/exchange/protocoldetail?id=4462&type=1)

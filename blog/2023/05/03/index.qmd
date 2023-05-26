@@ -90,3 +90,4 @@ draw(ht_list)
 1. [ComplexHeatmap Complete Reference](https://jokergoo.github.io/ComplexHeatmap-reference/book/index.html)
 2. [Heatmap in R: Static and Interactive Visualization](https://www.datanovia.com/en/lessons/heatmap-in-r-static-and-interactive-visualization/#r-packagesfunctions-for-drawing-heatmaps)
 3. <https://github.com/kevinblighe/E-MTAB-6141>
+4. [Test Hierarchical Clustering](https://rpubs.com/shbrief/hclust_varying_k)

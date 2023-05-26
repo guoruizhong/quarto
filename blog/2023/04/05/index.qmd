@@ -28,7 +28,7 @@ If we would assume all variables come from some normal distribution,  then scali
 
 
 
-$Transformed.Values = \frac{Values - Mean}{Standard.Deviation}$
+$$Transformed.Values = \frac{Values - Mean}{Standard.Deviation}$$
 
 
 
@@ -38,7 +38,7 @@ An alternative to standardization is the **mean normalization**, which resulting
 
 
 
-$Transformed.Values = \frac{Values - Mean}{Maximum - Minimum}$
+$$Transformed.Values = \frac{Values - Mean}{Maximum - Minimum}$$
 
 
 Standardization and Mean Normalization can be used for algorithms that assumes zero centric data like *Principal Component Analysis*(PCA).
@@ -54,13 +54,13 @@ This preserves the shape of each variable’s distribution while making them eas
 **Formula to normalize data between 0 and 1** :
 
 
-$Transformed.Values = \frac{Values - Minimum}{Maximum - Minimum}$
+$$Transformed.Values = \frac{Values - Minimum}{Maximum - Minimum}$$
 
 
 **Formula to rescale the data between an arbitrary set of values [a, b]**:
 
 
-$Transformed.Values = a + \frac{(Values - Minimum)(b-a)}{Maximum - Minimum}$
+$$Transformed.Values = a + \frac{(Values - Minimum)(b-a)}{Maximum - Minimum}$$
 
 
 where `a,b` are the min-max values.

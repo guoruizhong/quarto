@@ -1,139 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://guoruizhong.github.io/about.html</loc>
+    <lastmod>2023-05-26T13:51:54.896Z</lastmod>
+  </url>
+  <url>
     <loc>https://guoruizhong.github.io/atom.html</loc>
-    <lastmod>2023-05-18T03:58:45.540Z</lastmod>
+    <lastmod>2023-05-26T13:51:55.381Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2022/01/22/index.html</loc>
-    <lastmod>2023-05-18T03:58:48.474Z</lastmod>
+    <lastmod>2023-05-26T13:51:57.028Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2022/02/01/index.html</loc>
-    <lastmod>2023-05-18T03:58:54.000Z</lastmod>
+    <lastmod>2023-05-26T13:52:01.963Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2022/05/02/index.html</loc>
-    <lastmod>2023-05-18T03:58:59.587Z</lastmod>
+    <lastmod>2023-05-26T13:52:05.318Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2022/07/01/index.html</loc>
-    <lastmod>2023-05-18T03:59:03.680Z</lastmod>
+    <lastmod>2023-05-26T13:52:07.072Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2022/08/01/index.html</loc>
-    <lastmod>2023-05-18T03:59:06.894Z</lastmod>
+    <lastmod>2023-05-26T13:52:09.220Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2022/09/02/index.html</loc>
-    <lastmod>2023-05-18T03:59:08.917Z</lastmod>
+    <lastmod>2023-05-26T13:52:10.605Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2023/03/01/index.html</loc>
-    <lastmod>2023-05-18T03:59:11.906Z</lastmod>
+    <lastmod>2023-05-26T13:52:11.929Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2023/03/05/index.html</loc>
-    <lastmod>2023-05-18T03:59:16.827Z</lastmod>
+    <lastmod>2023-05-26T13:52:14.560Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2023/03/06/index.html</loc>
-    <lastmod>2023-05-18T03:59:25.685Z</lastmod>
+    <lastmod>2023-05-26T13:52:19.723Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2023/03/08/index.html</loc>
-    <lastmod>2023-05-18T03:59:31.296Z</lastmod>
+    <lastmod>2023-05-26T13:52:22.843Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2023/03/11/index.html</loc>
-    <lastmod>2023-05-18T03:59:34.597Z</lastmod>
+    <lastmod>2023-05-26T13:52:24.643Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2023/03/30/index.html</loc>
-    <lastmod>2023-05-18T03:59:40.909Z</lastmod>
+    <lastmod>2023-05-26T13:52:27.947Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2023/03/31/index.html</loc>
-    <lastmod>2023-05-18T03:59:48.228Z</lastmod>
+    <lastmod>2023-05-26T13:52:32.465Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2023/04/05/index.html</loc>
-    <lastmod>2023-05-18T03:59:50.404Z</lastmod>
+    <lastmod>2023-05-26T13:52:33.801Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2023/04/10/index.html</loc>
-    <lastmod>2023-05-18T03:59:50.803Z</lastmod>
+    <lastmod>2023-05-26T13:52:34.178Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2023/05/03/index.html</loc>
-    <lastmod>2023-05-18T03:59:57.010Z</lastmod>
+    <lastmod>2023-05-26T13:52:37.618Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2023/05/17/index.html</loc>
-    <lastmod>2023-05-18T03:59:59.909Z</lastmod>
+    <lastmod>2023-05-26T13:52:39.039Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2023/05/18/index.html</loc>
-    <lastmod>2023-05-18T04:00:03.754Z</lastmod>
+    <lastmod>2023-05-26T13:52:41.207Z</lastmod>
+  </url>
+  <url>
+    <loc>https://guoruizhong.github.io/blog/2023/05/25/index.html</loc>
+    <lastmod>2023-05-26T13:52:42.451Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/index.html</loc>
-    <lastmod>2023-05-18T04:00:04.615Z</lastmod>
-  </url>
-  <url>
-    <loc>https://guoruizhong.github.io/index.html</loc>
-    <lastmod>2023-05-18T04:00:05.228Z</lastmod>
+    <lastmod>2023-05-26T13:52:42.879Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/now/index.html</loc>
-    <lastmod>2023-05-18T04:00:05.639Z</lastmod>
+    <lastmod>2023-05-26T13:52:43.189Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/wiki/index.html</loc>
-    <lastmod>2023-05-18T04:00:06.388Z</lastmod>
+    <lastmod>2023-05-26T13:52:43.545Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2021/01/02/index.html</loc>
-    <lastmod>2023-05-18T04:00:06.720Z</lastmod>
+    <lastmod>2023-05-26T13:52:43.874Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2021/02/01/index.html</loc>
-    <lastmod>2023-05-18T04:00:07.085Z</lastmod>
+    <lastmod>2023-05-26T13:52:44.207Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2021/03/16/index.html</loc>
-    <lastmod>2023-05-18T04:00:07.479Z</lastmod>
+    <lastmod>2023-05-26T13:52:44.551Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2021/06/01/index.html</loc>
-    <lastmod>2023-05-18T04:00:07.816Z</lastmod>
+    <lastmod>2023-05-26T13:52:44.879Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2022/10/01/index.html</loc>
-    <lastmod>2023-05-18T04:00:08.354Z</lastmod>
+    <lastmod>2023-05-26T13:52:45.266Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2022/11/01/index.html</loc>
-    <lastmod>2023-05-18T04:00:08.673Z</lastmod>
+    <lastmod>2023-05-26T13:52:45.580Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2022/12/18/index.html</loc>
-    <lastmod>2023-05-18T04:00:09.017Z</lastmod>
+    <lastmod>2023-05-26T13:52:45.915Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2022/12/19/index.html</loc>
-    <lastmod>2023-05-18T04:00:10.324Z</lastmod>
+    <lastmod>2023-05-26T13:52:46.444Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2022/12/20/index.html</loc>
-    <lastmod>2023-05-18T04:00:10.964Z</lastmod>
+    <lastmod>2023-05-26T13:52:46.942Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2022/12/23/index.html</loc>
-    <lastmod>2023-05-18T04:00:11.544Z</lastmod>
+    <lastmod>2023-05-26T13:52:47.298Z</lastmod>
   </url>
   <url>
     <loc>https://guoruizhong.github.io/blog/2022/12/24/index.html</loc>
-    <lastmod>2023-05-18T04:00:12.058Z</lastmod>
+    <lastmod>2023-05-26T13:52:47.655Z</lastmod>
   </url>
 </urlset>
