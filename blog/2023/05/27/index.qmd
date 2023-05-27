@@ -1,0 +1,177 @@
+---
+title: "Learning PCA, tSNE and UMAP from simple example"
+date: 2023-05-27
+# date-modified: 2023-04-05
+categories:
+  - R
+  - PCA
+  - tSNE
+  - UMAP
+image: pca.png
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    # fig.width = 6, 
+    # fig.height = 3.8,
+    fig.align = "center", 
+    # fig.retina = 3,
+    # out.width = "85%", 
+    collapse = TRUE
+)
+```
+
+## library and data
+
+```{r}
+### load packages
+rm(list = ls())
+pacman::p_load(
+  tidyverse,
+  broom,
+  palmerpenguins
+)
+### demo data
+penguins <- penguins |> 
+  drop_na() |> 
+  select(-year)
+head(penguins)
+
+```
+## PCA
+
+```{r}
+### Perform PCA using prcomp()
+pca_fit <- penguins |> 
+  select(where(is.numeric)) |> 
+  scale() |> 
+  prcomp()
+
+### importance of components
+pca_fit
+summary(pca_fit)
+
+### visualize the PC1 and PC2
+pca_fit |> 
+  augment(penguins) |> 
+  rename_at(
+    vars(starts_with(".fitted")), 
+    list(~str_replace(., ".fitted", ""))
+    ) |> 
+    ggplot(aes(x = PC1, y = PC2, color = species, shape = sex)) +
+    geom_point()
+```
+
+## UMAP
+
+```{r}
+rm(list = ls())
+### load packages
+pacman::p_load(
+  tidyverse,
+  umap,
+  palmerpenguins
+)
+### theme set
+theme_set(theme_bw(18))
+### subset data
+penguins <- penguins |> 
+  drop_na() |> 
+  select(-year) |> 
+  mutate(ID = row_number())
+
+### meta data
+penguins_meta <- penguins |> 
+  select(ID, species, island, sex)
+### umap analysis
+set.seed(123)
+umap_fit <- penguins |>
+  select(where(is.numeric)) |> 
+  column_to_rownames("ID") |> 
+  scale() |> 
+  umap()
+### retrieve data from umap analysis
+umap_df <- umap_fit$layout |> 
+  as.data.frame() |> 
+  rename(UMAP1 = "V1", UMAP2 = "V2") |> 
+  mutate(ID = row_number()) |> 
+  inner_join(penguins_meta, by = "ID")  
+### visualize umap
+umap_df |> 
+  ggplot(aes(x = UMAP1, y = UMAP2, color = species, shape = sex)) +
+  geom_point() +
+  labs(x = "UMAP1", y = "UMAP2", title = "UMAP plot")
+
+### facet by island
+umap_df |> 
+  ggplot(aes(x = UMAP1, y = UMAP2, color = species))+
+  geom_point(size = 3, alpha = 0.5) +
+  facet_wrap(~island) +
+  labs(x = "UMAP1", y = "UMAP2", subtitle = "UMAP plot") +
+  theme(legend.position = "bottom")
+
+### circlize the outlier cases
+pacman::p_load(
+  ggforce
+)
+umap_df |> 
+  ggplot(aes(x = UMAP1, y = UMAP2, color = species, shape = sex)) +
+  geom_point()+
+  labs(x = "UMAP1", y = "UMAP2", subtitle = "UMAP plot") +
+  geom_circle(aes(x0 = -5, y0= -3.8, r = 0.65), color = "green", inherit.aes = FALSE)
+```
+
+## tSNE
+
+```{r}
+rm(list = ls())
+### load packages
+pacman::p_load(
+  tidyverse,
+  Rtsne,
+  palmerpenguins
+)
+### theme set
+theme_set(theme_bw(18))
+### subset data
+penguins <- penguins |> 
+  drop_na() |> 
+  select(-year) |> 
+  mutate(ID = row_number())
+
+### meta data
+penguins_meta <- penguins |> 
+  select(ID, species, island, sex)
+
+### tSNE analysis
+set.seed(135)
+tsne_fit <- penguins |> 
+  select(where(is.numeric)) |> 
+  column_to_rownames("ID") |> 
+  scale() |> 
+  Rtsne()
+
+### retrive data
+tsne_df  <- tsne_fit$Y |> 
+  as.data.frame() |> 
+  rename(tSNE1 = "V1", tSNE2 = "V2") |> 
+  mutate(ID = row_number())
+
+tsne_df <- tsne_df |> 
+  inner_join(penguins_meta, by = "ID")
+
+### check data
+head(tsne_df)
+
+### visualize 
+tsne_df |> 
+  ggplot(aes(x = tSNE1, y = tSNE2, color = species, shape = sex)) +
+  geom_point()+
+  theme(legend.position = "bottom")
+```
+
+## Reference
+ - [How To Make PCA Plot with R](https://datavizpyr.com/how-to-make-pca-plot-with-r/) 
+ - [How To Make tSNE plot in R](https://datavizpyr.com/how-to-make-tsne-plot-in-r/)
+ - [How to make UMAP plot in R](https://datavizpyr.com/how-to-make-umap-plot-in-r/)
+ - [How To Annotate a Plot with Circle in R](https://datavizpyr.com/annotate-a-plot-with-circle-ggplot2/)

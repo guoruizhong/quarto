@@ -26,6 +26,7 @@ These are the collections of things that I beleived useful in my daily researh w
 - [Publication ready plots using ggpubr](https://jeweljohnsonj.github.io/jeweljohnson.github.io/project7.html)
 - [datanovia](https://www.datanovia.com/en/)
 - [Data Analysis in Genome Biology](https://girke.bioinformatics.ucr.edu/GEN242/)
+- [Data Viz with Python and R](https://datavizpyr.com/category/r/)
 
 
 ## Linux Basic
