@@ -21,7 +21,17 @@ knitr::opts_chunk$set(
 )
 ```
 
-## library and data
+```{r}
+### Load packages
+pacman::p_load(
+    tidyverse,  # tidy data
+    FactoMineR, # compute principal component methods
+    factoextra,  # extract, visualize and interpretate the results
+    corrplot  # visualize cos2 of variables
+)
+```
+## Library and data
+
 
 ```{r}
 ### load packages
@@ -36,9 +46,10 @@ penguins <- penguins |>
   drop_na() |> 
   select(-year)
 head(penguins)
-
 ```
+
 ## PCA
+
 
 ```{r}
 ### Perform PCA using prcomp()
@@ -123,6 +134,7 @@ umap_df |>
 
 ## tSNE
 
+
 ```{r}
 rm(list = ls())
 ### load packages
@@ -169,6 +181,7 @@ tsne_df |>
   geom_point()+
   theme(legend.position = "bottom")
 ```
+
 
 ## Reference
  - [How To Make PCA Plot with R](https://datavizpyr.com/how-to-make-pca-plot-with-r/) 

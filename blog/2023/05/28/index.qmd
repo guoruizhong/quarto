@@ -1,0 +1,32 @@
+---
+title: "R build-in shapes and default color in ggplot2"
+date: 2023-05-28
+# date-modified: 2023-04-05
+categories:
+  - ggplot2
+# image: pca_biplot.png
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    # fig.width = 6, 
+    # fig.height = 3.8,
+    fig.align = "center", 
+    # fig.retina = 3,
+    # out.width = "85%", 
+    collapse = TRUE
+)
+```
+
+```{r}
+pacman::p_load(
+    tidyverse,
+    scales
+)
+```
+
+
+## Reference
+
+- [How To Get the Default Color Codes of ggplot2?](https://datavizpyr.com/how-to-get-the-default-color-codes-of-ggplot2/?amp=1)
+- [pch in R : built-in shapes in R](https://datavizpyr.com/pch-in-r-built-in-shapes-in-r/?amp=1)

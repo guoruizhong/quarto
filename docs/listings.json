@@ -8,7 +8,6 @@
       "/blog/2023/03/31/index.html",
       "/blog/2023/03/30/index.html",
       "/blog/2023/03/11/index.html",
-      "/blog/2023/05/25/index.html",
       "/blog/2023/03/01/index.html",
       "/blog/2022/05/02/index.html",
       "/blog/2023/05/27/index.html",
@@ -16,6 +15,7 @@
       "/blog/2023/04/05/index.html",
       "/blog/2023/05/18/index.html",
       "/blog/2023/05/17/index.html",
+      "/blog/2023/05/28/index.html",
       "/blog/2023/03/08/index.html",
       "/blog/2023/03/05/index.html",
       "/blog/2022/01/22/index.html",
@@ -28,8 +28,8 @@
   {
     "listing": "/blog/index.html",
     "items": [
+      "/blog/2023/05/28/index.html",
       "/blog/2023/05/27/index.html",
-      "/blog/2023/05/25/index.html",
       "/blog/2023/05/18/index.html",
       "/blog/2023/05/17/index.html",
       "/blog/2023/05/03/index.html",
@@ -64,8 +64,8 @@
   {
     "listing": "/index.html",
     "items": [
+      "/blog/2023/05/28/index.html",
       "/blog/2023/05/27/index.html",
-      "/blog/2023/05/25/index.html",
       "/blog/2023/05/18/index.html",
       "/blog/2023/05/17/index.html",
       "/blog/2023/05/03/index.html",

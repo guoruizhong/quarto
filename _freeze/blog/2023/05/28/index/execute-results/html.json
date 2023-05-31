@@ -1,0 +1,14 @@
+{
+  "hash": "a375823884fdd6bfb1164bfe8d5ac668",
+  "result": {
+    "markdown": "---\ntitle: \"R build-in shapes and default color in ggplot2\"\ndate: 2023-05-28\n# date-modified: 2023-04-05\ncategories:\n  - ggplot2\n# image: pca_biplot.png\n---\n\n\n\n::: {.cell layout-align=\"center\"}\n\n```{.r .cell-code}\npacman::p_load(\n    tidyverse,\n    scales\n)\n```\n:::\n\n\n\n## Reference\n\n- [How To Get the Default Color Codes of ggplot2?](https://datavizpyr.com/how-to-get-the-default-color-codes-of-ggplot2/?amp=1)\n- [pch in R : built-in shapes in R](https://datavizpyr.com/pch-in-r-built-in-shapes-in-r/?amp=1)",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
