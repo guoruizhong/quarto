@@ -1,9 +1,10 @@
 ---
-title: "R build-in shapes and default color in ggplot2"
+title: "R build-in shapes for ggplot2"
 date: 2023-05-28
 # date-modified: 2023-04-05
 categories:
   - ggplot2
+  - R
 # image: pca_biplot.png
 ---
 
@@ -13,18 +14,52 @@ knitr::opts_chunk$set(
     # fig.height = 3.8,
     fig.align = "center", 
     # fig.retina = 3,
-    # out.width = "85%", 
+    out.width = "100%", 
     collapse = TRUE
 )
 ```
 
 ```{r}
 pacman::p_load(
-    tidyverse,
-    scales
+    tidyverse
 )
-```
+theme_set(theme_bw(16))
 
+### create the coordinate
+n_g <- 4
+pch_df <- data.frame(p = c(0:25)) %>%
+    mutate(x = rep(seq_len(ceiling(n() / n_g)),
+        each = n_g,
+        length.out = n()
+    )) %>%
+    group_by(x) %>%
+    mutate(y = 1:n())
+head(pch_df)
+
+### plot shapes
+pch_df %>%
+    ggplot(aes(x = x, y = y, shape = p), ) +
+    scale_shape_identity() +
+    geom_point(size = 5, fill = "steelblue") +
+    scale_y_reverse() +
+    geom_text(aes(
+        x = x - 0.5, y = y,
+        label = paste0("pch =", p)
+    ), size = 3) +
+    labs(
+        title = "pch in R"
+    ) +
+    theme(
+        axis.title = element_blank(),
+        axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        plot.caption = element_text(
+            size = 16,
+            color = "steelblue",
+            face = "bold"
+        )
+    )
+```
 
 ## Reference
 
