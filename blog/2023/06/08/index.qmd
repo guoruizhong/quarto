@@ -5,7 +5,7 @@ date: 2023-06-8
 categories:
   - Regex
   - R
-# image: pca_biplot.png
+image: reg.png
 ---
 
 ```{r setup, include=FALSE}
@@ -18,15 +18,16 @@ knitr::opts_chunk$set(
     collapse = TRUE
 )
 ```
+Regular expressions are also called regex or regexp. A regex is a text string that defines a search pattern. Regex can be used to manipulate and extract information from text strings. Regex are universally supported din many programming languages like R, Python, Java and SQL.
 
-## Native R Functions to work with R Regex
+
 - grep(), grepl() – return the indices of strings containing a match (grep()) or a logical vector showing which strings contain a match (grepl()).
 - regexpr(), gregexpr() – return the index for each string where the match begins and the length of that match. While regexpr() provides this information only for the first match (from the left), gregexpr() does the same for all the matches.
 - sub(), gsub() – replace a detected match in each string with a specified string (sub() – only for the first match, gsub() – for all the matches).
 - regexec() – works like regexpr() but returns the same information also for a specified sub-expression inside the match.
 - regmatches() – works like regexec() but returns the exact strings detected for the overall match and a specified sub-expression.
 
-## R Regex Patterns
+![](reg.png)
 
 
 

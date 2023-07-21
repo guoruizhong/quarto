@@ -5,7 +5,7 @@ date: 2023-05-28
 categories:
   - ggplot2
   - R
-# image: pca_biplot.png
+image: shape.png
 ---
 
 ```{r setup, include=FALSE}

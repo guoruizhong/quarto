@@ -142,28 +142,25 @@ ul.task-list li input[type="checkbox"] {
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Contents</h2>
-   
-  <ul>
-<li><a href="#native-r-functions-to-work-with-r-regex" id="toc-native-r-functions-to-work-with-r-regex" class="nav-link active" data-scroll-target="#native-r-functions-to-work-with-r-regex">Native R Functions to work with R Regex</a></li>
-  <li><a href="#r-regex-patterns" id="toc-r-regex-patterns" class="nav-link" data-scroll-target="#r-regex-patterns">R Regex Patterns</a></li>
-  </ul></nav>
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content"><section id="native-r-functions-to-work-with-r-regex" class="level2"><h2 class="anchored" data-anchor-id="native-r-functions-to-work-with-r-regex">Native R Functions to work with R Regex</h2>
+<main class="content quarto-banner-title-block" id="quarto-document-content"><p>Regular expressions are also called regex or regexp. A regex is a text string that defines a search pattern. Regex can be used to manipulate and extract information from text strings. Regex are universally supported din many programming languages like R, Python, Java and SQL.</p>
 <ul>
 <li>grep(), grepl() – return the indices of strings containing a match (grep()) or a logical vector showing which strings contain a match (grepl()).</li>
 <li>regexpr(), gregexpr() – return the index for each string where the match begins and the length of that match. While regexpr() provides this information only for the first match (from the left), gregexpr() does the same for all the matches.</li>
 <li>sub(), gsub() – replace a detected match in each string with a specified string (sub() – only for the first match, gsub() – for all the matches).</li>
 <li>regexec() – works like regexpr() but returns the same information also for a specified sub-expression inside the match.</li>
 <li>regmatches() – works like regexec() but returns the exact strings detected for the overall match and a specified sub-expression.</li>
-</ul></section><section id="r-regex-patterns" class="level2"><h2 class="anchored" data-anchor-id="r-regex-patterns">R Regex Patterns</h2>
+</ul>
+<p><img src="reg.png" class="img-fluid"></p>
 
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+
+</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
