@@ -5,7 +5,7 @@ date: 2023-07-04
 categories:
   - omics
   - R
-# image: pca_biplot.png
+image: pca.png
 ---
 
 ```{r setup, include=FALSE}
