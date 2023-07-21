@@ -82,3 +82,4 @@ ggplot(df, aes(y = country, x = lifeExp, fill = continent)) +
 #     # type = "cairo"
 # )
 ```
+

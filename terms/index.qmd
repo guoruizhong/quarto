@@ -1,0 +1,24 @@
+---
+title: Terms
+# date: 2022-12-26
+# description-meta: Guorui is working on a bunch of exciting and groundbreaking projects
+published-title: Last updated
+title-block-banner: "#212529"
+toc: true
+toc-location: left
+toc-title: "Contents"
+---
+
+
+### Likely pathogenic/benign
+
+“likely pathogenic” and “likely benign” be used to mean greater than 90% certainty of a variant either being disease- causing or benign
+
+It should also be noted that at present most variants do not have data to support a quan- titative assignment of variant certainty to any of the five cat- egories given the heterogeneous nature of most diseases.
+
+### Mutation
+Mutation is defined as a permanent change in the nucleotide sequence.
+
+### Polymorphism
+
+Polymorphism is defined as a vari- ant with a frequency above 1%.

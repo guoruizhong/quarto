@@ -93,3 +93,4 @@ The solution is to set the default terminal provider on the remote settings to b
 
 - <https://www.zdyn.net/system/hacks/2020/09/19/vscode-term-session.html>
 - <https://arcolinux.com/everthing-you-need-to-know-about-tmux-introduction/>
+

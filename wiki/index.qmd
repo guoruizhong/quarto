@@ -10,7 +10,8 @@ toc-title: "Contents"
 
 These are the collections of things that I beleived useful in my daily researh work.
   
-
+## Biology
+ - [Sequence Variant Nomenclature](http://varnomen.hgvs.org/)
 ## Data Analysis
 
 - [An Introduction to Statistical Learning](https://www.statlearning.com/)
@@ -95,3 +96,5 @@ These are the collections of things that I beleived useful in my daily researh w
 
 - <https://www.andrewheiss.com/blog/>
 - <https://renkun.me/>
+- <https://morphoscape.wordpress.com/category/tech/>
+- <https://albert-rapp.de/>

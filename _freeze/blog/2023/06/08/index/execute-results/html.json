@@ -1,0 +1,16 @@
+{
+  "hash": "9597def56945d1f15b8793984f89745f",
+  "result": {
+    "markdown": "---\ntitle: \"Regular expression with R\"\ndate: 2023-06-8\n# date-modified: 2023-04-05\ncategories:\n  - Regex\n  - R\n# image: pca_biplot.png\n---\n\n\n\n\n## Native R Functions to work with R Regex\n- grep(), grepl() – return the indices of strings containing a match (grep()) or a logical vector showing which strings contain a match (grepl()).\n- regexpr(), gregexpr() – return the index for each string where the match begins and the length of that match. While regexpr() provides this information only for the first match (from the left), gregexpr() does the same for all the matches.\n- sub(), gsub() – replace a detected match in each string with a specified string (sub() – only for the first match, gsub() – for all the matches).\n- regexec() – works like regexpr() but returns the same information also for a specified sub-expression inside the match.\n- regmatches() – works like regexec() but returns the exact strings detected for the overall match and a specified sub-expression.\n\n## R Regex Patterns\n\n\n\n\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

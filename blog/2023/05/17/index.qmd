@@ -239,3 +239,6 @@ fviz_pca_ind(res_pca, axes = c(2, 3))
 ## Reference
 
 - [Principal Component Methods in R: Practical Guide](http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials/)
+- [Factoextra R Package: Easy Multivariate Data Analyses and Elegant Visualization](https://www.r-bloggers.com/2017/02/factoextra-r-package-easy-multivariate-data-analyses-and-elegant-visualization/)
+
+

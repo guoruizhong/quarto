@@ -490,5 +490,20 @@
   },
   "blog/2023/05/28/index.qmd": {
     "index.html": "d4d76b31"
+  },
+  "blog/2023/06/07/index.qmd": {
+    "index.html": "55b84c7b"
+  },
+  "blog/2023/06/08/index.qmd": {
+    "index.html": "76c7336c"
+  },
+  "blog/2023/07/04/index.qmd": {
+    "index.html": "50a814fe"
+  },
+  "blog/2023/07/05/index.qmd": {
+    "index.html": "32fc0282"
+  },
+  "terms/index.qmd": {
+    "index.html": "a9fb03da"
   }
 }
