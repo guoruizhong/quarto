@@ -6,7 +6,7 @@ categories:
   - PCA
   - PLS-DA
   - R
-# image: pca_biplot.png
+image: pca.png
 ---
 
 PCA (also called eigenvector analysis) is unsupervised pattern recognition technique mostly utilized as data reduction and modelling technique. It determines the degree or extent to which variables are related. Large data of many variables are unavoidably superfluous and overlap, the use of correlation matrix generally quantifies these anomalies by extracting the eigenvalues and eigenvectors from the square matrix originated by multiplying the data matrix. The purpose of PCA is to find orthogonal variables that capture the maximum amount of variance in the data without considering class information. PCA provide the information about the relationships and patterns and help identify major sources of variation and potential outliers
