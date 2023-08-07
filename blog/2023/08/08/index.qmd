@@ -1,0 +1,11 @@
+---
+title: "Using {renv} to manage R environment for reproducible coding"
+date: 2023-08-08
+# date-modified: 2023-04-05
+categories:
+  - R
+image: renv.png
+---
+
+
+- [R renv: How to Manage Dependencies in R Projects Easily](https://appsilon.com/renv-how-to-manage-dependencies-in-r/)
