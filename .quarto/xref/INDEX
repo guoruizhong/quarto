@@ -505,5 +505,11 @@
   },
   "terms/index.qmd": {
     "index.html": "a9fb03da"
+  },
+  "blog/2023/08/07/index.qmd": {
+    "index.html": "8f25fa24"
+  },
+  "blog/2023/05/17/index.knit.md": {
+    "index.knit.html": "b35c7e1d"
   }
 }

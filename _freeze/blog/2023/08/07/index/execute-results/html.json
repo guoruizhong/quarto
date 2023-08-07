@@ -1,0 +1,11 @@
+{
+  "hash": "5bec36496e389ceb4b96daa601d69a65",
+  "result": {
+    "markdown": "---\ntitle: \"Build R environment with miniforge in linux without root\"\ndate: 2023-08-07\n# date-modified: 2023-04-05\ncategories:\n  - env\nimage: conda.jpg\n---\n\n```{bash}\n### Download miniforge\nwget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh\n\n### chmod \nchmod +x ./Miniforge3-Linux-x86_64.sh\n\n### Install to /home/usr/opt/miniforge3\nbash ./Miniforge3-Linux-x86_64.sh\n\n### Not auto activate base environment\nconda config --set auto_activate_base false\n\n### Install mamba\nconda install -c conda-forge mamba\n```\n\n![](conda.jpg)\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

@@ -15,14 +15,13 @@ The details refer to: <https://github.com/REditorSupport/vscode-R>
 ### Install r packages
    
 ```r
-install.packages(
-        c(
-            "languageserver", 
-            "httpgd",
-            "IRkernel",
-            "rmarkdown"
-    ), 
-    dependencies = TRUE
+pacman::p_load(
+    jsonlite,
+    rlang,
+    languageserver, 
+    httpgd,
+    IRkernel,
+    rmarkdown
 )
 
 ```

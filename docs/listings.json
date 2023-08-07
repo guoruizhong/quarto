@@ -9,6 +9,7 @@
       "/blog/2023/03/30/index.html",
       "/blog/2023/07/04/index.html",
       "/blog/2023/03/11/index.html",
+      "/blog/2023/08/07/index.html",
       "/blog/2023/03/01/index.html",
       "/blog/2022/05/02/index.html",
       "/blog/2023/05/27/index.html",
@@ -32,6 +33,7 @@
   {
     "listing": "/blog/index.html",
     "items": [
+      "/blog/2023/08/07/index.html",
       "/blog/2023/07/05/index.html",
       "/blog/2023/07/04/index.html",
       "/blog/2023/06/08/index.html",
@@ -72,6 +74,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/blog/2023/08/07/index.html",
       "/blog/2023/07/05/index.html",
       "/blog/2023/07/04/index.html",
       "/blog/2023/06/08/index.html",
