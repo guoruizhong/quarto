@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Guorui Zhong">
+
+<title>combat</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>
+
+      .quarto-title-block .quarto-title-banner {
+        background: #212529;
+      }
+</style>
+
+
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../blog/index.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../wiki/index.html" rel="" target="">
+ <span class="menu-text">Wiki</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../now/index.html" rel="" target="">
+ <span class="menu-text">Now</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:zhonggr@bii.a-star.edu.sg" rel="" target=""><i class="bi bi-envelope" role="img" aria-label="email">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=g0MfTPMAAAAJ&amp;hl=en" rel="" target=""><i class="bi bi-journal-check" role="img" aria-label="journal-check">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/guorui-zhong-754761185/" rel="" target=""><i class="bi bi-linkedin" role="img" aria-label="linkedin">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/guoruizhong" rel="" target=""><i class="bi bi-github" role="img" aria-label="github">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#setting-up-the-data" id="toc-setting-up-the-data" class="nav-link active" data-scroll-target="#setting-up-the-data">Setting up the data</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#adjusting-batch-effect-using-linerar-model" id="toc-adjusting-batch-effect-using-linerar-model" class="nav-link" data-scroll-target="#adjusting-batch-effect-using-linerar-model">Adjusting batch effect using Linerar model</a></li>
+  <li><a href="#adjusting-for-batch-effect-with-combat" id="toc-adjusting-for-batch-effect-with-combat" class="nav-link" data-scroll-target="#adjusting-for-batch-effect-with-combat">Adjusting for batch effect with {Combat}</a></li>
+  <li><a href="#comparing-the-combat-and-linear-adjustment" id="toc-comparing-the-combat-and-linear-adjustment" class="nav-link" data-scroll-target="#comparing-the-combat-and-linear-adjustment">Comparing the combat and linear adjustment</a></li>
+  <li><a href="#adjusting-for-batch-effects-with-sva" id="toc-adjusting-for-batch-effects-with-sva" class="nav-link" data-scroll-target="#adjusting-for-batch-effects-with-sva">Adjusting for batch effects with {sva}</a></li>
+  <li><a href="#principal-components-for-population-structure" id="toc-principal-components-for-population-structure" class="nav-link" data-scroll-target="#principal-components-for-population-structure">Principal components for population structure</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+<section id="setting-up-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-the-data">Setting up the data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Install package</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    here, tidyverse, sva, bladderbatch, pamr, limma</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="do">### Load data</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(bladderdata)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="do">### Get the expression data</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>edata <span class="ot">&lt;-</span> <span class="fu">exprs</span>(bladderEset)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(edata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          GSM71019.CEL GSM71020.CEL GSM71021.CEL GSM71022.CEL GSM71023.CEL
+1007_s_at    10.115170     8.628044     8.779235     9.248569    10.256841
+1053_at       5.345168     5.063598     5.113116     5.179410     5.181383
+117_at        6.348024     6.663625     6.465892     6.116422     5.980457
+121_at        8.901739     9.439977     9.540738     9.254368     8.798086
+1255_g_at     3.967672     4.466027     4.144885     4.189338     4.078509
+1294_at       7.775183     7.110154     7.248430     7.017220     7.896419
+          GSM71024.CEL GSM71025.CEL GSM71026.CEL GSM71028.CEL GSM71029.CEL
+1007_s_at    10.023133     9.108034     8.735616     9.803271    10.168602
+1053_at       5.248418     5.252312     5.220931     5.595771     5.025180
+117_at        5.796155     6.414849     6.846798     5.841478     6.352257
+121_at        8.002870     9.093704     9.263386     7.789240     9.834564
+1255_g_at     3.919740     4.402590     4.173666     3.590649     4.338196
+1294_at       7.944676     7.469767     7.281925     7.367814     7.825735
+          GSM71030.CEL GSM71031.CEL GSM71032.CEL GSM71033.CEL GSM71034.CEL
+1007_s_at     8.420904    10.194269    10.184201     9.621902    10.330774
+1053_at       5.909075     5.307699     5.311109     5.542951     5.458996
+117_at        5.967566     6.171909     6.156392     6.120551     5.571636
+121_at        7.844720     7.862812     8.387105     8.646292     8.395863
+1255_g_at     3.952783     3.985398     3.863569     3.923745     3.815636
+1294_at       7.401377     8.252998     7.564053     7.009706     8.772693
+          GSM71035.CEL GSM71036.CEL GSM71037.CEL GSM71038.CEL GSM71039.CEL
+1007_s_at     8.986572    10.639548    10.054243     9.768019     9.328306
+1053_at       5.430052     5.587119     5.493452     5.633127     5.159921
+117_at        6.000733     6.187920     6.114563     7.011835     6.336885
+121_at        7.813381     8.752571     8.576715     8.254420     7.959826
+1255_g_at     3.813763     3.928739     3.942883     3.764742     4.097321
+1294_at       7.728379     7.553263     7.197903     8.149383     7.636171
+          GSM71040.CEL GSM71041.CEL GSM71042.CEL GSM71043.CEL GSM71044.CEL
+1007_s_at    10.196158    10.292591    10.320349     9.323106     9.628180
+1053_at       6.076057     5.338113     5.187639     5.955838     5.450218
+117_at        6.092187     6.088709     6.303387     5.888935     8.477193
+121_at        8.096221     8.158816     8.598261     7.389635     8.508515
+1255_g_at     3.774978     3.893144     4.065195     3.633987     3.967857
+1294_at       8.028049     7.684338     8.122264     7.019915     8.083954
+          GSM71045.CEL GSM71046.CEL GSM71047.CEL GSM71048.CEL GSM71049.CEL
+1007_s_at    10.493403    10.840534     9.368271    10.337764     9.803385
+1053_at       5.366804     5.437124     5.793530     5.247940     5.320422
+117_at        6.011152     5.903212     6.313240     5.729220     6.161011
+121_at        8.336089     7.792873     8.990317     8.976696     8.439951
+1255_g_at     3.836356     3.799026     4.054613     3.844070     4.202248
+1294_at       7.964711     7.862600     7.303318     8.013374     7.820776
+          GSM71050.CEL GSM71051.CEL GSM71052.CEL GSM71053.CEL GSM71054.CEL
+1007_s_at    10.158010     9.096022     9.287650     9.636696     9.911038
+1053_at       5.826067     5.265145     5.391201     5.677830     5.373810
+117_at        5.944079     6.727406     6.860623     5.862206     6.032169
+121_at        8.259074     8.992336     8.617814     8.373513     8.227620
+1255_g_at     3.865914     3.897634     4.019904     3.815712     3.841906
+1294_at       8.499586     7.015544     7.358916     7.885461     7.288989
+          GSM71055.CEL GSM71056.CEL GSM71058.CEL GSM71059.CEL GSM71060.CEL
+1007_s_at    10.505014    10.417704     9.911863    10.545780    10.131537
+1053_at       5.441140     5.579827     5.395288     5.524846     5.901671
+117_at        6.033868     6.077683     6.791961     6.157637     6.058080
+121_at        8.946566     8.505293     8.291846     8.214104     7.917774
+1255_g_at     4.017547     3.879476     3.890512     3.894170     3.547688
+1294_at       7.952671     7.490074     7.450992     8.086814     7.614454
+          GSM71061.CEL GSM71062.CEL GSM71063.CEL GSM71064.CEL GSM71065.CEL
+1007_s_at     9.712869    10.401919     8.763484     9.994538     9.790791
+1053_at       5.841468     5.656442     5.723440     5.727089     5.484076
+117_at        6.339688     5.648701     5.211550     6.177668     6.398325
+121_at        7.968398     8.835210     7.469142     8.256623     8.211274
+1255_g_at     3.831119     3.706997     3.668804     3.823414     4.164475
+1294_at       7.676996     8.290899     6.749402     8.355787     7.311462
+          GSM71066.CEL GSM71067.CEL GSM71068.CEL GSM71069.CEL GSM71070.CEL
+1007_s_at    10.292308    10.627200    10.582892    10.009028     9.912853
+1053_at       5.304608     5.491903     5.615926     5.151548     5.237126
+117_at        5.891567     6.383317     5.913488     5.904794     5.960948
+121_at        8.532695     8.016517     8.049998     8.407351     8.985741
+1255_g_at     3.824158     3.783804     3.775194     3.995371     4.322380
+1294_at       7.876914     8.554634     8.042399     7.680460     7.199866
+          GSM71071.CEL GSM71072.CEL GSM71073.CEL GSM71074.CEL GSM71075.CEL
+1007_s_at     9.096809     9.011927     8.396062     8.903465     9.501538
+1053_at       5.093278     5.353248     5.214357     5.251383     5.223598
+117_at        6.394089     6.425034     6.372520     6.095344     5.811968
+121_at        8.817789     8.866083     8.704385     9.375736     8.580523
+1255_g_at     4.141255     3.997644     4.219360     4.454771     4.188310
+1294_at       7.378438     7.354380     7.179849     7.143989     7.136764
+          GSM71076.CEL GSM71077.CEL
+1007_s_at     9.540766     9.039143
+1053_at       5.191392     5.235880
+117_at        6.007461     6.314809
+121_at        8.848099     9.663298
+1255_g_at     4.284053     4.877523
+1294_at       7.369991     6.992046</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Get the variable data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>pheno <span class="ot">&lt;-</span> <span class="fu">pData</span>(bladderEset)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pheno)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             sample outcome batch cancer
+GSM71019.CEL      1  Normal     3 Normal
+GSM71020.CEL      2  Normal     2 Normal
+GSM71021.CEL      3  Normal     2 Normal
+GSM71022.CEL      4  Normal     3 Normal
+GSM71023.CEL      5  Normal     3 Normal
+GSM71024.CEL      6  Normal     3 Normal</code></pre>
+</div>
+</div>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
+</section>
+<section id="adjusting-batch-effect-using-linerar-model" class="level2">
+<h2 class="anchored" data-anchor-id="adjusting-batch-effect-using-linerar-model">Adjusting batch effect using Linerar model</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span><span class="fu">as.factor</span>(cancer) <span class="sc">+</span> <span class="fu">as.factor</span>(batch), <span class="at">data =</span> pheno)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm.fit</span>(mod, <span class="fu">t</span>(edata))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(fit<span class="sc">$</span>coefficients[<span class="dv">2</span>, ], <span class="at">col =</span> <span class="dv">4</span>, <span class="at">breaks =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="combat_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(pheno<span class="sc">$</span>cancer, pheno<span class="sc">$</span>batch)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        
+          1  2  3  4  5
+  Biopsy  0  0  0  5  4
+  Cancer 11 14  0  0 15
+  Normal  0  4  4  0  0</code></pre>
+</div>
+</div>
+</section>
+<section id="adjusting-for-batch-effect-with-combat" class="level2">
+<h2 class="anchored" data-anchor-id="adjusting-for-batch-effect-with-combat">Adjusting for batch effect with {Combat}</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>batch <span class="ot">&lt;-</span> pheno<span class="sc">$</span>batch</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>modcombat <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span><span class="dv">1</span>, <span class="at">data =</span> pheno)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>modcancer <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span>cancer, <span class="at">data =</span> pheno)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>combat_edata <span class="ot">&lt;-</span> <span class="fu">ComBat</span>(</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">dat =</span> edata, </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">batch =</span> batch,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mod =</span> modcombat, </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">par.prior =</span>  <span class="cn">TRUE</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">prior.plots =</span> <span class="cn">FALSE</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Found5batches</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Adjusting for0covariate(s) or covariate level(s)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Standardizing Data across genes</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Fitting L/S model and finding priors</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Finding parametric adjustments</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Adjusting the Data</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>combat_fit <span class="ot">&lt;-</span> <span class="fu">lm.fit</span>(modcancer, <span class="fu">t</span>(combat_edata))</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(combat_fit<span class="sc">$</span>coefficients[<span class="dv">2</span>, ], <span class="at">col =</span> <span class="dv">4</span>, <span class="at">breaks =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="combat_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="comparing-the-combat-and-linear-adjustment" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-the-combat-and-linear-adjustment">Comparing the combat and linear adjustment</h2>
+<p>We can compare the estimated coefficients from Combat and linear adjustment by looking at the right coefficients for each model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    fit<span class="sc">$</span>coefficients[<span class="dv">2</span>, ], combat_fit<span class="sc">$</span>coefficients[<span class="dv">2</span>, ],</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="dv">4</span>, <span class="at">xlab =</span> <span class="st">"Linear Model"</span>, <span class="at">ylab =</span> <span class="st">"Combat"</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="combat_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>null device 
+          1 </code></pre>
+</div>
+</div>
+</section>
+<section id="adjusting-for-batch-effects-with-sva" class="level2">
+<h2 class="anchored" data-anchor-id="adjusting-for-batch-effects-with-sva">Adjusting for batch effects with {sva}</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span>cancer, <span class="at">data =</span> pheno)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>mod0 <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span><span class="dv">1</span>, <span class="at">data =</span> pheno)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>sva1 <span class="ot">&lt;-</span> <span class="fu">sva</span>(edata, mod, mod0, <span class="at">n.sv =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of significant surrogate variables is:  2 
+Iteration (out of 5 ):1  2  3  4  5  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(sva1<span class="sc">$</span>sv <span class="sc">~</span> pheno<span class="sc">$</span>batch))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Response Y1 :
+
+Call:
+lm(formula = Y1 ~ pheno$batch)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.26953 -0.11076  0.00787  0.10399  0.19069 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept) -0.018470   0.038694  -0.477    0.635
+pheno$batch  0.006051   0.011253   0.538    0.593
+
+Residual standard error: 0.1345 on 55 degrees of freedom
+Multiple R-squared:  0.00523,   Adjusted R-squared:  -0.01286 
+F-statistic: 0.2891 on 1 and 55 DF,  p-value: 0.5929
+
+
+Response Y2 :
+
+Call:
+lm(formula = Y2 ~ pheno$batch)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.23973 -0.07467 -0.02157  0.08116  0.25629 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.121112   0.034157   3.546 0.000808 ***
+pheno$batch -0.039675   0.009933  -3.994 0.000194 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.1187 on 55 degrees of freedom
+Multiple R-squared:  0.2248,    Adjusted R-squared:  0.2107 
+F-statistic: 15.95 on 1 and 55 DF,  p-value: 0.0001945</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(sva1<span class="sc">$</span>sv[, <span class="dv">2</span>] <span class="sc">~</span> pheno<span class="sc">$</span>batch)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(sva1<span class="sc">$</span>sv[, <span class="dv">2</span>] <span class="sc">~</span> <span class="fu">jitter</span>(<span class="fu">as.numeric</span>(pheno<span class="sc">$</span>batch)), <span class="at">col =</span> <span class="fu">as.numeric</span>(pheno<span class="sc">$</span>batch))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="combat_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Add the surrogate variables to model matrix and perfom the model fit</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>modsv  <span class="ot">&lt;-</span>  <span class="fu">cbind</span>(mod, sva1<span class="sc">$</span>sv)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>fitsv <span class="ot">&lt;-</span> <span class="fu">lm.fit</span>(modsv, <span class="fu">t</span>(edata))</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="do">### Compare the fit from surrogate variable analysis to the other two</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fitsv<span class="sc">$</span>coefficients[<span class="dv">2</span>,],combat_fit<span class="sc">$</span>coefficients[<span class="dv">2</span>,],<span class="at">col=</span><span class="dv">2</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab=</span><span class="st">"SVA"</span>,<span class="at">ylab=</span><span class="st">"Combat"</span>,<span class="at">xlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">5</span>),<span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">5</span>))</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">col=</span><span class="dv">1</span>,<span class="at">lwd=</span><span class="dv">3</span>)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fitsv<span class="sc">$</span>coefficients[<span class="dv">2</span>,], fit<span class="sc">$</span>coefficients[<span class="dv">2</span>,],<span class="at">col=</span><span class="dv">2</span>,</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab=</span><span class="st">"SVA"</span>,<span class="at">ylab=</span><span class="st">"linear model"</span>,<span class="at">xlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">5</span>),<span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">5</span>))</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">col=</span><span class="dv">1</span>,<span class="at">lwd=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="combat_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="principal-components-for-population-structure" class="level2">
+<h2 class="anchored" data-anchor-id="principal-components-for-population-structure">Principal components for population structure</h2>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center"><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2021-2023 Guorui Zhong ~ Made with <a href="https://www.r-project.org/"><i class="fa-brands fa-r-project" aria-label="r-project"></i></a> and <a href="https://quarto.org/">Quarto</a></span></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

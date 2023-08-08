@@ -514,5 +514,11 @@
   },
   "blog/2023/08/08/index.qmd": {
     "index.html": "f66cadcd"
+  },
+  "blog/2023/08/09/index.qmd": {
+    "index.html": "a5087ca1"
+  },
+  "blog/2023/08/09/combat.qmd": {
+    "combat.html": "401d69de"
   }
 }

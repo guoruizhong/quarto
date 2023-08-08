@@ -1,0 +1,119 @@
+---
+title: "Remove batch effects in high-throughput experiments"
+date: 2023-08-09
+categories:
+  - R
+  - Batch effect
+# image: plot.png
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  # fig.width = 6, fig.height = 3.8, out.width = "85%", 
+  fig.align = "center", fig.retina = 3,
+  collapse = TRUE
+)
+```
+## What is batch effect?
+
+Batch effects are sub-groubs of measurements that have qualitatively different behaviour
+across conditions and unrelated to the biological or scientific variables in a study.
+ - Experiments run on different time
+ - Different technician
+ - Different lots of reagents, chips or instruments ...
+
+## Setting up the data
+
+- The data should be a matrix with features in the rows and samples in the columns.
+- The data should be standardized before applying for correction.
+
+![](sample.png)
+
+```{r, load-libraries-data, warning=FALSE, message=FALSE}
+### Load packages
+pacman::p_load(here, tidyverse, sva, bladderbatch, pamr, limma, survival)
+### Load data
+data(bladderdata)
+### Get the expression data matrix
+edata <- exprs(bladderEset)
+head(edata)
+
+### Get the variable data
+pheno <- pData(bladderEset)
+head(pheno)
+
+### Create full model matrix, including both the adjustment variables and the variable of interest (cancer status)
+mod <- model.matrix(~as.matrix(cancer), data = pheno)
+
+### Create null model matrix, ontains only the adjustment variables.
+mod0 <- model.matrix(~1, data = pheno) 
+```
+
+## Estimate batch and other artifacts suing {sva}
+
+```{r, warning=FALSE, message=FALSE}
+### Identify the number of latent factors that need to be estimated
+n_sv <- num.sv(edata, mod, method = "leek")
+n_sv
+### Estimate the surrogate variables
+svobj <- sva(edata, mod, mod0, n.sv = n_sv)
+
+### Adjusting for surrogate variables
+pvalues = f.pvalue(edata,mod,mod0)
+qvalues = p.adjust(pvalues,method="BH")
+
+### 
+modsv <- cbind(mod, svobj$sv)
+mod0sv <- cbind(mod0, svobj$sv)
+pvaluesv <- f.pvalue(edata, modsv, mod0sv)
+qvaluesv <- p.adjust(pvaluesv, method = "BH")
+``` 
+## Adjusting the surrogate variables using {limma}
+
+```{r, warning = FALSE, message = FALSE}
+### Fit the linear model with surrogate variables
+fit <- lmFit(edata, modsv)
+
+### Compute the contrasts between pairs of cancer/normal terms
+contrast_matrix <- cbind(
+  "C1" = c(-1, 1, 0, rep(0, svobj$n.sv)),
+  "C2" = c(0, -1, 1, rep(0, svobj$n.sv))
+)
+fitcontrasts <- contrasts.fit(fit, contrast_matrix)
+
+### Calculate the test statistics
+eb <- eBayes(fitcontrasts)
+topTableF(eb, adjust = "BH")
+```
+
+## Adjust known batches using {Combat}
+
+```{r}
+### Adjust for known batches using an empirical Bayesian framework
+### a known batch variable
+batch <- pheno$batch
+
+### Model matrix
+modcombat <- model.matrix(~1, data = pheno)
+
+head(edata)
+### Using parametric empirical Bayesian adjustments.
+combat_edata <- ComBat(
+    dat = edata,
+    batch = batch, 
+    mod = modcombat,
+    par.prior = TRUE, # performs parametric empirical Bayesian adjustment
+    # par.prior = FALSE, # performs non-parametric empirical Bayesian adjustment
+    prior.plots = FALSE,
+    mean.only = FALSE
+)
+
+head(combat_edata)
+### Significance analysis
+pvalue_combat <- f.pvalue(combat_edata, mod, mod0)
+qvalue_combat <- p.adjust(pvalue_combat, method = "BH")
+```
+
+## Reference
+- [Batch effects and confounders](http://jtleek.com/genstats/inst/doc/02_13_batch-effects.html)
+- [The SVA package for removing batch effects and other unwanted variation in high-throughput experiments](https://www.bioconductor.org/packages/release/bioc/vignettes/sva/inst/doc/sva.pdf)
