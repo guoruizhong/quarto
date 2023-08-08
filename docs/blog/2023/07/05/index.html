@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.361">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Guorui Zhong">
-
 <title>Learning [ropls] for multivariate analysis and feature selection of omics data</title>
 <style>
 code{white-space: pre-wrap;}
@@ -57,7 +54,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -74,8 +70,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 <link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script id="quarto-search-options" type="application/json">{
+<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -94,30 +89,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-<style>
+}</script><style>
 
       .quarto-title-block .quarto-title-banner {
         background: #212529;
       }
 </style>
-
-
 </head>
-
 <body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
             <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="../../../../blog/index.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
@@ -150,15 +139,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+<div class="quarto-navbar-tools">
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
+    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full"><div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Learning [ropls] for multivariate analysis and feature selection of omics data</h1>
                                 <div class="quarto-categories">
@@ -192,46 +177,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Contents</h2>
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#packages-and-data" id="toc-packages-and-data" class="nav-link active" data-scroll-target="#packages-and-data">Packages and Data</a></li>
+<li><a href="#packages-and-data" id="toc-packages-and-data" class="nav-link active" data-scroll-target="#packages-and-data">Packages and Data</a></li>
   <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca">PCA</a></li>
   <li><a href="#pls-da" id="toc-pls-da" class="nav-link" data-scroll-target="#pls-da">PLS-DA</a></li>
   <li><a href="#opls-da" id="toc-opls-da" class="nav-link" data-scroll-target="#opls-da">OPLS-DA</a></li>
   <li><a href="#predict-models" id="toc-predict-models" class="nav-link" data-scroll-target="#predict-models">Predict models</a></li>
   <li><a href="#other" id="toc-other" class="nav-link" data-scroll-target="#other">Other</a></li>
-  </ul>
-</nav>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+  </ul></nav>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
-
-
-
-
-<p>PCA (also called eigenvector analysis) is unsupervised pattern recognition technique mostly utilized as data reduction and modelling technique. It determines the degree or extent to which variables are related. Large data of many variables are unavoidably superfluous and overlap, the use of correlation matrix generally quantifies these anomalies by extracting the eigenvalues and eigenvectors from the square matrix originated by multiplying the data matrix. The purpose of PCA is to find orthogonal variables that capture the maximum amount of variance in the data without considering class information. PCA provide the information about the relationships and patterns and help identify major sources of variation and potential outliers</p>
+<main class="content quarto-banner-title-block" id="quarto-document-content"><p>PCA (also called eigenvector analysis) is unsupervised pattern recognition technique mostly utilized as data reduction and modelling technique. It determines the degree or extent to which variables are related. Large data of many variables are unavoidably superfluous and overlap, the use of correlation matrix generally quantifies these anomalies by extracting the eigenvalues and eigenvectors from the square matrix originated by multiplying the data matrix. The purpose of PCA is to find orthogonal variables that capture the maximum amount of variance in the data without considering class information. PCA provide the information about the relationships and patterns and help identify major sources of variation and potential outliers</p>
 <p>PLS discriminant analysis is a supervised technique that uses the PLS algorithm to explain and predict the membership of observations to several classes using quantitative or qualitative explanatory variables or parameters. The purpose of PLS-DA is to identify the latent variables that maximize the discrimination between the predefined classes in the data. PLS-DA focus on the the separation of classes in the dataset and provide information on important features that serparate classes.</p>
-<section id="packages-and-data" class="level2">
-<h2 class="anchored" data-anchor-id="packages-and-data">Packages and Data</h2>
+<section id="packages-and-data" class="level2"><h2 class="anchored" data-anchor-id="packages-and-data">Packages and Data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(ropls, tidyverse, ggsci)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">### load data</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(sacurine)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sacurine)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">ropls</span>, <span class="va">tidyverse</span>, <span class="va">ggsci</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### load data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">sacurine</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">sacurine</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "dataMatrix"       "sampleMetadata"   "variableMetadata" "se"              
 [5] "eset"            </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(sacurine)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">strF</span>(dataMatrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/attach.html">attach</a></span><span class="op">(</span><span class="va">sacurine</span><span class="op">)</span></span>
+<span><span class="fu">strF</span><span class="op">(</span><span class="va">dataMatrix</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       dim  class    mode typeof   size NAs  min mean median max
  183 x 109 matrix numeric double 0.2 Mb   0 -0.3  4.2    4.3   6
@@ -248,7 +223,7 @@ HU_014             4.181765852 4.195761901
 HU_208             4.634338821 4.487781609
 HU_209              4.47194762 4.222953354</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strF</span>(variableMetadata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">strF</span><span class="op">(</span><span class="va">variableMetadata</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> msiLevel      hmdb chemicalClass
   numeric character     character
@@ -261,15 +236,13 @@ HU_209              4.47194762 4.222953354</code></pre>
 Valerylglycine isomer 2                       2           AA-pep:AcyGly
 Xanthosine                                    1 HMDB00299        Nucleo</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View(dataMatrix)</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># View(variableMetadata)</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># View(sampleMetadata)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># View(dataMatrix)</span></span>
+<span><span class="co"># View(variableMetadata)</span></span>
+<span><span class="co"># View(sampleMetadata)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="pca" class="level2">
-<h2 class="anchored" data-anchor-id="pca">PCA</h2>
+</section><section id="pca" class="level2"><h2 class="anchored" data-anchor-id="pca">PCA</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">opls</span>(dataMatrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pca</span> <span class="op">&lt;-</span> <span class="fu">opls</span><span class="op">(</span><span class="va">dataMatrix</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>PCA
 183 samples x 109 variables
@@ -280,38 +253,36 @@ Total    0.501   8   0</code></pre>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>genderFc <span class="ot">&lt;-</span> sampleMetadata[, <span class="st">"gender"</span>]</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pca,</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">typeVc =</span> <span class="st">"x-score"</span>,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">parAsColFcVn =</span> genderFc,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">parEllipsesL =</span> <span class="cn">TRUE</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">genderFc</span> <span class="op">&lt;-</span> <span class="va">sampleMetadata</span><span class="op">[</span>, <span class="st">"gender"</span><span class="op">]</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pca</span>,</span>
+<span>     typeVc <span class="op">=</span> <span class="st">"x-score"</span>,</span>
+<span>     parAsColFcVn <span class="op">=</span> <span class="va">genderFc</span>,</span>
+<span>     parEllipsesL <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>null device 
           1 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pca,</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">typeVc =</span> <span class="st">"x-score"</span>,</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">parAsColFcVn =</span> genderFc,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">parLabVc =</span> <span class="fu">as.character</span>(sampleMetadata[, <span class="st">"age"</span>]),</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">parPaletteVc =</span> <span class="fu">c</span>(<span class="st">"green4"</span>, <span class="st">"magenta"</span>))</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pca</span>,</span>
+<span>     typeVc <span class="op">=</span> <span class="st">"x-score"</span>,</span>
+<span>     parAsColFcVn <span class="op">=</span> <span class="va">genderFc</span>,</span>
+<span>     parLabVc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">sampleMetadata</span><span class="op">[</span>, <span class="st">"age"</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>     parPaletteVc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"green4"</span>, <span class="st">"magenta"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>null device 
           1 </code></pre>
 </div>
 </div>
-</section>
-<section id="pls-da" class="level2">
-<h2 class="anchored" data-anchor-id="pls-da">PLS-DA</h2>
+</section><section id="pls-da" class="level2"><h2 class="anchored" data-anchor-id="pls-da">PLS-DA</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="do">### PLSDA analysis</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>plsda <span class="ot">&lt;-</span> <span class="fu">opls</span>(dataMatrix, genderFc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### PLSDA analysis</span></span>
+<span><span class="va">plsda</span> <span class="op">&lt;-</span> <span class="fu">opls</span><span class="op">(</span><span class="va">dataMatrix</span>, <span class="va">genderFc</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>PLS-DA
 183 samples x 109 variables and 1 response
@@ -322,31 +293,31 @@ Total    0.275     0.73   0.584 0.262   3   0 0.05 0.05</code></pre>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">### sample scores plot</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>sample_score <span class="ot">&lt;-</span> plsda<span class="sc">@</span>scoreMN <span class="sc">|&gt;</span> </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">gender =</span> sacurine[[<span class="st">"sampleMetadata"</span>]][[<span class="st">"gender"</span>]])</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="do">### plot</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sample_score, <span class="fu">aes</span>(<span class="at">x =</span> p1, <span class="at">y =</span> p2, <span class="at">color =</span> gender)) <span class="sc">+</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">-</span><span class="dv">10</span>, <span class="at">y =</span> <span class="sc">-</span><span class="dv">10</span>), <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"P1(10.0%)"</span>, <span class="at">y =</span> <span class="st">"P2(9%)"</span>) <span class="sc">+</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_ellipse</span>(</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">level =</span> <span class="fl">0.95</span>, <span class="at">linetype =</span> <span class="st">"solid"</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#3CB371"</span>, <span class="st">"#FF6347"</span>)) <span class="sc">+</span></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.9</span>, <span class="fl">0.8</span>),</span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">12</span>, <span class="at">family =</span> <span class="st">"Arial"</span>, <span class="at">face =</span> <span class="st">"plain"</span>),</span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">15</span>, <span class="at">family =</span> <span class="st">'Arial'</span>, <span class="at">face =</span> <span class="st">"plain"</span>),</span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">15</span>, <span class="at">family =</span> <span class="st">'Arial'</span>, <span class="at">face =</span> <span class="st">"plain"</span>),</span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>)</span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### sample scores plot</span></span>
+<span><span class="va">sample_score</span> <span class="op">&lt;-</span> <span class="va">plsda</span><span class="op">@</span><span class="va">scoreMN</span> <span class="op">|&gt;</span> </span>
+<span>     <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>     <span class="fu">mutate</span><span class="op">(</span>gender <span class="op">=</span> <span class="va">sacurine</span><span class="op">[[</span><span class="st">"sampleMetadata"</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="st">"gender"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">### plot</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">sample_score</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">p1</span>, y <span class="op">=</span> <span class="va">p2</span>, color <span class="op">=</span> <span class="va">gender</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, linewidth <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, linewidth <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_point</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="op">-</span><span class="fl">10</span>, y <span class="op">=</span> <span class="op">-</span><span class="fl">10</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"P1(10.0%)"</span>, y <span class="op">=</span> <span class="st">"P2(9%)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">stat_ellipse</span><span class="op">(</span></span>
+<span>        level <span class="op">=</span> <span class="fl">0.95</span>, linetype <span class="op">=</span> <span class="st">"solid"</span>, size <span class="op">=</span> <span class="fl">1</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>    <span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">scale_color_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#3CB371"</span>, <span class="st">"#FF6347"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">theme</span><span class="op">(</span></span>
+<span>        legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">0.8</span><span class="op">)</span>,</span>
+<span>        legend.text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, size <span class="op">=</span> <span class="fl">12</span>, family <span class="op">=</span> <span class="st">"Arial"</span>, face <span class="op">=</span> <span class="st">"plain"</span><span class="op">)</span>,</span>
+<span>        panel.background <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        panel.grid <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        axis.text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, size <span class="op">=</span> <span class="fl">15</span>, family <span class="op">=</span> <span class="st">'Arial'</span>, face <span class="op">=</span> <span class="st">"plain"</span><span class="op">)</span>,</span>
+<span>        axis.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, size <span class="op">=</span> <span class="fl">15</span>, family <span class="op">=</span> <span class="st">'Arial'</span>, face <span class="op">=</span> <span class="st">"plain"</span><span class="op">)</span>,</span>
+<span>        axis.ticks <span class="op">=</span> <span class="fu">element_line</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 ℹ Please use `linewidth` instead.</code></pre>
@@ -356,52 +327,50 @@ Total    0.275     0.73   0.584 0.262   3   0 0.05 0.05</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="do">### find the discrinminative variable that VIP greater than 1</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="do">### VIP scores plot</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>vip_score <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(plsda<span class="sc">@</span>vipVn)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(vip_score)  <span class="ot">&lt;-</span> <span class="st">"vip"</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>vip_score<span class="sc">$</span>metabolites <span class="ot">&lt;-</span> <span class="fu">rownames</span>(vip_score)</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>vip_score <span class="ot">&lt;-</span> vip_score[<span class="fu">order</span>(<span class="sc">-</span>vip_score<span class="sc">$</span>vip), ]</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>vip_score<span class="sc">$</span>metabolites <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    vip_score<span class="sc">$</span>metabolites, <span class="at">levels =</span> vip_score<span class="sc">$</span>metabolites)</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>loading_score <span class="ot">&lt;-</span> plsda<span class="sc">@</span>loadingMN <span class="sc">|&gt;</span> </span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.data.frame</span>()</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>loading_score<span class="sc">$</span>metabolites <span class="ot">&lt;-</span> <span class="fu">rownames</span>(loading_score)</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>all_score <span class="ot">&lt;-</span> <span class="fu">merge</span>(vip_score, loading_score, <span class="at">by =</span> <span class="st">"metabolites"</span>)</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>all_score<span class="sc">$</span>cat <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"feature"</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(all_score), <span class="at">sep =</span> <span class="st">""</span>)</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="do">### plot</span></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(all_score[all_score<span class="sc">$</span>vip <span class="sc">&gt;=</span><span class="dv">1</span>, ], <span class="fu">aes</span>(<span class="at">x =</span> cat, <span class="at">y =</span> vip)) <span class="sc">+</span> </span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> cat, <span class="at">xend =</span> cat,</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>                    <span class="at">y =</span> <span class="dv">0</span>, <span class="at">yend =</span> vip)) <span class="sc">+</span></span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"#008000"</span>, <span class="at">fill =</span> <span class="st">"#008000"</span>)<span class="sc">+</span></span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="dv">1</span>, <span class="fl">2.5</span>), <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"VIP value"</span>) <span class="sc">+</span></span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">12</span>, <span class="at">family =</span> <span class="st">"Arial"</span>, <span class="at">face =</span> <span class="st">"plain"</span>),</span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">15</span>, <span class="at">family =</span> <span class="st">'Arial'</span>, <span class="at">face =</span> <span class="st">"plain"</span>),</span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>),</span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">15</span>, <span class="at">family =</span> <span class="st">'Arial'</span>, <span class="at">face =</span> <span class="st">"plain"</span>),</span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### find the discrinminative variable that VIP greater than 1</span></span>
+<span></span>
+<span><span class="co">### VIP scores plot</span></span>
+<span><span class="va">vip_score</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">plsda</span><span class="op">@</span><span class="va">vipVn</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">vip_score</span><span class="op">)</span>  <span class="op">&lt;-</span> <span class="st">"vip"</span></span>
+<span><span class="va">vip_score</span><span class="op">$</span><span class="va">metabolites</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">vip_score</span><span class="op">)</span></span>
+<span><span class="va">vip_score</span> <span class="op">&lt;-</span> <span class="va">vip_score</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="op">-</span><span class="va">vip_score</span><span class="op">$</span><span class="va">vip</span><span class="op">)</span>, <span class="op">]</span></span>
+<span><span class="va">vip_score</span><span class="op">$</span><span class="va">metabolites</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span></span>
+<span>    <span class="va">vip_score</span><span class="op">$</span><span class="va">metabolites</span>, levels <span class="op">=</span> <span class="va">vip_score</span><span class="op">$</span><span class="va">metabolites</span><span class="op">)</span></span>
+<span><span class="va">loading_score</span> <span class="op">&lt;-</span> <span class="va">plsda</span><span class="op">@</span><span class="va">loadingMN</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">loading_score</span><span class="op">$</span><span class="va">metabolites</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">loading_score</span><span class="op">)</span></span>
+<span><span class="va">all_score</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">vip_score</span>, <span class="va">loading_score</span>, by <span class="op">=</span> <span class="st">"metabolites"</span><span class="op">)</span></span>
+<span><span class="va">all_score</span><span class="op">$</span><span class="va">cat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"feature"</span>, <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">all_score</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### plot</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">all_score</span><span class="op">[</span><span class="va">all_score</span><span class="op">$</span><span class="va">vip</span> <span class="op">&gt;=</span><span class="fl">1</span>, <span class="op">]</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">cat</span>, y <span class="op">=</span> <span class="va">vip</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu">geom_segment</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">cat</span>, xend <span class="op">=</span> <span class="va">cat</span>,</span>
+<span>                    y <span class="op">=</span> <span class="fl">0</span>, yend <span class="op">=</span> <span class="va">vip</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_point</span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">21</span>, size <span class="op">=</span> <span class="fl">5</span>, color <span class="op">=</span> <span class="st">"#008000"</span>, fill <span class="op">=</span> <span class="st">"#008000"</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu">geom_point</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2.5</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">1</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">scale_y_continuous</span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">"VIP value"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">theme</span><span class="op">(</span></span>
+<span>        legend.position <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>        legend.text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, size <span class="op">=</span> <span class="fl">12</span>, family <span class="op">=</span> <span class="st">"Arial"</span>, face <span class="op">=</span> <span class="st">"plain"</span><span class="op">)</span>,</span>
+<span>        panel.background <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        panel.grid <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        axis.text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, size <span class="op">=</span> <span class="fl">15</span>, family <span class="op">=</span> <span class="st">'Arial'</span>, face <span class="op">=</span> <span class="st">"plain"</span><span class="op">)</span>,</span>
+<span>        axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span><span class="op">)</span>,</span>
+<span>        axis.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, size <span class="op">=</span> <span class="fl">15</span>, family <span class="op">=</span> <span class="st">'Arial'</span>, face <span class="op">=</span> <span class="st">"plain"</span><span class="op">)</span>,</span>
+<span>        axis.ticks <span class="op">=</span> <span class="fu">element_line</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span>,</span>
+<span>        axis.ticks.x <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section>
-<section id="opls-da" class="level2">
-<h2 class="anchored" data-anchor-id="opls-da">OPLS-DA</h2>
+</section><section id="opls-da" class="level2"><h2 class="anchored" data-anchor-id="opls-da">OPLS-DA</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="do">### OPLS-DA analysis</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>oplsda <span class="ot">&lt;-</span> <span class="fu">opls</span>(dataMatrix, genderFc, <span class="at">predI =</span> <span class="dv">1</span>, <span class="at">orthoI =</span> <span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### OPLS-DA analysis</span></span>
+<span><span class="va">oplsda</span> <span class="op">&lt;-</span> <span class="fu">opls</span><span class="op">(</span><span class="va">dataMatrix</span>, <span class="va">genderFc</span>, predI <span class="op">=</span> <span class="fl">1</span>, orthoI <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>OPLS-DA
 183 samples x 109 variables and 1 response
@@ -412,82 +381,80 @@ Total    0.275     0.73   0.602 0.262   1   2 0.05 0.05</code></pre>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="do">### sample scores plot</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>sample_score <span class="ot">&lt;-</span> oplsda<span class="sc">@</span>scoreMN <span class="sc">|&gt;</span> </span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">gender =</span> sacurine[[<span class="st">"sampleMetadata"</span>]][[<span class="st">"gender"</span>]],</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">o1 =</span> oplsda<span class="sc">@</span>orthoScoreMN[, <span class="dv">1</span>]</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="do">### plot</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sample_score, <span class="fu">aes</span>(p1, o1, <span class="at">color =</span> gender)) <span class="sc">+</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_point(aes(-10,-10), color = 'white') +</span></span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"P1(5.0%)"</span>, <span class="at">y =</span> <span class="st">"to1"</span>) <span class="sc">+</span></span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_ellipse</span>(<span class="at">level =</span> <span class="fl">0.95</span>, <span class="at">linetype =</span> <span class="st">"solid"</span>, </span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>               <span class="at">size =</span> <span class="dv">1</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#3CB371"</span>, <span class="st">"#FF6347"</span>)) <span class="sc">+</span></span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.85</span>),</span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">12</span>, <span class="at">family =</span> <span class="st">"Arial"</span>, </span>
-<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>            <span class="at">face =</span> <span class="st">"plain"</span>),</span>
-<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">15</span>, <span class="at">family =</span> <span class="st">"Arial"</span>, <span class="at">face =</span> <span class="st">"plain"</span>),</span>
-<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">15</span>, <span class="at">family =</span> <span class="st">"Arial"</span>, <span class="at">face =</span> <span class="st">"plain"</span>),</span>
-<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">'black'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### sample scores plot</span></span>
+<span><span class="va">sample_score</span> <span class="op">&lt;-</span> <span class="va">oplsda</span><span class="op">@</span><span class="va">scoreMN</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu">mutate</span><span class="op">(</span></span>
+<span>        gender <span class="op">=</span> <span class="va">sacurine</span><span class="op">[[</span><span class="st">"sampleMetadata"</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="st">"gender"</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>        o1 <span class="op">=</span> <span class="va">oplsda</span><span class="op">@</span><span class="va">orthoScoreMN</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span>
+<span>    <span class="op">)</span></span>
+<span><span class="co">### plot</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">sample_score</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">p1</span>, <span class="va">o1</span>, color <span class="op">=</span> <span class="va">gender</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, size <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, size <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="co">#geom_point(aes(-10,-10), color = 'white') +</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"P1(5.0%)"</span>, y <span class="op">=</span> <span class="st">"to1"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">stat_ellipse</span><span class="op">(</span>level <span class="op">=</span> <span class="fl">0.95</span>, linetype <span class="op">=</span> <span class="st">"solid"</span>, </span>
+<span>               size <span class="op">=</span> <span class="fl">1</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_color_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#3CB371"</span>, <span class="st">"#FF6347"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.85</span><span class="op">)</span>,</span>
+<span>        legend.title <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        legend.text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, size <span class="op">=</span> <span class="fl">12</span>, family <span class="op">=</span> <span class="st">"Arial"</span>, </span>
+<span>            face <span class="op">=</span> <span class="st">"plain"</span><span class="op">)</span>,</span>
+<span>        panel.background <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        panel.grid <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        axis.text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, size <span class="op">=</span> <span class="fl">15</span>, family <span class="op">=</span> <span class="st">"Arial"</span>, face <span class="op">=</span> <span class="st">"plain"</span><span class="op">)</span>,</span>
+<span>        axis.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, size <span class="op">=</span> <span class="fl">15</span>, family <span class="op">=</span> <span class="st">"Arial"</span>, face <span class="op">=</span> <span class="st">"plain"</span><span class="op">)</span>,</span>
+<span>        axis.ticks <span class="op">=</span> <span class="fu">element_line</span><span class="op">(</span>color <span class="op">=</span> <span class="st">'black'</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="do">### VIP scores plot</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>vip_score <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(oplsda<span class="sc">@</span>vipVn)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(vip_score)  <span class="ot">&lt;-</span> <span class="st">"vip"</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>vip_score<span class="sc">$</span>metabolites <span class="ot">&lt;-</span> <span class="fu">rownames</span>(vip_score)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>vip_score <span class="ot">&lt;-</span> vip_score[<span class="fu">order</span>(<span class="sc">-</span>vip_score<span class="sc">$</span>vip), ]</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>vip_score<span class="sc">$</span>metabolites <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    vip_score<span class="sc">$</span>metabolites, <span class="at">levels =</span> vip_score<span class="sc">$</span>metabolites)</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>loading_score <span class="ot">&lt;-</span> oplsda<span class="sc">@</span>loadingMN <span class="sc">|&gt;</span> </span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.data.frame</span>()</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>loading_score<span class="sc">$</span>metabolites <span class="ot">&lt;-</span> <span class="fu">rownames</span>(loading_score)</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>all_score <span class="ot">&lt;-</span> <span class="fu">merge</span>(vip_score, loading_score, <span class="at">by =</span> <span class="st">"metabolites"</span>)</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>all_score<span class="sc">$</span>cat <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"feature"</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(all_score), <span class="at">sep =</span> <span class="st">""</span>)</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="do">### plot</span></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(all_score[all_score<span class="sc">$</span>vip <span class="sc">&gt;=</span><span class="dv">1</span>, ], <span class="fu">aes</span>(<span class="at">x =</span> cat, <span class="at">y =</span> vip)) <span class="sc">+</span> </span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> cat, <span class="at">xend =</span> cat,</span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>                    <span class="at">y =</span> <span class="dv">0</span>, <span class="at">yend =</span> vip)) <span class="sc">+</span></span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"#FFA07A"</span>, <span class="at">fill =</span> <span class="st">"#FFA07A"</span>)<span class="sc">+</span></span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="dv">1</span>, <span class="fl">2.5</span>), <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"VIP value"</span>) <span class="sc">+</span></span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">12</span>, <span class="at">family =</span> <span class="st">"Arial"</span>, <span class="at">face =</span> <span class="st">"plain"</span>),</span>
-<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">15</span>, <span class="at">family =</span> <span class="st">'Arial'</span>, <span class="at">face =</span> <span class="st">"plain"</span>),</span>
-<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>),</span>
-<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">15</span>, <span class="at">family =</span> <span class="st">'Arial'</span>, <span class="at">face =</span> <span class="st">"plain"</span>),</span>
-<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### VIP scores plot</span></span>
+<span><span class="va">vip_score</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">oplsda</span><span class="op">@</span><span class="va">vipVn</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">vip_score</span><span class="op">)</span>  <span class="op">&lt;-</span> <span class="st">"vip"</span></span>
+<span><span class="va">vip_score</span><span class="op">$</span><span class="va">metabolites</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">vip_score</span><span class="op">)</span></span>
+<span><span class="va">vip_score</span> <span class="op">&lt;-</span> <span class="va">vip_score</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="op">-</span><span class="va">vip_score</span><span class="op">$</span><span class="va">vip</span><span class="op">)</span>, <span class="op">]</span></span>
+<span><span class="va">vip_score</span><span class="op">$</span><span class="va">metabolites</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span></span>
+<span>    <span class="va">vip_score</span><span class="op">$</span><span class="va">metabolites</span>, levels <span class="op">=</span> <span class="va">vip_score</span><span class="op">$</span><span class="va">metabolites</span><span class="op">)</span></span>
+<span><span class="va">loading_score</span> <span class="op">&lt;-</span> <span class="va">oplsda</span><span class="op">@</span><span class="va">loadingMN</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">loading_score</span><span class="op">$</span><span class="va">metabolites</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">loading_score</span><span class="op">)</span></span>
+<span><span class="va">all_score</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">vip_score</span>, <span class="va">loading_score</span>, by <span class="op">=</span> <span class="st">"metabolites"</span><span class="op">)</span></span>
+<span><span class="va">all_score</span><span class="op">$</span><span class="va">cat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"feature"</span>, <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">all_score</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### plot</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">all_score</span><span class="op">[</span><span class="va">all_score</span><span class="op">$</span><span class="va">vip</span> <span class="op">&gt;=</span><span class="fl">1</span>, <span class="op">]</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">cat</span>, y <span class="op">=</span> <span class="va">vip</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu">geom_segment</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">cat</span>, xend <span class="op">=</span> <span class="va">cat</span>,</span>
+<span>                    y <span class="op">=</span> <span class="fl">0</span>, yend <span class="op">=</span> <span class="va">vip</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_point</span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">21</span>, size <span class="op">=</span> <span class="fl">5</span>, color <span class="op">=</span> <span class="st">"#FFA07A"</span>, fill <span class="op">=</span> <span class="st">"#FFA07A"</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu">geom_point</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2.5</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">1</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">scale_y_continuous</span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">"VIP value"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">theme</span><span class="op">(</span></span>
+<span>        legend.position <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>        legend.text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, size <span class="op">=</span> <span class="fl">12</span>, family <span class="op">=</span> <span class="st">"Arial"</span>, face <span class="op">=</span> <span class="st">"plain"</span><span class="op">)</span>,</span>
+<span>        panel.background <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        panel.grid <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        axis.text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, size <span class="op">=</span> <span class="fl">15</span>, family <span class="op">=</span> <span class="st">'Arial'</span>, face <span class="op">=</span> <span class="st">"plain"</span><span class="op">)</span>,</span>
+<span>        axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span><span class="op">)</span>,</span>
+<span>        axis.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, size <span class="op">=</span> <span class="fl">15</span>, family <span class="op">=</span> <span class="st">'Arial'</span>, face <span class="op">=</span> <span class="st">"plain"</span><span class="op">)</span>,</span>
+<span>        axis.ticks <span class="op">=</span> <span class="fu">element_line</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span>,</span>
+<span>        axis.ticks.x <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section>
-<section id="predict-models" class="level2">
-<h2 class="anchored" data-anchor-id="predict-models">Predict models</h2>
+</section><section id="predict-models" class="level2"><h2 class="anchored" data-anchor-id="predict-models">Predict models</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">### OPLS-DA model training</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>oplsda<span class="fl">.2</span>  <span class="ot">&lt;-</span>  <span class="fu">opls</span>(dataMatrix, genderFc, <span class="at">predI =</span> <span class="dv">1</span>, <span class="at">orthoI =</span> <span class="cn">NA</span>,<span class="at">subset =</span> <span class="st">"odd"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### OPLS-DA model training</span></span>
+<span><span class="va">oplsda.2</span>  <span class="op">&lt;-</span>  <span class="fu">opls</span><span class="op">(</span><span class="va">dataMatrix</span>, <span class="va">genderFc</span>, predI <span class="op">=</span> <span class="fl">1</span>, orthoI <span class="op">=</span> <span class="cn">NA</span>,subset <span class="op">=</span> <span class="st">"odd"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: 'permI' set to 0 because train/test partition is selected</code></pre>
 </div>
@@ -501,69 +468,64 @@ Total     0.26    0.825   0.608 0.213 0.341   1   2</code></pre>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="do">### training dataset  accuracy</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>trainVi  <span class="ot">&lt;-</span>  <span class="fu">getSubsetVi</span>(oplsda<span class="fl">.2</span>)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>tab  <span class="ot">&lt;-</span>  <span class="fu">table</span>(genderFc[trainVi], <span class="fu">fitted</span>(oplsda<span class="fl">.2</span>))</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"model accuracy："</span>, <span class="fu">round</span>(<span class="fu">sum</span>(<span class="fu">diag</span>(tab))<span class="sc">/</span><span class="fu">sum</span>(tab)<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>), <span class="st">"%"</span>, <span class="at">sep =</span> <span class="st">""</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### training dataset  accuracy</span></span>
+<span><span class="va">trainVi</span>  <span class="op">&lt;-</span>  <span class="fu">getSubsetVi</span><span class="op">(</span><span class="va">oplsda.2</span><span class="op">)</span></span>
+<span><span class="va">tab</span>  <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">genderFc</span><span class="op">[</span><span class="va">trainVi</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">oplsda.2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"model accuracy："</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span>, <span class="fl">2</span><span class="op">)</span>, <span class="st">"%"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "model accuracy：100%"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="do">### testing dataset accuracy</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>tab2  <span class="ot">&lt;-</span>  <span class="fu">table</span>(genderFc[<span class="sc">-</span>trainVi], <span class="fu">predict</span>(oplsda<span class="fl">.2</span>, dataMatrix[<span class="sc">-</span>trainVi, ]))</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"model accuracy："</span>, <span class="fu">round</span>(<span class="fu">sum</span>(<span class="fu">diag</span>(tab2))<span class="sc">/</span><span class="fu">sum</span>(tab2)<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>),<span class="st">'%'</span>, <span class="at">sep =</span> <span class="st">''</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### testing dataset accuracy</span></span>
+<span><span class="va">tab2</span>  <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">genderFc</span><span class="op">[</span><span class="op">-</span><span class="va">trainVi</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">oplsda.2</span>, <span class="va">dataMatrix</span><span class="op">[</span><span class="op">-</span><span class="va">trainVi</span>, <span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"model accuracy："</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">tab2</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">tab2</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span>, <span class="fl">2</span><span class="op">)</span>,<span class="st">'%'</span>, sep <span class="op">=</span> <span class="st">''</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "model accuracy：84.62%"</code></pre>
 </div>
 </div>
-</section>
-<section id="other" class="level2">
-<h2 class="anchored" data-anchor-id="other">Other</h2>
+</section><section id="other" class="level2"><h2 class="anchored" data-anchor-id="other">Other</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># volcano plot</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>df  <span class="ot">&lt;-</span>  dataMatrix <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>gender  <span class="ot">&lt;-</span>  sacurine[[<span class="st">"sampleMetadata"</span>]][[<span class="st">"gender"</span>]]</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>df  <span class="ot">&lt;-</span>  df[<span class="fu">order</span>(df<span class="sc">$</span>gender), ]</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>df  <span class="ot">&lt;-</span>  df[,<span class="sc">-</span><span class="dv">110</span>]</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>M.mean  <span class="ot">&lt;-</span>  <span class="fu">apply</span>(df[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,], <span class="dv">2</span>, <span class="at">FUN =</span> mean)</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>F.mean  <span class="ot">&lt;-</span>  <span class="fu">apply</span>(df[<span class="dv">101</span><span class="sc">:</span><span class="dv">183</span>,], <span class="dv">2</span>, <span class="at">FUN =</span> mean)</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>FC  <span class="ot">&lt;-</span>  M.mean <span class="sc">/</span> F.mean</span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>log2FC  <span class="ot">&lt;-</span>  <span class="fu">log</span>(FC, <span class="dv">2</span>)</span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>pvalue  <span class="ot">&lt;-</span>  <span class="fu">apply</span>(df, <span class="dv">2</span>, <span class="cf">function</span>(x) {<span class="fu">t.test</span>(x[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>],x[<span class="dv">101</span><span class="sc">:</span><span class="dv">183</span>])<span class="sc">$</span>p.value})</span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>p.adj  <span class="ot">&lt;-</span>  <span class="fu">p.adjust</span>(pvalue, <span class="at">method =</span> <span class="st">'BH'</span>)</span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>p.adj.log  <span class="ot">&lt;-</span>  <span class="sc">-</span><span class="fu">log10</span>(p.adj)</span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>colcano.df  <span class="ot">&lt;-</span>  <span class="fu">data.frame</span>(log2FC, p.adj, p.adj.log)</span>
-<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>colcano.df<span class="sc">$</span>cat  <span class="ot">&lt;-</span>  <span class="fu">ifelse</span>(colcano.df<span class="sc">$</span>log2FC <span class="sc">&gt;=</span> <span class="dv">1</span> <span class="sc">&amp;</span> colcano.df<span class="sc">$</span>p.adj <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="st">"Up"</span>,</span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">ifelse</span>(colcano.df<span class="sc">$</span>log2FC <span class="sc">&lt;=</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">&amp;</span> colcano.df<span class="sc">$</span>p.adj <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="st">"Down"</span>,<span class="st">"NS"</span>))</span>
-<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(colcano.df, <span class="fu">aes</span>(log2FC, p.adj.log)) <span class="sc">+</span></span>
-<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"#A9A9A9"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"-log10(p-value.adj)"</span>) <span class="sc">+</span></span>
-<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>)) <span class="sc">+</span></span>
-<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'none'</span>,</span>
-<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">'black'</span>, <span class="at">size =</span> <span class="dv">12</span>, <span class="at">family =</span> <span class="st">'Arial'</span>, <span class="at">face =</span> <span class="st">'plain'</span>),</span>
-<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">'black'</span>, <span class="at">size =</span> <span class="dv">15</span>, <span class="at">family =</span> <span class="st">'Arial'</span>, <span class="at">face =</span> <span class="st">'plain'</span>),</span>
-<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>),</span>
-<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">'black'</span>, <span class="at">size =</span> <span class="dv">15</span>, <span class="at">family =</span> <span class="st">'Arial'</span>, <span class="at">face =</span> <span class="st">'plain'</span>),</span>
-<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">'black'</span>),</span>
-<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># volcano plot</span></span>
+<span><span class="va">df</span>  <span class="op">&lt;-</span>  <span class="va">dataMatrix</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">df</span><span class="op">$</span><span class="va">gender</span>  <span class="op">&lt;-</span>  <span class="va">sacurine</span><span class="op">[[</span><span class="st">"sampleMetadata"</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="st">"gender"</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="va">df</span>  <span class="op">&lt;-</span>  <span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">gender</span><span class="op">)</span>, <span class="op">]</span></span>
+<span><span class="va">df</span>  <span class="op">&lt;-</span>  <span class="va">df</span><span class="op">[</span>,<span class="op">-</span><span class="fl">110</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">M.mean</span>  <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>,<span class="op">]</span>, <span class="fl">2</span>, FUN <span class="op">=</span> <span class="va">mean</span><span class="op">)</span></span>
+<span><span class="va">F.mean</span>  <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">101</span><span class="op">:</span><span class="fl">183</span>,<span class="op">]</span>, <span class="fl">2</span>, FUN <span class="op">=</span> <span class="va">mean</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">FC</span>  <span class="op">&lt;-</span>  <span class="va">M.mean</span> <span class="op">/</span> <span class="va">F.mean</span></span>
+<span><span class="va">log2FC</span>  <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">FC</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">pvalue</span>  <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">df</span>, <span class="fl">2</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span>,<span class="va">x</span><span class="op">[</span><span class="fl">101</span><span class="op">:</span><span class="fl">183</span><span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span><span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p.adj</span>  <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">pvalue</span>, method <span class="op">=</span> <span class="st">'BH'</span><span class="op">)</span></span>
+<span><span class="va">p.adj.log</span>  <span class="op">&lt;-</span>  <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span><span class="op">(</span><span class="va">p.adj</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">colcano.df</span>  <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">log2FC</span>, <span class="va">p.adj</span>, <span class="va">p.adj.log</span><span class="op">)</span></span>
+<span><span class="va">colcano.df</span><span class="op">$</span><span class="va">cat</span>  <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">colcano.df</span><span class="op">$</span><span class="va">log2FC</span> <span class="op">&gt;=</span> <span class="fl">1</span> <span class="op">&amp;</span> <span class="va">colcano.df</span><span class="op">$</span><span class="va">p.adj</span> <span class="op">&lt;</span> <span class="fl">0.05</span>, <span class="st">"Up"</span>,</span>
+<span>                        <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">colcano.df</span><span class="op">$</span><span class="va">log2FC</span> <span class="op">&lt;=</span> <span class="op">-</span><span class="fl">1</span> <span class="op">&amp;</span> <span class="va">colcano.df</span><span class="op">$</span><span class="va">p.adj</span> <span class="op">&lt;</span> <span class="fl">0.05</span>, <span class="st">"Down"</span>,<span class="st">"NS"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">colcano.df</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">log2FC</span>, <span class="va">p.adj.log</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_point</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"#A9A9A9"</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span>y <span class="op">=</span> <span class="st">"-log10(p-value.adj)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">scale_x_continuous</span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">theme</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">'none'</span>,</span>
+<span>        legend.text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>color <span class="op">=</span> <span class="st">'black'</span>, size <span class="op">=</span> <span class="fl">12</span>, family <span class="op">=</span> <span class="st">'Arial'</span>, face <span class="op">=</span> <span class="st">'plain'</span><span class="op">)</span>,</span>
+<span>        panel.background <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        panel.grid <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        axis.text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>color <span class="op">=</span> <span class="st">'black'</span>, size <span class="op">=</span> <span class="fl">15</span>, family <span class="op">=</span> <span class="st">'Arial'</span>, face <span class="op">=</span> <span class="st">'plain'</span><span class="op">)</span>,</span>
+<span>        axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span><span class="op">)</span>,</span>
+<span>        axis.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>color <span class="op">=</span> <span class="st">'black'</span>, size <span class="op">=</span> <span class="fl">15</span>, family <span class="op">=</span> <span class="st">'Arial'</span>, face <span class="op">=</span> <span class="st">'plain'</span><span class="op">)</span>,</span>
+<span>        axis.ticks <span class="op">=</span> <span class="fu">element_line</span><span class="op">(</span>color <span class="op">=</span> <span class="st">'black'</span><span class="op">)</span>,</span>
+<span>        axis.ticks.x <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -797,8 +759,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
@@ -808,7 +769,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-
 
 
 </body></html>

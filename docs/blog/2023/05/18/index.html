@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.361">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Guorui Zhong">
-
 <title>PCA Graph Customization</title>
 <style>
 code{white-space: pre-wrap;}
@@ -57,7 +54,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -74,8 +70,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 <link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script id="quarto-search-options" type="application/json">{
+<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -94,30 +89,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-<style>
+}</script><style>
 
       .quarto-title-block .quarto-title-banner {
         background: #212529;
       }
 </style>
-
-
 </head>
-
 <body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
             <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="../../../../blog/index.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
@@ -150,15 +139,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+<div class="quarto-navbar-tools">
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
+    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full"><div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">PCA Graph Customization</h1>
                                 <div class="quarto-categories">
@@ -190,12 +175,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Contents</h2>
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#compute-pca" id="toc-compute-pca" class="nav-link active" data-scroll-target="#compute-pca">Compute PCA</a></li>
+<li><a href="#compute-pca" id="toc-compute-pca" class="nav-link active" data-scroll-target="#compute-pca">Compute PCA</a></li>
   <li><a href="#color-individuals-by-groups" id="toc-color-individuals-by-groups" class="nav-link" data-scroll-target="#color-individuals-by-groups">Color individuals by groups</a></li>
   <li><a href="#add-confidence-ellipses" id="toc-add-confidence-ellipses" class="nav-link" data-scroll-target="#add-confidence-ellipses">Add confidence ellipses</a></li>
   <li><a href="#group-mean-points" id="toc-group-mean-points" class="nav-link" data-scroll-target="#group-mean-points">Group mean points</a></li>
@@ -203,177 +186,155 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#biplot" id="toc-biplot" class="nav-link" data-scroll-target="#biplot">Biplot</a></li>
   <li><a href="#color-by-groups" id="toc-color-by-groups" class="nav-link" data-scroll-target="#color-by-groups">Color by groups</a></li>
   <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
-  </ul>
-</nav>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+  </ul></nav>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
-
-
-
-
-<p>Arguments to customize the PCA graph of variables and individuals.</p>
-<section id="compute-pca" class="level2">
-<h2 class="anchored" data-anchor-id="compute-pca">Compute PCA</h2>
+<main class="content quarto-banner-title-block" id="quarto-document-content"><p>Arguments to customize the PCA graph of variables and individuals.</p>
+<section id="compute-pca" class="level2"><h2 class="anchored" data-anchor-id="compute-pca">Compute PCA</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Load packages</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    tidyverse,  <span class="co"># tidy data</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    FactoMineR, <span class="co"># compute principal component methods</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    factoextra,  <span class="co"># extract, visualize and interpretate the results</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    corrplot  <span class="co"># visualize cos2 of variables</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="do">### compute pca</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris, <span class="dv">3</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 1          5.1         3.5          1.4         0.2  setosa</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 2          4.9         3.0          1.4         0.2  setosa</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 3          4.7         3.2          1.3         0.2  setosa</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># The variable Species (index = 5) is removed</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># before PCA analysis</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>iris_pca <span class="ot">&lt;-</span> <span class="fu">PCA</span>(iris[,<span class="sc">-</span><span class="dv">5</span>], <span class="at">graph =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>iris_pca</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="do">## **Results for the Principal Component Analysis (PCA)**</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="do">## The analysis was performed on 150 individuals, described by 4 variables</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="do">## *The results are available in the following objects:</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="do">##    name               description                          </span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  "$eig"             "eigenvalues"                        </span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  "$var"             "results for the variables"          </span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  "$var$coord"       "coord. for the variables"           </span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  "$var$cor"         "correlations variables - dimensions"</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  "$var$cos2"        "cos2 for the variables"             </span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  "$var$contrib"     "contributions of the variables"     </span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="do">## 7  "$ind"             "results for the individuals"        </span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="do">## 8  "$ind$coord"       "coord. for the individuals"         </span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="do">## 9  "$ind$cos2"        "cos2 for the individuals"           </span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 "$ind$contrib"     "contributions of the individuals"   </span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="do">## 11 "$call"            "summary statistics"                 </span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="do">## 12 "$call$centre"     "mean of the variables"              </span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="do">## 13 "$call$ecart.type" "standard error of the variables"    </span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="do">## 14 "$call$row.w"      "weights for the individuals"        </span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="do">## 15 "$call$col.w"      "weights for the variables"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Load packages</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/trinker/pacman">pacman</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span></span>
+<span>    <span class="va">tidyverse</span>,  <span class="co"># tidy data</span></span>
+<span>    <span class="va">FactoMineR</span>, <span class="co"># compute principal component methods</span></span>
+<span>    <span class="va">factoextra</span>,  <span class="co"># extract, visualize and interpretate the results</span></span>
+<span>    <span class="va">corrplot</span>  <span class="co"># visualize cos2 of variables</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### compute pca</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></span>
+<span><span class="co">## 1          5.1         3.5          1.4         0.2  setosa</span></span>
+<span><span class="co">## 2          4.9         3.0          1.4         0.2  setosa</span></span>
+<span><span class="co">## 3          4.7         3.2          1.3         0.2  setosa</span></span>
+<span><span class="co"># The variable Species (index = 5) is removed</span></span>
+<span><span class="co"># before PCA analysis</span></span>
+<span><span class="va">iris_pca</span> <span class="op">&lt;-</span> <span class="fu">PCA</span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span>, graph <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">iris_pca</span></span>
+<span><span class="co">## **Results for the Principal Component Analysis (PCA)**</span></span>
+<span><span class="co">## The analysis was performed on 150 individuals, described by 4 variables</span></span>
+<span><span class="co">## *The results are available in the following objects:</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##    name               description                          </span></span>
+<span><span class="co">## 1  "$eig"             "eigenvalues"                        </span></span>
+<span><span class="co">## 2  "$var"             "results for the variables"          </span></span>
+<span><span class="co">## 3  "$var$coord"       "coord. for the variables"           </span></span>
+<span><span class="co">## 4  "$var$cor"         "correlations variables - dimensions"</span></span>
+<span><span class="co">## 5  "$var$cos2"        "cos2 for the variables"             </span></span>
+<span><span class="co">## 6  "$var$contrib"     "contributions of the variables"     </span></span>
+<span><span class="co">## 7  "$ind"             "results for the individuals"        </span></span>
+<span><span class="co">## 8  "$ind$coord"       "coord. for the individuals"         </span></span>
+<span><span class="co">## 9  "$ind$cos2"        "cos2 for the individuals"           </span></span>
+<span><span class="co">## 10 "$ind$contrib"     "contributions of the individuals"   </span></span>
+<span><span class="co">## 11 "$call"            "summary statistics"                 </span></span>
+<span><span class="co">## 12 "$call$centre"     "mean of the variables"              </span></span>
+<span><span class="co">## 13 "$call$ecart.type" "standard error of the variables"    </span></span>
+<span><span class="co">## 14 "$call$row.w"      "weights for the individuals"        </span></span>
+<span><span class="co">## 15 "$call$col.w"      "weights for the variables"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="color-individuals-by-groups" class="level2">
-<h2 class="anchored" data-anchor-id="color-individuals-by-groups">Color individuals by groups</h2>
+</section><section id="color-individuals-by-groups" class="level2"><h2 class="anchored" data-anchor-id="color-individuals-by-groups">Color individuals by groups</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  iris_pca,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">geom.ind =</span> <span class="st">"point"</span>, <span class="co"># show points only (nbut not "text")</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.ind =</span> iris<span class="sc">$</span>Species, <span class="co"># color by groups</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span>),</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">addEllipses =</span> <span class="cn">TRUE</span>, <span class="co"># Concentration ellipses</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend.title =</span> <span class="st">"Groups"</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">fviz_pca_ind</span><span class="op">(</span></span>
+<span>  <span class="va">iris_pca</span>,</span>
+<span>  geom.ind <span class="op">=</span> <span class="st">"point"</span>, <span class="co"># show points only (nbut not "text")</span></span>
+<span>  col.ind <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span>, <span class="co"># color by groups</span></span>
+<span>  palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span><span class="op">)</span>,</span>
+<span>  addEllipses <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># Concentration ellipses</span></span>
+<span>  legend.title <span class="op">=</span> <span class="st">"Groups"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="add-confidence-ellipses" class="level2">
-<h2 class="anchored" data-anchor-id="add-confidence-ellipses">Add confidence ellipses</h2>
+</section><section id="add-confidence-ellipses" class="level2"><h2 class="anchored" data-anchor-id="add-confidence-ellipses">Add confidence ellipses</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  iris_pca, </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">geom.ind =</span> <span class="st">"point"</span>, </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.ind =</span> iris<span class="sc">$</span>Species, </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span>),</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">addEllipses =</span> <span class="cn">TRUE</span>, <span class="at">ellipse.type =</span> <span class="st">"confidence"</span>,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend.title =</span> <span class="st">"Groups"</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">fviz_pca_ind</span><span class="op">(</span></span>
+<span>  <span class="va">iris_pca</span>, </span>
+<span>  geom.ind <span class="op">=</span> <span class="st">"point"</span>, </span>
+<span>  col.ind <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span>, </span>
+<span>  palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span><span class="op">)</span>,</span>
+<span>  addEllipses <span class="op">=</span> <span class="cn">TRUE</span>, ellipse.type <span class="op">=</span> <span class="st">"confidence"</span>,</span>
+<span>  legend.title <span class="op">=</span> <span class="st">"Groups"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">### use color from jco</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  iris_pca,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"none"</span>, <span class="co"># hide individual labels</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">habillage =</span> iris<span class="sc">$</span>Species, <span class="co"># color by groups</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">addEllipses =</span> <span class="cn">TRUE</span>, <span class="co"># Concentration ellipses</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"jco"</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### use color from jco</span></span>
+<span><span class="fu">fviz_pca_ind</span><span class="op">(</span></span>
+<span>  <span class="va">iris_pca</span>,</span>
+<span>  label <span class="op">=</span> <span class="st">"none"</span>, <span class="co"># hide individual labels</span></span>
+<span>  habillage <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span>, <span class="co"># color by groups</span></span>
+<span>  addEllipses <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># Concentration ellipses</span></span>
+<span>  palette <span class="op">=</span> <span class="st">"jco"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Add confidence ellipses</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  iris_pca, </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">geom.ind =</span> <span class="st">"point"</span>, </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.ind =</span> iris<span class="sc">$</span>Species, <span class="co"># color by groups</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span>),</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">addEllipses =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ellipse.type =</span> <span class="st">"confidence"</span>,</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend.title =</span> <span class="st">"Groups"</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># Add confidence ellipses</span></span>
+<span><span class="fu">fviz_pca_ind</span><span class="op">(</span></span>
+<span>  <span class="va">iris_pca</span>, </span>
+<span>  geom.ind <span class="op">=</span> <span class="st">"point"</span>, </span>
+<span>  col.ind <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span>, <span class="co"># color by groups</span></span>
+<span>  palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span><span class="op">)</span>,</span>
+<span>  addEllipses <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>  ellipse.type <span class="op">=</span> <span class="st">"confidence"</span>,</span>
+<span>  legend.title <span class="op">=</span> <span class="st">"Groups"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-3.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Convex hull</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  iris_pca, </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">geom.ind =</span> <span class="st">"point"</span>,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.ind =</span> iris<span class="sc">$</span>Species, <span class="co"># color by groups</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span>),</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">addEllipses =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ellipse.type =</span> <span class="st">"convex"</span>,</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend.title =</span> <span class="st">"Groups"</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># Convex hull</span></span>
+<span><span class="fu">fviz_pca_ind</span><span class="op">(</span></span>
+<span>  <span class="va">iris_pca</span>, </span>
+<span>  geom.ind <span class="op">=</span> <span class="st">"point"</span>,</span>
+<span>  col.ind <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span>, <span class="co"># color by groups</span></span>
+<span>  palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span><span class="op">)</span>,</span>
+<span>  addEllipses <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>  ellipse.type <span class="op">=</span> <span class="st">"convex"</span>,</span>
+<span>  legend.title <span class="op">=</span> <span class="st">"Groups"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-4.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-4.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="group-mean-points" class="level2">
-<h2 class="anchored" data-anchor-id="group-mean-points">Group mean points</h2>
+</section><section id="group-mean-points" class="level2"><h2 class="anchored" data-anchor-id="group-mean-points">Group mean points</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  iris_pca,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">geom.ind =</span> <span class="st">"point"</span>, <span class="co"># show points only (but not "text")</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">group.ind =</span> iris<span class="sc">$</span>Species, <span class="co"># color by groups</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend.title =</span> <span class="st">"Groups"</span>,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean.point =</span> <span class="cn">FALSE</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">fviz_pca_ind</span><span class="op">(</span></span>
+<span>  <span class="va">iris_pca</span>,</span>
+<span>  geom.ind <span class="op">=</span> <span class="st">"point"</span>, <span class="co"># show points only (but not "text")</span></span>
+<span>  group.ind <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span>, <span class="co"># color by groups</span></span>
+<span>  legend.title <span class="op">=</span> <span class="st">"Groups"</span>,</span>
+<span>  mean.point <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="graphical-parameters" class="level2">
-<h2 class="anchored" data-anchor-id="graphical-parameters">Graphical parameters</h2>
+</section><section id="graphical-parameters" class="level2"><h2 class="anchored" data-anchor-id="graphical-parameters">Graphical parameters</h2>
 <p>To change easily the graphical of any ggplots, you can use the function ggpar() [ggpubr package]</p>
 <p>The graphical parameters that can be changed using ggpar() include:</p>
 <ul>
@@ -383,114 +344,101 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Themes. Allowed values include: theme_gray(), theme_bw(), theme_minimal(), theme_classic(), theme_void().</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ind_p <span class="ot">&lt;-</span> <span class="fu">fviz_pca_ind</span>(iris_pca, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">col.ind =</span> iris<span class="sc">$</span>Species)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>ggpubr<span class="sc">::</span><span class="fu">ggpar</span>(ind_p,</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">title =</span> <span class="st">"Principal Component Analysis"</span>,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">subtitle =</span> <span class="st">"Iris data set"</span>,</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">caption =</span> <span class="st">"Source: factoextra"</span>,</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">xlab =</span> <span class="st">"PC1"</span>, <span class="at">ylab =</span> <span class="st">"PC2"</span>,</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">legend.title =</span> <span class="st">"Species"</span>, <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">ggtheme =</span> <span class="fu">theme_gray</span>(), <span class="at">palette =</span> <span class="st">"jco"</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>              )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ind_p</span> <span class="op">&lt;-</span> <span class="fu">fviz_pca_ind</span><span class="op">(</span><span class="va">iris_pca</span>, geom <span class="op">=</span> <span class="st">"point"</span>, col.ind <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ggpubr</span><span class="fu">::</span><span class="fu">ggpar</span><span class="op">(</span><span class="va">ind_p</span>,</span>
+<span>              title <span class="op">=</span> <span class="st">"Principal Component Analysis"</span>,</span>
+<span>              subtitle <span class="op">=</span> <span class="st">"Iris data set"</span>,</span>
+<span>              caption <span class="op">=</span> <span class="st">"Source: factoextra"</span>,</span>
+<span>              xlab <span class="op">=</span> <span class="st">"PC1"</span>, ylab <span class="op">=</span> <span class="st">"PC2"</span>,</span>
+<span>              legend.title <span class="op">=</span> <span class="st">"Species"</span>, legend.position <span class="op">=</span> <span class="st">"top"</span>,</span>
+<span>              ggtheme <span class="op">=</span> <span class="fu">theme_gray</span><span class="op">(</span><span class="op">)</span>, palette <span class="op">=</span> <span class="st">"jco"</span></span>
+<span>              <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="biplot" class="level2">
-<h2 class="anchored" data-anchor-id="biplot">Biplot</h2>
+</section><section id="biplot" class="level2"><h2 class="anchored" data-anchor-id="biplot">Biplot</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  iris_pca, </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.ind =</span> iris<span class="sc">$</span>Species, </span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"jco"</span>, </span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">addEllipses =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"var"</span>,</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.var =</span> <span class="st">"black"</span>, </span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">repel =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend.title =</span> <span class="st">"Species"</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">fviz_pca_biplot</span><span class="op">(</span></span>
+<span>  <span class="va">iris_pca</span>, </span>
+<span>  col.ind <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span>, </span>
+<span>  palette <span class="op">=</span> <span class="st">"jco"</span>, </span>
+<span>  addEllipses <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>  label <span class="op">=</span> <span class="st">"var"</span>,</span>
+<span>  col.var <span class="op">=</span> <span class="st">"black"</span>, </span>
+<span>  repel <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  legend.title <span class="op">=</span> <span class="st">"Species"</span></span>
+<span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="color-by-groups" class="level2">
-<h2 class="anchored" data-anchor-id="color-by-groups">Color by groups</h2>
+</section><section id="color-by-groups" class="level2"><h2 class="anchored" data-anchor-id="color-by-groups">Color by groups</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  iris_pca, </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Fill individuals by groups</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">geom.ind =</span> <span class="st">"point"</span>,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">pointshape =</span> <span class="dv">21</span>,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">pointsize =</span> <span class="fl">2.5</span>,</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill.ind =</span> iris<span class="sc">$</span>Species,</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.ind =</span> <span class="st">"black"</span>,</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Color variable by groups</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.var =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"sepal"</span>, <span class="st">"sepal"</span>, <span class="st">"petal"</span>, <span class="st">"petal"</span>)),</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend.title =</span> <span class="fu">list</span>(<span class="at">fill =</span> <span class="st">"Species"</span>, <span class="at">color =</span> <span class="st">"Clusters"</span>),</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">repel =</span> <span class="cn">TRUE</span>        <span class="co"># Avoid label overplotting</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">fill_palette</span>(<span class="st">"jco"</span>)<span class="sc">+</span>      <span class="co"># Indiviual fill color</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">color_palette</span>(<span class="st">"npg"</span>)      <span class="co"># Variable colors</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">fviz_pca_biplot</span><span class="op">(</span></span>
+<span>  <span class="va">iris_pca</span>, </span>
+<span>  <span class="co"># Fill individuals by groups</span></span>
+<span>  geom.ind <span class="op">=</span> <span class="st">"point"</span>,</span>
+<span>  pointshape <span class="op">=</span> <span class="fl">21</span>,</span>
+<span>  pointsize <span class="op">=</span> <span class="fl">2.5</span>,</span>
+<span>  fill.ind <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span>,</span>
+<span>  col.ind <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  <span class="co"># Color variable by groups</span></span>
+<span>  col.var <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sepal"</span>, <span class="st">"sepal"</span>, <span class="st">"petal"</span>, <span class="st">"petal"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  legend.title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"Species"</span>, color <span class="op">=</span> <span class="st">"Clusters"</span><span class="op">)</span>,</span>
+<span>  repel <span class="op">=</span> <span class="cn">TRUE</span>        <span class="co"># Avoid label overplotting</span></span>
+<span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggpubr</span><span class="fu">::</span><span class="fu">fill_palette</span><span class="op">(</span><span class="st">"jco"</span><span class="op">)</span><span class="op">+</span>      <span class="co"># Indiviual fill color</span></span>
+<span>  <span class="fu">ggpubr</span><span class="fu">::</span><span class="fu">color_palette</span><span class="op">(</span><span class="st">"npg"</span><span class="op">)</span>      <span class="co"># Variable colors</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  iris_pca, </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Individuals</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">geom.ind =</span> <span class="st">"point"</span>,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill.ind =</span> iris<span class="sc">$</span>Species, </span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.ind =</span> <span class="st">"black"</span>,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">pointshape =</span> <span class="dv">21</span>, </span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">pointsize =</span> <span class="dv">2</span>,</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"jco"</span>,</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">addEllipses =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Variables</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha.var =</span><span class="st">"contrib"</span>, </span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.var =</span> <span class="st">"contrib"</span>,</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">gradient.cols =</span> <span class="st">"RdYlBu"</span>,</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend.title =</span> <span class="fu">list</span>(</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Species"</span>, </span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Contrib"</span>, </span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="st">"Contrib"</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">fviz_pca_biplot</span><span class="op">(</span></span>
+<span>  <span class="va">iris_pca</span>, </span>
+<span>  <span class="co"># Individuals</span></span>
+<span>  geom.ind <span class="op">=</span> <span class="st">"point"</span>,</span>
+<span>  fill.ind <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span>, </span>
+<span>  col.ind <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  pointshape <span class="op">=</span> <span class="fl">21</span>, </span>
+<span>  pointsize <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  palette <span class="op">=</span> <span class="st">"jco"</span>,</span>
+<span>  addEllipses <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="co"># Variables</span></span>
+<span>  alpha.var <span class="op">=</span><span class="st">"contrib"</span>, </span>
+<span>  col.var <span class="op">=</span> <span class="st">"contrib"</span>,</span>
+<span>  gradient.cols <span class="op">=</span> <span class="st">"RdYlBu"</span>,</span>
+<span>  legend.title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>    fill <span class="op">=</span> <span class="st">"Species"</span>, </span>
+<span>    color <span class="op">=</span> <span class="st">"Contrib"</span>, </span>
+<span>    alpha <span class="op">=</span> <span class="st">"Contrib"</span></span>
+<span>    <span class="op">)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="reference" class="level2">
-<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+</section><section id="reference" class="level2"><h2 class="anchored" data-anchor-id="reference">Reference</h2>
 <ul>
 <li><a href="http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials/">Principal Component Methods in R: Practical Guide</a></li>
 </ul>
 
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -724,8 +672,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
@@ -735,7 +682,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-
 
 
 </body></html>

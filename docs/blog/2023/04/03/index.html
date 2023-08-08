@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.361">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Guorui Zhong">
-
 <title>ComplexHeatmap</title>
 <style>
 code{white-space: pre-wrap;}
@@ -57,7 +54,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -74,8 +70,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 <link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script id="quarto-search-options" type="application/json">{
+<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -94,30 +89,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-<style>
+}</script><style>
 
       .quarto-title-block .quarto-title-banner {
         background: #212529;
       }
 </style>
-
-
 </head>
-
 <body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
             <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="../../../../blog/index.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
@@ -150,15 +139,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+<div class="quarto-navbar-tools">
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
+    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full"><div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">ComplexHeatmap</h1>
                                 <div class="quarto-categories">
@@ -191,263 +176,246 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Contents</h2>
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#make-simple-heatmap" id="toc-make-simple-heatmap" class="nav-link active" data-scroll-target="#make-simple-heatmap">Make simple heatmap</a></li>
+<li><a href="#make-simple-heatmap" id="toc-make-simple-heatmap" class="nav-link active" data-scroll-target="#make-simple-heatmap">Make simple heatmap</a></li>
   <li><a href="#generate-heatmap" id="toc-generate-heatmap" class="nav-link" data-scroll-target="#generate-heatmap">Generate heatmap</a></li>
   <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
-  </ul>
-</nav>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+  </ul></nav>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
-
-
-
-
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># if (!requireNamespace("BiocManager", quietly=TRUE))</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#     install.packages("BiocManager")</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># BiocManager::install("ComplexHeatmap")</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># library(ComplexHeatmap)</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># library(RColorBrewer)</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># library(circlize)</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># library(digest)</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># library(cluster)</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># library(tidyverse)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<main class="content quarto-banner-title-block" id="quarto-document-content"><div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># if (!requireNamespace("BiocManager", quietly=TRUE))</span></span>
+<span><span class="co">#     install.packages("BiocManager")</span></span>
+<span><span class="co"># BiocManager::install("ComplexHeatmap")</span></span>
+<span></span>
+<span><span class="co"># library(ComplexHeatmap)</span></span>
+<span><span class="co"># library(RColorBrewer)</span></span>
+<span><span class="co"># library(circlize)</span></span>
+<span><span class="co"># library(digest)</span></span>
+<span><span class="co"># library(cluster)</span></span>
+<span><span class="co"># library(tidyverse)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="make-simple-heatmap" class="level3">
-<h3 class="anchored" data-anchor-id="make-simple-heatmap">Make simple heatmap</h3>
+<section id="make-simple-heatmap" class="level3"><h3 class="anchored" data-anchor-id="make-simple-heatmap">Make simple heatmap</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">###</span><span class="co"> Fetch data</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># tmpfile &lt;- tempfile()</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># download.file('https://github.com/kevinblighe/E-MTAB-6141/raw/master/rdata/mat.tsv',</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   tmpfile, method = 'auto')</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># mat &lt;- read.table(tmpfile, sep = '\t', row.names = 1,</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   header = TRUE, stringsAsFactors = FALSE)</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># tmpfile &lt;- tempfile()</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># download.file('https://github.com/kevinblighe/E-MTAB-6141/raw/master/rdata/metadata.tsv',</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   tmpfile, method = 'auto')</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># metadata &lt;- read.table(tmpfile, sep = '\t', row.names = 1,</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   header = TRUE, stringsAsFactors = FALSE)</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># tmpfile &lt;- tempfile()</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># download.file('https://github.com/kevinblighe/E-MTAB-6141/raw/master/rdata/sig_genes.list',</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   tmpfile, method = 'auto')</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># sig_genes &lt;- read.table(tmpfile, sep = '\t',</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">#   header = FALSE, stringsAsFactors = FALSE)[,1]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># ### Fetch data</span></span>
+<span><span class="co"># tmpfile &lt;- tempfile()</span></span>
+<span><span class="co"># download.file('https://github.com/kevinblighe/E-MTAB-6141/raw/master/rdata/mat.tsv',</span></span>
+<span><span class="co">#   tmpfile, method = 'auto')</span></span>
+<span><span class="co"># mat &lt;- read.table(tmpfile, sep = '\t', row.names = 1,</span></span>
+<span><span class="co">#   header = TRUE, stringsAsFactors = FALSE)</span></span>
+<span></span>
+<span><span class="co"># tmpfile &lt;- tempfile()</span></span>
+<span><span class="co"># download.file('https://github.com/kevinblighe/E-MTAB-6141/raw/master/rdata/metadata.tsv',</span></span>
+<span><span class="co">#   tmpfile, method = 'auto')</span></span>
+<span><span class="co"># metadata &lt;- read.table(tmpfile, sep = '\t', row.names = 1,</span></span>
+<span><span class="co">#   header = TRUE, stringsAsFactors = FALSE)</span></span>
+<span></span>
+<span><span class="co"># tmpfile &lt;- tempfile()</span></span>
+<span><span class="co"># download.file('https://github.com/kevinblighe/E-MTAB-6141/raw/master/rdata/sig_genes.list',</span></span>
+<span><span class="co">#   tmpfile, method = 'auto')</span></span>
+<span><span class="co"># sig_genes &lt;- read.table(tmpfile, sep = '\t',</span></span>
+<span><span class="co">#   header = FALSE, stringsAsFactors = FALSE)[,1]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># digest::digest(mat, algo = 'md5')</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># digest::digest(metadata, algo = 'md5')</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># digest::digest(sig_genes, algo = 'md5')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># digest::digest(mat, algo = 'md5')</span></span>
+<span><span class="co"># digest::digest(metadata, algo = 'md5')</span></span>
+<span><span class="co"># digest::digest(sig_genes, algo = 'md5')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dimensions of expression data and metadata, and length of sig_genes</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># dim(mat)</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># first 5 rows; first 5 columns</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># mat[1:5,1:5]</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># head(metadata)</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># take a peek at the genes identified as statistically significant</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># head(sig_genes)</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># length(sig_genes)</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># verify integrity of metadata and expression matrix:</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># --check that both objects are aligned by name</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># all(rownames(metadata) == colnames(mat))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># dimensions of expression data and metadata, and length of sig_genes</span></span>
+<span><span class="co"># dim(mat)</span></span>
+<span><span class="co"># first 5 rows; first 5 columns</span></span>
+<span><span class="co"># mat[1:5,1:5]</span></span>
+<span><span class="co"># head(metadata)</span></span>
+<span><span class="co"># take a peek at the genes identified as statistically significant</span></span>
+<span><span class="co"># head(sig_genes)</span></span>
+<span><span class="co"># length(sig_genes)</span></span>
+<span><span class="co"># verify integrity of metadata and expression matrix:</span></span>
+<span><span class="co"># --check that both objects are aligned by name</span></span>
+<span><span class="co"># all(rownames(metadata) == colnames(mat))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="generate-heatmap" class="level3">
-<h3 class="anchored" data-anchor-id="generate-heatmap">Generate heatmap</h3>
+</section><section id="generate-heatmap" class="level3"><h3 class="anchored" data-anchor-id="generate-heatmap">Generate heatmap</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">### 1. scale the data to Z-scores (by row)</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">### standard when performing clustering and generating a heatmap</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># heat &lt;- t(scale(t(mat)))</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">###</span><span class="co"> 2. set colour scheme and choose breaks</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># myCol &lt;- colorRampPalette(c('dodgerblue', 'black', 'yellow'))(100)</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># myBreaks &lt;- seq(-3, 3, length.out = 100)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### 1. scale the data to Z-scores (by row)</span></span>
+<span><span class="co">### standard when performing clustering and generating a heatmap</span></span>
+<span><span class="co"># heat &lt;- t(scale(t(mat)))</span></span>
+<span><span class="co"># ### 2. set colour scheme and choose breaks</span></span>
+<span><span class="co"># myCol &lt;- colorRampPalette(c('dodgerblue', 'black', 'yellow'))(100)</span></span>
+<span><span class="co"># myBreaks &lt;- seq(-3, 3, length.out = 100)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">###</span><span class="co"> create annotation: histo-pathotype and histology scores</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   # CD3</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     cd3 &lt;- metadata$CD3</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     cd3 &lt;- cd3[!is.na(cd3)] # remove missing values - we don't want to include these in the mapping</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     pick.col &lt;- brewer.pal(9, 'Greens')</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     col.cd3 &lt;- colorRampPalette(pick.col)(length(unique(cd3)))</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   # CD20</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     cd20 &lt;- metadata$CD20</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     cd20 &lt;- cd20[!is.na(cd20)]</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#     pick.col &lt;- brewer.pal(9, 'Blues')</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#     col.cd20 &lt;- colorRampPalette(pick.col)(length(unique(cd20)))</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   # CD68L</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#     cd68L &lt;- metadata$CD68L</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#     cd68L &lt;- cd68L[!is.na(cd68L)]</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">#     pick.col &lt;- brewer.pal(9, 'Reds')</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">#     col.cd68L &lt;- colorRampPalette(pick.col)(length(unique(cd68L)))</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">#   # CD68SL</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">#     cd68SL &lt;- metadata$CD68SL</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">#     cd68SL &lt;- cd68L[!is.na(cd68L)]</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">#     pick.col &lt;- brewer.pal(9, 'Oranges')</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co">#     col.cd68SL &lt;- colorRampPalette(pick.col)(length(unique(cd68SL)))</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co">#   # CD138</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co">#     cd138 &lt;- metadata$CD138</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co">#     cd138 &lt;- cd138[!is.na(cd138)]</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co">#     pick.col &lt;- brewer.pal(9, 'Purples')</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="co">#     col.cd138 &lt;- colorRampPalette(pick.col)(length(unique(cd68SL)))</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co"># ```</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="co"># ```{r}</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="co">#   # Create an initial data-frame of the annotation that we want to use</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="co">#   # In this example, the 'ann' object turns out to be the exact same as 'metadata'</span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="co">#   ann &lt;- data.frame(</span></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="co">#     Pathotype = metadata$Pathotype,</span></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="co">#     CD3 = metadata$CD3,</span></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="co">#     CD20 = metadata$CD20,</span></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="co">#     CD68L = metadata$CD68L,</span></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="co">#     CD68SL = metadata$CD68SL,</span></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="co">#     CD138 = metadata$CD138,</span></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="co">#     stringsAsFactors = FALSE)</span></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="co">#   # create the colour mapping</span></span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="co">#   colours &lt;- list(</span></span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="co">#     Pathotype = c('Lymphoid' = 'blue', 'Myeloid' = 'red', 'Fibroid' = 'green3', 'Ungraded' = 'grey'),</span></span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="co">#     CD3 = c('0' = '#F7FCF5', '1' = '#C7E9C0', '2' = '#74C476', '3' = '#238B45', '4' = '#00441B'),</span></span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="co">#     CD20 = c('0' = '#F7FBFF', '1' = '#C6DBEF', '2' = '#6BAED6', '3' = '#2171B5', '4' = '#08306B'),</span></span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="co">#     CD68L = c('0' = '#FFF5F0', '1' = '#FCBBA1', '2' = '#FB6A4A', '3' = '#CB181D', '4' = '#67000D'),</span></span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="co">#     CD68SL = c('0' = '#FFF5EB', '1' = '#FDD0A2', '2' = '#FD8D3C', '3' = '#D94801', '4' = '#7F2704'),</span></span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="co">#     CD138 = c('0' = '#FCFBFD', '1' = '#DADAEB', '2' = '#9E9AC8', '3' = '#6A51A3', '4' = '#3F007D'))</span></span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="co">#   # now create the ComplexHeatmap annotation object</span></span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="co">#   # as most of these parameters are self-explanatory, comments will only appear where needed</span></span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="co">#   colAnn &lt;- HeatmapAnnotation(</span></span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="co">#     df = ann,</span></span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="co">#     which = 'col', # 'col' (samples) or 'row' (gene) annotation?</span></span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="co">#     na_col = 'white', # default colour for any NA values in the annotation data-frame, 'ann'</span></span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="co">#     col = colours,</span></span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="co">#     annotation_height = 0.6,</span></span>
-<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="co">#     annotation_width = unit(1, 'cm'),</span></span>
-<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="co">#     gap = unit(1, 'mm'),</span></span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="co">#     annotation_legend_param = list(</span></span>
-<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a><span class="co">#       Pathotype = list(</span></span>
-<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a><span class="co">#         nrow = 4, # number of rows across which the legend will be arranged</span></span>
-<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="co">#         title = 'Pathotype',</span></span>
-<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a><span class="co">#         title_position = 'topcenter',</span></span>
-<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="co">#         legend_direction = 'vertical',</span></span>
-<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a><span class="co">#         title_gp = gpar(fontsize = 12, fontface = 'bold'),</span></span>
-<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a><span class="co">#         labels_gp = gpar(fontsize = 12, fontface = 'bold')),</span></span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a><span class="co">#       CD3 = list(</span></span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a><span class="co">#         nrow = 5,</span></span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a><span class="co">#         title = 'CD3',</span></span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="co">#         title_position = 'topcenter',</span></span>
-<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a><span class="co">#         legend_direction = 'vertical',</span></span>
-<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a><span class="co">#         title_gp = gpar(fontsize = 12, fontface = 'bold'),</span></span>
-<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a><span class="co">#         labels_gp = gpar(fontsize = 12, fontface = 'bold')),</span></span>
-<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a><span class="co">#       CD20 = list(</span></span>
-<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a><span class="co">#         nrow = 5,</span></span>
-<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a><span class="co">#         title = 'CD20',</span></span>
-<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a><span class="co">#         title_position = 'topcenter',</span></span>
-<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a><span class="co">#         legend_direction = 'vertical',</span></span>
-<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a><span class="co">#         title_gp = gpar(fontsize = 12, fontface = 'bold'),</span></span>
-<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a><span class="co">#         labels_gp = gpar(fontsize = 12, fontface = 'bold')),</span></span>
-<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a><span class="co">#       CD68L = list(</span></span>
-<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a><span class="co">#         nrow = 5,</span></span>
-<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a><span class="co">#         title = 'CD68L',</span></span>
-<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a><span class="co">#         title_position = 'topcenter',</span></span>
-<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a><span class="co">#         legend_direction = 'vertical',</span></span>
-<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a><span class="co">#         title_gp = gpar(fontsize = 12, fontface = 'bold'),</span></span>
-<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a><span class="co">#         labels_gp = gpar(fontsize = 12, fontface = 'bold')),</span></span>
-<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a><span class="co">#       CD68SL = list(</span></span>
-<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a><span class="co">#         nrow = 5,</span></span>
-<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a><span class="co">#         title = 'CD68SL',</span></span>
-<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a><span class="co">#         title_position = 'topcenter',</span></span>
-<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a><span class="co">#         legend_direction = 'vertical',</span></span>
-<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a><span class="co">#         title_gp = gpar(fontsize = 12, fontface = 'bold'),</span></span>
-<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a><span class="co">#         labels_gp = gpar(fontsize = 12, fontface = 'bold')),</span></span>
-<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a><span class="co">#       CD138 = list(</span></span>
-<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a><span class="co">#         nrow = 5,</span></span>
-<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a><span class="co">#         title = 'CD138',</span></span>
-<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a><span class="co">#         title_position = 'topcenter',</span></span>
-<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a><span class="co">#         legend_direction = 'vertical',</span></span>
-<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a><span class="co">#         title_gp = gpar(fontsize = 12, fontface = 'bold'),</span></span>
-<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a><span class="co">#         labels_gp = gpar(fontsize = 12, fontface = 'bold'))))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># ### create annotation: histo-pathotype and histology scores</span></span>
+<span><span class="co">#   # CD3</span></span>
+<span><span class="co">#     cd3 &lt;- metadata$CD3</span></span>
+<span><span class="co">#     cd3 &lt;- cd3[!is.na(cd3)] # remove missing values - we don't want to include these in the mapping</span></span>
+<span><span class="co">#     pick.col &lt;- brewer.pal(9, 'Greens')</span></span>
+<span><span class="co">#     col.cd3 &lt;- colorRampPalette(pick.col)(length(unique(cd3)))</span></span>
+<span></span>
+<span><span class="co">#   # CD20</span></span>
+<span><span class="co">#     cd20 &lt;- metadata$CD20</span></span>
+<span><span class="co">#     cd20 &lt;- cd20[!is.na(cd20)]</span></span>
+<span><span class="co">#     pick.col &lt;- brewer.pal(9, 'Blues')</span></span>
+<span><span class="co">#     col.cd20 &lt;- colorRampPalette(pick.col)(length(unique(cd20)))</span></span>
+<span></span>
+<span><span class="co">#   # CD68L</span></span>
+<span><span class="co">#     cd68L &lt;- metadata$CD68L</span></span>
+<span><span class="co">#     cd68L &lt;- cd68L[!is.na(cd68L)]</span></span>
+<span><span class="co">#     pick.col &lt;- brewer.pal(9, 'Reds')</span></span>
+<span><span class="co">#     col.cd68L &lt;- colorRampPalette(pick.col)(length(unique(cd68L)))</span></span>
+<span></span>
+<span><span class="co">#   # CD68SL</span></span>
+<span><span class="co">#     cd68SL &lt;- metadata$CD68SL</span></span>
+<span><span class="co">#     cd68SL &lt;- cd68L[!is.na(cd68L)]</span></span>
+<span><span class="co">#     pick.col &lt;- brewer.pal(9, 'Oranges')</span></span>
+<span><span class="co">#     col.cd68SL &lt;- colorRampPalette(pick.col)(length(unique(cd68SL)))</span></span>
+<span></span>
+<span><span class="co">#   # CD138</span></span>
+<span><span class="co">#     cd138 &lt;- metadata$CD138</span></span>
+<span><span class="co">#     cd138 &lt;- cd138[!is.na(cd138)]</span></span>
+<span><span class="co">#     pick.col &lt;- brewer.pal(9, 'Purples')</span></span>
+<span><span class="co">#     col.cd138 &lt;- colorRampPalette(pick.col)(length(unique(cd68SL)))</span></span>
+<span><span class="co"># ```</span></span>
+<span></span>
+<span><span class="co"># ```{r}</span></span>
+<span><span class="co">#   # Create an initial data-frame of the annotation that we want to use</span></span>
+<span><span class="co">#   # In this example, the 'ann' object turns out to be the exact same as 'metadata'</span></span>
+<span><span class="co">#   ann &lt;- data.frame(</span></span>
+<span><span class="co">#     Pathotype = metadata$Pathotype,</span></span>
+<span><span class="co">#     CD3 = metadata$CD3,</span></span>
+<span><span class="co">#     CD20 = metadata$CD20,</span></span>
+<span><span class="co">#     CD68L = metadata$CD68L,</span></span>
+<span><span class="co">#     CD68SL = metadata$CD68SL,</span></span>
+<span><span class="co">#     CD138 = metadata$CD138,</span></span>
+<span><span class="co">#     stringsAsFactors = FALSE)</span></span>
+<span></span>
+<span><span class="co">#   # create the colour mapping</span></span>
+<span><span class="co">#   colours &lt;- list(</span></span>
+<span><span class="co">#     Pathotype = c('Lymphoid' = 'blue', 'Myeloid' = 'red', 'Fibroid' = 'green3', 'Ungraded' = 'grey'),</span></span>
+<span><span class="co">#     CD3 = c('0' = '#F7FCF5', '1' = '#C7E9C0', '2' = '#74C476', '3' = '#238B45', '4' = '#00441B'),</span></span>
+<span><span class="co">#     CD20 = c('0' = '#F7FBFF', '1' = '#C6DBEF', '2' = '#6BAED6', '3' = '#2171B5', '4' = '#08306B'),</span></span>
+<span><span class="co">#     CD68L = c('0' = '#FFF5F0', '1' = '#FCBBA1', '2' = '#FB6A4A', '3' = '#CB181D', '4' = '#67000D'),</span></span>
+<span><span class="co">#     CD68SL = c('0' = '#FFF5EB', '1' = '#FDD0A2', '2' = '#FD8D3C', '3' = '#D94801', '4' = '#7F2704'),</span></span>
+<span><span class="co">#     CD138 = c('0' = '#FCFBFD', '1' = '#DADAEB', '2' = '#9E9AC8', '3' = '#6A51A3', '4' = '#3F007D'))</span></span>
+<span></span>
+<span><span class="co">#   # now create the ComplexHeatmap annotation object</span></span>
+<span><span class="co">#   # as most of these parameters are self-explanatory, comments will only appear where needed</span></span>
+<span><span class="co">#   colAnn &lt;- HeatmapAnnotation(</span></span>
+<span><span class="co">#     df = ann,</span></span>
+<span><span class="co">#     which = 'col', # 'col' (samples) or 'row' (gene) annotation?</span></span>
+<span><span class="co">#     na_col = 'white', # default colour for any NA values in the annotation data-frame, 'ann'</span></span>
+<span><span class="co">#     col = colours,</span></span>
+<span><span class="co">#     annotation_height = 0.6,</span></span>
+<span><span class="co">#     annotation_width = unit(1, 'cm'),</span></span>
+<span><span class="co">#     gap = unit(1, 'mm'),</span></span>
+<span><span class="co">#     annotation_legend_param = list(</span></span>
+<span><span class="co">#       Pathotype = list(</span></span>
+<span><span class="co">#         nrow = 4, # number of rows across which the legend will be arranged</span></span>
+<span><span class="co">#         title = 'Pathotype',</span></span>
+<span><span class="co">#         title_position = 'topcenter',</span></span>
+<span><span class="co">#         legend_direction = 'vertical',</span></span>
+<span><span class="co">#         title_gp = gpar(fontsize = 12, fontface = 'bold'),</span></span>
+<span><span class="co">#         labels_gp = gpar(fontsize = 12, fontface = 'bold')),</span></span>
+<span><span class="co">#       CD3 = list(</span></span>
+<span><span class="co">#         nrow = 5,</span></span>
+<span><span class="co">#         title = 'CD3',</span></span>
+<span><span class="co">#         title_position = 'topcenter',</span></span>
+<span><span class="co">#         legend_direction = 'vertical',</span></span>
+<span><span class="co">#         title_gp = gpar(fontsize = 12, fontface = 'bold'),</span></span>
+<span><span class="co">#         labels_gp = gpar(fontsize = 12, fontface = 'bold')),</span></span>
+<span><span class="co">#       CD20 = list(</span></span>
+<span><span class="co">#         nrow = 5,</span></span>
+<span><span class="co">#         title = 'CD20',</span></span>
+<span><span class="co">#         title_position = 'topcenter',</span></span>
+<span><span class="co">#         legend_direction = 'vertical',</span></span>
+<span><span class="co">#         title_gp = gpar(fontsize = 12, fontface = 'bold'),</span></span>
+<span><span class="co">#         labels_gp = gpar(fontsize = 12, fontface = 'bold')),</span></span>
+<span><span class="co">#       CD68L = list(</span></span>
+<span><span class="co">#         nrow = 5,</span></span>
+<span><span class="co">#         title = 'CD68L',</span></span>
+<span><span class="co">#         title_position = 'topcenter',</span></span>
+<span><span class="co">#         legend_direction = 'vertical',</span></span>
+<span><span class="co">#         title_gp = gpar(fontsize = 12, fontface = 'bold'),</span></span>
+<span><span class="co">#         labels_gp = gpar(fontsize = 12, fontface = 'bold')),</span></span>
+<span><span class="co">#       CD68SL = list(</span></span>
+<span><span class="co">#         nrow = 5,</span></span>
+<span><span class="co">#         title = 'CD68SL',</span></span>
+<span><span class="co">#         title_position = 'topcenter',</span></span>
+<span><span class="co">#         legend_direction = 'vertical',</span></span>
+<span><span class="co">#         title_gp = gpar(fontsize = 12, fontface = 'bold'),</span></span>
+<span><span class="co">#         labels_gp = gpar(fontsize = 12, fontface = 'bold')),</span></span>
+<span><span class="co">#       CD138 = list(</span></span>
+<span><span class="co">#         nrow = 5,</span></span>
+<span><span class="co">#         title = 'CD138',</span></span>
+<span><span class="co">#         title_position = 'topcenter',</span></span>
+<span><span class="co">#         legend_direction = 'vertical',</span></span>
+<span><span class="co">#         title_gp = gpar(fontsize = 12, fontface = 'bold'),</span></span>
+<span><span class="co">#         labels_gp = gpar(fontsize = 12, fontface = 'bold'))))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#   boxplotCol &lt;- HeatmapAnnotation(</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#     boxplot = anno_boxplot(</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#       heat,</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#       border = FALSE,</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#       gp = gpar(fill = '#CCCCCC'),</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#       pch = '.',</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#       size = unit(2, 'mm'),</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#       axis = TRUE,</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#       axis_param = list(</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#         gp = gpar(fontsize = 12),</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#         side = 'left')),</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#       annotation_width = unit(c(2.0), 'cm'),</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#       which = 'col')</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#   boxplotRow &lt;- HeatmapAnnotation(</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">#     boxplot = row_anno_boxplot(</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#       heat,</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co">#       border = FALSE,</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co">#       gp = gpar(fill = '#CCCCCC'),</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co">#       pch = '.',</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">#       size = unit(2, 'mm'),</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co">#       axis = TRUE,</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">#       axis_param = list(</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co">#         gp = gpar(fontsize = 12),</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co">#         side = 'top')),</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co">#       annotation_width = unit(c(2.0), 'cm'),</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co">#       which = 'row')</span></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co"># ```</span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="co"># ```{r}</span></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="co">#   genelabels &lt;- rowAnnotation(</span></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="co">#     Genes = anno_mark(</span></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="co">#       at = seq(1, nrow(heat), 40),</span></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="co">#       labels = rownames(heat)[seq(1, nrow(heat), 40)],</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="co">#       labels_gp = gpar(fontsize = 10, fontface = 'bold'),</span></span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="co">#       padding = 0.75),</span></span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="co">#       width = unit(2.0, 'cm') +</span></span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="co">#       max_text_width(</span></span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="co">#         rownames(heat)[seq(1, nrow(heat), 40)],</span></span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="co">#         gp = gpar(fontsize = 10,  fontface = 'bold')))</span></span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="co"># ```</span></span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="co"># ```{r}</span></span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="co">#   pamClusters &lt;- cluster::pam(heat, k = 4) # pre-select k = 4 centers</span></span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="co">#   pamClusters$clustering &lt;- paste0('Cluster ', pamClusters$clustering)</span></span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a><span class="co">#   # fix order of the clusters to have 1 to 4, top to bottom</span></span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a><span class="co">#   pamClusters$clustering &lt;- factor(pamClusters$clustering,</span></span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="co">#     levels = c('Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4'))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#   boxplotCol &lt;- HeatmapAnnotation(</span></span>
+<span><span class="co">#     boxplot = anno_boxplot(</span></span>
+<span><span class="co">#       heat,</span></span>
+<span><span class="co">#       border = FALSE,</span></span>
+<span><span class="co">#       gp = gpar(fill = '#CCCCCC'),</span></span>
+<span><span class="co">#       pch = '.',</span></span>
+<span><span class="co">#       size = unit(2, 'mm'),</span></span>
+<span><span class="co">#       axis = TRUE,</span></span>
+<span><span class="co">#       axis_param = list(</span></span>
+<span><span class="co">#         gp = gpar(fontsize = 12),</span></span>
+<span><span class="co">#         side = 'left')),</span></span>
+<span><span class="co">#       annotation_width = unit(c(2.0), 'cm'),</span></span>
+<span><span class="co">#       which = 'col')</span></span>
+<span></span>
+<span><span class="co">#   boxplotRow &lt;- HeatmapAnnotation(</span></span>
+<span><span class="co">#     boxplot = row_anno_boxplot(</span></span>
+<span><span class="co">#       heat,</span></span>
+<span><span class="co">#       border = FALSE,</span></span>
+<span><span class="co">#       gp = gpar(fill = '#CCCCCC'),</span></span>
+<span><span class="co">#       pch = '.',</span></span>
+<span><span class="co">#       size = unit(2, 'mm'),</span></span>
+<span><span class="co">#       axis = TRUE,</span></span>
+<span><span class="co">#       axis_param = list(</span></span>
+<span><span class="co">#         gp = gpar(fontsize = 12),</span></span>
+<span><span class="co">#         side = 'top')),</span></span>
+<span><span class="co">#       annotation_width = unit(c(2.0), 'cm'),</span></span>
+<span><span class="co">#       which = 'row')</span></span>
+<span><span class="co"># ```</span></span>
+<span></span>
+<span><span class="co"># ```{r}</span></span>
+<span><span class="co">#   genelabels &lt;- rowAnnotation(</span></span>
+<span><span class="co">#     Genes = anno_mark(</span></span>
+<span><span class="co">#       at = seq(1, nrow(heat), 40),</span></span>
+<span><span class="co">#       labels = rownames(heat)[seq(1, nrow(heat), 40)],</span></span>
+<span><span class="co">#       labels_gp = gpar(fontsize = 10, fontface = 'bold'),</span></span>
+<span><span class="co">#       padding = 0.75),</span></span>
+<span><span class="co">#       width = unit(2.0, 'cm') +</span></span>
+<span></span>
+<span><span class="co">#       max_text_width(</span></span>
+<span><span class="co">#         rownames(heat)[seq(1, nrow(heat), 40)],</span></span>
+<span><span class="co">#         gp = gpar(fontsize = 10,  fontface = 'bold')))</span></span>
+<span><span class="co"># ```</span></span>
+<span></span>
+<span><span class="co"># ```{r}</span></span>
+<span><span class="co">#   pamClusters &lt;- cluster::pam(heat, k = 4) # pre-select k = 4 centers</span></span>
+<span><span class="co">#   pamClusters$clustering &lt;- paste0('Cluster ', pamClusters$clustering)</span></span>
+<span></span>
+<span><span class="co">#   # fix order of the clusters to have 1 to 4, top to bottom</span></span>
+<span><span class="co">#   pamClusters$clustering &lt;- factor(pamClusters$clustering,</span></span>
+<span><span class="co">#     levels = c('Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4'))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="reference" class="level3">
-<h3 class="anchored" data-anchor-id="reference">Reference</h3>
+</section><section id="reference" class="level3"><h3 class="anchored" data-anchor-id="reference">Reference</h3>
 <ol type="1">
 <li><a href="https://github.com/kevinblighe/E-MTAB-6141">A simple tutorial for a complex ComplexHeatmap</a></li>
 <li><a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/">ComplexHeatmap Complete Reference</a></li>
 </ol>
 
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -681,8 +649,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
@@ -692,7 +659,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-
 
 
 </body></html>

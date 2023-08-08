@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.361">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Guorui Zhong">
-
 <title>Perform Principal Component Analysis</title>
 <style>
 code{white-space: pre-wrap;}
@@ -57,7 +54,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -74,8 +70,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 <link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script id="quarto-search-options" type="application/json">{
+<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -94,30 +89,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-<style>
+}</script><style>
 
       .quarto-title-block .quarto-title-banner {
         background: #212529;
       }
 </style>
-
-
 </head>
-
 <body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
             <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="../../../../blog/index.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
@@ -150,15 +139,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+<div class="quarto-navbar-tools">
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
+    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full"><div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Perform Principal Component Analysis</h1>
                                 <div class="quarto-categories">
@@ -190,31 +175,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Contents</h2>
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#compute-pca" id="toc-compute-pca" class="nav-link active" data-scroll-target="#compute-pca">Compute PCA</a></li>
+<li><a href="#compute-pca" id="toc-compute-pca" class="nav-link active" data-scroll-target="#compute-pca">Compute PCA</a></li>
   <li><a href="#variances" id="toc-variances" class="nav-link" data-scroll-target="#variances">Variances</a></li>
   <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables">Variables</a></li>
   <li><a href="#individuals" id="toc-individuals" class="nav-link" data-scroll-target="#individuals">Individuals</a></li>
   <li><a href="#other-dimensions" id="toc-other-dimensions" class="nav-link" data-scroll-target="#other-dimensions">Other Dimensions</a></li>
   <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
-  </ul>
-</nav>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+  </ul></nav>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
-
-
-
-
-<p><img src="pca.png" class="img-fluid"></p>
+<main class="content quarto-banner-title-block" id="quarto-document-content"><p><img src="pca.png" class="img-fluid"></p>
 <p>Principle component methods are used to summarize and viusalize the information contained in a large multivariate datasets.</p>
 <p>Principle component analysis is used to extract the important information from a multivariate data table and to express this information as a set of few new variables called principle components. These new variables correspond to a linear combination of the originals. The number of principal components is less than or equal to the number of original variables.</p>
 <p>PCA assumes that the directions with the largest variances are the most “important” (i.e, the most principal).</p>
@@ -227,480 +203,445 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>identify correlated variables</li>
 </ul>
 <p><img src="pca2.png" class="img-fluid"></p>
-<section id="compute-pca" class="level2">
-<h2 class="anchored" data-anchor-id="compute-pca">Compute PCA</h2>
+<section id="compute-pca" class="level2"><h2 class="anchored" data-anchor-id="compute-pca">Compute PCA</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Load packages</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    tidyverse,  <span class="co"># tidy data</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    FactoMineR, <span class="co"># compute principal component methods</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    factoextra,  <span class="co"># extract, visualize and interpretate the results</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    corrplot  <span class="co"># visualize cos2 of variables</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="do">### subset active individuals and active variables</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(decathlon2)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>decathlon2_active <span class="ot">&lt;-</span> decathlon2[<span class="dv">1</span><span class="sc">:</span><span class="dv">23</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(decathlon2_active[, <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>], <span class="dv">4</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="do">##         X100m Long.jump Shot.put High.jump X400m X110m.hurdle</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="do">## SEBRLE  11.04      7.58    14.83      2.07 49.81        14.69</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="do">## CLAY    10.76      7.40    14.26      1.86 49.37        14.05</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="do">## BERNARD 11.02      7.23    14.25      1.92 48.93        14.99</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="do">## YURKOV  11.34      7.09    15.19      2.10 50.42        15.31</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="do">### compute pca</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>res_pca <span class="ot">&lt;-</span> <span class="fu">PCA</span>(decathlon2_active, <span class="at">graph =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>res_pca</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="do">## **Results for the Principal Component Analysis (PCA)**</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="do">## The analysis was performed on 23 individuals, described by 10 variables</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="do">## *The results are available in the following objects:</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="do">##    name               description                          </span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  "$eig"             "eigenvalues"                        </span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  "$var"             "results for the variables"          </span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  "$var$coord"       "coord. for the variables"           </span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  "$var$cor"         "correlations variables - dimensions"</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  "$var$cos2"        "cos2 for the variables"             </span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  "$var$contrib"     "contributions of the variables"     </span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="do">## 7  "$ind"             "results for the individuals"        </span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="do">## 8  "$ind$coord"       "coord. for the individuals"         </span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="do">## 9  "$ind$cos2"        "cos2 for the individuals"           </span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 "$ind$contrib"     "contributions of the individuals"   </span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="do">## 11 "$call"            "summary statistics"                 </span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="do">## 12 "$call$centre"     "mean of the variables"              </span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="do">## 13 "$call$ecart.type" "standard error of the variables"    </span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="do">## 14 "$call$row.w"      "weights for the individuals"        </span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="do">## 15 "$call$col.w"      "weights for the variables"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Load packages</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/trinker/pacman">pacman</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span></span>
+<span>    <span class="va">tidyverse</span>,  <span class="co"># tidy data</span></span>
+<span>    <span class="va">FactoMineR</span>, <span class="co"># compute principal component methods</span></span>
+<span>    <span class="va">factoextra</span>,  <span class="co"># extract, visualize and interpretate the results</span></span>
+<span>    <span class="va">corrplot</span>  <span class="co"># visualize cos2 of variables</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### subset active individuals and active variables</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">decathlon2</span><span class="op">)</span></span>
+<span><span class="va">decathlon2_active</span> <span class="op">&lt;-</span> <span class="va">decathlon2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">23</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">decathlon2_active</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="co">##         X100m Long.jump Shot.put High.jump X400m X110m.hurdle</span></span>
+<span><span class="co">## SEBRLE  11.04      7.58    14.83      2.07 49.81        14.69</span></span>
+<span><span class="co">## CLAY    10.76      7.40    14.26      1.86 49.37        14.05</span></span>
+<span><span class="co">## BERNARD 11.02      7.23    14.25      1.92 48.93        14.99</span></span>
+<span><span class="co">## YURKOV  11.34      7.09    15.19      2.10 50.42        15.31</span></span>
+<span></span>
+<span><span class="co">### compute pca</span></span>
+<span><span class="va">res_pca</span> <span class="op">&lt;-</span> <span class="fu">PCA</span><span class="op">(</span><span class="va">decathlon2_active</span>, graph <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">res_pca</span></span>
+<span><span class="co">## **Results for the Principal Component Analysis (PCA)**</span></span>
+<span><span class="co">## The analysis was performed on 23 individuals, described by 10 variables</span></span>
+<span><span class="co">## *The results are available in the following objects:</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##    name               description                          </span></span>
+<span><span class="co">## 1  "$eig"             "eigenvalues"                        </span></span>
+<span><span class="co">## 2  "$var"             "results for the variables"          </span></span>
+<span><span class="co">## 3  "$var$coord"       "coord. for the variables"           </span></span>
+<span><span class="co">## 4  "$var$cor"         "correlations variables - dimensions"</span></span>
+<span><span class="co">## 5  "$var$cos2"        "cos2 for the variables"             </span></span>
+<span><span class="co">## 6  "$var$contrib"     "contributions of the variables"     </span></span>
+<span><span class="co">## 7  "$ind"             "results for the individuals"        </span></span>
+<span><span class="co">## 8  "$ind$coord"       "coord. for the individuals"         </span></span>
+<span><span class="co">## 9  "$ind$cos2"        "cos2 for the individuals"           </span></span>
+<span><span class="co">## 10 "$ind$contrib"     "contributions of the individuals"   </span></span>
+<span><span class="co">## 11 "$call"            "summary statistics"                 </span></span>
+<span><span class="co">## 12 "$call$centre"     "mean of the variables"              </span></span>
+<span><span class="co">## 13 "$call$ecart.type" "standard error of the variables"    </span></span>
+<span><span class="co">## 14 "$call$row.w"      "weights for the individuals"        </span></span>
+<span><span class="co">## 15 "$call$col.w"      "weights for the variables"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="variances" class="level2">
-<h2 class="anchored" data-anchor-id="variances">Variances</h2>
+</section><section id="variances" class="level2"><h2 class="anchored" data-anchor-id="variances">Variances</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">### eigenvalues measure the amount of variation retained by each principal component</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>eig_val <span class="ot">&lt;-</span> <span class="fu">get_eigenvalue</span>(res_pca)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>eig_val</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">##        eigenvalue variance.percent cumulative.variance.percent</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Dim.1   4.1242133        41.242133                    41.24213</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Dim.2   1.8385309        18.385309                    59.62744</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Dim.3   1.2391403        12.391403                    72.01885</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Dim.4   0.8194402         8.194402                    80.21325</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Dim.5   0.7015528         7.015528                    87.22878</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Dim.6   0.4228828         4.228828                    91.45760</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Dim.7   0.3025817         3.025817                    94.48342</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Dim.8   0.2744700         2.744700                    97.22812</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Dim.9   0.1552169         1.552169                    98.78029</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Dim.10  0.1219710         1.219710                   100.00000</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="do">### scree plot to visualize the eigenvalues</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(res_pca, <span class="at">addlabels =</span> <span class="cn">TRUE</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">50</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### eigenvalues measure the amount of variation retained by each principal component</span></span>
+<span><span class="va">eig_val</span> <span class="op">&lt;-</span> <span class="fu">get_eigenvalue</span><span class="op">(</span><span class="va">res_pca</span><span class="op">)</span></span>
+<span><span class="va">eig_val</span></span>
+<span><span class="co">##        eigenvalue variance.percent cumulative.variance.percent</span></span>
+<span><span class="co">## Dim.1   4.1242133        41.242133                    41.24213</span></span>
+<span><span class="co">## Dim.2   1.8385309        18.385309                    59.62744</span></span>
+<span><span class="co">## Dim.3   1.2391403        12.391403                    72.01885</span></span>
+<span><span class="co">## Dim.4   0.8194402         8.194402                    80.21325</span></span>
+<span><span class="co">## Dim.5   0.7015528         7.015528                    87.22878</span></span>
+<span><span class="co">## Dim.6   0.4228828         4.228828                    91.45760</span></span>
+<span><span class="co">## Dim.7   0.3025817         3.025817                    94.48342</span></span>
+<span><span class="co">## Dim.8   0.2744700         2.744700                    97.22812</span></span>
+<span><span class="co">## Dim.9   0.1552169         1.552169                    98.78029</span></span>
+<span><span class="co">## Dim.10  0.1219710         1.219710                   100.00000</span></span>
+<span></span>
+<span><span class="co">### scree plot to visualize the eigenvalues</span></span>
+<span><span class="fu">fviz_eig</span><span class="op">(</span><span class="va">res_pca</span>, addlabels <span class="op">=</span> <span class="cn">TRUE</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="variables" class="level2">
-<h2 class="anchored" data-anchor-id="variables">Variables</h2>
+</section><section id="variables" class="level2"><h2 class="anchored" data-anchor-id="variables">Variables</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">### graph of variables</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>var <span class="ot">&lt;-</span> <span class="fu">get_pca_var</span>(res_pca)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>var</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Principal Component Analysis Results for variables</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  ===================================================</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   Name       Description                                    </span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 "$coord"   "Coordinates for the variables"                </span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 "$cor"     "Correlations between variables and dimensions"</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 "$cos2"    "Cos2 for the variables"                       </span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 "$contrib" "contributions of the variables"</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="do">### coordinates of variables to create a scatter plot</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(var<span class="sc">$</span>coord)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="do">##                   Dim.1       Dim.2      Dim.3       Dim.4      Dim.5</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="do">## X100m        -0.8506257 -0.17939806  0.3015564  0.03357320 -0.1944440</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Long.jump     0.7941806  0.28085695 -0.1905465 -0.11538956  0.2331567</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Shot.put      0.7339127  0.08540412  0.5175978  0.12846837 -0.2488129</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="do">## High.jump     0.6100840 -0.46521415  0.3300852  0.14455012  0.4027002</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="do">## X400m        -0.7016034  0.29017826  0.2835329  0.43082552  0.1039085</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="do">## X110m.hurdle -0.7641252 -0.02474081  0.4488873 -0.01689589  0.2242200</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="do">### represents the quality of representation for variables on the factor map. </span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="do">### It’s calculated as the squared coordinates: var.cos2 = var.coord * var.coord.</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(var<span class="sc">$</span>cos2)</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="do">##                  Dim.1        Dim.2      Dim.3        Dim.4      Dim.5</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="do">## X100m        0.7235641 0.0321836641 0.09093628 0.0011271597 0.03780845</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Long.jump    0.6307229 0.0788806285 0.03630798 0.0133147506 0.05436203</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="do">## Shot.put     0.5386279 0.0072938636 0.26790749 0.0165041211 0.06190783</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="do">## High.jump    0.3722025 0.2164242070 0.10895622 0.0208947375 0.16216747</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="do">## X400m        0.4922473 0.0842034209 0.08039091 0.1856106269 0.01079698</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="do">## X110m.hurdle 0.5838873 0.0006121077 0.20149984 0.0002854712 0.05027463</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="do">### contains the contributions (in percentage) of the variables to the principal components. </span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="do">### The contribution of a variable (var) to a given principal component is (in percentage) : (var.cos2 * 100) / (total cos2 of the component).</span></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(var<span class="sc">$</span>contrib)</span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="do">##                  Dim.1      Dim.2     Dim.3       Dim.4     Dim.5</span></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="do">## X100m        17.544293  1.7505098  7.338659  0.13755240  5.389252</span></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="do">## Long.jump    15.293168  4.2904162  2.930094  1.62485936  7.748815</span></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="do">## Shot.put     13.060137  0.3967224 21.620432  2.01407269  8.824401</span></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="do">## High.jump     9.024811 11.7715838  8.792888  2.54987951 23.115504</span></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="do">## X400m        11.935544  4.5799296  6.487636 22.65090599  1.539012</span></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="do">## X110m.hurdle 14.157544  0.0332933 16.261261  0.03483735  7.166193</span></span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="do">### plot variables. it shows the relationship between all variables</span></span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(res_pca, <span class="at">col.var =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### graph of variables</span></span>
+<span><span class="va">var</span> <span class="op">&lt;-</span> <span class="fu">get_pca_var</span><span class="op">(</span><span class="va">res_pca</span><span class="op">)</span></span>
+<span><span class="va">var</span></span>
+<span><span class="co">## Principal Component Analysis Results for variables</span></span>
+<span><span class="co">##  ===================================================</span></span>
+<span><span class="co">##   Name       Description                                    </span></span>
+<span><span class="co">## 1 "$coord"   "Coordinates for the variables"                </span></span>
+<span><span class="co">## 2 "$cor"     "Correlations between variables and dimensions"</span></span>
+<span><span class="co">## 3 "$cos2"    "Cos2 for the variables"                       </span></span>
+<span><span class="co">## 4 "$contrib" "contributions of the variables"</span></span>
+<span><span class="co">### coordinates of variables to create a scatter plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">var</span><span class="op">$</span><span class="va">coord</span><span class="op">)</span></span>
+<span><span class="co">##                   Dim.1       Dim.2      Dim.3       Dim.4      Dim.5</span></span>
+<span><span class="co">## X100m        -0.8506257 -0.17939806  0.3015564  0.03357320 -0.1944440</span></span>
+<span><span class="co">## Long.jump     0.7941806  0.28085695 -0.1905465 -0.11538956  0.2331567</span></span>
+<span><span class="co">## Shot.put      0.7339127  0.08540412  0.5175978  0.12846837 -0.2488129</span></span>
+<span><span class="co">## High.jump     0.6100840 -0.46521415  0.3300852  0.14455012  0.4027002</span></span>
+<span><span class="co">## X400m        -0.7016034  0.29017826  0.2835329  0.43082552  0.1039085</span></span>
+<span><span class="co">## X110m.hurdle -0.7641252 -0.02474081  0.4488873 -0.01689589  0.2242200</span></span>
+<span></span>
+<span><span class="co">### represents the quality of representation for variables on the factor map. </span></span>
+<span><span class="co">### It’s calculated as the squared coordinates: var.cos2 = var.coord * var.coord.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">var</span><span class="op">$</span><span class="va">cos2</span><span class="op">)</span></span>
+<span><span class="co">##                  Dim.1        Dim.2      Dim.3        Dim.4      Dim.5</span></span>
+<span><span class="co">## X100m        0.7235641 0.0321836641 0.09093628 0.0011271597 0.03780845</span></span>
+<span><span class="co">## Long.jump    0.6307229 0.0788806285 0.03630798 0.0133147506 0.05436203</span></span>
+<span><span class="co">## Shot.put     0.5386279 0.0072938636 0.26790749 0.0165041211 0.06190783</span></span>
+<span><span class="co">## High.jump    0.3722025 0.2164242070 0.10895622 0.0208947375 0.16216747</span></span>
+<span><span class="co">## X400m        0.4922473 0.0842034209 0.08039091 0.1856106269 0.01079698</span></span>
+<span><span class="co">## X110m.hurdle 0.5838873 0.0006121077 0.20149984 0.0002854712 0.05027463</span></span>
+<span></span>
+<span><span class="co">### contains the contributions (in percentage) of the variables to the principal components. </span></span>
+<span><span class="co">### The contribution of a variable (var) to a given principal component is (in percentage) : (var.cos2 * 100) / (total cos2 of the component).</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">var</span><span class="op">$</span><span class="va">contrib</span><span class="op">)</span></span>
+<span><span class="co">##                  Dim.1      Dim.2     Dim.3       Dim.4     Dim.5</span></span>
+<span><span class="co">## X100m        17.544293  1.7505098  7.338659  0.13755240  5.389252</span></span>
+<span><span class="co">## Long.jump    15.293168  4.2904162  2.930094  1.62485936  7.748815</span></span>
+<span><span class="co">## Shot.put     13.060137  0.3967224 21.620432  2.01407269  8.824401</span></span>
+<span><span class="co">## High.jump     9.024811 11.7715838  8.792888  2.54987951 23.115504</span></span>
+<span><span class="co">## X400m        11.935544  4.5799296  6.487636 22.65090599  1.539012</span></span>
+<span><span class="co">## X110m.hurdle 14.157544  0.0332933 16.261261  0.03483735  7.166193</span></span>
+<span></span>
+<span><span class="co">### plot variables. it shows the relationship between all variables</span></span>
+<span><span class="fu">fviz_pca_var</span><span class="op">(</span><span class="va">res_pca</span>, col.var <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">### quality of representation</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(var<span class="sc">$</span>cos2, <span class="dv">4</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">##               Dim.1       Dim.2      Dim.3      Dim.4      Dim.5</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="do">## X100m     0.7235641 0.032183664 0.09093628 0.00112716 0.03780845</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Long.jump 0.6307229 0.078880629 0.03630798 0.01331475 0.05436203</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Shot.put  0.5386279 0.007293864 0.26790749 0.01650412 0.06190783</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="do">## High.jump 0.3722025 0.216424207 0.10895622 0.02089474 0.16216747</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(var<span class="sc">$</span>cos2, <span class="at">is.corr=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### quality of representation</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">var</span><span class="op">$</span><span class="va">cos2</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="co">##               Dim.1       Dim.2      Dim.3      Dim.4      Dim.5</span></span>
+<span><span class="co">## X100m     0.7235641 0.032183664 0.09093628 0.00112716 0.03780845</span></span>
+<span><span class="co">## Long.jump 0.6307229 0.078880629 0.03630798 0.01331475 0.05436203</span></span>
+<span><span class="co">## Shot.put  0.5386279 0.007293864 0.26790749 0.01650412 0.06190783</span></span>
+<span><span class="co">## High.jump 0.3722025 0.216424207 0.10895622 0.02089474 0.16216747</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">var</span><span class="op">$</span><span class="va">cos2</span>, is.corr<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">### bar plot total cos2 of variables on Dim.1 and Dim.2</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_cos2</span>(res_pca, <span class="at">choice =</span> <span class="st">"var"</span>, <span class="at">axes =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### bar plot total cos2 of variables on Dim.1 and Dim.2</span></span>
+<span><span class="fu">fviz_cos2</span><span class="op">(</span><span class="va">res_pca</span>, choice <span class="op">=</span> <span class="st">"var"</span>, axes <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-3.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Color by cos2 values: quality on the factor map</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  res_pca, </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.var =</span> <span class="st">"cos2"</span>,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">gradient.cols =</span> <span class="fu">c</span>(<span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span>), </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">repel =</span> <span class="cn">TRUE</span> <span class="co"># Avoid text overlapping</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### Color by cos2 values: quality on the factor map</span></span>
+<span><span class="fu">fviz_pca_var</span><span class="op">(</span></span>
+<span>  <span class="va">res_pca</span>, </span>
+<span>  col.var <span class="op">=</span> <span class="st">"cos2"</span>,</span>
+<span>  gradient.cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span><span class="op">)</span>, </span>
+<span>  repel <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># Avoid text overlapping</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-4.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-4.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Change the transparency by cos2 values</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(res_pca, <span class="at">alpha.var =</span> <span class="st">"cos2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### Change the transparency by cos2 values</span></span>
+<span><span class="fu">fviz_pca_var</span><span class="op">(</span><span class="va">res_pca</span>, alpha.var <span class="op">=</span> <span class="st">"cos2"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-5.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-5.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="do">### contribution of variables to PCs</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(var<span class="sc">$</span>contrib, <span class="dv">4</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="do">##               Dim.1      Dim.2     Dim.3     Dim.4     Dim.5</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="do">## X100m     17.544293  1.7505098  7.338659 0.1375524  5.389252</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Long.jump 15.293168  4.2904162  2.930094 1.6248594  7.748815</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Shot.put  13.060137  0.3967224 21.620432 2.0140727  8.824401</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="do">## High.jump  9.024811 11.7715838  8.792888 2.5498795 23.115504</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="do">### highlight the most contributing variables for each dimension</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(var<span class="sc">$</span>contrib, <span class="at">is.corr=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### contribution of variables to PCs</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">var</span><span class="op">$</span><span class="va">contrib</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="co">##               Dim.1      Dim.2     Dim.3     Dim.4     Dim.5</span></span>
+<span><span class="co">## X100m     17.544293  1.7505098  7.338659 0.1375524  5.389252</span></span>
+<span><span class="co">## Long.jump 15.293168  4.2904162  2.930094 1.6248594  7.748815</span></span>
+<span><span class="co">## Shot.put  13.060137  0.3967224 21.620432 2.0140727  8.824401</span></span>
+<span><span class="co">## High.jump  9.024811 11.7715838  8.792888 2.5498795 23.115504</span></span>
+<span></span>
+<span><span class="co">### highlight the most contributing variables for each dimension</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">var</span><span class="op">$</span><span class="va">contrib</span>, is.corr<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-6.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-6.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Contributions of variables to PC1</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_contrib</span>(res_pca, <span class="at">choice =</span> <span class="st">"var"</span>, <span class="at">axes =</span> <span class="dv">1</span>, <span class="at">top =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># Contributions of variables to PC1</span></span>
+<span><span class="fu">fviz_contrib</span><span class="op">(</span><span class="va">res_pca</span>, choice <span class="op">=</span> <span class="st">"var"</span>, axes <span class="op">=</span> <span class="fl">1</span>, top <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-7.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-7.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Contributions of variables to PC2</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_contrib</span>(res_pca, <span class="at">choice =</span> <span class="st">"var"</span>, <span class="at">axes =</span> <span class="dv">2</span>, <span class="at">top =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># Contributions of variables to PC2</span></span>
+<span><span class="fu">fviz_contrib</span><span class="op">(</span><span class="va">res_pca</span>, choice <span class="op">=</span> <span class="st">"var"</span>, axes <span class="op">=</span> <span class="fl">2</span>, top <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-8.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-8.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="do">### total contribution to PC1 and PC2 </span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_contrib</span>(res_pca, <span class="at">choice =</span> <span class="st">"var"</span>, <span class="at">axes =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">top =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### total contribution to PC1 and PC2 </span></span>
+<span><span class="fu">fviz_contrib</span><span class="op">(</span><span class="va">res_pca</span>, choice <span class="op">=</span> <span class="st">"var"</span>, axes <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, top <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-9.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-9.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">### highlight most important variables on the correlation plot</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  res_pca, </span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.var =</span> <span class="st">"contrib"</span>,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">gradient.cols =</span> <span class="fu">c</span>(<span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span>)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### highlight most important variables on the correlation plot</span></span>
+<span><span class="fu">fviz_pca_var</span><span class="op">(</span></span>
+<span>  <span class="va">res_pca</span>, </span>
+<span>  col.var <span class="op">=</span> <span class="st">"contrib"</span>,</span>
+<span>  gradient.cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-10.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-10.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Change the transparency by contrib values</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(res_pca, <span class="at">alpha.var =</span> <span class="st">"contrib"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### Change the transparency by contrib values</span></span>
+<span><span class="fu">fviz_pca_var</span><span class="op">(</span><span class="va">res_pca</span>, alpha.var <span class="op">=</span> <span class="st">"contrib"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-11.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-11.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">### color variables by custom continus variable</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a random continuous variable of length 10</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>my_cont_var <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="do">### Color variables by the continuous variable</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  res_pca, </span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.var =</span> my_cont_var,</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">gradient.cols =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"yellow"</span>, <span class="st">"red"</span>),</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend.title =</span> <span class="st">"Cont.Var"</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### color variables by custom continus variable</span></span>
+<span><span class="co"># Create a random continuous variable of length 10</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="va">my_cont_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="co">### Color variables by the continuous variable</span></span>
+<span><span class="fu">fviz_pca_var</span><span class="op">(</span></span>
+<span>  <span class="va">res_pca</span>, </span>
+<span>  col.var <span class="op">=</span> <span class="va">my_cont_var</span>,</span>
+<span>  gradient.cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"yellow"</span>, <span class="st">"red"</span><span class="op">)</span>,</span>
+<span>  legend.title <span class="op">=</span> <span class="st">"Cont.Var"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-12.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-12.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="do">### color by groups, create a grouping variables using kmeans</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>res_km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(var<span class="sc">$</span>coord, <span class="at">centers =</span> <span class="dv">3</span>, <span class="at">nstart =</span> <span class="dv">25</span>)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>grp <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(res_km<span class="sc">$</span>cluster)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Color variables by groups</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  res_pca, </span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.var =</span> grp, </span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"#0073C2FF"</span>, <span class="st">"#EFC000FF"</span>, <span class="st">"#868686FF"</span>),</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend.title =</span> <span class="st">"Cluster"</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### color by groups, create a grouping variables using kmeans</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="va">res_km</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/kmeans.html">kmeans</a></span><span class="op">(</span><span class="va">var</span><span class="op">$</span><span class="va">coord</span>, centers <span class="op">=</span> <span class="fl">3</span>, nstart <span class="op">=</span> <span class="fl">25</span><span class="op">)</span></span>
+<span><span class="va">grp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">res_km</span><span class="op">$</span><span class="va">cluster</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Color variables by groups</span></span>
+<span><span class="fu">fviz_pca_var</span><span class="op">(</span></span>
+<span>  <span class="va">res_pca</span>, </span>
+<span>  col.var <span class="op">=</span> <span class="va">grp</span>, </span>
+<span>  palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#0073C2FF"</span>, <span class="st">"#EFC000FF"</span>, <span class="st">"#868686FF"</span><span class="op">)</span>,</span>
+<span>  legend.title <span class="op">=</span> <span class="st">"Cluster"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-13.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-13.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="do">### dimension description</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>res_desc <span class="ot">&lt;-</span> <span class="fu">dimdesc</span>(res_pca, <span class="at">axes =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">proba =</span> <span class="fl">0.05</span>)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Description of dimension 1</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>res_desc<span class="sc">$</span>Dim<span class="fl">.1</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Link between the variable and the continuous variables (R-square)</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="do">## =================================================================================</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="do">##              correlation      p.value</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Long.jump      0.7941806 6.059893e-06</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Discus         0.7432090 4.842563e-05</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Shot.put       0.7339127 6.723102e-05</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="do">## High.jump      0.6100840 1.993677e-03</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Javeline       0.4282266 4.149192e-02</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="do">## X400m         -0.7016034 1.910387e-04</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="do">## X110m.hurdle  -0.7641252 2.195812e-05</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="do">## X100m         -0.8506257 2.727129e-07</span></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Description of dimension 2</span></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>res_desc<span class="sc">$</span>Dim<span class="fl">.2</span></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Link between the variable and the continuous variables (R-square)</span></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="do">## =================================================================================</span></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="do">##            correlation      p.value</span></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Pole.vault   0.8074511 3.205016e-06</span></span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="do">## X1500m       0.7844802 9.384747e-06</span></span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="do">## High.jump   -0.4652142 2.529390e-02</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### dimension description</span></span>
+<span><span class="va">res_desc</span> <span class="op">&lt;-</span> <span class="fu">dimdesc</span><span class="op">(</span><span class="va">res_pca</span>, axes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>, proba <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="co"># Description of dimension 1</span></span>
+<span><span class="va">res_desc</span><span class="op">$</span><span class="va">Dim.1</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Link between the variable and the continuous variables (R-square)</span></span>
+<span><span class="co">## =================================================================================</span></span>
+<span><span class="co">##              correlation      p.value</span></span>
+<span><span class="co">## Long.jump      0.7941806 6.059893e-06</span></span>
+<span><span class="co">## Discus         0.7432090 4.842563e-05</span></span>
+<span><span class="co">## Shot.put       0.7339127 6.723102e-05</span></span>
+<span><span class="co">## High.jump      0.6100840 1.993677e-03</span></span>
+<span><span class="co">## Javeline       0.4282266 4.149192e-02</span></span>
+<span><span class="co">## X400m         -0.7016034 1.910387e-04</span></span>
+<span><span class="co">## X110m.hurdle  -0.7641252 2.195812e-05</span></span>
+<span><span class="co">## X100m         -0.8506257 2.727129e-07</span></span>
+<span><span class="co"># Description of dimension 2</span></span>
+<span><span class="va">res_desc</span><span class="op">$</span><span class="va">Dim.2</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Link between the variable and the continuous variables (R-square)</span></span>
+<span><span class="co">## =================================================================================</span></span>
+<span><span class="co">##            correlation      p.value</span></span>
+<span><span class="co">## Pole.vault   0.8074511 3.205016e-06</span></span>
+<span><span class="co">## X1500m       0.7844802 9.384747e-06</span></span>
+<span><span class="co">## High.jump   -0.4652142 2.529390e-02</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="individuals" class="level2">
-<h2 class="anchored" data-anchor-id="individuals">Individuals</h2>
+</section><section id="individuals" class="level2"><h2 class="anchored" data-anchor-id="individuals">Individuals</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">### extract results for individuals</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>ind <span class="ot">&lt;-</span> <span class="fu">get_pca_ind</span>(res_pca)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>ind</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Principal Component Analysis Results for individuals</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  ===================================================</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   Name       Description                       </span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 "$coord"   "Coordinates for the individuals" </span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 "$cos2"    "Cos2 for the individuals"        </span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 "$contrib" "contributions of the individuals"</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Coordinates of individuals</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ind<span class="sc">$</span>coord)</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="do">##                Dim.1      Dim.2      Dim.3       Dim.4       Dim.5</span></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="do">## SEBRLE     0.1955047  1.5890567  0.6424912  0.08389652  1.16829387</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="do">## CLAY       0.8078795  2.4748137 -1.3873827  1.29838232 -0.82498206</span></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="do">## BERNARD   -1.3591340  1.6480950  0.2005584 -1.96409420  0.08419345</span></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="do">## YURKOV    -0.8889532 -0.4426067  2.5295843  0.71290837  0.40782264</span></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="do">## ZSIVOCZKY -0.1081216 -2.0688377 -1.3342591 -0.10152796 -0.20145217</span></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="do">## McMULLEN   0.1212195 -1.0139102 -0.8625170  1.34164291  1.62151286</span></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="do">### Quality of individuals</span></span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ind<span class="sc">$</span>cos2)</span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="do">##                 Dim.1      Dim.2       Dim.3       Dim.4        Dim.5</span></span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="do">## SEBRLE    0.007530179 0.49747323 0.081325232 0.001386688 0.2689026575</span></span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="do">## CLAY      0.048701249 0.45701660 0.143628117 0.125791741 0.0507850580</span></span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="do">## BERNARD   0.197199804 0.28996555 0.004294015 0.411819183 0.0007567259</span></span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a><span class="do">## YURKOV    0.096109800 0.02382571 0.778230322 0.061812637 0.0202279796</span></span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a><span class="do">## ZSIVOCZKY 0.001574385 0.57641944 0.239754152 0.001388216 0.0054654972</span></span>
-<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="do">## McMULLEN  0.002175437 0.15219499 0.110137872 0.266486530 0.3892621478</span></span>
-<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="do">### Contributions of individuals</span></span>
-<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ind<span class="sc">$</span>contrib)</span>
-<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a><span class="do">##                Dim.1      Dim.2      Dim.3       Dim.4       Dim.5</span></span>
-<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a><span class="do">## SEBRLE    0.04029447  5.9714533  1.4483919  0.03734589  8.45894063</span></span>
-<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a><span class="do">## CLAY      0.68805664 14.4839248  6.7537381  8.94458283  4.21794385</span></span>
-<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a><span class="do">## BERNARD   1.94740183  6.4234107  0.1411345 20.46819433  0.04393073</span></span>
-<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a><span class="do">## YURKOV    0.83308415  0.4632733 22.4517396  2.69663605  1.03075263</span></span>
-<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a><span class="do">## ZSIVOCZKY 0.01232413 10.1217143  6.2464325  0.05469230  0.25151025</span></span>
-<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a><span class="do">## McMULLEN  0.01549089  2.4310854  2.6102794  9.55055888 16.29493304</span></span>
-<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a><span class="do">### quality and contribution</span></span>
-<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a><span class="do">### individuals that are similar are grouped together on the plot</span></span>
-<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(</span>
-<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>  res_pca, </span>
-<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.ind =</span> <span class="st">"cos2"</span>, </span>
-<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>  <span class="at">gradient.cols =</span> <span class="fu">c</span>(<span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span>),</span>
-<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>  <span class="at">repel =</span> <span class="cn">TRUE</span> <span class="co"># Avoid text overlapping (slow if many points)</span></span>
-<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### extract results for individuals</span></span>
+<span><span class="va">ind</span> <span class="op">&lt;-</span> <span class="fu">get_pca_ind</span><span class="op">(</span><span class="va">res_pca</span><span class="op">)</span></span>
+<span><span class="va">ind</span></span>
+<span><span class="co">## Principal Component Analysis Results for individuals</span></span>
+<span><span class="co">##  ===================================================</span></span>
+<span><span class="co">##   Name       Description                       </span></span>
+<span><span class="co">## 1 "$coord"   "Coordinates for the individuals" </span></span>
+<span><span class="co">## 2 "$cos2"    "Cos2 for the individuals"        </span></span>
+<span><span class="co">## 3 "$contrib" "contributions of the individuals"</span></span>
+<span><span class="co"># Coordinates of individuals</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ind</span><span class="op">$</span><span class="va">coord</span><span class="op">)</span></span>
+<span><span class="co">##                Dim.1      Dim.2      Dim.3       Dim.4       Dim.5</span></span>
+<span><span class="co">## SEBRLE     0.1955047  1.5890567  0.6424912  0.08389652  1.16829387</span></span>
+<span><span class="co">## CLAY       0.8078795  2.4748137 -1.3873827  1.29838232 -0.82498206</span></span>
+<span><span class="co">## BERNARD   -1.3591340  1.6480950  0.2005584 -1.96409420  0.08419345</span></span>
+<span><span class="co">## YURKOV    -0.8889532 -0.4426067  2.5295843  0.71290837  0.40782264</span></span>
+<span><span class="co">## ZSIVOCZKY -0.1081216 -2.0688377 -1.3342591 -0.10152796 -0.20145217</span></span>
+<span><span class="co">## McMULLEN   0.1212195 -1.0139102 -0.8625170  1.34164291  1.62151286</span></span>
+<span><span class="co">### Quality of individuals</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ind</span><span class="op">$</span><span class="va">cos2</span><span class="op">)</span></span>
+<span><span class="co">##                 Dim.1      Dim.2       Dim.3       Dim.4        Dim.5</span></span>
+<span><span class="co">## SEBRLE    0.007530179 0.49747323 0.081325232 0.001386688 0.2689026575</span></span>
+<span><span class="co">## CLAY      0.048701249 0.45701660 0.143628117 0.125791741 0.0507850580</span></span>
+<span><span class="co">## BERNARD   0.197199804 0.28996555 0.004294015 0.411819183 0.0007567259</span></span>
+<span><span class="co">## YURKOV    0.096109800 0.02382571 0.778230322 0.061812637 0.0202279796</span></span>
+<span><span class="co">## ZSIVOCZKY 0.001574385 0.57641944 0.239754152 0.001388216 0.0054654972</span></span>
+<span><span class="co">## McMULLEN  0.002175437 0.15219499 0.110137872 0.266486530 0.3892621478</span></span>
+<span><span class="co">### Contributions of individuals</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ind</span><span class="op">$</span><span class="va">contrib</span><span class="op">)</span></span>
+<span><span class="co">##                Dim.1      Dim.2      Dim.3       Dim.4       Dim.5</span></span>
+<span><span class="co">## SEBRLE    0.04029447  5.9714533  1.4483919  0.03734589  8.45894063</span></span>
+<span><span class="co">## CLAY      0.68805664 14.4839248  6.7537381  8.94458283  4.21794385</span></span>
+<span><span class="co">## BERNARD   1.94740183  6.4234107  0.1411345 20.46819433  0.04393073</span></span>
+<span><span class="co">## YURKOV    0.83308415  0.4632733 22.4517396  2.69663605  1.03075263</span></span>
+<span><span class="co">## ZSIVOCZKY 0.01232413 10.1217143  6.2464325  0.05469230  0.25151025</span></span>
+<span><span class="co">## McMULLEN  0.01549089  2.4310854  2.6102794  9.55055888 16.29493304</span></span>
+<span></span>
+<span><span class="co">### quality and contribution</span></span>
+<span><span class="co">### individuals that are similar are grouped together on the plot</span></span>
+<span><span class="fu">fviz_pca_ind</span><span class="op">(</span></span>
+<span>  <span class="va">res_pca</span>, </span>
+<span>  col.ind <span class="op">=</span> <span class="st">"cos2"</span>, </span>
+<span>  gradient.cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span><span class="op">)</span>,</span>
+<span>  repel <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># Avoid text overlapping (slow if many points)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="do">### change the point size according to the cos2 of corresponding individuals</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  res_pca, </span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">pointsize =</span> <span class="st">"cos2"</span>, </span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">pointshape =</span> <span class="dv">21</span>, </span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill =</span> <span class="st">"#E7B800"</span>,</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">repel =</span> <span class="cn">TRUE</span> <span class="co"># Avoid text overlapping (slow if many points)</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### change the point size according to the cos2 of corresponding individuals</span></span>
+<span><span class="fu">fviz_pca_ind</span><span class="op">(</span></span>
+<span>  <span class="va">res_pca</span>, </span>
+<span>  pointsize <span class="op">=</span> <span class="st">"cos2"</span>, </span>
+<span>  pointshape <span class="op">=</span> <span class="fl">21</span>, </span>
+<span>  fill <span class="op">=</span> <span class="st">"#E7B800"</span>,</span>
+<span>  repel <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># Avoid text overlapping (slow if many points)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="do">### change both point size and color by cos2</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  res_pca, </span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.ind =</span> <span class="st">"cos2"</span>, </span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">pointsize =</span> <span class="st">"cos2"</span>,</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">gradient.cols =</span> <span class="fu">c</span>(<span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span>),</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">repel =</span> <span class="cn">TRUE</span> <span class="co"># Avoid text overlapping (slow if many points)</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### change both point size and color by cos2</span></span>
+<span><span class="fu">fviz_pca_ind</span><span class="op">(</span></span>
+<span>  <span class="va">res_pca</span>, </span>
+<span>  col.ind <span class="op">=</span> <span class="st">"cos2"</span>, </span>
+<span>  pointsize <span class="op">=</span> <span class="st">"cos2"</span>,</span>
+<span>  gradient.cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span><span class="op">)</span>,</span>
+<span>  repel <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># Avoid text overlapping (slow if many points)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="do">### total contribution on PC1 and PC2</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_contrib</span>(res_pca, <span class="at">choice =</span> <span class="st">"ind"</span>, <span class="at">axes =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### total contribution on PC1 and PC2</span></span>
+<span><span class="fu">fviz_contrib</span><span class="op">(</span><span class="va">res_pca</span>, choice <span class="op">=</span> <span class="st">"ind"</span>, axes <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-4-4.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-4-4.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="do">### color by custom continus variable</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>my_cont_var <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">23</span>)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Color individuals by the continuous variable</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  res_pca, </span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.ind =</span> my_cont_var,</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">gradient.cols =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"yellow"</span>, <span class="st">"red"</span>),</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend.title =</span> <span class="st">"Cont.Var"</span></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### color by custom continus variable</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="va">my_cont_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">23</span><span class="op">)</span></span>
+<span><span class="co"># Color individuals by the continuous variable</span></span>
+<span><span class="fu">fviz_pca_ind</span><span class="op">(</span></span>
+<span>  <span class="va">res_pca</span>, </span>
+<span>  col.ind <span class="op">=</span> <span class="va">my_cont_var</span>,</span>
+<span>  gradient.cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"yellow"</span>, <span class="st">"red"</span><span class="op">)</span>,</span>
+<span>  legend.title <span class="op">=</span> <span class="st">"Cont.Var"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-4-5.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-4-5.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="other-dimensions" class="level2">
-<h2 class="anchored" data-anchor-id="other-dimensions">Other Dimensions</h2>
+</section><section id="other-dimensions" class="level2"><h2 class="anchored" data-anchor-id="other-dimensions">Other Dimensions</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="do">### visualize variables/individuals on dimension 2 and 3</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Variables on dimensions 2 and 3</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(res_pca, <span class="at">axes =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### visualize variables/individuals on dimension 2 and 3</span></span>
+<span></span>
+<span><span class="co"># Variables on dimensions 2 and 3</span></span>
+<span><span class="fu">fviz_pca_var</span><span class="op">(</span><span class="va">res_pca</span>, axes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Individuals on dimensions 2 and 3</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(res_pca, <span class="at">axes =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Individuals on dimensions 2 and 3</span></span>
+<span><span class="fu">fviz_pca_ind</span><span class="op">(</span><span class="va">res_pca</span>, axes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="reference" class="level2">
-<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+</section><section id="reference" class="level2"><h2 class="anchored" data-anchor-id="reference">Reference</h2>
 <ul>
 <li><a href="http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials/">Principal Component Methods in R: Practical Guide</a></li>
 <li><a href="https://www.r-bloggers.com/2017/02/factoextra-r-package-easy-multivariate-data-analyses-and-elegant-visualization/">Factoextra R Package: Easy Multivariate Data Analyses and Elegant Visualization</a></li>
 </ul>
 
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -934,8 +875,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
@@ -945,7 +885,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-
 
 
 </body></html>

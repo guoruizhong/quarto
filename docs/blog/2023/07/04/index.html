@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.361">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Guorui Zhong">
-
 <title>Analyze Omics data using [structToolbox]</title>
 <style>
 code{white-space: pre-wrap;}
@@ -57,7 +54,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -74,8 +70,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 <link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script id="quarto-search-options" type="application/json">{
+<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -94,30 +89,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-<style>
+}</script><style>
 
       .quarto-title-block .quarto-title-banner {
         background: #212529;
       }
 </style>
-
-
 </head>
-
 <body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
             <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="../../../../blog/index.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
@@ -150,15 +139,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+<div class="quarto-navbar-tools">
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
+    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full"><div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Analyze Omics data using [structToolbox]</h1>
                                 <div class="quarto-categories">
@@ -191,268 +176,238 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Contents</h2>
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#packages" id="toc-packages" class="nav-link active" data-scroll-target="#packages">Packages</a></li>
+<li><a href="#packages" id="toc-packages" class="nav-link active" data-scroll-target="#packages">Packages</a></li>
   <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a></li>
   <li><a href="#using-struct-model-objects" id="toc-using-struct-model-objects" class="nav-link" data-scroll-target="#using-struct-model-objects">Using {struct} model objects</a></li>
-  <li><a href="#typical-workflow" id="toc-typical-workflow" class="nav-link" data-scroll-target="#typical-workflow">Typical workflow</a>
+  <li>
+<a href="#typical-workflow" id="toc-typical-workflow" class="nav-link" data-scroll-target="#typical-workflow">Typical workflow</a>
   <ul>
-  <li><a href="#dataset-1" id="toc-dataset-1" class="nav-link" data-scroll-target="#dataset-1">Dataset</a></li>
+<li><a href="#dataset-1" id="toc-dataset-1" class="nav-link" data-scroll-target="#dataset-1">Dataset</a></li>
   <li><a href="#signal-drift-and-batch-correction" id="toc-signal-drift-and-batch-correction" class="nav-link" data-scroll-target="#signal-drift-and-batch-correction">Signal drift and batch correction</a></li>
   <li><a href="#feature-filtering" id="toc-feature-filtering" class="nav-link" data-scroll-target="#feature-filtering">Feature filtering</a></li>
-  </ul></li>
-  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
   </ul>
-</nav>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
+  </ul></nav>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
-
-
-
-
-<section id="packages" class="level2">
-<h2 class="anchored" data-anchor-id="packages">Packages</h2>
+<main class="content quarto-banner-title-block" id="quarto-document-content"><section id="packages" class="level2"><h2 class="anchored" data-anchor-id="packages">Packages</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="do">### BiocManager packages</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    structToolbox,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    pmp,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    ropls,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    BiocFileCache,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="do">### CRAN packages</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    cowplot,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    openxlsx,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    ggplot2, </span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    gridExtra</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="do">### use the BiocFileCache</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>bfc <span class="ot">&lt;-</span> <span class="fu">BiocFileCache</span>(<span class="at">ask =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span></span>
+<span>    <span class="co">### BiocManager packages</span></span>
+<span>    <span class="va">structToolbox</span>,</span>
+<span>    <span class="va">pmp</span>,</span>
+<span>    <span class="va">ropls</span>,</span>
+<span>    <span class="va">BiocFileCache</span>,</span>
+<span>    <span class="co">### CRAN packages</span></span>
+<span>    <span class="va">cowplot</span>,</span>
+<span>    <span class="va">openxlsx</span>,</span>
+<span>    <span class="va">ggplot2</span>, </span>
+<span>    <span class="va">gridExtra</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### use the BiocFileCache</span></span>
+<span><span class="va">bfc</span> <span class="op">&lt;-</span> <span class="fu">BiocFileCache</span><span class="op">(</span>ask <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="dataset" class="level2">
-<h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
+</section><section id="dataset" class="level2"><h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">### iris dataset</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">iris_DatasetExperiment</span>()</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>D<span class="sc">$</span>sample_meta<span class="sc">$</span>class <span class="ot">&lt;-</span> D<span class="sc">$</span>sample_meta<span class="sc">$</span>Species</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>D</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="do">## A "DatasetExperiment" object</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="do">## ----------------------------</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="do">## name:          Fisher's Iris dataset</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="do">## description:   This famous (Fisher's or Anderson's) iris data set gives the measurements in centimeters of</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="do">##                  the variables sepal length and width and petal length and width,</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="do">##                  respectively, for 50 flowers from each of 3 species of iris. The species are</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="do">##                  Iris setosa, versicolor, and virginica.</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="do">## data:          150 rows x 4 columns</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="do">## sample_meta:   150 rows x 2 columns</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="do">## variable_meta: 4 rows x 1 columns</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(D<span class="sc">$</span>data[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="do">##   Sepal.Length Sepal.Width Petal.Length Petal.Width</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 1          5.1         3.5          1.4         0.2</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="do">## 2          4.9         3.0          1.4         0.2</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 3          4.7         3.2          1.3         0.2</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 4          4.6         3.1          1.5         0.2</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="do">## 5          5.0         3.6          1.4         0.2</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="do">## 6          5.4         3.9          1.7         0.4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### iris dataset</span></span>
+<span><span class="va">D</span> <span class="op">&lt;-</span> <span class="fu">iris_DatasetExperiment</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">D</span><span class="op">$</span><span class="va">sample_meta</span><span class="op">$</span><span class="va">class</span> <span class="op">&lt;-</span> <span class="va">D</span><span class="op">$</span><span class="va">sample_meta</span><span class="op">$</span><span class="va">Species</span></span>
+<span><span class="va">D</span></span>
+<span><span class="co">## A "DatasetExperiment" object</span></span>
+<span><span class="co">## ----------------------------</span></span>
+<span><span class="co">## name:          Fisher's Iris dataset</span></span>
+<span><span class="co">## description:   This famous (Fisher's or Anderson's) iris data set gives the measurements in centimeters of</span></span>
+<span><span class="co">##                  the variables sepal length and width and petal length and width,</span></span>
+<span><span class="co">##                  respectively, for 50 flowers from each of 3 species of iris. The species are</span></span>
+<span><span class="co">##                  Iris setosa, versicolor, and virginica.</span></span>
+<span><span class="co">## data:          150 rows x 4 columns</span></span>
+<span><span class="co">## sample_meta:   150 rows x 2 columns</span></span>
+<span><span class="co">## variable_meta: 4 rows x 1 columns</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">D</span><span class="op">$</span><span class="va">data</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">##   Sepal.Length Sepal.Width Petal.Length Petal.Width</span></span>
+<span><span class="co">## 1          5.1         3.5          1.4         0.2</span></span>
+<span><span class="co">## 2          4.9         3.0          1.4         0.2</span></span>
+<span><span class="co">## 3          4.7         3.2          1.3         0.2</span></span>
+<span><span class="co">## 4          4.6         3.1          1.5         0.2</span></span>
+<span><span class="co">## 5          5.0         3.6          1.4         0.2</span></span>
+<span><span class="co">## 6          5.4         3.9          1.7         0.4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="using-struct-model-objects" class="level2">
-<h2 class="anchored" data-anchor-id="using-struct-model-objects">Using {struct} model objects</h2>
+</section><section id="using-struct-model-objects" class="level2"><h2 class="anchored" data-anchor-id="using-struct-model-objects">Using {struct} model objects</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Statistical models</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>P <span class="ot">=</span> <span class="fu">PCA</span>(<span class="at">number_components=</span><span class="dv">15</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>P<span class="sc">$</span>number_components  <span class="ot">&lt;-</span>  <span class="dv">5</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>P<span class="sc">$</span>number_components</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 5</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">### the input for a model can be listed using:</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">param_ids</span>(P)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "number_components"</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>P</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">## A "PCA" object</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="do">## --------------</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="do">## name:          Principal Component Analysis (PCA)</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="do">## description:   PCA is a multivariate data reduction technique. It summarises the data in a smaller number of</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="do">##                  Principal Components that maximise variance.</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="do">## input params:  number_components </span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="do">## outputs:       scores, loadings, eigenvalues, ssx, correlation, that </span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="do">## predicted:     that</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="do">## seq_in:        data</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="do">### model sequences</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>M <span class="ot">=</span> <span class="fu">mean_centre</span>() <span class="sc">+</span> <span class="fu">PCA</span>(<span class="at">number_components =</span> <span class="dv">4</span>)</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>M[<span class="dv">2</span>]<span class="sc">$</span>number_components</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 4</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="do">### training/testing models</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>M <span class="ot">=</span> <span class="fu">model_train</span>(M, D)</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>M <span class="ot">=</span> <span class="fu">model_predict</span>(M,D)</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>M <span class="ot">=</span> <span class="fu">model_apply</span>(M,D)</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="fu">output_ids</span>(M[<span class="dv">2</span>])</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "scores"      "loadings"    "eigenvalues" "ssx"         "correlation"</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="do">## [6] "that"</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="do">### model charts</span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="fu">chart_names</span>(M[<span class="dv">2</span>])</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "pca_biplot"           "pca_correlation_plot" "pca_dstat_plot"      </span></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="do">## [4] "pca_loadings_plot"    "pca_scores_plot"      "pca_scree_plot"</span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="do">### plot PCA scores plot</span></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>C <span class="ot">=</span> <span class="fu">pca_scores_plot</span>(<span class="at">factor_name=</span><span class="st">'class'</span>) <span class="co"># colour by class</span></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="fu">chart_plot</span>(C,M[<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Statistical models</span></span>
+<span><span class="va">P</span> <span class="op">=</span> <span class="fu">PCA</span><span class="op">(</span>number_components<span class="op">=</span><span class="fl">15</span><span class="op">)</span></span>
+<span><span class="va">P</span><span class="op">$</span><span class="va">number_components</span>  <span class="op">&lt;-</span>  <span class="fl">5</span></span>
+<span><span class="va">P</span><span class="op">$</span><span class="va">number_components</span></span>
+<span><span class="co">## [1] 5</span></span>
+<span><span class="co">### the input for a model can be listed using:</span></span>
+<span><span class="fu">param_ids</span><span class="op">(</span><span class="va">P</span><span class="op">)</span></span>
+<span><span class="co">## [1] "number_components"</span></span>
+<span><span class="va">P</span></span>
+<span><span class="co">## A "PCA" object</span></span>
+<span><span class="co">## --------------</span></span>
+<span><span class="co">## name:          Principal Component Analysis (PCA)</span></span>
+<span><span class="co">## description:   PCA is a multivariate data reduction technique. It summarises the data in a smaller number of</span></span>
+<span><span class="co">##                  Principal Components that maximise variance.</span></span>
+<span><span class="co">## input params:  number_components </span></span>
+<span><span class="co">## outputs:       scores, loadings, eigenvalues, ssx, correlation, that </span></span>
+<span><span class="co">## predicted:     that</span></span>
+<span><span class="co">## seq_in:        data</span></span>
+<span><span class="co">### model sequences</span></span>
+<span><span class="va">M</span> <span class="op">=</span> <span class="fu">mean_centre</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">PCA</span><span class="op">(</span>number_components <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="va">M</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">$</span><span class="va">number_components</span></span>
+<span><span class="co">## [1] 4</span></span>
+<span><span class="co">### training/testing models</span></span>
+<span><span class="va">M</span> <span class="op">=</span> <span class="fu">model_train</span><span class="op">(</span><span class="va">M</span>, <span class="va">D</span><span class="op">)</span></span>
+<span><span class="va">M</span> <span class="op">=</span> <span class="fu">model_predict</span><span class="op">(</span><span class="va">M</span>,<span class="va">D</span><span class="op">)</span></span>
+<span><span class="va">M</span> <span class="op">=</span> <span class="fu">model_apply</span><span class="op">(</span><span class="va">M</span>,<span class="va">D</span><span class="op">)</span></span>
+<span><span class="fu">output_ids</span><span class="op">(</span><span class="va">M</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">## [1] "scores"      "loadings"    "eigenvalues" "ssx"         "correlation"</span></span>
+<span><span class="co">## [6] "that"</span></span>
+<span></span>
+<span><span class="co">### model charts</span></span>
+<span><span class="fu">chart_names</span><span class="op">(</span><span class="va">M</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">## [1] "pca_biplot"           "pca_correlation_plot" "pca_dstat_plot"      </span></span>
+<span><span class="co">## [4] "pca_loadings_plot"    "pca_scores_plot"      "pca_scree_plot"</span></span>
+<span><span class="co">### plot PCA scores plot</span></span>
+<span><span class="va">C</span> <span class="op">=</span> <span class="fu">pca_scores_plot</span><span class="op">(</span>factor_name<span class="op">=</span><span class="st">'class'</span><span class="op">)</span> <span class="co"># colour by class</span></span>
+<span><span class="fu">chart_plot</span><span class="op">(</span><span class="va">C</span>,<span class="va">M</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># add petal width to meta data of pca scores</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>M[<span class="dv">2</span>]<span class="sc">$</span>scores<span class="sc">$</span>sample_meta<span class="sc">$</span>example<span class="ot">=</span>D<span class="sc">$</span>data[,<span class="dv">1</span>]</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># update plot</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>C<span class="sc">$</span>factor_name<span class="ot">=</span><span class="st">'example'</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">chart_plot</span>(C,M[<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># add petal width to meta data of pca scores</span></span>
+<span><span class="va">M</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">$</span><span class="va">scores</span><span class="op">$</span><span class="va">sample_meta</span><span class="op">$</span><span class="va">example</span><span class="op">=</span><span class="va">D</span><span class="op">$</span><span class="va">data</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span>
+<span><span class="co"># update plot</span></span>
+<span><span class="va">C</span><span class="op">$</span><span class="va">factor_name</span><span class="op">=</span><span class="st">'example'</span></span>
+<span><span class="fu">chart_plot</span><span class="op">(</span><span class="va">C</span>,<span class="va">M</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># scores plot</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>C1 <span class="ot">=</span> <span class="fu">pca_scores_plot</span>(<span class="at">factor_name=</span><span class="st">'class'</span>) <span class="co"># colour by class</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>g1 <span class="ot">=</span> <span class="fu">chart_plot</span>(C1,M[<span class="dv">2</span>])</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># scree plot</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>C2 <span class="ot">=</span> <span class="fu">pca_scree_plot</span>()</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>g2 <span class="ot">=</span> <span class="fu">chart_plot</span>(C2,M[<span class="dv">2</span>])</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># arange in grid</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(<span class="at">grobs=</span><span class="fu">list</span>(g1,g2),<span class="at">nrow=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># scores plot</span></span>
+<span><span class="va">C1</span> <span class="op">=</span> <span class="fu">pca_scores_plot</span><span class="op">(</span>factor_name<span class="op">=</span><span class="st">'class'</span><span class="op">)</span> <span class="co"># colour by class</span></span>
+<span><span class="va">g1</span> <span class="op">=</span> <span class="fu">chart_plot</span><span class="op">(</span><span class="va">C1</span>,<span class="va">M</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># scree plot</span></span>
+<span><span class="va">C2</span> <span class="op">=</span> <span class="fu">pca_scree_plot</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">g2</span> <span class="op">=</span> <span class="fu">chart_plot</span><span class="op">(</span><span class="va">C2</span>,<span class="va">M</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># arange in grid</span></span>
+<span><span class="fu">grid.arrange</span><span class="op">(</span>grobs<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">g1</span>,<span class="va">g2</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-3.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-3.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="typical-workflow" class="level2">
-<h2 class="anchored" data-anchor-id="typical-workflow">Typical workflow</h2>
-<section id="dataset-1" class="level3">
-<h3 class="anchored" data-anchor-id="dataset-1">Dataset</h3>
+</section><section id="typical-workflow" class="level2"><h2 class="anchored" data-anchor-id="typical-workflow">Typical workflow</h2>
+<section id="dataset-1" class="level3"><h3 class="anchored" data-anchor-id="dataset-1">Dataset</h3>
 <p>The MTBLS79 dataset represents a systematic evaluation of the reproducibility of a multi-batch direct-infusion mass spectrometry (DIMS)-based metabolomics study of cardiac tissue extracts. It comprises twenty biological samples (cow vs.&nbsp;sheep) that were analysed repeatedly, in 8 batches across 7 days, together with a concurrent set of quality control (QC) samples. Data are presented from each step of the data processing workflow and are available through MetaboLights (https://www.ebi.ac.uk/metabolights/MTBLS79).</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the pmp SE object</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>SE  <span class="ot">&lt;-</span>  MTBLS79</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># convert to DE</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>DE  <span class="ot">&lt;-</span>  <span class="fu">as.DatasetExperiment</span>(SE)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>DE<span class="sc">$</span>name  <span class="ot">&lt;-</span>  <span class="st">"MTBLS79"</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>DE<span class="sc">$</span>description  <span class="ot">&lt;-</span>  <span class="st">"Converted from SE provided by the pmp package"</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># add a column indicating the order the samples were measured in</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>DE<span class="sc">$</span>sample_meta<span class="sc">$</span>run_order  <span class="ot">&lt;-</span>  <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(DE)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># add a column indicating if the sample is biological or a QC</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>Type <span class="ot">&lt;-</span> <span class="fu">as.character</span>(DE<span class="sc">$</span>sample_meta<span class="sc">$</span>Class)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>Type[Type <span class="sc">!=</span> <span class="st">'QC'</span>]  <span class="ot">&lt;-</span>  <span class="st">"Sample"</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>DE<span class="sc">$</span>sample_meta<span class="sc">$</span>Type  <span class="ot">&lt;-</span>  <span class="fu">factor</span>(Type)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># convert to factors</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>DE<span class="sc">$</span>sample_meta<span class="sc">$</span>Batch <span class="ot">=</span> <span class="fu">factor</span>(DE<span class="sc">$</span>sample_meta<span class="sc">$</span>Batch)</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>DE<span class="sc">$</span>sample_meta<span class="sc">$</span>Class <span class="ot">=</span> <span class="fu">factor</span>(DE<span class="sc">$</span>sample_meta<span class="sc">$</span>Class)</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co"># print summary</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>DE</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="do">## A "DatasetExperiment" object</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="do">## ----------------------------</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="do">## name:          MTBLS79</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="do">## description:   Converted from SE provided by the pmp package</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="do">## data:          172 rows x 2488 columns</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="do">## sample_meta:   172 rows x 6 columns</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="do">## variable_meta: 2488 rows x 0 columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># the pmp SE object</span></span>
+<span><span class="va">SE</span>  <span class="op">&lt;-</span>  <span class="va">MTBLS79</span></span>
+<span><span class="co"># convert to DE</span></span>
+<span><span class="va">DE</span>  <span class="op">&lt;-</span>  <span class="fu">as.DatasetExperiment</span><span class="op">(</span><span class="va">SE</span><span class="op">)</span></span>
+<span><span class="va">DE</span><span class="op">$</span><span class="va">name</span>  <span class="op">&lt;-</span>  <span class="st">"MTBLS79"</span></span>
+<span><span class="va">DE</span><span class="op">$</span><span class="va">description</span>  <span class="op">&lt;-</span>  <span class="st">"Converted from SE provided by the pmp package"</span></span>
+<span></span>
+<span><span class="co"># add a column indicating the order the samples were measured in</span></span>
+<span><span class="va">DE</span><span class="op">$</span><span class="va">sample_meta</span><span class="op">$</span><span class="va">run_order</span>  <span class="op">&lt;-</span>  <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">DE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># add a column indicating if the sample is biological or a QC</span></span>
+<span><span class="va">Type</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">DE</span><span class="op">$</span><span class="va">sample_meta</span><span class="op">$</span><span class="va">Class</span><span class="op">)</span></span>
+<span><span class="va">Type</span><span class="op">[</span><span class="va">Type</span> <span class="op">!=</span> <span class="st">'QC'</span><span class="op">]</span>  <span class="op">&lt;-</span>  <span class="st">"Sample"</span></span>
+<span><span class="va">DE</span><span class="op">$</span><span class="va">sample_meta</span><span class="op">$</span><span class="va">Type</span>  <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Type</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># convert to factors</span></span>
+<span><span class="va">DE</span><span class="op">$</span><span class="va">sample_meta</span><span class="op">$</span><span class="va">Batch</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">DE</span><span class="op">$</span><span class="va">sample_meta</span><span class="op">$</span><span class="va">Batch</span><span class="op">)</span></span>
+<span><span class="va">DE</span><span class="op">$</span><span class="va">sample_meta</span><span class="op">$</span><span class="va">Class</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">DE</span><span class="op">$</span><span class="va">sample_meta</span><span class="op">$</span><span class="va">Class</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># print summary</span></span>
+<span><span class="va">DE</span></span>
+<span><span class="co">## A "DatasetExperiment" object</span></span>
+<span><span class="co">## ----------------------------</span></span>
+<span><span class="co">## name:          MTBLS79</span></span>
+<span><span class="co">## description:   Converted from SE provided by the pmp package</span></span>
+<span><span class="co">## data:          172 rows x 2488 columns</span></span>
+<span><span class="co">## sample_meta:   172 rows x 6 columns</span></span>
+<span><span class="co">## variable_meta: 2488 rows x 0 columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="signal-drift-and-batch-correction" class="level3">
-<h3 class="anchored" data-anchor-id="signal-drift-and-batch-correction">Signal drift and batch correction</h3>
+</section><section id="signal-drift-and-batch-correction" class="level3"><h3 class="anchored" data-anchor-id="signal-drift-and-batch-correction">Signal drift and batch correction</h3>
 <p>A batch correction algorithm is applied to reduce intra- and inter- batch variations in the dataset. Quality Control-Robust Spline Correction (QC-RSC) is provided in the pmp package, and it has been wrapped into a structToolbox object called sb_corr.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># batch correction</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">sb_corr</span>(</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">order_col =</span> <span class="st">"run_order"</span>,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">batch_col =</span> <span class="st">"Batch"</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">qc_col =</span> <span class="st">"Type"</span>,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">qc_label =</span> <span class="st">"QC"</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>M <span class="ot">=</span> <span class="fu">model_apply</span>(M, DE)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="do">## The number of NA and &lt;= 0 values in peaksData before QC-RSC: 18222</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="do">### plot of a feature vs run order, before and after the correction</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>C <span class="ot">=</span> <span class="fu">feature_profile</span>(</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">run_order=</span><span class="st">'run_order'</span>,</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">qc_label=</span><span class="st">'QC'</span>,</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">qc_column=</span><span class="st">'Type'</span>,</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour_by=</span><span class="st">'Batch'</span>,</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">feature_to_plot=</span><span class="st">'200.03196'</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co"># plot and modify using ggplot2 </span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="fu">chart_plot</span>(C,DE) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">'Peak area'</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">'Before'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span> <span class="co"># batch correction</span></span>
+<span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fu">sb_corr</span><span class="op">(</span></span>
+<span>    order_col <span class="op">=</span> <span class="st">"run_order"</span>,</span>
+<span>    batch_col <span class="op">=</span> <span class="st">"Batch"</span>,</span>
+<span>    qc_col <span class="op">=</span> <span class="st">"Type"</span>,</span>
+<span>    qc_label <span class="op">=</span> <span class="st">"QC"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">M</span> <span class="op">=</span> <span class="fu">model_apply</span><span class="op">(</span><span class="va">M</span>, <span class="va">DE</span><span class="op">)</span></span>
+<span><span class="co">## The number of NA and &lt;= 0 values in peaksData before QC-RSC: 18222</span></span>
+<span></span>
+<span><span class="co">### plot of a feature vs run order, before and after the correction</span></span>
+<span><span class="va">C</span> <span class="op">=</span> <span class="fu">feature_profile</span><span class="op">(</span></span>
+<span>      run_order<span class="op">=</span><span class="st">'run_order'</span>,</span>
+<span>      qc_label<span class="op">=</span><span class="st">'QC'</span>,</span>
+<span>      qc_column<span class="op">=</span><span class="st">'Type'</span>,</span>
+<span>      colour_by<span class="op">=</span><span class="st">'Batch'</span>,</span>
+<span>      feature_to_plot<span class="op">=</span><span class="st">'200.03196'</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># plot and modify using ggplot2 </span></span>
+<span><span class="fu">chart_plot</span><span class="op">(</span><span class="va">C</span>,<span class="va">DE</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ylab</span><span class="op">(</span><span class="st">'Peak area'</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggtitle</span><span class="op">(</span><span class="st">'Before'</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chart_plot</span>(C,<span class="fu">predicted</span>(M))<span class="sc">+</span><span class="fu">ylab</span>(<span class="st">'Peak area'</span>)<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">'After'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="fu">chart_plot</span><span class="op">(</span><span class="va">C</span>,<span class="fu">predicted</span><span class="op">(</span><span class="va">M</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">ylab</span><span class="op">(</span><span class="st">'Peak area'</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">'After'</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>M2 <span class="ot">=</span> <span class="fu">filter_na_count</span>(</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">threshold=</span><span class="dv">3</span>,</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">factor_name=</span><span class="st">'Batch'</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>M2 <span class="ot">=</span> <span class="fu">model_apply</span>(M2,<span class="fu">predicted</span>(M))</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate number of features removed</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>nc <span class="ot">=</span> <span class="fu">ncol</span>(DE) <span class="sc">-</span> <span class="fu">ncol</span>(<span class="fu">predicted</span>(M2))</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste0</span>(<span class="st">'Number of features removed: '</span>, nc))</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of features removed: 425</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="va">M2</span> <span class="op">=</span> <span class="fu">filter_na_count</span><span class="op">(</span></span>
+<span>      threshold<span class="op">=</span><span class="fl">3</span>,</span>
+<span>      factor_name<span class="op">=</span><span class="st">'Batch'</span></span>
+<span>    <span class="op">)</span></span>
+<span><span class="va">M2</span> <span class="op">=</span> <span class="fu">model_apply</span><span class="op">(</span><span class="va">M2</span>,<span class="fu">predicted</span><span class="op">(</span><span class="va">M</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># calculate number of features removed</span></span>
+<span><span class="va">nc</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">DE</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="fu">predicted</span><span class="op">(</span><span class="va">M2</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'Number of features removed: '</span>, <span class="va">nc</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">## Number of features removed: 425</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="feature-filtering" class="level3">
-<h3 class="anchored" data-anchor-id="feature-filtering">Feature filtering</h3>
-</section>
-</section>
-<section id="reference" class="level2">
-<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+</section><section id="feature-filtering" class="level3"><h3 class="anchored" data-anchor-id="feature-filtering">Feature filtering</h3>
+</section></section><section id="reference" class="level2"><h2 class="anchored" data-anchor-id="reference">Reference</h2>
 <ul>
 <li><a href="https://bioconductor.statistik.tu-dortmund.de/packages/3.11/bioc/vignettes/structToolbox/inst/doc/data_analysis_omics_using_the_structtoolbox.html#1_introduction">Data analysis of metabolomics and other omics datasets using the structToolbox</a></li>
 </ul>
 
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -686,8 +641,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
@@ -697,7 +651,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-
 
 
 </body></html>
