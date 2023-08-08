@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
-<head>
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
 
-<meta charset="utf-8" />
-<meta name="generator" content="quarto-1.3.361" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-
-<meta name="author" content="Guorui Zhong" />
+<meta name="author" content="Guorui Zhong">
 
 <title>Remove batch effects in high-throughput experiments</title>
 <style>
@@ -59,7 +57,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-<!-- htmldependencies:E3FAD763 -->
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -90,65 +105,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body>
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-  aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"
-  onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="/blog/index.html" rel="" target="">
+    <a class="nav-link" href="../../../../blog/index.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="/wiki/index.html" rel="" target="">
+    <a class="nav-link" href="../../../../wiki/index.html" rel="" target="">
  <span class="menu-text">Wiki</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="/now/index.html" rel="" target="">
+    <a class="nav-link" href="../../../../now/index.html" rel="" target="">
  <span class="menu-text">Now</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="mailto:zhonggr@bii.a-star.edu.sg" rel="" target=""><i 
-  class="bi bi-envelope" 
-  role="img" 
-  aria-label="email" 
->
+    <a class="nav-link" href="mailto:zhonggr@bii.a-star.edu.sg" rel="" target=""><i class="bi bi-envelope" role="img" aria-label="email">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://scholar.google.com/citations?user=g0MfTPMAAAAJ&amp;hl=en" rel="" target=""><i 
-  class="bi bi-journal-check" 
-  role="img" 
-  aria-label="journal-check" 
->
+    <a class="nav-link" href="https://scholar.google.com/citations?user=g0MfTPMAAAAJ&amp;hl=en" rel="" target=""><i class="bi bi-journal-check" role="img" aria-label="journal-check">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/guorui-zhong-754761185/" rel="" target=""><i 
-  class="bi bi-linkedin" 
-  role="img" 
-  aria-label="linkedin" 
->
+    <a class="nav-link" href="https://www.linkedin.com/in/guorui-zhong-754761185/" rel="" target=""><i class="bi bi-linkedin" role="img" aria-label="linkedin">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/guoruizhong" rel="" target=""><i 
-  class="bi bi-github" 
-  role="img" 
-  aria-label="github" 
->
+    <a class="nav-link" href="https://github.com/guoruizhong" rel="" target=""><i class="bi bi-github" role="img" aria-label="github">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -160,21 +157,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
-<!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <div id="quarto-toc-target"></div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" ></div>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    </div>
-<!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default toc-left">
-  <div class="quarto-title-banner">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Remove batch effects in high-throughput experiments</h1>
                                 <div class="quarto-categories">
@@ -205,32 +189,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
     
   
-  </header>
-<nav id="TOC" role="doc-toc">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#what-is-batch-effect" id="toc-what-is-batch-effect">What is batch effect?</a></li>
-  <li><a href="#setting-up-the-data" id="toc-setting-up-the-data">Setting up the data</a></li>
-  <li><a href="#estimate-batch-and-other-artifacts-suing-sva" id="toc-estimate-batch-and-other-artifacts-suing-sva">Estimate batch and other artifacts suing {sva}</a></li>
-  <li><a href="#adjusting-the-surrogate-variables-using-limma" id="toc-adjusting-the-surrogate-variables-using-limma">Adjusting the surrogate variables using {limma}</a></li>
-  <li><a href="#adjust-known-batches-using-combat" id="toc-adjust-known-batches-using-combat">Adjust known batches using {Combat}</a></li>
-  <li><a href="#reference" id="toc-reference">Reference</a></li>
+  <li><a href="#what-is-batch-effect" id="toc-what-is-batch-effect" class="nav-link active" data-scroll-target="#what-is-batch-effect">What is batch effect?</a></li>
+  <li><a href="#setting-up-the-data" id="toc-setting-up-the-data" class="nav-link" data-scroll-target="#setting-up-the-data">Setting up the data</a></li>
+  <li><a href="#estimate-batch-and-other-artifacts-suing-sva" id="toc-estimate-batch-and-other-artifacts-suing-sva" class="nav-link" data-scroll-target="#estimate-batch-and-other-artifacts-suing-sva">Estimate batch and other artifacts suing {sva}</a></li>
+  <li><a href="#adjusting-the-surrogate-variables-using-limma" id="toc-adjusting-the-surrogate-variables-using-limma" class="nav-link" data-scroll-target="#adjusting-the-surrogate-variables-using-limma">Adjusting the surrogate variables using {limma}</a></li>
+  <li><a href="#adjust-known-batches-using-combat" id="toc-adjust-known-batches-using-combat" class="nav-link" data-scroll-target="#adjust-known-batches-using-combat">Adjust known batches using {Combat}</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
   </ul>
 </nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
 <section id="what-is-batch-effect" class="level2">
-<h2>What is batch effect?</h2>
+<h2 class="anchored" data-anchor-id="what-is-batch-effect">What is batch effect?</h2>
 <p>Batch effects are sub-groubs of measurements that have qualitatively different behaviour across conditions and unrelated to the biological or scientific variables in a study. - Experiments run on different time - Different technician - Different lots of reagents, chips or instruments …</p>
 </section>
 <section id="setting-up-the-data" class="level2">
-<h2>Setting up the data</h2>
+<h2 class="anchored" data-anchor-id="setting-up-the-data">Setting up the data</h2>
 <ul>
 <li>The data should be a matrix with features in the rows and samples in the columns.</li>
 <li>The data should be standardized before applying for correction.</li>
 </ul>
-<p><img src="sample.png" class="margin-caption img-fluid" /></p>
+<p><img src="sample.png" class="img-fluid"></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Load packages</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Load packages</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(here, tidyverse, sva, bladderbatch, pamr, limma, survival)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">### Load data</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(bladderdata)</span>
@@ -337,14 +334,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span><span class="fu">as.matrix</span>(cancer), <span class="at">data =</span> pheno)</span>
 <span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a><span class="do">### Create null model matrix, ontains only the adjustment variables.</span></span>
-<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>mod0 <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span><span class="dv">1</span>, <span class="at">data =</span> pheno) </span></code></pre></div>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>mod0 <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span><span class="dv">1</span>, <span class="at">data =</span> pheno) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="estimate-batch-and-other-artifacts-suing-sva" class="level2">
-<h2>Estimate batch and other artifacts suing {sva}</h2>
+<h2 class="anchored" data-anchor-id="estimate-batch-and-other-artifacts-suing-sva">Estimate batch and other artifacts suing {sva}</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Identify the number of latent factors that need to be estimated</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n_sv <span class="ot">&lt;-</span> <span class="fu">num.sv</span>(edata, mod, <span class="at">method =</span> <span class="st">&quot;leek&quot;</span>)</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Identify the number of latent factors that need to be estimated</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n_sv <span class="ot">&lt;-</span> <span class="fu">num.sv</span>(edata, mod, <span class="at">method =</span> <span class="st">"leek"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>n_sv</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="do">### Estimate the surrogate variables</span></span>
@@ -354,31 +351,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="do">### Adjusting for surrogate variables</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>pvalues <span class="ot">=</span> <span class="fu">f.pvalue</span>(edata,mod,mod0)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>qvalues <span class="ot">=</span> <span class="fu">p.adjust</span>(pvalues,<span class="at">method=</span><span class="st">&quot;BH&quot;</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>qvalues <span class="ot">=</span> <span class="fu">p.adjust</span>(pvalues,<span class="at">method=</span><span class="st">"BH"</span>)</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="do">### </span></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>modsv <span class="ot">&lt;-</span> <span class="fu">cbind</span>(mod, svobj<span class="sc">$</span>sv)</span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>mod0sv <span class="ot">&lt;-</span> <span class="fu">cbind</span>(mod0, svobj<span class="sc">$</span>sv)</span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>pvaluesv <span class="ot">&lt;-</span> <span class="fu">f.pvalue</span>(edata, modsv, mod0sv)</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>qvaluesv <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(pvaluesv, <span class="at">method =</span> <span class="st">&quot;BH&quot;</span>)</span></code></pre></div>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>qvaluesv <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(pvaluesv, <span class="at">method =</span> <span class="st">"BH"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="adjusting-the-surrogate-variables-using-limma" class="level2">
-<h2>Adjusting the surrogate variables using {limma}</h2>
+<h2 class="anchored" data-anchor-id="adjusting-the-surrogate-variables-using-limma">Adjusting the surrogate variables using {limma}</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Fit the linear model with surrogate variables</span></span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Fit the linear model with surrogate variables</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lmFit</span>(edata, modsv)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">### Compute the contrasts between pairs of cancer/normal terms</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>contrast_matrix <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;C1&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="fu">rep</span>(<span class="dv">0</span>, svobj<span class="sc">$</span>n.sv)),</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;C2&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="fu">rep</span>(<span class="dv">0</span>, svobj<span class="sc">$</span>n.sv))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"C1"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="fu">rep</span>(<span class="dv">0</span>, svobj<span class="sc">$</span>n.sv)),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"C2"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="fu">rep</span>(<span class="dv">0</span>, svobj<span class="sc">$</span>n.sv))</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>fitcontrasts <span class="ot">&lt;-</span> <span class="fu">contrasts.fit</span>(fit, contrast_matrix)</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="do">### Calculate the test statistics</span></span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>eb <span class="ot">&lt;-</span> <span class="fu">eBayes</span>(fitcontrasts)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">topTableF</span>(eb, <span class="at">adjust =</span> <span class="st">&quot;BH&quot;</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">topTableF</span>(eb, <span class="at">adjust =</span> <span class="st">"BH"</span>)</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="do">##                    C1          C2   AveExpr        F      P.Value    adj.P.Val</span></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 207783_x_at -13.45607  0.26592268 12.938786 8622.529 1.207531e-69 1.419929e-65</span></span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 201492_s_at -13.27594  0.15357702 13.336090 8605.649 1.274450e-69 1.419929e-65</span></span>
@@ -389,13 +386,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="do">## 211445_x_at -10.15890 -0.06633356  9.853817 5256.114 9.845076e-64 3.133969e-60</span></span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="do">## 213084_x_at -12.59345  0.03015520 13.046529 4790.107 1.260201e-62 3.510132e-59</span></span>
 <span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="do">## 201429_s_at -13.33686  0.28358293 12.941208 4464.995 8.675221e-62 2.147888e-58</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="do">## 214327_x_at -12.60146  0.20934783 11.832607 4312.087 2.257025e-61 5.029329e-58</span></span></code></pre></div>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="do">## 214327_x_at -12.60146  0.20934783 11.832607 4312.087 2.257025e-61 5.029329e-58</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="adjust-known-batches-using-combat" class="level2">
-<h2>Adjust known batches using {Combat}</h2>
+<h2 class="anchored" data-anchor-id="adjust-known-batches-using-combat">Adjust known batches using {Combat}</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Adjust for known batches using an empirical Bayesian framework</span></span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Adjust for known batches using an empirical Bayesian framework</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">### a known batch variable</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>batch <span class="ot">&lt;-</span> pheno<span class="sc">$</span>batch</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -591,25 +588,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-194"><a href="#cb4-194" aria-hidden="true" tabindex="-1"></a><span class="do">## 1294_at       7.692059     7.186505</span></span>
 <span id="cb4-195"><a href="#cb4-195" aria-hidden="true" tabindex="-1"></a><span class="do">### Significance analysis</span></span>
 <span id="cb4-196"><a href="#cb4-196" aria-hidden="true" tabindex="-1"></a>pvalue_combat <span class="ot">&lt;-</span> <span class="fu">f.pvalue</span>(combat_edata, mod, mod0)</span>
-<span id="cb4-197"><a href="#cb4-197" aria-hidden="true" tabindex="-1"></a>qvalue_combat <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(pvalue_combat, <span class="at">method =</span> <span class="st">&quot;BH&quot;</span>)</span></code></pre></div>
+<span id="cb4-197"><a href="#cb4-197" aria-hidden="true" tabindex="-1"></a>qvalue_combat <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(pvalue_combat, <span class="at">method =</span> <span class="st">"BH"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="reference" class="level2">
-<h2>Reference</h2>
+<h2 class="anchored" data-anchor-id="reference">Reference</h2>
 <ul>
 <li><a href="http://jtleek.com/genstats/inst/doc/02_13_batch-effects.html">Batch effects and confounders</a></li>
 <li><a href="https://www.bioconductor.org/packages/release/bioc/vignettes/sva/inst/doc/sva.pdf">The SVA package for removing batch effects and other unwanted variation in high-throughput experiments</a></li>
 </ul>
-<div id="quarto-navigation-envelope" class="hidden">
-<p><span class="hidden" data-render-id="quarto-int-sidebar-title">Remove batch effects in high-throughput experiments</span> <span class="hidden" data-render-id="quarto-int-navbar-title">Remove batch effects in high-throughput experiments</span> <span class="hidden" data-render-id="quarto-int-navbar:About">About</span> <span class="hidden" data-render-id="quarto-int-navbar:/blog/index.html">/blog/index.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Wiki">Wiki</span> <span class="hidden" data-render-id="quarto-int-navbar:/wiki/index.html">/wiki/index.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Now">Now</span> <span class="hidden" data-render-id="quarto-int-navbar:/now/index.html">/now/index.html</span> <span class="hidden" data-render-id="quarto-int-navbar:mailto:zhonggr@bii.a-star.edu.sg">mailto:zhonggr@bii.a-star.edu.sg</span> <span class="hidden" data-render-id="quarto-int-navbar:https://scholar.google.com/citations?user=g0MfTPMAAAAJ&amp;hl=en">https://scholar.google.com/citations?user=g0MfTPMAAAAJ&amp;hl=en</span> <span class="hidden" data-render-id="quarto-int-navbar:https://www.linkedin.com/in/guorui-zhong-754761185/">https://www.linkedin.com/in/guorui-zhong-754761185/</span> <span class="hidden" data-render-id="quarto-int-navbar:https://github.com/guoruizhong">https://github.com/guoruizhong</span> <span class="hidden" data-render-id="footer-center"><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2021-2023 Guorui Zhong ~ Made with <a href="https://www.r-project.org/"><i class="fa-brands fa-r-project" aria-label="r-project"></i></a> and <a href="https://quarto.org/">Quarto</a></span></span></p>
-</div>
-<div id="quarto-meta-markdown" class="hidden">
-<p><span class="hidden" data-render-id="quarto-metatitle">Remove batch effects in high-throughput experiments</span> <span class="hidden" data-render-id="quarto-twittercardtitle">Remove batch effects in high-throughput experiments</span> <span class="hidden" data-render-id="quarto-ogcardtitle">Remove batch effects in high-throughput experiments</span> <span class="hidden" data-render-id="quarto-twittercarddesc"></span> <span class="hidden" data-render-id="quarto-ogcardddesc"></span></p>
-</div>
+
+
 </section>
 
 </main> <!-- /main -->
-<script id = "quarto-html-after-body" type="application/javascript">
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -848,16 +841,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">
-      <div class='footer-contents'><span class="faux-block"> 2021-2023 Guorui Zhong ~ Made with [](https://www.r-project.org/) and [Quarto](https://quarto.org/)</span>
-</div>  
-    </div>
+    <div class="nav-footer-center"><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2021-2023 Guorui Zhong ~ Made with <a href="https://www.r-project.org/"><i class="fa-brands fa-r-project" aria-label="r-project"></i></a> and <a href="https://quarto.org/">Quarto</a></span></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
 
-</body>
 
-</html>
+
+</body></html>
