@@ -7,5 +7,10 @@ categories:
 image: renv.png
 ---
 
+R works by defaultly by installing packages to a central library and shares them between the projects. It sounds like a good and time-saving feature. After all, you don’t need to install the same package in every project. But that’s where the problems arise. You might have a newer version of some package than your coworkers – resulting in a deprecated or not-implemented functionality.
+
+`renv` create separate, reproducible environment that you and your coworkers can use, hassle free
+
+This nice post introduced how to use it to manage dependencies in R projects easily
 
 - [R renv: How to Manage Dependencies in R Projects Easily](https://appsilon.com/renv-how-to-manage-dependencies-in-r/)

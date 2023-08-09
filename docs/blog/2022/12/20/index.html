@@ -8,7 +8,7 @@
 
 <meta name="author" content="Guorui Zhong">
 
-<title>Using R in VSCode</title>
+<title>Setup VSCode for using R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -160,7 +160,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Using R in VSCode</h1>
+      <h1 class="title">Setup VSCode for using R</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">R</div>
                 <div class="quarto-category">VSCode</div>
@@ -203,6 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#remote-server-settings" id="toc-remote-server-settings" class="nav-link" data-scroll-target="#remote-server-settings">Remote Server Settings</a></li>
   <li><a href="#keyboard-shortcuts" id="toc-keyboard-shortcuts" class="nav-link" data-scroll-target="#keyboard-shortcuts">Keyboard Shortcuts</a></li>
   <li><a href="#toning-down-code-linting" id="toc-toning-down-code-linting" class="nav-link" data-scroll-target="#toning-down-code-linting">Toning down code linting</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
   </ul>
 </nav>
 </nav>
@@ -218,8 +219,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>The details refer to: <a href="https://github.com/REditorSupport/vscode-R" class="uri">https://github.com/REditorSupport/vscode-R</a></p>
 <p><img src="vscode.jpg" class="img-fluid"></p>
-<section id="install-r-packages" class="level3">
-<h3 class="anchored" data-anchor-id="install-r-packages">Install r packages</h3>
+<section id="install-r-packages" class="level2">
+<h2 class="anchored" data-anchor-id="install-r-packages">Install r packages</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    jsonlite,</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    rlang,</span>
@@ -231,8 +232,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">### A modern R console from python</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-U</span> radian</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="intall-vscode-extensions" class="level3">
-<h3 class="anchored" data-anchor-id="intall-vscode-extensions">Intall VSCode extensions</h3>
+<section id="intall-vscode-extensions" class="level2">
+<h2 class="anchored" data-anchor-id="intall-vscode-extensions">Intall VSCode extensions</h2>
 <ul>
 <li>vscode-R</li>
 <li>R Debugger</li>
@@ -251,15 +252,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Git Graph</li>
 </ul>
 </section>
-<section id="ssh-using-keys" class="level3">
-<h3 class="anchored" data-anchor-id="ssh-using-keys">SSH using Keys</h3>
+<section id="ssh-using-keys" class="level2">
+<h2 class="anchored" data-anchor-id="ssh-using-keys">SSH using Keys</h2>
 <p>open <code>Users/zhonggr/.ssh/config</code>, add the following</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Host</span> nucleus</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">HostName</span> 172.20.<span class="pp">***</span>.<span class="pp">**</span> <span class="co">## host ip address</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">User</span> zhonggr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="user-settings" class="level3">
-<h3 class="anchored" data-anchor-id="user-settings">User Settings</h3>
+<section id="user-settings" class="level2">
+<h2 class="anchored" data-anchor-id="user-settings">User Settings</h2>
 <ul>
 <li>User <code>settings.json</code>:</li>
 </ul>
@@ -333,8 +334,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
 <span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="remote-server-settings" class="level3">
-<h3 class="anchored" data-anchor-id="remote-server-settings">Remote Server Settings</h3>
+<section id="remote-server-settings" class="level2">
+<h2 class="anchored" data-anchor-id="remote-server-settings">Remote Server Settings</h2>
 <p>[SSH:nucleus] <code>settings.json</code></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"r.rterm.linux"</span><span class="fu">:</span> <span class="st">"/home/zhonggr/.local/bin/radian"</span><span class="fu">,</span></span>
@@ -349,8 +350,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"r.plot.useHttpgd"</span><span class="fu">:</span> <span class="kw">true</span></span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="keyboard-shortcuts" class="level3">
-<h3 class="anchored" data-anchor-id="keyboard-shortcuts">Keyboard Shortcuts</h3>
+<section id="keyboard-shortcuts" class="level2">
+<h2 class="anchored" data-anchor-id="keyboard-shortcuts">Keyboard Shortcuts</h2>
 <div class="sourceCode" id="cb6"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="er">//</span> <span class="er">April</span> <span class="er">09,</span> <span class="er">2023</span> <span class="er">updated</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
@@ -454,8 +455,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
 <span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="toning-down-code-linting" class="level3">
-<h3 class="anchored" data-anchor-id="toning-down-code-linting">Toning down code linting</h3>
+<section id="toning-down-code-linting" class="level2">
+<h2 class="anchored" data-anchor-id="toning-down-code-linting">Toning down code linting</h2>
 <p>creating a ~/.lintr file in the project folder</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">linters:</span> with_defaults<span class="er">(</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">line_length_linter</span> = NULL,</span>
@@ -468,6 +469,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="ex">commas_linter</span> = NULL,</span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="ex">function_left_parentheses_linter</span> = NULL,</span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="ex">trailing_whitespace_linter</span> = NULL<span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<ul>
+<li><a href="https://schiff.co.nz/blog/r-and-vscode/">Using R in VSCode</a></li>
+<li><a href="https://renkun.me/">Renkun</a></li>
+</ul>
 
 
 </section>

@@ -181,9 +181,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
 <li><a href="#what-is-batch-effect" id="toc-what-is-batch-effect" class="nav-link active" data-scroll-target="#what-is-batch-effect">What is batch effect?</a></li>
   <li><a href="#setting-up-the-data" id="toc-setting-up-the-data" class="nav-link" data-scroll-target="#setting-up-the-data">Setting up the data</a></li>
-  <li><a href="#estimate-batch-and-other-artifacts-suing-sva" id="toc-estimate-batch-and-other-artifacts-suing-sva" class="nav-link" data-scroll-target="#estimate-batch-and-other-artifacts-suing-sva">Estimate batch and other artifacts suing {sva}</a></li>
-  <li><a href="#adjusting-the-surrogate-variables-using-limma" id="toc-adjusting-the-surrogate-variables-using-limma" class="nav-link" data-scroll-target="#adjusting-the-surrogate-variables-using-limma">Adjusting the surrogate variables using {limma}</a></li>
+  <li><a href="#adjusting-for-batch-effects-with-a-linear-model" id="toc-adjusting-for-batch-effects-with-a-linear-model" class="nav-link" data-scroll-target="#adjusting-for-batch-effects-with-a-linear-model">Adjusting for batch effects with a linear model</a></li>
   <li><a href="#adjust-known-batches-using-combat" id="toc-adjust-known-batches-using-combat" class="nav-link" data-scroll-target="#adjust-known-batches-using-combat">Adjust known batches using {Combat}</a></li>
+  <li><a href="#comparing-combat-and-linear-adjustment" id="toc-comparing-combat-and-linear-adjustment" class="nav-link" data-scroll-target="#comparing-combat-and-linear-adjustment">Comparing {ComBat} and linear adjustment</a></li>
+  <li><a href="#estimate-batch-and-other-artifacts-using-sva" id="toc-estimate-batch-and-other-artifacts-using-sva" class="nav-link" data-scroll-target="#estimate-batch-and-other-artifacts-using-sva">Estimate batch and other artifacts using {sva}</a></li>
+  <li><a href="#adjusting-the-surrogate-variables-using-limma" id="toc-adjusting-the-surrogate-variables-using-limma" class="nav-link" data-scroll-target="#adjusting-the-surrogate-variables-using-limma">Adjusting the surrogate variables using {limma}</a></li>
   <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
   </ul></nav>
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
@@ -309,36 +311,167 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="co">### Create null model matrix, ontains only the adjustment variables.</span></span>
 <span><span class="va">mod0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="fl">1</span>, data <span class="op">=</span> <span class="va">pheno</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="estimate-batch-and-other-artifacts-suing-sva" class="level2"><h2 class="anchored" data-anchor-id="estimate-batch-and-other-artifacts-suing-sva">Estimate batch and other artifacts suing {sva}</h2>
+</section><section id="adjusting-for-batch-effects-with-a-linear-model" class="level2"><h2 class="anchored" data-anchor-id="adjusting-for-batch-effects-with-a-linear-model">Adjusting for batch effects with a linear model</h2>
+<p>In this case, we use two models. - One with the variable we care about - cancer status - the other is just the known adjustment variables, in this case, we assume none</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Identify the number of latent factors that need to be estimated</span></span>
-<span><span class="va">n_sv</span> <span class="op">&lt;-</span> <span class="fu">num.sv</span><span class="op">(</span><span class="va">edata</span>, <span class="va">mod</span>, method <span class="op">=</span> <span class="st">"leek"</span><span class="op">)</span></span>
-<span><span class="va">n_sv</span></span>
-<span><span class="co">## [1] 2</span></span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">cancer</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">batch</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">pheno</span><span class="op">)</span></span>
+<span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lmfit.html">lm.fit</a></span><span class="op">(</span><span class="va">mod</span>, <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">edata</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">fit</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span>, col <span class="op">=</span> <span class="fl">4</span>, breaks <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This will only work if the batch effects aren’t too highly correlated with the outcome.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">pheno</span><span class="op">$</span><span class="va">cancer</span>, <span class="va">pheno</span><span class="op">$</span><span class="va">batch</span><span class="op">)</span></span>
+<span><span class="co">##         </span></span>
+<span><span class="co">##           1  2  3  4  5</span></span>
+<span><span class="co">##   Biopsy  0  0  0  5  4</span></span>
+<span><span class="co">##   Cancer 11 14  0  0 15</span></span>
+<span><span class="co">##   Normal  0  4  4  0  0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="adjust-known-batches-using-combat" class="level2"><h2 class="anchored" data-anchor-id="adjust-known-batches-using-combat">Adjust known batches using {Combat}</h2>
+<p><code>ComBat</code> returns a “cleaned” data matrix after batch effects have been removed. Here we pass a model matrix with any known adjustment variables and a second parameter that is the batch variable.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Adjust for known batches using an empirical Bayesian framework</span></span>
+<span><span class="co">### a known batch variable</span></span>
+<span><span class="va">batch</span> <span class="op">&lt;-</span> <span class="va">pheno</span><span class="op">$</span><span class="va">batch</span></span>
+<span><span class="co">### Model matrix</span></span>
+<span><span class="va">modcombat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="fl">1</span>, data <span class="op">=</span> <span class="va">pheno</span><span class="op">)</span></span>
+<span><span class="va">modcancer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="va">cancer</span>, data <span class="op">=</span> <span class="va">pheno</span><span class="op">)</span></span>
+<span><span class="co">### Using parametric empirical Bayesian adjustments.</span></span>
+<span><span class="va">combat_edata</span> <span class="op">&lt;-</span> <span class="fu">ComBat</span><span class="op">(</span></span>
+<span>    dat <span class="op">=</span> <span class="va">edata</span>,</span>
+<span>    batch <span class="op">=</span> <span class="va">batch</span>, </span>
+<span>    mod <span class="op">=</span> <span class="va">modcombat</span>,</span>
+<span>    par.prior <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># performs parametric empirical Bayesian adjustment</span></span>
+<span>    <span class="co"># par.prior = FALSE, # performs non-parametric empirical Bayesian adjustment</span></span>
+<span>    prior.plots <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>    mean.only <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">combat_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lmfit.html">lm.fit</a></span><span class="op">(</span><span class="va">modcancer</span>, <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">combat_edata</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">combat_fit</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span>, col <span class="op">=</span> <span class="fl">4</span>, breaks <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### Significance analysis</span></span>
+<span><span class="va">pvalue_combat</span> <span class="op">&lt;-</span> <span class="fu">f.pvalue</span><span class="op">(</span><span class="va">combat_edata</span>, <span class="va">mod</span>, <span class="va">mod0</span><span class="op">)</span></span>
+<span><span class="va">qvalue_combat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">pvalue_combat</span>, method <span class="op">=</span> <span class="st">"BH"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="comparing-combat-and-linear-adjustment" class="level2"><h2 class="anchored" data-anchor-id="comparing-combat-and-linear-adjustment">Comparing {ComBat} and linear adjustment</h2>
+<p>We can compare the estimated coefficients from Combat and linear adjustment by looking at the right coefficients for each model.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">fit</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span>, <span class="va">combat_fit</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span>, col <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Linear Model"</span>, ylab <span class="op">=</span> <span class="st">"Combat"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, col <span class="op">=</span> <span class="fl">6</span>, lwd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">## null device </span></span>
+<span><span class="co">##           1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="estimate-batch-and-other-artifacts-using-sva" class="level2"><h2 class="anchored" data-anchor-id="estimate-batch-and-other-artifacts-using-sva">Estimate batch and other artifacts using {sva}</h2>
+<p>First we need to estimate the surrogate variables. To do this, we need to build a model with any known adjustment variables and the variable we care about mod and another model with only the adjustment variables. Here we won’t adjust for anything to see if sva can “discover” the batch effect.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Identify the number of latent factors that need to be estimated</span></span>
+<span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="va">cancer</span>, data <span class="op">=</span> <span class="va">pheno</span><span class="op">)</span></span>
+<span><span class="va">mod0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="fl">1</span>, data <span class="op">=</span> <span class="va">pheno</span><span class="op">)</span></span>
 <span><span class="co">### Estimate the surrogate variables</span></span>
-<span><span class="va">svobj</span> <span class="op">&lt;-</span> <span class="fu">sva</span><span class="op">(</span><span class="va">edata</span>, <span class="va">mod</span>, <span class="va">mod0</span>, n.sv <span class="op">=</span> <span class="va">n_sv</span><span class="op">)</span></span>
+<span><span class="va">sva1</span> <span class="op">&lt;-</span> <span class="fu">sva</span><span class="op">(</span><span class="va">edata</span>, <span class="va">mod</span>, <span class="va">mod0</span>, n.sv <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">## Number of significant surrogate variables is:  2 </span></span>
 <span><span class="co">## Iteration (out of 5 ):1  2  3  4  5</span></span>
 <span></span>
-<span><span class="co">### Adjusting for surrogate variables</span></span>
-<span><span class="va">pvalues</span> <span class="op">=</span> <span class="fu">f.pvalue</span><span class="op">(</span><span class="va">edata</span>,<span class="va">mod</span>,<span class="va">mod0</span><span class="op">)</span></span>
-<span><span class="va">qvalues</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">pvalues</span>,method<span class="op">=</span><span class="st">"BH"</span><span class="op">)</span></span>
+<span><span class="co">### See if any of the variables correlate with batch</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">sva1</span><span class="op">$</span><span class="va">sv</span> <span class="op">~</span> <span class="va">pheno</span><span class="op">$</span><span class="va">batch</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">## Response Y1 :</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Call:</span></span>
+<span><span class="co">## lm(formula = Y1 ~ pheno$batch)</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Residuals:</span></span>
+<span><span class="co">##      Min       1Q   Median       3Q      Max </span></span>
+<span><span class="co">## -0.26953 -0.11076  0.00787  0.10399  0.19069 </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Coefficients:</span></span>
+<span><span class="co">##              Estimate Std. Error t value Pr(&gt;|t|)</span></span>
+<span><span class="co">## (Intercept) -0.018470   0.038694  -0.477    0.635</span></span>
+<span><span class="co">## pheno$batch  0.006051   0.011253   0.538    0.593</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Residual standard error: 0.1345 on 55 degrees of freedom</span></span>
+<span><span class="co">## Multiple R-squared:  0.00523,    Adjusted R-squared:  -0.01286 </span></span>
+<span><span class="co">## F-statistic: 0.2891 on 1 and 55 DF,  p-value: 0.5929</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Response Y2 :</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Call:</span></span>
+<span><span class="co">## lm(formula = Y2 ~ pheno$batch)</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Residuals:</span></span>
+<span><span class="co">##      Min       1Q   Median       3Q      Max </span></span>
+<span><span class="co">## -0.23973 -0.07467 -0.02157  0.08116  0.25629 </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Coefficients:</span></span>
+<span><span class="co">##              Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">## (Intercept)  0.121112   0.034157   3.546 0.000808 ***</span></span>
+<span><span class="co">## pheno$batch -0.039675   0.009933  -3.994 0.000194 ***</span></span>
+<span><span class="co">## ---</span></span>
+<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Residual standard error: 0.1187 on 55 degrees of freedom</span></span>
+<span><span class="co">## Multiple R-squared:  0.2248, Adjusted R-squared:  0.2107 </span></span>
+<span><span class="co">## F-statistic: 15.95 on 1 and 55 DF,  p-value: 0.0001945</span></span>
 <span></span>
-<span><span class="co">### </span></span>
-<span><span class="va">modsv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">mod</span>, <span class="va">svobj</span><span class="op">$</span><span class="va">sv</span><span class="op">)</span></span>
-<span><span class="va">mod0sv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">mod0</span>, <span class="va">svobj</span><span class="op">$</span><span class="va">sv</span><span class="op">)</span></span>
-<span><span class="va">pvaluesv</span> <span class="op">&lt;-</span> <span class="fu">f.pvalue</span><span class="op">(</span><span class="va">edata</span>, <span class="va">modsv</span>, <span class="va">mod0sv</span><span class="op">)</span></span>
-<span><span class="va">qvaluesv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">pvaluesv</span>, method <span class="op">=</span> <span class="st">"BH"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">sva1</span><span class="op">$</span><span class="va">sv</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">~</span> <span class="va">pheno</span><span class="op">$</span><span class="va">batch</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span><span class="va">sva1</span><span class="op">$</span><span class="va">sv</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/jitter.html">jitter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">pheno</span><span class="op">$</span><span class="va">batch</span><span class="op">)</span><span class="op">)</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">pheno</span><span class="op">$</span><span class="va">batch</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">## null device </span></span>
+<span><span class="co">##           1</span></span>
+<span><span class="co">### Add the surrogate variables to the model matrix and perform model fit</span></span>
+<span><span class="va">modsv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">mod</span>, <span class="va">sva1</span><span class="op">$</span><span class="va">sv</span><span class="op">)</span></span>
+<span><span class="va">fitsv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lmfit.html">lm.fit</a></span><span class="op">(</span><span class="va">modsv</span>, <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">edata</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### Compare the fit from surrogate variable analysis to the other two</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">fitsv</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span>, <span class="va">combat_fit</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span>, </span>
+<span>  col <span class="op">=</span> <span class="fl">2</span>, xlab <span class="op">=</span> <span class="st">"SVA"</span>, ylab <span class="op">=</span> <span class="st">"Combat"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, col <span class="op">=</span> <span class="fl">1</span>, lwd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">fitsv</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span>, <span class="va">fit</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span>, </span>
+<span>  col <span class="op">=</span> <span class="fl">2</span>, xlab <span class="op">=</span> <span class="st">"SVA"</span>, ylab <span class="op">=</span> <span class="st">"Linear model"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, col <span class="op">=</span> <span class="fl">1</span>, lwd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="adjusting-the-surrogate-variables-using-limma" class="level2"><h2 class="anchored" data-anchor-id="adjusting-the-surrogate-variables-using-limma">Adjusting the surrogate variables using {limma}</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Fit the linear model with surrogate variables</span></span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Fit the linear model with surrogate variables</span></span>
 <span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu">lmFit</span><span class="op">(</span><span class="va">edata</span>, <span class="va">modsv</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">### Compute the contrasts between pairs of cancer/normal terms</span></span>
 <span><span class="va">contrast_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span></span>
-<span>  <span class="st">"C1"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">svobj</span><span class="op">$</span><span class="va">n.sv</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  <span class="st">"C2"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">svobj</span><span class="op">$</span><span class="va">n.sv</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="st">"C1"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">sva1</span><span class="op">$</span><span class="va">n.sv</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="st">"C2"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">sva1</span><span class="op">$</span><span class="va">n.sv</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">fitcontrasts</span> <span class="op">&lt;-</span> <span class="fu">contrasts.fit</span><span class="op">(</span><span class="va">fit</span>, <span class="va">contrast_matrix</span><span class="op">)</span></span>
 <span></span>
@@ -356,206 +489,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="co">## 213084_x_at -12.59345  0.03015520 13.046529 4790.107 1.260201e-62 3.510132e-59</span></span>
 <span><span class="co">## 201429_s_at -13.33686  0.28358293 12.941208 4464.995 8.675221e-62 2.147888e-58</span></span>
 <span><span class="co">## 214327_x_at -12.60146  0.20934783 11.832607 4312.087 2.257025e-61 5.029329e-58</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section><section id="adjust-known-batches-using-combat" class="level2"><h2 class="anchored" data-anchor-id="adjust-known-batches-using-combat">Adjust known batches using {Combat}</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Adjust for known batches using an empirical Bayesian framework</span></span>
-<span><span class="co">### a known batch variable</span></span>
-<span><span class="va">batch</span> <span class="op">&lt;-</span> <span class="va">pheno</span><span class="op">$</span><span class="va">batch</span></span>
-<span></span>
-<span><span class="co">### Model matrix</span></span>
-<span><span class="va">modcombat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="fl">1</span>, data <span class="op">=</span> <span class="va">pheno</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">edata</span><span class="op">)</span></span>
-<span><span class="co">##           GSM71019.CEL GSM71020.CEL GSM71021.CEL GSM71022.CEL GSM71023.CEL</span></span>
-<span><span class="co">## 1007_s_at    10.115170     8.628044     8.779235     9.248569    10.256841</span></span>
-<span><span class="co">## 1053_at       5.345168     5.063598     5.113116     5.179410     5.181383</span></span>
-<span><span class="co">## 117_at        6.348024     6.663625     6.465892     6.116422     5.980457</span></span>
-<span><span class="co">## 121_at        8.901739     9.439977     9.540738     9.254368     8.798086</span></span>
-<span><span class="co">## 1255_g_at     3.967672     4.466027     4.144885     4.189338     4.078509</span></span>
-<span><span class="co">## 1294_at       7.775183     7.110154     7.248430     7.017220     7.896419</span></span>
-<span><span class="co">##           GSM71024.CEL GSM71025.CEL GSM71026.CEL GSM71028.CEL GSM71029.CEL</span></span>
-<span><span class="co">## 1007_s_at    10.023133     9.108034     8.735616     9.803271    10.168602</span></span>
-<span><span class="co">## 1053_at       5.248418     5.252312     5.220931     5.595771     5.025180</span></span>
-<span><span class="co">## 117_at        5.796155     6.414849     6.846798     5.841478     6.352257</span></span>
-<span><span class="co">## 121_at        8.002870     9.093704     9.263386     7.789240     9.834564</span></span>
-<span><span class="co">## 1255_g_at     3.919740     4.402590     4.173666     3.590649     4.338196</span></span>
-<span><span class="co">## 1294_at       7.944676     7.469767     7.281925     7.367814     7.825735</span></span>
-<span><span class="co">##           GSM71030.CEL GSM71031.CEL GSM71032.CEL GSM71033.CEL GSM71034.CEL</span></span>
-<span><span class="co">## 1007_s_at     8.420904    10.194269    10.184201     9.621902    10.330774</span></span>
-<span><span class="co">## 1053_at       5.909075     5.307699     5.311109     5.542951     5.458996</span></span>
-<span><span class="co">## 117_at        5.967566     6.171909     6.156392     6.120551     5.571636</span></span>
-<span><span class="co">## 121_at        7.844720     7.862812     8.387105     8.646292     8.395863</span></span>
-<span><span class="co">## 1255_g_at     3.952783     3.985398     3.863569     3.923745     3.815636</span></span>
-<span><span class="co">## 1294_at       7.401377     8.252998     7.564053     7.009706     8.772693</span></span>
-<span><span class="co">##           GSM71035.CEL GSM71036.CEL GSM71037.CEL GSM71038.CEL GSM71039.CEL</span></span>
-<span><span class="co">## 1007_s_at     8.986572    10.639548    10.054243     9.768019     9.328306</span></span>
-<span><span class="co">## 1053_at       5.430052     5.587119     5.493452     5.633127     5.159921</span></span>
-<span><span class="co">## 117_at        6.000733     6.187920     6.114563     7.011835     6.336885</span></span>
-<span><span class="co">## 121_at        7.813381     8.752571     8.576715     8.254420     7.959826</span></span>
-<span><span class="co">## 1255_g_at     3.813763     3.928739     3.942883     3.764742     4.097321</span></span>
-<span><span class="co">## 1294_at       7.728379     7.553263     7.197903     8.149383     7.636171</span></span>
-<span><span class="co">##           GSM71040.CEL GSM71041.CEL GSM71042.CEL GSM71043.CEL GSM71044.CEL</span></span>
-<span><span class="co">## 1007_s_at    10.196158    10.292591    10.320349     9.323106     9.628180</span></span>
-<span><span class="co">## 1053_at       6.076057     5.338113     5.187639     5.955838     5.450218</span></span>
-<span><span class="co">## 117_at        6.092187     6.088709     6.303387     5.888935     8.477193</span></span>
-<span><span class="co">## 121_at        8.096221     8.158816     8.598261     7.389635     8.508515</span></span>
-<span><span class="co">## 1255_g_at     3.774978     3.893144     4.065195     3.633987     3.967857</span></span>
-<span><span class="co">## 1294_at       8.028049     7.684338     8.122264     7.019915     8.083954</span></span>
-<span><span class="co">##           GSM71045.CEL GSM71046.CEL GSM71047.CEL GSM71048.CEL GSM71049.CEL</span></span>
-<span><span class="co">## 1007_s_at    10.493403    10.840534     9.368271    10.337764     9.803385</span></span>
-<span><span class="co">## 1053_at       5.366804     5.437124     5.793530     5.247940     5.320422</span></span>
-<span><span class="co">## 117_at        6.011152     5.903212     6.313240     5.729220     6.161011</span></span>
-<span><span class="co">## 121_at        8.336089     7.792873     8.990317     8.976696     8.439951</span></span>
-<span><span class="co">## 1255_g_at     3.836356     3.799026     4.054613     3.844070     4.202248</span></span>
-<span><span class="co">## 1294_at       7.964711     7.862600     7.303318     8.013374     7.820776</span></span>
-<span><span class="co">##           GSM71050.CEL GSM71051.CEL GSM71052.CEL GSM71053.CEL GSM71054.CEL</span></span>
-<span><span class="co">## 1007_s_at    10.158010     9.096022     9.287650     9.636696     9.911038</span></span>
-<span><span class="co">## 1053_at       5.826067     5.265145     5.391201     5.677830     5.373810</span></span>
-<span><span class="co">## 117_at        5.944079     6.727406     6.860623     5.862206     6.032169</span></span>
-<span><span class="co">## 121_at        8.259074     8.992336     8.617814     8.373513     8.227620</span></span>
-<span><span class="co">## 1255_g_at     3.865914     3.897634     4.019904     3.815712     3.841906</span></span>
-<span><span class="co">## 1294_at       8.499586     7.015544     7.358916     7.885461     7.288989</span></span>
-<span><span class="co">##           GSM71055.CEL GSM71056.CEL GSM71058.CEL GSM71059.CEL GSM71060.CEL</span></span>
-<span><span class="co">## 1007_s_at    10.505014    10.417704     9.911863    10.545780    10.131537</span></span>
-<span><span class="co">## 1053_at       5.441140     5.579827     5.395288     5.524846     5.901671</span></span>
-<span><span class="co">## 117_at        6.033868     6.077683     6.791961     6.157637     6.058080</span></span>
-<span><span class="co">## 121_at        8.946566     8.505293     8.291846     8.214104     7.917774</span></span>
-<span><span class="co">## 1255_g_at     4.017547     3.879476     3.890512     3.894170     3.547688</span></span>
-<span><span class="co">## 1294_at       7.952671     7.490074     7.450992     8.086814     7.614454</span></span>
-<span><span class="co">##           GSM71061.CEL GSM71062.CEL GSM71063.CEL GSM71064.CEL GSM71065.CEL</span></span>
-<span><span class="co">## 1007_s_at     9.712869    10.401919     8.763484     9.994538     9.790791</span></span>
-<span><span class="co">## 1053_at       5.841468     5.656442     5.723440     5.727089     5.484076</span></span>
-<span><span class="co">## 117_at        6.339688     5.648701     5.211550     6.177668     6.398325</span></span>
-<span><span class="co">## 121_at        7.968398     8.835210     7.469142     8.256623     8.211274</span></span>
-<span><span class="co">## 1255_g_at     3.831119     3.706997     3.668804     3.823414     4.164475</span></span>
-<span><span class="co">## 1294_at       7.676996     8.290899     6.749402     8.355787     7.311462</span></span>
-<span><span class="co">##           GSM71066.CEL GSM71067.CEL GSM71068.CEL GSM71069.CEL GSM71070.CEL</span></span>
-<span><span class="co">## 1007_s_at    10.292308    10.627200    10.582892    10.009028     9.912853</span></span>
-<span><span class="co">## 1053_at       5.304608     5.491903     5.615926     5.151548     5.237126</span></span>
-<span><span class="co">## 117_at        5.891567     6.383317     5.913488     5.904794     5.960948</span></span>
-<span><span class="co">## 121_at        8.532695     8.016517     8.049998     8.407351     8.985741</span></span>
-<span><span class="co">## 1255_g_at     3.824158     3.783804     3.775194     3.995371     4.322380</span></span>
-<span><span class="co">## 1294_at       7.876914     8.554634     8.042399     7.680460     7.199866</span></span>
-<span><span class="co">##           GSM71071.CEL GSM71072.CEL GSM71073.CEL GSM71074.CEL GSM71075.CEL</span></span>
-<span><span class="co">## 1007_s_at     9.096809     9.011927     8.396062     8.903465     9.501538</span></span>
-<span><span class="co">## 1053_at       5.093278     5.353248     5.214357     5.251383     5.223598</span></span>
-<span><span class="co">## 117_at        6.394089     6.425034     6.372520     6.095344     5.811968</span></span>
-<span><span class="co">## 121_at        8.817789     8.866083     8.704385     9.375736     8.580523</span></span>
-<span><span class="co">## 1255_g_at     4.141255     3.997644     4.219360     4.454771     4.188310</span></span>
-<span><span class="co">## 1294_at       7.378438     7.354380     7.179849     7.143989     7.136764</span></span>
-<span><span class="co">##           GSM71076.CEL GSM71077.CEL</span></span>
-<span><span class="co">## 1007_s_at     9.540766     9.039143</span></span>
-<span><span class="co">## 1053_at       5.191392     5.235880</span></span>
-<span><span class="co">## 117_at        6.007461     6.314809</span></span>
-<span><span class="co">## 121_at        8.848099     9.663298</span></span>
-<span><span class="co">## 1255_g_at     4.284053     4.877523</span></span>
-<span><span class="co">## 1294_at       7.369991     6.992046</span></span>
-<span><span class="co">### Using parametric empirical Bayesian adjustments.</span></span>
-<span><span class="va">combat_edata</span> <span class="op">&lt;-</span> <span class="fu">ComBat</span><span class="op">(</span></span>
-<span>    dat <span class="op">=</span> <span class="va">edata</span>,</span>
-<span>    batch <span class="op">=</span> <span class="va">batch</span>, </span>
-<span>    mod <span class="op">=</span> <span class="va">modcombat</span>,</span>
-<span>    par.prior <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># performs parametric empirical Bayesian adjustment</span></span>
-<span>    <span class="co"># par.prior = FALSE, # performs non-parametric empirical Bayesian adjustment</span></span>
-<span>    prior.plots <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>    mean.only <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">## Found5batches</span></span>
-<span><span class="co">## Adjusting for0covariate(s) or covariate level(s)</span></span>
-<span><span class="co">## Standardizing Data across genes</span></span>
-<span><span class="co">## Fitting L/S model and finding priors</span></span>
-<span><span class="co">## Finding parametric adjustments</span></span>
-<span><span class="co">## Adjusting the Data</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">combat_edata</span><span class="op">)</span></span>
-<span><span class="co">##           GSM71019.CEL GSM71020.CEL GSM71021.CEL GSM71022.CEL GSM71023.CEL</span></span>
-<span><span class="co">## 1007_s_at    10.086492     8.593022     8.735540     8.904952    10.279650</span></span>
-<span><span class="co">## 1053_at       5.519207     5.113332     5.158352     5.262212     5.265272</span></span>
-<span><span class="co">## 117_at        6.561742     6.432693     6.270198     6.220636     6.020385</span></span>
-<span><span class="co">## 121_at        8.789976     9.223917     9.316884     9.194757     8.670993</span></span>
-<span><span class="co">## 1255_g_at     3.899327     4.403982     4.092681     4.221116     4.060228</span></span>
-<span><span class="co">## 1294_at       7.776518     7.019255     7.158185     6.861674     7.922848</span></span>
-<span><span class="co">##           GSM71024.CEL GSM71025.CEL GSM71026.CEL GSM71028.CEL GSM71029.CEL</span></span>
-<span><span class="co">## 1007_s_at     9.961007     9.045478     8.694423     9.899764    10.045210</span></span>
-<span><span class="co">## 1053_at       5.369203     5.284904     5.256374     5.510407     5.078403</span></span>
-<span><span class="co">## 117_at        5.748943     6.228251     6.583223     5.959972     6.176814</span></span>
-<span><span class="co">## 121_at        7.758169     8.904430     9.060986     8.070843     9.587981</span></span>
-<span><span class="co">## 1255_g_at     3.829743     4.342488     4.120581     3.705901     4.280068</span></span>
-<span><span class="co">## 1294_at       7.981092     7.380569     7.191838     7.400875     7.738220</span></span>
-<span><span class="co">##           GSM71030.CEL GSM71031.CEL GSM71032.CEL GSM71033.CEL GSM71034.CEL</span></span>
-<span><span class="co">## 1007_s_at     8.728213    10.069404    10.222600     9.529869    10.346820</span></span>
-<span><span class="co">## 1053_at       5.793924     5.335260     5.252809     5.549143     5.386636</span></span>
-<span><span class="co">## 117_at        6.078828     6.028606     6.256825     5.986400     5.705606</span></span>
-<span><span class="co">## 121_at        8.120722     7.768753     8.608355     8.491627     8.616229</span></span>
-<span><span class="co">## 1255_g_at     4.028444     3.938081     3.948983     3.878318     3.906291</span></span>
-<span><span class="co">## 1294_at       7.429397     8.167503     7.567643     6.918332     8.594777</span></span>
-<span><span class="co">##           GSM71035.CEL GSM71036.CEL GSM71037.CEL GSM71038.CEL GSM71039.CEL</span></span>
-<span><span class="co">## 1007_s_at     9.207615    10.489141    10.055878     9.869888     9.158731</span></span>
-<span><span class="co">## 1053_at       5.360444     5.589299     5.473216     5.544211     5.152297</span></span>
-<span><span class="co">## 117_at        6.110093     6.041764     6.114110     7.063206     6.379864</span></span>
-<span><span class="co">## 121_at        8.092547     8.589685     8.642015     8.489064     7.905125</span></span>
-<span><span class="co">## 1255_g_at     3.904623     3.883160     4.029158     3.860961     4.225654</span></span>
-<span><span class="co">## 1294_at       7.707292     7.464459     7.208720     8.065072     7.680872</span></span>
-<span><span class="co">##           GSM71040.CEL GSM71041.CEL GSM71042.CEL GSM71043.CEL GSM71044.CEL</span></span>
-<span><span class="co">## 1007_s_at    10.071185    10.350440    10.188253     9.492826     9.535788</span></span>
-<span><span class="co">## 1053_at       6.033825     5.323750     5.226105     5.836241     5.464833</span></span>
-<span><span class="co">## 117_at        5.963091     6.083206     6.136653     6.004707     7.923066</span></span>
-<span><span class="co">## 121_at        7.984107     8.142824     8.447311     7.711577     8.364508</span></span>
-<span><span class="co">## 1255_g_at     3.734111     3.965874     4.015434     3.744501     3.921078</span></span>
-<span><span class="co">## 1294_at       7.941490     7.732763     8.036151     7.105221     7.997660</span></span>
-<span><span class="co">##           GSM71045.CEL GSM71046.CEL GSM71047.CEL GSM71048.CEL GSM71049.CEL</span></span>
-<span><span class="co">## 1007_s_at    10.351380    10.778840     9.208122    10.406267     9.700942</span></span>
-<span><span class="co">## 1053_at       5.388997     5.366843     5.761948     5.236987     5.346827</span></span>
-<span><span class="co">## 117_at        5.896497     6.018165     6.351599     5.653488     6.019650</span></span>
-<span><span class="co">## 121_at        8.205420     8.074109     9.136074     9.119804     8.301247</span></span>
-<span><span class="co">## 1255_g_at     3.793607     3.891497     4.171316     3.903436     4.148287</span></span>
-<span><span class="co">## 1294_at       7.877853     7.821356     7.322285     8.087238     7.733237</span></span>
-<span><span class="co">##           GSM71050.CEL GSM71051.CEL GSM71052.CEL GSM71053.CEL GSM71054.CEL</span></span>
-<span><span class="co">## 1007_s_at    10.184118     8.871664     9.108487     9.758592     9.878899</span></span>
-<span><span class="co">## 1053_at       5.793254     5.253541     5.374831     5.584665     5.358097</span></span>
-<span><span class="co">## 117_at        5.910321     6.846674     7.005916     5.979511     6.015620</span></span>
-<span><span class="co">## 121_at        8.262585     9.138486     8.691110     8.596135     8.225012</span></span>
-<span><span class="co">## 1255_g_at     3.931228     3.971587     4.127154     3.906358     3.900682</span></span>
-<span><span class="co">## 1294_at       8.611040     7.012263     7.382181     7.840784     7.306848</span></span>
-<span><span class="co">##           GSM71055.CEL GSM71056.CEL GSM71058.CEL GSM71059.CEL GSM71060.CEL</span></span>
-<span><span class="co">## 1007_s_at    10.362324    10.280022     9.803198    10.400752    10.151401</span></span>
-<span><span class="co">## 1053_at       5.456580     5.582669     5.414892     5.532682     5.865999</span></span>
-<span><span class="co">## 117_at        5.915164     5.951171     6.538158     6.016877     6.046593</span></span>
-<span><span class="co">## 121_at        8.768673     8.361535     8.164599     8.092870     7.854892</span></span>
-<span><span class="co">## 1255_g_at     3.969246     3.835405     3.846103     3.849649     3.526340</span></span>
-<span><span class="co">## 1294_at       7.865755     7.400972     7.361705     8.000533     7.657476</span></span>
-<span><span class="co">##           GSM71061.CEL GSM71062.CEL GSM71063.CEL GSM71064.CEL GSM71065.CEL</span></span>
-<span><span class="co">## 1007_s_at     9.823149    10.407115     9.018549     9.881130     9.889187</span></span>
-<span><span class="co">## 1053_at       5.732745     5.565310     5.625939     5.716556     5.409331</span></span>
-<span><span class="co">## 117_at        6.429608     5.778251     5.366172     6.033338     6.484882</span></span>
-<span><span class="co">## 121_at        8.231915     9.011224     7.783058     8.132100     8.450274</span></span>
-<span><span class="co">## 1255_g_at     3.920081     3.809529     3.775511     3.781062     4.216992</span></span>
-<span><span class="co">## 1294_at       7.663625     8.185336     6.875332     8.270778     7.352985</span></span>
-<span><span class="co">##           GSM71066.CEL GSM71067.CEL GSM71068.CEL GSM71069.CEL GSM71070.CEL</span></span>
-<span><span class="co">## 1007_s_at    10.350090    10.598040    10.560489    10.268863    10.140820</span></span>
-<span><span class="co">## 1053_at       5.291512     5.416415     5.528646     5.304092     5.437771</span></span>
-<span><span class="co">## 117_at        5.847551     6.470735     6.027851     6.024179     6.104957</span></span>
-<span><span class="co">## 121_at        8.589432     8.275177     8.305278     8.055460     8.689642</span></span>
-<span><span class="co">## 1255_g_at     3.878101     3.877939     3.870270     3.807743     4.059233</span></span>
-<span><span class="co">## 1294_at       7.940227     8.409465     7.974154     8.107354     7.464492</span></span>
-<span><span class="co">##           GSM71071.CEL GSM71072.CEL GSM71073.CEL GSM71074.CEL GSM71075.CEL</span></span>
-<span><span class="co">## 1007_s_at     9.301040     9.229103     8.707160     9.137182     9.593214</span></span>
-<span><span class="co">## 1053_at       5.055688     5.290942     5.165256     5.198762     5.416639</span></span>
-<span><span class="co">## 117_at        6.480889     6.510059     6.460557     6.199278     5.890647</span></span>
-<span><span class="co">## 121_at        8.995563     9.038981     8.893606     9.497186     8.245336</span></span>
-<span><span class="co">## 1255_g_at     4.196310     4.068400     4.265876     4.475550     3.956125</span></span>
-<span><span class="co">## 1294_at       7.409903     7.389458     7.241137     7.210662     7.380085</span></span>
-<span><span class="co">##           GSM71076.CEL GSM71077.CEL</span></span>
-<span><span class="co">## 1007_s_at     9.645440     8.977602</span></span>
-<span><span class="co">## 1053_at       5.366331     5.435824</span></span>
-<span><span class="co">## 117_at        6.171867     6.613994</span></span>
-<span><span class="co">## 121_at        8.538723     9.432557</span></span>
-<span><span class="co">## 1255_g_at     4.029758     4.486174</span></span>
-<span><span class="co">## 1294_at       7.692059     7.186505</span></span>
-<span><span class="co">### Significance analysis</span></span>
-<span><span class="va">pvalue_combat</span> <span class="op">&lt;-</span> <span class="fu">f.pvalue</span><span class="op">(</span><span class="va">combat_edata</span>, <span class="va">mod</span>, <span class="va">mod0</span><span class="op">)</span></span>
-<span><span class="va">qvalue_combat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">pvalue_combat</span>, method <span class="op">=</span> <span class="st">"BH"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="reference" class="level2"><h2 class="anchored" data-anchor-id="reference">Reference</h2>
 <ul>

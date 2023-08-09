@@ -1,5 +1,5 @@
 ---
-title: "Using R in VSCode"
+title: "Setup VSCode for using R"
 date: 2022-12-20
 image: vscode.jpg
 categories:
@@ -12,7 +12,7 @@ The details refer to: <https://github.com/REditorSupport/vscode-R>
 
 ![](vscode.jpg)
 
-### Install r packages
+## Install r packages
    
 ```r
 pacman::p_load(
@@ -31,7 +31,7 @@ pacman::p_load(
 pip install -U radian
 ```
 
-### Intall VSCode extensions
+## Intall VSCode extensions
 
 - vscode-R
 - R Debugger
@@ -48,7 +48,7 @@ pip install -U radian
 - Codesnap  
 - Git Graph
 
-### SSH using Keys
+## SSH using Keys
 open `Users/zhonggr/.ssh/config`, add the following
 ```bash
 Host nucleus
@@ -56,7 +56,7 @@ Host nucleus
     User zhonggr
 
 ```
-### User Settings
+## User Settings
 
 - User `settings.json`:
 
@@ -131,7 +131,7 @@ Host nucleus
     }
 }
 ```
-### Remote Server Settings
+## Remote Server Settings
 
 [SSH:nucleus] `settings.json`
   
@@ -149,7 +149,7 @@ Host nucleus
     "r.plot.useHttpgd": true
 }
 ```
-### Keyboard Shortcuts
+## Keyboard Shortcuts
 ```json
 // April 09, 2023 updated
 [
@@ -254,7 +254,7 @@ Host nucleus
     }
 ]
 ```
-### Toning down code linting
+## Toning down code linting
 
 creating a ~/.lintr file in the project folder
 
@@ -271,3 +271,6 @@ linters: with_defaults(
   function_left_parentheses_linter = NULL,
   trailing_whitespace_linter = NULL)
 ```
+## Reference
+- [Using R in VSCode](https://schiff.co.nz/blog/r-and-vscode/)
+- [Renkun](https://renkun.me/)
