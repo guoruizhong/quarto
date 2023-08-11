@@ -15,6 +15,26 @@ The solution is to set the default terminal provider on the remote settings to b
 
 [Advanced commands & shortcodes](https://quickref.me/tmux)
 
+## Basic workflow
+
+1. Create session
+2. Setup session
+3. Work
+4. Detach
+5. Attach
+6. Work
+7. To 4
+
+## Useful Aliases
+
+```{bash}
+alias t="tmux"
+alias ta="t a -t"
+alias tls="t ls"
+alias tn="t new -t"
+``` 
+Now we can run any tmux commands by just typing `t` (saved 3 characters and much cognitive load! Yeah!), create a new session with `t {session-name}`, attach to an existing session with `ta {session-name}` and list all your sessions with `tls`.
+
 ## Single session
 
 - Add the below snippet to your remote settings in VSCode.
@@ -89,8 +109,12 @@ The solution is to set the default terminal provider on the remote settings to b
 }
 
 ```
+```bash
+source-file ~/.tmux.conf
+```
 ## Reference
 
 - <https://www.zdyn.net/system/hacks/2020/09/19/vscode-term-session.html>
 - <https://arcolinux.com/everthing-you-need-to-know-about-tmux-introduction/>
+- <https://www.barbarianmeetscoding.com/blog/jaimes-guide-to-tmux-the-most-awesome-tool-you-didnt-know-you-needed>
 

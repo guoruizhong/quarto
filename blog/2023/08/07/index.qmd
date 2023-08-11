@@ -1,13 +1,14 @@
 ---
 title: "Build R environment with miniforge in linux without root"
 date: 2023-08-07
-# date-modified: 2023-04-05
+date-modified: last-modified
 categories:
-  - env
+  - Linux
 image: conda.jpg
+description: Sometimes, We need to install R in the Linux server, but we don't the root permission
 ---
 
-```{bash}
+```bash
 ### Download miniforge
 wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
 
