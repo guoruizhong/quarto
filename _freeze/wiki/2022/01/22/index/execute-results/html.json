@@ -1,0 +1,16 @@
+{
+  "hash": "d9ae996ea01d8a32a674f89df189e966",
+  "result": {
+    "markdown": "---\ntitle: \"Use colorblind-friendly palette for visualization\"\ndate: 2022-01-22\nimage: colorblind_palette.jpg\ndescription: \"Use friendly colors in a graph with ggplot2\"\ncategories:\n  - R\n  - colors\n---\n\n\n\n\n\n![](colorblind_palette.jpg)\n\n## Gray colors \n\n\n::: {.cell layout-align=\"center\"}\n\n```{.r .cell-code}\n### gray colors\ncb <- c(\"gray\", \"lightgray\", \"darkgray\", \"black\")\nbarplot(1:4, col = cb)\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-1-1.png){fig-align='center' width=85%}\n:::\n:::\n\n## Friendly colors\n\n\n::: {.cell layout-align=\"center\"}\n\n```{.r .cell-code}\n## Use color blind-friendly palette:\ncbp1 <- c(\n  \"#999999\", \n  \"#E69F00\", \n  \"#56B4E9\", \n  \"#009E73\",\n  \"#F0E442\", \n  \"#0072B2\", \n  \"#D55E00\", \n  \"#CC79A7\"\n)\nbarplot(1:8, col = cbp1)\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-2-1.png){fig-align='center' width=85%}\n:::\n:::\n\n::: {.cell layout-align=\"center\"}\n\n```{.r .cell-code}\n### friendly colors\ncbPalette <- c(\n    \"#000000\", \n    \"#999999\", \n    \"#E69F00\", \n    \"#56B4E9\", \n    \"#009E73\", \n    \"#F0E442\", \n    \"#0072B2\", \n    \"#D55E00\", \n    \"#CC79A7\"\n)\nbarplot(1:8, col = cbPalette)\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-3-1.png){fig-align='center' width=85%}\n:::\n:::\n\n::: {.cell layout-align=\"center\"}\n\n```{.r .cell-code}\nlibrary(ggplot2)\n\ntheme_set(\n    theme(\n        text = element_text(size = 10, family = \"Arial\"),\n        panel.background = element_rect(fill = NA, color = NA),\n        axis.title = element_text(size = 10, color = \"black\"),\n        axis.text = element_text(size = 10, color = \"black\"),\n        # axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1),\n        axis.ticks.length.x = unit(0.3, \"lines\"),\n        axis.line = element_line(colour = \"Black\"),\n        axis.ticks = element_line(colour = \"black\", linewidth = 0.6),\n        plot.title = element_text(face = \"bold\", hjust = 0.5, size = 10)\n    )\n)\n\nfriendly_colors <- c(\n  \"#4C72B0\", \n  \"#55A868\", \n  \"#C44E52\", \n  \"#8172B2\", \n  \"#CCB974\", \n  \"#64B5CD\"\n)\n\n# Create example data frame\ndf <- data.frame(\n    group = c(\"A\", \"B\", \"C\", \"D\", \"E\", \"F\"),\n    value = c(10, 20, 15, 25, 30, 35)\n)\n\n# Create plot with friendly colors\nggplot(df, aes(x = group, y = value, fill = group)) +\n    geom_bar(stat = \"identity\") +\n    scale_fill_manual(values = friendly_colors)\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-4-1.png){fig-align='center' width=85%}\n:::\n:::\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

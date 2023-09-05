@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.3.450">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Guorui Zhong">
-<title>Learning PCA, tSNE and UMAP from simple example</title>
+<title>ZGR.FFXDZ - Learning PCA, tSNE and UMAP from simple example</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,7 +60,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../../">
-<link href="../../../..//files/profiles/z_512x512.png" rel="icon" type="image/png">
 <script src="../../../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -101,6 +100,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">ZGR.FFXDZ</span>
+    </a>
+  </div>
             <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
@@ -108,36 +112,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
 <li class="nav-item">
-    <a class="nav-link" href="../../../../blog/index.html" rel="" target="">
+    <a class="nav-link" href="../../../../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../wiki/index.html" rel="" target="">
+    <a class="nav-link" href="../../../../blog/index.html" rel="" target="">
  <span class="menu-text">Wiki</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../tools/index.html" rel="" target="">
+ <span class="menu-text">Resources</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../../../now/index.html" rel="" target="">
  <span class="menu-text">Now</span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="mailto:zhonggr@bii.a-star.edu.sg" rel="" target=""><i class="bi bi-envelope" role="img" aria-label="email">
-</i> 
- <span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://scholar.google.com/citations?user=g0MfTPMAAAAJ&amp;hl=en" rel="" target=""><i class="bi bi-journal-check" role="img" aria-label="journal-check">
-</i> 
- <span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/guorui-zhong-754761185/" rel="" target=""><i class="bi bi-linkedin" role="img" aria-label="linkedin">
-</i> 
- <span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/guoruizhong" rel="" target=""><i class="bi bi-github" role="img" aria-label="github">
-</i> 
- <span class="menu-text"></span></a>
   </li>  
 </ul>
 <div class="quarto-navbar-tools">
@@ -200,19 +188,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>    <span class="va">FactoMineR</span>, <span class="co"># compute principal component methods</span></span>
 <span>    <span class="va">factoextra</span>,  <span class="co"># extract, visualize and interpretate the results</span></span>
 <span>    <span class="va">corrplot</span>  <span class="co"># visualize cos2 of variables</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">## also installing the dependencies 'diffobj', 'praise', 'waldo', 'Matrix', 'testthat', 'SparseM', 'MatrixModels', 'minqa', 'nloptr', 'RcppEigen', 'carData', 'abind', 'pbkrtest', 'quantreg', 'lme4', 'htmlwidgets', 'crosstalk', 'promises', 'estimability', 'numDeriv', 'mvtnorm', 'car', 'DT', 'ellipse', 'emmeans', 'flashClust', 'leaps', 'multcompView', 'scatterplot3d', 'ggrepel'</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## The downloaded binary packages are in</span></span>
-<span><span class="co">##  /var/folders/2c/9q3pg2295195bp3gnrgbzrg40000gn/T//RtmpIMvNLR/downloaded_packages</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## FactoMineR installed</span></span>
-<span><span class="co">## also installing the dependencies 'corrplot', 'viridis', 'ggsci', 'cowplot', 'ggsignif', 'gridExtra', 'polynom', 'rstatix', 'plyr', 'dendextend', 'ggpubr', 'reshape2'</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## The downloaded binary packages are in</span></span>
-<span><span class="co">##  /var/folders/2c/9q3pg2295195bp3gnrgbzrg40000gn/T//RtmpIMvNLR/downloaded_packages</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## factoextra installed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="library-and-data" class="level2"><h2 class="anchored" data-anchor-id="library-and-data">Library and data</h2>
 <div class="cell" data-layout-align="center">
@@ -223,11 +199,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>  <span class="va">broom</span>,</span>
 <span>  <span class="va">palmerpenguins</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## The downloaded binary packages are in</span></span>
-<span><span class="co">##  /var/folders/2c/9q3pg2295195bp3gnrgbzrg40000gn/T//RtmpIMvNLR/downloaded_packages</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## palmerpenguins installed</span></span>
 <span><span class="co">### demo data</span></span>
 <span><span class="va">penguins</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">drop_na</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -295,12 +266,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>  <span class="va">umap</span>,</span>
 <span>  <span class="va">palmerpenguins</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">## also installing the dependencies 'RcppTOML', 'reticulate', 'RSpectra'</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## The downloaded binary packages are in</span></span>
-<span><span class="co">##  /var/folders/2c/9q3pg2295195bp3gnrgbzrg40000gn/T//RtmpIMvNLR/downloaded_packages</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## umap installed</span></span>
 <span><span class="co">### theme set</span></span>
 <span><span class="fu">theme_set</span><span class="op">(</span><span class="fu">theme_bw</span><span class="op">(</span><span class="fl">18</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">### subset data</span></span>
@@ -355,12 +320,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span></span>
 <span>  <span class="va">ggforce</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">## also installing the dependencies 'tweenr', 'polyclip'</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## The downloaded binary packages are in</span></span>
-<span><span class="co">##  /var/folders/2c/9q3pg2295195bp3gnrgbzrg40000gn/T//RtmpIMvNLR/downloaded_packages</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## ggforce installed</span></span>
 <span><span class="va">umap_df</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">UMAP1</span>, y <span class="op">=</span> <span class="va">UMAP2</span>, color <span class="op">=</span> <span class="va">species</span>, shape <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
@@ -382,11 +341,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>  <span class="va">Rtsne</span>,</span>
 <span>  <span class="va">palmerpenguins</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## The downloaded binary packages are in</span></span>
-<span><span class="co">##  /var/folders/2c/9q3pg2295195bp3gnrgbzrg40000gn/T//RtmpIMvNLR/downloaded_packages</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Rtsne installed</span></span>
 <span><span class="co">### theme set</span></span>
 <span><span class="fu">theme_set</span><span class="op">(</span><span class="fu">theme_bw</span><span class="op">(</span><span class="fl">18</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">### subset data</span></span>

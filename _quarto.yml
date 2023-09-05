@@ -27,9 +27,12 @@ execute:
 # author-meta: "Guorui Zhong"
 
 website:
-  title: ""
+  title: "ZGR.FFXDZ"
   description: ""
-  favicon: "/files/profiles/z_512x512.png"
+  search: 
+    location: navbar
+    type: overlay
+  # favicon: "/files/profiles/z_512x512.png"
   site-url: "https://guoruizhong.github.io/"
   repo-url: "https://github.com/guoruizhong/guoruizhong.github.io"
 
@@ -50,9 +53,11 @@ website:
 
     right:
       - text: "About"
-        file: "blog/index.qmd"
+        file: "about.qmd"
       - text: "Wiki"
-        file: "wiki/index.qmd"
+        file: "blog/index.qmd"
+      - text: "Resources"
+        file: "tools/index.qmd"
       - text: "Now"
         file: "now/index.qmd"
     
@@ -60,9 +65,9 @@ website:
       # - icon: rss
       #   aria-label: rss
       #   href: atom.xml
-      - icon: envelope
-        aria-label: email
-        href: "mailto:zhonggr@bii.a-star.edu.sg"
+      # - icon: envelope
+        # aria-label: email
+        # href: "mailto:zhonggr@bii.a-star.edu.sg"
       # - icon: twitter
       #   aria-label: twitter
       #   href: https://twitter.com/andrewheiss
@@ -76,15 +81,15 @@ website:
       #   aria-label: youtube
       #   href: https://www.youtube.com/andrewheiss
       #   # rel: me
-      - icon: journal-check
-        aria-label: journal-check
-        href: https://scholar.google.com/citations?user=g0MfTPMAAAAJ&hl=en
-      - icon: linkedin
-        aria-label: linkedin
-        href: https://www.linkedin.com/in/guorui-zhong-754761185/
-      - icon: github
-        aria-label: github
-        href: https://github.com/guoruizhong
+      # - icon: journal-check
+      #   aria-label: journal-check
+      #   href: https://scholar.google.com/citations?user=g0MfTPMAAAAJ&hl=en
+      # - icon: linkedin
+      #   aria-label: linkedin
+      #   href: https://www.linkedin.com/in/guorui-zhong-754761185/
+      # - icon: github
+      #   aria-label: github
+      #   href: https://github.com/guoruizhong
 
   
   page-footer:

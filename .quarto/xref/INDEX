@@ -529,5 +529,20 @@
   },
   "blog/2023/08/07/index.md": {
     "index.html": "5e367d9e"
+  },
+  "blog/2023/09/01/index.qmd": {
+    "index.html": "55ab9ae0"
+  },
+  "tools/index.qmd": {
+    "index.html": "d669bd3c"
+  },
+  "wiki/2022/01/22/index.qmd": {
+    "index.html": "93447626"
+  },
+  "wiki/2022/02/01/index.qmd": {
+    "index.html": "0a6ab6ef"
+  },
+  "wiki/2022/05/02/index.qmd": {
+    "index.html": "63978e8c"
   }
 }
