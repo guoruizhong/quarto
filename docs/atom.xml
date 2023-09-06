@@ -5,10 +5,15 @@
       xmlns:dc="http://purl.org/dc/elements/1.1/" 
       version="2.0">
 <channel>
-<title>ZGR.FFXDZ</title>
+<title>F</title>
 <link>https://guoruizhong.github.io/atom.html</link>
 <atom:link href="https://guoruizhong.github.io/atom.xml" rel="self" type="application/rss+xml"/>
 <description></description>
+<image>
+<url>https://guoruizhong.github.io/files/profiles/z_512x512.png</url>
+<title>F</title>
+<link>https://guoruizhong.github.io/atom.html</link>
+</image>
 <generator>quarto-1.3.450</generator>
 <lastBuildDate>Thu, 10 Aug 2023 16:00:00 GMT</lastBuildDate>
 <item>

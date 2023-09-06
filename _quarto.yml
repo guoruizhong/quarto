@@ -7,7 +7,6 @@ project:
 
   resources:
     - "files/**"
-
     # Things that need to be at the site root
     - ".htaccess"
     - "LiveSearchSiteAuth.xml"
@@ -15,19 +14,9 @@ project:
     - "y_key_31e0c4105fc75710.html"
     - "pgp_ath.asc.txt"
 
-execute:
-  freeze: auto
-
-# bibliography: files/bib/references.bib
-# csl: files/bib/chicago-author-date.csl
-
-# Metadata stuff
-# pagetitle: "{{< meta title >}} | {{< meta website.title >}}"
-# description-meta: "{{< meta description >}}"
-# author-meta: "Guorui Zhong"
-
 website:
-  title: "ZGR.FFXDZ"
+  title: "F"
+  image: "/files/profiles/z_512x512.png"
   description: ""
   search: 
     location: navbar
@@ -35,33 +24,21 @@ website:
   # favicon: "/files/profiles/z_512x512.png"
   site-url: "https://guoruizhong.github.io/"
   repo-url: "https://github.com/guoruizhong/guoruizhong.github.io"
-
-  # google-analytics: "UA-527449-5"
-
-  # twitter-card: 
-  #   image: "/files/profiles/twitter-card-large.png"
-  #   card-style: summary_large_image
-  #   creator: "@andrewheiss"
-  #   site: "@andrewheiss"
-
-  # open-graph: 
-  #   image: "/files/profiles/twitter-card-large.png"
-  #   locale: en_US
-  
   navbar:
     pinned: true
-
     right:
       - text: "About"
         file: "about.qmd"
-      - text: "Wiki"
+      - text: "Blog"
         file: "blog/index.qmd"
-      - text: "Resources"
-        file: "tools/index.qmd"
-      - text: "Now"
-        file: "now/index.qmd"
-    
-    # right:
+      - text: "Techniques"
+        file: "techniques/index.qmd"
+      - text: "Wiki"
+        file: "wiki/index.qmd"
+      - text: "eBooks"
+        file: "ebooks/index.qmd"
+      # - text: "Now"
+      #   file: "now/index.qmd"
       # - icon: rss
       #   aria-label: rss
       #   href: atom.xml
@@ -90,8 +67,6 @@ website:
       # - icon: github
       #   aria-label: github
       #   href: https://github.com/guoruizhong
-
-  
   page-footer:
     center: |
       <span class="faux-block">{{< fa brands creative-commons >}} 2021-2023 Guorui Zhong ~ Made with [{{< fa brands r-project >}}](https://www.r-project.org/) and [Quarto](https://quarto.org/)</span>
@@ -109,3 +84,14 @@ format:
     # highlight-style: github-dark
     highlight-style: dracula
     # highlight-style: monokai
+
+# bibliography: files/bib/references.bib
+# csl: files/bib/chicago-author-date.csl
+
+# Metadata stuff
+# pagetitle: "{{< meta title >}} | {{< meta website.title >}}"
+# description-meta: "{{< meta description >}}"
+# author-meta: "Guorui Zhong"
+
+execute:
+  freeze: auto

@@ -1,0 +1,32 @@
+---
+title: Techniques
+date: 2023-04-09
+title-block-banner: "#212529"
+published-title: Last updated
+toc: true
+toc-location: left
+toc-title: "Contents"
+---
+
+## CRISPR
+
+- [Guide Design Resources](https://zlab.bio/guide-design-resources)
+- [New CRISPR Method Allows Scientists to Understand Impact of Subtle Mutations](https://www.cuimc.columbia.edu/news/new-crispr-method-allows-scientists-understand-impact-subtle-mutations)
+- [CRISPR Transfection Protocols Guide: How To Select The Best Method](https://www.synthego.com/guide/how-to-use-crispr/transfection-protocols)
+- [How To Use CRISPR: Your Guide to Successful Genome Engineering](https://www.synthego.com/guide/how-to-use-crispr)
+- [The Ultimate Guide To CRISPR: Mechanism, Applications, Methods & More](https://www.synthego.com/learn/crispr)
+- [Irregular Protein Expression After CRISPR Edits: Troubleshooting Tips](https://www.synthego.com/blog/crispr-irregular-protein-expression)
+- [CRISPR Editing in Primary Cells](https://www.synthego.com/crispr-primary-cells)
+
+## Imaging
+
+ - [The power of observation](https://www.gene.com/stories/the-power-of-observation)
+ - [Abcam antibody training on how to choose and use antibodies](https://www.abcam.com/content/abcam-antibody-basics-training)
+ - [How to Choose a Secondary Antibody](https://www.sigmaaldrich.com/SG/en/technical-documents/technical-article/protein-biology/western-blotting/secondary-antibody-selection)
+
+
+## scRNA-seq
+
+- [SequencEnG - An interactive learning resource for next-generation sequencing (NGS) techniques](http://education.knoweng.org/sequenceng/)
+- [Single Cell Gene Expression](https://www.10xgenomics.com/support/single-cell-gene-expression)
+- [The Essence of scRNA-Seq Clustering: Why and How to Do it Right](https://blog.bioturing.com/2022/02/15/the-essence-of-scrna-seq-clustering/)

@@ -10,11 +10,17 @@ toc-title: "Contents"
 
 These are the collections of things that I beleived useful in my daily researh work.
   
-## Biology
+## To be a biologist
 
- - [Sequence Variant Nomenclature](http://varnomen.hgvs.org/)
+- [Bioturing](https://blog.bioturing.com/)
+- [iBiology - Bringing the world's best biology to you, for free!](https://www.ibiology.org/)
+- [Sequence Variant Nomenclature](http://varnomen.hgvs.org/)
+- [Encyclopedia Britannica](https://www.britannica.com/)
+- [Labpedia.net](https://labpedia.net/)
+- [The bumbling chemist](https://thebumblingbiochemist.com/)
+- [ToxTutor](https://www.toxmsdt.com/0-toxtutor-home.html)
 
-## Data Analysis
+## Learning R
 
 - [An Introduction to Statistical Learning](https://www.statlearning.com/)
 - [R for Data Science (2e)](https://r4ds.hadley.nz/)
@@ -31,30 +37,17 @@ These are the collections of things that I beleived useful in my daily researh w
 - [Data Analysis in Genome Biology](https://girke.bioinformatics.ucr.edu/GEN242/)
 - [Data Viz with Python and R](https://datavizpyr.com/category/r/)
 
+## Bioinformatics Training
+
+- [National Cancer Institute: Bioinformatics Training & Education Program](https://bioinformatics.ccr.cancer.gov/btep/)
+- [High dimensional statistics with R Introduction to high-dimensional data](https://carpentries-incubator.github.io/high-dimensional-stats-r/aio/index.html)
+- [Bioinformatics Training at the Harvard Chan Bioinformatics Core](https://hbctraining.github.io/main/)
+
+
 ## Linux Basic
 
 - [Linux Command Cheat Sheet](https://www.guru99.com/linux-commands-cheat-sheet.html)
 - [How To Use Linux Screen](https://linuxize.com/post/how-to-use-linux-screen/)
-
-## Sequencing
-
-- [SequencEnG - An interactive learning resource for next-generation sequencing (NGS) techniques](http://education.knoweng.org/sequenceng/)
-
-## CRISPR-Cas
-
-- [Guide Design Resources](https://zlab.bio/guide-design-resources)
-- [New CRISPR Method Allows Scientists to Understand Impact of Subtle Mutations](https://www.cuimc.columbia.edu/news/new-crispr-method-allows-scientists-understand-impact-subtle-mutations)
-- [CRISPR Transfection Protocols Guide: How To Select The Best Method](https://www.synthego.com/guide/how-to-use-crispr/transfection-protocols)
-- [How To Use CRISPR: Your Guide to Successful Genome Engineering](https://www.synthego.com/guide/how-to-use-crispr)
-- [The Ultimate Guide To CRISPR: Mechanism, Applications, Methods & More](https://www.synthego.com/learn/crispr)
-- [Irregular Protein Expression After CRISPR Edits: Troubleshooting Tips](https://www.synthego.com/blog/crispr-irregular-protein-expression)
-- [CRISPR Editing in Primary Cells](https://www.synthego.com/crispr-primary-cells)
-
-## Imaging
-
- - [The power of observation](https://www.gene.com/stories/the-power-of-observation)
- - [Abcam antibody training on how to choose and use antibodies](https://www.abcam.com/content/abcam-antibody-basics-training)
- - [How to Choose a Secondary Antibody](https://www.sigmaaldrich.com/SG/en/technical-documents/technical-article/protein-biology/western-blotting/secondary-antibody-selection)
 
 
 ## Research Proposal
@@ -76,18 +69,11 @@ These are the collections of things that I beleived useful in my daily researh w
 - <https://www.jax.org>
 - <https://sizunjianglab.com>
 
-## To be a biologist
-
-- [iBiology - Bringing the world's best biology to you, for free!](https://www.ibiology.org/)
-- [Encyclopedia Britannica](https://www.britannica.com/)
-- [Labpedia.net](https://labpedia.net/)
-- [The bumbling chemist](https://thebumblingbiochemist.com/)
-- [ToxTutor](https://www.toxmsdt.com/0-toxtutor-home.html)
-
 ## Useful Tools
 
 - [DIY.transcriptomics](https://diytranscriptomics.com/lab/)
 - [ProteinPaint](https://proteinpaint.stjude.org/)
+- [Hiplot](https://hiplot.cn/)
 - [Free Icons and Stickers](https://www.flaticon.com/)
 - [Bootstrap Icons](https://icons.getbootstrap.com/)
 - [Blood PBMCs](https://www.miltenyibiotec.com/US-en/resources/macs-handbook/human-cells-and-organs/human-cell-sources/blood-human.html)
@@ -95,6 +81,7 @@ These are the collections of things that I beleived useful in my daily researh w
 ## Nice Blogs
 
 - <https://www.andrewheiss.com/blog/>
+- <https://www.andreashandel.com/>
 - <https://renkun.me/>
 - <https://morphoscape.wordpress.com/category/tech/>
 - <https://albert-rapp.de/>

@@ -544,5 +544,11 @@
   },
   "wiki/2022/05/02/index.qmd": {
     "index.html": "63978e8c"
+  },
+  "ebooks/index.qmd": {
+    "index.html": "bdbf1c7e"
+  },
+  "techniques/index.qmd": {
+    "index.html": "c3f94974"
   }
 }
