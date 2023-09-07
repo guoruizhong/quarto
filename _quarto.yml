@@ -15,7 +15,7 @@ project:
     - "pgp_ath.asc.txt"
 
 website:
-  title: "F"
+  title: ""
   image: "/files/profiles/z_512x512.png"
   description: ""
   search: 
@@ -31,10 +31,10 @@ website:
         file: "about.qmd"
       - text: "Blog"
         file: "blog/index.qmd"
-      - text: "Techniques"
-        file: "techniques/index.qmd"
       - text: "Wiki"
         file: "wiki/index.qmd"
+      - text: "BioTech"
+        file: "techniques/index.qmd"
       - text: "eBooks"
         file: "ebooks/index.qmd"
       # - text: "Now"

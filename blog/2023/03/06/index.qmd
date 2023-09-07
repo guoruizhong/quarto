@@ -2,8 +2,8 @@
 title: "ggplot2 with p-value and significant level"
 date: 2023-03-06
 categories:
-  - barplot
-  - R
+  - p-value
+  - r
 image: plot.png
 ---
 ```{r setup, include=FALSE}

@@ -2,8 +2,7 @@
 title: "Equalizing Bar Widths"
 date: 2023-03-06
 categories:
-  - barplot
-  - R
+  - r
 image: barplot.png
 ---
 

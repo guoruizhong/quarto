@@ -3,8 +3,7 @@ title: "Volano plot with ggvolcano"
 date: 2022-07-01
 image: ggvolcano.png
 categories:
-  - ggvolcano
-  - R
+  - r
 # draft: true
 ---
 

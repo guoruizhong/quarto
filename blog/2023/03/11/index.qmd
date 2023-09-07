@@ -2,8 +2,7 @@
 title: "Barplot with negative and positive value"
 date: 2023-03-11
 categories:
-  - barplot
-  - R
+  - r
 image: plot.png
 ---
 

@@ -3,8 +3,7 @@ title: "Normalize and Standardize Data in R "
 date: 2023-04-05
 date-modified: 2023-04-05
 categories:
-  - R
-  - ComplexHeatmap
+  - r
 image: scale.png
 ---
 

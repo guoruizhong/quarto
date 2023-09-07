@@ -1,10 +1,10 @@
 ---
-title: "Setup VSCode for using R"
+title: "Coding R in VSCode"
 date: 2022-12-20
 image: vscode.jpg
 categories:
-  - R
-  - VSCode
+  - r
+  - vscode
 ---
 
 

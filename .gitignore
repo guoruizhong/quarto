@@ -6,7 +6,7 @@
 
 # Quarto stuff
 /.quarto/
-_site/
+/_site/
 **/*_cache/*
 
 # Miscellaneous stuff

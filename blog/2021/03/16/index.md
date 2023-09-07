@@ -3,8 +3,7 @@ title: "Crop image and add scale bar with ImageJ/Fiji"
 date: 2021-03-16
 image: f4.png
 categories:
-- Fiji
-- ImageJ
+- fiji
 ---
 
 ## Crop images to a given physical size

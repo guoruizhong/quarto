@@ -2,8 +2,8 @@
 title: "ComplexHeatmap"
 date: 2023-04-3
 categories:
-  - R
-  - ComplexHeatmap
+  - r
+  - complexheatmap
 # image: plot.png
 draft: true
 ---

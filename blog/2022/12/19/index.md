@@ -4,7 +4,7 @@ date: 2022-12-19
 description: ""
 image: linux.jpg
 categories:
-  - Linux
+  - linux
 ---
 
 After working at Bioinformatics Institute for 3 years, I gradullly relizaed that it’s essential to learn Linux as:

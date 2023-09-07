@@ -3,8 +3,8 @@ title: "R build-in shapes for ggplot2"
 date: 2023-05-28
 # date-modified: 2023-04-05
 categories:
-  - ggplot2
-  - R
+  - r
+  - shapes
 image: shape.png
 ---
 

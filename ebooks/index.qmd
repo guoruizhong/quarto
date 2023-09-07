@@ -23,10 +23,18 @@ toc-title: "Contents"
 
 
 
-<!-- ::: {layout-ncol=3 height="30%"} -->
-[![r4ds](r4ds.jpg)](https://r4ds.hadley.nz/)
 
-[![rgc](rgc.jpg)](https://r-graphics.org/)
+::: {layout-ncol=2}
 
-[![ggplot2](ggplot2.jpg)](https://ggplot2-book.org/)
-<!-- ::: -->
+[![](r4ds.jpg){height=100}](https://r4ds.hadley.nz/)
+
+[![](rgc.jpg){height=100}](https://r-graphics.org/)
+
+test
+:::
+
+
+
+[![](ggplot2.jpg)](https://ggplot2-book.org/)
+[![](ggplot2.jpg)](https://ggplot2-book.org/)
+

@@ -3,7 +3,7 @@ title: "Nomenclature for the description of mutations and variations"
 date: 2022-10-01
 image: Mutation.jpg
 categories:
-  - Nomenclature 
+  - nomenclature 
 ---
 
 ## Indicate the reference sequence

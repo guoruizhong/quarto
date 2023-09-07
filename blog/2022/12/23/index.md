@@ -2,7 +2,7 @@
 title: "VSCode Keyboard Shortcut Cheat Sheet"
 date: 2022-12-23
 categories:
-- VSCode
+  - vscode
 image: keyboard.jpg
 tbl-colwidths: [40, 30, 30]
 ---

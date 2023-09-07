@@ -3,8 +3,8 @@ title: "Regular expression with R"
 date: 2023-06-8
 # date-modified: 2023-04-05
 categories:
-  - Regex
-  - R
+  - regex
+  - r
 image: reg.png
 ---
 

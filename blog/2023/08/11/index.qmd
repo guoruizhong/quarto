@@ -3,8 +3,8 @@ title: "Commonly used Vim commands "
 date: 2023-08-11
 date-modified: last-modified
 categories:
-  - Vim
-  - Linux
+  - vim
+  - linux
 image: vim.jpg
 description: a list of essential Vim commands that could be used every day
 ---

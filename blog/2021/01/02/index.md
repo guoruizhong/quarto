@@ -4,8 +4,8 @@ date: 2021-01-02
 description: "Commonly used greek letters when using markdown" 
 image: greek_letters.png
 categories:
-- greek letters
-- Markdown
+- letters
+- markdown
 ---
 
 1. inline-equation: $xyz$

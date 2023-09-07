@@ -3,7 +3,7 @@ title: "PCA Graph Customization"
 date: 2023-05-18
 # date-modified: 2023-04-05
 categories:
-  - PCA
+  - pca
 image: pca_biplot.png
 ---
 ```{r setup, include=FALSE}

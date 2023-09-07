@@ -3,7 +3,8 @@ title: "Using Tmux for Persistent Terminal in VSCode Remote Session"
 date: 2023-04-10
 # date-modified: 2023-04-05
 categories:
-  - Linux
+  - linux
+  - tmux
 image: tmux_introduction.png
 ---
 The solution is to set the default terminal provider on the remote settings to be tmux, and have it attach to either an existing session named main, or create a new one if it doesn't exist. 

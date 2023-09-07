@@ -1,13 +1,16 @@
 ---
-title: "Using {renv} to manage R environment for reproducible coding"
+title: "Using renv to manage R environment for reproducible coding"
 date: 2023-08-08
 # date-modified: 2023-04-05
 categories:
-  - R
+  - r
+  - renv
 image: renv.png
 ---
 
 R works by defaultly by installing packages to a central library and shares them between the projects. It sounds like a good and time-saving feature. After all, you don’t need to install the same package in every project. But that’s where the problems arise. You might have a newer version of some package than your coworkers – resulting in a deprecated or not-implemented functionality.
+
+![](renv.png)
 
 `renv` create separate, reproducible environment that you and your coworkers can use, hassle free
 

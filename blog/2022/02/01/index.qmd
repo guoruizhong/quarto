@@ -4,11 +4,8 @@ date: 2022-02-01
 description: ""
 image: barplot.png
 categories:
-  - ggsignif
-  - ggh4x
-  - ggplot2
-  - tidyverse
-  - R
+  - r
+  - p-value
 
 ---
 

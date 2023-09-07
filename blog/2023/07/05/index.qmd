@@ -3,9 +3,8 @@ title: "Learning [ropls] for multivariate analysis and feature selection of omic
 date: 2023-07-05
 # date-modified: 2023-04-05
 categories:
-  - PCA
-  - PLS-DA
-  - R
+  - pca
+  - plsda
 image: plsda.png
 ---
 

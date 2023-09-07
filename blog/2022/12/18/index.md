@@ -4,8 +4,8 @@ date: 2022-12-18
 description: ""
 image: index.png
 categories:
-  - ggplot2 theme
-  - R
+  - theme
+  - r
 ---
 
 Modify components of a theme: <https://ggplot2.tidyverse.org/reference/theme>

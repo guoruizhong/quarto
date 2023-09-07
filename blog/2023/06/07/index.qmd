@@ -3,8 +3,8 @@ title: "PCA, PLS-DA and OPLS-DA analysis using [ropls]"
 date: 2023-05-28
 # date-modified: 2023-04-05
 categories:
-  - ropls
-  - R
+  - plsda
+  - r
 # image: pca_biplot.png
 ---
 

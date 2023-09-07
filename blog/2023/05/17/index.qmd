@@ -3,7 +3,7 @@ title: "Perform Principal Component Analysis"
 date: 2023-05-17
 # date-modified: 2023-04-05
 categories:
-  - PCA
+  - pca
 image: p.png
 ---
 ```{r setup, include=FALSE}

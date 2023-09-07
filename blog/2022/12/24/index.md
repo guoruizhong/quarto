@@ -1,11 +1,11 @@
 ---
-title: "Pipeline for Working with remote server"
+title: "Setup SSH to work in remote server"
 date: 2022-12-24
 image: macfuse.png
 categories:
-  - R
-  - Linux
-  - VSCode
+  - r
+  - linux
+  - ssh
 ---
 
 ## Setup SSH Remote Keys
