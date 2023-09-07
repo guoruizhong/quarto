@@ -32,13 +32,15 @@ How to compute and add p-values to basic ggplots using the rstatix and the ggpub
 
 ```{r, load-libraries-data, warning=FALSE, message=FALSE}
 #| warning: false
-library(tidyverse)
-library(ggsci)
-library(ggprism)
-library(rstatix)
-library(ggpubr)
-library(gapminder)
-library(ggpmisc)
+pacman::p_load(
+    tidyverse,
+    ggsci,
+    ggprism,
+    rstatix,
+    ggpubr,
+    gapminder,
+    ggpmisc
+)
 ```
 
 ## Add t-test annotation in specific subgroup 

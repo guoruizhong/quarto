@@ -13,16 +13,18 @@ knitr::opts_chunk$set(fig.width = 6, fig.height = 3.8,
 Make a nice scatter plot 
 
 ```{r, load-libraries-data, warning=FALSE, message=FALSE}
-library(tidyverse)
-library(ggpubr)
-library(ggprism)
-library(patchwork)
-library(ggsci)
-library(gapminder)
-library(here)
-library(ggthemes)
-library(countrycode)
-library(mapproj)
+pacman::p_load(
+    tidyverse,
+    ggpubr,
+    ggprism,
+    patchwork,
+    ggsci,
+    gapminder,
+    here,
+    ggthemes,
+    countrycode,
+    mapproj
+)
 ```
 
 ```{r}

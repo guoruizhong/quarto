@@ -16,9 +16,7 @@ knitr::opts_chunk$set(fig.width = 6, fig.height = 3.8,
 ```{r}
 #| warning: false
 # library(plater)
-library(platetools)
-library(ggplot2)
-library(viridis)
+pacman::p_load(platetools, ggplot2, viridis)
 ```
 
 ```{r}

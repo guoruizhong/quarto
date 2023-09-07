@@ -28,7 +28,7 @@ The solution is to set the default terminal provider on the remote settings to b
 
 ## Useful Aliases
 
-```{bash}
+```bash
 alias t="tmux"
 alias ta="t a -t"
 alias tls="t ls"

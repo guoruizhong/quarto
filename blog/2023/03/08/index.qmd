@@ -16,13 +16,15 @@ knitr::opts_chunk$set(
 Visualizing changes in distributions over time or space nicely usning ggrigges.
 
 ```{r, load-libraries-data, warning=FALSE, message=FALSE}
-library(tidyverse)
-library(ggsci)
-library(ggridges)
-library(ggtext)
-library(ggh4x)
-library(gapminder)
-library(here)
+pacman::p_load(
+    tidyverse,
+    ggsci,
+    ggridges,
+    ggtext,
+    ggh4x,
+    gapminder,
+    here
+)
 ```
 
 ```{r}
