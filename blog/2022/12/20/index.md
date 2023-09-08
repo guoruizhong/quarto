@@ -3,7 +3,6 @@ title: "Coding R in VSCode"
 date: 2022-12-20
 image: vscode.jpg
 categories:
-  - r
   - vscode
 ---
 

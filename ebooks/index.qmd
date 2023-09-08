@@ -8,33 +8,14 @@ toc-location: left
 toc-title: "Contents"
 ---
 
-## R
 
-
+- [R for Data science](https://r4ds.hadley.nz/)
 - [R Graphics Cookbook, 2nd edition](https://r-graphics.org/)
+- [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/)
 - [An Introduction to Statistical Learning](https://www.statlearning.com/)
 - [Functional Programming](https://dcl-prog.stanford.edu/)
-- [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/)
 - [The Epidemiologist R Handbook](https://epirhandbook.com/en/index.html)
 - [Data Analysis and Prediction Algorithms with R](http://rafalab.dfci.harvard.edu/dsbook/)
-
 - [Modern Statistics for Modern Biology](https://web.stanford.edu/class/bios221/book/)
 - [Data Analysis in Genome Biology](https://girke.bioinformatics.ucr.edu/GEN242/)
-
-
-
-
-::: {layout-ncol=2}
-
-[![](r4ds.jpg){height=100}](https://r4ds.hadley.nz/)
-
-[![](rgc.jpg){height=100}](https://r-graphics.org/)
-
-test
-:::
-
-
-
-[![](ggplot2.jpg)](https://ggplot2-book.org/)
-[![](ggplot2.jpg)](https://ggplot2-book.org/)
 

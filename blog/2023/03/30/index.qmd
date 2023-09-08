@@ -2,7 +2,6 @@
 title: "Add p-values onto basic barplot or boxplot"
 date: 2023-03-30
 categories:
-  - r
   - p-value
 image: plot.png
 ---

@@ -20,14 +20,7 @@ chmod +x ./Miniforge3-Linux-x86_64.sh
 
 ### Install to /home/usr/opt/miniforge3
 bash ./Miniforge3-Linux-x86_64.sh
-
-### Not auto activate base environment
-conda config --set auto_activate_base false
-
-### Install mamba
-conda install -c conda-forge mamba
 ```
-![](conda.jpg)
 
 ## Configuring conda
 
@@ -36,6 +29,8 @@ conda install -c conda-forge mamba
 conda info #to view all the details about your conda set-up
 conda info --envs #to view all the environments available to you (note, since you just installed miniconda, you'll only have a 'base' environment available)
 
+### Install mamba
+conda install -c conda-forge mamba
 ### Access to various channels where many pre-packaged bioinformatics programs can be downloaded with all their dependencies
 conda config --add channels defaults
 conda config --add channels bioconda
@@ -69,10 +64,18 @@ conda search myenv #search your channels for a specific package called 'myenv'
 conda update --all #update conda
 nano $HOME/.condarc #view your list of channels
 ```
+![](conda.jpg)
 
 ## Conda tips
+
 We automatically get a 'base' environment after installing conda and we can find it when we open the terminal that you are placed in the base env by default.  
-- Avoid installing lots of software in base or, eventually, you will run into conflicts.
+
+- Not auto activate base environment
+```bash
+conda config --set auto_activate_base false
+
+```
+- Avoid installing lots of software in base or, eventually, we will run into conflicts.
 
 ## Reference
 

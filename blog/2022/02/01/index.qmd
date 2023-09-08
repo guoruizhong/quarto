@@ -4,7 +4,7 @@ date: 2022-02-01
 description: ""
 image: barplot.png
 categories:
-  - r
+  - barplot
   - p-value
 
 ---

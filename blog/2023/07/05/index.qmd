@@ -5,6 +5,7 @@ date: 2023-07-05
 categories:
   - pca
   - plsda
+  - supervised
 image: plsda.png
 ---
 

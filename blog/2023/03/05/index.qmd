@@ -2,7 +2,7 @@
 title: "Scatter plot with ggplot2"
 date: 2023-03-05
 categories:
-  - r
+  - scatterplot
 image: plot.png
 ---
 ```{r setup, include=FALSE}

@@ -4,7 +4,6 @@ date: 2022-01-22
 image: colorblind_palette.jpg
 description: "Use friendly colors in a graph with ggplot2"
 categories:
-  - r
   - colors
 ---
 

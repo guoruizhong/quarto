@@ -1,7 +1,7 @@
 {
-  "hash": "789fa66bf1596ab5c3712e6113a8ee72",
+  "hash": "075f5017a1990ac8722b22fd2a64ab01",
   "result": {
-    "markdown": "---\ntitle: \"PCA, PLS-DA and OPLS-DA analysis using [ropls]\"\ndate: 2023-05-28\n# date-modified: 2023-04-05\ncategories:\n  - plsda\n  - r\n# image: pca_biplot.png\n---\n\n\n",
+    "markdown": "---\ntitle: \"PCA, PLS-DA and OPLS-DA analysis using [ropls]\"\ndate: 2023-05-28\n# date-modified: 2023-04-05\ncategories:\n  - plsda\n  - supervised\n# image: pca_biplot.png\n---\n\n\n",
     "supporting": [
       "index_files"
     ],

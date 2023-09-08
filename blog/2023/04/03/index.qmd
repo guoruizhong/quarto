@@ -2,8 +2,9 @@
 title: "ComplexHeatmap"
 date: 2023-04-3
 categories:
-  - r
   - complexheatmap
+  - unsupervised
+  - multivariate
 # image: plot.png
 draft: true
 ---

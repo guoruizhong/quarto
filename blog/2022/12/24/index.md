@@ -3,7 +3,6 @@ title: "Setup SSH to work in remote server"
 date: 2022-12-24
 image: macfuse.png
 categories:
-  - r
   - linux
   - ssh
 ---

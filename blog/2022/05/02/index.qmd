@@ -4,7 +4,7 @@ date: 2022-05-02
 description: ""
 image: truncated.png
 categories:
-  - r
+  - barplot
 ---
 
 

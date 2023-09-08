@@ -28,7 +28,7 @@ website:
     pinned: true
     right:
       - text: "About"
-        file: "about.qmd"
+        file: "index.qmd"
       - text: "Blog"
         file: "blog/index.qmd"
       - text: "Wiki"

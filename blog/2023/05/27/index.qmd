@@ -3,10 +3,11 @@ title: "Learning PCA, tSNE and UMAP from simple example"
 date: 2023-05-27
 # date-modified: 2023-04-05
 categories:
-  - r
   - pca
   - tsne
   - umap
+  - unsupervised
+  - dimensional reduction
 image: pca.png
 ---
 
@@ -187,6 +188,7 @@ tsne_df |>
  - [How To Make tSNE plot in R](https://datavizpyr.com/how-to-make-tsne-plot-in-r/)
  - [How to make UMAP plot in R](https://datavizpyr.com/how-to-make-umap-plot-in-r/)
  - [How To Annotate a Plot with Circle in R](https://datavizpyr.com/annotate-a-plot-with-circle-ggplot2/)
+ 
  
 
  
