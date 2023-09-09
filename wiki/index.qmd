@@ -68,6 +68,8 @@ These are the collections of things that I beleived useful in my daily researh w
 - <https://www.ciccialab.com/>
 - <https://www.jax.org>
 - <https://sizunjianglab.com>
+- <http://rafalab.dfci.harvard.edu/>
+- <https://hostmicrobe.org/>
 
 ## Useful Tools
 

@@ -20,6 +20,9 @@ chmod +x ./Miniforge3-Linux-x86_64.sh
 
 ### Install to /home/usr/opt/miniforge3
 bash ./Miniforge3-Linux-x86_64.sh
+
+### Running a newer MacOS that uses the zsh shell.
+conda init zsh 
 ```
 
 ## Configuring conda
@@ -28,6 +31,9 @@ bash ./Miniforge3-Linux-x86_64.sh
 ### Make sure conda works
 conda info #to view all the details about your conda set-up
 conda info --envs #to view all the environments available to you (note, since you just installed miniconda, you'll only have a 'base' environment available)
+
+### initialize your shell
+
 
 ### Install mamba
 conda install -c conda-forge mamba
@@ -79,4 +85,4 @@ conda config --set auto_activate_base false
 
 ## Reference
 
-- [](https://protocols.hostmicrobe.org/conda)
+- [Conda for bioinformatics](https://protocols.hostmicrobe.org/conda)
