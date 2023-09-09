@@ -556,5 +556,8 @@
   },
   "Books/index.qmd": {
     "index.html": "8eafeb39"
+  },
+  "books/index.qmd": {
+    "index.html": "15ad3efd"
   }
 }

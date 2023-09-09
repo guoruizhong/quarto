@@ -203,18 +203,32 @@
     "text": "Nice Blogs\n\nhttps://www.andrewheiss.com/blog/\nhttps://www.andreashandel.com/\nhttps://renkun.me/\nhttps://morphoscape.wordpress.com/category/tech/\nhttps://albert-rapp.de/"
   },
   {
-    "objectID": "now/index.html",
-    "href": "now/index.html",
-    "title": "Now",
+    "objectID": "techniques/index.html",
+    "href": "techniques/index.html",
+    "title": "Techniques",
     "section": "",
-    "text": "Living in Singapore and working as an research fellow in the Complex Phenotype Analysis Group at the Bioinformatics institute (BII), A*STAR.\n\nEarning money to marry Miss Zhou Haiyan (She is doing her Ph.D in University of Hong Kong).\nLearning High-throughput phenotypic profiling from mentor Dr. Loo Lit-Hsin.\nLearning to write papers, grants and apply grant for independent research.\nImproving R coding skills."
+    "text": "Guide Design Resources\nNew CRISPR Method Allows Scientists to Understand Impact of Subtle Mutations\nCRISPR Transfection Protocols Guide: How To Select The Best Method\nHow To Use CRISPR: Your Guide to Successful Genome Engineering\nThe Ultimate Guide To CRISPR: Mechanism, Applications, Methods & More\nIrregular Protein Expression After CRISPR Edits: Troubleshooting Tips\nCRISPR Editing in Primary Cells"
   },
   {
-    "objectID": "now/index.html#section",
-    "href": "now/index.html#section",
-    "title": "Now",
+    "objectID": "techniques/index.html#crispr-gene-editing",
+    "href": "techniques/index.html#crispr-gene-editing",
+    "title": "Techniques",
     "section": "",
-    "text": "Living in Singapore and working as an research fellow in the Complex Phenotype Analysis Group at the Bioinformatics institute (BII), A*STAR.\n\nEarning money to marry Miss Zhou Haiyan (She is doing her Ph.D in University of Hong Kong).\nLearning High-throughput phenotypic profiling from mentor Dr. Loo Lit-Hsin.\nLearning to write papers, grants and apply grant for independent research.\nImproving R coding skills."
+    "text": "Guide Design Resources\nNew CRISPR Method Allows Scientists to Understand Impact of Subtle Mutations\nCRISPR Transfection Protocols Guide: How To Select The Best Method\nHow To Use CRISPR: Your Guide to Successful Genome Engineering\nThe Ultimate Guide To CRISPR: Mechanism, Applications, Methods & More\nIrregular Protein Expression After CRISPR Edits: Troubleshooting Tips\nCRISPR Editing in Primary Cells"
+  },
+  {
+    "objectID": "techniques/index.html#high-throughput-imaging",
+    "href": "techniques/index.html#high-throughput-imaging",
+    "title": "Techniques",
+    "section": "High throughput Imaging",
+    "text": "High throughput Imaging\n\nThe power of observation\nAbcam antibody training on how to choose and use antibodies\nHow to Choose a Secondary Antibody"
+  },
+  {
+    "objectID": "techniques/index.html#high-throughput-sequencing",
+    "href": "techniques/index.html#high-throughput-sequencing",
+    "title": "Techniques",
+    "section": "High-throughput Sequencing",
+    "text": "High-throughput Sequencing\n\n\n\nscRNAseq\n\n\n\nSingle-cell RNA-seq: raw sequencing data to counts\n\n\nsource\n\nFile formats produced by sequencing\nRNA-seqlopedia - Created by the Univ. of Orgeon, this is a great resource for understanding the entire RNAseq workflow.\nSequencEnG - An interactive learning resource for next-generation sequencing (NGS) techniques\nNext-Generation Sequencing Analysis - provide hands on experience with analyzing next generation sequencing. Standard pipelines are presented that provide the user with and step-by-step guide to using state of the art bioinformatics tools\nSingle Cell Gene Expression\nThe Essence of scRNA-Seq Clustering: Why and How to Do it Right"
   },
   {
     "objectID": "blog/index.html",
@@ -630,41 +644,6 @@
     "text": "Friendly colors\n\n## Use color blind-friendly palette:\ncbp1 &lt;- c(\n  \"#999999\", \n  \"#E69F00\", \n  \"#56B4E9\", \n  \"#009E73\",\n  \"#F0E442\", \n  \"#0072B2\", \n  \"#D55E00\", \n  \"#CC79A7\"\n)\nbarplot(1:8, col = cbp1)\n\n\n\n\n\n\n\n\n### friendly colors\ncbPalette &lt;- c(\n    \"#000000\", \n    \"#999999\", \n    \"#E69F00\", \n    \"#56B4E9\", \n    \"#009E73\", \n    \"#F0E442\", \n    \"#0072B2\", \n    \"#D55E00\", \n    \"#CC79A7\"\n)\nbarplot(1:8, col = cbPalette)\n\n\n\n\n\n\n\n\nlibrary(ggplot2)\n\ntheme_set(\n    theme(\n        text = element_text(size = 10, family = \"Arial\"),\n        panel.background = element_rect(fill = NA, color = NA),\n        axis.title = element_text(size = 10, color = \"black\"),\n        axis.text = element_text(size = 10, color = \"black\"),\n        # axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1),\n        axis.ticks.length.x = unit(0.3, \"lines\"),\n        axis.line = element_line(colour = \"Black\"),\n        axis.ticks = element_line(colour = \"black\", linewidth = 0.6),\n        plot.title = element_text(face = \"bold\", hjust = 0.5, size = 10)\n    )\n)\n\nfriendly_colors &lt;- c(\n  \"#4C72B0\", \n  \"#55A868\", \n  \"#C44E52\", \n  \"#8172B2\", \n  \"#CCB974\", \n  \"#64B5CD\"\n)\n\n# Create example data frame\ndf &lt;- data.frame(\n    group = c(\"A\", \"B\", \"C\", \"D\", \"E\", \"F\"),\n    value = c(10, 20, 15, 25, 30, 35)\n)\n\n# Create plot with friendly colors\nggplot(df, aes(x = group, y = value, fill = group)) +\n    geom_bar(stat = \"identity\") +\n    scale_fill_manual(values = friendly_colors)"
   },
   {
-    "objectID": "Books/index.html",
-    "href": "Books/index.html",
-    "title": "eBooks",
-    "section": "",
-    "text": "R for Data science\nR Graphics Cookbook, 2nd edition\nggplot2: Elegant Graphics for Data Analysis\nAn Introduction to Statistical Learning\nFunctional Programming\nThe Epidemiologist R Handbook\nData Analysis and Prediction Algorithms with R\nModern Statistics for Modern Biology\nData Analysis in Genome Biology"
-  },
-  {
-    "objectID": "biotech/index.html",
-    "href": "biotech/index.html",
-    "title": "Techniques",
-    "section": "",
-    "text": "Guide Design Resources\nNew CRISPR Method Allows Scientists to Understand Impact of Subtle Mutations\nCRISPR Transfection Protocols Guide: How To Select The Best Method\nHow To Use CRISPR: Your Guide to Successful Genome Engineering\nThe Ultimate Guide To CRISPR: Mechanism, Applications, Methods & More\nIrregular Protein Expression After CRISPR Edits: Troubleshooting Tips\nCRISPR Editing in Primary Cells"
-  },
-  {
-    "objectID": "biotech/index.html#crispr-gene-editing",
-    "href": "biotech/index.html#crispr-gene-editing",
-    "title": "Techniques",
-    "section": "",
-    "text": "Guide Design Resources\nNew CRISPR Method Allows Scientists to Understand Impact of Subtle Mutations\nCRISPR Transfection Protocols Guide: How To Select The Best Method\nHow To Use CRISPR: Your Guide to Successful Genome Engineering\nThe Ultimate Guide To CRISPR: Mechanism, Applications, Methods & More\nIrregular Protein Expression After CRISPR Edits: Troubleshooting Tips\nCRISPR Editing in Primary Cells"
-  },
-  {
-    "objectID": "biotech/index.html#high-throughput-imaging",
-    "href": "biotech/index.html#high-throughput-imaging",
-    "title": "Techniques",
-    "section": "High throughput Imaging",
-    "text": "High throughput Imaging\n\nThe power of observation\nAbcam antibody training on how to choose and use antibodies\nHow to Choose a Secondary Antibody"
-  },
-  {
-    "objectID": "biotech/index.html#high-throughput-sequencing",
-    "href": "biotech/index.html#high-throughput-sequencing",
-    "title": "Techniques",
-    "section": "High-throughput Sequencing",
-    "text": "High-throughput Sequencing\n\n\n\nscRNAseq\n\n\n\nSingle-cell RNA-seq: raw sequencing data to counts\n\n\nsource\n\nFile formats produced by sequencing\nRNA-seqlopedia - Created by the Univ. of Orgeon, this is a great resource for understanding the entire RNAseq workflow.\nSequencEnG - An interactive learning resource for next-generation sequencing (NGS) techniques\nNext-Generation Sequencing Analysis - provide hands on experience with analyzing next generation sequencing. Standard pipelines are presented that provide the user with and step-by-step guide to using state of the art bioinformatics tools\nSingle Cell Gene Expression\nThe Essence of scRNA-Seq Clustering: Why and How to Do it Right"
-  },
-  {
     "objectID": "blog/2022/02/01/index.html",
     "href": "blog/2022/02/01/index.html",
     "title": "Add errorbar and p-value on barplot with ggsignif",
@@ -1013,6 +992,27 @@
     "title": "Commonly used Vim commands",
     "section": "Reference",
     "text": "Reference\n\nVim cheatsheet"
+  },
+  {
+    "objectID": "books/index.html",
+    "href": "books/index.html",
+    "title": "eBooks",
+    "section": "",
+    "text": "R for Data science\nR Graphics Cookbook, 2nd edition\nggplot2: Elegant Graphics for Data Analysis\nAn Introduction to Statistical Learning\nFunctional Programming\nThe Epidemiologist R Handbook\nData Analysis and Prediction Algorithms with R\nModern Statistics for Modern Biology\nData Analysis in Genome Biology"
+  },
+  {
+    "objectID": "now/index.html",
+    "href": "now/index.html",
+    "title": "Now",
+    "section": "",
+    "text": "Living in Singapore and working as an research fellow in the Complex Phenotype Analysis Group at the Bioinformatics institute (BII), A*STAR.\n\nEarning money to marry Miss Zhou Haiyan (She is doing her Ph.D in University of Hong Kong).\nLearning High-throughput phenotypic profiling from mentor Dr. Loo Lit-Hsin.\nLearning to write papers, grants and apply grant for independent research.\nImproving R coding skills."
+  },
+  {
+    "objectID": "now/index.html#section",
+    "href": "now/index.html#section",
+    "title": "Now",
+    "section": "",
+    "text": "Living in Singapore and working as an research fellow in the Complex Phenotype Analysis Group at the Bioinformatics institute (BII), A*STAR.\n\nEarning money to marry Miss Zhou Haiyan (She is doing her Ph.D in University of Hong Kong).\nLearning High-throughput phenotypic profiling from mentor Dr. Loo Lit-Hsin.\nLearning to write papers, grants and apply grant for independent research.\nImproving R coding skills."
   },
   {
     "objectID": "terms/index.html",
