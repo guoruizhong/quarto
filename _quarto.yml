@@ -33,10 +33,10 @@ website:
         file: "blog/index.qmd"
       - text: "Wiki"
         file: "wiki/index.qmd"
-      - text: "BioTech"
+      - text: "Techniques"
         file: "biotech/index.qmd"
-      - text: "eBooks"
-        file: "ebooks/index.qmd"
+      - text: "Books"
+        file: "books/index.qmd"
       # - text: "Now"
       #   file: "now/index.qmd"
       # - icon: rss

@@ -8,7 +8,7 @@ toc-location: left
 toc-title: "Contents"
 ---
 
-## CRISPR
+## CRISPR gene editing
 
 - [Guide Design Resources](https://zlab.bio/guide-design-resources)
 - [New CRISPR Method Allows Scientists to Understand Impact of Subtle Mutations](https://www.cuimc.columbia.edu/news/new-crispr-method-allows-scientists-understand-impact-subtle-mutations)
@@ -18,7 +18,7 @@ toc-title: "Contents"
 - [Irregular Protein Expression After CRISPR Edits: Troubleshooting Tips](https://www.synthego.com/blog/crispr-irregular-protein-expression)
 - [CRISPR Editing in Primary Cells](https://www.synthego.com/crispr-primary-cells)
 
-## Imaging
+## High throughput Imaging
 
  - [The power of observation](https://www.gene.com/stories/the-power-of-observation)
  - [Abcam antibody training on how to choose and use antibodies](https://www.abcam.com/content/abcam-antibody-basics-training)
@@ -27,7 +27,7 @@ toc-title: "Contents"
 
 ## High-throughput Sequencing
 
-[scRNAseq](scRNAseq.png)
+![scRNAseq](scRNAseq.png)
 
 - [Single-cell RNA-seq: raw sequencing data to counts](https://hbctraining.github.io/In-depth-NGS-Data-Analysis-Course/sessionIV/lessons/SC_pre-QC.html)
 
