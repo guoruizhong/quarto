@@ -599,7 +599,7 @@
     "href": "biotech/index.html#high-throughput-sequencing",
     "title": "Techniques",
     "section": "High-throughput Sequencing",
-    "text": "High-throughput Sequencing\n\nFile formats produced by sequencing\nRNA-seqlopedia - Created by the Univ. of Orgeon, this is a great resource for understanding the entire RNAseq workflow.\nSequencEnG - An interactive learning resource for next-generation sequencing (NGS) techniques\nNext-Generation Sequencing Analysis - provide hands on experience with analyzing next generation sequencing. Standard pipelines are presented that provide the user with and step-by-step guide to using state of the art bioinformatics tools\nSingle Cell Gene Expression\nThe Essence of scRNA-Seq Clustering: Why and How to Do it Right"
+    "text": "High-throughput Sequencing\nscRNAseq\n\nSingle-cell RNA-seq: raw sequencing data to counts\n\n\nsource\n\nFile formats produced by sequencing\nRNA-seqlopedia - Created by the Univ. of Orgeon, this is a great resource for understanding the entire RNAseq workflow.\nSequencEnG - An interactive learning resource for next-generation sequencing (NGS) techniques\nNext-Generation Sequencing Analysis - provide hands on experience with analyzing next generation sequencing. Standard pipelines are presented that provide the user with and step-by-step guide to using state of the art bioinformatics tools\nSingle Cell Gene Expression\nThe Essence of scRNA-Seq Clustering: Why and How to Do it Right"
   },
   {
     "objectID": "blog/2022/01/22/index.html#gray-colors",
