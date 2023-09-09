@@ -1,10 +1,12 @@
 ---
 title: "Learn Linux basic for computing"
 date: 2022-12-19
+date-modified: last-modified
 description: ""
 image: linux.jpg
 categories:
   - linux
+  - bash
 ---
 
 After working at Bioinformatics Institute for 3 years, I gradullly relizaed that it’s essential to learn Linux as:
@@ -124,6 +126,12 @@ mv <name> <path>   # Moves file/directory as specified in path
 
 
 ## Permissions and Ownship
+
+
+![](fig_permissions.jpg)
+
+![](permission_code.png)
+
 
 
 - **user (u)** - User ownership of a file/directory. This user has the special right to change the permission bits and group ownership.
@@ -593,3 +601,7 @@ You can also get help from within Vim:
 :help <topic> CTRL-D # gives list of help topics that contain key word
 : <up-down keys>     # like in shell you get recent commands!!!!
 ```
+
+## Reference
+
+- [Bash basics](https://protocols.hostmicrobe.org/bash)
