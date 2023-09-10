@@ -559,5 +559,14 @@
   },
   "books/index.qmd": {
     "index.html": "15ad3efd"
+  },
+  "crispr/index.qmd": {
+    "index.html": "95a5b7b8"
+  },
+  "hts/index.qmd": {
+    "index.html": "d91ee8f0"
+  },
+  "imaging/index.qmd": {
+    "index.html": "77e2f31b"
   }
 }

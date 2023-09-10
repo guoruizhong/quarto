@@ -1,0 +1,20 @@
+---
+title: CRISPR
+date: 2023-04-09
+date-modified: last-modified
+title-block-banner: "#212529"
+published-title: Last updated
+toc: true
+toc-location: left
+toc-title: "Contents"
+---
+
+## Resources
+
+- [Guide Design Resources](https://zlab.bio/guide-design-resources)
+- [New CRISPR Method Allows Scientists to Understand Impact of Subtle Mutations](https://www.cuimc.columbia.edu/news/new-crispr-method-allows-scientists-understand-impact-subtle-mutations)
+- [CRISPR Transfection Protocols Guide: How To Select The Best Method](https://www.synthego.com/guide/how-to-use-crispr/transfection-protocols)
+- [How To Use CRISPR: Your Guide to Successful Genome Engineering](https://www.synthego.com/guide/how-to-use-crispr)
+- [The Ultimate Guide To CRISPR: Mechanism, Applications, Methods & More](https://www.synthego.com/learn/crispr)
+- [Irregular Protein Expression After CRISPR Edits: Troubleshooting Tips](https://www.synthego.com/blog/crispr-irregular-protein-expression)
+- [CRISPR Editing in Primary Cells](https://www.synthego.com/crispr-primary-cells)
