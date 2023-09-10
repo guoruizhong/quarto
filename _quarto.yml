@@ -34,7 +34,7 @@ website:
       - text: "Wiki"
         file: "wiki/index.qmd"
       - text: "Techniques"
-        file: "biotech/index.qmd"
+        file: "techniques/index.qmd"
       - text: "Books"
         file: "books/index.qmd"
       # - text: "Now"
