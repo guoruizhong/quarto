@@ -123,8 +123,6 @@ mv <name> <path>   # Moves file/directory as specified in path
 ```
 
 
-
-
 ## Permissions and Ownship
 
 
@@ -308,6 +306,7 @@ export MYVAR='Something Important'
 ```bash
 ### User
 top               # view top consumers of memory and CPU (press 1 to see per-CPU statistics)
+htop
 who               # Shows who is logged into system
 w                 # Shows which users are logged into system and what they are doing
 ```

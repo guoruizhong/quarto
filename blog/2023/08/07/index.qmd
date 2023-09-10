@@ -54,7 +54,10 @@ conda create --name rnaseq
 conda activate rnaseq 
 
 ### Install some commonly used RNA-seq software inside this environment
-conda install -c bioconda kallisto
+conda config --add subdirs osx-64 # for mac user run first in base env
+conda install -c bioconda kallisto # then install kallisto and centrifuge in their respective enivronments
+
+
 kallisto # test it works
 conda install -c bioconda fastqc
 conda install -c bioconda multiqc

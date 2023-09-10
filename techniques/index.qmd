@@ -27,11 +27,19 @@ toc-title: "Contents"
 
 ## High-throughput Sequencing
 
+### File formats produced by sequencing
+
+![](text.png)
+
+![](asc.png)
+
+### scRNA-seq
+
 ![scRNAseq](scRNAseq.png)
 
 - [Single-cell RNA-seq: raw sequencing data to counts](https://hbctraining.github.io/In-depth-NGS-Data-Analysis-Course/sessionIV/lessons/SC_pre-QC.html)
 
-### source
+### Resource
 
 - [File formats produced by sequencing](https://learn.gencore.bio.nyu.edu/ngs-file-formats/)
 - [RNA-seqlopedia](https://rnaseq.uoregon.edu/) - Created by the Univ. of Orgeon, this is a great resource for understanding the entire RNAseq workflow.
