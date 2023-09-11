@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Guorui Zhong">
+<meta name="description" content="To use of lightweight and open-source software using the R programming language and the Bioconductor suite of packages">
 
-<title>Crop image and add scale bar with ImageJ/Fiji</title>
+<title>Learning the analysis of high-throughput sequencing data from gene expression (RNA-seq)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -122,9 +123,15 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Crop image and add scale bar with ImageJ/Fiji</h1>
-                                <div class="quarto-categories">
-                <div class="quarto-category">fiji</div>
+      <h1 class="title">Learning the analysis of high-throughput sequencing data from gene expression (RNA-seq)</h1>
+                  <div>
+        <div class="description">
+          To use of lightweight and open-source software using the R programming language and the Bioconductor suite of packages
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">sequencing</div>
+                <div class="quarto-category">transcriptomic</div>
               </div>
                   </div>
   </div>
@@ -142,10 +149,16 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Tuesday, March 16, 2021</p>
+        <p class="date">Monday, September 11, 2023</p>
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">Monday, September 11, 2023</p>
+      </div>
+    </div>
       
     </div>
     
@@ -153,15 +166,7 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Contents</h2>
-   
-  <ul>
-  <li><a href="#crop-images-to-a-given-physical-size" id="toc-crop-images-to-a-given-physical-size" class="nav-link active" data-scroll-target="#crop-images-to-a-given-physical-size">Crop images to a given physical size</a></li>
-  <li><a href="#crop-same-area-from-different-images" id="toc-crop-same-area-from-different-images" class="nav-link" data-scroll-target="#crop-same-area-from-different-images">Crop same area from different images</a></li>
-  <li><a href="#set-scale-and-add-scale-bar" id="toc-set-scale-and-add-scale-bar" class="nav-link" data-scroll-target="#set-scale-and-add-scale-bar">Set scale and add scale bar</a></li>
-  </ul>
-</nav>
+    
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
@@ -173,61 +178,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="crop-images-to-a-given-physical-size" class="level2">
-<h2 class="anchored" data-anchor-id="crop-images-to-a-given-physical-size">Crop images to a given physical size</h2>
-<ol type="1">
-<li>Edit -&gt; Selection -&gt; Specify</li>
-<li>image -&gt; Crop</li>
-</ol>
-<p><img src="f1.png" class="img-fluid"></p>
-</section>
-<section id="crop-same-area-from-different-images" class="level2">
-<h2 class="anchored" data-anchor-id="crop-same-area-from-different-images">Crop same area from different images</h2>
-<ol type="1">
-<li>Select the area on the first image</li>
-<li>Analyze -&gt; Tools -&gt; ROI manager -&gt; Add [t]</li>
-<li>Click the second image, select and click the parameters on the ROI manager</li>
-</ol>
-<p><img src="f2.png" class="img-fluid"></p>
-</section>
-<section id="set-scale-and-add-scale-bar" class="level2">
-<h2 class="anchored" data-anchor-id="set-scale-and-add-scale-bar">Set scale and add scale bar</h2>
-<ol type="1">
-<li>Analyze -&gt; Set Scale</li>
-</ol>
-<ul>
-<li><p>Nikon (20x object):</p>
-<ul>
-<li>3.2 pixel/um, 5 um/16 pixel</li>
-<li>5uM = 16 pixels (cellxpress exported as 100%)</li>
-<li>5uM = 32 pixels (cellxpress exported as 200%)</li>
-<li>5uM = 64 pixels (cellxpress exported as 400%)</li>
-<li>12.8 pixel/um (when exported with 400% zoom in using cellXpress)</li>
-</ul></li>
-<li><p>Nikon (40x object):</p>
-<ul>
-<li>6.25 pixel/um, 0.16 um/pixel</li>
-<li>1um = 6.25 pixel (cellxpress exported as 100%)</li>
-<li>1um = 12.5 pixel (cellxpress exported as 200%)</li>
-<li>1um = 25 pixel (cellxpress exported as 400%)</li>
-<li>5uM = 125 pixels (cellxpress exported as 400%)</li>
-</ul></li>
-<li><p>TC microscope:</p>
-<ul>
-<li>physical length of a pixel: 3.4375 um</li>
-<li>10x: 0.34375 um/pixel = 2.91 pixel/um</li>
-<li>20x: 0.171875 um/pixel = 5.82 pixel/um</li>
-</ul></li>
-</ul>
-<ol start="2" type="1">
-<li><p>Analyze -&gt; Tools -&gt; Scale bar</p></li>
-<li><p>File save as png format.</p></li>
-</ol>
-<p><img src="f3.png" class="img-fluid"></p>
-<p><img src="f4.png" class="img-fluid"></p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

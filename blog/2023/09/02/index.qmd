@@ -1,0 +1,10 @@
+---
+title: "Learning the analysis of high-throughput sequencing data from gene expression (RNA-seq)"
+date: 2023-09-11
+date-modified: last-modified
+categories:
+  - sequencing
+  - transcriptomic
+image: workflow.png
+description: To use of lightweight and open-source software using the R programming language and the Bioconductor suite of packages
+---

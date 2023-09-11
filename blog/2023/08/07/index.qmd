@@ -12,7 +12,7 @@ description: Sometimes, We need to install R in the Linux server, but we don't t
 ## Install conda
 
 ```bash
-### Download miniforge
+### Download miniforge or mambaforge
 wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
 
 ### chmod 
@@ -54,9 +54,9 @@ conda create --name rnaseq
 conda activate rnaseq 
 
 ### Install some commonly used RNA-seq software inside this environment
-conda config --add subdirs osx-64 # for mac user run first in base env
-conda install -c bioconda kallisto # then install kallisto and centrifuge in their respective enivronments
-
+# conda config --add subdirs osx-64 
+# conda install -c bioconda kallisto # then install kallisto and centrifuge in their respective enivronments
+# conda search -c conda-forge -c bioconda 'kallisto[subdir=osx-arm64]' # for M1 mac user 
 
 kallisto # test it works
 conda install -c bioconda fastqc
