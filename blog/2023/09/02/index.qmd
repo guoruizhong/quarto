@@ -92,6 +92,8 @@ library(cowplot) # allows you to combine multiple plots in one figure
 library(DT) # for making interactive tables
 library(plotly) # for making interactive plots
 library(gt) # A layered 'grammar of tables' - think ggplot, but for tables
+library(limma) # venerable package for differential gene expression using linear modeling
+library(edgeR)
 ```
 ### Study design files
 ```{r}
@@ -272,36 +274,145 @@ plot_grid(p1, p2, p3, labels = c('A', 'B', 'C'), label_size = 12)
 ```
 ## Step5: Data exploration with multivariate analysis
 
-```{r}
 
+```{r}
+### Identify variables of interest in study design file
 group <- targets$group
 group <- factor(group)
+group
+```
 
-pca.res <- prcomp(t(log2.cpm.filtered.norm), scale.=F, retx=T)
-pc.var <- pca.res$sdev^2 # sdev^2 captures these eigenvalues from the PCA result
-pc.per <- round(pc.var/sum(pc.var)*100, 1) 
-pca.res.df <- as_tibble(pca.res$x)
-pca.plot <- ggplot(pca.res.df) +
+### Hierarchical clustering
+
+```{r}
+### calculate distance  methods (e.g. switch from 'maximum' to 'euclidean')
+distance <- dist(t(log2_cpm_filtered_norm), method = "maximum") 
+### other distance methods are "euclidean", maximum", "manhattan", "canberra", "binary" or "minkowski"
+
+clusters <- hclust(distance, method = "average") 
+### other agglomeration methods are "ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median", or "centroid"
+plot(clusters, labels=sampleLabels)
+```
+
+### Principal compoent analysis
+
+```{r}
+pca_res <- prcomp(t(log2_cpm_filtered_norm), scale. = FALSE, retx = TRUE)
+### look at the PCA result (pca.res)
+ls(pca_res)
+### Prints variance summary for all principal components.
+summary(pca_res)
+### $rotation shows you how much each gene influenced each PC (called 'scores')
+head(pca_res$rotation) 
+### 'x' shows you how much each sample influenced each PC (called 'loadings')
+pca_res$x 
+### A screeplot is a standard way to view eigenvalues for each PCA
+screeplot(pca_res) 
+### sdev^2 captures these eigenvalues from the PCA result
+pc_var <- pca_res$sdev^2 
+### use these eigenvalues to calculate the percentage variance explained by each PC
+pc_per <- round(pc_var/sum(pc_var)*100, 1) 
+pc_per
+
+```
+- Can we figure out the identify of outlier?
+
+```{r}
+### Visualize PCA result 
+pca_res_df <- as_tibble(pca_res$x)
+pca_plot <- ggplot(pca_res_df) +
   aes(x=PC1, y=PC2, label=sampleLabels, color = group) +
   geom_point(size=4) +
   stat_ellipse() +
-  xlab(paste0("PC1 (",pc.per[1],"%",")")) + 
-  ylab(paste0("PC2 (",pc.per[2],"%",")")) +
+  xlab(paste0("PC1 (",pc_per[1],"%",")")) + 
+  ylab(paste0("PC2 (",pc_per[2],"%",")")) +
   labs(title="PCA plot",
        caption=paste0("produced on ", Sys.time())) +
   coord_fixed() +
   theme_bw()
 
-ggplotly(pca.plot)
+ggplotly(pca_plot)
+```
+- Another way to view PCA laodings to understand impact of each sample on each pricipal component
 
-mydata.df <- mutate(log2.cpm.filtered.norm.df,
+```{r}
+pca_res_df <- pca_res$x[,1:4] %>% 
+  as_tibble() %>%
+  add_column(sample = sampleLabels,
+             group = group)
+### dataframe to be pivoted  
+pca_pivot <- pivot_longer(pca_res_df, 
+                          cols = PC1:PC4, # column names to be stored as a SINGLE variable
+                          names_to = "PC", # name of that new variable (column)
+                          values_to = "loadings") # name of new variable (column) storing all the values (data)
+
+ggplot(pca_pivot) +
+  aes(x=sample, y=loadings, fill=group) + # you could iteratively 'paint' different covariates onto this plot using the 'fill' aes
+  geom_bar(stat="identity") +
+  facet_wrap(~PC) +
+  labs(title="PCA 'small multiples' plot",
+       caption=paste0("produced on ", Sys.time())) +
+  theme_bw() +
+  coord_flip()
+```
+
+```{r}
+mydata_df <- mutate(log2_cpm_filtered_norm_df,
                     healthy.AVG = (HS01 + HS02 + HS03 + HS04 + HS05)/5, 
                     disease.AVG = (CL08 + CL10 + CL11 + CL12 + CL13)/5,
                     #now make columns comparing each of the averages above that you're interested in
-                    LogFC = (disease.AVG - healthy.AVG)) %>% #note that this is the first time you've seen the 'pipe' operator
+                    LogFC = (disease.AVG - healthy.AVG)) %>% 
   mutate_if(is.numeric, round, 2)
 
-datatable(mydata.df[,c(1,12:14)], 
+### sort data
+mydata_sort <- mydata_df %>%
+  dplyr::arrange(desc(LogFC)) %>% 
+  dplyr::select(geneID, LogFC)
+mydata_sort
+
+### filter data
+mydata_filter <- mydata_df %>%
+  dplyr::filter(geneID=="MMP1" | geneID=="GZMB" | geneID=="IL1B" | geneID=="GNLY" | geneID=="IFNG"
+                | geneID=="CCL4" | geneID=="PRF1" | geneID=="APOBEC3A" | geneID=="UNC13A" ) %>%
+  dplyr::select(geneID, healthy.AVG, disease.AVG, LogFC) %>%
+  dplyr::arrange(desc(LogFC))
+mydata_filter
+```
+
+- Produce publication-quality tables using `gt` package
+
+```{r}
+gt(mydata_filter)
+
+mydata_filter %>%
+  gt() %>%
+  fmt_number(columns=2:4, decimals = 1) %>%
+  tab_header(title = md("**Regulators of skin pathogenesis**"),
+             subtitle = md("*during cutaneous leishmaniasis*")) %>%
+  tab_footnote(
+    footnote = "Deletion or blockaid ameliorates disease in mice",
+    locations = cells_body(
+      columns = geneID,
+      rows = c(6, 7))) %>% 
+  tab_footnote(
+    footnote = "Associated with treatment failure in multiple studies",
+    locations = cells_body(
+      columns = geneID,
+      rows = c(2:9))) %>%
+  tab_footnote(
+    footnote = "Implicated in parasite control",
+    locations = cells_body(
+      columns = geneID,
+      rows = c(2))) %>%
+  tab_source_note(
+    source_note = md("Reference: Amorim *et al*., (2019). DOI: 10.1126/scitranslmed.aar3619"))
+```
+
+- Make an interactive table using the `DT` package
+
+```{r}
+#| eval: false
+datatable(mydata_df[,c(1,12:14)], 
           extensions = c('KeyTable', "FixedHeader"), 
           filter = 'top',
           options = list(keys = TRUE, 
@@ -312,8 +423,125 @@ datatable(mydata.df[,c(1,12:14)],
                          lengthMenu = c("10", "25", "50", "100")))
 ```
 
+- Make an interactive scatter plot with `plotly`
+
+```{r}
+myplot <- ggplot(mydata_df) +
+  aes(x=healthy.AVG, y=disease.AVG, 
+      text = paste("Symbol:", geneID)) +
+  geom_point(shape=16, size=1) +
+  ggtitle("disease vs. healthy") +
+  theme_bw()
+
+ggplotly(myplot)
+```
+
 ## Step6: Differential gene expression
+
+### Set up design matrix
+
+```{r}
+group <- factor(targets$group)
+design <- model.matrix(~0 + group)
+colnames(design) <- levels(group)
+
+# NOTE: if you need a paired analysis (a.k.a.'blocking' design) or have a batch effect, the following design is useful
+# design <- model.matrix(~block + treatment)
+# this is just an example. 'block' and 'treatment' would need to be objects in your environment
+```
+
+### Model mean-variance trend and fit linear model to data
+
+```{r}
+head(DGEList_filtered_norm)
+### Use VOOM function from Limma package to model the mean-variance relationship
+v_DEGList_filtered_norm <- voom(DGEList_filtered_norm, design, plot = TRUE)
+# fit a linear model to your data
+fit <- lmFit(v_DEGList_filtered_norm, design)
+### contrast matrix
+contrast_matrix <- makeContrasts(infection = disease - healthy,
+                                 levels=design)
+### extract the linear model fit
+fits <- contrasts.fit(fit, contrast_matrix)
+
+### get bayesian stats for the linear model fit
+ebFit <- eBayes(fits)
+#write.fit(ebFit, file="lmfit_results.txt")
+
+### top table to view DEGs
+TopHits <- topTable(ebFit, adjust ="BH", coef=1, number=40000, sort.by="logFC")
+
+### convert to a tibble
+TopHits_df <- TopHits %>%
+  as_tibble(rownames = "geneID")
+
+TopHits_df
+
+```
+
+::: {.callout-note}
+## Limma outputs
+- TopTable (from Limma) outputs a few different stats:
+- logFC, AveExpr, and P.Value should be self-explanatory
+- adj.P.Val is your adjusted P value, also known as an FDR (if BH method was used for multiple testing correction)
+- B statistic is the log-odds that that gene is differentially expressed. If B = 1.5, then log odds is e^1.5, where e is euler's constant (approx. 2.718).  So, the odds of differential expression os about 4.8 to 1
+- t statistic is ratio of the logFC to the standard error (where the error has been moderated across all genes...because of Bayesian approach)
+:::
+
+```{r}
+vplot <- ggplot(TopHits_df) +
+  aes(y=-log10(adj.P.Val), x=logFC, text = paste("Symbol:", geneID)) +
+  geom_point(size=2) +
+  geom_hline(yintercept = -log10(0.01), linetype="longdash", colour="grey", linewidth=1) +
+  geom_vline(xintercept = 1, linetype="longdash", colour="#BE684D", linewidth=1) +
+  geom_vline(xintercept = -1, linetype="longdash", colour="#2C467A", linewidth=1) +
+  #annotate("rect", xmin = 1, xmax = 12, ymin = -log10(0.01), ymax = 7.5, alpha=.2, fill="#BE684D") +
+  #annotate("rect", xmin = -1, xmax = -12, ymin = -log10(0.01), ymax = 7.5, alpha=.2, fill="#2C467A") +
+  labs(title="Volcano plot",
+       subtitle = "Cutaneous leishmaniasis",
+       caption=paste0("produced on ", Sys.time())) +
+  theme_bw()
+
+ggplotly(vplot)
+```
+
+```{r}
+### pull out DEGs and make venn diagram
+results <- decideTests(ebFit, method="global", adjust.method="BH", p.value=0.01, lfc=2)
+head(results)
+summary(results)
+vennDiagram(results, include="up")
+```
+
+```{r}
+### retrieve expression data for DEGs
+head(v_DEGList_filtered_norm$E)
+colnames(v_DEGList_filtered_norm$E) <- sampleLabels
+
+diffGenes <- v_DEGList_filtered_norm$E[results[,1] !=0,]
+head(diffGenes)
+dim(diffGenes)
+
+#convert DEGs to a dataframe using as_tibble
+diffGenes_df <- as_tibble(diffGenes, rownames = "geneID")
+
+### create interactive tables to display DEGs
+# datatable(diffGenes_df,
+#           extensions = c('KeyTable', "FixedHeader"),
+#           caption = 'Table 1: DEGs in cutaneous leishmaniasis',
+#           options = list(keys = TRUE, searchHighlight = TRUE, pageLength = 10, lengthMenu = c("10", "25", "50", "100"))) %>%
+#   formatRound(columns=c(2:11), digits=2)
+
+### write DEGs to a file
+# write_tsv(diffGenes_df, "DiffGenes.txt") 
+#NOTE: this .txt file can be directly used for input into other clustering or network analysis tools (e.g., String, Clust (https://github.com/BaselAbujamous/clust, etc.)
+
+```
+
 ## Step7: Module identification
+
+
+
 ## Step8: Functional enrichment analysis
 
 ## Automate above using shell scripts
