@@ -9,6 +9,9 @@
 /_site/
 **/*_cache/*
 
+# data
+data/
+
 # Miscellaneous stuff
 design-assets/*
 static/etc/*

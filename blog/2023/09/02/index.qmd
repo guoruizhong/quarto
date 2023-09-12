@@ -1,10 +1,330 @@
 ---
-title: "Learning the analysis of high-throughput sequencing data from gene expression (RNA-seq)"
+title: "Learning workflow for RNAseq data analysis"
 date: 2023-09-11
 date-modified: last-modified
 categories:
-  - sequencing
-  - transcriptomic
+  - RNA-seq
 image: workflow.png
-description: To use of lightweight and open-source software using the R programming language and the Bioconductor suite of packages
+description: Learn to use lightweight and open-source software with  R programming language and the Bioconductor suite of packages to perfrm RNA-seq data analysis.
+# execute: 
+#   echo: false
+#   warning: false
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    # fig.width = 6, 
+    # fig.height = 3.8,
+    fig.align = "center", 
+    # fig.retina = 3,
+    out.width = "100%", 
+    collapse = TRUE
+)
+```
+![workflow](workflow.png)
+
+## Step1: Check the quality of raw reads
+
+```bash
+### go to row reads folder
+cd ~/onedrive/analysis/230907_DIY_Transcriptomics/data/fastq
+### activate env
+conda active rnaseq
+### use fastqc to check the quality of fastq files
+fastqc *.gz -t 4
+```
+
+## Step2: Mapping reads with Kallisto pseudoaligment
+
+- Download reference transciptome files from [here](https://asia.ensembl.org/info/data/ftp/index.html)
+
+- Build an index from reference fasta file
+
+```bash
+kallisto index -i Homo_sapiens.GRCh38.cdna.all.index Homo_sapiens.GRCh38.cdna.all.fa.gz
+```
+- Map reads to the indexed reference host transcriptome
+
+![](map_single_end.png)
+
+![](map_paired_end.png)
+
+```bash
+### first the healthy subjects (HS)
+kallisto quant -i Homo_sapiens.GRCh38.cdna.all.index -o HS01 -t 4 --single -l 250 -s 30 SRR8668755.fastq.gz &> HS01.log
+kallisto quant -i Homo_sapiens.GRCh38.cdna.all.index -o HS02 -t 4 --single -l 250 -s 30 SRR8668756.fastq.gz &> HS02.log
+kallisto quant -i Homo_sapiens.GRCh38.cdna.all.index -o HS03 -t 4 --single -l 250 -s 30 SRR8668757.fastq.gz &> HS03.log
+kallisto quant -i Homo_sapiens.GRCh38.cdna.all.index -o HS04 -t 4 --single -l 250 -s 30 SRR8668758.fastq.gz &> HS04.log
+kallisto quant -i Homo_sapiens.GRCh38.cdna.all.index -o HS05 -t 4 --single -l 250 -s 30 SRR8668759.fastq.gz &> HS05.log
+
+### then the cutaneous leishmaniasis (CL) patients
+kallisto quant -i Homo_sapiens.GRCh38.cdna.all.index -o CL08 -t 4 --single -l 250 -s 30 SRR8668769.fastq.gz &> CL08.log
+kallisto quant -i Homo_sapiens.GRCh38.cdna.all.index -o CL10 -t 4 --single -l 250 -s 30 SRR8668771.fastq.gz &> CL10.log
+kallisto quant -i Homo_sapiens.GRCh38.cdna.all.index -o CL11 -t 4 --single -l 250 -s 30 SRR8668772.fastq.gz &> CL11.log
+kallisto quant -i Homo_sapiens.GRCh38.cdna.all.index -o CL12 -t 4 --single -l 250 -s 30 SRR8668773.fastq.gz &> CL12.log
+kallisto quant -i Homo_sapiens.GRCh38.cdna.all.index -o CL13 -t 4 --single -l 250 -s 30 SRR8668774.fastq.gz &> CL13.log
+```
+- Summarize fastqc and kallisto mapping results in a single summary html using MultiQC
+
+```bash
+multiqc -d .
+```
+
+
+## Step3: Import data into R
+
+```{r}
+#| warning: false
+#| message: false
+
+### load packages
+library(rhdf5) #provides functions for handling hdf5 file formats (kallisto outputs bootstraps in this format)
+library(tidyverse) # provides access to Hadley Wickham's collection of R packages for data science, which we will use throughout the course
+library(tximport) # package for getting Kallisto results into R
+library(ensembldb) #helps deal with ensembl
+library(EnsDb.Hsapiens.v86) #replace with your organism-specific database package
+library(beepr) #just for fun
+library(here) # file path
+library(datapasta) # paste data into R from clipboard
+library(edgeR) # well known package for differential expression analysis, but we only use for the DGEList object and for normalization methods
+library(matrixStats) # let's us easily calculate stats on rows or columns of a data matrix
+library(cowplot) # allows you to combine multiple plots in one figure
+library(DT) # for making interactive tables
+library(plotly) # for making interactive plots
+library(gt) # A layered 'grammar of tables' - think ggplot, but for tables
+```
+### Study design files
+```{r}
+### load study design
+targets <- read_tsv(here("data", 
+    "230907_DIY_Transcriptomics",
+    "studydesign.txt"))
+targets
+
+### create file paths for the abundance files
+path <- file.path("data", "230907_DIY_Transcriptomics", targets$sample, "abundance.tsv")
+path
+
+### make sure path is correct
+all(file.exists(path))
+```
+### Get organsim specific annotations
+
+```{r}
+tx <- transcripts(EnsDb.Hsapiens.v86, columns=c("tx_id", "gene_name"))
+tx <- as_tibble(tx)
+head(tx)
+### need to change first column name to 'target_id'
+tx <- dplyr::rename(tx, target_id = tx_id)
+### transcrip ID needs to be the first column in the dataframe
+tx <- dplyr::select(tx, "target_id", "gene_name")
+```
+### Load transcript counts
+
+```{r}
+txi_gene <- tximport(path, 
+                     type = "kallisto", 
+                     tx2gene = tx, 
+                     txOut = FALSE, #How does the result change if this =FALSE vs =TRUE?
+                     countsFromAbundance = "lengthScaledTPM",
+                     ignoreTxVersion = TRUE)
+### take a look at the type of object
+class(txi_gene)
+names(txi_gene)
+```
+
+## Step4: Wrangling gene expression
+
+```{r}
+### examine the data
+tpm <- txi_gene$abundance
+counts <- txi_gene$counts
+
+### generate summary stats
+tpm_stats <- transform(tpm, 
+                         SD=rowSds(tpm), 
+                         AVG=rowMeans(tpm),
+                         MED=rowMedians(tpm))
+
+### look at what you created
+head(tpm_stats)
+
+### scatter plot
+ggplot(tpm_stats) + 
+  aes(x = SD, y = MED) +
+  geom_point(shape=16, size=2) +
+  geom_smooth(method=lm) +
+  geom_hex(show.legend = FALSE) +
+  labs(y="Median", x = "Standard deviation",
+       title="Transcripts per million (TPM)",
+       subtitle="unfiltered, non-normalized data",
+       caption="DIYtranscriptomics - Spring 2020") +
+  theme_classic() +
+  theme_dark() + 
+  theme_bw()
+```
+
+```{r}
+### capture sample labels from study design
+sampleLabels <- targets$sample
+### make DGElist from the counts
+DGEList <- DGEList(txi_gene$counts)
+DGEList
+
+### get counts per million
+cpm <- cpm(DGEList)
+colSums(cpm)
+
+log2_cpm <- cpm(DGEList, log=TRUE)
+### connvert data matrix to dataframe
+log2_cpm_df <- as_tibble(log2_cpm, rownames = "geneID")
+### add sample names
+colnames(log2_cpm_df) <- c("geneID", sampleLabels)
+
+### pivot from wide to long 
+log2_cpm_df_pivot <- pivot_longer(
+  log2_cpm_df, # dataframe to be pivoted
+  cols = HS01:CL13, # column names to be stored as a SINGLE variable
+  names_to = "samples", # name of that new variable (column)
+  values_to = "expression") # name of new variable (column) storing all the values (data)
+
+p1 <- ggplot(log2_cpm_df_pivot) +
+  aes(x=samples, y=expression, fill=samples) +
+  geom_violin(trim = FALSE, show.legend = FALSE) +
+  stat_summary(fun = "median", 
+               geom = "point", 
+               shape = 95, 
+               size = 10, 
+               color = "black", 
+               show.legend = FALSE) +
+  labs(y="log2 expression", x = "sample",
+       title="Log2 Counts per Million (CPM)",
+       subtitle="unfiltered, non-normalized",
+       caption=paste0("produced on ", Sys.time())) +
+  theme_bw()
+p1
+```
+- How many genes or transcripts have no read counts at all?
+
+```{r}
+### filter data
+table(rowSums(DGEList$counts==0)==10)
+### how many genes had more than 1 CPM (TRUE) in at least 3 samples
+### set cutoff
+keepers <- rowSums(cpm>1)>=5 #user defined
+DGEList_filtered <- DGEList[keepers,]
+
+log2_cpm_filtered <- cpm(DGEList_filtered, log=TRUE)
+log2_cpm_filtered_df <- as_tibble(log2_cpm_filtered, rownames = "geneID")
+colnames(log2_cpm_filtered_df) <- c("geneID", sampleLabels)
+log2_cpm_filtered_df_pivot <- pivot_longer(log2_cpm_filtered_df, # dataframe to be pivoted
+      cols = HS01:CL13, # column names to be stored as a SINGLE variable
+      names_to = "samples", # name of that new variable (column)
+      values_to = "expression") # name of new variable (column) storing all the values (data)
+
+p2 <- ggplot(log2_cpm_filtered_df_pivot) +
+  aes(x=samples, y=expression, fill=samples) +
+  geom_violin(trim = FALSE, show.legend = FALSE) +
+  stat_summary(fun = "median", 
+               geom = "point", 
+               shape = 95, 
+               size = 10, 
+               color = "black", 
+               show.legend = FALSE) +
+  labs(y="log2 expression", x = "sample",
+       title="Log2 Counts per Million (CPM)",
+       subtitle="filtered, non-normalized",
+       caption=paste0("produced on ", Sys.time())) +
+  theme_bw()
+
+p2
+```
+
+```{r}
+### normalize data
+DGEList_filtered_norm <- calcNormFactors(DGEList_filtered, method = "TMM")
+log2_cpm_filtered_norm <- cpm(DGEList_filtered_norm, log=TRUE)
+log2_cpm_filtered_norm_df <- as_tibble(log2_cpm_filtered_norm, rownames = "geneID")
+colnames(log2_cpm_filtered_norm_df) <- c("geneID", sampleLabels)
+
+log2_cpm_filtered_norm_df_pivot <- pivot_longer(log2_cpm_filtered_norm_df, # dataframe to be pivoted
+    cols = HS01:CL13, # column names to be stored as a SINGLE variable
+    names_to = "samples", # name of that new variable (column)
+    values_to = "expression") # name of new variable (column) storing all the values (data)
+
+p3 <- ggplot(log2_cpm_filtered_norm_df_pivot) +
+  aes(x=samples, y=expression, fill=samples) +
+  geom_violin(trim = FALSE, show.legend = FALSE) +
+  stat_summary(fun = "median", 
+               geom = "point", 
+               shape = 95, 
+               size = 10, 
+               color = "black", 
+               show.legend = FALSE) +
+  labs(y="log2 expression", x = "sample",
+       title="Log2 Counts per Million (CPM)",
+       subtitle="filtered, TMM normalized",
+       caption=paste0("produced on ", Sys.time())) +
+  theme_bw()
+
+plot_grid(p1, p2, p3, labels = c('A', 'B', 'C'), label_size = 12)
+
+```
+## Step5: Data exploration with multivariate analysis
+
+```{r}
+
+group <- targets$group
+group <- factor(group)
+
+pca.res <- prcomp(t(log2.cpm.filtered.norm), scale.=F, retx=T)
+pc.var <- pca.res$sdev^2 # sdev^2 captures these eigenvalues from the PCA result
+pc.per <- round(pc.var/sum(pc.var)*100, 1) 
+pca.res.df <- as_tibble(pca.res$x)
+pca.plot <- ggplot(pca.res.df) +
+  aes(x=PC1, y=PC2, label=sampleLabels, color = group) +
+  geom_point(size=4) +
+  stat_ellipse() +
+  xlab(paste0("PC1 (",pc.per[1],"%",")")) + 
+  ylab(paste0("PC2 (",pc.per[2],"%",")")) +
+  labs(title="PCA plot",
+       caption=paste0("produced on ", Sys.time())) +
+  coord_fixed() +
+  theme_bw()
+
+ggplotly(pca.plot)
+
+mydata.df <- mutate(log2.cpm.filtered.norm.df,
+                    healthy.AVG = (HS01 + HS02 + HS03 + HS04 + HS05)/5, 
+                    disease.AVG = (CL08 + CL10 + CL11 + CL12 + CL13)/5,
+                    #now make columns comparing each of the averages above that you're interested in
+                    LogFC = (disease.AVG - healthy.AVG)) %>% #note that this is the first time you've seen the 'pipe' operator
+  mutate_if(is.numeric, round, 2)
+
+datatable(mydata.df[,c(1,12:14)], 
+          extensions = c('KeyTable', "FixedHeader"), 
+          filter = 'top',
+          options = list(keys = TRUE, 
+                         searchHighlight = TRUE, 
+                         pageLength = 10, 
+                         #dom = "Blfrtip", 
+                         #buttons = c("copy", "csv", "excel"),
+                         lengthMenu = c("10", "25", "50", "100")))
+```
+
+## Step6: Differential gene expression
+## Step7: Module identification
+## Step8: Functional enrichment analysis
+
+## Automate above using shell scripts
+
+## Reference
+
+- [DIY Transcriptomics](https://diytranscriptomics.com/)
+- [protocols](https://protocols.hostmicrobe.org/)
+
+## SessionInfo
+
+```{r}
+sessionInfo()
+```
