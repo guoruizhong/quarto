@@ -14,5 +14,5 @@ quarto render
 # Add to the local git repository then push to the remote repository
 
 git add .
-git commit -m "scRNAseq"
+git commit -m "update blog"
 git push -u guoruizhong.github.io main

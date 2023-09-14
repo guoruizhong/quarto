@@ -574,5 +574,11 @@
   },
   "ngs/index.qmd": {
     "index.html": "dcfc24f8"
+  },
+  "blog/2023/09/03/index.qmd": {
+    "index.html": "bed305ab"
+  },
+  "keyboard/index.qmd": {
+    "index.html": "7cbb6af6"
   }
 }

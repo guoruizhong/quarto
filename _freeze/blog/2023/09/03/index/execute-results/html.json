@@ -1,0 +1,14 @@
+{
+  "hash": "dd0bec0fb0ec3524d047bad930028cb8",
+  "result": {
+    "markdown": "---\ntitle: \"Learning scRNA-seq data analysis\"\ndate: 2023-09-13\ndate-modified: last-modified\ncategories:\n  - scRNA-seq\nimage: workflow.png\ndraft: true\ndescription: Use lightweight and open-source software with  R programming language and the Bioconductor suite of packages to perfrm RNA-seq data analysis.\n\nexecute: \n  echo: false\n  warning: false\n  eval: false\n---\n\n\n\n\n## Preparing reference files for scRNA-seq\n\n```bash\n### navigate to directory and active kb environment\nconda create --name kb\nconda activate kb\npip install kb-python\ncd OneDrive/Analysis/230907_DIY_Transcriptomics/data/pbmc_1k_raw\n```\n\n```bash\nkb ref -d human -i Homo_sapiens.GRCh38.cdna.all.index -g t2g.txt\n```\n![](scRNAseq1.png)\n\n## Proprocessing scRNA-seq data\n\n```bash\nkb count pbmc_1k_v3_S1_mergedLanes_R1.fastq.gz pbmc_1k_v3_S1_mergedLanes_R2.fastq.gz -i Homo_sapiens.GRCh38.cdna.all.index -x 10XV3 -g t2g.txt -t 8 --cellranger\n```\n![](scRNAseq2.png)\n\n## Imporing data into R\n\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n:::\n\n## \n\n\n::: {.cell}\n\n:::\n\n## Basic Quality assessment \n\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n:::\n\n## Cluster identification\n\n## integration of multiple samples\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

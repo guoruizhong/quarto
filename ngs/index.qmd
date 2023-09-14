@@ -32,3 +32,6 @@ toc-title: "Contents"
 - [Next-Generation Sequencing Analysis](https://learn.gencore.bio.nyu.edu/) - provide hands on experience with analyzing next generation sequencing. Standard pipelines are presented that provide the user with and step-by-step guide to using state of the art bioinformatics tools
 - [Single Cell Gene Expression](https://www.10xgenomics.com/support/single-cell-gene-expression)
 - [The Essence of scRNA-Seq Clustering: Why and How to Do it Right](https://blog.bioturing.com/2022/02/15/the-essence-of-scrna-seq-clustering/)
+- [How to Use t-SNE Effectively](https://distill.pub/2016/misread-tsne/)
+- [Ten quick tips for effective dimensionality reduction](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006907)
+- [Hypergeometric test and Fisher’s exact test ](http://mengnote.labspot.com/2012/12/calculate-correct-hypergeometric-p.html)

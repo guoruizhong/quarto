@@ -18,4 +18,17 @@ toc-title: "Contents"
 - [Data Analysis and Prediction Algorithms with R](http://rafalab.dfci.harvard.edu/dsbook/)
 - [Modern Statistics for Modern Biology](https://web.stanford.edu/class/bios221/book/)
 - [Data Analysis in Genome Biology](https://girke.bioinformatics.ucr.edu/GEN242/)
+- [PH525x series - Biomedical Data Science](http://genomicsclass.github.io/book/)
+
+
+
+::: {layout-ncol=3}
+
+![](r4ds.jpg)
+
+![](rgc.jpg)
+
+![](ggplot2.jpg)
+
+:::
 
