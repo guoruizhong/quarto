@@ -5,11 +5,11 @@ date-modified: last-modified
 categories:
   - scRNA-seq
 image: workflow.png
-draft: true
-description: Use lightweight and open-source software with  R programming language and the Bioconductor suite of packages to perfrm RNA-seq data analysis.
+# draft: true
+# description: Use lightweight and open-source software with  R programming language and the Bioconductor suite of packages to perfrm RNA-seq data analysis.
 image: scRNAseq.png
 execute: 
-  echo: false
+  # echo: false
   warning: false
   eval: false
 ---
@@ -28,14 +28,14 @@ knitr::opts_chunk$set(
 ## Step1: Preparing reference files for scRNA-seq
 
 ```bash
-### navigate to directory and active kb environment
+### create conda env for mapping reads
 conda create --name kb
 conda activate kb
 pip install kb-python
-cd OneDrive/Analysis/230907_DIY_Transcriptomics/data/pbmc_1k_raw
 ```
 
 ```bash
+### navigate to directory and active kb environment 230907_DIY_Transcriptomics/data/pbmc_1k_raw
 kb ref -d human -i Homo_sapiens.GRCh38.cdna.all.index -g t2g.txt
 ```
 ![](scRNAseq1.png)

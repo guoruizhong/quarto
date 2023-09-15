@@ -1,5 +1,5 @@
 ---
-title: "General workflow for RNAseq data analysis"
+title: "Learning general workflow for RNAseq data analysis"
 date: 2023-09-11
 date-modified: last-modified
 categories:
@@ -9,9 +9,9 @@ draft: true
 description: Use lightweight and open-source software with  R programming language and the Bioconductor suite of packages to perfrm RNA-seq data analysis.
 
 execute: 
-  echo: false
+  # echo: false
   warning: false
-  eval: false
+  # eval: false
 ---
 
 ```{r setup, include=FALSE}
@@ -101,6 +101,7 @@ library(edgeR)
 library(RColorBrewer) #need colors to make heatmaps
 # library(gameofthrones) #because...why not.  Install using 'devtools::install_github("aljrico/gameofthrones")'
 library(heatmaply) #for making interactive heatmaps using plotly
+library(gplots)
 # library(d3heatmap) #for making interactive heatmaps using D3
 library(GSEABase) #functions and methods for Gene Set Enrichment Analysis
 library(Biobase) #base functions for bioconductor; required by GSEABase
@@ -559,6 +560,7 @@ diffGenes_df <- as_tibble(diffGenes, rownames = "geneID")
 ## Step7: Module identification
 
 ```{r}
+#| eval: false
 heatcolors <- rev(brewer.pal(name="RdBu", n=11))
 clustRows <- hclust(as.dist(1-cor(t(diffGenes), method="pearson")), method="complete") #cluster rows by pearson correlation
 clustColumns <- hclust(as.dist(1-cor(diffGenes, method="spearman")), method="complete")
@@ -603,6 +605,7 @@ heatmap.2(Module_down,
 ## Step8: Functional enrichment analysis
 
 ```{r}
+#| eval: false
 # Carry out GO enrichment using gProfiler2 ----
 # use topTable result to pick the top genes for carrying out a Gene Ontology (GO) enrichment analysis
 myTopHits <- topTable(ebFit, adjust ="BH", coef=1, number=50, sort.by="logFC")
@@ -612,12 +615,12 @@ gost.res <- gost(rownames(myTopHits), organism = "hsapiens", correction_method =
 gostplot(gost.res, interactive = T, capped = T) #set interactive=FALSE to get plot for publications
 # produce a publication quality static manhattan plot with specific GO terms highlighted
 # rerun the above gostplot function with 'interactive=F' and save to an object 'mygostplot'
-publish_gostplot(
-  mygostplot, #your static gostplot from above
-  highlight_terms = c("GO:0034987"),
-  filename = NULL,
-  width = NA,
-  height = NA)
+# publish_gostplot(
+#   mygostplot, #your static gostplot from above
+#   highlight_terms = c("GO:0034987"),
+#   filename = NULL,
+#   width = NA,
+#   height = NA)
 
 #you can also generate a table of your gost results
 publish_gosttable(
@@ -797,6 +800,7 @@ heatmap.2(diffSets.C2CP,
 # you can edit what is shown in this heatmap, just as you did for your gene level heatmap earlier in the course
 ```
 ```{r}
+#| eval: false
 gost.res_up <- gost(rownames(myModule_up), organism = "hsapiens", correction_method = "fdr")
 gostplot(gost.res_up, interactive = T, capped = T) #set interactive=FALSE to get plot for publications
 gost.res_down <- gost(rownames(myModule_down), organism = "hsapiens", correction_method = "fdr")
