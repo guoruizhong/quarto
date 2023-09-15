@@ -8,10 +8,6 @@ image: workflow.png
 # draft: true
 # description: Use lightweight and open-source software with  R programming language and the Bioconductor suite of packages to perfrm RNA-seq data analysis.
 image: scRNAseq.png
-execute: 
-  # echo: false
-  warning: false
-  eval: false
 ---
 
 ```{r setup, include=FALSE}
@@ -21,6 +17,8 @@ knitr::opts_chunk$set(
     fig.align = "center", 
     # fig.retina = 3,
     out.width = "100%", 
+    warning = FALSE,
+    evaluate = FALSE,
     collapse = TRUE
 )
 ```
@@ -40,7 +38,7 @@ kb ref -d human -i Homo_sapiens.GRCh38.cdna.all.index -g t2g.txt
 ```
 ![](scRNAseq1.png)
 
-## Step2: Proprocessing scRNA-seq data
+## Step2: Mapping reads for scRNA-seq data
 
 ```bash
 kb count pbmc_1k_v3_S1_mergedLanes_R1.fastq.gz pbmc_1k_v3_S1_mergedLanes_R2.fastq.gz -i Homo_sapiens.GRCh38.cdna.all.index -x 10XV3 -g t2g.txt -t 8 --cellranger
