@@ -4,10 +4,14 @@ date: 2023-09-13
 date-modified: last-modified
 categories:
   - scRNA-seq
-image: workflow.png
-# draft: true
-# description: Use lightweight and open-source software with  R programming language and the Bioconductor suite of packages to perfrm RNA-seq data analysis.
+# image: workflow.png
 image: scRNAseq.png
+draft: true
+execute: 
+  freeze: true
+  # echo: false
+  warning: false
+  # eval: false
 ---
 
 ```{r setup, include=FALSE}
