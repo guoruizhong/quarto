@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2023-04-09">
 
-<title>HTS</title>
+<title>NGS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -71,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="floating nav-fixed slimcontent">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -126,7 +126,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">HTS</h1>
+      <h1 class="title">NGS</h1>
                       </div>
   </div>
     
@@ -144,7 +144,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">September 13, 2023</p>
+        <p class="date-modified">September 23, 2023</p>
       </div>
     </div>
       
@@ -158,12 +158,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#high-throughput-sequencing" id="toc-high-throughput-sequencing" class="nav-link active" data-scroll-target="#high-throughput-sequencing">High-throughput Sequencing</a>
+  <li><a href="#scrna-seq" id="toc-scrna-seq" class="nav-link active" data-scroll-target="#scrna-seq"><span class="header-section-number">1</span> scRNA-seq</a>
   <ul class="collapse">
-  <li><a href="#file-formats-produced-by-sequencing" id="toc-file-formats-produced-by-sequencing" class="nav-link" data-scroll-target="#file-formats-produced-by-sequencing">File formats produced by sequencing</a></li>
+  <li><a href="#experimental-scrna-seq-workflow" id="toc-experimental-scrna-seq-workflow" class="nav-link" data-scroll-target="#experimental-scrna-seq-workflow"><span class="header-section-number">1.1</span> Experimental scRNA-seq workflow</a></li>
+  <li><a href="#file-formats-produced-by-sequencing" id="toc-file-formats-produced-by-sequencing" class="nav-link" data-scroll-target="#file-formats-produced-by-sequencing"><span class="header-section-number">1.2</span> File formats produced by sequencing</a></li>
+  <li><a href="#reads-quality-control" id="toc-reads-quality-control" class="nav-link" data-scroll-target="#reads-quality-control"><span class="header-section-number">1.3</span> Reads quality control</a></li>
+  <li><a href="#mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules" id="toc-mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules" class="nav-link" data-scroll-target="#mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules"><span class="header-section-number">1.4</span> Mapping reads to cellular barcodes and origin mRNA molecules</a></li>
+  <li><a href="#normalization" id="toc-normalization" class="nav-link" data-scroll-target="#normalization"><span class="header-section-number">1.5</span> Normalization</a></li>
+  <li><a href="#data-correction-and-integration" id="toc-data-correction-and-integration" class="nav-link" data-scroll-target="#data-correction-and-integration"><span class="header-section-number">1.6</span> Data correction and integration</a></li>
+  <li><a href="#feature-selection-and-dimensionality-reduction" id="toc-feature-selection-and-dimensionality-reduction" class="nav-link" data-scroll-target="#feature-selection-and-dimensionality-reduction"><span class="header-section-number">1.7</span> Feature selection and dimensionality reduction</a></li>
+  <li><a href="#cell-and-gene-level-downstream-analysis" id="toc-cell-and-gene-level-downstream-analysis" class="nav-link" data-scroll-target="#cell-and-gene-level-downstream-analysis"><span class="header-section-number">1.8</span> Cell and gene-level downstream analysis</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">1.9</span> </a></li>
   </ul></li>
-  <li><a href="#scrna-seq" id="toc-scrna-seq" class="nav-link" data-scroll-target="#scrna-seq">scRNA-seq</a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  <li><a href="#bulk-rna-seq" id="toc-bulk-rna-seq" class="nav-link" data-scroll-target="#bulk-rna-seq"><span class="header-section-number">2</span> Bulk-RNA seq</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">3</span> Reference</a></li>
   </ul>
 </nav>
 </nav>
@@ -172,34 +180,144 @@ ul.task-list li input[type="checkbox"] {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
-<section id="high-throughput-sequencing" class="level2">
-<h2 class="anchored" data-anchor-id="high-throughput-sequencing">High-throughput Sequencing</h2>
-<section id="file-formats-produced-by-sequencing" class="level3">
-<h3 class="anchored" data-anchor-id="file-formats-produced-by-sequencing">File formats produced by sequencing</h3>
+<section id="scrna-seq" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="scrna-seq"><span class="header-section-number">1</span> scRNA-seq</h2>
+<p><img src="scRNAseq.png" class="img-fluid"></p>
+<section id="experimental-scrna-seq-workflow" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="experimental-scrna-seq-workflow"><span class="header-section-number">1.1</span> Experimental scRNA-seq workflow</h3>
+<p><img src="experimental.png" class="img-fluid"></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Typical workflows including:">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Typical workflows including:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Single cell dissociation
+<ul>
+<li>tissue is digested</li>
+</ul></li>
+<li>Single cell isolation
+<ul>
+<li>errors can occur that lead to empty droplets, doublets, multiplets, non-viables cells</li>
+</ul></li>
+<li>Library construction
+<ul>
+<li>well or droplet contains the chemicals to break down the cell membrances</li>
+<li>intra cellular mRNA is captured, reverse-transcribed to cDNA molecules and amplified</li>
+<li>Uniqiue molecular identifed (UMI) allow us to distinguish between amplified copies of the same mRNA molecule and reads from separate mRNA molecules transcribed from the same gene</li>
+<li>Amplification before sequencing is to increase its probility of being measured</li>
+</ul></li>
+<li>Sequencing
+<ul>
+<li>cDNA libraries are labelled with cellular barcodes</li>
+<li>libraries are pooled together</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</section>
+<section id="file-formats-produced-by-sequencing" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="file-formats-produced-by-sequencing"><span class="header-section-number">1.2</span> File formats produced by sequencing</h3>
 <p><img src="text.png" class="img-fluid"></p>
 <p><img src="asc.png" class="img-fluid"></p>
 </section>
-</section>
-<section id="scrna-seq" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="scrna-seq">scRNA-seq</h2>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="scRNAseq.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">scRNAseq</figcaption>
-</figure>
+<section id="reads-quality-control" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="reads-quality-control"><span class="header-section-number">1.3</span> Reads quality control</h3>
+<p>Quality control is performed to ensure that the data quality is sufficient for downstream analysis. The QC can be performed in cell level, transcript level and count data directly.</p>
+<p>To check the integrity of cel, <code>cell QC</code> is commonly performed based on three covariates:</p>
+<ol type="1">
+<li>Count depth: the number of counts per barcode</li>
+<li>The number of genes per barcode</li>
+<li>The fraction of counts from mitochondrial genes per barcode</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Make sure all cellular bacode data correspond to viable cells</li>
+<li>all reads assigned to the same barcode may not correspond to reads from the cells as a barcode may mistakenly tag multiple cells (doublet) or may not tag any cells (empty droplet)</li>
+</ul>
+</div>
+</div>
+<p>The distribution of these QC covariates are examined for outlier peaks that filtered out by thresholding. Condieration any of these three QC covariates in isolation can lead to misinterpretation of cellular signals. These thresholds shoule be set as permissive as possible to avoid filtering out viable cell populations unintentionally.</p>
+<div class="callout callout-style-default callout-caution callout-titled" title="Example">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Cells with high a comparatively high fraction of mitochandrial counts maybe involved in respiratory process</li>
+<li>Cells with low counts and/or genes may correspond to quiecent cells population</li>
+<li>Cells with high counts maybe larger in size</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Perform QC by finding outlier peaks in the number of genes, the count depth and the fraction of mitochondrial reads. Consider these covariates jointly instead of separtely</li>
+<li>Be as permissive of QC thresholding as possible, and revisit QC if downstream clustering cannot be interpreted</li>
+<li>If the distribution of QC covariates differ between samples, QC thresholds should be determined separately for each sample to account for sample quality differences.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules" class="level3" data-number="1.4">
+<h3 data-number="1.4" class="anchored" data-anchor-id="mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules"><span class="header-section-number">1.4</span> Mapping reads to cellular barcodes and origin mRNA molecules</h3>
+</section>
+<section id="normalization" class="level3" data-number="1.5">
+<h3 data-number="1.5" class="anchored" data-anchor-id="normalization"><span class="header-section-number">1.5</span> Normalization</h3>
+</section>
+<section id="data-correction-and-integration" class="level3" data-number="1.6">
+<h3 data-number="1.6" class="anchored" data-anchor-id="data-correction-and-integration"><span class="header-section-number">1.6</span> Data correction and integration</h3>
+</section>
+<section id="feature-selection-and-dimensionality-reduction" class="level3" data-number="1.7">
+<h3 data-number="1.7" class="anchored" data-anchor-id="feature-selection-and-dimensionality-reduction"><span class="header-section-number">1.7</span> Feature selection and dimensionality reduction</h3>
+</section>
+<section id="cell-and-gene-level-downstream-analysis" class="level3" data-number="1.8">
+<h3 data-number="1.8" class="anchored" data-anchor-id="cell-and-gene-level-downstream-analysis"><span class="header-section-number">1.8</span> Cell and gene-level downstream analysis</h3>
+</section>
+<section id="section" class="level3" data-number="1.9">
+<h3 data-number="1.9" class="anchored" data-anchor-id="section"><span class="header-section-number">1.9</span> </h3>
+</section>
+</section>
+<section id="bulk-rna-seq" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="bulk-rna-seq"><span class="header-section-number">2</span> Bulk-RNA seq</h2>
+</section>
+<section id="reference" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="reference"><span class="header-section-number">3</span> Reference</h2>
 <ul>
 <li><a href="https://hbctraining.github.io/In-depth-NGS-Data-Analysis-Course/sessionIV/lessons/SC_pre-QC.html">Single-cell RNA-seq: raw sequencing data to counts</a></li>
-</ul>
-</section>
-<section id="resources" class="level2">
-<h2 class="anchored" data-anchor-id="resources">Resources</h2>
-<ul>
 <li><a href="https://learn.gencore.bio.nyu.edu/ngs-file-formats/">File formats produced by sequencing</a></li>
 <li><a href="https://rnaseq.uoregon.edu/">RNA-seqlopedia</a> - Created by the Univ. of Orgeon, this is a great resource for understanding the entire RNAseq workflow.</li>
 <li><a href="http://education.knoweng.org/sequenceng/">SequencEnG - An interactive learning resource for next-generation sequencing (NGS) techniques</a></li>

@@ -1,5 +1,5 @@
 ---
-title: HTS
+title: NGS
 date: 2023-04-09
 date-modified: last-modified
 title-block-banner: "#212529"
@@ -7,25 +7,101 @@ published-title: Last updated
 toc: true
 toc-location: left
 toc-title: "Contents"
+format:
+  html:
+    # toc: true
+    html-math-method: katex
+    number-sections: true
+    number-depth: 3
+    # css: styles.css
 ---
 
 
-## High-throughput Sequencing
+## scRNA-seq
+
+
+![](scRNAseq.png)
+
+### Experimental scRNA-seq workflow
+
+
+![](experimental.png)
+
+::: {.callout-note title="Typical workflows including:"}
+
+1. Single cell dissociation
+    - tissue is digested
+
+2. Single cell isolation
+    - errors can occur that lead to empty droplets, doublets, multiplets, non-viables cells
+
+3. Library construction
+    - well or droplet contains the chemicals to break down the cell membrances
+    - intra cellular mRNA is captured, reverse-transcribed to cDNA molecules and amplified
+    - Uniqiue molecular identifed (UMI) allow us to distinguish between amplified copies of the same mRNA molecule and reads from separate mRNA molecules transcribed from the same gene
+    - Amplification before sequencing is to increase its probility of being measured
+
+4. Sequencing
+    - cDNA libraries are labelled with cellular barcodes
+    - libraries are pooled together
+:::
 
 ### File formats produced by sequencing
+
 
 ![](text.png)
 
 ![](asc.png)
 
-## scRNA-seq
+### Reads quality control
 
-![scRNAseq](scRNAseq.png)
+
+Quality control is performed to ensure that the data quality is sufficient for downstream analysis. The QC can be performed in cell level,  transcript level and count data directly.
+
+To check the integrity of cel, `cell QC` is commonly performed based on three covariates:
+
+1. Count depth: the number of counts per barcode
+2. The number of genes per barcode
+3. The fraction of counts from mitochondrial genes per barcode
+
+::: {.callout-note}
+- Make sure all cellular bacode data correspond to viable cells
+- all reads assigned to the same barcode may not correspond to reads from the cells as a barcode may mistakenly tag multiple cells (doublet) or may not tag any cells (empty droplet)
+:::
+
+The distribution of  these QC covariates are examined for outlier peaks that filtered out by thresholding. Condieration any of these three QC covariates in isolation can lead to misinterpretation of cellular signals. These thresholds shoule be set as permissive as possible to  avoid filtering out viable cell populations unintentionally.
+
+::: {.callout-caution title="Example"}
+- Cells with high a comparatively high fraction of mitochandrial counts maybe involved  in respiratory process
+- Cells with low counts and/or genes may correspond to quiecent cells population
+- Cells with high counts maybe larger in size
+:::
+
+
+
+::: {.callout-tip}
+- Perform QC by finding outlier peaks in the number of genes, the count depth and the fraction of mitochondrial reads. Consider these covariates jointly instead of separtely
+- Be as permissive of QC thresholding as possible, and revisit QC if downstream clustering cannot be interpreted
+- If the distribution of QC covariates differ between samples, QC thresholds should be determined separately for each sample to account for sample quality differences.
+:::
+
+### Mapping reads to cellular barcodes and origin mRNA molecules 
+
+### Normalization
+
+### Data correction and integration
+
+### Feature selection and dimensionality reduction
+
+### Cell and gene-level downstream analysis
+
+### 
+
+## Bulk-RNA seq
+
+## Reference
 
 - [Single-cell RNA-seq: raw sequencing data to counts](https://hbctraining.github.io/In-depth-NGS-Data-Analysis-Course/sessionIV/lessons/SC_pre-QC.html)
-
-## Resources
-
 - [File formats produced by sequencing](https://learn.gencore.bio.nyu.edu/ngs-file-formats/)
 - [RNA-seqlopedia](https://rnaseq.uoregon.edu/) - Created by the Univ. of Orgeon, this is a great resource for understanding the entire RNAseq workflow.
 - [SequencEnG - An interactive learning resource for next-generation sequencing (NGS) techniques](http://education.knoweng.org/sequenceng/)

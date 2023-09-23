@@ -89,3 +89,4 @@ conda config --set auto_activate_base false
 ## Reference
 
 - [Conda for bioinformatics](https://protocols.hostmicrobe.org/conda)
+- <https://github.com/conda-forge/miniforge>

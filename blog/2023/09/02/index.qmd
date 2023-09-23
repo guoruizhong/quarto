@@ -5,7 +5,7 @@ date-modified: last-modified
 categories:
   - RNA-seq
 image: workflow.png
-draft: true
+# draft: true
 description: Use lightweight and open-source software with  R programming language and the Bioconductor suite of packages to perfrm RNA-seq data analysis.
 
 execute: 
@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
     collapse = TRUE
 )
 ```
-![workflow](workflow.png)
+![](workflow.png)
 
 ## Step1: Check the quality of raw reads
 
