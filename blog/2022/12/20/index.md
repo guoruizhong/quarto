@@ -1,6 +1,7 @@
 ---
 title: "Using R in VSCode"
 date: 2022-12-20
+date-modified: last-modified
 image: vscode.jpg
 categories:
   - R
@@ -271,3 +272,8 @@ linters: with_defaults(
   function_left_parentheses_linter = NULL,
   trailing_whitespace_linter = NULL)
 ```
+
+### Reference
+
+- [Quick list of useful R packages](https://support.posit.co/hc/en-us/articles/201057987-Quick-list-of-useful-R-packages)
+- [Managing R with .Rprofile, .Renviron, Rprofile.site, Renviron.site, rsession.conf, and repos.conf](https://support.posit.co/hc/en-us/articles/360047157094-Managing-R-with-Rprofile-Renviron-Rprofile-site-Renviron-site-rsession-conf-and-repos-conf)

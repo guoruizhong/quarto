@@ -79,6 +79,7 @@ The distribution of  these QC covariates are examined for outlier peaks that fil
 
 
 
+
 ::: {.callout-tip}
 - Perform QC by finding outlier peaks in the number of genes, the count depth and the fraction of mitochondrial reads. Consider these covariates jointly instead of separtely
 - Be as permissive of QC thresholding as possible, and revisit QC if downstream clustering cannot be interpreted
@@ -87,7 +88,38 @@ The distribution of  these QC covariates are examined for outlier peaks that fil
 
 ### Mapping reads to cellular barcodes and origin mRNA molecules 
 
+![](alignment.png)
+
+Tools that same as those used in bulk RNA-seq are available for this procedure, including:
+- Burrows-Wheeler Aligner (BWA)
+- STAR
+- Kallisto
+
+Only reads that map to exonic loci with high mapping quality are considered for generation of the gene expression matrix.
+
+
 ### Normalization
+
+Each count in a count matrix represents the successful capture, reverse transciption, and sequencing of a molecule of cellular mRNA. **Count depths** for identical cellss can differ due to the variability inherent in each of these steps. 
+These variables are usually difficult to estimate  and thus typically modeled as fixed effects.
+
+
+Normalization is done by scaling count data to obtain correct relative gene expression abundances between cells.
+![](rpkm.png)
+
+![](normalization.png)
+- Reads per kilobase (RPK) is defined by multiplying the read counts of an isoform (i) by 1000 and dividing by isoform length
+- Reads per kilobase per million (RPKM) is defined to compare experiments or different samples (cells) so that additional normalization by the total fragment count is integrated in the denominator term, which is expressed in millions
+- TPM takes other isoforms into account, which contrasts with the RPKM metric. This metric quantifies the abundance of isoforms (i) using the RPK fraction across isoforms
+
+::: {.callout-note}
+- Normalized data should be log(x=1)-transformed for use with downstream analysis methods that assume data are normally distributed
+:::
+
+
+### Estimate confounding factors
+
+
 
 ### Data correction and integration
 

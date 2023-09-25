@@ -331,3 +331,8 @@ DoHeatmap(pbmc_1k_seurat, features = top10$gene)
 
 ```
 ## integration of multiple samples
+
+## Reference
+
+- [DIY Transcriptomics](https://diytranscriptomics.com/)
+- [In-depth-NGS-Data-Analysis-Course](https://hbctraining.github.io/In-depth-NGS-Data-Analysis-Course/sessionIV/lessons/SC_pre-QC.html)
