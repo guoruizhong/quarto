@@ -144,7 +144,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">September 25, 2023</p>
+        <p class="date-modified">September 26, 2023</p>
       </div>
     </div>
       
@@ -169,10 +169,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#data-correction-and-integration" id="toc-data-correction-and-integration" class="nav-link" data-scroll-target="#data-correction-and-integration"><span class="header-section-number">1.7</span> Data correction and integration</a></li>
   <li><a href="#feature-selection-and-dimensionality-reduction" id="toc-feature-selection-and-dimensionality-reduction" class="nav-link" data-scroll-target="#feature-selection-and-dimensionality-reduction"><span class="header-section-number">1.8</span> Feature selection and dimensionality reduction</a></li>
   <li><a href="#cell-and-gene-level-downstream-analysis" id="toc-cell-and-gene-level-downstream-analysis" class="nav-link" data-scroll-target="#cell-and-gene-level-downstream-analysis"><span class="header-section-number">1.9</span> Cell and gene-level downstream analysis</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">1.10</span> </a></li>
   </ul></li>
-  <li><a href="#bulk-rna-seq" id="toc-bulk-rna-seq" class="nav-link" data-scroll-target="#bulk-rna-seq"><span class="header-section-number">2</span> Bulk-RNA seq</a></li>
-  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">3</span> Reference</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">2</span> Reference</a></li>
   </ul>
 </nav>
 </nav>
@@ -241,40 +239,16 @@ Typical workflows including:
 <li>The number of genes per barcode</li>
 <li>The fraction of counts from mitochondrial genes per barcode</li>
 </ol>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
 <ul>
-<li>Make sure all cellular bacode data correspond to viable cells</li>
-<li>all reads assigned to the same barcode may not correspond to reads from the cells as a barcode may mistakenly tag multiple cells (doublet) or may not tag any cells (empty droplet)</li>
+<li><p>Make sure all cellular bacode data correspond to viable cells</p></li>
+<li><p>all reads assigned to the same barcode may not correspond to reads from the cells as a barcode may mistakenly tag multiple cells (doublet) or may not tag any cells (empty droplet)</p></li>
 </ul>
-</div>
-</div>
 <p>The distribution of these QC covariates are examined for outlier peaks that filtered out by thresholding. Condieration any of these three QC covariates in isolation can lead to misinterpretation of cellular signals. These thresholds shoule be set as permissive as possible to avoid filtering out viable cell populations unintentionally.</p>
-<div class="callout callout-style-default callout-caution callout-titled" title="Example">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Example
-</div>
-</div>
-<div class="callout-body-container callout-body">
 <ul>
-<li>Cells with high a comparatively high fraction of mitochandrial counts maybe involved in respiratory process</li>
-<li>Cells with low counts and/or genes may correspond to quiecent cells population</li>
-<li>Cells with high counts maybe larger in size</li>
+<li><p>Cells with high a comparatively high fraction of mitochandrial counts maybe involved in respiratory process</p></li>
+<li><p>Cells with low counts and/or genes may correspond to quiecent cells population</p></li>
+<li><p>Cells with high counts maybe larger in size</p></li>
 </ul>
-</div>
-</div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -296,14 +270,25 @@ Tip
 <section id="mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules" class="level3" data-number="1.4">
 <h3 data-number="1.4" class="anchored" data-anchor-id="mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules"><span class="header-section-number">1.4</span> Mapping reads to cellular barcodes and origin mRNA molecules</h3>
 <p><img src="alignment.png" class="img-fluid"></p>
-<p>Tools that same as those used in bulk RNA-seq are available for this procedure, including: - Burrows-Wheeler Aligner (BWA) - STAR - Kallisto</p>
+<p>Tools that same as those used in bulk RNA-seq are available for this procedure, including:</p>
+<ul>
+<li><p>Burrows-Wheeler Aligner (BWA)</p></li>
+<li><p>STAR</p></li>
+<li><p>Kallisto</p></li>
+</ul>
 <p>Only reads that map to exonic loci with high mapping quality are considered for generation of the gene expression matrix.</p>
 </section>
 <section id="normalization" class="level3" data-number="1.5">
 <h3 data-number="1.5" class="anchored" data-anchor-id="normalization"><span class="header-section-number">1.5</span> Normalization</h3>
 <p>Each count in a count matrix represents the successful capture, reverse transciption, and sequencing of a molecule of cellular mRNA. <strong>Count depths</strong> for identical cellss can differ due to the variability inherent in each of these steps. These variables are usually difficult to estimate and thus typically modeled as fixed effects.</p>
 <p>Normalization is done by scaling count data to obtain correct relative gene expression abundances between cells. <img src="rpkm.png" class="img-fluid"></p>
-<p><img src="normalization.png" class="img-fluid"> - Reads per kilobase (RPK) is defined by multiplying the read counts of an isoform (i) by 1000 and dividing by isoform length - Reads per kilobase per million (RPKM) is defined to compare experiments or different samples (cells) so that additional normalization by the total fragment count is integrated in the denominator term, which is expressed in millions - TPM takes other isoforms into account, which contrasts with the RPKM metric. This metric quantifies the abundance of isoforms (i) using the RPK fraction across isoforms</p>
+<p><img src="normalization.png" class="img-fluid"></p>
+<ul>
+<li><p>Reads per kilobase (RPK) is defined by multiplying the read counts of an isoform (i) by 1000 and dividing by isoform length</p></li>
+<li><p>Reads per kilobase per million (RPKM) is defined to compare experiments or different samples (cells) so that additional normalization by the total fragment count is integrated in the denominator term, which is expressed in millions.</p></li>
+<li><p>TPM takes other isoforms into account, which contrasts with the RPKM metric. This metric quantifies the abundance of isoforms (i) using the RPK fraction across isoforms.</p></li>
+</ul>
+<p><img src="rpkm_ex.png" class="img-fluid"></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -332,15 +317,9 @@ Note
 <section id="cell-and-gene-level-downstream-analysis" class="level3" data-number="1.9">
 <h3 data-number="1.9" class="anchored" data-anchor-id="cell-and-gene-level-downstream-analysis"><span class="header-section-number">1.9</span> Cell and gene-level downstream analysis</h3>
 </section>
-<section id="section" class="level3" data-number="1.10">
-<h3 data-number="1.10" class="anchored" data-anchor-id="section"><span class="header-section-number">1.10</span> </h3>
 </section>
-</section>
-<section id="bulk-rna-seq" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="bulk-rna-seq"><span class="header-section-number">2</span> Bulk-RNA seq</h2>
-</section>
-<section id="reference" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="reference"><span class="header-section-number">3</span> Reference</h2>
+<section id="reference" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="reference"><span class="header-section-number">2</span> Reference</h2>
 <ul>
 <li><a href="https://hbctraining.github.io/In-depth-NGS-Data-Analysis-Course/sessionIV/lessons/SC_pre-QC.html">Single-cell RNA-seq: raw sequencing data to counts</a></li>
 <li><a href="https://learn.gencore.bio.nyu.edu/ngs-file-formats/">File formats produced by sequencing</a></li>

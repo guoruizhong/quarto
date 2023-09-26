@@ -14,5 +14,5 @@ quarto render
 # Add to the local git repository then push to the remote repository
 
 git add .
-git commit -m "update blog"
+git commit -m "update RNAseq data analysis with R"
 git push -u guoruizhong.github.io main
