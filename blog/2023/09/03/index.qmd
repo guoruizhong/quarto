@@ -1,5 +1,5 @@
 ---
-title: "Learning scRNA-seq data analysis"
+title: "Learning scRNA-seq data analysis using Seurat package"
 date: 2023-09-13
 date-modified: last-modified
 categories:
@@ -27,7 +27,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Step1: Preparing reference files for scRNA-seq
+## Preparing reference files for scRNA-seq
 
 ```bash
 ### create conda env for mapping reads
@@ -42,17 +42,18 @@ kb ref -d human -i Homo_sapiens.GRCh38.cdna.all.index -g t2g.txt
 ```
 ![](scRNAseq1.png)
 
-## Step2: Mapping reads for scRNA-seq data
+## Mapping reads for scRNA-seq data
 
 ```bash
 kb count pbmc_1k_v3_S1_mergedLanes_R1.fastq.gz pbmc_1k_v3_S1_mergedLanes_R2.fastq.gz -i Homo_sapiens.GRCh38.cdna.all.index -x 10XV3 -g t2g.txt -t 8 --cellranger
 ```
 ![](scRNAseq2.png)
 
-## Step3: Load R packages
+## Imporing data into R
 
 ```{r}
-### load packages
+### Load R packages
+library(here)
 library(tidyverse)
 library(DropletUtils)
 library(Seurat) # a huge, powerful, and popular library for analyzing single cell genomic data
@@ -61,23 +62,18 @@ library(scales)
 library(rjson)
 library(R2HTML)
 library(DT)
-library(here)
-library(scater) #quality control and visualization for scRNA-seq data
-library(scran) #for low level processing of scRNA-seq data
+library(scater) # quality control and visualization for scRNA-seq data
+library(scran) # for low level processing of scRNA-seq data
 library(tensorflow)
-# need to install tensorflow R package first (above)
-# then run tensorflow::install_tensorflow(extra_packages='tensorflow-probability'), 
-# then install cellassign from github: https://github.com/irrationone/cellassign
 library(cellassign) 
-library(SingleR) #automated cell type annotation ('label transfer') using reference data
-library(celldex) #a large collection of reference expression datasets with curated cell type labels for use with SingleR package
+library(SingleR) # automated cell type annotation ('label transfer') using reference data
+library(celldex) # a large collection of reference expression datasets with curated cell type labels for use with SingleR package
 library(pheatmap)
 ```
 
-## Step4: Imporing data into R
 
 ```{r}
-### load raw matix
+### Load raw matix
 raw_mtx <- readMM(here(
     "data", "230907_DIY_Transcriptomics", "pbmc_1k_v3_scRNAseq_processed",
     "counts_unfiltered", "cellranger", "matrix.mtx"
@@ -330,9 +326,16 @@ DoHeatmap(pbmc_1k_seurat, features = top10$gene)
 ```{r}
 
 ```
-## integration of multiple samples
+## Integration of multiple samples
 
 ## Reference
 
 - [DIY Transcriptomics](https://diytranscriptomics.com/)
 - [In-depth-NGS-Data-Analysis-Course](https://hbctraining.github.io/In-depth-NGS-Data-Analysis-Course/sessionIV/lessons/SC_pre-QC.html)
+
+## SessionInfo
+
+
+```{r}
+sessionInfo()
+```

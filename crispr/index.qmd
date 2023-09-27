@@ -18,3 +18,4 @@ toc-title: "Contents"
 - [The Ultimate Guide To CRISPR: Mechanism, Applications, Methods & More](https://www.synthego.com/learn/crispr)
 - [Irregular Protein Expression After CRISPR Edits: Troubleshooting Tips](https://www.synthego.com/blog/crispr-irregular-protein-expression)
 - [CRISPR Editing in Primary Cells](https://www.synthego.com/crispr-primary-cells)
+- [CrispR screen analysis using R and Bioconductor](https://rockefelleruniversity.github.io/RU_CrisprScreen/presentations/singlepage/crisprscreen.html#Crispr_Screenining_analysis_in_R)

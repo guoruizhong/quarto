@@ -144,7 +144,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">September 26, 2023</p>
+        <p class="date-modified">September 27, 2023</p>
       </div>
     </div>
       
@@ -158,19 +158,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#scrna-seq" id="toc-scrna-seq" class="nav-link active" data-scroll-target="#scrna-seq"><span class="header-section-number">1</span> scRNA-seq</a>
+  <li><a href="#scrna-seq" id="toc-scrna-seq" class="nav-link active" data-scroll-target="#scrna-seq">scRNA-seq</a>
   <ul class="collapse">
-  <li><a href="#experimental-scrna-seq-workflow" id="toc-experimental-scrna-seq-workflow" class="nav-link" data-scroll-target="#experimental-scrna-seq-workflow"><span class="header-section-number">1.1</span> Experimental scRNA-seq workflow</a></li>
-  <li><a href="#file-formats-produced-by-sequencing" id="toc-file-formats-produced-by-sequencing" class="nav-link" data-scroll-target="#file-formats-produced-by-sequencing"><span class="header-section-number">1.2</span> File formats produced by sequencing</a></li>
-  <li><a href="#reads-quality-control" id="toc-reads-quality-control" class="nav-link" data-scroll-target="#reads-quality-control"><span class="header-section-number">1.3</span> Reads quality control</a></li>
-  <li><a href="#mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules" id="toc-mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules" class="nav-link" data-scroll-target="#mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules"><span class="header-section-number">1.4</span> Mapping reads to cellular barcodes and origin mRNA molecules</a></li>
-  <li><a href="#normalization" id="toc-normalization" class="nav-link" data-scroll-target="#normalization"><span class="header-section-number">1.5</span> Normalization</a></li>
-  <li><a href="#estimate-confounding-factors" id="toc-estimate-confounding-factors" class="nav-link" data-scroll-target="#estimate-confounding-factors"><span class="header-section-number">1.6</span> Estimate confounding factors</a></li>
-  <li><a href="#data-correction-and-integration" id="toc-data-correction-and-integration" class="nav-link" data-scroll-target="#data-correction-and-integration"><span class="header-section-number">1.7</span> Data correction and integration</a></li>
-  <li><a href="#feature-selection-and-dimensionality-reduction" id="toc-feature-selection-and-dimensionality-reduction" class="nav-link" data-scroll-target="#feature-selection-and-dimensionality-reduction"><span class="header-section-number">1.8</span> Feature selection and dimensionality reduction</a></li>
-  <li><a href="#cell-and-gene-level-downstream-analysis" id="toc-cell-and-gene-level-downstream-analysis" class="nav-link" data-scroll-target="#cell-and-gene-level-downstream-analysis"><span class="header-section-number">1.9</span> Cell and gene-level downstream analysis</a></li>
+  <li><a href="#experimental-scrna-seq-workflow" id="toc-experimental-scrna-seq-workflow" class="nav-link" data-scroll-target="#experimental-scrna-seq-workflow">Experimental scRNA-seq workflow</a></li>
+  <li><a href="#file-formats-produced-by-sequencing" id="toc-file-formats-produced-by-sequencing" class="nav-link" data-scroll-target="#file-formats-produced-by-sequencing">File formats produced by sequencing</a></li>
+  <li><a href="#quality-control-of-raw-reads" id="toc-quality-control-of-raw-reads" class="nav-link" data-scroll-target="#quality-control-of-raw-reads">Quality control of raw reads</a></li>
+  <li><a href="#mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules" id="toc-mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules" class="nav-link" data-scroll-target="#mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules">Mapping reads to cellular barcodes and origin mRNA molecules</a></li>
+  <li><a href="#normalization-for-quantification-of-expression" id="toc-normalization-for-quantification-of-expression" class="nav-link" data-scroll-target="#normalization-for-quantification-of-expression">Normalization for quantification of expression</a></li>
+  <li><a href="#estimate-confounding-factors" id="toc-estimate-confounding-factors" class="nav-link" data-scroll-target="#estimate-confounding-factors">Estimate confounding factors</a></li>
+  <li><a href="#data-correction-and-integration" id="toc-data-correction-and-integration" class="nav-link" data-scroll-target="#data-correction-and-integration">Data correction and integration</a></li>
+  <li><a href="#feature-selection-and-dimensionality-reduction" id="toc-feature-selection-and-dimensionality-reduction" class="nav-link" data-scroll-target="#feature-selection-and-dimensionality-reduction">Feature selection and dimensionality reduction</a></li>
+  <li><a href="#cell-and-gene-level-downstream-analysis" id="toc-cell-and-gene-level-downstream-analysis" class="nav-link" data-scroll-target="#cell-and-gene-level-downstream-analysis">Cell and gene-level downstream analysis</a></li>
   </ul></li>
-  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">2</span> Reference</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
   </ul>
 </nav>
 </nav>
@@ -184,22 +184,13 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="scrna-seq" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="scrna-seq"><span class="header-section-number">1</span> scRNA-seq</h2>
+<section id="scrna-seq" class="level2">
+<h2 class="anchored" data-anchor-id="scrna-seq">scRNA-seq</h2>
 <p><img src="scRNAseq.png" class="img-fluid"></p>
-<section id="experimental-scrna-seq-workflow" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="experimental-scrna-seq-workflow"><span class="header-section-number">1.1</span> Experimental scRNA-seq workflow</h3>
+<section id="experimental-scrna-seq-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="experimental-scrna-seq-workflow">Experimental scRNA-seq workflow</h3>
 <p><img src="experimental.png" class="img-fluid"></p>
-<div class="callout callout-style-default callout-note callout-titled" title="Typical workflows including:">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Typical workflows including:
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<p>Typical workflows including:</p>
 <ol type="1">
 <li>Single cell dissociation
 <ul>
@@ -222,16 +213,14 @@ Typical workflows including:
 <li>libraries are pooled together</li>
 </ul></li>
 </ol>
-</div>
-</div>
 </section>
-<section id="file-formats-produced-by-sequencing" class="level3" data-number="1.2">
-<h3 data-number="1.2" class="anchored" data-anchor-id="file-formats-produced-by-sequencing"><span class="header-section-number">1.2</span> File formats produced by sequencing</h3>
+<section id="file-formats-produced-by-sequencing" class="level3">
+<h3 class="anchored" data-anchor-id="file-formats-produced-by-sequencing">File formats produced by sequencing</h3>
 <p><img src="text.png" class="img-fluid"></p>
 <p><img src="asc.png" class="img-fluid"></p>
 </section>
-<section id="reads-quality-control" class="level3" data-number="1.3">
-<h3 data-number="1.3" class="anchored" data-anchor-id="reads-quality-control"><span class="header-section-number">1.3</span> Reads quality control</h3>
+<section id="quality-control-of-raw-reads" class="level3">
+<h3 class="anchored" data-anchor-id="quality-control-of-raw-reads">Quality control of raw reads</h3>
 <p>Quality control is performed to ensure that the data quality is sufficient for downstream analysis. The QC can be performed in cell level, transcript level and count data directly.</p>
 <p>To check the integrity of cel, <code>cell QC</code> is commonly performed based on three covariates:</p>
 <ol type="1">
@@ -267,28 +256,87 @@ Tip
 </div>
 </div>
 </section>
-<section id="mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules" class="level3" data-number="1.4">
-<h3 data-number="1.4" class="anchored" data-anchor-id="mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules"><span class="header-section-number">1.4</span> Mapping reads to cellular barcodes and origin mRNA molecules</h3>
+<section id="mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules" class="level3">
+<h3 class="anchored" data-anchor-id="mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules">Mapping reads to cellular barcodes and origin mRNA molecules</h3>
 <p><img src="alignment.png" class="img-fluid"></p>
 <p>Tools that same as those used in bulk RNA-seq are available for this procedure, including:</p>
 <ul>
-<li><p>Burrows-Wheeler Aligner (BWA)</p></li>
-<li><p>STAR</p></li>
-<li><p>Kallisto</p></li>
+<li>Burrows-Wheeler Aligner (BWA)</li>
+<li>STAR</li>
+<li>Kallisto</li>
+<li>Sailfish</li>
+<li>Salmon</li>
 </ul>
 <p>Only reads that map to exonic loci with high mapping quality are considered for generation of the gene expression matrix.</p>
 </section>
-<section id="normalization" class="level3" data-number="1.5">
-<h3 data-number="1.5" class="anchored" data-anchor-id="normalization"><span class="header-section-number">1.5</span> Normalization</h3>
+<section id="normalization-for-quantification-of-expression" class="level3">
+<h3 class="anchored" data-anchor-id="normalization-for-quantification-of-expression">Normalization for quantification of expression</h3>
 <p>Each count in a count matrix represents the successful capture, reverse transciption, and sequencing of a molecule of cellular mRNA. <strong>Count depths</strong> for identical cellss can differ due to the variability inherent in each of these steps. These variables are usually difficult to estimate and thus typically modeled as fixed effects.</p>
-<p>Normalization is done by scaling count data to obtain correct relative gene expression abundances between cells. <img src="rpkm.png" class="img-fluid"></p>
+<p>Normalization is done by scaling count data to obtain correct relative gene expression abundances between cells.</p>
+<p><img src="rpkm.png" class="img-fluid"></p>
+<p>These three metrics attempt to normalize for sequencing depth and gene length. Here’s how you do it for RPKM:</p>
+<ol type="1">
+<li>Count up the total reads in a sample and divide that number by 1,000,000 – this is our “per million” scaling factor.</li>
+<li>Divide the read counts by the “per million” scaling factor. This normalizes for sequencing depth, giving you reads per million (RPM)</li>
+<li>Divide the RPM values by the length of the gene, in kilobases. This gives you RPKM.</li>
+</ol>
+<p>FPKM is very similar to RPKM. RPKM was made for single-end RNA-seq, where every read corresponded to a single fragment that was sequenced. FPKM was made for paired-end RNA-seq. With paired-end RNA-seq, two reads can correspond to a single fragment, or, if one read in the pair did not map, one read can correspond to a single fragment. The only difference between RPKM and FPKM is that FPKM takes into account that two reads can map to one fragment (and so it doesn’t count this fragment twice).</p>
 <p><img src="normalization.png" class="img-fluid"></p>
-<ul>
-<li><p>Reads per kilobase (RPK) is defined by multiplying the read counts of an isoform (i) by 1000 and dividing by isoform length</p></li>
-<li><p>Reads per kilobase per million (RPKM) is defined to compare experiments or different samples (cells) so that additional normalization by the total fragment count is integrated in the denominator term, which is expressed in millions.</p></li>
-<li><p>TPM takes other isoforms into account, which contrasts with the RPKM metric. This metric quantifies the abundance of isoforms (i) using the RPK fraction across isoforms.</p></li>
-</ul>
-<p><img src="rpkm_ex.png" class="img-fluid"></p>
+<p>TPM is very similar to RPKM and FPKM. The only difference is the order of operations. Here’s how you calculate TPM:</p>
+<ol type="1">
+<li>Divide the read counts by the length of each gene in kilobases. This gives you reads per kilobase (RPK).</li>
+<li>Count up all the RPK values in a sample and divide this number by 1,000,000. This is your “per million” scaling factor.</li>
+<li>Divide the RPK values by the “per million” scaling factor. This gives you TPM.</li>
+</ol>
+<p>When calculating TPM, the only difference is that you normalize for gene length first, and then normalize for sequencing depth second. However, the effects of this difference are quite profound.</p>
+<p>When you use TPM, the sum of all TPMs in each sample are the same. This makes it easier to compare the proportion of reads that mapped to a gene in each sample. In contrast, with RPKM and FPKM, the sum of the normalized reads in each sample may be different, and this makes it harder to compare samples directly.</p>
+<p>Here’s an example. If the TPM for gene A in Sample 1 is 3.33 and the TPM in sample B is 3.33, then I know that the exact same proportion of total reads mapped to gene A in both samples. This is because the sum of the TPMs in both samples always add up to the same number (so the denominator required to calculate the proportions is the same, regardless of what sample you are looking at.)</p>
+<p>With RPKM or FPKM, the sum of normalized reads in each sample can be different. Thus, if the RPKM for gene A in Sample 1 is 3.33 and the RPKM in Sample 2 is 3.33, I would not know if the same proportion of reads in Sample 1 mapped to gene A as in Sample 2. This is because the denominator required to calculate the proportion could be different for the two samples.</p>
+<p>Using RPKM/FPKM normalization, the total number of RPKM/FPKM normalized counts for each sample will be different. Therefore, you cannot compare the normalized counts for each gene equally between samples.</p>
+<table class="table">
+<caption>Several common normalization methods exist to account for these differences:</caption>
+<thead>
+<tr class="header">
+<th>Normalization method</th>
+<th>Description</th>
+<th>Accounted factors</th>
+<th>Recommendations for use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>CPM</strong> (counts per million)</td>
+<td>counts scaled by total number of reads</td>
+<td>sequencing depth</td>
+<td>gene count comparisons between replicates of the same samplegroup; <strong>NOT for within sample comparisons or DE analysis</strong></td>
+</tr>
+<tr class="even">
+<td><strong>TPM</strong> (transcripts per kilobase million)</td>
+<td>counts per length of transcript (kb) per million reads mapped</td>
+<td>sequencing depth and gene length</td>
+<td>gene count comparisons within a sample or between samples of the same sample group; <strong>NOT for DE analysis</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>RPKM/FPKM</strong> (reads/fragments per kilobase of exon per million reads/fragments mapped)</td>
+<td>similar to TPM</td>
+<td>sequencing depth and gene length</td>
+<td>gene count comparisons between genes within a sample; <strong>NOT for between sample comparisons or DE analysis</strong></td>
+</tr>
+<tr class="even">
+<td>DESeq2’s <strong>median of ratios</strong> [<a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-10-r106">1</a>]</td>
+<td>counts divided by sample-specific size factors determined by median ratio of gene counts relative to geometric mean per gene</td>
+<td>sequencing depth and RNA composition</td>
+<td>gene count comparisons between samples and for <strong>DE analysis</strong>; <strong>NOT for within sample comparisons</strong></td>
+</tr>
+<tr class="odd">
+<td>EdgeR’s <strong>trimmed mean of M values (TMM)</strong> [<a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-3-r25">2</a>]</td>
+<td>uses a weighted trimmed mean of the log expression ratios between samples</td>
+<td>sequencing depth, RNA composition</td>
+<td>gene count comparisons between samples and for <strong>DE analysis</strong>; <strong>NOT for within sample comparisons</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Source - <a href="https://www.youtube.com/watch?v=TTUrtCY2k-w&amp;embeds_referring_euri=https%3A%2F%2Fwww.rna-seqblog.com%2F&amp;source_ve_path=MjM4NTE&amp;feature=emb_title">StatQuest</a>, <a href="https://www.rna-seqblog.com/rpkm-fpkm-and-tpm-clearly-explained/">RPKM, FPKM and TPM, clearly explained</a>, <a href="https://hbctraining.github.io/DGE_workshop_salmon/lessons/02_DGE_count_normalization.html">Count normalization with DESeq2</a></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -300,26 +348,28 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <ul>
+<li>While TPM and RPKM/FPKM normalization methods both account for sequencing depth and gene length, RPKM/FPKM are not recommended. <strong>The reason is that the normalized count values output by the RPKM/FPKM method are not comparable between samples.</strong></li>
 <li>Normalized data should be log(x=1)-transformed for use with downstream analysis methods that assume data are normally distributed</li>
 </ul>
 </div>
 </div>
 </section>
-<section id="estimate-confounding-factors" class="level3" data-number="1.6">
-<h3 data-number="1.6" class="anchored" data-anchor-id="estimate-confounding-factors"><span class="header-section-number">1.6</span> Estimate confounding factors</h3>
+<section id="estimate-confounding-factors" class="level3">
+<h3 class="anchored" data-anchor-id="estimate-confounding-factors">Estimate confounding factors</h3>
+<p><img src="confunding.png" class="img-fluid"></p>
 </section>
-<section id="data-correction-and-integration" class="level3" data-number="1.7">
-<h3 data-number="1.7" class="anchored" data-anchor-id="data-correction-and-integration"><span class="header-section-number">1.7</span> Data correction and integration</h3>
+<section id="data-correction-and-integration" class="level3">
+<h3 class="anchored" data-anchor-id="data-correction-and-integration">Data correction and integration</h3>
 </section>
-<section id="feature-selection-and-dimensionality-reduction" class="level3" data-number="1.8">
-<h3 data-number="1.8" class="anchored" data-anchor-id="feature-selection-and-dimensionality-reduction"><span class="header-section-number">1.8</span> Feature selection and dimensionality reduction</h3>
+<section id="feature-selection-and-dimensionality-reduction" class="level3">
+<h3 class="anchored" data-anchor-id="feature-selection-and-dimensionality-reduction">Feature selection and dimensionality reduction</h3>
 </section>
-<section id="cell-and-gene-level-downstream-analysis" class="level3" data-number="1.9">
-<h3 data-number="1.9" class="anchored" data-anchor-id="cell-and-gene-level-downstream-analysis"><span class="header-section-number">1.9</span> Cell and gene-level downstream analysis</h3>
+<section id="cell-and-gene-level-downstream-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="cell-and-gene-level-downstream-analysis">Cell and gene-level downstream analysis</h3>
 </section>
 </section>
-<section id="reference" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="reference"><span class="header-section-number">2</span> Reference</h2>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">Reference</h2>
 <ul>
 <li><a href="https://hbctraining.github.io/In-depth-NGS-Data-Analysis-Course/sessionIV/lessons/SC_pre-QC.html">Single-cell RNA-seq: raw sequencing data to counts</a></li>
 <li><a href="https://learn.gencore.bio.nyu.edu/ngs-file-formats/">File formats produced by sequencing</a></li>
@@ -331,6 +381,7 @@ Note
 <li><a href="https://distill.pub/2016/misread-tsne/">How to Use t-SNE Effectively</a></li>
 <li><a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006907">Ten quick tips for effective dimensionality reduction</a></li>
 <li><a href="http://mengnote.labspot.com/2012/12/calculate-correct-hypergeometric-p.html">Hypergeometric test and Fisher’s exact test</a></li>
+<li><a href="https://hbctraining.github.io/main/">Bioinformatics Training at the Harvard Chan Bioinformatics Core</a></li>
 </ul>
 
 
