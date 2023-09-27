@@ -161,6 +161,10 @@ Source - [StatQuest](https://www.youtube.com/watch?v=TTUrtCY2k-w&embeds_referrin
 
 ### Estimate confounding factors
 
+The observed read counts are affected by a combination of different factors, including biological variables and technical noise.
+
+Batch effects, systematic differences that are unrelated to any biological variation and result from sample preparation conditions, are often prominent.
+
 ![](confunding.png)
 
 ### Data correction and integration
@@ -182,3 +186,4 @@ Source - [StatQuest](https://www.youtube.com/watch?v=TTUrtCY2k-w&embeds_referrin
 - [Ten quick tips for effective dimensionality reduction](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006907)
 - [Hypergeometric test and Fisher’s exact test ](http://mengnote.labspot.com/2012/12/calculate-correct-hypergeometric-p.html)
 - [Bioinformatics Training at the Harvard Chan Bioinformatics Core](https://hbctraining.github.io/main/)
+- [ANALYSIS OF SINGLE CELL RNA-SEQ DATA](https://broadinstitute.github.io/2019_scWorkshop/)
