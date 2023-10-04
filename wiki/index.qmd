@@ -20,6 +20,21 @@ These are the collections of things that I beleived useful in my daily researh w
 - [The bumbling chemist](https://thebumblingbiochemist.com/)
 - [ToxTutor](https://www.toxmsdt.com/0-toxtutor-home.html)
 
+## Researh Labs
+
+- <https://www.jax.org> - Leading the research for tomorrow's cures
+- <https://www.snijderlab.org/> - Use systems biology to discover things about cells.
+- <https://zlab.bio/> - Zhang Feng Biological Discovery & Engineering
+- <https://www.ciccialab.com/> - Genome Integrity and Genome Editing
+- <https://sizunjianglab.com> - Investigate host-disease interaction
+- <http://rafalab.dfci.harvard.edu/> - Development of statistical tools
+- <https://hostmicrobe.org/> - Study the biological basis of diseases caused by microbes
+- <https://cheesemanlab.wi.mit.edu/> - World of cell division
+- <https://blainey.mit.edu/> - Pooled optical genetic screening in human cells
+- <https://marsonlab.org/> - Decoding and rewriting human immune cells with CRISPR
+- <https://liulab-dfci.github.io/> - Computational methods for the design (SSC), analysis (MAGeCK), hit prioritization (NEST), and visualization (VISPR) of genome-wide CRISPR screens
+
+
 ## Learning R
 
 - [An Introduction to Statistical Learning](https://www.statlearning.com/)
@@ -44,12 +59,6 @@ These are the collections of things that I beleived useful in my daily researh w
 - [Bioinformatics Training at the Harvard Chan Bioinformatics Core](https://hbctraining.github.io/main/)
 
 
-## Linux Basic
-
-- [Linux Command Cheat Sheet](https://www.guru99.com/linux-commands-cheat-sheet.html)
-- [How To Use Linux Screen](https://linuxize.com/post/how-to-use-linux-screen/)
-
-
 ## Research Proposal
 
 - [NMRC | Open Fund - Young Individual Research Grant](https://www.nmrc.gov.sg/grants/competitive-research-grants/of-yirg)
@@ -60,19 +69,6 @@ These are the collections of things that I beleived useful in my daily researh w
 
 - [The underappreciated art of creating publication-quality figures](https://www.embopress.org/doi/abs/10.15252/embr.202255114)
 
-## Researh Labs
-
-- <https://www.snijderlab.org/>
-- <https://zlab.bio/>
-- <https://www.ciccialab.com/>
-- <https://www.jax.org>
-- <https://sizunjianglab.com>
-- <http://rafalab.dfci.harvard.edu/>
-- <https://hostmicrobe.org/>
-- <https://cheesemanlab.wi.mit.edu/>
-- <https://blainey.mit.edu/>
-- <https://marsonlab.org/>
-- <https://liulab-dfci.github.io/>
 
 ## Useful Tools
 
