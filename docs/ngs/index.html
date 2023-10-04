@@ -140,7 +140,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">September 27, 2023</p>
+        <p class="date-modified">October 4, 2023</p>
       </div>
     </div>
       
@@ -267,8 +267,8 @@ Tip
 </section>
 <section id="normalization-for-quantification-of-expression" class="level3">
 <h3 class="anchored" data-anchor-id="normalization-for-quantification-of-expression">Normalization for quantification of expression</h3>
-<p>Each count in a count matrix represents the successful capture, reverse transciption, and sequencing of a molecule of cellular mRNA. <strong>Count depths</strong> for identical cellss can differ due to the variability inherent in each of these steps. These variables are usually difficult to estimate and thus typically modeled as fixed effects.</p>
-<p>Normalization is done by scaling count data to obtain correct relative gene expression abundances between cells.</p>
+<p>Why need to do normaliztion?</p>
+<p>Each count in a count matrix represents the successful capture, reverse transciption, and sequencing of a molecule of cellular mRNA. <strong>Count depths</strong> for identical cellss can differ due to the variability inherent in each of these steps. These variables are usually difficult to estimate and thus typically modeled as fixed effects. Thus, when gene expression is compared betwen cells based on count data, any difference may have arisen solely due to sampling effects. So Normalization address this issue by scaling count data to obtain correct relative gene expression abundances between cells.</p>
 <p><img src="rpkm.png" class="img-fluid"></p>
 <p>These three metrics attempt to normalize for sequencing depth and gene length. Here’s how you do it for RPKM:</p>
 <ol type="1">
@@ -358,6 +358,10 @@ Note
 </section>
 <section id="data-correction-and-integration" class="level3">
 <h3 class="anchored" data-anchor-id="data-correction-and-integration">Data correction and integration</h3>
+<p>Normalized data may still contain unwanted variability. Data correction targets further technical and biological variability covariates suchs as</p>
+<p>Biological effects: - Cell cycle effects on transcriptome - mitochondrial gene expression</p>
+<p>Technical effects: - Count depth - Batch effect - Dropout (noise)</p>
+<p>Consider the correction for biological and technical covariates separtely as these are used for different purpose and present unique challenge.</p>
 </section>
 <section id="feature-selection-and-dimensionality-reduction" class="level3">
 <h3 class="anchored" data-anchor-id="feature-selection-and-dimensionality-reduction">Feature selection and dimensionality reduction</h3>

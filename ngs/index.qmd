@@ -104,14 +104,12 @@ Only reads that map to exonic loci with high mapping quality are considered for 
 
 ### Normalization for quantification of expression
 
-Each count in a count matrix represents the successful capture, reverse transciption, and sequencing of a molecule of cellular mRNA. **Count depths** for identical cellss can differ due to the variability inherent in each of these steps. 
-These variables are usually difficult to estimate  and thus typically modeled as fixed effects.
+Why need to do normaliztion?
 
-Normalization is done by scaling count data to obtain correct relative gene expression abundances between cells.
+Each count in a count matrix represents the successful capture, reverse transciption, and sequencing of a molecule of cellular mRNA. **Count depths** for identical cellss can differ due to the variability inherent in each of these steps. 
+These variables are usually difficult to estimate  and thus typically modeled as fixed effects. Thus, when gene expression is compared betwen cells based on count data, any difference may have arisen solely due to sampling effects. So Normalization address this issue by scaling count data to obtain correct relative gene expression abundances between cells.
 
 ![](rpkm.png)
-
-
 
 These three metrics attempt to normalize for sequencing depth and gene length. Here’s how you do it for RPKM:
 
@@ -168,6 +166,20 @@ Batch effects, systematic differences that are unrelated to any biological varia
 ![](confunding.png)
 
 ### Data correction and integration
+
+Normalized data may still contain unwanted variability. Data correction targets further technical and biological variability covariates suchs as
+
+Biological effects:
+- Cell cycle effects on transcriptome
+- mitochondrial gene expression
+
+Technical effects:
+- Count depth
+- Batch effect
+- Dropout (noise)
+
+Consider the correction for biological and technical covariates separtely as these are used for different purpose and present unique challenge.
+
 
 ### Feature selection and dimensionality reduction
 
