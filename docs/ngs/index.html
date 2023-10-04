@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2023-04-09">
 
-<title>NGS</title>
+<title>scRNA-seq</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -122,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">NGS</h1>
+      <h1 class="title">scRNA-seq</h1>
                       </div>
   </div>
     
@@ -154,9 +154,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#scrna-seq" id="toc-scrna-seq" class="nav-link active" data-scroll-target="#scrna-seq">scRNA-seq</a>
-  <ul class="collapse">
-  <li><a href="#experimental-scrna-seq-workflow" id="toc-experimental-scrna-seq-workflow" class="nav-link" data-scroll-target="#experimental-scrna-seq-workflow">Experimental scRNA-seq workflow</a></li>
+  <li><a href="#experimental-scrna-seq-workflow" id="toc-experimental-scrna-seq-workflow" class="nav-link active" data-scroll-target="#experimental-scrna-seq-workflow">Experimental scRNA-seq workflow</a></li>
   <li><a href="#file-formats-produced-by-sequencing" id="toc-file-formats-produced-by-sequencing" class="nav-link" data-scroll-target="#file-formats-produced-by-sequencing">File formats produced by sequencing</a></li>
   <li><a href="#quality-control-of-raw-reads" id="toc-quality-control-of-raw-reads" class="nav-link" data-scroll-target="#quality-control-of-raw-reads">Quality control of raw reads</a></li>
   <li><a href="#mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules" id="toc-mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules" class="nav-link" data-scroll-target="#mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules">Mapping reads to cellular barcodes and origin mRNA molecules</a></li>
@@ -165,7 +163,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#data-correction-and-integration" id="toc-data-correction-and-integration" class="nav-link" data-scroll-target="#data-correction-and-integration">Data correction and integration</a></li>
   <li><a href="#feature-selection-and-dimensionality-reduction" id="toc-feature-selection-and-dimensionality-reduction" class="nav-link" data-scroll-target="#feature-selection-and-dimensionality-reduction">Feature selection and dimensionality reduction</a></li>
   <li><a href="#cell-and-gene-level-downstream-analysis" id="toc-cell-and-gene-level-downstream-analysis" class="nav-link" data-scroll-target="#cell-and-gene-level-downstream-analysis">Cell and gene-level downstream analysis</a></li>
-  </ul></li>
   <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
   </ul>
 </nav>
@@ -180,11 +177,9 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="scrna-seq" class="level2">
-<h2 class="anchored" data-anchor-id="scrna-seq">scRNA-seq</h2>
 <p><img src="scRNAseq.png" class="img-fluid"></p>
-<section id="experimental-scrna-seq-workflow" class="level3">
-<h3 class="anchored" data-anchor-id="experimental-scrna-seq-workflow">Experimental scRNA-seq workflow</h3>
+<section id="experimental-scrna-seq-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="experimental-scrna-seq-workflow">Experimental scRNA-seq workflow</h2>
 <p><img src="experimental.png" class="img-fluid"></p>
 <p>Typical workflows including:</p>
 <ol type="1">
@@ -210,13 +205,13 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 </ol>
 </section>
-<section id="file-formats-produced-by-sequencing" class="level3">
-<h3 class="anchored" data-anchor-id="file-formats-produced-by-sequencing">File formats produced by sequencing</h3>
+<section id="file-formats-produced-by-sequencing" class="level2">
+<h2 class="anchored" data-anchor-id="file-formats-produced-by-sequencing">File formats produced by sequencing</h2>
 <p><img src="text.png" class="img-fluid"></p>
 <p><img src="asc.png" class="img-fluid"></p>
 </section>
-<section id="quality-control-of-raw-reads" class="level3">
-<h3 class="anchored" data-anchor-id="quality-control-of-raw-reads">Quality control of raw reads</h3>
+<section id="quality-control-of-raw-reads" class="level2">
+<h2 class="anchored" data-anchor-id="quality-control-of-raw-reads">Quality control of raw reads</h2>
 <p>Quality control is performed to ensure that the data quality is sufficient for downstream analysis. The QC can be performed in cell level, transcript level and count data directly.</p>
 <p>To check the integrity of cel, <code>cell QC</code> is commonly performed based on three covariates:</p>
 <ol type="1">
@@ -252,8 +247,8 @@ Tip
 </div>
 </div>
 </section>
-<section id="mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules" class="level3">
-<h3 class="anchored" data-anchor-id="mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules">Mapping reads to cellular barcodes and origin mRNA molecules</h3>
+<section id="mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules" class="level2">
+<h2 class="anchored" data-anchor-id="mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules">Mapping reads to cellular barcodes and origin mRNA molecules</h2>
 <p><img src="alignment.png" class="img-fluid"></p>
 <p>Tools that same as those used in bulk RNA-seq are available for this procedure, including:</p>
 <ul>
@@ -265,8 +260,8 @@ Tip
 </ul>
 <p>Only reads that map to exonic loci with high mapping quality are considered for generation of the gene expression matrix.</p>
 </section>
-<section id="normalization-for-quantification-of-expression" class="level3">
-<h3 class="anchored" data-anchor-id="normalization-for-quantification-of-expression">Normalization for quantification of expression</h3>
+<section id="normalization-for-quantification-of-expression" class="level2">
+<h2 class="anchored" data-anchor-id="normalization-for-quantification-of-expression">Normalization for quantification of expression</h2>
 <p>Why need to do normaliztion?</p>
 <p>Each count in a count matrix represents the successful capture, reverse transciption, and sequencing of a molecule of cellular mRNA. <strong>Count depths</strong> for identical cellss can differ due to the variability inherent in each of these steps. These variables are usually difficult to estimate and thus typically modeled as fixed effects. Thus, when gene expression is compared betwen cells based on count data, any difference may have arisen solely due to sampling effects. So Normalization address this issue by scaling count data to obtain correct relative gene expression abundances between cells.</p>
 <p><img src="rpkm.png" class="img-fluid"></p>
@@ -350,25 +345,24 @@ Note
 </div>
 </div>
 </section>
-<section id="estimate-confounding-factors" class="level3">
-<h3 class="anchored" data-anchor-id="estimate-confounding-factors">Estimate confounding factors</h3>
+<section id="estimate-confounding-factors" class="level2">
+<h2 class="anchored" data-anchor-id="estimate-confounding-factors">Estimate confounding factors</h2>
 <p>The observed read counts are affected by a combination of different factors, including biological variables and technical noise.</p>
 <p>Batch effects, systematic differences that are unrelated to any biological variation and result from sample preparation conditions, are often prominent.</p>
 <p><img src="confunding.png" class="img-fluid"></p>
 </section>
-<section id="data-correction-and-integration" class="level3">
-<h3 class="anchored" data-anchor-id="data-correction-and-integration">Data correction and integration</h3>
+<section id="data-correction-and-integration" class="level2">
+<h2 class="anchored" data-anchor-id="data-correction-and-integration">Data correction and integration</h2>
 <p>Normalized data may still contain unwanted variability. Data correction targets further technical and biological variability covariates suchs as</p>
 <p>Biological effects: - Cell cycle effects on transcriptome - mitochondrial gene expression</p>
 <p>Technical effects: - Count depth - Batch effect - Dropout (noise)</p>
 <p>Consider the correction for biological and technical covariates separtely as these are used for different purpose and present unique challenge.</p>
 </section>
-<section id="feature-selection-and-dimensionality-reduction" class="level3">
-<h3 class="anchored" data-anchor-id="feature-selection-and-dimensionality-reduction">Feature selection and dimensionality reduction</h3>
+<section id="feature-selection-and-dimensionality-reduction" class="level2">
+<h2 class="anchored" data-anchor-id="feature-selection-and-dimensionality-reduction">Feature selection and dimensionality reduction</h2>
 </section>
-<section id="cell-and-gene-level-downstream-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="cell-and-gene-level-downstream-analysis">Cell and gene-level downstream analysis</h3>
-</section>
+<section id="cell-and-gene-level-downstream-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="cell-and-gene-level-downstream-analysis">Cell and gene-level downstream analysis</h2>
 </section>
 <section id="reference" class="level2">
 <h2 class="anchored" data-anchor-id="reference">Reference</h2>

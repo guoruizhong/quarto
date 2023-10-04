@@ -1,5 +1,5 @@
 ---
-title: NGS
+title: scRNA-seq
 date: 2023-04-09
 date-modified: last-modified
 title-block-banner: "#212529"
@@ -17,12 +17,12 @@ toc-title: "Contents"
 ---
 
 
-## scRNA-seq
+
 
 
 ![](scRNAseq.png)
 
-### Experimental scRNA-seq workflow
+## Experimental scRNA-seq workflow
 
 
 ![](experimental.png)
@@ -46,14 +46,14 @@ Typical workflows including:
     - libraries are pooled together
 
 
-### File formats produced by sequencing
+## File formats produced by sequencing
 
 
 ![](text.png)
 
 ![](asc.png)
 
-### Quality control of raw reads 
+## Quality control of raw reads 
 
 
 Quality control is performed to ensure that the data quality is sufficient for downstream analysis. The QC can be performed in cell level,  transcript level and count data directly.
@@ -87,7 +87,7 @@ The distribution of  these QC covariates are examined for outlier peaks that fil
 - If the distribution of QC covariates differ between samples, QC thresholds should be determined separately for each sample to account for sample quality differences.
 :::
 
-### Mapping reads to cellular barcodes and origin mRNA molecules 
+## Mapping reads to cellular barcodes and origin mRNA molecules 
 
 ![](alignment.png)
 
@@ -102,7 +102,7 @@ Tools that same as those used in bulk RNA-seq are available for this procedure, 
 Only reads that map to exonic loci with high mapping quality are considered for generation of the gene expression matrix.
 
 
-### Normalization for quantification of expression
+## Normalization for quantification of expression
 
 Why need to do normaliztion?
 
@@ -157,7 +157,7 @@ Source - [StatQuest](https://www.youtube.com/watch?v=TTUrtCY2k-w&embeds_referrin
 :::
 
 
-### Estimate confounding factors
+## Estimate confounding factors
 
 The observed read counts are affected by a combination of different factors, including biological variables and technical noise.
 
@@ -165,7 +165,7 @@ Batch effects, systematic differences that are unrelated to any biological varia
 
 ![](confunding.png)
 
-### Data correction and integration
+## Data correction and integration
 
 Normalized data may still contain unwanted variability. Data correction targets further technical and biological variability covariates suchs as
 
@@ -181,9 +181,9 @@ Technical effects:
 Consider the correction for biological and technical covariates separtely as these are used for different purpose and present unique challenge.
 
 
-### Feature selection and dimensionality reduction
+## Feature selection and dimensionality reduction
 
-### Cell and gene-level downstream analysis
+## Cell and gene-level downstream analysis
 
 ## Reference
 
