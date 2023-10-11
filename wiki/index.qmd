@@ -46,8 +46,6 @@ These are the collections of things that I beleived useful in my daily researh w
 - [The underappreciated art of creating publication-quality figures](https://www.embopress.org/doi/abs/10.15252/embr.202255114)
 
 
-
-
 ## Useful Tools
 
 - [DIY.transcriptomics](https://diytranscriptomics.com/lab/)
@@ -89,3 +87,27 @@ These are the collections of things that I beleived useful in my daily researh w
 - <https://morphoscape.wordpress.com/category/tech/>
 - <https://albert-rapp.de/>
 - <https://jokergoo.github.io/>
+
+## CRISPR
+
+- [Guide Design Resources](https://zlab.bio/guide-design-resources)
+- [New CRISPR Method Allows Scientists to Understand Impact of Subtle Mutations](https://www.cuimc.columbia.edu/news/new-crispr-method-allows-scientists-understand-impact-subtle-mutations)
+- [CRISPR Transfection Protocols Guide: How To Select The Best Method](https://www.synthego.com/guide/how-to-use-crispr/transfection-protocols)
+- [How To Use CRISPR: Your Guide to Successful Genome Engineering](https://www.synthego.com/guide/how-to-use-crispr)
+- [The Ultimate Guide To CRISPR: Mechanism, Applications, Methods & More](https://www.synthego.com/learn/crispr)
+- [Irregular Protein Expression After CRISPR Edits: Troubleshooting Tips](https://www.synthego.com/blog/crispr-irregular-protein-expression)
+- [CRISPR Editing in Primary Cells](https://www.synthego.com/crispr-primary-cells)
+- [CrispR screen analysis using R and Bioconductor](https://rockefelleruniversity.github.io/RU_CrisprScreen/presentations/singlepage/crisprscreen.html#Crispr_Screenining_analysis_in_R)
+
+## Books
+
+- [R for Data science](https://r4ds.hadley.nz/)
+- [R Graphics Cookbook, 2nd edition](https://r-graphics.org/)
+- [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/)
+- [Modern Statistics for Modern Biology](https://web.stanford.edu/class/bios221/book/)
+- [An Introduction to Statistical Learning](https://www.statlearning.com/)
+- [Functional Programming](https://dcl-prog.stanford.edu/)
+- [The Epidemiologist R Handbook](https://epirhandbook.com/en/index.html)
+- [Data Analysis and Prediction Algorithms with R](http://rafalab.dfci.harvard.edu/dsbook/)
+- [Data Analysis in Genome Biology](https://girke.bioinformatics.ucr.edu/GEN242/)
+- [PH525x series - Biomedical Data Science](http://genomicsclass.github.io/book/)

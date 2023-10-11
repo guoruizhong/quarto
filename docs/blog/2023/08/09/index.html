@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Guorui Zhong">
 <meta name="description" content="Batch effects are those variables that ideally should not be there">
-<title>Remove batch effects in high-throughput experiments</title>
+<title>Batch effects in high-throughput experiments</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -113,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../../../blog/index.html" rel="" target="">
- <span class="menu-text">Learning!</span></a>
+ <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../../../keyboard/index.html" rel="" target="">
@@ -123,18 +123,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="../../../../wiki/index.html" rel="" target="">
  <span class="menu-text">Wiki</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../../../ngs/index.html" rel="" target="">
- <span class="menu-text">NGS</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../../../imaging/index.html" rel="" target="">
- <span class="menu-text">Imaging</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../../../crispr/index.html" rel="" target="">
- <span class="menu-text">CRISPR</span></a>
-  </li>  
 </ul>
 <div class="quarto-navbar-tools">
 </div>
@@ -142,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div> <!-- /container-fluid -->
     </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full"><div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Remove batch effects in high-throughput experiments</h1>
+      <h1 class="title">Batch effects in high-throughput experiments</h1>
                   <div>
         <div class="description">
           Batch effects are those variables that ideally should not be there
@@ -150,7 +138,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">batch effect</div>
-                <div class="quarto-category">HTS</div>
               </div>
                   </div>
   </div>
@@ -175,7 +162,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">Friday, September 8, 2023</p>
+        <p class="date-modified">Sunday, October 8, 2023</p>
       </div>
     </div>
       
@@ -189,7 +176,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
 <li><a href="#what-is-batch-effect" id="toc-what-is-batch-effect" class="nav-link active" data-scroll-target="#what-is-batch-effect">What is batch effect?</a></li>
   <li><a href="#why-is-batch-effect-a-problem" id="toc-why-is-batch-effect-a-problem" class="nav-link" data-scroll-target="#why-is-batch-effect-a-problem">Why is batch effect a problem</a></li>
-  <li><a href="#setting-up-the-data" id="toc-setting-up-the-data" class="nav-link" data-scroll-target="#setting-up-the-data">Setting up the data</a></li>
+  <li>
+<a href="#sva-package-for-removing-batch-effects" id="toc-sva-package-for-removing-batch-effects" class="nav-link" data-scroll-target="#sva-package-for-removing-batch-effects">SVA package for removing batch effects</a>
+  <ul>
+<li><a href="#setting-up-the-data" id="toc-setting-up-the-data" class="nav-link" data-scroll-target="#setting-up-the-data">Setting up the data</a></li>
+  </ul>
+</li>
   <li><a href="#adjusting-for-batch-effects-with-a-linear-model" id="toc-adjusting-for-batch-effects-with-a-linear-model" class="nav-link" data-scroll-target="#adjusting-for-batch-effects-with-a-linear-model">Adjusting for batch effects with a linear model</a></li>
   <li><a href="#adjust-known-batches-using-combat" id="toc-adjust-known-batches-using-combat" class="nav-link" data-scroll-target="#adjust-known-batches-using-combat">Adjust known batches using {Combat}</a></li>
   <li><a href="#comparing-combat-and-linear-adjustment" id="toc-comparing-combat-and-linear-adjustment" class="nav-link" data-scroll-target="#comparing-combat-and-linear-adjustment">Comparing {ComBat} and linear adjustment</a></li>
@@ -212,7 +204,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Most of the time, batch effect deviate our finding from the real biological relevant information</li>
 </ul>
 <p>Try our best to eliminate batch effect to get a real difference between conditions!</p>
-</section><section id="setting-up-the-data" class="level2"><h2 class="anchored" data-anchor-id="setting-up-the-data">Setting up the data</h2>
+</section><section id="sva-package-for-removing-batch-effects" class="level2"><h2 class="anchored" data-anchor-id="sva-package-for-removing-batch-effects">SVA package for removing batch effects</h2>
+<p>The assumption is that you will be trying to analyze the association between the variables of interest and gene expression, adjusting for the adjustment variables</p>
+<section id="setting-up-the-data" class="level3"><h3 class="anchored" data-anchor-id="setting-up-the-data">Setting up the data</h3>
 <ul>
 <li>The data should be a matrix with features in the rows and samples in the columns.</li>
 <li>The data should be standardized before applying for correction.</li>
@@ -220,7 +214,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="sample.png" class="img-fluid"></p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Load packages</span></span>
-<span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">here</span>, <span class="va">tidyverse</span>, <span class="va">sva</span>, <span class="va">bladderbatch</span>, <span class="va">pamr</span>, <span class="va">limma</span>, <span class="va">survival</span><span class="op">)</span></span>
+<span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span></span>
+<span>    <span class="va">here</span>,</span>
+<span>    <span class="va">tidyverse</span>,</span>
+<span>    <span class="va">sva</span>,</span>
+<span>    <span class="va">bladderbatch</span>,</span>
+<span>    <span class="va">pamr</span>,</span>
+<span>    <span class="va">limma</span>,</span>
+<span>    <span class="va">survival</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">### Load data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">bladderdata</span><span class="op">)</span></span>
 <span><span class="co">### Get the expression data matrix</span></span>
@@ -323,12 +325,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="co">## GSM71024.CEL      6  Normal     3 Normal</span></span>
 <span></span>
 <span><span class="co">### Create full model matrix, including both the adjustment variables and the variable of interest (cancer status)</span></span>
-<span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">cancer</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">pheno</span><span class="op">)</span></span>
+<span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">cancer</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">pheno</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">### Create null model matrix, ontains only the adjustment variables.</span></span>
 <span><span class="va">mod0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="fl">1</span>, data <span class="op">=</span> <span class="va">pheno</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="adjusting-for-batch-effects-with-a-linear-model" class="level2"><h2 class="anchored" data-anchor-id="adjusting-for-batch-effects-with-a-linear-model">Adjusting for batch effects with a linear model</h2>
+</section></section><section id="adjusting-for-batch-effects-with-a-linear-model" class="level2"><h2 class="anchored" data-anchor-id="adjusting-for-batch-effects-with-a-linear-model">Adjusting for batch effects with a linear model</h2>
 <p>In this case, we use two models. - One with the variable we care about - cancer status - the other is just the known adjustment variables, in this case, we assume none</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">cancer</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">batch</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">pheno</span><span class="op">)</span></span>

@@ -580,5 +580,8 @@
   },
   "keyboard/index.qmd": {
     "index.html": "7cbb6af6"
+  },
+  "blog/2023/10/01/index.qmd": {
+    "index.html": "292f9cae"
   }
 }

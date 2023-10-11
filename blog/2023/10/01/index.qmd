@@ -1,26 +1,11 @@
 ---
-title: scRNA-seq
-date: 2023-04-09
+title: General understanding of scRNA-seq data analysis
+date: 2023-10-01
 date-modified: last-modified
-title-block-banner: "#212529"
-published-title: Last updated
-toc: true
-toc-location: left
-toc-title: "Contents"
-# format:
-#   html:
-#     # toc: true
-#     html-math-method: katex
-#     number-sections: true
-#     number-depth: 3
-    # css: styles.css
+categories: 
+  - scRNA-seq
+image: scRNAseq.png
 ---
-
-
-
-
-
-![](scRNAseq.png)
 
 ## Experimental scRNA-seq workflow
 

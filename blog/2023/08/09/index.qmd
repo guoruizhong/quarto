@@ -1,10 +1,9 @@
 ---
-title: "Remove batch effects in high-throughput experiments"
+title: "Batch effects in high-throughput experiments"
 date: 2023-08-09
 date-modified: last-modified
 categories:
   - batch effect
-  - HTS
 image: index.png
 description: Batch effects are those variables that ideally should not be there
 ---
@@ -37,7 +36,12 @@ All of these factors are considered to be factors as batches
 
 Try our best to eliminate batch effect to get a real difference between conditions! 
 
-## Setting up the data
+## SVA package for removing batch effects
+
+The assumption is that you will be trying to analyze the association between the variables of
+interest and gene expression, adjusting for the adjustment variables
+
+### Setting up the data
 
 - The data should be a matrix with features in the rows and samples in the columns.
 - The data should be standardized before applying for correction.
@@ -48,7 +52,15 @@ Try our best to eliminate batch effect to get a real difference between conditio
 #| warning: false
 
 ### Load packages
-pacman::p_load(here, tidyverse, sva, bladderbatch, pamr, limma, survival)
+pacman::p_load(
+    here,
+    tidyverse,
+    sva,
+    bladderbatch,
+    pamr,
+    limma,
+    survival
+)
 ### Load data
 data(bladderdata)
 ### Get the expression data matrix
@@ -60,7 +72,7 @@ pheno <- pData(bladderEset)
 head(pheno)
 
 ### Create full model matrix, including both the adjustment variables and the variable of interest (cancer status)
-mod <- model.matrix(~as.matrix(cancer), data = pheno)
+mod <- model.matrix(~as.factor(cancer), data = pheno)
 
 ### Create null model matrix, ontains only the adjustment variables.
 mod0 <- model.matrix(~1, data = pheno) 
