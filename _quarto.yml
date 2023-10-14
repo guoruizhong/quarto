@@ -36,8 +36,8 @@ website:
         file: "keyboard/index.qmd"
       - text: "Wiki"
         file: "wiki/index.qmd"
-      # - text: "Books"
-      #   file: "books/index.qmd"
+      - text: "CRISPR"
+        file: "crispr/index.qmd"
       # - text: "Now"
       #   file: "now/index.qmd"
       # - icon: rss
