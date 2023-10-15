@@ -15,13 +15,13 @@ toc-title: "Contents"
 
 ### ***Navigation***
 
-`CTRL + A` : Move the cursor to the beginning of the line
+`Ctrl` + `A` : Move the cursor to the beginning of the line
 
-`CTRL + E` : Move the cursor to the end of the line
+`Ctrl` + `E` : Move the cursor to the end of the line
 
-`OPTION + Left Arrow` : Move the cursor one word backward
+`OPTION` + `Left Arrow` : Move the cursor one word backward
 
-`OPTION + Right arrow` : Move the cursor one word forward
+`OPTION` + `Right arrow` : Move the cursor one word forward
 
 `Left Arrow` : Move the cursor one character backward
 
@@ -29,33 +29,32 @@ toc-title: "Contents"
 
 ### ***Deletion***
 
-`CTRL + U` : Delete the current line
+`Ctrl` + `U` : Delete the current line
 
-`CTRL + K` : Delete from the cursor to the end of the line
+`Ctrl` + `K` : Delete from the cursor to the end of the line
 
-`ESC + Backspace` : Delete one word backward
+`Ctrl` + `L` : Clear the screen
 
-`CTRL + W` : Delete one word backward
+`Ctrl` + `W` : Delete one word backward
 
-`CTRL + D` : Delete one character forward
+`Ctrl` + `D` : Delete one character forward
 
-`Fn + Backspace` : Delete one character forward
+`Fn` + `Backspace` : Delete one character forward
 
 `Backspace` : Delete one character backward
 
-`CTRL + L` : Clear the screen
 
 ### ***Undo***
 
-`CTRL + _` : Undo the last change
+`Ctrl` + `_` : Undo the last change
 
 ### ***Process and Shell***
 
-`CTRL + C` : Terminate the running foreground process
+`Ctrl` + `C` : Terminate the running foreground process
 
-`CTRL + Z` : Suspend the running foreground process
+`Ctrl` + `Z` : Suspend the running foreground process
 
-`CTRL + D` : Exit current shell
+`Ctrl` + `D` : Exit current shell
 
 ### ***History***
 
@@ -63,9 +62,9 @@ toc-title: "Contents"
 
 `Down Arrow` : Recall the next command in history
 
-`CTRL + R` : Search the command history
+`Ctrl` + `R` : Search the command history
 
-`CTRL + G` : Escape from command search mode
+`Ctrl` + `G` : Escape from command search mode
 `!!` : Execute the last typed command
 
 `!pw` : Execute the last command in history that begins with pw
@@ -75,9 +74,9 @@ toc-title: "Contents"
 
 `TAB` : Auto-complete the typed command
 
-`TAB TAB` : Show list of commands
+`TAB` `TAB` : Show list of commands
 
-`TAB TAB TAB` ... : Cycle through matched commands
+`TAB` `TAB` `TAB` ... : Cycle through matched commands
 
 ### ***List all Keyboard Shortcuts***
 
