@@ -146,22 +146,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#zsh" id="toc-zsh" class="nav-link active" data-scroll-target="#zsh">ZSH</a>
-  <ul class="collapse">
-  <li><a href="#navigation" id="toc-navigation" class="nav-link" data-scroll-target="#navigation"><strong><em>Navigation</em></strong></a></li>
-  <li><a href="#deletion" id="toc-deletion" class="nav-link" data-scroll-target="#deletion"><strong><em>Deletion</em></strong></a></li>
-  <li><a href="#undo" id="toc-undo" class="nav-link" data-scroll-target="#undo"><strong><em>Undo</em></strong></a></li>
-  <li><a href="#process-and-shell" id="toc-process-and-shell" class="nav-link" data-scroll-target="#process-and-shell"><strong><em>Process and Shell</em></strong></a></li>
-  <li><a href="#history" id="toc-history" class="nav-link" data-scroll-target="#history"><strong><em>History</em></strong></a></li>
-  <li><a href="#auto-completion" id="toc-auto-completion" class="nav-link" data-scroll-target="#auto-completion"><strong><em>Auto-completion</em></strong></a></li>
-  <li><a href="#list-all-keyboard-shortcuts" id="toc-list-all-keyboard-shortcuts" class="nav-link" data-scroll-target="#list-all-keyboard-shortcuts"><strong><em>List all Keyboard Shortcuts</em></strong></a></li>
-  </ul></li>
-  <li><a href="#vscode" id="toc-vscode" class="nav-link" data-scroll-target="#vscode">VSCode</a>
-  <ul class="collapse">
-  <li><a href="#general" id="toc-general" class="nav-link" data-scroll-target="#general"><strong><em>General</em></strong></a></li>
-  <li><a href="#editor" id="toc-editor" class="nav-link" data-scroll-target="#editor"><strong><em>Editor</em></strong></a></li>
-  <li><a href="#search-and-replace" id="toc-search-and-replace" class="nav-link" data-scroll-target="#search-and-replace"><strong><em>Search and Replace</em></strong></a></li>
-  </ul></li>
+  <li><a href="#zshbash" id="toc-zshbash" class="nav-link active" data-scroll-target="#zshbash">Zsh/Bash</a></li>
+  <li><a href="#vscode" id="toc-vscode" class="nav-link" data-scroll-target="#vscode">VSCode</a></li>
   </ul>
 </nav>
 </nav>
@@ -176,61 +162,132 @@ ul.task-list li input[type="checkbox"] {
 
 
 <!-- ![](keyboard.jpg) -->
-<section id="zsh" class="level2">
-<h2 class="anchored" data-anchor-id="zsh">ZSH</h2>
-<section id="navigation" class="level3">
-<h3 class="anchored" data-anchor-id="navigation"><strong><em>Navigation</em></strong></h3>
-<p><code>Ctrl</code> + <code>A</code> : Move the cursor to the beginning of the line</p>
-<p><code>Ctrl</code> + <code>E</code> : Move the cursor to the end of the line</p>
-<p><code>OPTION</code> + <code>Left Arrow</code> : Move the cursor one word backward</p>
-<p><code>OPTION</code> + <code>Right arrow</code> : Move the cursor one word forward</p>
-<p><code>Left Arrow</code> : Move the cursor one character backward</p>
-<p><code>Right Arrow</code> : Move the cursor one character forward</p>
+<section id="zshbash" class="level1">
+<h1>Zsh/Bash</h1>
+<table class="table-striped table-hover table">
+<caption>ZSH/Bash</caption>
+<colgroup>
+<col style="width: 40%">
+<col style="width: 60%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Ctrl</code> + <code>A</code></td>
+<td>Move the cursor to the beginning of the line</td>
+</tr>
+<tr class="even">
+<td><code>Ctrl</code> + <code>E</code></td>
+<td>Move the cursor to the end of the line</td>
+</tr>
+<tr class="odd">
+<td><code>Opt</code> + <code>←</code></td>
+<td>Move the cursor one word backward</td>
+</tr>
+<tr class="even">
+<td><code>Opt</code> + <code>→</code></td>
+<td>Move the cursor one word forward</td>
+</tr>
+<tr class="odd">
+<td><code>←</code></td>
+<td>Move the cursor one character backward</td>
+</tr>
+<tr class="even">
+<td><code>→</code></td>
+<td>Move the cursor one character forward</td>
+</tr>
+<tr class="odd">
+<td><code>Ctrl</code> + <code>U</code></td>
+<td>Delete the current line</td>
+</tr>
+<tr class="even">
+<td><code>Ctrl</code> + <code>K</code></td>
+<td>Delete from the cursor to the end of the line</td>
+</tr>
+<tr class="odd">
+<td><code>Ctrl</code> + <code>L</code></td>
+<td>Clear the screen</td>
+</tr>
+<tr class="even">
+<td><code>Ctrl</code> + <code>W</code></td>
+<td>Delete one word backward</td>
+</tr>
+<tr class="odd">
+<td><code>Ctrl</code> + <code>D</code></td>
+<td>Delete one character forward</td>
+</tr>
+<tr class="even">
+<td><code>Fn</code> + <code>Backspace</code></td>
+<td>Delete one character forward</td>
+</tr>
+<tr class="odd">
+<td><code>Backspace</code></td>
+<td>Delete one character backward</td>
+</tr>
+<tr class="even">
+<td><code>Ctrl</code> + <code>_</code></td>
+<td>Undo the last change</td>
+</tr>
+<tr class="odd">
+<td><code>Ctrl</code> + <code>C</code></td>
+<td>Terminate the running foreground process</td>
+</tr>
+<tr class="even">
+<td><code>Ctrl</code> + <code>Z</code></td>
+<td>Suspend the running foreground process</td>
+</tr>
+<tr class="odd">
+<td><code>Ctrl</code> + <code>D</code></td>
+<td>Exit current shell</td>
+</tr>
+<tr class="even">
+<td><code>↑</code></td>
+<td>Recall the previous command in history</td>
+</tr>
+<tr class="odd">
+<td><code>↓</code></td>
+<td>Recall the next command in history</td>
+</tr>
+<tr class="even">
+<td><code>Ctrl</code> + <code>R</code></td>
+<td>Search the command history</td>
+</tr>
+<tr class="odd">
+<td><code>Ctrl</code> + <code>G</code></td>
+<td>Escape from command search mode</td>
+</tr>
+<tr class="even">
+<td><code>!!</code></td>
+<td>Execute the last typed command</td>
+</tr>
+<tr class="odd">
+<td><code>!pw</code></td>
+<td>Execute the last command in history that begins with pw</td>
+</tr>
+<tr class="even">
+<td><code>TAB</code></td>
+<td>Auto-complete the typed command</td>
+</tr>
+<tr class="odd">
+<td><code>TAB</code> <code>TAB</code></td>
+<td>Show list of commands</td>
+</tr>
+<tr class="even">
+<td><code>TAB</code> <code>TAB</code> <code>TAB</code> <code>...</code></td>
+<td>Cycle through matched commands</td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="deletion" class="level3">
-<h3 class="anchored" data-anchor-id="deletion"><strong><em>Deletion</em></strong></h3>
-<p><code>Ctrl</code> + <code>U</code> : Delete the current line</p>
-<p><code>Ctrl</code> + <code>K</code> : Delete from the cursor to the end of the line</p>
-<p><code>Ctrl</code> + <code>L</code> : Clear the screen</p>
-<p><code>Ctrl</code> + <code>W</code> : Delete one word backward</p>
-<p><code>Ctrl</code> + <code>D</code> : Delete one character forward</p>
-<p><code>Fn</code> + <code>Backspace</code> : Delete one character forward</p>
-<p><code>Backspace</code> : Delete one character backward</p>
-</section>
-<section id="undo" class="level3">
-<h3 class="anchored" data-anchor-id="undo"><strong><em>Undo</em></strong></h3>
-<p><code>Ctrl</code> + <code>_</code> : Undo the last change</p>
-</section>
-<section id="process-and-shell" class="level3">
-<h3 class="anchored" data-anchor-id="process-and-shell"><strong><em>Process and Shell</em></strong></h3>
-<p><code>Ctrl</code> + <code>C</code> : Terminate the running foreground process</p>
-<p><code>Ctrl</code> + <code>Z</code> : Suspend the running foreground process</p>
-<p><code>Ctrl</code> + <code>D</code> : Exit current shell</p>
-</section>
-<section id="history" class="level3">
-<h3 class="anchored" data-anchor-id="history"><strong><em>History</em></strong></h3>
-<p><code>Up Arrow</code> : Recall the previous command in history</p>
-<p><code>Down Arrow</code> : Recall the next command in history</p>
-<p><code>Ctrl</code> + <code>R</code> : Search the command history</p>
-<p><code>Ctrl</code> + <code>G</code> : Escape from command search mode <code>!!</code> : Execute the last typed command</p>
-<p><code>!pw</code> : Execute the last command in history that begins with pw</p>
-</section>
-<section id="auto-completion" class="level3">
-<h3 class="anchored" data-anchor-id="auto-completion"><strong><em>Auto-completion</em></strong></h3>
-<p><code>TAB</code> : Auto-complete the typed command</p>
-<p><code>TAB</code> <code>TAB</code> : Show list of commands</p>
-<p><code>TAB</code> <code>TAB</code> <code>TAB</code> … : Cycle through matched commands</p>
-</section>
-<section id="list-all-keyboard-shortcuts" class="level3">
-<h3 class="anchored" data-anchor-id="list-all-keyboard-shortcuts"><strong><em>List all Keyboard Shortcuts</em></strong></h3>
-<p><code>% bindkey</code></p>
-</section>
-</section>
-<section id="vscode" class="level2">
-<h2 class="anchored" data-anchor-id="vscode">VSCode</h2>
-<section id="general" class="level3">
-<h3 class="anchored" data-anchor-id="general"><strong><em>General</em></strong></h3>
-<table class="table">
+<section id="vscode" class="level1">
+<h1>VSCode</h1>
+<table class="table-striped table-hover table">
+<caption>VSCode</caption>
 <colgroup>
 <col style="width: 25%">
 <col style="width: 35%">
@@ -284,25 +341,6 @@ ul.task-list li input[type="checkbox"] {
 <td><code>Cmd</code> + <code>J</code></td>
 <td><code>Ctrl</code> + <code>J</code></td>
 </tr>
-</tbody>
-</table>
-</section>
-<section id="editor" class="level3">
-<h3 class="anchored" data-anchor-id="editor"><strong><em>Editor</em></strong></h3>
-<table class="table">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 35%">
-<col style="width: 38%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Description</th>
-<th>Mac</th>
-<th>Windows</th>
-</tr>
-</thead>
-<tbody>
 <tr class="odd">
 <td>Split view</td>
 <td><code>Cmd</code> + <code>\</code></td>
@@ -408,36 +446,17 @@ ul.task-list li input[type="checkbox"] {
 <td><code>Cmd</code> + <code>↑</code> / <code>↓</code></td>
 <td><code>Ctrl</code> + <code>↑</code> / <code>↓</code></td>
 </tr>
-</tbody>
-</table>
-</section>
-<section id="search-and-replace" class="level3">
-<h3 class="anchored" data-anchor-id="search-and-replace"><strong><em>Search and Replace</em></strong></h3>
-<table class="table">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 35%">
-<col style="width: 38%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Description</th>
-<th>Mac</th>
-<th>Windows</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
+<tr class="even">
 <td>Search files</td>
 <td><code>Cmd</code> + <code>Shift</code> + <code>F</code></td>
 <td><code>Ctrl</code> + <code>Shift</code> + <code>F</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Find text</td>
 <td><code>Cmd</code> + <code>F</code></td>
 <td><code>Ctrl</code> + <code>F</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Replace text</td>
 <td><code>Cmd</code> + <code>Opt</code> + <code>F</code></td>
 <td><code>Ctrl</code> + <code>H</code></td>
@@ -446,7 +465,6 @@ ul.task-list li input[type="checkbox"] {
 </table>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

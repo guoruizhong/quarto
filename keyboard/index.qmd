@@ -11,81 +11,41 @@ toc-title: "Contents"
 
 <!-- ![](keyboard.jpg) -->
 
-## ZSH
+# Zsh/Bash
 
-### ***Navigation***
-
-`Ctrl` + `A` : Move the cursor to the beginning of the line
-
-`Ctrl` + `E` : Move the cursor to the end of the line
-
-`OPTION` + `Left Arrow` : Move the cursor one word backward
-
-`OPTION` + `Right arrow` : Move the cursor one word forward
-
-`Left Arrow` : Move the cursor one character backward
-
-`Right Arrow` : Move the cursor one character forward
-
-### ***Deletion***
-
-`Ctrl` + `U` : Delete the current line
-
-`Ctrl` + `K` : Delete from the cursor to the end of the line
-
-`Ctrl` + `L` : Clear the screen
-
-`Ctrl` + `W` : Delete one word backward
-
-`Ctrl` + `D` : Delete one character forward
-
-`Fn` + `Backspace` : Delete one character forward
-
-`Backspace` : Delete one character backward
-
-
-### ***Undo***
-
-`Ctrl` + `_` : Undo the last change
-
-### ***Process and Shell***
-
-`Ctrl` + `C` : Terminate the running foreground process
-
-`Ctrl` + `Z` : Suspend the running foreground process
-
-`Ctrl` + `D` : Exit current shell
-
-### ***History***
-
-`Up Arrow` : Recall the previous command in history
-
-`Down Arrow` : Recall the next command in history
-
-`Ctrl` + `R` : Search the command history
-
-`Ctrl` + `G` : Escape from command search mode
-`!!` : Execute the last typed command
-
-`!pw` : Execute the last command in history that begins with pw
+| Command                        | Description                                                        |
+| ------------------             |  ---------------------------                                       |
+| `Ctrl` + `A`                   | Move the cursor to the beginning of the line                       |
+|`Ctrl` + `E`                    | Move the cursor to the end of the line                             |
+|`Opt` + `←`                     | Move the cursor one word backward                                  |
+|`Opt` + `→`                     | Move the cursor one word forward                                   |
+|`←`                             | Move the cursor one character backward                             |
+|`→`                             | Move the cursor one character forward                              |
+|`Ctrl` + `U`                    | Delete the current line                                            |
+|`Ctrl` + `K`                    | Delete from the cursor to the end of the line                      |
+|`Ctrl` + `L`                    | Clear the screen                                                   |
+|`Ctrl` + `W`                    | Delete one word backward                                           |
+|`Ctrl` + `D`                    | Delete one character forward                                       |
+|`Fn` + `Backspace`              | Delete one character forward                                       |
+|`Backspace`                     | Delete one character backward                                      |
+|`Ctrl` + `_`                    | Undo the last change                                               |
+|`Ctrl` + `C`                    | Terminate the running foreground process                           |
+|`Ctrl` + `Z`                    | Suspend the running foreground process                             |
+|`Ctrl` + `D`                    | Exit current shell                                                 |
+|`↑`                             | Recall the previous command in history                             |
+|`↓`                             | Recall the next command in history                                 |
+|`Ctrl` + `R`                    | Search the command history                                         |
+|`Ctrl` + `G`                    | Escape from command search mode                                    |
+|`!!`                            | Execute the last typed command                                     |
+|`!pw`                           | Execute the last command in history that begins with pw            |
+|`TAB`                           | Auto-complete the typed command                                    |
+|`TAB` `TAB`                     | Show list of commands                                              |
+|`TAB` `TAB` `TAB` `...`         | Cycle through matched commands                                     |
 
 
-### ***Auto-completion***
+: ZSH/Bash {.striped .hover}
 
-`TAB` : Auto-complete the typed command
-
-`TAB` `TAB` : Show list of commands
-
-`TAB` `TAB` `TAB` ... : Cycle through matched commands
-
-### ***List all Keyboard Shortcuts***
-
-`% bindkey`
-
-## VSCode
-
-
-### ***General***
+# VSCode
 
 | Description                        | Mac                            | Windows                       |
 | ------------------                 | -------------------------      | ---------------------------   |
@@ -97,12 +57,6 @@ toc-title: "Contents"
 | Close window                       | `Cmd` + `Shift` + `W`          | `Ctrl` + `Shift` + `W`        |
 | Close tab                          | `Cmd` + `W`                    | `Ctrl` + `W`                  |
 | Open the terminal                  | `Cmd` + `J`                    | `Ctrl`  + `J`                 |
-
-
-### ***Editor***
-
-| Description                        | Mac                            | Windows                       |
-| ------------------                 | -------------------------      | ---------------------------   |
 | Split view                         | `Cmd` + `\`                    | `Ctrl` + \                    |
 | Navigate tabs                      | `Cmd` + `Shift` + `Tab`        | `Ctrl` + `Shift` + `Tab`      |
 | Navigate tab groups                | `Cmd` + `1` / `2` / `3`        | `Ctrl` + `1` / `2` / `3`      |
@@ -124,13 +78,9 @@ toc-title: "Contents"
 | Go to the start / end of the word  | `Opt` + `←` / `→`              | `Alt` + `←` / `→`             |
 | Go to the start / end of the line  | `Cmd` + `←` / `→`              | `Ctrl` + `←` / `→`            |
 | Go to beginning or end of file     | `Cmd` + `↑` / `↓`              | `Ctrl` + `↑` / `↓`            |
-
-
-### ***Search and Replace***
-
-| Description                        | Mac                            | Windows                       |
-| ------------------                 | -------------------------      | ---------------------------   |
 | Search files                       | `Cmd` + `Shift` + `F`          | `Ctrl` + `Shift` + `F`        |
 | Find text                          | `Cmd` + `F`                    | `Ctrl` + `F`                  |
 | Replace text                       | `Cmd` + `Opt` + `F`            | `Ctrl` + `H`                  |
+
+: VSCode {.striped .hover}
 
