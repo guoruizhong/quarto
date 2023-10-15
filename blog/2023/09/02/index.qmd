@@ -1,5 +1,5 @@
 ---
-title: "Learning general workflow for RNAseq data analysis with R"
+title: "General workflow for Bulk RNAseq data analysis with R"
 date: 2023-09-11
 date-modified: last-modified
 categories:
