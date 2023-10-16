@@ -9,7 +9,7 @@
 <meta name="author" content="Guorui Zhong">
 <meta name="description" content="Sometimes, We need to install R in the Linux server, but we don’t the root permission">
 
-<title>Install Conda for Bioinformatics Analysis in Linux server</title>
+<title>Install Conda to manage R/Python environments and packages</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -149,7 +149,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Install Conda for Bioinformatics Analysis in Linux server</h1>
+      <h1 class="title">Install Conda to manage R/Python environments and packages</h1>
                   <div>
         <div class="description">
           Sometimes, We need to install R in the Linux server, but we don’t the root permission
@@ -182,7 +182,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">Wednesday, September 20, 2023</p>
+        <p class="date-modified">Monday, October 16, 2023</p>
       </div>
     </div>
       
@@ -199,6 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#install-conda" id="toc-install-conda" class="nav-link active" data-scroll-target="#install-conda">Install conda</a></li>
   <li><a href="#configuring-conda" id="toc-configuring-conda" class="nav-link" data-scroll-target="#configuring-conda">Configuring conda</a></li>
   <li><a href="#create-environment" id="toc-create-environment" class="nav-link" data-scroll-target="#create-environment">Create environment</a></li>
+  <li><a href="#using-r-with-conda" id="toc-using-r-with-conda" class="nav-link" data-scroll-target="#using-r-with-conda">Using R with Conda</a></li>
   <li><a href="#useful-conda-commands" id="toc-useful-conda-commands" class="nav-link" data-scroll-target="#useful-conda-commands">Useful conda commands</a></li>
   <li><a href="#conda-tips" id="toc-conda-tips" class="nav-link" data-scroll-target="#conda-tips">Conda tips</a></li>
   <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
@@ -217,7 +218,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="install-conda" class="level2">
 <h2 class="anchored" data-anchor-id="install-conda">Install conda</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Download miniforge or mambaforge</span></span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Download  mambaforge or miniforge</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">### chmod </span></span>
@@ -262,14 +263,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> bioconda fastqc</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> bioconda multiqc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
+<section id="using-r-with-conda" class="level2">
+<h2 class="anchored" data-anchor-id="using-r-with-conda">Using R with Conda</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Create a new conda environment with all the r-essentials conda packages built from CRAN</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> renv r-essentials r-base</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">### Activate the environment: </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate renv</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">### When using conda to install R packages, you will need to add r- before the regular package name. </span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> r r-{name_of_package}</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">### install a bioconductor package</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> bioconda bioconductor-{name_of_package}</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">### Update all of the packages and their dependencies with one command</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> update r-caret</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 <section id="useful-conda-commands" class="level2">
 <h2 class="anchored" data-anchor-id="useful-conda-commands">Useful conda commands</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list <span class="co">#shows you everything installed in your current environment</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list <span class="at">-n</span> [ENV NAME] <span class="co">#shows you everything installed in the specified environment</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> remove <span class="at">--name</span> myenv <span class="at">--all</span> <span class="co">#remove any environment (substitute your env name for 'myenv')</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> search myenv <span class="co">#search your channels for a specific package called 'myenv'</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> update <span class="at">--all</span> <span class="co">#update conda</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> <span class="va">$HOME</span>/.condarc <span class="co">#view your list of channels</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list <span class="co"># shows you everything installed in your current environment</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list <span class="at">-n</span> [ENV NAME] <span class="co"># shows you everything installed in the specified environment</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> info <span class="at">--envs</span> <span class="co"># Viewing a list of your environments</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env list <span class="co"># Viewing a list of your environments</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> remove <span class="at">--name</span> myenv <span class="at">--all</span> <span class="co"># remove any environment (substitute your env name for 'myenv')</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> search myenv <span class="co"># search your channels for a specific package called 'myenv'</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> update <span class="at">--all</span> <span class="co"># update conda</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> <span class="va">$HOME</span>/.condarc <span class="co"># view your list of channels</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><img src="conda.jpg" class="img-fluid"></p>
 </section>
 <section id="conda-tips" class="level2">
@@ -278,7 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Not auto activate base environment</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> auto_activate_base false</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> auto_activate_base false</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Avoid installing lots of software in base or, eventually, we will run into conflicts.</li>
 </ul>
@@ -288,6 +304,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><a href="https://protocols.hostmicrobe.org/conda">Conda for bioinformatics</a></li>
 <li><a href="https://github.com/conda-forge/miniforge" class="uri">https://github.com/conda-forge/miniforge</a></li>
+<li><a href="https://odin.mdacc.tmc.edu/~wwang7/tutorials.html">Using Conda to manage R/Python environments and packages</a></li>
 </ul>
 
 

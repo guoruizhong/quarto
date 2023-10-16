@@ -33,6 +33,7 @@ These are the collections of things that I beleived useful in my daily researh w
 - <https://blainey.mit.edu/> - Pooled optical genetic screening in human cells
 - <https://marsonlab.org/> - Decoding and rewriting human immune cells with CRISPR
 - <https://liulab-dfci.github.io/> - Computational methods for the design (SSC), analysis (MAGeCK), hit prioritization (NEST), and visualization (VISPR) of genome-wide CRISPR screens
+- [Statistical Bioinformatics Lab](https://odin.mdacc.tmc.edu/~wwang7/index.html)
 
 
 ## Research Proposal

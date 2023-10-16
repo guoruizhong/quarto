@@ -1,5 +1,5 @@
 ---
-title: "Install Conda for Bioinformatics Analysis in Linux server"
+title: "Install Conda to manage R/Python environments and packages"
 date: 2023-08-07
 date-modified: last-modified
 categories:
@@ -12,7 +12,7 @@ description: Sometimes, We need to install R in the Linux server, but we don't t
 ## Install conda
 
 ```bash
-### Download miniforge or mambaforge
+### Download  mambaforge or miniforge
 wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
 
 ### chmod 
@@ -62,16 +62,32 @@ kallisto # test it works
 conda install -c bioconda fastqc
 conda install -c bioconda multiqc
 ```
+## Using R with Conda
+
+```bash
+### Create a new conda environment with all the r-essentials conda packages built from CRAN
+conda create -n renv r-essentials r-base
+### Activate the environment: 
+conda activate renv
+### When using conda to install R packages, you will need to add r- before the regular package name. 
+conda install -c r r-{name_of_package}
+### install a bioconductor package
+conda install -c bioconda bioconductor-{name_of_package}
+### Update all of the packages and their dependencies with one command
+conda update r-caret
+```
 
 ## Useful conda commands
 
 ```bash
-conda list #shows you everything installed in your current environment
-conda list -n [ENV NAME] #shows you everything installed in the specified environment
-conda remove --name myenv --all #remove any environment (substitute your env name for 'myenv')
-conda search myenv #search your channels for a specific package called 'myenv'
-conda update --all #update conda
-nano $HOME/.condarc #view your list of channels
+conda list # shows you everything installed in your current environment
+conda list -n [ENV NAME] # shows you everything installed in the specified environment
+conda info --envs # Viewing a list of your environments
+conda env list # Viewing a list of your environments
+conda remove --name myenv --all # remove any environment (substitute your env name for 'myenv')
+conda search myenv # search your channels for a specific package called 'myenv'
+conda update --all # update conda
+nano $HOME/.condarc # view your list of channels
 ```
 ![](conda.jpg)
 
@@ -90,3 +106,4 @@ conda config --set auto_activate_base false
 
 - [Conda for bioinformatics](https://protocols.hostmicrobe.org/conda)
 - <https://github.com/conda-forge/miniforge>
+- [Using Conda to manage R/Python environments and packages](https://odin.mdacc.tmc.edu/~wwang7/tutorials.html)
