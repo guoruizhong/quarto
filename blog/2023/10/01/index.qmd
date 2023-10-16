@@ -165,10 +165,99 @@ Technical effects:
 
 Consider the correction for biological and technical covariates separtely as these are used for different purpose and present unique challenge.
 
-
 ## Feature selection and dimensionality reduction
 
-## Cell and gene-level downstream analysis
+## Cluster analysis
+
+After pre-processing, we can perform downstream anslysis to extract biological insights and describe the underlying biological system. These descriptions are obtained by fitting interpretable models to the data.
+
+- Group of cells with similary gene expression profiles representing cell-type clusters
+- Small changes in gene expression between similar cells denoting continuous (differentiation) trajectories
+- Genes with correlated expression profiles indicating co-regulation
+
+### Identifying Clusters
+
+Cluster analysis methods attempt to explain the heterogenity in the data based on a categorization of cells into groups.
+
+Clusters are obtained by grouping cells based on the similarity of their gene expression profiles.
+
+Similarity scores:
+
+- Euclidean distance
+- Clustering algorithms
+    - K-means
+
+- Community detection
+    - K-Nearest Neighbour
+
+### Cluster annotation
+
+Marker genes characterize the cluster and are used to annotate it with a meanningful biological label.
+
+::: {.callout-note "Cell identities"}
+- It is not always clear what constitutes a cell type
+- cells of the same cell type in different states maybe detected in separte clusters
+:::
+
+- Reference databases
+- Marker genes from the literature
+- Data-drived marker genes
+    - Focus on up-regulated genes in the cluster as marker genes are expected to have strong differential expression effects
+    - rank-sum test or t-test to rank genes
+    - Top-ranked genes are regarded as marker genes
+
+P-values are often inflated, which can lead to an overestimation of the number of marker genes. However,  the ranking of genes based on p-values is unaffected
+
+### Compositional analysis
+
+Compositional data analysis revolves around the proporations of cells that fall into each cell-identity cluster.
+
+### Trajectory inference
+
+Trajectory analysis in the data are regarded as a snapshot of a dynamic process, which investigate the underlying process.
+
+The biological processes that drive the development of the observed heterogenity are continuous process.
+
+Trajectory inference methods interpret single-cell data as a snapshot of a continuous process. This process is reconstructed by finding paths through cellular space that minimize transcriptional changes between neighbouring cells. The ordering of cells along these paths is described by a pseudotime variable. While this variable is related to transcriptional distances from a root cell, tt is often inter- preted as a proxy for developmental time
+
+## Gene-level downstream analysis
+
+### Differential expression testing
+
+DE is to answer the question whether any genes are differntially expressed between two experimental conditions
+
+Tools are commonly used:
+
+- DESeq2
+- EdgeR
+- limma
+
+::: {.callout-note}
+- DE testing should not be performed on corrected data (denoised, batch corrected, etc), but instead on measured data with technical covariates included in the model
+:::
+
+### Gene set analsysis
+
+To further interpret the long list of candidate genes that maybe differentially expressed between treated and control cells, we can group the genes into sets based on characteristics and testing whether these characteristics are overrepresented in the candidate gene list.
+
+Common biological processes labels:
+
+- MSigDB
+- Gene Ontology
+- KEGG
+- Reactome
+
+### Gene regulatory networks
+
+The expression level of a gene is determined by a complex interplay of regulatory interactions with other genes and small molecules.
+
+Gene regulatory network inference is performed based on measurement of gene co-expression such as correlation, mutual information, or via regression models.
+
+## Analysis platforms
+
+- Scater (R, Strength in QC and pre-processing)
+- Seurat (R, Comprehensive)
+- scanpy (Python-based)
 
 ## Reference
 

@@ -141,7 +141,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">Sunday, October 15, 2023</p>
+        <p class="date-modified">Monday, October 16, 2023</p>
       </div>
     </div>
       
@@ -163,7 +163,20 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#estimate-confounding-factors" id="toc-estimate-confounding-factors" class="nav-link" data-scroll-target="#estimate-confounding-factors">Estimate confounding factors</a></li>
   <li><a href="#data-correction-and-integration" id="toc-data-correction-and-integration" class="nav-link" data-scroll-target="#data-correction-and-integration">Data correction and integration</a></li>
   <li><a href="#feature-selection-and-dimensionality-reduction" id="toc-feature-selection-and-dimensionality-reduction" class="nav-link" data-scroll-target="#feature-selection-and-dimensionality-reduction">Feature selection and dimensionality reduction</a></li>
-  <li><a href="#cell-and-gene-level-downstream-analysis" id="toc-cell-and-gene-level-downstream-analysis" class="nav-link" data-scroll-target="#cell-and-gene-level-downstream-analysis">Cell and gene-level downstream analysis</a></li>
+  <li><a href="#cluster-analysis" id="toc-cluster-analysis" class="nav-link" data-scroll-target="#cluster-analysis">Cluster analysis</a>
+  <ul>
+  <li><a href="#identifying-clusters" id="toc-identifying-clusters" class="nav-link" data-scroll-target="#identifying-clusters">Identifying Clusters</a></li>
+  <li><a href="#cluster-annotation" id="toc-cluster-annotation" class="nav-link" data-scroll-target="#cluster-annotation">Cluster annotation</a></li>
+  <li><a href="#compositional-analysis" id="toc-compositional-analysis" class="nav-link" data-scroll-target="#compositional-analysis">Compositional analysis</a></li>
+  <li><a href="#trajectory-inference" id="toc-trajectory-inference" class="nav-link" data-scroll-target="#trajectory-inference">Trajectory inference</a></li>
+  </ul></li>
+  <li><a href="#gene-level-downstream-analysis" id="toc-gene-level-downstream-analysis" class="nav-link" data-scroll-target="#gene-level-downstream-analysis">Gene-level downstream analysis</a>
+  <ul>
+  <li><a href="#differential-expression-testing" id="toc-differential-expression-testing" class="nav-link" data-scroll-target="#differential-expression-testing">Differential expression testing</a></li>
+  <li><a href="#gene-set-analsysis" id="toc-gene-set-analsysis" class="nav-link" data-scroll-target="#gene-set-analsysis">Gene set analsysis</a></li>
+  <li><a href="#gene-regulatory-networks" id="toc-gene-regulatory-networks" class="nav-link" data-scroll-target="#gene-regulatory-networks">Gene regulatory networks</a></li>
+  </ul></li>
+  <li><a href="#analysis-platforms" id="toc-analysis-platforms" class="nav-link" data-scroll-target="#analysis-platforms">Analysis platforms</a></li>
   <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
   </ul>
 </nav>
@@ -361,8 +374,109 @@ Note
 <section id="feature-selection-and-dimensionality-reduction" class="level2">
 <h2 class="anchored" data-anchor-id="feature-selection-and-dimensionality-reduction">Feature selection and dimensionality reduction</h2>
 </section>
-<section id="cell-and-gene-level-downstream-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="cell-and-gene-level-downstream-analysis">Cell and gene-level downstream analysis</h2>
+<section id="cluster-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="cluster-analysis">Cluster analysis</h2>
+<p>After pre-processing, we can perform downstream anslysis to extract biological insights and describe the underlying biological system. These descriptions are obtained by fitting interpretable models to the data.</p>
+<ul>
+<li>Group of cells with similary gene expression profiles representing cell-type clusters</li>
+<li>Small changes in gene expression between similar cells denoting continuous (differentiation) trajectories</li>
+<li>Genes with correlated expression profiles indicating co-regulation</li>
+</ul>
+<section id="identifying-clusters" class="level3">
+<h3 class="anchored" data-anchor-id="identifying-clusters">Identifying Clusters</h3>
+<p>Cluster analysis methods attempt to explain the heterogenity in the data based on a categorization of cells into groups.</p>
+<p>Clusters are obtained by grouping cells based on the similarity of their gene expression profiles.</p>
+<p>Similarity scores:</p>
+<ul>
+<li>Euclidean distance</li>
+<li>Clustering algorithms
+<ul>
+<li>K-means</li>
+</ul></li>
+<li>Community detection
+<ul>
+<li>K-Nearest Neighbour</li>
+</ul></li>
+</ul>
+</section>
+<section id="cluster-annotation" class="level3">
+<h3 class="anchored" data-anchor-id="cluster-annotation">Cluster annotation</h3>
+<p>Marker genes characterize the cluster and are used to annotate it with a meanningful biological label.</p>
+<p>::: {.callout-note “Cell identities”} - It is not always clear what constitutes a cell type - cells of the same cell type in different states maybe detected in separte clusters :::</p>
+<ul>
+<li>Reference databases</li>
+<li>Marker genes from the literature</li>
+<li>Data-drived marker genes
+<ul>
+<li>Focus on up-regulated genes in the cluster as marker genes are expected to have strong differential expression effects</li>
+<li>rank-sum test or t-test to rank genes</li>
+<li>Top-ranked genes are regarded as marker genes</li>
+</ul></li>
+</ul>
+<p>P-values are often inflated, which can lead to an overestimation of the number of marker genes. However, the ranking of genes based on p-values is unaffected</p>
+</section>
+<section id="compositional-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="compositional-analysis">Compositional analysis</h3>
+<p>Compositional data analysis revolves around the proporations of cells that fall into each cell-identity cluster.</p>
+</section>
+<section id="trajectory-inference" class="level3">
+<h3 class="anchored" data-anchor-id="trajectory-inference">Trajectory inference</h3>
+<p>Trajectory analysis in the data are regarded as a snapshot of a dynamic process, which investigate the underlying process.</p>
+<p>The biological processes that drive the development of the observed heterogenity are continuous process.</p>
+<p>Trajectory inference methods interpret single-cell data as a snapshot of a continuous process. This process is reconstructed by finding paths through cellular space that minimize transcriptional changes between neighbouring cells. The ordering of cells along these paths is described by a pseudotime variable. While this variable is related to transcriptional distances from a root cell, tt is often inter- preted as a proxy for developmental time</p>
+</section>
+</section>
+<section id="gene-level-downstream-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="gene-level-downstream-analysis">Gene-level downstream analysis</h2>
+<section id="differential-expression-testing" class="level3">
+<h3 class="anchored" data-anchor-id="differential-expression-testing">Differential expression testing</h3>
+<p>DE is to answer the question whether any genes are differntially expressed between two experimental conditions</p>
+<p>Tools are commonly used:</p>
+<ul>
+<li>DESeq2</li>
+<li>EdgeR</li>
+<li>limma</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>DE testing should not be performed on corrected data (denoised, batch corrected, etc), but instead on measured data with technical covariates included in the model</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="gene-set-analsysis" class="level3">
+<h3 class="anchored" data-anchor-id="gene-set-analsysis">Gene set analsysis</h3>
+<p>To further interpret the long list of candidate genes that maybe differentially expressed between treated and control cells, we can group the genes into sets based on characteristics and testing whether these characteristics are overrepresented in the candidate gene list.</p>
+<p>Common biological processes labels:</p>
+<ul>
+<li>MSigDB</li>
+<li>Gene Ontology</li>
+<li>KEGG</li>
+<li>Reactome</li>
+</ul>
+</section>
+<section id="gene-regulatory-networks" class="level3">
+<h3 class="anchored" data-anchor-id="gene-regulatory-networks">Gene regulatory networks</h3>
+<p>The expression level of a gene is determined by a complex interplay of regulatory interactions with other genes and small molecules.</p>
+<p>Gene regulatory network inference is performed based on measurement of gene co-expression such as correlation, mutual information, or via regression models.</p>
+</section>
+</section>
+<section id="analysis-platforms" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-platforms">Analysis platforms</h2>
+<ul>
+<li>Scater (R, Strength in QC and pre-processing)</li>
+<li>Seurat (R, Comprehensive)</li>
+<li>scanpy (Python-based)</li>
+</ul>
 </section>
 <section id="reference" class="level2">
 <h2 class="anchored" data-anchor-id="reference">Reference</h2>
