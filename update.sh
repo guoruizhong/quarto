@@ -1,18 +1,16 @@
 #!/bin/bash
 
-## render doc
-quarto render
-
+### completely remove git
+# rm -rf .git
+# git remote remove guoruizhong.github.io
 # git init
-
-# git remote remove origin
-# git remote add guoruizhong.github.io https://github.com/guoruizhong/guoruizhong.github.io.git
-
-# Switched to a new branch 'main'
+# git remote add quarto https://github.com/guoruizhong/quarto.git
 # git checkout -b main 
 
-# Add to the local git repository then push to the remote repository
-
+### render doc
+quarto render
+### add to the local git repository
 git add .
-git commit -m "update RNAseq data analysis with R"
-git push -u guoruizhong.github.io main
+git commit -m "update quarto"
+### push to the remote repository
+git push -u quarto main
