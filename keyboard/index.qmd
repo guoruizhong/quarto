@@ -13,6 +13,8 @@ toc-title: "Contents"
 
 # Zsh/Bash
 
+
+
 | Command                        | Description                                                        |
 | ------------------             |  ---------------------------                                       |
 | `Ctrl` + `A`                   | Move the cursor to the beginning of the line                       |
@@ -43,44 +45,46 @@ toc-title: "Contents"
 |`TAB` `TAB` `TAB` `...`         | Cycle through matched commands                                     |
 
 
-: ZSH/Bash {.striped .hover}
+
 
 # VSCode
 
-| Description                        | Mac                            | Windows                       |
-| ------------------                 | -------------------------      | ---------------------------   |
-| Command Palette                    | `Cmd` + `Shift` + `P`          | `Ctrl` + `Shift` + `P`        |
-| Open settings                      | `Cmd` + `,`                    | `Ctrl` + `,`                  |
-| Keyboard shoutcuts                 | `Cmd` + `K`   `Cmd` + `S`      | `Ctrl` + `K`   `Ctrl` + `S`   |
-| Toggle sidebar                     | `Cmd` + `B`                    | `Ctrl` + `B`                  |
-| Open new window                    | `Cmd` + `Shift` + `N`          | `Ctrl` + `Shift` + `N`        |
-| Close window                       | `Cmd` + `Shift` + `W`          | `Ctrl` + `Shift` + `W`        |
-| Close tab                          | `Cmd` + `W`                    | `Ctrl` + `W`                  |
-| Open the terminal                  | `Cmd` + `J`                    | `Ctrl`  + `J`                 |
-| Split view                         | `Cmd` + `\`                    | `Ctrl` + \                    |
-| Navigate tabs                      | `Cmd` + `Shift` + `Tab`        | `Ctrl` + `Shift` + `Tab`      |
-| Navigate tab groups                | `Cmd` + `1` / `2` / `3`        | `Ctrl` + `1` / `2` / `3`      |
-| Multiple cursor                    | `Cmd` + `Opt` + `↑` / `↓`      | `Cmd` + `Opt` + `↑` / `↓`     |
-| Select text                        | `Cmd` + `Shift` + `↑` / `↓`    | `Ctrl` + `Shift` + `↑` / `↓`  |
-| Delete previous word               | `Cmd` + `Backspace`            | `Ctrl` + `Backspace`          |
-| Move the line Up / Down            | `Opt` + `↑` / `↓`              | `Alt` + `↑` / `↓`             |
-| Copy line Up / Down                | `Shift` + `Opt` + `↑` / `↓`    | `Shift` + `Alt` + `↑` / `↓`   |
-| Select word                        | `Cmd` + `D`                    | `Ctrl` + `D`                  |
-| Select current line                | `Cmd` + `L`                    | `Ctrl` + `L`                  |
-| Select similar occurrences         | `Cmd` + `Shift` + `L`          | `Ctrl` + `Shift` + `L`        |
-| Delete current line                | `Cmd` + `Shift` + `K`          | `Ctrl` + `Shift` + `K`        |
-| Comment lines                      | `Cmd` + `/`                    | `Ctrl` + `/`                  |
-| Navigate to  line                  | `Cmd` + `G`                    | `Ctrl` + `G`                  |
-| Code folding                       | `Cmd` + `Opt` + `[`  /  `]`    | `Ctrl` + `Shift` + `[` / `]`  |
-| Indent / outdent lines             | `Cmd` + `[`  /  `]`            | `Ctrl` + `[`  /  `]`          |
-| Format selected code               | `Cmd` + `K`   `Cmd` + `F`      | `Ctrl` + `K`   `Ctrl` + `F`   |
-| Format document                    | `Shift` + `Opt` + `F`          | `Shift` + `Alt` + `F`         |
-| Go to the start / end of the word  | `Opt` + `←` / `→`              | `Alt` + `←` / `→`             |
-| Go to the start / end of the line  | `Cmd` + `←` / `→`              | `Ctrl` + `←` / `→`            |
-| Go to beginning or end of file     | `Cmd` + `↑` / `↓`              | `Ctrl` + `↑` / `↓`            |
-| Search files                       | `Cmd` + `Shift` + `F`          | `Ctrl` + `Shift` + `F`        |
-| Find text                          | `Cmd` + `F`                    | `Ctrl` + `F`                  |
-| Replace text                       | `Cmd` + `Opt` + `F`            | `Ctrl` + `H`                  |
 
-: VSCode {.striped .hover}
+| Mac                            | Windows                       | Description                        |
+| -------------------------      | ---------------------------   | ------------------                 |
+| `Cmd` + `Shift` + `P`          | `Ctrl` + `Shift` + `P`        | Command Palette                    |
+| `Cmd` + `,`                    | `Ctrl` + `,`                  | Open settings                      |
+| `Cmd` + `K`   `Cmd` + `S`      | `Ctrl` + `K`   `Ctrl` + `S`   | Keyboard shoutcuts                 |
+| `Cmd` + `B`                    | `Ctrl` + `B`                  | Toggle sidebar                     |
+| `Cmd` + `Shift` + `N`          | `Ctrl` + `Shift` + `N`        | Open new window                    |
+| `Cmd` + `Shift` + `W`          | `Ctrl` + `Shift` + `W`        | Close window                       |
+| `Cmd` + `W`                    | `Ctrl` + `W`                  | Close tab                          |
+| `Cmd` + `J`                    | `Ctrl`  + `J`                 | Open the terminal                  |
+| `Cmd` + `\`                    | `Ctrl` + \                    | Split view                         |
+| `Cmd` + `Shift` + `Tab`        | `Ctrl` + `Shift` + `Tab`      | Navigate tabs                      |
+| `Cmd` + `1` / `2` / `3`        | `Ctrl` + `1` / `2` / `3`      | Navigate tab groups                |
+| `Cmd` + `Opt` + `↑` / `↓`      | `Ctrl` + `Opt` + `↑` / `↓`    | Multiple cursor                    |
+| `Cmd` + `Shift` + `↑` / `↓`    | `Ctrl` + `Shift` + `↑` / `↓`  | Select text                        |
+| `Opt` + `↑` / `↓`              | `Alt` + `↑` / `↓`             | Move the line Up / Down            |
+| `Shift` + `Opt` + `↑` / `↓`    | `Shift` + `Alt` + `↑` / `↓`   | Copy line Up / Down                |
+| `Cmd` + `D`                    | `Ctrl` + `D`                  | Select word                        |
+| `Cmd` + `L`                    | `Ctrl` + `L`                  | Select current line                |
+| `Cmd` + `Shift` + `L`          | `Ctrl` + `Shift` + `L`        | Select similar occurrences         |
+| `Cmd` + `Shift` + `K`          | `Ctrl` + `Shift` + `K`        | Delete current line                |
+| `Cmd` + `Backspace`            | `Ctrl` + `Backspace`          | Delete one word backward           |
+| `Opt` + `Backspace`            | `Alt` + `Backspace`           | Delete one word backward           |
+| `Cmd` + `/`                    | `Ctrl` + `/`                  | Comment lines                      |
+| `Cmd` + `G`                    | `Ctrl` + `G`                  | Navigate to  line                  |
+| `Cmd` + `Opt` + `[`  /  `]`    | `Ctrl` + `Shift` + `[` / `]`  | Code folding                       |
+| `Cmd` + `[`  /  `]`            | `Ctrl` + `[`  /  `]`          | Indent / outdent lines             |
+| `Cmd` + `K`   `Cmd` + `F`      | `Ctrl` + `K`   `Ctrl` + `F`   | Format selected code               |
+| `Shift` + `Opt` + `F`          | `Shift` + `Alt` + `F`         | Format document                    |
+| `Opt` + `←` / `→`              | `Alt` + `←` / `→`             | Go to the start / end of the word  |
+| `Cmd` + `←` / `→`              | `Ctrl` + `←` / `→`            | Go to the start / end of the line  |
+| `Cmd` + `↑` / `↓`              | `Ctrl` + `↑` / `↓`            | Go to beginning or end of file     |
+| `Cmd` + `Shift` + `F`          | `Ctrl` + `Shift` + `F`        | Search files                       |
+| `Cmd` + `F`                    | `Ctrl` + `F`                  | Find text                          |
+| `Cmd` + `Opt` + `F`            | `Ctrl` + `H`                  | Replace text                       |
+
+
 

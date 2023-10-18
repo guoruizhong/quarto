@@ -7,7 +7,7 @@
 # git remote add quarto https://github.com/guoruizhong/quarto.git
 # git checkout -b main 
 
-### render doc
+### render site files to docs
 quarto render
 ### add to the local git repository
 git add .

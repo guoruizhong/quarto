@@ -9,10 +9,10 @@ image: workflow.png
 description: Use lightweight and open-source software with  R programming language and the Bioconductor suite of packages to perfrm RNA-seq data analysis.
 
 execute: 
-  freeze: true
+  # freeze: true
   # echo: false
   warning: false
-  eval: false
+  # eval: false
 ---
 
 ```{r setup, include=FALSE}
@@ -25,6 +25,7 @@ knitr::opts_chunk$set(
     collapse = TRUE
 )
 ```
+
 ![](workflow.png)
 
 ## Step1: Check the quality of raw reads
@@ -82,6 +83,7 @@ multiqc -d .
 ## Step3: Import data into R
 
 ### Load packages
+
 ```{r}
 #| warning: false
 #| message: false
@@ -115,7 +117,9 @@ library(clusterProfiler) # provides a suite of tools for functional enrichment a
 library(msigdbr) # access to msigdb collections directly within R
 library(enrichplot) # great for making the standard GSEA enrichment plots
 ```
+
 ### Import study design files
+
 ```{r}
 ### load study design
 targets <- read_tsv(
@@ -132,7 +136,9 @@ path
 ### make sure path is correct
 all(file.exists(path))
 ```
+
 ### Get organsim specific annotations
+
 
 ```{r}
 tx <- transcripts(
@@ -147,7 +153,9 @@ tx
 tx <- select(tx, "target_id", "gene_name")
 ```
 
+
 ### Load transcript counts
+
 
 ```{r}
 txi_gene <- tximport(
@@ -164,7 +172,9 @@ class(txi_gene)
 names(txi_gene)
 ```
 
+
 ## Step4: Wrangling gene expression
+
 
 ```{r}
 ### examine the data
@@ -245,7 +255,9 @@ p1 <- ggplot(
     theme_bw()
 p1
 ```
+
 - How many genes or transcripts have no read counts at all?
+
 
 ```{r}
 ### filter data
@@ -337,7 +349,9 @@ plot_grid(
   label_size = 12
 )
 ```
+
 ## Step5: Data exploration with multivariate analysis
+
 
 
 ```{r}
@@ -347,7 +361,9 @@ group <- factor(group)
 group
 ```
 
+
 ### Hierarchical clustering
+
 
 ```{r}
 ### calculate distance  methods (e.g. switch from 'maximum' to 'euclidean')
@@ -362,7 +378,9 @@ plot(clusters, labels=sampleLabels)
 
 ```
 
+
 ### Principal compoent analysis
+
 
 ```{r}
 pca_res <- prcomp(
@@ -394,7 +412,9 @@ pc_per <- round(pc_var/sum(pc_var)*100, 1)
 pc_per
 
 ```
+
 - Can we figure out the identify of outlier?
+
 
 ```{r}
 ### visualize PCA result 
@@ -416,7 +436,9 @@ pca_plot1 <- pca_res_df |>
 
 pca_plot1
 ```
+
 - Another way to view PCA laodings to understand impact of each sample on each pricipal component
+
 
 ```{r}
 pca_res_df <- pca_res$x[, 1:4] |>
@@ -501,7 +523,9 @@ mydata_filter |>
     )
 ```
 
+
 - Make an interactive table using the `DT` package
+
 
 ```{r}
 # datatable(
@@ -517,7 +541,9 @@ mydata_filter |>
 # )
 ```
 
+
 - Make an interactive scatter plot with `plotly`
+
 
 ```{r}
 myplot <- ggplot(mydata_df) +
@@ -531,9 +557,11 @@ myplot
 # ggplotly(myplot)
 ```
 
+
 ## Step6: Differential gene expression
 
 ### Set up design matrix
+
 
 ```{r}
 group <- factor(targets$group)
@@ -545,7 +573,9 @@ colnames(design) <- levels(group)
 # this is just an example. 'block' and 'treatment' would need to be objects in your environment
 ```
 
+
 ### Model mean-variance trend and fit linear model to data
+
 
 ```{r}
 ### Use VOOM function from Limma package to model the mean-variance relationship
@@ -576,6 +606,7 @@ TopHits_df <- TopHits |>
 TopHits_df
 ```
 
+
 ::: {.callout-note}
 ## Limma outputs
 - TopTable (from Limma) outputs a few different stats:
@@ -584,6 +615,7 @@ TopHits_df
 - B statistic is the log-odds that that gene is differentially expressed. If B = 1.5, then log odds is e^1.5, where e is euler's constant (approx. 2.718).  So, the odds of differential expression os about 4.8 to 1
 - t statistic is ratio of the logFC to the standard error (where the error has been moderated across all genes...because of Bayesian approach)
 :::
+
 
 ```{r}
 ### volcano plot
@@ -640,7 +672,9 @@ diffGenes_df <- as_tibble(diffGenes, rownames = "geneID")
 
 ```
 
+
 ## Step7: Module identification
+
 
 ```{r}
 heatcolors <- rev(brewer.pal(name="RdBu", n=11))
@@ -705,9 +739,11 @@ heatmap.2(Module_down,
           RowSideColors=module_color[module_assign%in%modulePick], margins=c(8,20))
 ```
 
+
 ## Step8: Functional enrichment analysis
 
 ### Go enrichment analysis
+
 
 ```{r}
 #| eval: true
@@ -757,6 +793,7 @@ publish_gosttable(
 # now repeat the above steps using only genes from a single module from the step 6 script, by using `rownames(myModule)`
 # what is value in breaking up DEGs into modules for functional enrichment analysis?
 ```
+
 ### Perform GSEA using clusterProfiler
 
 There are a few ways to get msigDB collections into R:
@@ -767,6 +804,7 @@ There are a few ways to get msigDB collections into R:
 c2cp <- read.gmt("/Users/.../MSigDB/c2.cp.v7.1.symbols.gmt")
 ```
 - Option2: use the msigdb package to access up-to-date collections. this option has the additional advantage of providing access to species-specific collections are also retrieved as tibbles
+
 
 ```{r}
 msigdbr_species()
@@ -840,9 +878,11 @@ ggplot(myGSEA_df[1:20,], aes(x=phenotype, y=ID)) +
   theme_bw()
 ```
 
+
 ### Competitive GSEA using CAMERA
 
 For competitive tests the null hypothesis is that genes in the set are, at most, as often differentially expressed as genes outside the set.
+
 
 ```{r}
 #| eval: true
@@ -863,9 +903,11 @@ camera_df <- as_tibble(camera_res, rownames = "setName")
 camera_df
 
 ```
+
 ### Self-contained GSEA using ROAST
 
 For self-contained the null hypothesis is that no genes in the set are differentially expressed.
+
 
 ```{r}
 mroast(
@@ -928,6 +970,7 @@ ggplot(camera_df[1:25,], aes(x=phenotype, y=setName)) +
 
 ```
 
+
 ### Single sample GSEA using the GSVA package
 
 The GSVA package offers a different way of approaching functional enrichment analysis.  
@@ -935,6 +978,7 @@ The GSVA package offers a different way of approaching functional enrichment ana
 - In contrast to most GSE methods, GSVA performs a change in coordinate systems,transforming the data from a gene by sample matrix to a gene set (signature) by sample matrix. This allows for the evaluation of pathway enrichment for each sample.
 - The method is both non-parametric and unsupervised bypasses the conventional approach of explicitly modeling phenotypes within enrichment scoring algorithms. 
 - Focus is therefore placed on the RELATIVE enrichment of pathways across the sample space rather than the absolute enrichment with respect to a phenotype. However, with data with a moderate to small sample size (< 30), other GSE methods that explicitly include the phenotype in their model are more likely to provide greater statistical power to detect functional enrichment.
+
 
 ```{r}
 # Be aware that if you choose a large MsigDB file here, this step may take a while
@@ -950,8 +994,10 @@ GSVA_res_C2CP <- gsva(
 )
 ```
 
+
 - Apply linear model to GSVA result. Now using Limma to find significantly enriched gene sets in the same way you did to find diffGenes. This means you'll be using topTable, decideTests, etc. 
 - note that you need to reference your design and contrast matrix here.
+
 
 ```{r}
 fit_C2CP <- lmFit(GSVA_res_C2CP, design)
@@ -1008,6 +1054,7 @@ heatmap.2(
 ```
 
 
+
 ## Reference
 
 - [DIY Transcriptomics](https://diytranscriptomics.com/)
@@ -1015,6 +1062,8 @@ heatmap.2(
 
 ## SessionInfo
 
+
 ```{r}
 sessionInfo()
 ```
+

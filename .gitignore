@@ -9,8 +9,8 @@
 /_site/
 **/*_cache/*
 
-# data
-data/
+# learning data
+learn/
 
 # Miscellaneous stuff
 design-assets/*
