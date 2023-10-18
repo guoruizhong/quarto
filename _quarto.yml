@@ -17,7 +17,7 @@ project:
     - "pgp_ath.asc.txt"
 
 website:
-  title: ""
+  title: "Guorui Zhong"
   image: "/files/profiles/z_512x512.png"
   description: ""
   search: 
@@ -25,10 +25,10 @@ website:
     type: overlay
   # favicon: "/files/profiles/z_512x512.png"
   site-url: "https://guoruizhong.github.io/"
-  repo-url: "https://github.com/guoruizhong/guoruizhong.github.io"
+  repo-url: "https://github.com/guoruizhong/quarto"
   navbar:
     pinned: true
-    right:
+    left:
       - text: "About"
         file: "index.qmd"
       - text: "Blog"
@@ -39,36 +39,17 @@ website:
         file: "wiki/index.qmd"
       - text: "CRISPR"
         file: "crispr/index.qmd"
-      # - text: "Now"
-      #   file: "now/index.qmd"
-      # - icon: rss
-      #   aria-label: rss
-      #   href: atom.xml
-      # - icon: envelope
-        # aria-label: email
-        # href: "mailto:zhonggr@bii.a-star.edu.sg"
-      # - icon: twitter
-      #   aria-label: twitter
-      #   href: https://twitter.com/andrewheiss
-      #   # rel: me
-      # - icon: mastodon
-      #   aria-label: mastodon
-      #   href: https://fediscience.org/users/andrew/
-      #   # rel: me
-        # rel: me
-      # - icon: youtube
-      #   aria-label: youtube
-      #   href: https://www.youtube.com/andrewheiss
-      #   # rel: me
-      # - icon: journal-check
-      #   aria-label: journal-check
-      #   href: https://scholar.google.com/citations?user=g0MfTPMAAAAJ&hl=en
-      # - icon: linkedin
-      #   aria-label: linkedin
-      #   href: https://www.linkedin.com/in/guorui-zhong-754761185/
-      # - icon: github
-      #   aria-label: github
-      #   href: https://github.com/guoruizhong
+    right: 
+      - icon: journal-check
+        aria-label: journal-check
+        href: https://scholar.google.com/citations?user=g0MfTPMAAAAJ&hl=en
+      - icon: linkedin
+        aria-label: linkedin
+        href: https://www.linkedin.com/in/guorui-zhong-754761185/
+      - icon: github
+        aria-label: github
+        href: https://github.com/guoruizhong
+  
   page-footer:
     center: |
       <span class="faux-block">{{< fa brands creative-commons >}} 2021-2023 Guorui Zhong ~ Made with [{{< fa brands r-project >}}](https://www.r-project.org/) and [Quarto](https://quarto.org/)</span>
