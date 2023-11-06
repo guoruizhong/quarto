@@ -1,0 +1,205 @@
+---
+title: "Single-cell RNA-seq data analysis using Seurat package"
+date: 2023-10-22
+date-modified: last-modified
+categories:
+  - scRNA-seq
+# image: workflow.png
+image: scRNAseq.png
+draft: true
+execute: 
+  freeze: true
+  # echo: false
+  warning: false
+  eval: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    # fig.width = 6, 
+    # fig.height = 3.8,
+    fig.align = "center", 
+    # fig.retina = 3,
+    out.width = "100%", 
+    warning = FALSE,
+    evaluate = FALSE,
+    collapse = TRUE
+)
+```
+
+This tutorial is credited from [here.](https://github.com/quadbio/scRNAseq_analysis_vignette) and [Seurat tutorial](https://satijalab.org/seurat/archive/v3.1/pbmc3k_tutorial.html). It assumes that the sequencing data preprocessing steps, including base calling, mapping, and read counting, have been done using 10x Genomics own analysis pipeline Cell Ranger. 
+
+- DS1 and DS2, public scRNA-seq data of human cerebral organoids and are part of the data in this [paper](https://www.nature.com/articles/s41586-019-1654-9)
+
+# Part 1: Analyze single scRNA-seq data
+
+## Step 0: Load packages
+```{r}
+library(Seurat)
+library(patchwork)
+```
+## Step 1: Create s Seurat object
+
+Seurat object allow us to store all the steps and results along the whole analysis.
+
+```{r}
+### read in the matrix and rename its row names and colnames by gene symbols and cell barcodes, repectively.
+counts <- Read10X(data.dir = "learn/scRNAseq_analysis_vignette/data/DS1/")
+seurat <- CreateSeuratObject(counts, project = "DS1")
+```
+
+Alternatively, do this manually
+```{r}
+#| eval: false
+
+library(Matrix)
+counts <- readMM("learn/scRNAseq_analysis_vignette/data/DS1/matrix.mtx.gz")
+barcodes <- read.table(
+    "learn/scRNAseq_analysis_vignette/data/DS1/barcodes.tsv.gz", 
+    stringsAsFactors = FALSE
+    )[, 1]
+features <- read.csv(
+    "learn/scRNAseq_analysis_vignette/data/DS1/features.tsv.gz", 
+    stringsAsFactors = FALSE, sep = "\t", header = FALSE
+    )
+rownames(counts) <- make.unique(features[, 2])
+colnames(counts) <- barcodes
+seurat <- CreateSeuratObject(counts, project = "DS1")
+```
+
+## Step 2: Quality Control
+
+The most common quality control is to filter out:
+
+- Cells with too few genes detected. They usually represent cells which are not sequenced deep enough for reliable characteriztion
+- cells with too many genes detected
+- Cells with high mitochondrial transcript percentage
+
+```{r}
+### calculate mitochondial transcript percentages
+seurat[["percent.mt"]] <- PercentageFeatureSet(seurat, pattern = "^MT[-\\.]")
+### look at the distribution
+VlnPlot(
+    seurat, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3
+    )
+### don't show individual cells
+VlnPlot(
+    seurat, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3,
+    pt.size = 0
+    )
+```
+We expect number of detected genes and number of detected transcripts are well correlated across cells while mitochondrial transcript percentage is not.
+
+```{r}
+p1 <- FeatureScatter(
+    seurat, feature1 = "nCount_RNA", feature2 = "percent.mt"
+    )
+p2 <- FeatureScatter(
+    seurat, feature1 = "nCount_RNA", feature2 = "nFeature_RNA"
+    )
+p1 + p2
+```
+
+```{r}
+### set a reasonable cutoff
+seurat <- subset(
+    seurat, 
+    subset = nFeature_RNA > 500 & nFeature_RNA < 5000 & percent.mt < 5
+)
+```
+
+## Step 3: Normalization
+
+```{r}
+seurat <- NormalizeData(seurat)
+```
+# Step 4: Feature selection
+
+```{r}
+seurat <- FindVariableFeatures(seurat, nfeatures = 3000)
+
+### visualize the result
+top_features <- head(VariableFeatures(seurat), 20)
+p1 <- VariableFeaturePlot(seurat)
+p2 <- LabelPoints(
+    plot = p1, points = top_features, repel = TRUE
+)
+p1 + p2
+```
+## Step 5: Data scaling
+
+```{r}
+seurat <- ScaleData(seurat)
+```
+
+```{r}
+#| eval: false
+
+### remove unwanted source of variation
+seurat <- ScaleData(
+    seurat, vars.to.regress = c("nFeature_RNA", "percent.mt")
+    )
+
+```
+## Step 6: Linear dimensionality reduction using PCA
+
+```{r}
+seurat <- RunPCA(seurat, npcs = 50)
+```
+
+```{r}
+ElbowPlot(seurat, ndims = ncol(Embeddings(seurat, "pca")))
+```
+
+```{r}
+PCHeatmap(seurat, dims = 1:20, cells = 500, balanced = TRUE, ncol = 4)
+```
+## Step 7: Non-linear dimension reduction for visualization
+
+```{r}
+seurat <- RunTSNE(seurat, dims = 1:20)
+seurat <- RunUMAP(seurat, dims = 1:20)
+
+p1 <- TSNEPlot(seurat)
+p2 <- UMAPPlot(seurat)
+
+p1 + p2
+```
+
+Check whether certain cell types or cell states exist in the data
+
+- MKI67: a marker of G2M phase of cell cycle
+- DCX: a pan-(immature) neuro marker
+- FOXG1: a telencephalon marker
+- DLX2: a ventral telencephalon marker
+- EMX1: a dorssal telencephalon (cortex) marker
+- OTX2: a midbrain and diencephalon neuron marker
+- LHX9: a diencephalon and midbrain neuron marker
+- TFAP2A: a midbrain-hindbrain boundary marker
+
+```{r}
+p1 <- FeaturePlot(
+    seurat, 
+    c("MKI67", "NES", "DCX", "FOXG1", "DLX2", "EMX1", "OTX2", "LHX9", "TFAP2A"),
+    ncol = 3, reduction = "tsne"
+)
+p2 <- FeaturePlot(
+    seurat, 
+    c("MKI67", "NES", "DCX", "FOXG1", "DLX2", "EMX1", "OTX2", "LHX9", "TFAP2A"),
+    ncol = 3, reduction = "umap"
+)
+
+p1 / p2
+```
+
+## Step 8: Cluster the cells
+
+## Step 9: Annotate cell clusters
+## Step 10: Pseudotemporal cell ordering
+## Step 11: Save the result
+
+# Part 2: Integrate  multiple scRNA-seq data sets
+
+# Part 3: Use annotated reference data set
+
+# Part 4: Optional advanced analysis for scRNA-seq data

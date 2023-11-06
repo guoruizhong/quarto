@@ -1,0 +1,34 @@
+---
+title: "Learning scRNA-seq data analysis"
+date: 2023-11-05
+date-modified: last-modified
+categories:
+  - scRNA-seq
+# image: workflow.png
+image: scRNAseq.png
+draft: true
+# execute: 
+#   freeze: true
+#   # echo: false
+#   warning: false
+#   eval: false
+---
+
+
+```{r}
+# BiocManager::install("AnnotationHub", force = TRUE)
+# BiocManager::install("ensembldb", force = TRUE)
+# BiocManager::install("multtest", force = TRUE)
+# BiocManager::install("glmGamPoi", force = TRUE)
+library(Seurat)
+library(tidyverse)
+library(Matrix)
+library(RCurl)
+library(scales)
+library(cowplot)
+library(metap)
+library(AnnotationHub)
+library(ensembldb)
+library(multtest)
+library(glmGamPoi)
+```

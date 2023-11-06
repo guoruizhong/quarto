@@ -1,7 +1,7 @@
 ---
 title: "Learning PCA, tSNE and UMAP from simple example"
 date: 2023-05-27
-# date-modified: 2023-04-05
+date-modified: last-modified
 categories:
   - pca
   - tsne
@@ -28,20 +28,19 @@ pacman::p_load(
     tidyverse,  # tidy data
     FactoMineR, # compute principal component methods
     factoextra,  # extract, visualize and interpretate the results
-    corrplot  # visualize cos2 of variables
+    corrplot,  # visualize cos2 of variables
+    broom,
+    ggforce,
+    palmerpenguins,
+    umap,
+    Rtsne
 )
 ```
 ## Library and data
 
-
 ```{r}
 ### load packages
 rm(list = ls())
-pacman::p_load(
-  tidyverse,
-  broom,
-  palmerpenguins
-)
 ### demo data
 penguins <- penguins |> 
   drop_na() |> 
@@ -50,7 +49,6 @@ head(penguins)
 ```
 
 ## PCA
-
 
 ```{r}
 ### Perform PCA using prcomp()
@@ -78,12 +76,6 @@ pca_fit |>
 
 ```{r}
 rm(list = ls())
-### load packages
-pacman::p_load(
-  tidyverse,
-  umap,
-  palmerpenguins
-)
 ### theme set
 theme_set(theme_bw(18))
 ### subset data
@@ -107,7 +99,9 @@ umap_df <- umap_fit$layout |>
   as.data.frame() |> 
   rename(UMAP1 = "V1", UMAP2 = "V2") |> 
   mutate(ID = row_number()) |> 
-  inner_join(penguins_meta, by = "ID")  
+  inner_join(penguins_meta, by = "ID") |> 
+  as_tibble()  
+head(umap_df)
 ### visualize umap
 umap_df |> 
   ggplot(aes(x = UMAP1, y = UMAP2, color = species, shape = sex)) +
@@ -123,9 +117,6 @@ umap_df |>
   theme(legend.position = "bottom")
 
 ### circlize the outlier cases
-pacman::p_load(
-  ggforce
-)
 umap_df |> 
   ggplot(aes(x = UMAP1, y = UMAP2, color = species, shape = sex)) +
   geom_point()+
@@ -135,15 +126,8 @@ umap_df |>
 
 ## tSNE
 
-
 ```{r}
 rm(list = ls())
-### load packages
-pacman::p_load(
-  tidyverse,
-  Rtsne,
-  palmerpenguins
-)
 ### theme set
 theme_set(theme_bw(18))
 ### subset data
@@ -178,9 +162,16 @@ head(tsne_df)
 
 ### visualize 
 tsne_df |> 
-  ggplot(aes(x = tSNE1, y = tSNE2, color = species, shape = sex)) +
+  ggplot(
+    aes(x = tSNE1, y = tSNE2, color = species, shape = sex)) +
   geom_point()+
-  theme(legend.position = "bottom")
+  theme(legend.position = "right") +
+  ### identify potential sample mismatch
+  geom_circle(
+    aes(x0 = 9, y0 = -2, r = 2),
+    color = "green",
+    inherit.aes = FALSE
+  )
 ```
 
 

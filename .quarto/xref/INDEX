@@ -772,5 +772,26 @@
   },
   "learn/In-depth-NGS-Data-Analysis-Course/sessionVI/lessons/knitr_rmarkdown.md": {
     "knitr_rmarkdown.html": "e269c01f"
+  },
+  "blog/2023/10/22/index.qmd": {
+    "index.html": "3e52c3c5"
+  },
+  "blog/2023/11/06/index.qmd": {
+    "index.html": "02b5f598"
+  },
+  "blog/2023/09/11/index.qmd": {
+    "index.html": "5aecf50c"
+  },
+  "blog/2023/10/26/index.qmd": {
+    "index.html": "28a3ae46"
+  },
+  "blog/2023/11/03/index.qmd": {
+    "index.html": "b9834192"
+  },
+  "blog/2023/11/05/index.qmd": {
+    "index.html": "c23daa93"
+  },
+  "stat/index.qmd": {
+    "index.html": "13605353"
   }
 }
