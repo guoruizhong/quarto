@@ -290,5 +290,7 @@ mytrain_sv <- pamr.train(mydata_sv)
 ```
 
 ## Reference
+
 - [Batch effects and confounders](http://jtleek.com/genstats/inst/doc/02_13_batch-effects.html)
 - [The SVA package for removing batch effects and other unwanted variation in high-throughput experiments](https://www.bioconductor.org/packages/release/bioc/vignettes/sva/inst/doc/sva.pdf)
+- [Managing batch effects](https://evayiwenwang.github.io/Managing_batch_effects/)
