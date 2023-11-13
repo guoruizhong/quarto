@@ -247,3 +247,4 @@ table(pred.te, dat.te$y)
 ## Reference
 
 - [Support Vector Machine](https://uc-r.github.io/svm)
+- [Support Vector Machines in R](https://www.datacamp.com/tutorial/support-vector-machines-r)

@@ -11,6 +11,6 @@
 quarto render
 ### add to the local git repository
 git add .
-git commit -m "update harmony blog"
+git commit -m "Add dot plot"
 ### push to the remote repository
 git push -u quarto main

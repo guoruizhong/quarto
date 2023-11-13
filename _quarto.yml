@@ -39,6 +39,12 @@ website:
         file: "wiki/index.qmd"
       - text: "CRISPR"
         file: "crispr/index.qmd"
+      - text: "Imaging"
+        file: "imaging/index.qmd"
+      - text: "Spatial"
+        file: "spatial/index.qmd"
+      - text: "Immune!"
+        file: "immune/index.qmd"
     right: 
       - icon: journal-check
         aria-label: journal-check
