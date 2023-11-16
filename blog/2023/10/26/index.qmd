@@ -30,4 +30,3 @@ knitr::opts_chunk$set(
 
 The content is credit from [here](https://www.youtube.com/playlist?list=PLblh5JKOoLUIzaEkCLIUxQFjPIlapw8nU)
 
-## 

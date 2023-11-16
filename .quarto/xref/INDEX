@@ -796,5 +796,14 @@
   },
   "blog/2023/11/09/index.qmd": {
     "index.html": "8d4e8b03"
+  },
+  "blog/2023/11/13/index.qmd": {
+    "index.html": "037a410e"
+  },
+  "immune/index.qmd": {
+    "index.html": "de4b0079"
+  },
+  "spatial/index.qmd": {
+    "index.html": "c11c7aba"
   }
 }

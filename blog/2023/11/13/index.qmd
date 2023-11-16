@@ -51,15 +51,17 @@ replicate_mean
 #     alternative = "two.sided",
 #     var.equal =  TRUE
 # )
+### Retrieve the p-value for the t-test of variable 1 and 2
+# pvalue <- t_test["p.value"]
+
 pvalue <- replicate_mean |> 
     t_test(value ~ variable) |> 
     add_significance(p.col = "p")
 
-### Retrieve the p-value for the t-test of variable 1 and 2
-pvalue <- t_test["p.value"]
-
 ## Calculate total average
-total_mean <- replicate_mean |> summarise_at(vars(value), mean, na.rm = TRUE)
+total_mean <- replicate_mean |> 
+    group_by(variable) |> 
+    summarise_at(vars(value), mean, na.rm = TRUE)
 ```
 
 ```{r}
@@ -105,3 +107,4 @@ ggplot(dataset, aes(x = variable, y = value, color = factor(replicate))) +
         panel.border = element_blank()
     )
 ```
+

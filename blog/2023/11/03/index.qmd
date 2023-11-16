@@ -26,3 +26,4 @@ categories:
 - Don't save a session history
 - Keep track of `sessionInfo()` in project folder
 - Use version control
+
