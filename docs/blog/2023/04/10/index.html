@@ -8,7 +8,7 @@
 
 <meta name="author" content="Guorui Zhong">
 
-<title>Guorui Zhong - Using Tmux for Persistent Terminal in VSCode Remote Session</title>
+<title>Guorui Zhong - Using Tmux and Screen for Persistent Terminal in VSCode Remote Session</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -182,10 +182,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Using Tmux for Persistent Terminal in VSCode Remote Session</h1>
+      <h1 class="title">Using Tmux and Screen for Persistent Terminal in VSCode Remote Session</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">linux</div>
                 <div class="quarto-category">tmux</div>
+                <div class="quarto-category">screen</div>
               </div>
                   </div>
   </div>
@@ -207,6 +208,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">Monday, November 20, 2023</p>
+      </div>
+    </div>
       
     </div>
     
@@ -218,13 +225,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#tmux-shortcuts" id="toc-tmux-shortcuts" class="nav-link active" data-scroll-target="#tmux-shortcuts">Tmux shortcuts</a></li>
+  <li><a href="#tmux" id="toc-tmux" class="nav-link active" data-scroll-target="#tmux">Tmux</a>
+  <ul>
+  <li><a href="#shortcuts" id="toc-shortcuts" class="nav-link" data-scroll-target="#shortcuts">shortcuts</a></li>
   <li><a href="#basic-workflow" id="toc-basic-workflow" class="nav-link" data-scroll-target="#basic-workflow">Basic workflow</a></li>
   <li><a href="#useful-aliases" id="toc-useful-aliases" class="nav-link" data-scroll-target="#useful-aliases">Useful Aliases</a></li>
   <li><a href="#single-session" id="toc-single-session" class="nav-link" data-scroll-target="#single-session">Single session</a></li>
   <li><a href="#session-per-workspace" id="toc-session-per-workspace" class="nav-link" data-scroll-target="#session-per-workspace">Session Per Workspace</a></li>
   <li><a href="#remote-setting" id="toc-remote-setting" class="nav-link" data-scroll-target="#remote-setting">Remote setting</a></li>
-  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
+  </ul></li>
+  <li><a href="#screen" id="toc-screen" class="nav-link" data-scroll-target="#screen">Screen</a>
+  <ul>
+  <li><a href="#general-commands" id="toc-general-commands" class="nav-link" data-scroll-target="#general-commands">General commands</a></li>
+  <li><a href="#to-copy-a-block" id="toc-to-copy-a-block" class="nav-link" data-scroll-target="#to-copy-a-block">To copy a block</a></li>
+  <li><a href="#to-paste-a-block" id="toc-to-paste-a-block" class="nav-link" data-scroll-target="#to-paste-a-block">To paste a block</a></li>
+  </ul></li>
   </ul>
 </nav>
 </nav>
@@ -239,14 +254,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>The solution is to set the default terminal provider on the remote settings to be tmux, and have it attach to either an existing session named main, or create a new one if it doesn’t exist.</p>
-<section id="tmux-shortcuts" class="level2">
-<h2 class="anchored" data-anchor-id="tmux-shortcuts">Tmux shortcuts</h2>
+<section id="tmux" class="level2">
+<h2 class="anchored" data-anchor-id="tmux">Tmux</h2>
+<section id="shortcuts" class="level3">
+<h3 class="anchored" data-anchor-id="shortcuts">shortcuts</h3>
 <!-- ![](simple-tmux-cheatsheet.jpg) -->
 <p><img src="tmux.png" class="img-fluid"></p>
 <p><a href="https://quickref.me/tmux">Advanced commands &amp; shortcodes</a></p>
 </section>
-<section id="basic-workflow" class="level2">
-<h2 class="anchored" data-anchor-id="basic-workflow">Basic workflow</h2>
+<section id="basic-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="basic-workflow">Basic workflow</h3>
 <ol type="1">
 <li>Create session</li>
 <li>Setup session</li>
@@ -257,16 +274,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>To 4</li>
 </ol>
 </section>
-<section id="useful-aliases" class="level2">
-<h2 class="anchored" data-anchor-id="useful-aliases">Useful Aliases</h2>
+<section id="useful-aliases" class="level3">
+<h3 class="anchored" data-anchor-id="useful-aliases">Useful Aliases</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">alias</span> t=<span class="st">"tmux"</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">alias</span> ta=<span class="st">"t a -t"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">alias</span> tls=<span class="st">"t ls"</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">alias</span> tn=<span class="st">"t new -t"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now we can run any tmux commands by just typing <code>t</code> (saved 3 characters and much cognitive load! Yeah!), create a new session with <code>t {session-name}</code>, attach to an existing session with <code>ta {session-name}</code> and list all your sessions with <code>tls</code>.</p>
 </section>
-<section id="single-session" class="level2">
-<h2 class="anchored" data-anchor-id="single-session">Single session</h2>
+<section id="single-session" class="level3">
+<h3 class="anchored" data-anchor-id="single-session">Single session</h3>
 <ul>
 <li>Add the below snippet to your remote settings in VSCode.</li>
 </ul>
@@ -285,8 +302,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"terminal.integrated.defaultProfile.linux"</span><span class="fu">:</span> <span class="st">"tmux"</span><span class="fu">,</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="session-per-workspace" class="level2">
-<h2 class="anchored" data-anchor-id="session-per-workspace">Session Per Workspace</h2>
+<section id="session-per-workspace" class="level3">
+<h3 class="anchored" data-anchor-id="session-per-workspace">Session Per Workspace</h3>
 <ul>
 <li>Use vscode variables to make one tmux-session per project,</li>
 </ul>
@@ -305,8 +322,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"terminal.integrated.defaultProfile.linux"</span><span class="fu">:</span> <span class="st">"tmux"</span><span class="fu">,</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="remote-setting" class="level2">
-<h2 class="anchored" data-anchor-id="remote-setting">Remote setting</h2>
+<section id="remote-setting" class="level3">
+<h3 class="anchored" data-anchor-id="remote-setting">Remote setting</h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="er">//</span> <span class="er">2023-04-10</span> <span class="er">updated</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"r.rterm.linux"</span><span class="fu">:</span> <span class="st">"/home/zhonggr/.local/bin/radian"</span><span class="fu">,</span></span>
@@ -335,8 +352,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">source-file</span> ~/.tmux.conf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="reference" class="level2">
-<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+</section>
+<section id="screen" class="level2">
+<h2 class="anchored" data-anchor-id="screen">Screen</h2>
+<section id="general-commands" class="level3">
+<h3 class="anchored" data-anchor-id="general-commands">General commands</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span>                   <span class="co"># start a screen session</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-S</span> session_name   <span class="co"># start a named session</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-r</span>                <span class="co"># reattach to a linux screen</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-ls</span>               <span class="co"># list the current running screen session</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Common commands for managing Linux Screen Windows:</p>
+<ul>
+<li>Ctrl + A + C # create a new window (with shell).</li>
+<li>Ctrl + A + ” # list all windows.</li>
+<li>Ctrl + A + K # kill the current window.</li>
+<li>Ctrl + A + W # list all windows (the current window is marked with “*“) .</li>
+<li>Ctrl + A + 0-9 # go to a window numbered 0-9 .</li>
+<li>Ctrl + A + N # go to the next window.</li>
+<li>Ctrl + A Ctrl + A # toggle between the current and previous window.</li>
+<li>Ctrl + A + A # rename the current window.</li>
+<li>Ctrl + A + S # split current region horizontally into two regions.</li>
+<li>Ctrl + A + | # split current region vertically into two regions.</li>
+<li>Ctrl + A + Tab # switch the input focus to the next region.</li>
+<li>Ctrl + A + Ctrl + A # toggle between the current and previous windows</li>
+<li>Ctrl + A + Q # close all regions but the current one.</li>
+<li>Ctrl + A + X # close the current region.</li>
+<li>Ctrl + A + D # detach from linux screen session</li>
+<li>Ctrl + A + [ # start copy mode</li>
+<li>Ctrl + A + ] # paste copied text</li>
+<li>Ctrl + A + ? # help, display a list commands</li>
+<li>Ctrl + A + Ctrl + &nbsp; # quit screen</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-ls</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">## Output</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">There</span> are screens on:</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">10835.pts-0.linuxize-desktop</span>   <span class="er">(</span><span class="ex">Detached</span><span class="kw">)</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">10366.pts-0.linuxize-desktop</span>   <span class="er">(</span><span class="ex">Detached</span><span class="kw">)</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span> Sockets in /run/screens/S-linuxize.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If want to restore screen 10835.pts-0, then</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-r</span> 10835</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Press the Spacebar or Enter to end a command.</p>
+</section>
+<section id="to-copy-a-block" class="level3">
+<h3 class="anchored" data-anchor-id="to-copy-a-block">To copy a block</h3>
+<p>To get into copy mode, press Ctrl-a [ .</p>
+<p>To move the cursor, press the h, j, k, and l (the letter l) keys. The 0 (the number 0) or ^ (the caret) moves to the start of the line and $ (the dollar sign) moves to the end of the line. Ctrl-b scrolls the cursor back one page and Ctrl-f scrolls forward one page. To set the left and right margins of copy, press c and C (Shift-c). The Spacebar starts selecting the text and ends selecting the text. To abort copy mode, press Ctrl-g.</p>
+</section>
+<section id="to-paste-a-block" class="level3">
+<h3 class="anchored" data-anchor-id="to-paste-a-block">To paste a block</h3>
+<p>To paste the copied text to the current window (as many times as you want), press Ctrl-a ]. ## Reference</p>
 <ul>
 <li><a href="https://www.zdyn.net/system/hacks/2020/09/19/vscode-term-session.html" class="uri">https://www.zdyn.net/system/hacks/2020/09/19/vscode-term-session.html</a></li>
 <li><a href="https://arcolinux.com/everthing-you-need-to-know-about-tmux-introduction/" class="uri">https://arcolinux.com/everthing-you-need-to-know-about-tmux-introduction/</a></li>
@@ -344,6 +408,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

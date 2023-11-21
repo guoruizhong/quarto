@@ -805,5 +805,8 @@
   },
   "spatial/index.qmd": {
     "index.html": "c11c7aba"
+  },
+  "blog/2023/11/21/index.qmd": {
+    "index.html": "40d54d9d"
   }
 }

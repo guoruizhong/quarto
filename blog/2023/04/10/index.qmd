@@ -1,22 +1,24 @@
 ---
-title: "Using Tmux for Persistent Terminal in VSCode Remote Session"
+title: "Using Tmux and Screen for Persistent Terminal in VSCode Remote Session"
 date: 2023-04-10
-# date-modified: 2023-04-05
+date-modified: last-modified
 categories:
   - linux
   - tmux
+  - screen
 image: tmux_introduction.png
 ---
 The solution is to set the default terminal provider on the remote settings to be tmux, and have it attach to either an existing session named main, or create a new one if it doesn't exist. 
 
-## Tmux shortcuts
+## Tmux 
 
+### shortcuts
 <!-- ![](simple-tmux-cheatsheet.jpg) -->
 ![](tmux.png)
 
 [Advanced commands & shortcodes](https://quickref.me/tmux)
 
-## Basic workflow
+### Basic workflow
 
 1. Create session
 2. Setup session
@@ -26,7 +28,7 @@ The solution is to set the default terminal provider on the remote settings to b
 6. Work
 7. To 4
 
-## Useful Aliases
+### Useful Aliases
 
 ```bash
 alias t="tmux"
@@ -36,7 +38,7 @@ alias tn="t new -t"
 ``` 
 Now we can run any tmux commands by just typing `t` (saved 3 characters and much cognitive load! Yeah!), create a new session with `t {session-name}`, attach to an existing session with `ta {session-name}` and list all your sessions with `tls`.
 
-## Single session
+### Single session
 
 - Add the below snippet to your remote settings in VSCode.
 
@@ -57,7 +59,7 @@ Now we can run any tmux commands by just typing `t` (saved 3 characters and much
 }
 
 ```
-## Session Per Workspace
+### Session Per Workspace
 
 - Use vscode variables to make one tmux-session per project, 
 
@@ -79,7 +81,7 @@ Now we can run any tmux commands by just typing `t` (saved 3 characters and much
 
 ```
 
-## Remote setting
+### Remote setting
 
 ```json
 // 2023-04-10 updated
@@ -113,6 +115,65 @@ Now we can run any tmux commands by just typing `t` (saved 3 characters and much
 ```bash
 source-file ~/.tmux.conf
 ```
+
+## Screen
+
+### General commands
+
+```bash
+screen                   # start a screen session
+screen -S session_name   # start a named session
+screen -r                # reattach to a linux screen
+screen -ls               # list the current running screen session
+```
+Common commands for managing Linux Screen Windows:
+
+- Ctrl + A + C           # create a new window (with shell).
+- Ctrl + A + "           # list all windows.
+- Ctrl + A + K           # kill the current window.
+- Ctrl + A + W           # list all windows (the current window is marked with "*") .
+- Ctrl + A + 0-9         # go to a window numbered 0-9 .
+- Ctrl + A + N           # go to the next window.
+- Ctrl + A  Ctrl + A     # toggle between the current and previous window.
+- Ctrl + A + A           # rename the current window.
+- Ctrl + A + S           # split current region horizontally into two regions.
+- Ctrl + A + |           # split current region vertically into two regions.
+- Ctrl + A + Tab         # switch the input focus to the next region.
+- Ctrl + A + Ctrl + A    # toggle between the current and previous windows
+- Ctrl + A + Q           # close all regions but the current one.
+- Ctrl + A + X           # close the current region.
+- Ctrl + A + D           # detach from linux screen session
+- Ctrl + A + [           # start copy mode
+- Ctrl + A + ]           # paste copied text
+- Ctrl + A + ?           # help, display  a list commands
+- Ctrl + A + Ctrl + \    # quit screen
+
+
+```bash
+screen -ls
+## Output
+There are screens on:
+    10835.pts-0.linuxize-desktop   (Detached)
+    10366.pts-0.linuxize-desktop   (Detached)
+2 Sockets in /run/screens/S-linuxize.
+```
+If want to restore screen 10835.pts-0, then 
+
+```bash
+screen -r 10835
+```
+
+Press the Spacebar or Enter to end a command.
+
+### To copy a block
+
+To get into copy mode, press Ctrl-a [ .
+
+To move the cursor, press the h, j, k, and l (the letter l) keys. The 0 (the number 0) or ^ (the caret) moves to the start of the line and $ (the dollar sign) moves to the end of the line. Ctrl-b scrolls the cursor back one page and Ctrl-f scrolls forward one page. To set the left and right margins of copy, press c and C (Shift-c). The Spacebar starts selecting the text and ends selecting the text. To abort copy mode, press Ctrl-g.
+
+### To paste a block
+
+To paste the copied text to the current window (as many times as you want), press Ctrl-a ].
 ## Reference
 
 - <https://www.zdyn.net/system/hacks/2020/09/19/vscode-term-session.html>
