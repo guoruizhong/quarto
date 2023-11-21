@@ -7,9 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Guorui Zhong">
-<meta name="description" content="Sometimes, We need to install R in the Linux server, but we don’t the root permission">
 
-<title>Guorui Zhong - Install Conda to manage R/Python environments and packages</title>
+<title>Guorui Zhong - Normalize and Standardize Data in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -103,6 +68,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       }
 </style>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -183,15 +150,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Install Conda to manage R/Python environments and packages</h1>
-                  <div>
-        <div class="description">
-          Sometimes, We need to install R in the Linux server, but we don’t the root permission
-        </div>
-      </div>
-                          <div class="quarto-categories">
-                <div class="quarto-category">linux</div>
-                <div class="quarto-category">conda</div>
+      <h1 class="title">Normalize and Standardize Data in R</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">r</div>
               </div>
                   </div>
   </div>
@@ -209,14 +170,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Monday, August 7, 2023</p>
+        <p class="date">Wednesday, April 5, 2023</p>
       </div>
     </div>
     
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">Monday, October 16, 2023</p>
+        <p class="date-modified">Wednesday, April 5, 2023</p>
       </div>
     </div>
       
@@ -230,12 +191,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#install-conda" id="toc-install-conda" class="nav-link active" data-scroll-target="#install-conda">Install conda</a></li>
-  <li><a href="#configuring-conda" id="toc-configuring-conda" class="nav-link" data-scroll-target="#configuring-conda">Configuring conda</a></li>
-  <li><a href="#create-environment" id="toc-create-environment" class="nav-link" data-scroll-target="#create-environment">Create environment</a></li>
-  <li><a href="#using-r-with-conda" id="toc-using-r-with-conda" class="nav-link" data-scroll-target="#using-r-with-conda">Using R with Conda</a></li>
-  <li><a href="#useful-conda-commands" id="toc-useful-conda-commands" class="nav-link" data-scroll-target="#useful-conda-commands">Useful conda commands</a></li>
-  <li><a href="#conda-tips" id="toc-conda-tips" class="nav-link" data-scroll-target="#conda-tips">Conda tips</a></li>
+  <li><a href="#standard-scaling" id="toc-standard-scaling" class="nav-link active" data-scroll-target="#standard-scaling">Standard scaling</a></li>
+  <li><a href="#normalization" id="toc-normalization" class="nav-link" data-scroll-target="#normalization">Normalization</a></li>
   <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
   </ul>
 </nav>
@@ -250,96 +207,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="install-conda" class="level2">
-<h2 class="anchored" data-anchor-id="install-conda">Install conda</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Download  mambaforge or miniforge</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">### chmod </span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x ./Miniforge3-Linux-x86_64.sh</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">### Install to /home/usr/opt/miniforge3</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> ./Miniforge3-Linux-x86_64.sh</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">### Running a newer MacOS that uses the zsh shell.</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> init zsh </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Data normalization methods are used to make variables, measured in different scales, have comparable values. This preprocessing steps is important for clustering and heatmap visualization, principal component analysis and other machine learning algorithms based on distance measures.</p>
+<p>This article describes the following data rescaling approaches:</p>
+<pre><code>Standard scaling or standardization
+Normalization or Min-Max scaling
+Percentile transformation</code></pre>
+<p><img src="scale.png" class="img-fluid"></p>
+<section id="standard-scaling" class="level2">
+<h2 class="anchored" data-anchor-id="standard-scaling">Standard scaling</h2>
+<p><strong>Standard scaling</strong>, also known as standardization or Z-score normalization, consists of subtracting the mean and divide by the standard deviation. In such a case, each value would reflect the distance from the mean in units of standard deviation.</p>
+<p>If we would assume all variables come from some normal distribution, then scaling would bring them all close to the standard normal distribution. The resulting distribution has a mean of 0 and a standard deviation of 1.</p>
+<p><strong>Standard scaling formula</strong>:</p>
+<p><span class="math display">\[Transformed.Values = \frac{Values - Mean}{Standard.Deviation}\]</span></p>
+<p>An alternative to standardization is the <strong>mean normalization</strong>, which resulting distribution will have between -1 and 1 with mean = 0.</p>
+<p><strong>Mean normalization formula</strong>:</p>
+<p><span class="math display">\[Transformed.Values = \frac{Values - Mean}{Maximum - Minimum}\]</span></p>
+<p>Standardization and Mean Normalization can be used for algorithms that assumes zero centric data like <em>Principal Component Analysis</em>(PCA).</p>
 </section>
-<section id="configuring-conda" class="level2">
-<h2 class="anchored" data-anchor-id="configuring-conda">Configuring conda</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Make sure conda works</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> info <span class="co">#to view all the details about your conda set-up</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> info <span class="at">--envs</span> <span class="co">#to view all the environments available to you (note, since you just installed miniconda, you'll only have a 'base' environment available)</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">### initialize your shell</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">### Install mamba</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge mamba</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">### Access to various channels where many pre-packaged bioinformatics programs can be downloaded with all their dependencies</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels defaults</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels bioconda</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels conda-forge</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> offline false</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="create-environment" class="level2">
-<h2 class="anchored" data-anchor-id="create-environment">Create environment</h2>
-<p><img src="conda_env.png" class="img-fluid"></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Conda environment makes managing dependencies much less frustrating</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> rnaseq </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate rnaseq </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">### Install some commonly used RNA-seq software inside this environment</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># conda config --add subdirs osx-64 </span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># conda install -c bioconda kallisto # then install kallisto and centrifuge in their respective enivronments</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># conda search -c conda-forge -c bioconda 'kallisto[subdir=osx-arm64]' # for M1 mac user </span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="ex">kallisto</span> <span class="co"># test it works</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> bioconda fastqc</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> bioconda multiqc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="using-r-with-conda" class="level2">
-<h2 class="anchored" data-anchor-id="using-r-with-conda">Using R with Conda</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Create a new conda environment with all the r-essentials conda packages built from CRAN</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> renv r-essentials r-base</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">### Activate the environment: </span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate renv</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">### When using conda to install R packages, you will need to add r- before the regular package name. </span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> r r-{name_of_package}</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">### install a bioconductor package</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> bioconda bioconductor-{name_of_package}</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">### Update all of the packages and their dependencies with one command</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> update r-caret</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="useful-conda-commands" class="level2">
-<h2 class="anchored" data-anchor-id="useful-conda-commands">Useful conda commands</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list <span class="co"># shows you everything installed in your current environment</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list <span class="at">-n</span> [ENV NAME] <span class="co"># shows you everything installed in the specified environment</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> info <span class="at">--envs</span> <span class="co"># Viewing a list of your environments</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env list <span class="co"># Viewing a list of your environments</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> remove <span class="at">--name</span> myenv <span class="at">--all</span> <span class="co"># remove any environment (substitute your env name for 'myenv')</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> search myenv <span class="co"># search your channels for a specific package called 'myenv'</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> update <span class="at">--all</span> <span class="co"># update conda</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> <span class="va">$HOME</span>/.condarc <span class="co"># view your list of channels</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="conda.jpg" class="img-fluid"></p>
-</section>
-<section id="conda-tips" class="level2">
-<h2 class="anchored" data-anchor-id="conda-tips">Conda tips</h2>
-<p>We automatically get a ‘base’ environment after installing conda and we can find it when we open the terminal that you are placed in the base env by default.</p>
-<ul>
-<li>Not auto activate base environment</li>
-</ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> auto_activate_base false</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Avoid installing lots of software in base or, eventually, we will run into conflicts.</li>
-</ul>
+<section id="normalization" class="level2">
+<h2 class="anchored" data-anchor-id="normalization">Normalization</h2>
+<p>When variables in the data comes from possibly different (and non-normal) distributions, other transformations may be in order. Another possibility is to normalize the variables to brings data to the 0 to 1 scale by subtracting the minimum and dividing by the maximum of all observations.</p>
+<p>This preserves the shape of each variable’s distribution while making them easily comparable on the same “scale”.</p>
+<p><strong>Formula to normalize data between 0 and 1</strong> :</p>
+<p><span class="math display">\[Transformed.Values = \frac{Values - Minimum}{Maximum - Minimum}\]</span></p>
+<p><strong>Formula to rescale the data between an arbitrary set of values [a, b]</strong>:</p>
+<p><span class="math display">\[Transformed.Values = a + \frac{(Values - Minimum)(b-a)}{Maximum - Minimum}\]</span></p>
+<p>where <code>a,b</code> are the min-max values.</p>
+<p><strong>Normalize data in R</strong>. Using the Min-Max normalization function on <code>mtcars</code> data easily reveals columns with only two (<code>am</code>, <code>vs</code>) or three (<code>gear</code>, <code>cyl</code>) variables compared with variables that have a higher resolution of possible values:</p>
 </section>
 <section id="reference" class="level2">
 <h2 class="anchored" data-anchor-id="reference">Reference</h2>
-<ul>
-<li><a href="https://protocols.hostmicrobe.org/conda">Conda for bioinformatics</a></li>
-<li><a href="https://github.com/conda-forge/miniforge" class="uri">https://github.com/conda-forge/miniforge</a></li>
-<li><a href="https://odin.mdacc.tmc.edu/~wwang7/tutorials.html">Using Conda to manage R/Python environments and packages</a></li>
-</ul>
+<ol type="1">
+<li><a href="https://www.datanovia.com/en/lessons/heatmap-in-r-static-and-interactive-visualization/" class="uri">https://www.datanovia.com/en/lessons/heatmap-in-r-static-and-interactive-visualization/</a></li>
+</ol>
 
 
 </section>
