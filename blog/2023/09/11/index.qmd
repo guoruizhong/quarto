@@ -9,7 +9,7 @@ image: workflow.png
 description: Use lightweight and open-source software with  R programming language and the Bioconductor suite of packages to perfrm RNA-seq data analysis.
 
 execute: 
-  freeze: false
+  freeze: true
   # echo: false
   warning: false
   eval: true
