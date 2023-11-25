@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.3.450">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Guorui Zhong">
-<meta name="description" content="The package that must to learn for scRNA-seq data analysi.">
+<meta name="description" content="The package that must to learn for scRNA-seq data analysis.">
 <title>Guorui Zhong - Learning Seruat scRNA-seq data analysis</title>
 <style>
 code{white-space: pre-wrap;}
@@ -171,7 +171,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <h1 class="title">Learning Seruat scRNA-seq data analysis</h1>
                   <div>
         <div class="description">
-          The package that must to learn for scRNA-seq data analysi.
+          The package that must to learn for scRNA-seq data analysis.
         </div>
       </div>
                           <div class="quarto-categories">
@@ -403,7 +403,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="co">##   ..@ commands    :List of 1</span></span>
 <span><span class="co">##   .. ..$ NormalizeData.RNA:Formal class 'SeuratCommand' [package "SeuratObject"] with 5 slots</span></span>
 <span><span class="co">##   .. .. .. ..@ name       : chr "NormalizeData.RNA"</span></span>
-<span><span class="co">##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: "2023-11-25 10:45:45"</span></span>
+<span><span class="co">##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: "2023-11-25 11:16:06"</span></span>
 <span><span class="co">##   .. .. .. ..@ assay.used : chr "RNA"</span></span>
 <span><span class="co">##   .. .. .. ..@ call.string: chr [1:2] "NormalizeData(pbmc, normalization.method = \"LogNormalize\", " "    scale.factor = 10000)"</span></span>
 <span><span class="co">##   .. .. .. ..@ params     :List of 5</span></span>
@@ -633,24 +633,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="co"># reticulate::py_install(packages = "umap-learn")</span></span>
 <span></span>
 <span><span class="va">pbmc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/RunUMAP.html">RunUMAP</a></span><span class="op">(</span><span class="va">pbmc</span>, dims <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">## 10:48:55 UMAP embedding parameters a = 0.9922 b = 1.112</span></span>
+<span><span class="co">## 11:19:17 UMAP embedding parameters a = 0.9922 b = 1.112</span></span>
 <span><span class="co">## Found more than one class "dist" in cache; using the first, from namespace 'spam'</span></span>
 <span><span class="co">## Also defined by 'BiocGenerics'</span></span>
-<span><span class="co">## 10:48:55 Read 2638 rows and found 10 numeric columns</span></span>
-<span><span class="co">## 10:48:55 Using Annoy for neighbor search, n_neighbors = 30</span></span>
+<span><span class="co">## 11:19:17 Read 2638 rows and found 10 numeric columns</span></span>
+<span><span class="co">## 11:19:17 Using Annoy for neighbor search, n_neighbors = 30</span></span>
 <span><span class="co">## Found more than one class "dist" in cache; using the first, from namespace 'spam'</span></span>
 <span><span class="co">## Also defined by 'BiocGenerics'</span></span>
-<span><span class="co">## 10:48:55 Building Annoy index with metric = cosine, n_trees = 50</span></span>
+<span><span class="co">## 11:19:17 Building Annoy index with metric = cosine, n_trees = 50</span></span>
 <span><span class="co">## 0%   10   20   30   40   50   60   70   80   90   100%</span></span>
 <span><span class="co">## [----|----|----|----|----|----|----|----|----|----|</span></span>
 <span><span class="co">## **************************************************|</span></span>
-<span><span class="co">## 10:48:55 Writing NN index file to temp file /var/folders/2c/9q3pg2295195bp3gnrgbzrg40000gn/T//RtmpCQfJUg/file16b364f7d907c</span></span>
-<span><span class="co">## 10:48:55 Searching Annoy index using 1 thread, search_k = 3000</span></span>
-<span><span class="co">## 10:48:56 Annoy recall = 100%</span></span>
-<span><span class="co">## 10:48:56 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30</span></span>
-<span><span class="co">## 10:48:57 Initializing from normalized Laplacian + noise (using RSpectra)</span></span>
-<span><span class="co">## 10:48:57 Commencing optimization for 500 epochs, with 105140 positive edges</span></span>
-<span><span class="co">## 10:48:59 Optimization finished</span></span>
+<span><span class="co">## 11:19:17 Writing NN index file to temp file /var/folders/2c/9q3pg2295195bp3gnrgbzrg40000gn/T//RtmpIyCfN9/file172aa6c9d2f66</span></span>
+<span><span class="co">## 11:19:17 Searching Annoy index using 1 thread, search_k = 3000</span></span>
+<span><span class="co">## 11:19:17 Annoy recall = 100%</span></span>
+<span><span class="co">## 11:19:18 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30</span></span>
+<span><span class="co">## 11:19:18 Initializing from normalized Laplacian + noise (using RSpectra)</span></span>
+<span><span class="co">## 11:19:18 Commencing optimization for 500 epochs, with 105140 positive edges</span></span>
+<span><span class="co">## 11:19:21 Optimization finished</span></span>
 <span></span>
 <span><span class="co"># Note that you can set `label = TRUE` or use the LabelClusters function to help label</span></span>
 <span><span class="co"># Individual clusters</span></span>
@@ -843,6 +843,109 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="co"># )</span></span>
 <span><span class="co"># Save data</span></span>
 <span><span class="co"># saveRDS(pbmc, file = "./learn/pbmc3k/pbmc3k_final.rds")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">## R version 4.3.1 (2023-06-16)</span></span>
+<span><span class="co">## Platform: aarch64-apple-darwin20 (64-bit)</span></span>
+<span><span class="co">## Running under: macOS Sonoma 14.1.1</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Matrix products: default</span></span>
+<span><span class="co">## BLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib </span></span>
+<span><span class="co">## LAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## locale:</span></span>
+<span><span class="co">## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## time zone: Asia/Singapore</span></span>
+<span><span class="co">## tzcode source: internal</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## attached base packages:</span></span>
+<span><span class="co">## [1] stats4    stats     graphics  grDevices utils     datasets  methods  </span></span>
+<span><span class="co">## [8] base     </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## other attached packages:</span></span>
+<span><span class="co">##  [1] patchwork_1.1.3             ggrepel_0.9.4              </span></span>
+<span><span class="co">##  [3] SingleR_2.2.0               SummarizedExperiment_1.30.2</span></span>
+<span><span class="co">##  [5] Biobase_2.62.0              GenomicRanges_1.52.1       </span></span>
+<span><span class="co">##  [7] GenomeInfoDb_1.38.0         IRanges_2.36.0             </span></span>
+<span><span class="co">##  [9] S4Vectors_0.40.1            BiocGenerics_0.48.1        </span></span>
+<span><span class="co">## [11] MatrixGenerics_1.14.0       matrixStats_1.1.0          </span></span>
+<span><span class="co">## [13] Seurat_5.0.1                SeuratObject_5.0.1         </span></span>
+<span><span class="co">## [15] sp_2.1-1                    lubridate_1.9.3            </span></span>
+<span><span class="co">## [17] forcats_1.0.0               stringr_1.5.1              </span></span>
+<span><span class="co">## [19] dplyr_1.1.4                 purrr_1.0.2                </span></span>
+<span><span class="co">## [21] readr_2.1.4                 tidyr_1.3.0                </span></span>
+<span><span class="co">## [23] tibble_3.2.1                ggplot2_3.4.4              </span></span>
+<span><span class="co">## [25] tidyverse_2.0.0             here_1.0.1                 </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## loaded via a namespace (and not attached):</span></span>
+<span><span class="co">##   [1] RcppAnnoy_0.0.21          splines_4.3.1            </span></span>
+<span><span class="co">##   [3] later_1.3.1               bitops_1.0-7             </span></span>
+<span><span class="co">##   [5] R.oo_1.25.0               polyclip_1.10-6          </span></span>
+<span><span class="co">##   [7] fastDummies_1.7.3         lifecycle_1.0.4          </span></span>
+<span><span class="co">##   [9] rprojroot_2.0.4           globals_0.16.2           </span></span>
+<span><span class="co">##  [11] lattice_0.22-5            MASS_7.3-60              </span></span>
+<span><span class="co">##  [13] magrittr_2.0.3            limma_3.58.1             </span></span>
+<span><span class="co">##  [15] plotly_4.10.3             rmarkdown_2.25           </span></span>
+<span><span class="co">##  [17] yaml_2.3.7                httpuv_1.6.12            </span></span>
+<span><span class="co">##  [19] sctransform_0.4.1         spam_2.10-0              </span></span>
+<span><span class="co">##  [21] spatstat.sparse_3.0-3     reticulate_1.34.0        </span></span>
+<span><span class="co">##  [23] cowplot_1.1.1             pbapply_1.7-2            </span></span>
+<span><span class="co">##  [25] RColorBrewer_1.1-3        abind_1.4-5              </span></span>
+<span><span class="co">##  [27] zlibbioc_1.48.0           Rtsne_0.16               </span></span>
+<span><span class="co">##  [29] R.utils_2.12.3            RCurl_1.98-1.13          </span></span>
+<span><span class="co">##  [31] GenomeInfoDbData_1.2.11   irlba_2.3.5.1            </span></span>
+<span><span class="co">##  [33] listenv_0.9.0             spatstat.utils_3.0-4     </span></span>
+<span><span class="co">##  [35] goftest_1.2-3             RSpectra_0.16-1          </span></span>
+<span><span class="co">##  [37] spatstat.random_3.2-1     fitdistrplus_1.1-11      </span></span>
+<span><span class="co">##  [39] parallelly_1.36.0         DelayedMatrixStats_1.22.6</span></span>
+<span><span class="co">##  [41] leiden_0.4.3.1            codetools_0.2-19         </span></span>
+<span><span class="co">##  [43] DelayedArray_0.26.7       tidyselect_1.2.0         </span></span>
+<span><span class="co">##  [45] farver_2.1.1              ScaledMatrix_1.8.1       </span></span>
+<span><span class="co">##  [47] spatstat.explore_3.2-5    jsonlite_1.8.7           </span></span>
+<span><span class="co">##  [49] ellipsis_0.3.2            progressr_0.14.0         </span></span>
+<span><span class="co">##  [51] ggridges_0.5.4            survival_3.5-7           </span></span>
+<span><span class="co">##  [53] tools_4.3.1               ica_1.0-3                </span></span>
+<span><span class="co">##  [55] Rcpp_1.0.11               glue_1.6.2               </span></span>
+<span><span class="co">##  [57] gridExtra_2.3             xfun_0.41                </span></span>
+<span><span class="co">##  [59] withr_2.5.2               fastmap_1.1.1            </span></span>
+<span><span class="co">##  [61] fansi_1.0.5               digest_0.6.33            </span></span>
+<span><span class="co">##  [63] rsvd_1.0.5                timechange_0.2.0         </span></span>
+<span><span class="co">##  [65] R6_2.5.1                  mime_0.12                </span></span>
+<span><span class="co">##  [67] colorspace_2.1-0          scattermore_1.2          </span></span>
+<span><span class="co">##  [69] tensor_1.5                spatstat.data_3.0-3      </span></span>
+<span><span class="co">##  [71] R.methodsS3_1.8.2         utf8_1.2.4               </span></span>
+<span><span class="co">##  [73] generics_0.1.3            data.table_1.14.8        </span></span>
+<span><span class="co">##  [75] httr_1.4.7                htmlwidgets_1.6.2        </span></span>
+<span><span class="co">##  [77] S4Arrays_1.0.6            uwot_0.1.16              </span></span>
+<span><span class="co">##  [79] pkgconfig_2.0.3           gtable_0.3.4             </span></span>
+<span><span class="co">##  [81] lmtest_0.9-40             XVector_0.42.0           </span></span>
+<span><span class="co">##  [83] htmltools_0.5.7           dotCall64_1.1-0          </span></span>
+<span><span class="co">##  [85] scales_1.2.1              png_0.1-8                </span></span>
+<span><span class="co">##  [87] knitr_1.45                tzdb_0.4.0               </span></span>
+<span><span class="co">##  [89] reshape2_1.4.4            nlme_3.1-163             </span></span>
+<span><span class="co">##  [91] zoo_1.8-12                KernSmooth_2.23-22       </span></span>
+<span><span class="co">##  [93] parallel_4.3.1            miniUI_0.1.1.1           </span></span>
+<span><span class="co">##  [95] vipor_0.4.5               ggrastr_1.0.2            </span></span>
+<span><span class="co">##  [97] pillar_1.9.0              grid_4.3.1               </span></span>
+<span><span class="co">##  [99] vctrs_0.6.4               RANN_2.6.1               </span></span>
+<span><span class="co">## [101] promises_1.2.1            BiocSingular_1.16.0      </span></span>
+<span><span class="co">## [103] beachmat_2.16.0           xtable_1.8-4             </span></span>
+<span><span class="co">## [105] cluster_2.1.4             beeswarm_0.4.0           </span></span>
+<span><span class="co">## [107] evaluate_0.23             cli_3.6.1                </span></span>
+<span><span class="co">## [109] compiler_4.3.1            rlang_1.1.2              </span></span>
+<span><span class="co">## [111] crayon_1.5.2              future.apply_1.11.0      </span></span>
+<span><span class="co">## [113] labeling_0.4.3            plyr_1.8.9               </span></span>
+<span><span class="co">## [115] ggbeeswarm_0.7.2          stringi_1.8.1            </span></span>
+<span><span class="co">## [117] viridisLite_0.4.2         deldir_1.0-9             </span></span>
+<span><span class="co">## [119] BiocParallel_1.36.0       munsell_0.5.0            </span></span>
+<span><span class="co">## [121] lazyeval_0.2.2            spatstat.geom_3.2-7      </span></span>
+<span><span class="co">## [123] Matrix_1.6-3              RcppHNSW_0.5.0           </span></span>
+<span><span class="co">## [125] hms_1.1.3                 sparseMatrixStats_1.12.2 </span></span>
+<span><span class="co">## [127] future_1.33.0             statmod_1.5.0            </span></span>
+<span><span class="co">## [129] shiny_1.8.0               ROCR_1.0-11              </span></span>
+<span><span class="co">## [131] igraph_1.5.1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

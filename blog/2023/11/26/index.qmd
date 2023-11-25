@@ -1,6 +1,6 @@
 ---
 title: "Customize UMAP using ggplot2 from Seruat output"
-date: 2023-11-21
+date: 2023-11-26
 date-modified: last-modified
 categories:
   - umap
