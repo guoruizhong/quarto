@@ -18,7 +18,43 @@ The solution is to set the default terminal provider on the remote settings to b
 
 [Advanced commands & shortcodes](https://quickref.me/tmux)
 
-### Basic workflow
+### Sessions
+
+```bash
+tmux list-sessions
+tmux attach-session -t target-session
+```
+
+```bash
+Ctrl + B + (     # Cycle through all the available sessions and switch to the lastest active one
+Ctrl + B + (     # Cycle through all the available sessions and switch to the lastest active one
+Ctrl + B + L     # Switch to the lastest session, regardless of whether it was detached or attached
+Ctrl + B + D     # Detach from linux screen session
+```
+
+### Windows
+
+```bash
+Ctrl + B + W     # List all windows (the current window is marked with "*") .
+Ctrl + B + N     # Switch to the next window.                                
+Ctrl + B + P     # Switch to the previous window.                            
+Ctrl + B + C     # create a new window (with shell).                         
+Ctrl + B + 0-9   # go to a window numbered 0-9 .                             
+Ctrl + B + K     # kill the current window.                                  
+
+```
+
+### Panes
+
+```bash
+Ctrl + B + Q     # List all the panes and theri number
+Ctrl + B + ↑     # Switch to the pane above the current one
+Ctrl + B + ↓     # Switch to the pane below the current one
+Ctrl + B + ←     # Switch to the pane left of the current one
+Ctrl + B + →     # Switch to the pane right of the current one
+
+```
+### Workflow
 
 1. Create session
 2. Setup session
@@ -128,25 +164,27 @@ screen -ls               # list the current running screen session
 ```
 Common commands for managing Linux Screen Windows:
 
-- Ctrl + A + C           # create a new window (with shell).
-- Ctrl + A + "           # list all windows.
-- Ctrl + A + K           # kill the current window.
-- Ctrl + A + W           # list all windows (the current window is marked with "*") .
-- Ctrl + A + 0-9         # go to a window numbered 0-9 .
-- Ctrl + A + N           # go to the next window.
-- Ctrl + A  Ctrl + A     # toggle between the current and previous window.
-- Ctrl + A + A           # rename the current window.
-- Ctrl + A + S           # split current region horizontally into two regions.
-- Ctrl + A + |           # split current region vertically into two regions.
-- Ctrl + A + Tab         # switch the input focus to the next region.
-- Ctrl + A + Ctrl + A    # toggle between the current and previous windows
-- Ctrl + A + Q           # close all regions but the current one.
-- Ctrl + A + X           # close the current region.
-- Ctrl + A + D           # detach from linux screen session
-- Ctrl + A + [           # start copy mode
-- Ctrl + A + ]           # paste copied text
-- Ctrl + A + ?           # help, display  a list commands
-- Ctrl + A + Ctrl + \    # quit screen
+```bash
+Ctrl + A + C            # create a new window (with shell).
+Ctrl + A + K            # kill the current window.
+Ctrl + A + W            # list all windows (the current window is marked with "*") .
+Ctrl + A + 0-9          # go to a window numbered 0-9 .
+Ctrl + A + N            # go to the next window.
+Ctrl + A  Ctrl + A      # toggle between the current and previous window.
+Ctrl + A + A            # rename the current window.
+Ctrl + A + S            # split current region horizontally into two regions.
+Ctrl + A + |            # split current region vertically into two regions.
+Ctrl + A + Tab          # switch the input focus to the next region.
+Ctrl + A + Ctrl + A     # toggle between the current and previous windows
+Ctrl + A + Q            # close all regions but the current one.
+Ctrl + A + X            # close the current region.
+Ctrl + A + D            # detach from linux screen session
+Ctrl + A + [            # start copy mode
+Ctrl + A + ]            # paste copied text
+Ctrl + A + ?            # help, display  a list commands
+Ctrl + A + Ctrl + \     # quit screen
+```
+
 
 
 ```bash
@@ -174,6 +212,7 @@ To move the cursor, press the h, j, k, and l (the letter l) keys. The 0 (the num
 ### To paste a block
 
 To paste the copied text to the current window (as many times as you want), press Ctrl-a ].
+
 ## Reference
 
 - <https://www.zdyn.net/system/hacks/2020/09/19/vscode-term-session.html>

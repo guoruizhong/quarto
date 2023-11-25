@@ -11,80 +11,176 @@ toc-title: "Contents"
 
 <!-- ![](keyboard.jpg) -->
 
-# Zsh/Bash
+## Zsh/Bash
 
 
+```bash
+Ctrl + A              # Move the cursor to the beginning of the line                       
+Ctrl + E              # Move the cursor to the end of the line                             
+Opt  + ←              # Move the cursor one word backward                                  
+Opt  + →              # Move the cursor one word forward                                   
+←                     # Move the cursor one character backward                             
+→                     # Move the cursor one character forward                              
 
-| Command                        | Description                                                        |
-| ------------------             |  ---------------------------                                       |
-| `Ctrl` + `A`                   | Move the cursor to the beginning of the line                       |
-|`Ctrl` + `E`                    | Move the cursor to the end of the line                             |
-|`Opt` + `←`                     | Move the cursor one word backward                                  |
-|`Opt` + `→`                     | Move the cursor one word forward                                   |
-|`←`                             | Move the cursor one character backward                             |
-|`→`                             | Move the cursor one character forward                              |
-|`Ctrl` + `U`                    | Delete the current line                                            |
-|`Ctrl` + `K`                    | Delete from the cursor to the end of the line                      |
-|`Ctrl` + `L`                    | Clear the screen                                                   |
-|`Ctrl` + `W`                    | Delete one word backward                                           |
-|`Ctrl` + `D`                    | Delete one character forward                                       |
-|`Fn` + `Backspace`              | Delete one character forward                                       |
-|`Backspace`                     | Delete one character backward                                      |
-|`Ctrl` + `_`                    | Undo the last change                                               |
-|`Ctrl` + `C`                    | Terminate the running foreground process                           |
-|`Ctrl` + `Z`                    | Suspend the running foreground process                             |
-|`Ctrl` + `D`                    | Exit current shell                                                 |
-|`↑`                             | Recall the previous command in history                             |
-|`↓`                             | Recall the next command in history                                 |
-|`Ctrl` + `R`                    | Search the command history                                         |
-|`Ctrl` + `G`                    | Escape from command search mode                                    |
-|`!!`                            | Execute the last typed command                                     |
-|`!pw`                           | Execute the last command in history that begins with pw            |
-|`TAB`                           | Auto-complete the typed command                                    |
-|`TAB` `TAB`                     | Show list of commands                                              |
-|`TAB` `TAB` `TAB` `...`         | Cycle through matched commands                                     |
+Ctrl + U              # Delete the current line                                            
+Ctrl + K              # Delete from the cursor to the end of the line                      
+Ctrl + L              # Clear the screen                                                   
+Ctrl + W              # Delete one word backward                                           
+Ctrl + D              # Delete one character forward                                       
+Fn   + Backspace      # Delete one character forward                                       
+Backspace             # Delete one character backward                                      
 
+Ctrl + _              # Undo the last change                                               
+Ctrl + C              # Terminate the running foreground process                           
+Ctrl + Z              # Suspend the running foreground process                             
+Ctrl + D              # Exit current shell                                                 
+↑                     # Recall the previous command in history                             
+↓                     # Recall the next command in history                                 
+Ctrl + R              # Search the command history                                         
+Ctrl + G              # Escape from command search mode                                    
+!!                    # Execute the last typed command                                     
+!pw                   # Execute the last command in history that begins with pw            
+TAB                   # Auto-complete the typed command                                    
+TAB TAB               # Show list of commands                                              
+TAB TAB TAB ...       # Cycle through matched commands                                     
+```
 
+## VSCode
 
+### Mac
 
-# VSCode
+```bash
+Cmd + Shift + P          # Command Palette                       
+Cmd + ,                  # Open settings                         
+Cmd + K   Cmd + S        # Keyboard shoutcuts                    
+Cmd + B                  # Toggle sidebar                        
 
+Cmd + Shift + N          # Open new window                       
+Cmd + Shift + W          # Close window                          
+Cmd + W                  # Close tab                             
+Cmd + J                  # Open the terminal                     
+Cmd + \                  # Split view                            
+Cmd + Shift + Tab        # Navigate tabs                         
+Cmd + 1 / 2 / 3          # Navigate tab groups                   
 
-| Mac                            | Windows                       | Description                        |
-| -------------------------      | ---------------------------   | ------------------                 |
-| `Cmd` + `Shift` + `P`          | `Ctrl` + `Shift` + `P`        | Command Palette                    |
-| `Cmd` + `,`                    | `Ctrl` + `,`                  | Open settings                      |
-| `Cmd` + `K`   `Cmd` + `S`      | `Ctrl` + `K`   `Ctrl` + `S`   | Keyboard shoutcuts                 |
-| `Cmd` + `B`                    | `Ctrl` + `B`                  | Toggle sidebar                     |
-| `Cmd` + `Shift` + `N`          | `Ctrl` + `Shift` + `N`        | Open new window                    |
-| `Cmd` + `Shift` + `W`          | `Ctrl` + `Shift` + `W`        | Close window                       |
-| `Cmd` + `W`                    | `Ctrl` + `W`                  | Close tab                          |
-| `Cmd` + `J`                    | `Ctrl`  + `J`                 | Open the terminal                  |
-| `Cmd` + `\`                    | `Ctrl` + \                    | Split view                         |
-| `Cmd` + `Shift` + `Tab`        | `Ctrl` + `Shift` + `Tab`      | Navigate tabs                      |
-| `Cmd` + `1` / `2` / `3`        | `Ctrl` + `1` / `2` / `3`      | Navigate tab groups                |
-| `Cmd` + `Opt` + `↑` / `↓`      | `Ctrl` + `Opt` + `↑` / `↓`    | Multiple cursor                    |
-| `Cmd` + `Shift` + `↑` / `↓`    | `Ctrl` + `Shift` + `↑` / `↓`  | Select text                        |
-| `Opt` + `↑` / `↓`              | `Alt` + `↑` / `↓`             | Move the line Up / Down            |
-| `Shift` + `Opt` + `↑` / `↓`    | `Shift` + `Alt` + `↑` / `↓`   | Copy line Up / Down                |
-| `Cmd` + `D`                    | `Ctrl` + `D`                  | Select word                        |
-| `Cmd` + `L`                    | `Ctrl` + `L`                  | Select current line                |
-| `Cmd` + `Shift` + `L`          | `Ctrl` + `Shift` + `L`        | Select similar occurrences         |
-| `Cmd` + `Shift` + `K`          | `Ctrl` + `Shift` + `K`        | Delete current line                |
-| `Cmd` + `Backspace`            | `Ctrl` + `Backspace`          | Delete one word backward           |
-| `Opt` + `Backspace`            | `Alt` + `Backspace`           | Delete one word backward           |
-| `Cmd` + `/`                    | `Ctrl` + `/`                  | Comment lines                      |
-| `Cmd` + `G`                    | `Ctrl` + `G`                  | Navigate to  line                  |
-| `Cmd` + `Opt` + `[`  /  `]`    | `Ctrl` + `Shift` + `[` / `]`  | Code folding                       |
-| `Cmd` + `[`  /  `]`            | `Ctrl` + `[`  /  `]`          | Indent / outdent lines             |
-| `Cmd` + `K`   `Cmd` + `F`      | `Ctrl` + `K`   `Ctrl` + `F`   | Format selected code               |
-| `Shift` + `Opt` + `F`          | `Shift` + `Alt` + `F`         | Format document                    |
-| `Opt` + `←` / `→`              | `Alt` + `←` / `→`             | Go to the start / end of the word  |
-| `Cmd` + `←` / `→`              | `Ctrl` + `←` / `→`            | Go to the start / end of the line  |
-| `Cmd` + `↑` / `↓`              | `Ctrl` + `↑` / `↓`            | Go to beginning or end of file     |
-| `Cmd` + `Shift` + `F`          | `Ctrl` + `Shift` + `F`        | Search files                       |
-| `Cmd` + `F`                    | `Ctrl` + `F`                  | Find text                          |
-| `Cmd` + `Opt` + `F`            | `Ctrl` + `H`                  | Replace text                       |
+Cmd + Opt + ↑ / ↓        # Multiple cursor                       
+Cmd + Shift + ↑ / ↓      # Select text                           
+Opt + ↑ / ↓              # Move the line Up / Down               
+Shift + Opt + ↑ / ↓      # Copy line Up / Down                   
+Cmd + D                  # Select word                           
+Cmd + L                  # Select current line                   
+Cmd + Shift + L          # Select similar occurrences            
+Cmd + Shift + K          # Delete current line                   
+Cmd + Backspace          # Delete one word backward              
+Opt + Backspace          # Delete one word backward              
 
+Cmd + /                  # Comment lines                         
+Cmd + G                  # Navigate to  line                     
+Cmd + Opt + [  /  ]      # Code folding                          
+Cmd + [  /  ]            # Indent / outdent lines                
+Cmd + K   Cmd + F        # Format selected code                  
+Shift + Opt + F          # Format document                       
+Opt + ← / →              # Go to the start / end of the word     
+Cmd + ← / →              # Go to the start / end of the line     
+Cmd + ↑ / ↓              # Go to beginning or end of file        
+Cmd + Shift + F          # Search files                          
+Cmd + F                  # Find text                             
+Cmd + Opt + F            # Replace text                          
+```
+### Windows
 
+```bash              
+Ctrl + Shift + P         # Command Palette                   
+Ctrl + ,                 # Open settings                     
+Ctrl + K   Ctrl + S      # Keyboard shoutcuts                
+Ctrl + B                 # Toggle sidebar                    
 
+Ctrl + Shift + N         # Open new window                   
+Ctrl + Shift + W         # Close window                      
+Ctrl + W                 # Close tab                         
+Ctrl  + J                # Open the terminal                 
+Ctrl + \                 # Split view                        
+Ctrl + Shift + Tab       # Navigate tabs                     
+Ctrl + 1 / 2 / 3         # Navigate tab groups               
+
+Ctrl + Opt + ↑ / ↓       # Multiple cursor                   
+Ctrl + Shift + ↑ / ↓     # Select text                       
+Alt + ↑ / ↓              # Move the line Up / Down           
+Shift + Alt + ↑ / ↓      # Copy line Up / Down               
+Ctrl + D                 # Select word                       
+Ctrl + L                 # Select current line               
+Ctrl + Shift + L         # Select similar occurrences        
+Ctrl + Shift + K         # Delete current line               
+Ctrl + Backspace         # Delete one word backward          
+Alt + Backspace          # Delete one word backward          
+Ctrl + G                 # Navigate to  line                 
+
+Ctrl + /                 # Comment lines                     
+Ctrl + Shift + [ / ]     # Code folding                      
+Ctrl + [  /  ]           # Indent / outdent lines            
+Ctrl + K   Ctrl + F      # Format selected code              
+Shift + Alt + F          # Format document                   
+Alt + ← / →              # Go to the start / end of the word 
+Ctrl + ← / →             # Go to the start / end of the line 
+Ctrl + ↑ / ↓             # Go to beginning or end of file    
+Ctrl + Shift + F         # Search files                      
+Ctrl + F                 # Find text                         
+Ctrl + H                # Replace text                      
+```
+
+## Tmux 
+
+```bash
+### Sessions
+tmux list-sessions
+tmux attach-session -t target-session
+Ctrl + B + (     # Cycle through all the available sessions and switch to the lastest active one
+Ctrl + B + (     # Cycle through all the available sessions and switch to the lastest active one
+Ctrl + B + L     # Switch to the lastest session, regardless of whether it was detached or attached
+Ctrl + B + D     # Detach from linux screen session
+
+### Windows
+Ctrl + B + W     # List all windows (the current window is marked with "*") .
+Ctrl + B + N     # Switch to the next window.                                
+Ctrl + B + P     # Switch to the previous window.                            
+Ctrl + B + C     # create a new window (with shell).                         
+Ctrl + B + 0-9   # go to a window numbered 0-9 .                             
+Ctrl + B + K     # kill the current window.                                  
+
+### Panes
+Ctrl + B + Q     # List all the panes and theri number
+Ctrl + B + ↑     # Switch to the pane above the current one
+Ctrl + B + ↓     # Switch to the pane below the current one
+Ctrl + B + ←     # Switch to the pane left of the current one
+Ctrl + B + →     # Switch to the pane right of the current one
+```
+
+## Screen
+
+```bash
+### General commands
+screen                   # start a screen session
+screen -S session_name   # start a named session
+screen -r                # reattach to a linux screen
+screen -ls               # list the current running screen session
+
+### Shortcuts
+Ctrl + A + C            # create a new window (with shell).
+Ctrl + A + K            # kill the current window.
+Ctrl + A + W            # list all windows (the current window is marked with "*") .
+Ctrl + A + 0-9          # go to a window numbered 0-9 .
+Ctrl + A + N            # go to the next window.
+Ctrl + A  Ctrl + A      # toggle between the current and previous window.
+Ctrl + A + A            # rename the current window.
+Ctrl + A + S            # split current region horizontally into two regions.
+Ctrl + A + |            # split current region vertically into two regions.
+Ctrl + A + Tab          # switch the input focus to the next region.
+Ctrl + A + Ctrl + A     # toggle between the current and previous windows
+Ctrl + A + Q            # close all regions but the current one.
+Ctrl + A + X            # close the current region.
+Ctrl + A + D            # detach from linux screen session
+Ctrl + A + [            # start copy mode
+Ctrl + A + ]            # paste copied text
+Ctrl + A + ?            # help, display  a list commands
+Ctrl + A + Ctrl + \     # quit screen
+```
