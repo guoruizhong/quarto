@@ -9,7 +9,7 @@ toc-location: left
 toc-title: "Contents"
 ---
 
-<!-- ![](keyboard.jpg) -->
+![](keyboard.jpg)
 
 ## Zsh/Bash
 
@@ -45,47 +45,118 @@ TAB TAB               # Show list of commands
 TAB TAB TAB ...       # Cycle through matched commands                                     
 ```
 
+
+## Tmux 
+
+```bash
+### Sessions
+tmux list-sessions
+tmux attach-session -t target-session
+Ctrl + B + (     # Cycle through all the available sessions and switch to the lastest active one
+Ctrl + B + (     # Cycle through all the available sessions and switch to the lastest active one
+Ctrl + B + L     # Switch to the lastest session, regardless of whether it was detached or attached
+Ctrl + B + D     # Detach from linux screen session
+
+### Windows
+Ctrl + B + W     # List all windows (the current window is marked with "*") .
+Ctrl + B + N     # Switch to the next window.                                
+Ctrl + B + P     # Switch to the previous window.                            
+Ctrl + B + C     # create a new window (with shell).                         
+Ctrl + B + 0-9   # go to a window numbered 0-9 .                             
+Ctrl + B + K     # kill the current window.                                  
+
+### Panes
+Ctrl + B + Q     # List all the panes and theri number
+Ctrl + B + ↑     # Switch to the pane above the current one
+Ctrl + B + ↓     # Switch to the pane below the current one
+Ctrl + B + ←     # Switch to the pane left of the current one
+Ctrl + B + →     # Switch to the pane right of the current one
+```
+
+
+## Screen
+
+```bash
+### General commands
+screen                   # start a screen session
+screen -S session_name   # start a named session
+screen -r                # reattach to a linux screen
+screen -ls               # list the current running screen session
+
+### Shortcuts
+Ctrl + A + C            # create a new window (with shell).
+Ctrl + A + K            # kill the current window.
+Ctrl + A + W            # list all windows (the current window is marked with "*") .
+Ctrl + A + 0-9          # go to a window numbered 0-9 .
+Ctrl + A + N            # go to the next window.
+Ctrl + A  Ctrl + A      # toggle between the current and previous window.
+Ctrl + A + A            # rename the current window.
+Ctrl + A + S            # split current region horizontally into two regions.
+Ctrl + A + |            # split current region vertically into two regions.
+Ctrl + A + Tab          # switch the input focus to the next region.
+Ctrl + A + Ctrl + A     # toggle between the current and previous windows
+Ctrl + A + Q            # close all regions but the current one.
+Ctrl + A + X            # close the current region.
+Ctrl + A + D            # detach from linux screen session
+Ctrl + A + [            # start copy mode
+Ctrl + A + ]            # paste copied text
+Ctrl + A + ?            # help, display  a list commands
+Ctrl + A + Ctrl + \     # quit screen
+```
+
+
+
 ## VSCode
 
 ### Mac
 
 ```bash
-Cmd + Shift + P          # Command Palette                       
-Cmd + ,                  # Open settings                         
-Cmd + K   Cmd + S        # Keyboard shoutcuts                    
-Cmd + B                  # Toggle sidebar                        
+### General
+Cmd  +  Shift + P      # Command Palette                       
+Cmd  +  ,              # Open settings                         
+Cmd  +  K  Cmd + S     # Keyboard shoutcuts                    
+Cmd  +  B              # Toggle sidebar                        
 
-Cmd + Shift + N          # Open new window                       
-Cmd + Shift + W          # Close window                          
-Cmd + W                  # Close tab                             
-Cmd + J                  # Open the terminal                     
-Cmd + \                  # Split view                            
-Cmd + Shift + Tab        # Navigate tabs                         
-Cmd + 1 / 2 / 3          # Navigate tab groups                   
+### Terminal
+Cmd   + `              # Open/close the terminal                     
+Cmd   + Shift + `      # Create a new the terminal                     
+Ctrl  + Pgup           # Switch between terminal
+Ctrl  + Pgdn           # Switch between terminal
+Cmd   + \              # Split pane within a terminal
 
-Cmd + Opt + ↑ / ↓        # Multiple cursor                       
-Cmd + Shift + ↑ / ↓      # Select text                           
-Opt + ↑ / ↓              # Move the line Up / Down               
-Shift + Opt + ↑ / ↓      # Copy line Up / Down                   
-Cmd + D                  # Select word                           
-Cmd + L                  # Select current line                   
-Cmd + Shift + L          # Select similar occurrences            
-Cmd + Shift + K          # Delete current line                   
-Cmd + Backspace          # Delete one word backward              
-Opt + Backspace          # Delete one word backward              
+### Editor
+Cmd   + Shift + N      # Open new window                       
+Cmd   + Shift + W      # Close window                          
+Cmd   + W              # Close tab                             
+Cmd   + \              # Split the editor                            
+Cmd   + Shift + Tab    # Navigate tabs                         
+Cmd   + 1 / 2 / 3      # Navigate tab groups                   
+Ctrl  + 1 / 2 / 3      # Navigate window groups                   
 
-Cmd + /                  # Comment lines                         
-Cmd + G                  # Navigate to  line                     
-Cmd + Opt + [  /  ]      # Code folding                          
-Cmd + [  /  ]            # Indent / outdent lines                
-Cmd + K   Cmd + F        # Format selected code                  
-Shift + Opt + F          # Format document                       
-Opt + ← / →              # Go to the start / end of the word     
-Cmd + ← / →              # Go to the start / end of the line     
-Cmd + ↑ / ↓              # Go to beginning or end of file        
-Cmd + Shift + F          # Search files                          
-Cmd + F                  # Find text                             
-Cmd + Opt + F            # Replace text                          
+### Text
+Cmd   + Opt + ↑ / ↓    # Multiple cursor                       
+Cmd   + Shift + ↑ / ↓  # Select text                           
+Opt   + ↑ / ↓          # Move the line Up / Down               
+Shift + Opt + ↑ / ↓    # Copy line Up / Down                   
+Cmd   + D              # Select word                           
+Cmd   + L              # Select current line                   
+Cmd   + Shift + L      # Select similar occurrences            
+Cmd   + Shift + K      # Delete current line                   
+Cmd   + Backspace      # Delete one word backward              
+Opt   + Backspace      # Delete one word backward              
+
+Cmd   + /              # Comment lines                         
+Cmd   + G              # Navigate to  line                     
+Cmd   + Opt + [  /  ]  # Code folding                          
+Cmd   + [  /  ]        # Indent / outdent lines                
+Cmd   + K   Cmd + F    # Format selected code                  
+Shift + Opt + F        # Format document                       
+Opt   + ← / →          # Go to the start / end of the word     
+Cmd   + ← / →          # Go to the start / end of the line     
+Cmd   + ↑ / ↓          # Go to beginning or end of file        
+Cmd   + Shift + F      # Search files                          
+Cmd   + F              # Find text                             
+Cmd   + Opt + F        # Replace text                          
 ```
 ### Windows
 
@@ -125,62 +196,6 @@ Ctrl + ← / →             # Go to the start / end of the line
 Ctrl + ↑ / ↓             # Go to beginning or end of file    
 Ctrl + Shift + F         # Search files                      
 Ctrl + F                 # Find text                         
-Ctrl + H                # Replace text                      
+Ctrl + H                 # Replace text                      
 ```
 
-## Tmux 
-
-```bash
-### Sessions
-tmux list-sessions
-tmux attach-session -t target-session
-Ctrl + B + (     # Cycle through all the available sessions and switch to the lastest active one
-Ctrl + B + (     # Cycle through all the available sessions and switch to the lastest active one
-Ctrl + B + L     # Switch to the lastest session, regardless of whether it was detached or attached
-Ctrl + B + D     # Detach from linux screen session
-
-### Windows
-Ctrl + B + W     # List all windows (the current window is marked with "*") .
-Ctrl + B + N     # Switch to the next window.                                
-Ctrl + B + P     # Switch to the previous window.                            
-Ctrl + B + C     # create a new window (with shell).                         
-Ctrl + B + 0-9   # go to a window numbered 0-9 .                             
-Ctrl + B + K     # kill the current window.                                  
-
-### Panes
-Ctrl + B + Q     # List all the panes and theri number
-Ctrl + B + ↑     # Switch to the pane above the current one
-Ctrl + B + ↓     # Switch to the pane below the current one
-Ctrl + B + ←     # Switch to the pane left of the current one
-Ctrl + B + →     # Switch to the pane right of the current one
-```
-
-## Screen
-
-```bash
-### General commands
-screen                   # start a screen session
-screen -S session_name   # start a named session
-screen -r                # reattach to a linux screen
-screen -ls               # list the current running screen session
-
-### Shortcuts
-Ctrl + A + C            # create a new window (with shell).
-Ctrl + A + K            # kill the current window.
-Ctrl + A + W            # list all windows (the current window is marked with "*") .
-Ctrl + A + 0-9          # go to a window numbered 0-9 .
-Ctrl + A + N            # go to the next window.
-Ctrl + A  Ctrl + A      # toggle between the current and previous window.
-Ctrl + A + A            # rename the current window.
-Ctrl + A + S            # split current region horizontally into two regions.
-Ctrl + A + |            # split current region vertically into two regions.
-Ctrl + A + Tab          # switch the input focus to the next region.
-Ctrl + A + Ctrl + A     # toggle between the current and previous windows
-Ctrl + A + Q            # close all regions but the current one.
-Ctrl + A + X            # close the current region.
-Ctrl + A + D            # detach from linux screen session
-Ctrl + A + [            # start copy mode
-Ctrl + A + ]            # paste copied text
-Ctrl + A + ?            # help, display  a list commands
-Ctrl + A + Ctrl + \     # quit screen
-```

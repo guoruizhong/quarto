@@ -200,7 +200,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">November 25, 2023</p>
+        <p class="date-modified">November 26, 2023</p>
       </div>
     </div>
       
@@ -215,13 +215,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#zshbash" id="toc-zshbash" class="nav-link active" data-scroll-target="#zshbash">Zsh/Bash</a></li>
+  <li><a href="#tmux" id="toc-tmux" class="nav-link" data-scroll-target="#tmux">Tmux</a></li>
+  <li><a href="#screen" id="toc-screen" class="nav-link" data-scroll-target="#screen">Screen</a></li>
   <li><a href="#vscode" id="toc-vscode" class="nav-link" data-scroll-target="#vscode">VSCode</a>
   <ul class="collapse">
   <li><a href="#mac" id="toc-mac" class="nav-link" data-scroll-target="#mac">Mac</a></li>
   <li><a href="#windows" id="toc-windows" class="nav-link" data-scroll-target="#windows">Windows</a></li>
   </ul></li>
-  <li><a href="#tmux" id="toc-tmux" class="nav-link" data-scroll-target="#tmux">Tmux</a></li>
-  <li><a href="#screen" id="toc-screen" class="nav-link" data-scroll-target="#screen">Screen</a></li>
   </ul>
 </nav>
 </nav>
@@ -235,7 +235,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<!-- ![](keyboard.jpg) -->
+<p><img src="keyboard.jpg" class="img-fluid"></p>
 <section id="zshbash" class="level2">
 <h2 class="anchored" data-anchor-id="zshbash">Zsh/Bash</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A              <span class="co"># Move the cursor to the beginning of the line                       </span></span>
@@ -267,141 +267,151 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="ex">TAB</span> TAB               <span class="co"># Show list of commands                                              </span></span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="ex">TAB</span> TAB TAB ...       <span class="co"># Cycle through matched commands                                     </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
+<section id="tmux" class="level2">
+<h2 class="anchored" data-anchor-id="tmux">Tmux</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Sessions</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> list-sessions</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> attach-session <span class="at">-t</span> target-session</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + <span class="er">(</span>     <span class="co"># Cycle through all the available sessions and switch to the lastest active one</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + <span class="er">(</span>     <span class="co"># Cycle through all the available sessions and switch to the lastest active one</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + L     <span class="co"># Switch to the lastest session, regardless of whether it was detached or attached</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + D     <span class="co"># Detach from linux screen session</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">### Windows</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + W     <span class="co"># List all windows (the current window is marked with "*") .</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + N     <span class="co"># Switch to the next window.                                </span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + P     <span class="co"># Switch to the previous window.                            </span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + C     <span class="co"># create a new window (with shell).                         </span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + 0-9   <span class="co"># go to a window numbered 0-9 .                             </span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + K     <span class="co"># kill the current window.                                  </span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">### Panes</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + Q     <span class="co"># List all the panes and theri number</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + ↑     <span class="co"># Switch to the pane above the current one</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + ↓     <span class="co"># Switch to the pane below the current one</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + ←     <span class="co"># Switch to the pane left of the current one</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + →     <span class="co"># Switch to the pane right of the current one</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="screen" class="level2">
+<h2 class="anchored" data-anchor-id="screen">Screen</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">### General commands</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span>                   <span class="co"># start a screen session</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-S</span> session_name   <span class="co"># start a named session</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-r</span>                <span class="co"># reattach to a linux screen</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-ls</span>               <span class="co"># list the current running screen session</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">### Shortcuts</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + C            <span class="co"># create a new window (with shell).</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + K            <span class="co"># kill the current window.</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + W            <span class="co"># list all windows (the current window is marked with "*") .</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + 0-9          <span class="co"># go to a window numbered 0-9 .</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + N            <span class="co"># go to the next window.</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A  Ctrl + A      <span class="co"># toggle between the current and previous window.</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + A            <span class="co"># rename the current window.</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + S            <span class="co"># split current region horizontally into two regions.</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + <span class="kw">|</span>            <span class="co"># split current region vertically into two regions.</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + Tab          <span class="co"># switch the input focus to the next region.</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + Ctrl + A     <span class="co"># toggle between the current and previous windows</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + Q            <span class="co"># close all regions but the current one.</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + X            <span class="co"># close the current region.</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + D            <span class="co"># detach from linux screen session</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + [            <span class="co"># start copy mode</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + ]            <span class="co"># paste copied text</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + <span class="pp">?</span>            <span class="co"># help, display  a list commands</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + Ctrl + <span class="dt">\ </span>    <span class="co"># quit screen</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 <section id="vscode" class="level2">
 <h2 class="anchored" data-anchor-id="vscode">VSCode</h2>
 <section id="mac" class="level3">
 <h3 class="anchored" data-anchor-id="mac">Mac</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + Shift + P          <span class="co"># Command Palette                       </span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + ,                  <span class="co"># Open settings                         </span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + K   Cmd + S        <span class="co"># Keyboard shoutcuts                    </span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + B                  <span class="co"># Toggle sidebar                        </span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + Shift + N          <span class="co"># Open new window                       </span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + Shift + W          <span class="co"># Close window                          </span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + W                  <span class="co"># Close tab                             </span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + J                  <span class="co"># Open the terminal                     </span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + <span class="dt">\ </span>                 <span class="co"># Split view                            </span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + Shift + Tab        <span class="co"># Navigate tabs                         </span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + 1 / 2 / 3          <span class="co"># Navigate tab groups                   </span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + Opt + ↑ / ↓        <span class="co"># Multiple cursor                       </span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + Shift + ↑ / ↓      <span class="co"># Select text                           </span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Opt</span> + ↑ / ↓              <span class="co"># Move the line Up / Down               </span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="ex">Shift</span> + Opt + ↑ / ↓      <span class="co"># Copy line Up / Down                   </span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + D                  <span class="co"># Select word                           </span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + L                  <span class="co"># Select current line                   </span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + Shift + L          <span class="co"># Select similar occurrences            </span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + Shift + K          <span class="co"># Delete current line                   </span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + Backspace          <span class="co"># Delete one word backward              </span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="ex">Opt</span> + Backspace          <span class="co"># Delete one word backward              </span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + /                  <span class="co"># Comment lines                         </span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + G                  <span class="co"># Navigate to  line                     </span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + Opt + [  /  ]      <span class="co"># Code folding                          </span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + [  /  ]            <span class="co"># Indent / outdent lines                </span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + K   Cmd + F        <span class="co"># Format selected code                  </span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="ex">Shift</span> + Opt + F          <span class="co"># Format document                       </span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="ex">Opt</span> + ← / →              <span class="co"># Go to the start / end of the word     </span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + ← / →              <span class="co"># Go to the start / end of the line     </span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + ↑ / ↓              <span class="co"># Go to beginning or end of file        </span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + Shift + F          <span class="co"># Search files                          </span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + F                  <span class="co"># Find text                             </span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span> + Opt + F            <span class="co"># Replace text                          </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">### General</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>  +  Shift + P      <span class="co"># Command Palette                       </span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>  +  ,              <span class="co"># Open settings                         </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>  +  K  Cmd + S     <span class="co"># Keyboard shoutcuts                    </span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>  +  B              <span class="co"># Toggle sidebar                        </span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">### Terminal</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + <span class="kw">`</span>              <span class="co"># Open/close the terminal                     </span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + Shift + <span class="kw">`</span>      <span class="co"># Create a new the terminal                     </span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span>  + Pgup           <span class="co"># Switch between terminal</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span>  + Pgdn           <span class="co"># Switch between terminal</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + <span class="dt">\ </span>             <span class="co"># Split pane within a terminal</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">### Editor</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + Shift + N      <span class="co"># Open new window                       </span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + Shift + W      <span class="co"># Close window                          </span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + W              <span class="co"># Close tab                             </span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + <span class="dt">\ </span>             <span class="co"># Split the editor                            </span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + Shift + Tab    <span class="co"># Navigate tabs                         </span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + 1 / 2 / 3      <span class="co"># Navigate tab groups                   </span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span>  + 1 / 2 / 3      <span class="co"># Navigate window groups                   </span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co">### Text</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + Opt + ↑ / ↓    <span class="co"># Multiple cursor                       </span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + Shift + ↑ / ↓  <span class="co"># Select text                           </span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="ex">Opt</span>   + ↑ / ↓          <span class="co"># Move the line Up / Down               </span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="ex">Shift</span> + Opt + ↑ / ↓    <span class="co"># Copy line Up / Down                   </span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + D              <span class="co"># Select word                           </span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + L              <span class="co"># Select current line                   </span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + Shift + L      <span class="co"># Select similar occurrences            </span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + Shift + K      <span class="co"># Delete current line                   </span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + Backspace      <span class="co"># Delete one word backward              </span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="ex">Opt</span>   + Backspace      <span class="co"># Delete one word backward              </span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + /              <span class="co"># Comment lines                         </span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + G              <span class="co"># Navigate to  line                     </span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + Opt + [  /  ]  <span class="co"># Code folding                          </span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + [  /  ]        <span class="co"># Indent / outdent lines                </span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + K   Cmd + F    <span class="co"># Format selected code                  </span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="ex">Shift</span> + Opt + F        <span class="co"># Format document                       </span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="ex">Opt</span>   + ← / →          <span class="co"># Go to the start / end of the word     </span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + ← / →          <span class="co"># Go to the start / end of the line     </span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + ↑ / ↓          <span class="co"># Go to beginning or end of file        </span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + Shift + F      <span class="co"># Search files                          </span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + F              <span class="co"># Find text                             </span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="ex">Cmd</span>   + Opt + F        <span class="co"># Replace text                          </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="windows" class="level3">
 <h3 class="anchored" data-anchor-id="windows">Windows</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + P         <span class="co"># Command Palette                   </span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + ,                 <span class="co"># Open settings                     </span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + K   Ctrl + S      <span class="co"># Keyboard shoutcuts                </span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B                 <span class="co"># Toggle sidebar                    </span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + N         <span class="co"># Open new window                   </span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + W         <span class="co"># Close window                      </span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + W                 <span class="co"># Close tab                         </span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span>  + J                <span class="co"># Open the terminal                 </span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + <span class="dt">\ </span>                <span class="co"># Split view                        </span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + Tab       <span class="co"># Navigate tabs                     </span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + 1 / 2 / 3         <span class="co"># Navigate tab groups               </span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Opt + ↑ / ↓       <span class="co"># Multiple cursor                   </span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + ↑ / ↓     <span class="co"># Select text                       </span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Alt</span> + ↑ / ↓              <span class="co"># Move the line Up / Down           </span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="ex">Shift</span> + Alt + ↑ / ↓      <span class="co"># Copy line Up / Down               </span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + D                 <span class="co"># Select word                       </span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + L                 <span class="co"># Select current line               </span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + L         <span class="co"># Select similar occurrences        </span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + K         <span class="co"># Delete current line               </span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Backspace         <span class="co"># Delete one word backward          </span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="ex">Alt</span> + Backspace          <span class="co"># Delete one word backward          </span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + G                 <span class="co"># Navigate to  line                 </span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + /                 <span class="co"># Comment lines                     </span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + [ / ]     <span class="co"># Code folding                      </span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + [  /  ]           <span class="co"># Indent / outdent lines            </span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + K   Ctrl + F      <span class="co"># Format selected code              </span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="ex">Shift</span> + Alt + F          <span class="co"># Format document                   </span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="ex">Alt</span> + ← / →              <span class="co"># Go to the start / end of the word </span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + ← / →             <span class="co"># Go to the start / end of the line </span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + ↑ / ↓             <span class="co"># Go to beginning or end of file    </span></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + F         <span class="co"># Search files                      </span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + F                 <span class="co"># Find text                         </span></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + H                <span class="co"># Replace text                      </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-</section>
-<section id="tmux" class="level2">
-<h2 class="anchored" data-anchor-id="tmux">Tmux</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Sessions</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> list-sessions</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> attach-session <span class="at">-t</span> target-session</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + <span class="er">(</span>     <span class="co"># Cycle through all the available sessions and switch to the lastest active one</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + <span class="er">(</span>     <span class="co"># Cycle through all the available sessions and switch to the lastest active one</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + L     <span class="co"># Switch to the lastest session, regardless of whether it was detached or attached</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + D     <span class="co"># Detach from linux screen session</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">### Windows</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + W     <span class="co"># List all windows (the current window is marked with "*") .</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + N     <span class="co"># Switch to the next window.                                </span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + P     <span class="co"># Switch to the previous window.                            </span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + C     <span class="co"># create a new window (with shell).                         </span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + 0-9   <span class="co"># go to a window numbered 0-9 .                             </span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + K     <span class="co"># kill the current window.                                  </span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">### Panes</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + Q     <span class="co"># List all the panes and theri number</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + ↑     <span class="co"># Switch to the pane above the current one</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + ↓     <span class="co"># Switch to the pane below the current one</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + ←     <span class="co"># Switch to the pane left of the current one</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B + →     <span class="co"># Switch to the pane right of the current one</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="screen" class="level2">
-<h2 class="anchored" data-anchor-id="screen">Screen</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">### General commands</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span>                   <span class="co"># start a screen session</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-S</span> session_name   <span class="co"># start a named session</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-r</span>                <span class="co"># reattach to a linux screen</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-ls</span>               <span class="co"># list the current running screen session</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">### Shortcuts</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + C            <span class="co"># create a new window (with shell).</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + K            <span class="co"># kill the current window.</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + W            <span class="co"># list all windows (the current window is marked with "*") .</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + 0-9          <span class="co"># go to a window numbered 0-9 .</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + N            <span class="co"># go to the next window.</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A  Ctrl + A      <span class="co"># toggle between the current and previous window.</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + A            <span class="co"># rename the current window.</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + S            <span class="co"># split current region horizontally into two regions.</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + <span class="kw">|</span>            <span class="co"># split current region vertically into two regions.</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + Tab          <span class="co"># switch the input focus to the next region.</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + Ctrl + A     <span class="co"># toggle between the current and previous windows</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + Q            <span class="co"># close all regions but the current one.</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + X            <span class="co"># close the current region.</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + D            <span class="co"># detach from linux screen session</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + [            <span class="co"># start copy mode</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + ]            <span class="co"># paste copied text</span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + <span class="pp">?</span>            <span class="co"># help, display  a list commands</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + A + Ctrl + <span class="dt">\ </span>    <span class="co"># quit screen</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + P         <span class="co"># Command Palette                   </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + ,                 <span class="co"># Open settings                     </span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + K   Ctrl + S      <span class="co"># Keyboard shoutcuts                </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + B                 <span class="co"># Toggle sidebar                    </span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + N         <span class="co"># Open new window                   </span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + W         <span class="co"># Close window                      </span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + W                 <span class="co"># Close tab                         </span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span>  + J                <span class="co"># Open the terminal                 </span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + <span class="dt">\ </span>                <span class="co"># Split view                        </span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + Tab       <span class="co"># Navigate tabs                     </span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + 1 / 2 / 3         <span class="co"># Navigate tab groups               </span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Opt + ↑ / ↓       <span class="co"># Multiple cursor                   </span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + ↑ / ↓     <span class="co"># Select text                       </span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Alt</span> + ↑ / ↓              <span class="co"># Move the line Up / Down           </span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="ex">Shift</span> + Alt + ↑ / ↓      <span class="co"># Copy line Up / Down               </span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + D                 <span class="co"># Select word                       </span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + L                 <span class="co"># Select current line               </span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + L         <span class="co"># Select similar occurrences        </span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + K         <span class="co"># Delete current line               </span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Backspace         <span class="co"># Delete one word backward          </span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="ex">Alt</span> + Backspace          <span class="co"># Delete one word backward          </span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + G                 <span class="co"># Navigate to  line                 </span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + /                 <span class="co"># Comment lines                     </span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + [ / ]     <span class="co"># Code folding                      </span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + [  /  ]           <span class="co"># Indent / outdent lines            </span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + K   Ctrl + F      <span class="co"># Format selected code              </span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="ex">Shift</span> + Alt + F          <span class="co"># Format document                   </span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="ex">Alt</span> + ← / →              <span class="co"># Go to the start / end of the word </span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + ← / →             <span class="co"># Go to the start / end of the line </span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + ↑ / ↓             <span class="co"># Go to beginning or end of file    </span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + Shift + F         <span class="co"># Search files                      </span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + F                 <span class="co"># Find text                         </span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl</span> + H                 <span class="co"># Replace text                      </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
