@@ -4,8 +4,8 @@ date: 2022-12-20
 date-modified: last-modified
 image: vscode.jpg
 categories:
-  - R
-  - VSCode
+  - r
+  - vscode
 ---
 
 
