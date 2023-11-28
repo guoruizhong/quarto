@@ -49,28 +49,34 @@ TAB TAB TAB ...       # Cycle through matched commands
 ## Tmux 
 
 ```bash
+### Change defautl prefix in .tmux.conf
+set-option -g prefix C-a
+bind-key C-a send-prefix
+
+### To enter copy mode, drag mouse to select text first, then paste with 
+Ctrl + A + ]
+
 ### Sessions
 tmux list-sessions
 tmux attach-session -t target-session
-Ctrl + B + (     # Cycle through all the available sessions and switch to the lastest active one
-Ctrl + B + (     # Cycle through all the available sessions and switch to the lastest active one
-Ctrl + B + L     # Switch to the lastest session, regardless of whether it was detached or attached
-Ctrl + B + D     # Detach from linux screen session
+Ctrl + A + s     # Switch between seesion
+Ctrl + A + l     # Switch to the lastest session, regardless of whether it was detached or attached
+Ctrl + A + d     # Detach from linux screen session
 
 ### Windows
-Ctrl + B + W     # List all windows (the current window is marked with "*") .
-Ctrl + B + N     # Switch to the next window.                                
-Ctrl + B + P     # Switch to the previous window.                            
-Ctrl + B + C     # create a new window (with shell).                         
-Ctrl + B + 0-9   # go to a window numbered 0-9 .                             
-Ctrl + B + K     # kill the current window.                                  
+Ctrl + A + w     # List all windows (the current window is marked with "*").
+Ctrl + A + ,     # Rename current window
+Ctrl + A + →     # Switch to the next window.                                
+Ctrl + A + ←     # Switch to the previous window.                            
+Ctrl + A + c     # create a new window.                         
+Ctrl + A + q     # kill the current window.                                  
 
 ### Panes
-Ctrl + B + Q     # List all the panes and theri number
-Ctrl + B + ↑     # Switch to the pane above the current one
-Ctrl + B + ↓     # Switch to the pane below the current one
-Ctrl + B + ←     # Switch to the pane left of the current one
-Ctrl + B + →     # Switch to the pane right of the current one
+Shift + ↑     # Switch to the pane above the current one
+Shift + ↓     # Switch to the pane below the current one
+Shift + ←     # Switch to the pane left of the current one
+Shift + →     # Switch to the pane right of the current one
+Ctrl + A + x     # kill the current pane.                                  
 ```
 
 
@@ -104,7 +110,36 @@ Ctrl + A + ?            # help, display  a list commands
 Ctrl + A + Ctrl + \     # quit screen
 ```
 
+## Vim
 
+```bash
+### Modes
+i    # Switch to insert mode, so you can type
+esc  # Swith to command mode (normal mode)
+
+### Saving and quiting
+:w   # Write (save)
+:q   # Quit
+:wq  # write and quit
+:q!  # Quit without saving
+
+### Using arrow keys
+h        # Left
+j        # Down
+k        # Up 
+l        # Right
+
+###
+w        # Next word 
+b        # Previous word
+
+/text    # Serach for text
+gg       # Go to the first line
+G        # Go to the last line
+33G      # go to line 33
+
+### 
+```
 
 ## VSCode
 
