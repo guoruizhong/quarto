@@ -1,11 +1,11 @@
 ---
-title: "Customize UMAP using ggplot2 from Seruat output"
+title: "Customization of Seurat plots"
 date: 2023-11-26
 date-modified: last-modified
 categories:
-  - umap
+  - seurat
 image: umap.png
-description: Use ggplot2 to make nice coordinate, colors, and size for UMAP using embeddings from seruat object
+description: Use ggplot2 to make nice coordinate, colors, and size for plots generated from seruat object
 ---
 
 ```{r setup, include=FALSE}
@@ -31,6 +31,8 @@ library(tidyverse)
 library(Seurat)
 library(SingleR)
 library(ggrepel)
+library(ggthemes)
+library(ggnewscale)
 
 ### Load data
 load(here("learn", "PBMC_tutorial", "pbmc_tutorial_singleR.RData"))
@@ -38,10 +40,15 @@ load(here("learn", "PBMC_tutorial", "pbmc_tutorial_singleR.RData"))
 ### Check data
 pbmc
 
+
+```
+## UMAP
+
+```{r}
 ### View the UMAP
 DimPlot(pbmc, group.by = c("seurat_clusters", "labels"), reduction = "umap")
 ```
-## Retrieve UMAP data
+### Retrieve UMAP data
 
 ```{r}
 ### Find the UMAP data
@@ -54,7 +61,7 @@ umap <- pbmc@reductions$umap@cell.embeddings %>%
 
 head(umap)
 ```
-## Make UMAP with ggplot2
+### Make UMAP with ggplot2
 ```{r}
 ### Define the colors
 allcolour <- c(
@@ -112,7 +119,7 @@ p <- ggplot(umap, aes(x = UMAP_1, y = UMAP_2, color = cell_type)) +
 p
 ```
 
-## Annotate cell type on UMAP
+### Annotate cell type on UMAP
 
 ```{r}
 ### Calcualte the median coordinates of each cluster
@@ -127,4 +134,68 @@ p + geom_label_repel(
     point.padding = unit(0.5, "lines")
 )
 ```
+## Featureplot
 
+```{r}
+DimPlot(pbmc,label = TRUE)|FeaturePlot(pbmc,features = "CD79A")
+```
+
+```{r}
+FeaturePlot(pbmc,features = c("CD79A", "CD8A"),blend=TRUE)
+FeaturePlot(pbmc,features = c("CD79A","CD79B"),blend=TRUE)
+FeaturePlot(pbmc,features = c("CD79A","CD79B", "CD68", "CD163"))
+```
+
+```{r}
+mydata  <- FetchData(
+    pbmc,
+    vars = c("rna_CD79A", "rna_CD8A", "rna_CCR7", "UMAP_1", "UMAP_2")
+)
+head(mydata)
+```
+
+```{r}
+### Single gene
+mydata |>
+    ggplot(aes(x = UMAP_1, y = UMAP_2)) +
+    geom_point(
+        data = mydata, aes(x = UMAP_1, y = UMAP_2,
+        color = rna_CD79A), size = 1
+    ) +
+    ### Increase the transprancy of gray dots
+    scale_color_gradient(
+        "rna_CD79A", low = alpha("grey", 0.1), 
+        high = alpha("red", 1)
+    ) +
+    ### Density
+    stat_density2d(aes(colour=rna_CD79A))
+```
+
+```{r}
+### Multiple genes in feature plot
+ggplot(mydata, aes(x = UMAP_1, y = UMAP_2)) +
+    geom_point(
+        data = mydata, aes(x = UMAP_1, y = UMAP_2, color = rna_CD79A), 
+        size = 1
+    ) +
+    scale_color_gradient(
+        "CD79A", low = alpha("grey", 0.1), high = alpha("purple", 1)
+    ) +
+    new_scale("color") +
+    geom_point(
+        data = mydata, aes(x = UMAP_1, y = UMAP_2, color = rna_CD8A), 
+        size = 1
+    ) +
+    scale_color_gradient(
+        "CD8A", low = alpha("grey", 0.1), high = alpha("red", 1)
+    ) +
+    new_scale("color") +
+    geom_point(
+        data = mydata, aes(x = UMAP_1, y = UMAP_2,color = rna_CCR7), 
+        size = 1
+    ) +
+    scale_color_gradient(
+        "CCR7", low = alpha("grey", 0.1), high = alpha("green", 1)
+    ) +
+    theme_bw()
+```

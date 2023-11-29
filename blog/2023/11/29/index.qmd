@@ -1,0 +1,31 @@
+---
+title: "Explained htop visually"
+date: 2023-11-29
+date-modified: last-modified
+categories:
+  - linux
+image: htop.jpg
+description: htop is an interactive process viewer and system monitor.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    # fig.width = 6, 
+    # fig.height = 3.8,
+    fig.align = "center", 
+    # fig.retina = 3,
+    out.width = "100%", 
+    warning = FALSE,
+    # evaluate = FALSE,
+    collapse = TRUE
+)
+``
+The content is credited from [here](https://codeahoy.com/2017/01/20/hhtop-explained-visually/)
+
+Let’s start with the upper section. 
+
+[](htop_top.jpg)
+
+Here’s the lower section of htop.
+
+[](htop_bottom.jpg)

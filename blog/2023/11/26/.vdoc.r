@@ -9,7 +9,6 @@
 #
 #
 #
-#
 knitr::opts_chunk$set(
     # fig.width = 6, 
     # fig.height = 3.8,
@@ -24,12 +23,16 @@ knitr::opts_chunk$set(
 #
 #
 #
+#| warning: false
+
 ### Library packages
 library(here)
 library(tidyverse)
 library(Seurat)
 library(SingleR)
 library(ggrepel)
+library(ggthemes)
+library(ggnewscale)
 
 ### Load data
 load(here("learn", "PBMC_tutorial", "pbmc_tutorial_singleR.RData"))
@@ -37,6 +40,11 @@ load(here("learn", "PBMC_tutorial", "pbmc_tutorial_singleR.RData"))
 ### Check data
 pbmc
 
+
+```
+#
+#
+#
 ### View the UMAP
 DimPlot(pbmc, group.by = c("seurat_clusters", "labels"), reduction = "umap")
 ```
@@ -107,6 +115,8 @@ p <- ggplot(umap, aes(x = UMAP_1, y = UMAP_2, color = cell_type)) +
     ) +
     ### legend label size
     guides(color = guide_legend(override.aes = list(size=5)))
+### View it
+p
 #
 #
 #
@@ -119,22 +129,75 @@ cell_type_med <- umap %>%
     UMAP_2 = median(UMAP_2)
   )
 ### Annotation
-p + geom_text(
-    aes(label = cell_type,size = 20), data = cell_type_med,
-    point.padding=unit(0.5, "lines")
-    )
-
-#ggrepel添加
-library(ggrepel)
-
-p4 + 
-  geom_label_repel(aes(label=cell_type), fontface="bold",data = cell_type_med,
-                   point.padding=unit(0.5, "lines"))
-
-#去掉legend
-p4 +geom_label_repel(aes(label=cell_type), fontface="bold",data = cell_type_med, 
-                     point.padding=unit(0.5, "lines")) +
-  theme(legend.position = "none")
+p + geom_label_repel(
+    aes(label = cell_type, size = 20), fontface = "bold", data = cell_type_med,
+    point.padding = unit(0.5, "lines")
+)
+```
+#
+#
+#
+DimPlot(pbmc,label = TRUE)|FeaturePlot(pbmc,features = "CD79A")
+#
+#
+#
+FeaturePlot(pbmc,features = c("CD79A", "CD8A"),blend=TRUE)
+FeaturePlot(pbmc,features = c("CD79A","CD79B"),blend=TRUE)
+FeaturePlot(pbmc,features = c("CD79A","CD79B", "CD68", "CD163"))
+#
+#
+#
+mydata  <- FetchData(
+    pbmc,
+    vars = c("rna_CD79A", "rna_CD8A", "rna_CCR7", "UMAP_1", "UMAP_2")
+)
+head(mydata)
+#
+#
+#
+### Single gene
+mydata |>
+    ggplot(aes(x = UMAP_1, y = UMAP_2)) +
+    geom_point(
+        data = mydata, aes(x = UMAP_1, y = UMAP_2,
+        color = rna_CD79A), size = 1
+    ) +
+    ### Increase the transprancy of gray dots
+    scale_color_gradient(
+        "rna_CD79A", low = alpha("grey", 0.1), 
+        high = alpha("red", 1)
+    ) +
+    ### Density
+    stat_density2d(aes(colour=rna_CD79A))
+#
+#
+#
+### Multiple genes in feature plot
+ggplot(mydata, aes(x = UMAP_1, y = UMAP_2)) +
+    geom_point(
+        data = mydata, aes(x = UMAP_1, y = UMAP_2, color = rna_CD79A), 
+        size = 1
+    ) +
+    scale_color_gradient(
+        "CD79A", low = alpha("grey", 0.1), high = alpha("purple", 1)
+    ) +
+    new_scale("color") +
+    geom_point(
+        data = mydata, aes(x = UMAP_1, y = UMAP_2, color = rna_CD8A), 
+        size = 1
+    ) +
+    scale_color_gradient(
+        "CD8A", low = alpha("grey", 0.1), high = alpha("red", 1)
+    ) +
+    new_scale("color") +
+    geom_point(
+        data = mydata, aes(x = UMAP_1, y = UMAP_2,color = rna_CCR7), 
+        size = 1
+    ) +
+    scale_color_gradient(
+        "CCR7", low = alpha("grey", 0.1), high = alpha("green", 1)
+    ) +
+    theme_bw()
 #
 #
 #

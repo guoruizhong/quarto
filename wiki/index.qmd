@@ -62,6 +62,7 @@ These are the collections of things that I beleived useful in my daily researh w
 - [An Introduction to Statistical Learning](https://www.statlearning.com/)
 - [R for Data Science (2e)](https://r4ds.hadley.nz/)
 - [R Graphics Cookbook, 2nd edition](https://r-graphics.org/)
+- [Advanced R](https://adv-r.hadley.nz/)
 - [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/)
 - [The Epidemiologist R Handbook](https://epirhandbook.com/en/index.html)
 - [Modern Statistics for Modern Biology](https://web.stanford.edu/class/bios221/book/)
