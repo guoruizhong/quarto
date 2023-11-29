@@ -19,13 +19,15 @@ knitr::opts_chunk$set(
     # evaluate = FALSE,
     collapse = TRUE
 )
-``
+```
+
+
 The content is credited from [here](https://codeahoy.com/2017/01/20/hhtop-explained-visually/)
 
 Let’s start with the upper section. 
 
-[](htop_top.jpg)
+![](htop_top.jpg)
 
 Here’s the lower section of htop.
 
-[](htop_bottom.jpg)
+![](htop_bottom.jpg)

@@ -1,5 +1,5 @@
 ---
-title: "Customization of Seurat plots"
+title: "Customization of Seurat plots using ggplot2"
 date: 2023-11-26
 date-modified: last-modified
 categories:

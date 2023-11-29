@@ -20,16 +20,11 @@
   <title>Explained htop visually</title>
   <dc:creator>Guorui Zhong</dc:creator>
   <link>https://guoruizhong.github.io/blog/2023/11/29/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>knitr::opts_chunk$set( # fig.width = 6, # fig.height = 3.8, fig.align = “center”, # fig.retina = 3, out.width = “100%”, warning = FALSE, # evaluate = FALSE, collapse = TRUE ) `` The content is credited from <a href="https://codeahoy.com/2017/01/20/hhtop-explained-visually/">here</a></p>
+  <description><![CDATA[ <p>The content is credited from <a href="https://codeahoy.com/2017/01/20/hhtop-explained-visually/">here</a></p>
 <p>Let’s start with the upper section.</p>
-<p><a href="htop_top.jpg"></a></p>
+<p><img src="https://guoruizhong.github.io/blog/2023/11/29/htop_top.jpg" class="img-fluid"></p>
 <p>Here’s the lower section of htop.</p>
-<p><a href="htop_bottom.jpg"></a></p>
+<p><img src="https://guoruizhong.github.io/blog/2023/11/29/htop_bottom.jpg" class="img-fluid"></p>
 
 
 
@@ -40,7 +35,7 @@
   <media:content url="https://guoruizhong.github.io/blog/2023/11/29/htop.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
-  <title>Customization of Seurat plots</title>
+  <title>Customization of Seurat plots using ggplot2</title>
   <dc:creator>Guorui Zhong</dc:creator>
   <link>https://guoruizhong.github.io/blog/2023/11/26/index.html</link>
   <description><![CDATA[ <section id="load-seurat-object" class="level2"><h2 class="anchored" data-anchor-id="load-seurat-object">Load Seurat object</h2>
