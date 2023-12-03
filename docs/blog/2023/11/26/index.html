@@ -5,8 +5,8 @@
 <meta name="generator" content="quarto-1.3.450">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Guorui Zhong">
-<meta name="description" content="Use ggplot2 to make nice coordinate, colors, and size for plots generated from seruat object">
-<title>Guorui Zhong - Customization of Seurat plots using ggplot2</title>
+<meta name="description" content="Harmony allow integrating data across several variables (for example, by experimental batch and by condition), and significant gain in speed and lower memory requirements for integration of large datasets.">
+<title>Guorui Zhong - Learning Harmony to integrate single cell RNA-seq data for batch borrection and meta analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -168,14 +168,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div> <!-- /container-fluid -->
     </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full"><div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Customization of Seurat plots using ggplot2</h1>
+      <h1 class="title">Learning Harmony to integrate single cell RNA-seq data for batch borrection and meta analysis</h1>
                   <div>
         <div class="description">
-          Use ggplot2 to make nice coordinate, colors, and size for plots generated from seruat object
+          Harmony allow integrating data across several variables (for example, by experimental batch and by condition), and significant gain in speed and lower memory requirements for integration of large datasets.
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">seurat</div>
+                <div class="quarto-category">scRNA-seq</div>
               </div>
                   </div>
   </div>
@@ -200,7 +200,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">Wednesday, November 29, 2023</p>
+        <p class="date-modified">Saturday, December 2, 2023</p>
       </div>
     </div>
       
@@ -212,48 +212,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Contents</h2>
    
   <ul>
-<li><a href="#load-seurat-object" id="toc-load-seurat-object" class="nav-link active" data-scroll-target="#load-seurat-object">Load Seurat object</a></li>
+<li><a href="#harmony-to-integrating-cell-line-datasets-from-10x" id="toc-harmony-to-integrating-cell-line-datasets-from-10x" class="nav-link active" data-scroll-target="#harmony-to-integrating-cell-line-datasets-from-10x">Harmony to integrating cell line datasets from 10X</a></li>
+  <li><a href="#mudan" id="toc-mudan" class="nav-link" data-scroll-target="#mudan">MUDAN</a></li>
   <li>
-<a href="#umap" id="toc-umap" class="nav-link" data-scroll-target="#umap">UMAP</a>
+<a href="#using-harmony-with-seurat" id="toc-using-harmony-with-seurat" class="nav-link" data-scroll-target="#using-harmony-with-seurat">Using Harmony with Seurat</a>
   <ul>
-<li><a href="#retrieve-umap-data" id="toc-retrieve-umap-data" class="nav-link" data-scroll-target="#retrieve-umap-data">Retrieve UMAP data</a></li>
-  <li><a href="#make-umap-with-ggplot2" id="toc-make-umap-with-ggplot2" class="nav-link" data-scroll-target="#make-umap-with-ggplot2">Make UMAP with ggplot2</a></li>
-  <li><a href="#annotate-cell-type-on-umap" id="toc-annotate-cell-type-on-umap" class="nav-link" data-scroll-target="#annotate-cell-type-on-umap">Annotate cell type on UMAP</a></li>
+<li><a href="#run-harmony" id="toc-run-harmony" class="nav-link" data-scroll-target="#run-harmony">Run Harmony</a></li>
+  <li><a href="#down-stream-analysis" id="toc-down-stream-analysis" class="nav-link" data-scroll-target="#down-stream-analysis">Down stream analysis</a></li>
   </ul>
 </li>
-  <li><a href="#featureplot" id="toc-featureplot" class="nav-link" data-scroll-target="#featureplot">Featureplot</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
+  <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info">Session info</a></li>
   </ul></nav>
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content"><section id="load-seurat-object" class="level2"><h2 class="anchored" data-anchor-id="load-seurat-object">Load Seurat object</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Library packages</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat">Seurat</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/LTLA/SingleR">SingleR</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/slowkow/ggrepel">ggrepel</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jrnold/ggthemes">ggthemes</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://eliocamp.github.io/ggnewscale/">ggnewscale</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">### Load data</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"learn"</span>, <span class="st">"PBMC_tutorial"</span>, <span class="st">"pbmc_tutorial_singleR.RData"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">### Check data</span></span>
-<span><span class="va">pbmc</span></span>
-<span><span class="co">## An object of class Seurat </span></span>
-<span><span class="co">## 13714 features across 2638 samples within 1 assay </span></span>
-<span><span class="co">## Active assay: RNA (13714 features, 2000 variable features)</span></span>
-<span><span class="co">##  3 layers present: counts, data, scale.data</span></span>
-<span><span class="co">##  3 dimensional reductions calculated: pca, umap, tsne</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<main class="content quarto-banner-title-block" id="quarto-document-content"><div class="cell" data-layout-align="center">
+
 </div>
-</section><section id="umap" class="level2"><h2 class="anchored" data-anchor-id="umap">UMAP</h2>
+<section id="harmony-to-integrating-cell-line-datasets-from-10x" class="level2"><h2 class="anchored" data-anchor-id="harmony-to-integrating-cell-line-datasets-from-10x">Harmony to integrating cell line datasets from 10X</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### View the UMAP</span></span>
-<span><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html">DimPlot</a></span><span class="op">(</span><span class="va">pbmc</span>, group.by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"seurat_clusters"</span>, <span class="st">"labels"</span><span class="op">)</span>, reduction <span class="op">=</span> <span class="st">"umap"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">cell_lines</span><span class="op">)</span></span>
+<span><span class="va">scaled_pcs</span> <span class="op">&lt;-</span> <span class="va">cell_lines</span><span class="op">$</span><span class="va">scaled_pcs</span></span>
+<span><span class="va">meta_data</span> <span class="op">&lt;-</span> <span class="va">cell_lines</span><span class="op">$</span><span class="va">meta_data</span></span>
+<span><span class="co">### cells cluster by dataset initially</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">do_scatter</span><span class="op">(</span><span class="va">scaled_pcs</span>, <span class="va">meta_data</span>, <span class="st">"dataset"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Colored by dataset"</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">do_scatter</span><span class="op">(</span><span class="va">scaled_pcs</span>, <span class="va">meta_data</span>, <span class="st">"cell_type"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Colored by cell type"</span><span class="op">)</span></span>
+<span><span class="co">### combine plot</span></span>
+<span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -261,537 +251,376 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<section id="retrieve-umap-data" class="level3"><h3 class="anchored" data-anchor-id="retrieve-umap-data">Retrieve UMAP data</h3>
+<p>Run harmonoy to remove the influence of dataset-of origin from ceel embeddings. After Harmony, the datasets are now mixed and the cell types are still separate.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Find the UMAP data</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">pbmc</span><span class="op">)</span></span>
-<span><span class="co">## Formal class 'Seurat' [package "SeuratObject"] with 13 slots</span></span>
-<span><span class="co">##   ..@ assays      :List of 1</span></span>
-<span><span class="co">##   .. ..$ RNA:Formal class 'Assay' [package "SeuratObject"] with 8 slots</span></span>
-<span><span class="co">##   .. .. .. ..@ counts       :Formal class 'dgCMatrix' [package "Matrix"] with 6 slots</span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ i       : int [1:2238732] 29 73 80 148 163 184 186 227 229 230 ...</span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ p       : int [1:2639] 0 779 2131 3260 4220 4741 5522 6304 7094 7626 ...</span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ Dim     : int [1:2] 13714 2638</span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ Dimnames:List of 2</span></span>
-<span><span class="co">##   .. .. .. .. .. .. ..$ : chr [1:13714] "AL627309.1" "AP006222.2" "RP11-206L10.2" "RP11-206L10.9" ...</span></span>
-<span><span class="co">##   .. .. .. .. .. .. ..$ : chr [1:2638] "AAACATACAACCAC-1" "AAACATTGAGCTAC-1" "AAACATTGATCAGC-1" "AAACCGTGCTTCCG-1" ...</span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ x       : num [1:2238732] 1 1 2 1 1 1 1 41 1 1 ...</span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ factors : list()</span></span>
-<span><span class="co">##   .. .. .. ..@ data         :Formal class 'dgCMatrix' [package "Matrix"] with 6 slots</span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ i       : int [1:2238732] 29 73 80 148 163 184 186 227 229 230 ...</span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ p       : int [1:2639] 0 779 2131 3260 4220 4741 5522 6304 7094 7626 ...</span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ Dim     : int [1:2] 13714 2638</span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ Dimnames:List of 2</span></span>
-<span><span class="co">##   .. .. .. .. .. .. ..$ : chr [1:13714] "AL627309.1" "AP006222.2" "RP11-206L10.2" "RP11-206L10.9" ...</span></span>
-<span><span class="co">##   .. .. .. .. .. .. ..$ : chr [1:2638] "AAACATACAACCAC-1" "AAACATTGAGCTAC-1" "AAACATTGATCAGC-1" "AAACCGTGCTTCCG-1" ...</span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ x       : num [1:2238732] 1.64 1.64 2.23 1.64 1.64 ...</span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ factors : list()</span></span>
-<span><span class="co">##   .. .. .. ..@ scale.data   : num [1:2000, 1:2638] -0.8556 -0.2773 1.4947 -0.0463 -0.4658 ...</span></span>
-<span><span class="co">##   .. .. .. .. ..- attr(*, "dimnames")=List of 2</span></span>
-<span><span class="co">##   .. .. .. .. .. ..$ : chr [1:2000] "ISG15" "CPSF3L" "MRPL20" "ATAD3C" ...</span></span>
-<span><span class="co">##   .. .. .. .. .. ..$ : chr [1:2638] "AAACATACAACCAC-1" "AAACATTGAGCTAC-1" "AAACATTGATCAGC-1" "AAACCGTGCTTCCG-1" ...</span></span>
-<span><span class="co">##   .. .. .. ..@ assay.orig   : NULL</span></span>
-<span><span class="co">##   .. .. .. ..@ var.features : chr [1:2000] "PPBP" "LYZ" "S100A9" "IGLL5" ...</span></span>
-<span><span class="co">##   .. .. .. ..@ meta.features:'data.frame':   13714 obs. of  5 variables:</span></span>
-<span><span class="co">##   .. .. .. .. ..$ vst.mean                 : num [1:13714] 0.00341 0.00114 0.0019 0.00114 0.00682 ...</span></span>
-<span><span class="co">##   .. .. .. .. ..$ vst.variance             : num [1:13714] 0.0034 0.00114 0.00189 0.00114 0.00678 ...</span></span>
-<span><span class="co">##   .. .. .. .. ..$ vst.variance.expected    : num [1:13714] 0.00365 0.00114 0.00197 0.00114 0.00748 ...</span></span>
-<span><span class="co">##   .. .. .. .. ..$ vst.variance.standardized: num [1:13714] 0.933 0.992 0.963 0.992 0.906 ...</span></span>
-<span><span class="co">##   .. .. .. .. ..$ vst.variable             : logi [1:13714] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
-<span><span class="co">##   .. .. .. ..@ misc         : list()</span></span>
-<span><span class="co">##   .. .. .. ..@ key          : chr "rna_"</span></span>
-<span><span class="co">##   ..@ meta.data   :'data.frame': 2638 obs. of  8 variables:</span></span>
-<span><span class="co">##   .. ..$ orig.ident     : Factor w/ 1 level "pbmc3k": 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">##   .. ..$ nCount_RNA     : num [1:2638] 2419 4903 3147 2639 980 ...</span></span>
-<span><span class="co">##   .. ..$ nFeature_RNA   : int [1:2638] 779 1352 1129 960 521 781 782 790 532 550 ...</span></span>
-<span><span class="co">##   .. ..$ percent.mt     : num [1:2638] 3.02 3.79 0.89 1.74 1.22 ...</span></span>
-<span><span class="co">##   .. ..$ percent.HB     : num [1:2638] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
-<span><span class="co">##   .. ..$ RNA_snn_res.0.5: Factor w/ 9 levels "0","1","2","3",..: 1 4 3 2 7 3 5 5 5 6 ...</span></span>
-<span><span class="co">##   .. ..$ seurat_clusters: Factor w/ 9 levels "0","1","2","3",..: 1 4 3 2 7 3 5 5 5 6 ...</span></span>
-<span><span class="co">##   .. ..$ labels         : chr [1:2638] "T_cells" "B_cell" "T_cells" "Monocyte" ...</span></span>
-<span><span class="co">##   ..@ active.assay: chr "RNA"</span></span>
-<span><span class="co">##   ..@ active.ident: Factor w/ 9 levels "0","1","2","3",..: 1 4 3 2 7 3 5 5 5 6 ...</span></span>
-<span><span class="co">##   .. ..- attr(*, "names")= chr [1:2638] "AAACATACAACCAC-1" "AAACATTGAGCTAC-1" "AAACATTGATCAGC-1" "AAACCGTGCTTCCG-1" ...</span></span>
-<span><span class="co">##   ..@ graphs      :List of 2</span></span>
-<span><span class="co">##   .. ..$ RNA_nn :Formal class 'Graph' [package "SeuratObject"] with 7 slots</span></span>
-<span><span class="co">##   .. .. .. ..@ assay.used: chr "RNA"</span></span>
-<span><span class="co">##   .. .. .. ..@ i         : int [1:52760] 0 6 102 203 213 229 292 451 547 618 ...</span></span>
-<span><span class="co">##   .. .. .. ..@ p         : int [1:2639] 0 33 50 64 80 87 103 139 155 162 ...</span></span>
-<span><span class="co">##   .. .. .. ..@ Dim       : int [1:2] 2638 2638</span></span>
-<span><span class="co">##   .. .. .. ..@ Dimnames  :List of 2</span></span>
-<span><span class="co">##   .. .. .. .. ..$ : chr [1:2638] "AAACATACAACCAC-1" "AAACATTGAGCTAC-1" "AAACATTGATCAGC-1" "AAACCGTGCTTCCG-1" ...</span></span>
-<span><span class="co">##   .. .. .. .. ..$ : chr [1:2638] "AAACATACAACCAC-1" "AAACATTGAGCTAC-1" "AAACATTGATCAGC-1" "AAACCGTGCTTCCG-1" ...</span></span>
-<span><span class="co">##   .. .. .. ..@ x         : num [1:52760] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">##   .. .. .. ..@ factors   : list()</span></span>
-<span><span class="co">##   .. ..$ RNA_snn:Formal class 'Graph' [package "SeuratObject"] with 7 slots</span></span>
-<span><span class="co">##   .. .. .. ..@ assay.used: chr "RNA"</span></span>
-<span><span class="co">##   .. .. .. ..@ i         : int [1:194424] 0 6 102 136 187 203 229 292 421 446 ...</span></span>
-<span><span class="co">##   .. .. .. ..@ p         : int [1:2639] 0 62 120 170 240 287 379 453 533 573 ...</span></span>
-<span><span class="co">##   .. .. .. ..@ Dim       : int [1:2] 2638 2638</span></span>
-<span><span class="co">##   .. .. .. ..@ Dimnames  :List of 2</span></span>
-<span><span class="co">##   .. .. .. .. ..$ : chr [1:2638] "AAACATACAACCAC-1" "AAACATTGAGCTAC-1" "AAACATTGATCAGC-1" "AAACCGTGCTTCCG-1" ...</span></span>
-<span><span class="co">##   .. .. .. .. ..$ : chr [1:2638] "AAACATACAACCAC-1" "AAACATTGAGCTAC-1" "AAACATTGATCAGC-1" "AAACCGTGCTTCCG-1" ...</span></span>
-<span><span class="co">##   .. .. .. ..@ x         : num [1:194424] 1 0.1111 0.1765 0.0811 0.0811 ...</span></span>
-<span><span class="co">##   .. .. .. ..@ factors   : list()</span></span>
-<span><span class="co">##   ..@ neighbors   : list()</span></span>
-<span><span class="co">##   ..@ reductions  :List of 3</span></span>
-<span><span class="co">##   .. ..$ pca :Formal class 'DimReduc' [package "SeuratObject"] with 9 slots</span></span>
-<span><span class="co">##   .. .. .. ..@ cell.embeddings           : num [1:2638, 1:50] -5.84 -2.56 -1.64 13.29 -2.15 ...</span></span>
-<span><span class="co">##   .. .. .. .. ..- attr(*, "dimnames")=List of 2</span></span>
-<span><span class="co">##   .. .. .. .. .. ..$ : chr [1:2638] "AAACATACAACCAC-1" "AAACATTGAGCTAC-1" "AAACATTGATCAGC-1" "AAACCGTGCTTCCG-1" ...</span></span>
-<span><span class="co">##   .. .. .. .. .. ..$ : chr [1:50] "PC_1" "PC_2" "PC_3" "PC_4" ...</span></span>
-<span><span class="co">##   .. .. .. ..@ feature.loadings          : num [1:2000, 1:50] 0.01091 0.11663 0.11569 -0.00853 -0.01632 ...</span></span>
-<span><span class="co">##   .. .. .. .. ..- attr(*, "dimnames")=List of 2</span></span>
-<span><span class="co">##   .. .. .. .. .. ..$ : chr [1:2000] "PPBP" "LYZ" "S100A9" "IGLL5" ...</span></span>
-<span><span class="co">##   .. .. .. .. .. ..$ : chr [1:50] "PC_1" "PC_2" "PC_3" "PC_4" ...</span></span>
-<span><span class="co">##   .. .. .. ..@ feature.loadings.projected: num[0 , 0 ] </span></span>
-<span><span class="co">##   .. .. .. ..@ assay.used                : chr "RNA"</span></span>
-<span><span class="co">##   .. .. .. ..@ global                    : logi FALSE</span></span>
-<span><span class="co">##   .. .. .. ..@ stdev                     : num [1:50] 7.05 4.5 3.87 3.75 3.15 ...</span></span>
-<span><span class="co">##   .. .. .. ..@ jackstraw                 :Formal class 'JackStrawData' [package "SeuratObject"] with 4 slots</span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ empirical.p.values     : num [1:2000, 1:20] 0.0005 0 0 0.0035 0 0 0.01 0 0.0135 0 ...</span></span>
-<span><span class="co">##   .. .. .. .. .. .. ..- attr(*, "dimnames")=List of 2</span></span>
-<span><span class="co">##   .. .. .. .. .. .. .. ..$ : chr [1:2000] "PPBP" "LYZ" "S100A9" "IGLL5" ...</span></span>
-<span><span class="co">##   .. .. .. .. .. .. .. ..$ : chr [1:20] "PC1" "PC2" "PC3" "PC4" ...</span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ fake.reduction.scores  : num [1:2000, 1:20] -0.003524 0.000285 -0.000627 0.002054 0.000959 ...</span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ empirical.p.values.full: logi [1, 1] NA</span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ overall.p.values       : num [1:20, 1:2] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
-<span><span class="co">##   .. .. .. .. .. .. ..- attr(*, "dimnames")=List of 2</span></span>
-<span><span class="co">##   .. .. .. .. .. .. .. ..$ : NULL</span></span>
-<span><span class="co">##   .. .. .. .. .. .. .. ..$ : chr [1:2] "PC" "Score"</span></span>
-<span><span class="co">##   .. .. .. ..@ misc                      :List of 1</span></span>
-<span><span class="co">##   .. .. .. .. ..$ total.variance: num 1734</span></span>
-<span><span class="co">##   .. .. .. ..@ key                       : chr "PC_"</span></span>
-<span><span class="co">##   .. ..$ umap:Formal class 'DimReduc' [package "SeuratObject"] with 9 slots</span></span>
-<span><span class="co">##   .. .. .. ..@ cell.embeddings           : num [1:2638, 1:2] -4.58 -2.81 -1.68 12.69 -9.83 ...</span></span>
-<span><span class="co">##   .. .. .. .. ..- attr(*, "scaled:center")= num [1:2] -0.0395 -1.1523</span></span>
-<span><span class="co">##   .. .. .. .. ..- attr(*, "dimnames")=List of 2</span></span>
-<span><span class="co">##   .. .. .. .. .. ..$ : chr [1:2638] "AAACATACAACCAC-1" "AAACATTGAGCTAC-1" "AAACATTGATCAGC-1" "AAACCGTGCTTCCG-1" ...</span></span>
-<span><span class="co">##   .. .. .. .. .. ..$ : chr [1:2] "UMAP_1" "UMAP_2"</span></span>
-<span><span class="co">##   .. .. .. ..@ feature.loadings          : num[0 , 0 ] </span></span>
-<span><span class="co">##   .. .. .. ..@ feature.loadings.projected: num[0 , 0 ] </span></span>
-<span><span class="co">##   .. .. .. ..@ assay.used                : chr "RNA"</span></span>
-<span><span class="co">##   .. .. .. ..@ global                    : logi TRUE</span></span>
-<span><span class="co">##   .. .. .. ..@ stdev                     : num(0) </span></span>
-<span><span class="co">##   .. .. .. ..@ jackstraw                 :Formal class 'JackStrawData' [package "SeuratObject"] with 4 slots</span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ empirical.p.values     : num[0 , 0 ] </span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ fake.reduction.scores  : num[0 , 0 ] </span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ empirical.p.values.full: num[0 , 0 ] </span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ overall.p.values       : num[0 , 0 ] </span></span>
-<span><span class="co">##   .. .. .. ..@ misc                      : list()</span></span>
-<span><span class="co">##   .. .. .. ..@ key                       : chr "UMAP_"</span></span>
-<span><span class="co">##   .. ..$ tsne:Formal class 'DimReduc' [package "SeuratObject"] with 9 slots</span></span>
-<span><span class="co">##   .. .. .. ..@ cell.embeddings           : num [1:2638, 1:2] -11.1 -36.27 1.96 37.46 -20.88 ...</span></span>
-<span><span class="co">##   .. .. .. .. ..- attr(*, "dimnames")=List of 2</span></span>
-<span><span class="co">##   .. .. .. .. .. ..$ : chr [1:2638] "AAACATACAACCAC-1" "AAACATTGAGCTAC-1" "AAACATTGATCAGC-1" "AAACCGTGCTTCCG-1" ...</span></span>
-<span><span class="co">##   .. .. .. .. .. ..$ : chr [1:2] "tSNE_1" "tSNE_2"</span></span>
-<span><span class="co">##   .. .. .. ..@ feature.loadings          : num[0 , 0 ] </span></span>
-<span><span class="co">##   .. .. .. ..@ feature.loadings.projected: num[0 , 0 ] </span></span>
-<span><span class="co">##   .. .. .. ..@ assay.used                : chr "RNA"</span></span>
-<span><span class="co">##   .. .. .. ..@ global                    : logi TRUE</span></span>
-<span><span class="co">##   .. .. .. ..@ stdev                     : num(0) </span></span>
-<span><span class="co">##   .. .. .. ..@ jackstraw                 :Formal class 'JackStrawData' [package "SeuratObject"] with 4 slots</span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ empirical.p.values     : num[0 , 0 ] </span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ fake.reduction.scores  : num[0 , 0 ] </span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ empirical.p.values.full: num[0 , 0 ] </span></span>
-<span><span class="co">##   .. .. .. .. .. ..@ overall.p.values       : num[0 , 0 ] </span></span>
-<span><span class="co">##   .. .. .. ..@ misc                      : list()</span></span>
-<span><span class="co">##   .. .. .. ..@ key                       : chr "tSNE_"</span></span>
-<span><span class="co">##   ..@ images      : list()</span></span>
-<span><span class="co">##   ..@ project.name: chr "pbmc3k"</span></span>
-<span><span class="co">##   ..@ misc        : list()</span></span>
-<span><span class="co">##   ..@ version     :Classes 'package_version', 'numeric_version'  hidden list of 1</span></span>
-<span><span class="co">##   .. ..$ : int [1:3] 4 0 0</span></span>
-<span><span class="co">##   ..@ commands    :List of 10</span></span>
-<span><span class="co">##   .. ..$ NormalizeData.RNA       :Formal class 'SeuratCommand' [package "SeuratObject"] with 5 slots</span></span>
-<span><span class="co">##   .. .. .. ..@ name       : chr "NormalizeData.RNA"</span></span>
-<span><span class="co">##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: "2021-07-08 11:49:17"</span></span>
-<span><span class="co">##   .. .. .. ..@ assay.used : chr "RNA"</span></span>
-<span><span class="co">##   .. .. .. ..@ call.string: chr [1:2] "NormalizeData(pbmc, normalization.method = \"LogNormalize\", " "    scale.factor = 10000)"</span></span>
-<span><span class="co">##   .. .. .. ..@ params     :List of 5</span></span>
-<span><span class="co">##   .. .. .. .. ..$ assay               : chr "RNA"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ normalization.method: chr "LogNormalize"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ scale.factor        : num 10000</span></span>
-<span><span class="co">##   .. .. .. .. ..$ margin              : num 1</span></span>
-<span><span class="co">##   .. .. .. .. ..$ verbose             : logi TRUE</span></span>
-<span><span class="co">##   .. ..$ FindVariableFeatures.RNA:Formal class 'SeuratCommand' [package "SeuratObject"] with 5 slots</span></span>
-<span><span class="co">##   .. .. .. ..@ name       : chr "FindVariableFeatures.RNA"</span></span>
-<span><span class="co">##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: "2021-07-08 11:49:18"</span></span>
-<span><span class="co">##   .. .. .. ..@ assay.used : chr "RNA"</span></span>
-<span><span class="co">##   .. .. .. ..@ call.string: chr "FindVariableFeatures(pbmc, selection.method = \"vst\", nfeatures = 2000)"</span></span>
-<span><span class="co">##   .. .. .. ..@ params     :List of 12</span></span>
-<span><span class="co">##   .. .. .. .. ..$ assay              : chr "RNA"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ selection.method   : chr "vst"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ loess.span         : num 0.3</span></span>
-<span><span class="co">##   .. .. .. .. ..$ clip.max           : chr "auto"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ mean.function      :function (mat, display_progress)  </span></span>
-<span><span class="co">##   .. .. .. .. ..$ dispersion.function:function (mat, display_progress)  </span></span>
-<span><span class="co">##   .. .. .. .. ..$ num.bin            : num 20</span></span>
-<span><span class="co">##   .. .. .. .. ..$ binning.method     : chr "equal_width"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ nfeatures          : num 2000</span></span>
-<span><span class="co">##   .. .. .. .. ..$ mean.cutoff        : num [1:2] 0.1 8</span></span>
-<span><span class="co">##   .. .. .. .. ..$ dispersion.cutoff  : num [1:2] 1 Inf</span></span>
-<span><span class="co">##   .. .. .. .. ..$ verbose            : logi TRUE</span></span>
-<span><span class="co">##   .. ..$ ScaleData.RNA           :Formal class 'SeuratCommand' [package "SeuratObject"] with 5 slots</span></span>
-<span><span class="co">##   .. .. .. ..@ name       : chr "ScaleData.RNA"</span></span>
-<span><span class="co">##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: "2021-07-08 11:49:47"</span></span>
-<span><span class="co">##   .. .. .. ..@ assay.used : chr "RNA"</span></span>
-<span><span class="co">##   .. .. .. ..@ call.string: chr "ScaleData(pbmc, vars.to.regress = \"percent.mt\")"</span></span>
-<span><span class="co">##   .. .. .. ..@ params     :List of 11</span></span>
-<span><span class="co">##   .. .. .. .. ..$ features          : chr [1:2000] "PPBP" "LYZ" "S100A9" "IGLL5" ...</span></span>
-<span><span class="co">##   .. .. .. .. ..$ assay             : chr "RNA"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ vars.to.regress   : chr "percent.mt"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ model.use         : chr "linear"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ use.umi           : logi FALSE</span></span>
-<span><span class="co">##   .. .. .. .. ..$ do.scale          : logi TRUE</span></span>
-<span><span class="co">##   .. .. .. .. ..$ do.center         : logi TRUE</span></span>
-<span><span class="co">##   .. .. .. .. ..$ scale.max         : num 10</span></span>
-<span><span class="co">##   .. .. .. .. ..$ block.size        : num 1000</span></span>
-<span><span class="co">##   .. .. .. .. ..$ min.cells.to.block: num 2638</span></span>
-<span><span class="co">##   .. .. .. .. ..$ verbose           : logi TRUE</span></span>
-<span><span class="co">##   .. ..$ RunPCA.RNA              :Formal class 'SeuratCommand' [package "SeuratObject"] with 5 slots</span></span>
-<span><span class="co">##   .. .. .. ..@ name       : chr "RunPCA.RNA"</span></span>
-<span><span class="co">##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: "2021-07-08 11:49:54"</span></span>
-<span><span class="co">##   .. .. .. ..@ assay.used : chr "RNA"</span></span>
-<span><span class="co">##   .. .. .. ..@ call.string: chr "RunPCA(pbmc, features = VariableFeatures(object = pbmc))"</span></span>
-<span><span class="co">##   .. .. .. ..@ params     :List of 11</span></span>
-<span><span class="co">##   .. .. .. .. ..$ assay          : chr "RNA"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ features       : chr [1:2000] "PPBP" "LYZ" "S100A9" "IGLL5" ...</span></span>
-<span><span class="co">##   .. .. .. .. ..$ npcs           : num 50</span></span>
-<span><span class="co">##   .. .. .. .. ..$ rev.pca        : logi FALSE</span></span>
-<span><span class="co">##   .. .. .. .. ..$ weight.by.var  : logi TRUE</span></span>
-<span><span class="co">##   .. .. .. .. ..$ verbose        : logi TRUE</span></span>
-<span><span class="co">##   .. .. .. .. ..$ ndims.print    : int [1:5] 1 2 3 4 5</span></span>
-<span><span class="co">##   .. .. .. .. ..$ nfeatures.print: num 30</span></span>
-<span><span class="co">##   .. .. .. .. ..$ reduction.name : chr "pca"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ reduction.key  : chr "PC_"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ seed.use       : num 42</span></span>
-<span><span class="co">##   .. ..$ JackStraw.RNA.pca       :Formal class 'SeuratCommand' [package "SeuratObject"] with 5 slots</span></span>
-<span><span class="co">##   .. .. .. ..@ name       : chr "JackStraw.RNA.pca"</span></span>
-<span><span class="co">##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: "2021-07-08 11:54:13"</span></span>
-<span><span class="co">##   .. .. .. ..@ assay.used : chr "RNA"</span></span>
-<span><span class="co">##   .. .. .. ..@ call.string: chr "JackStraw(pbmc, num.replicate = 100)"</span></span>
-<span><span class="co">##   .. .. .. ..@ params     :List of 7</span></span>
-<span><span class="co">##   .. .. .. .. ..$ reduction    : chr "pca"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ assay        : chr "RNA"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ dims         : num 20</span></span>
-<span><span class="co">##   .. .. .. .. ..$ num.replicate: num 100</span></span>
-<span><span class="co">##   .. .. .. .. ..$ prop.freq    : num 0.01</span></span>
-<span><span class="co">##   .. .. .. .. ..$ verbose      : logi TRUE</span></span>
-<span><span class="co">##   .. .. .. .. ..$ maxit        : num 1000</span></span>
-<span><span class="co">##   .. ..$ ScoreJackStraw          :Formal class 'SeuratCommand' [package "SeuratObject"] with 5 slots</span></span>
-<span><span class="co">##   .. .. .. ..@ name       : chr "ScoreJackStraw"</span></span>
-<span><span class="co">##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: "2021-07-08 11:54:13"</span></span>
-<span><span class="co">##   .. .. .. ..@ assay.used : chr "RNA"</span></span>
-<span><span class="co">##   .. .. .. ..@ call.string: chr "ScoreJackStraw(pbmc, dims = 1:20)"</span></span>
-<span><span class="co">##   .. .. .. ..@ params     :List of 4</span></span>
-<span><span class="co">##   .. .. .. .. ..$ reduction   : chr "pca"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ dims        : int [1:20] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
-<span><span class="co">##   .. .. .. .. ..$ score.thresh: num 1e-05</span></span>
-<span><span class="co">##   .. .. .. .. ..$ do.plot     : logi FALSE</span></span>
-<span><span class="co">##   .. ..$ FindNeighbors.RNA.pca   :Formal class 'SeuratCommand' [package "SeuratObject"] with 5 slots</span></span>
-<span><span class="co">##   .. .. .. ..@ name       : chr "FindNeighbors.RNA.pca"</span></span>
-<span><span class="co">##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: "2021-07-08 11:54:15"</span></span>
-<span><span class="co">##   .. .. .. ..@ assay.used : chr "RNA"</span></span>
-<span><span class="co">##   .. .. .. ..@ call.string: chr "FindNeighbors(pbmc, dims = 1:10)"</span></span>
-<span><span class="co">##   .. .. .. ..@ params     :List of 17</span></span>
-<span><span class="co">##   .. .. .. .. ..$ reduction      : chr "pca"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ dims           : int [1:10] 1 2 3 4 5 6 7 8 9 10</span></span>
-<span><span class="co">##   .. .. .. .. ..$ assay          : chr "RNA"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ k.param        : num 20</span></span>
-<span><span class="co">##   .. .. .. .. ..$ return.neighbor: logi FALSE</span></span>
-<span><span class="co">##   .. .. .. .. ..$ compute.SNN    : logi TRUE</span></span>
-<span><span class="co">##   .. .. .. .. ..$ prune.SNN      : num 0.0667</span></span>
-<span><span class="co">##   .. .. .. .. ..$ nn.method      : chr "annoy"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ n.trees        : num 50</span></span>
-<span><span class="co">##   .. .. .. .. ..$ annoy.metric   : chr "euclidean"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ nn.eps         : num 0</span></span>
-<span><span class="co">##   .. .. .. .. ..$ verbose        : logi TRUE</span></span>
-<span><span class="co">##   .. .. .. .. ..$ force.recalc   : logi FALSE</span></span>
-<span><span class="co">##   .. .. .. .. ..$ do.plot        : logi FALSE</span></span>
-<span><span class="co">##   .. .. .. .. ..$ graph.name     : chr [1:2] "RNA_nn" "RNA_snn"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ l2.norm        : logi FALSE</span></span>
-<span><span class="co">##   .. .. .. .. ..$ cache.index    : logi FALSE</span></span>
-<span><span class="co">##   .. ..$ FindClusters            :Formal class 'SeuratCommand' [package "SeuratObject"] with 5 slots</span></span>
-<span><span class="co">##   .. .. .. ..@ name       : chr "FindClusters"</span></span>
-<span><span class="co">##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: "2021-07-08 11:54:15"</span></span>
-<span><span class="co">##   .. .. .. ..@ assay.used : chr "RNA"</span></span>
-<span><span class="co">##   .. .. .. ..@ call.string: chr "FindClusters(pbmc, resolution = 0.5)"</span></span>
-<span><span class="co">##   .. .. .. ..@ params     :List of 10</span></span>
-<span><span class="co">##   .. .. .. .. ..$ graph.name      : chr "RNA_snn"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ modularity.fxn  : num 1</span></span>
-<span><span class="co">##   .. .. .. .. ..$ resolution      : num 0.5</span></span>
-<span><span class="co">##   .. .. .. .. ..$ method          : chr "matrix"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ algorithm       : num 1</span></span>
-<span><span class="co">##   .. .. .. .. ..$ n.start         : num 10</span></span>
-<span><span class="co">##   .. .. .. .. ..$ n.iter          : num 10</span></span>
-<span><span class="co">##   .. .. .. .. ..$ random.seed     : num 0</span></span>
-<span><span class="co">##   .. .. .. .. ..$ group.singletons: logi TRUE</span></span>
-<span><span class="co">##   .. .. .. .. ..$ verbose         : logi TRUE</span></span>
-<span><span class="co">##   .. ..$ RunUMAP.RNA.pca         :Formal class 'SeuratCommand' [package "SeuratObject"] with 5 slots</span></span>
-<span><span class="co">##   .. .. .. ..@ name       : chr "RunUMAP.RNA.pca"</span></span>
-<span><span class="co">##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: "2021-07-08 11:54:28"</span></span>
-<span><span class="co">##   .. .. .. ..@ assay.used : chr "RNA"</span></span>
-<span><span class="co">##   .. .. .. ..@ call.string: chr "RunUMAP(pbmc, dims = 1:10)"</span></span>
-<span><span class="co">##   .. .. .. ..@ params     :List of 22</span></span>
-<span><span class="co">##   .. .. .. .. ..$ dims                : int [1:10] 1 2 3 4 5 6 7 8 9 10</span></span>
-<span><span class="co">##   .. .. .. .. ..$ reduction           : chr "pca"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ assay               : chr "RNA"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ slot                : chr "data"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ umap.method         : chr "uwot"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ return.model        : logi FALSE</span></span>
-<span><span class="co">##   .. .. .. .. ..$ n.neighbors         : int 30</span></span>
-<span><span class="co">##   .. .. .. .. ..$ n.components        : int 2</span></span>
-<span><span class="co">##   .. .. .. .. ..$ metric              : chr "cosine"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ learning.rate       : num 1</span></span>
-<span><span class="co">##   .. .. .. .. ..$ min.dist            : num 0.3</span></span>
-<span><span class="co">##   .. .. .. .. ..$ spread              : num 1</span></span>
-<span><span class="co">##   .. .. .. .. ..$ set.op.mix.ratio    : num 1</span></span>
-<span><span class="co">##   .. .. .. .. ..$ local.connectivity  : int 1</span></span>
-<span><span class="co">##   .. .. .. .. ..$ repulsion.strength  : num 1</span></span>
-<span><span class="co">##   .. .. .. .. ..$ negative.sample.rate: int 5</span></span>
-<span><span class="co">##   .. .. .. .. ..$ uwot.sgd            : logi FALSE</span></span>
-<span><span class="co">##   .. .. .. .. ..$ seed.use            : int 42</span></span>
-<span><span class="co">##   .. .. .. .. ..$ angular.rp.forest   : logi FALSE</span></span>
-<span><span class="co">##   .. .. .. .. ..$ verbose             : logi TRUE</span></span>
-<span><span class="co">##   .. .. .. .. ..$ reduction.name      : chr "umap"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ reduction.key       : chr "UMAP_"</span></span>
-<span><span class="co">##   .. ..$ RunTSNE                 :Formal class 'SeuratCommand' [package "SeuratObject"] with 5 slots</span></span>
-<span><span class="co">##   .. .. .. ..@ name       : chr "RunTSNE"</span></span>
-<span><span class="co">##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: "2021-07-08 11:54:36"</span></span>
-<span><span class="co">##   .. .. .. ..@ assay.used : chr "RNA"</span></span>
-<span><span class="co">##   .. .. .. ..@ call.string: chr "RunTSNE(pbmc, dims = 1:10)"</span></span>
-<span><span class="co">##   .. .. .. ..@ params     :List of 8</span></span>
-<span><span class="co">##   .. .. .. .. ..$ reduction     : chr "pca"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ cells         : chr [1:2638] "AAACATACAACCAC-1" "AAACATTGAGCTAC-1" "AAACATTGATCAGC-1" "AAACCGTGCTTCCG-1" ...</span></span>
-<span><span class="co">##   .. .. .. .. ..$ dims          : int [1:10] 1 2 3 4 5 6 7 8 9 10</span></span>
-<span><span class="co">##   .. .. .. .. ..$ seed.use      : num 1</span></span>
-<span><span class="co">##   .. .. .. .. ..$ tsne.method   : chr "Rtsne"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ dim.embed     : num 2</span></span>
-<span><span class="co">##   .. .. .. .. ..$ reduction.name: chr "tsne"</span></span>
-<span><span class="co">##   .. .. .. .. ..$ reduction.key : chr "tSNE_"</span></span>
-<span><span class="co">##   ..@ tools       :List of 2</span></span>
-<span><span class="co">##   .. ..$ BuildClusterTree           :List of 4</span></span>
-<span><span class="co">##   .. .. ..$ edge       : int [1:16, 1:2] 10 10 11 12 12 11 13 14 14 16 ...</span></span>
-<span><span class="co">##   .. .. ..$ edge.length: num [1:16] 463 158 174 131 131 ...</span></span>
-<span><span class="co">##   .. .. ..$ tip.label  : chr [1:9] "0" "1" "2" "3" ...</span></span>
-<span><span class="co">##   .. .. ..$ Nnode      : int 8</span></span>
-<span><span class="co">##   .. .. ..- attr(*, "class")= chr "phylo"</span></span>
-<span><span class="co">##   .. .. ..- attr(*, "order")= chr "cladewise"</span></span>
-<span><span class="co">##   .. ..$ CalculateBarcodeInflections:List of 4</span></span>
-<span><span class="co">##   .. .. ..$ barcode_distribution:'data.frame':   2638 obs. of  4 variables:</span></span>
-<span><span class="co">##   .. .. .. ..$ orig.ident: Factor w/ 1 level "pbmc3k": 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">##   .. .. .. ..$ nCount_RNA: num [1:2638] 8875 8415 8011 7928 7167 ...</span></span>
-<span><span class="co">##   .. .. .. ..$ rank      : num [1:2638] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
-<span><span class="co">##   .. .. .. ..$ rawdiff   : num [1:2638] 0 -0.02311 -0.02136 -0.00452 -0.04382 ...</span></span>
-<span><span class="co">##   .. .. ..$ inflection_points   :'data.frame':   1 obs. of  3 variables:</span></span>
-<span><span class="co">##   .. .. .. ..$ orig.ident: Factor w/ 1 level "pbmc3k": 1</span></span>
-<span><span class="co">##   .. .. .. ..$ nCount_RNA: num 7167</span></span>
-<span><span class="co">##   .. .. .. ..$ rank      : num 5</span></span>
-<span><span class="co">##   .. .. ..$ threshold_values    :'data.frame':   2 obs. of  2 variables:</span></span>
-<span><span class="co">##   .. .. .. ..$ threshold: chr [1:2] "threshold.low" "threshold.high"</span></span>
-<span><span class="co">##   .. .. .. ..$ rank     : num [1:2] 1 2638</span></span>
-<span><span class="co">##   .. .. ..$ cells_pass          : chr [1:2635] "GGGCCAACCTTGGA-1" "CAGGTTGAGGATCT-1" "ACGAGGGACAGGAG-1" "AAGCCATGAACTGC-1" ...</span></span>
-<span></span>
-<span><span class="co">### Retrieve the coordinates of each cell, and cluster, celltype information</span></span>
-<span><span class="va">umap</span> <span class="op">&lt;-</span> <span class="va">pbmc</span><span class="op">@</span><span class="va">reductions</span><span class="op">$</span><span class="va">umap</span><span class="op">@</span><span class="va">cell.embeddings</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>cell_type <span class="op">=</span> <span class="va">pbmc</span><span class="op">@</span><span class="va">meta.data</span><span class="op">$</span><span class="va">labels</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">umap</span><span class="op">)</span></span>
-<span><span class="co">##                     UMAP_1     UMAP_2 cell_type</span></span>
-<span><span class="co">## AAACATACAACCAC-1 -4.577857   1.650203   T_cells</span></span>
-<span><span class="co">## AAACATTGAGCTAC-1 -2.813911 -11.897462    B_cell</span></span>
-<span><span class="co">## AAACATTGATCAGC-1 -1.684490   3.302480   T_cells</span></span>
-<span><span class="co">## AAACCGTGCTTCCG-1 12.694498   2.098798  Monocyte</span></span>
-<span><span class="co">## AAACCGTGTATGCG-1 -9.829201   3.982013   NK_cell</span></span>
-<span><span class="co">## AAACGCACTGGTAC-1 -2.908319   1.249230   T_cells</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section><section id="make-umap-with-ggplot2" class="level3"><h3 class="anchored" data-anchor-id="make-umap-with-ggplot2">Make UMAP with ggplot2</h3>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Define the colors</span></span>
-<span><span class="va">allcolour</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
-<span>    <span class="st">"#DC143C"</span>,<span class="st">"#0000FF"</span>,<span class="st">"#20B2AA"</span>,<span class="st">"#FFA500"</span>,<span class="st">"#9370DB"</span>,<span class="st">"#98FB98"</span>,<span class="st">"#F08080"</span>,</span>
-<span>    <span class="st">"#1E90FF"</span>,<span class="st">"#7CFC00"</span>,<span class="st">"#FFFF00"</span>, <span class="st">"#808000"</span>,<span class="st">"#FF00FF"</span>,<span class="st">"#FA8072"</span>,<span class="st">"#7B68EE"</span>,</span>
-<span>    <span class="st">"#9400D3"</span>,<span class="st">"#800080"</span>,<span class="st">"#A0522D"</span>,<span class="st">"#D2B48C"</span>,<span class="st">"#D2691E"</span>,<span class="st">"#87CEEB"</span>,<span class="st">"#40E0D0"</span>,</span>
-<span>    <span class="st">"#5F9EA0"</span>,<span class="st">"#FF1493"</span>,<span class="st">"#0000CD"</span>,<span class="st">"#008B8B"</span>,<span class="st">"#FFE4B5"</span>,<span class="st">"#8A2BE2"</span>,<span class="st">"#228B22"</span>,</span>
-<span>    <span class="st">"#E9967A"</span>,<span class="st">"#4682B4"</span>,<span class="st">"#32CD32"</span>,<span class="st">"#F0E68C"</span>,<span class="st">"#FFFFE0"</span>,<span class="st">"#EE82EE"</span>,<span class="st">"#FF6347"</span>,</span>
-<span>    <span class="st">"#6A5ACD"</span>,<span class="st">"#9932CC"</span>,<span class="st">"#8B008B"</span>,<span class="st">"#8B4513"</span>,<span class="st">"#DEB887"</span></span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">harmony_embeddings</span> <span class="op">&lt;-</span> <span class="fu">harmony</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/harmony/man/RunHarmony.html">RunHarmony</a></span><span class="op">(</span></span>
+<span>    <span class="va">scaled_pcs</span>, <span class="va">meta_data</span>, <span class="st">"dataset"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">### ggplot2</span></span>
-<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">umap</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">UMAP_1</span>, y <span class="op">=</span> <span class="va">UMAP_2</span>, color <span class="op">=</span> <span class="va">cell_type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span>, alpha <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="co">### MAP cluster with color</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">allcolour</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="co">### Axis annotation</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html">geom_segment</a></span><span class="op">(</span></span>
-<span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
-<span>            x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">umap</span><span class="op">$</span><span class="va">UMAP_1</span><span class="op">)</span> , y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">umap</span><span class="op">$</span><span class="va">UMAP_2</span><span class="op">)</span> ,</span>
-<span>            xend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">umap</span><span class="op">$</span><span class="va">UMAP_1</span><span class="op">)</span> <span class="op">+</span><span class="fl">3</span>, yend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">umap</span><span class="op">$</span><span class="va">UMAP_2</span><span class="op">)</span></span>
-<span>        <span class="op">)</span>, colour <span class="op">=</span> <span class="st">"black"</span>, linewidth <span class="op">=</span> <span class="fl">1</span>,arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">0.3</span>,<span class="st">"cm"</span><span class="op">)</span><span class="op">)</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span> </span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html">geom_segment</a></span><span class="op">(</span></span>
-<span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
-<span>            x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">umap</span><span class="op">$</span><span class="va">UMAP_1</span><span class="op">)</span>  , y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">umap</span><span class="op">$</span><span class="va">UMAP_2</span><span class="op">)</span>  ,</span>
-<span>            xend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">umap</span><span class="op">$</span><span class="va">UMAP_1</span><span class="op">)</span> , yend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">umap</span><span class="op">$</span><span class="va">UMAP_2</span><span class="op">)</span> <span class="op">+</span> <span class="fl">3</span><span class="op">)</span>,</span>
-<span>            colour <span class="op">=</span> <span class="st">"black"</span>, linewidth <span class="op">=</span> <span class="fl">1</span>,arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">0.3</span>,<span class="st">"cm"</span><span class="op">)</span><span class="op">)</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span></span>
-<span>        <span class="st">"text"</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">umap</span><span class="op">$</span><span class="va">UMAP_1</span><span class="op">)</span> <span class="op">+</span><span class="fl">1.5</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">umap</span><span class="op">$</span><span class="va">UMAP_2</span><span class="op">)</span> <span class="op">-</span><span class="fl">1</span>, </span>
-<span>        label <span class="op">=</span> <span class="st">"UMAP_1"</span>, color<span class="op">=</span><span class="st">"black"</span>,size <span class="op">=</span> <span class="fl">3</span>, fontface<span class="op">=</span><span class="st">"bold"</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span> </span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span></span>
-<span>        <span class="st">"text"</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">umap</span><span class="op">$</span><span class="va">UMAP_1</span><span class="op">)</span> <span class="op">-</span><span class="fl">1</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">umap</span><span class="op">$</span><span class="va">UMAP_2</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1.5</span>, </span>
-<span>        label <span class="op">=</span> <span class="st">"UMAP_2"</span>, color<span class="op">=</span><span class="st">"black"</span>,size <span class="op">=</span> <span class="fl">3</span>, fontface<span class="op">=</span><span class="st">"bold"</span> ,angle<span class="op">=</span><span class="fl">90</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span> </span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
-<span>        panel.grid.major <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>        panel.grid.minor <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>        panel.border <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>        axis.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>        axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>        axis.ticks <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>        panel.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
-<span>        plot.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
-<span>        legend.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>, </span>
-<span>        legend.key<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op">(</span>fill<span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
-<span>        legend.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>,</span>
-<span>        legend.key.size<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"cm"</span><span class="op">)</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="co">### legend label size</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span>color <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html">guide_legend</a></span><span class="op">(</span>override.aes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">### View it</span></span>
-<span><span class="va">p</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">do_scatter</span><span class="op">(</span><span class="va">harmony_embeddings</span>, <span class="va">meta_data</span>, <span class="st">"dataset"</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Colored by dataset"</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">do_scatter</span><span class="op">(</span><span class="va">harmony_embeddings</span>, <span class="va">meta_data</span>, <span class="st">"cell_type"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Colored by cell type"</span><span class="op">)</span></span>
+<span><span class="co">### combine plot</span></span>
+<span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-</section><section id="annotate-cell-type-on-umap" class="level3"><h3 class="anchored" data-anchor-id="annotate-cell-type-on-umap">Annotate cell type on UMAP</h3>
+</section><section id="mudan" class="level2"><h2 class="anchored" data-anchor-id="mudan">MUDAN</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Calcualte the median coordinates of each cluster</span></span>
-<span><span class="va">cell_type_med</span> <span class="op">&lt;-</span> <span class="va">umap</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cell_type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>UMAP_1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">UMAP_1</span><span class="op">)</span>,</span>
-<span>    UMAP_2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">UMAP_2</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="co">### Annotation</span></span>
-<span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html">geom_label_repel</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">cell_type</span>, size <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>, fontface <span class="op">=</span> <span class="st">"bold"</span>, data <span class="op">=</span> <span class="va">cell_type_med</span>,</span>
-<span>    point.padding <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="st">"lines"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### get data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"pbmcA"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"pbmcB"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">pbmcA</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">pbmcB</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### downsize the number of cells in each PBMC dataset</span></span>
+<span><span class="va">pbmcA</span> <span class="op">&lt;-</span> <span class="va">pbmcA</span><span class="op">[</span>, <span class="fl">500</span><span class="op">]</span> <span class="co"># take 500 cells</span></span>
+<span><span class="va">pbmcB</span> <span class="op">&lt;-</span> <span class="va">pbmcB</span><span class="op">[</span>, <span class="fl">2000</span><span class="op">]</span> <span class="co"># take 500 cells</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Combine the two datasets into one cell by gene counts matrix and use a meta vector to keep track of which cell belongs to which sample</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### combine into one coutns matrix</span></span>
+<span><span class="va">genes_int</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sets.html">intersect</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">pbmcA</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">pbmcB</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">cd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">pbmcA</span><span class="op">[</span><span class="va">genes_int</span>, <span class="op">]</span>, <span class="va">pbmcB</span><span class="op">[</span><span class="va">genes_int</span>, <span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### meta data</span></span>
+<span><span class="va">meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"pbmcA"</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">pbmcA</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"pbmcB"</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">pbmcB</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">meta</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">pbmcA</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">pbmcB</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">meta</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">cd</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span>
+<span><span class="va">meta</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Given this counts matrix, we can normalize our data, derive principal components, and perform dimensionality reduction using tSNE. However, we see prominent separation by sample due to batch effects.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### CPM normalization</span></span>
+<span><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu">MUDAN</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MUDAN/man/normalizeCounts.html">normalizeCounts</a></span><span class="op">(</span><span class="va">cd</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### variance normalize, identify overdispersed genes</span></span>
+<span><span class="va">matnorm_info</span> <span class="op">&lt;-</span> <span class="fu">MUDAN</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MUDAN/man/normalizeVariance.html">normalizeVariance</a></span><span class="op">(</span><span class="va">mat</span>, details <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### log transform</span></span>
+<span><span class="va">matnorm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span><span class="op">(</span><span class="va">matnorm_info</span><span class="op">$</span><span class="va">mat</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### 30 PCs on over dispersed genes</span></span>
+<span><span class="va">pcs</span> <span class="op">&lt;-</span> <span class="fu">MUDAN</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MUDAN/man/getPcs.html">getPcs</a></span><span class="op">(</span></span>
+<span>    <span class="va">matnorm</span><span class="op">[</span><span class="va">matnorm_info</span><span class="op">$</span><span class="va">ods</span>, <span class="op">]</span>,</span>
+<span>    nGenes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">matnorm_info</span><span class="op">$</span><span class="va">ods</span><span class="op">)</span>,</span>
+<span>    nPcs <span class="op">=</span> <span class="fl">30</span>, </span>
+<span>    verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">### TSNE embedding with regular PCS</span></span>
+<span><span class="va">emb</span> <span class="op">&lt;-</span> <span class="fu">Rtsne</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Rtsne/man/Rtsne.html">Rtsne</a></span><span class="op">(</span></span>
+<span>    <span class="va">pcs</span>,</span>
+<span>    is_distance <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>    perplexity <span class="op">=</span> <span class="fl">30</span>, </span>
+<span>    num_threads <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>    verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span><span class="op">$</span><span class="va">Y</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">emb</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">pcs</span><span class="op">)</span></span>
+<span><span class="co">### plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">MUDAN</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MUDAN/man/plotEmbedding.html">plotEmbedding</a></span><span class="op">(</span></span>
+<span>    <span class="va">emb</span>, groups <span class="op">=</span> <span class="va">meta</span>, show.legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    xlab <span class="op">=</span> <span class="cn">NA</span>, ylab <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>    main <span class="op">=</span> <span class="st">"Regular tSNE Embedding"</span>,</span>
+<span>    verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-</figure>
 </div>
-</div>
-</div>
-</section></section><section id="featureplot" class="level2"><h2 class="anchored" data-anchor-id="featureplot">Featureplot</h2>
+<p>Indeed, when we inspect certain cell-type specific marker genes (MS4A1/CD20 for B-cells, CD3E for T-cells, FCGR3A/CD16 for NK cells, macrophages, and monocytes, CD14 for dendritic cells, macrophages, and monocytes), we see that cells are separating by batch rather than by their expected cell-types.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html">DimPlot</a></span><span class="op">(</span><span class="va">pbmc</span>,label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">|</span><span class="fu"><a href="https://satijalab.org/seurat/reference/FeaturePlot.html">FeaturePlot</a></span><span class="op">(</span><span class="va">pbmc</span>,features <span class="op">=</span> <span class="st">"CD79A"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-</figure>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MS4A1"</span>, <span class="st">"CD3E"</span>, <span class="st">"FCGR3A"</span>, <span class="st">"CD14"</span><span class="op">)</span>,</span>
+<span>        <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>            <span class="va">gexp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span><span class="op">(</span><span class="va">mat</span><span class="op">[</span><span class="va">x</span>, <span class="op">]</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span></span>
+<span>            <span class="fu">plotEmbedding</span><span class="op">(</span></span>
+<span>                <span class="va">emb</span>, col <span class="op">=</span> <span class="va">gexp</span>, xlab <span class="op">=</span> <span class="st">"NA"</span>,</span>
+<span>                ylab <span class="op">=</span> <span class="cn">NA</span>, main <span class="op">=</span> <span class="va">x</span>,</span>
+<span>                verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>            <span class="op">)</span></span>
+<span>        <span class="op">}</span></span>
+<span>    <span class="op">)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</div>
+<p>If we were attempt to identify cell-types using clustering analysis at this step, we would identify a number of sample-specific clusters driven by batch effects.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/FeaturePlot.html">FeaturePlot</a></span><span class="op">(</span><span class="va">pbmc</span>,features <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CD79A"</span>, <span class="st">"CD8A"</span><span class="op">)</span>,blend<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/FeaturePlot.html">FeaturePlot</a></span><span class="op">(</span><span class="va">pbmc</span>,features <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CD79A"</span>,<span class="st">"CD79B"</span><span class="op">)</span>,blend<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/FeaturePlot.html">FeaturePlot</a></span><span class="op">(</span><span class="va">pbmc</span>,features <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CD79A"</span>,<span class="st">"CD79B"</span>, <span class="st">"CD68"</span>, <span class="st">"CD163"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-7-3.png" class="img-fluid figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">annot_bad</span> <span class="op">&lt;-</span> <span class="fu">getComMembership</span><span class="op">(</span><span class="va">pcs</span>, k <span class="op">=</span> <span class="fl">30</span>, method <span class="op">=</span> <span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://r.igraph.org/reference/cluster_louvain.html">cluster_louvain</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">plotEmbedding</span><span class="op">(</span></span>
+<span>    <span class="va">emb</span>, groups <span class="op">=</span> <span class="va">annot_bad</span>, show.legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    xlab <span class="op">=</span> <span class="cn">NA</span>, ylab <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>    main <span class="op">=</span> <span class="st">"Jointly-indentified cell clusters"</span>,</span>
+<span>    verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://mojaveazure.github.io/seurat-object/reference/FetchData.html">FetchData</a></span><span class="op">(</span></span>
-<span>    <span class="va">pbmc</span>,</span>
-<span>    vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"rna_CD79A"</span>, <span class="st">"rna_CD8A"</span>, <span class="st">"rna_CCR7"</span>, <span class="st">"UMAP_1"</span>, <span class="st">"UMAP_2"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### look at cell-type proportion per sample</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">annot_bad</span>, <span class="va">meta</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">meta</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Look at cell-type proportions per sample</span></span>
+<span><span class="co"># print(t(table(annot_bad, meta))/as.numeric(table(meta)))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="using-harmony-with-seurat" class="level2"><h2 class="anchored" data-anchor-id="using-harmony-with-seurat">Using Harmony with Seurat</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### load required data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"pbmc_stim"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### generate seurat object</span></span>
+<span><span class="va">pbmc</span> <span class="op">&lt;-</span> <span class="fu">CreateSeuratObject</span><span class="op">(</span></span>
+<span>    counts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">pbmc.stim</span>, <span class="va">pbmc.ctrl</span><span class="op">)</span>,</span>
+<span>    project <span class="op">=</span> <span class="st">"PBMC"</span>,</span>
+<span>    min.cells <span class="op">=</span> <span class="fl">5</span></span>
+<span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co">### separete conditions</span></span>
+<span><span class="va">pbmc</span><span class="op">@</span><span class="va">meta.data</span><span class="op">$</span><span class="va">stim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"STIM"</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">pbmc.stim</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"CTRL"</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">pbmc.ctrl</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span>
-<span><span class="co">##                  rna_CD79A rna_CD8A rna_CCR7    UMAP_1     UMAP_2</span></span>
-<span><span class="co">## AAACATACAACCAC-1  0.000000 1.635873 1.635873 -4.577857   1.650203</span></span>
-<span><span class="co">## AAACATTGAGCTAC-1  1.962726 0.000000 0.000000 -2.813911 -11.897462</span></span>
-<span><span class="co">## AAACATTGATCAGC-1  0.000000 0.000000 0.000000 -1.684490   3.302480</span></span>
-<span><span class="co">## AAACCGTGCTTCCG-1  0.000000 0.000000 0.000000 12.694498   2.098798</span></span>
-<span><span class="co">## AAACCGTGTATGCG-1  0.000000 0.000000 0.000000 -9.829201   3.982013</span></span>
-<span><span class="co">## AAACGCACTGGTAC-1  0.000000 0.000000 0.000000 -2.908319   1.249230</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span></span>
+<span><span class="co">### generate a union of highly variable genes</span></span>
+<span><span class="va">pbmc</span> <span class="op">&lt;-</span> <span class="va">pbmc</span> <span class="op">|&gt;</span> <span class="fu">Seurat</span><span class="fu">::</span><span class="fu"><a href="https://satijalab.org/seurat/reference/NormalizeData.html">NormalizeData</a></span><span class="op">(</span>verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">VariableFeatures</span><span class="op">(</span><span class="va">pbmc</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">pbmc</span><span class="op">@</span><span class="va">meta.data</span><span class="op">)</span>, <span class="va">pbmc</span><span class="op">@</span><span class="va">meta.data</span><span class="op">$</span><span class="va">stim</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">cells_use</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">pbmc</span><span class="op">[</span>,<span class="va">cells_use</span><span class="op">]</span> <span class="op">%&gt;%</span></span>
+<span>        <span class="fu">FindVariableFeatures</span><span class="op">(</span>selection.method <span class="op">=</span> <span class="st">"vst"</span>, nfeatures <span class="op">=</span> <span class="fl">2000</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>        <span class="fu">VariableFeatures</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">unlist</span> <span class="op">%&gt;%</span> <span class="va">unique</span></span>
+<span><span class="co">## Finding variable features for layer counts</span></span>
+<span><span class="co">## Finding variable features for layer counts</span></span>
+<span></span>
+<span><span class="va">pbmc</span> <span class="op">&lt;-</span> <span class="va">pbmc</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu">ScaleData</span><span class="op">(</span>verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu">RunPCA</span><span class="op">(</span>features <span class="op">=</span> <span class="fu">VariableFeatures</span><span class="op">(</span><span class="va">pbmc</span><span class="op">)</span>, npcs <span class="op">=</span> <span class="fl">20</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Clear difference between the datasets in the uncorrected PCs</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Single gene</span></span>
-<span><span class="va">mydata</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">UMAP_1</span>, y <span class="op">=</span> <span class="va">UMAP_2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span></span>
-<span>        data <span class="op">=</span> <span class="va">mydata</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">UMAP_1</span>, y <span class="op">=</span> <span class="va">UMAP_2</span>,</span>
-<span>        color <span class="op">=</span> <span class="va">rna_CD79A</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="co">### Increase the transprancy of gray dots</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_color_gradient</a></span><span class="op">(</span></span>
-<span>        <span class="st">"rna_CD79A"</span>, low <span class="op">=</span> <span class="fu"><a href="https://scales.r-lib.org/reference/alpha.html">alpha</a></span><span class="op">(</span><span class="st">"grey"</span>, <span class="fl">0.1</span><span class="op">)</span>, </span>
-<span>        high <span class="op">=</span> <span class="fu"><a href="https://scales.r-lib.org/reference/alpha.html">alpha</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="co">### Density</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density_2d.html">stat_density2d</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>colour<span class="op">=</span><span class="va">rna_CD79A</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">DimPlot</span><span class="op">(</span>object <span class="op">=</span> <span class="va">pbmc</span>, reduction <span class="op">=</span> <span class="st">"pca"</span>, pt.size <span class="op">=</span> <span class="fl">.1</span>, group.by <span class="op">=</span> <span class="st">"stim"</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">VlnPlot</span><span class="op">(</span>object <span class="op">=</span> <span class="va">pbmc</span>, features <span class="op">=</span> <span class="st">"PC_1"</span>, group.by <span class="op">=</span> <span class="st">"stim"</span>, pt.size <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span></span>
+<span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">p1</span>,<span class="va">p2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="run-harmony" class="level3"><h3 class="anchored" data-anchor-id="run-harmony">Run Harmony</h3>
+<p>Harmony works on an existing matrix with cell embeddings and outputs its transformed version with the datasets aligned according to some user-defined experimental conditions.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### run harmony to perform integrated analysis</span></span>
+<span><span class="va">pbmc</span> <span class="op">&lt;-</span> <span class="fu">RunHarmony</span><span class="op">(</span><span class="va">pbmc</span>, <span class="st">"stim"</span>, plot_convergence <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">## Transposing data matrix</span></span>
+<span><span class="co">## Initializing state using k-means centroids initialization</span></span>
+<span><span class="co">## Harmony 1/10</span></span>
+<span><span class="co">## Harmony 2/10</span></span>
+<span><span class="co">## Harmony 3/10</span></span>
+<span><span class="co">## Harmony 4/10</span></span>
+<span><span class="co">## Harmony 5/10</span></span>
+<span><span class="co">## Harmony 6/10</span></span>
+<span><span class="co">## Harmony 7/10</span></span>
+<span><span class="co">## Harmony 8/10</span></span>
+<span><span class="co">## Harmony 9/10</span></span>
+<span><span class="co">## Harmony converged after 9 iterations</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### directly access the new harmony embeddings</span></span>
+<span><span class="va">harmony_embeddings</span> <span class="op">&lt;-</span> <span class="fu">Embeddings</span><span class="op">(</span><span class="va">pbmc</span>, <span class="st">"harmony"</span><span class="op">)</span></span>
+<span><span class="va">harmony_embeddings</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span>
+<span><span class="co">##                  harmony_1   harmony_2   harmony_3 harmony_4    harmony_5</span></span>
+<span><span class="co">## ATCACTTGCTCGAA-1 -6.472885 -0.03395769 -3.37113988  4.104260  0.001600968</span></span>
+<span><span class="co">## CCGGAGACTGTGAC-1 -6.901013  1.59104949 -6.36127179  4.635761 -5.605371816</span></span>
+<span><span class="co">## CAAGCCCTGTTAGC-1 -6.774086 -1.21811545 -6.49162911 -9.135284 -0.197759676</span></span>
+<span><span class="co">## GAGGTACTAACGGG-1 -7.435499 -0.23169621  0.07052885  2.031633 -2.190562901</span></span>
+<span><span class="co">## CGCGGATGCCACAA-1 14.686943  4.38600212 -4.49637985  1.595446 -1.448223157</span></span>
+<span></span>
+<span><span class="co">### inspection of the modalities</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">DimPlot</span><span class="op">(</span>object <span class="op">=</span> <span class="va">pbmc</span>, reduction <span class="op">=</span> <span class="st">"harmony"</span>, pt.size <span class="op">=</span> <span class="fl">.1</span>, group.by <span class="op">=</span> <span class="st">"stim"</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">VlnPlot</span><span class="op">(</span>object <span class="op">=</span> <span class="va">pbmc</span>, features <span class="op">=</span> <span class="st">"harmony_1"</span>, group.by <span class="op">=</span> <span class="st">"stim"</span>, pt.size <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span></span>
+<span><span class="fu">plot_grid</span><span class="op">(</span><span class="va">p1</span>,<span class="va">p2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Plot genes correlated with the harmonized PCs</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">DimHeatmap</span><span class="op">(</span>object <span class="op">=</span> <span class="va">pbmc</span>, reduction <span class="op">=</span> <span class="st">"harmony"</span>, cells <span class="op">=</span> <span class="fl">500</span>, dims <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="down-stream-analysis" class="level3"><h3 class="anchored" data-anchor-id="down-stream-analysis">Down stream analysis</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pbmc</span> <span class="op">&lt;-</span> <span class="va">pbmc</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="co">### perform clustering using the harmonized vectors of cells</span></span>
+<span>    <span class="fu">FindNeighbors</span><span class="op">(</span>reduction <span class="op">=</span> <span class="st">"harmony"</span>, dims <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu">FindClusters</span><span class="op">(</span>resolution <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">## Computing nearest neighbor graph</span></span>
+<span><span class="co">## Computing SNN</span></span>
+<span><span class="co">## Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Number of nodes: 2000</span></span>
+<span><span class="co">## Number of edges: 85805</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Running Louvain algorithm...</span></span>
+<span><span class="co">## Maximum modularity in 10 random starts: 0.8883</span></span>
+<span><span class="co">## Number of communities: 10</span></span>
+<span><span class="co">## Elapsed time: 0 seconds</span></span>
+<span><span class="co">### TSNE</span></span>
+<span><span class="va">pbmc</span> <span class="op">&lt;-</span> <span class="va">pbmc</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">RunTSNE</span><span class="op">(</span>reduction <span class="op">=</span> <span class="st">"harmony"</span><span class="op">)</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">DimPlot</span><span class="op">(</span><span class="va">pbmc</span>, reduction <span class="op">=</span> <span class="st">"tsne"</span>, group.by <span class="op">=</span> <span class="st">"stim"</span>, pt.size <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">DimPlot</span><span class="op">(</span><span class="va">pbmc</span>, reduction <span class="op">=</span> <span class="st">"tsne"</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, pt.size <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span></span>
+<span><span class="fu">plot_grid</span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>One important observation is to assess that the harmonized data contain biological states of the cells. Therefore by checking the following genes we can see that biological cell states are preserved after harmonization.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">FeaturePlot</span><span class="op">(</span>object <span class="op">=</span> <span class="va">pbmc</span>, features<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CD3D"</span>, <span class="st">"SELL"</span>, <span class="st">"CREM"</span>, <span class="st">"CD8A"</span>, <span class="st">"GNLY"</span>, <span class="st">"CD79A"</span>, <span class="st">"FCGR3A"</span>, <span class="st">"CCL2"</span>, <span class="st">"PPBP"</span><span class="op">)</span>, </span>
+<span>            min.cutoff <span class="op">=</span> <span class="st">"q9"</span>, cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"lightgrey"</span>, <span class="st">"blue"</span><span class="op">)</span>, pt.size <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Multiple genes in feature plot</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">UMAP_1</span>, y <span class="op">=</span> <span class="va">UMAP_2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span></span>
-<span>        data <span class="op">=</span> <span class="va">mydata</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">UMAP_1</span>, y <span class="op">=</span> <span class="va">UMAP_2</span>, color <span class="op">=</span> <span class="va">rna_CD79A</span><span class="op">)</span>, </span>
-<span>        size <span class="op">=</span> <span class="fl">1</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_color_gradient</a></span><span class="op">(</span></span>
-<span>        <span class="st">"CD79A"</span>, low <span class="op">=</span> <span class="fu"><a href="https://scales.r-lib.org/reference/alpha.html">alpha</a></span><span class="op">(</span><span class="st">"grey"</span>, <span class="fl">0.1</span><span class="op">)</span>, high <span class="op">=</span> <span class="fu"><a href="https://scales.r-lib.org/reference/alpha.html">alpha</a></span><span class="op">(</span><span class="st">"purple"</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://eliocamp.github.io/ggnewscale/reference/new_scale.html">new_scale</a></span><span class="op">(</span><span class="st">"color"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span></span>
-<span>        data <span class="op">=</span> <span class="va">mydata</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">UMAP_1</span>, y <span class="op">=</span> <span class="va">UMAP_2</span>, color <span class="op">=</span> <span class="va">rna_CD8A</span><span class="op">)</span>, </span>
-<span>        size <span class="op">=</span> <span class="fl">1</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_color_gradient</a></span><span class="op">(</span></span>
-<span>        <span class="st">"CD8A"</span>, low <span class="op">=</span> <span class="fu"><a href="https://scales.r-lib.org/reference/alpha.html">alpha</a></span><span class="op">(</span><span class="st">"grey"</span>, <span class="fl">0.1</span><span class="op">)</span>, high <span class="op">=</span> <span class="fu"><a href="https://scales.r-lib.org/reference/alpha.html">alpha</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://eliocamp.github.io/ggnewscale/reference/new_scale.html">new_scale</a></span><span class="op">(</span><span class="st">"color"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span></span>
-<span>        data <span class="op">=</span> <span class="va">mydata</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">UMAP_1</span>, y <span class="op">=</span> <span class="va">UMAP_2</span>,color <span class="op">=</span> <span class="va">rna_CCR7</span><span class="op">)</span>, </span>
-<span>        size <span class="op">=</span> <span class="fl">1</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_color_gradient</a></span><span class="op">(</span></span>
-<span>        <span class="st">"CCR7"</span>, low <span class="op">=</span> <span class="fu"><a href="https://scales.r-lib.org/reference/alpha.html">alpha</a></span><span class="op">(</span><span class="st">"grey"</span>, <span class="fl">0.1</span><span class="op">)</span>, high <span class="op">=</span> <span class="fu"><a href="https://scales.r-lib.org/reference/alpha.html">alpha</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### UMAP</span></span>
+<span><span class="va">pbmc</span> <span class="op">&lt;-</span> <span class="va">pbmc</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu">RunUMAP</span><span class="op">(</span>reduction <span class="op">=</span> <span class="st">"harmony"</span>, dims <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span>
+<span><span class="co">## 20:32:13 UMAP embedding parameters a = 0.9922 b = 1.112</span></span>
+<span><span class="co">## Found more than one class "dist" in cache; using the first, from namespace 'BiocGenerics'</span></span>
+<span><span class="co">## Also defined by 'spam'</span></span>
+<span><span class="co">## 20:32:13 Read 2000 rows and found 20 numeric columns</span></span>
+<span><span class="co">## 20:32:13 Using Annoy for neighbor search, n_neighbors = 30</span></span>
+<span><span class="co">## Found more than one class "dist" in cache; using the first, from namespace 'BiocGenerics'</span></span>
+<span><span class="co">## Also defined by 'spam'</span></span>
+<span><span class="co">## 20:32:13 Building Annoy index with metric = cosine, n_trees = 50</span></span>
+<span><span class="co">## 0%   10   20   30   40   50   60   70   80   90   100%</span></span>
+<span><span class="co">## [----|----|----|----|----|----|----|----|----|----|</span></span>
+<span><span class="co">## **************************************************|</span></span>
+<span><span class="co">## 20:32:13 Writing NN index file to temp file /var/folders/2c/9q3pg2295195bp3gnrgbzrg40000gn/T//RtmpEU4UuJ/file6a6e46d2ac38</span></span>
+<span><span class="co">## 20:32:13 Searching Annoy index using 1 thread, search_k = 3000</span></span>
+<span><span class="co">## 20:32:13 Annoy recall = 100%</span></span>
+<span><span class="co">## 20:32:13 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30</span></span>
+<span><span class="co">## 20:32:14 Initializing from normalized Laplacian + noise (using RSpectra)</span></span>
+<span><span class="co">## 20:32:14 Commencing optimization for 500 epochs, with 83254 positive edges</span></span>
+<span><span class="co">## 20:32:16 Optimization finished</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">DimPlot</span><span class="op">(</span><span class="va">pbmc</span>, reduction <span class="op">=</span> <span class="st">"umap"</span>, group.by <span class="op">=</span> <span class="st">"stim"</span>, pt.size <span class="op">=</span> <span class="fl">.1</span>, split.by <span class="op">=</span> <span class="st">'stim'</span><span class="op">)</span></span>
+<span><span class="co">### identify shared cell types with clustering analysis</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">DimPlot</span><span class="op">(</span><span class="va">pbmc</span>, reduction <span class="op">=</span> <span class="st">"umap"</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, pt.size <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span></span>
+<span><span class="fu">plot_grid</span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
+</div>
+</section></section><section id="reference" class="level2"><h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<ul>
+<li><a href="https://portals.broadinstitute.org/harmony/index.html" class="uri">https://portals.broadinstitute.org/harmony/index.html</a></li>
+<li><a href="https://hbctraining.github.io/scRNA-seq_online/lessons/06a_integration_harmony.html">Single-cell RNA-seq: Integration with Harmony</a></li>
+</ul></section><section id="session-info" class="level2"><h2 class="anchored" data-anchor-id="session-info">Session info</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">## R version 4.3.1 (2023-06-16)</span></span>
+<span><span class="co">## Platform: aarch64-apple-darwin20 (64-bit)</span></span>
+<span><span class="co">## Running under: macOS Sonoma 14.1.2</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Matrix products: default</span></span>
+<span><span class="co">## BLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib </span></span>
+<span><span class="co">## LAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## locale:</span></span>
+<span><span class="co">## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## time zone: Asia/Singapore</span></span>
+<span><span class="co">## tzcode source: internal</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## attached base packages:</span></span>
+<span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## other attached packages:</span></span>
+<span><span class="co">##  [1] cowplot_1.1.1      here_1.0.1         lubridate_1.9.3    forcats_1.0.0     </span></span>
+<span><span class="co">##  [5] stringr_1.5.1      dplyr_1.1.4        purrr_1.0.2        readr_2.1.4       </span></span>
+<span><span class="co">##  [9] tidyr_1.3.0        tibble_3.2.1       ggplot2_3.4.4      tidyverse_2.0.0   </span></span>
+<span><span class="co">## [13] Seurat_5.0.1       SeuratObject_5.0.1 sp_2.1-1           MUDAN_0.1.0       </span></span>
+<span><span class="co">## [17] Matrix_1.6-3       harmony_1.1.0      Rcpp_1.0.11       </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## loaded via a namespace (and not attached):</span></span>
+<span><span class="co">##   [1] RcppAnnoy_0.0.21        splines_4.3.1           later_1.3.1            </span></span>
+<span><span class="co">##   [4] bitops_1.0-7            polyclip_1.10-6         XML_3.99-0.15          </span></span>
+<span><span class="co">##   [7] fastDummies_1.7.3       lifecycle_1.0.4         rprojroot_2.0.4        </span></span>
+<span><span class="co">##  [10] edgeR_4.0.1             globals_0.16.2          lattice_0.22-5         </span></span>
+<span><span class="co">##  [13] MASS_7.3-60             magrittr_2.0.3          limma_3.58.1           </span></span>
+<span><span class="co">##  [16] plotly_4.10.3           rmarkdown_2.25          yaml_2.3.7             </span></span>
+<span><span class="co">##  [19] httpuv_1.6.12           sctransform_0.4.1       spam_2.10-0            </span></span>
+<span><span class="co">##  [22] spatstat.sparse_3.0-3   reticulate_1.34.0       pbapply_1.7-2          </span></span>
+<span><span class="co">##  [25] DBI_1.1.3               RColorBrewer_1.1-3      abind_1.4-5            </span></span>
+<span><span class="co">##  [28] zlibbioc_1.48.0         Rtsne_0.16              BiocGenerics_0.48.1    </span></span>
+<span><span class="co">##  [31] RCurl_1.98-1.13         sva_3.50.0              GenomeInfoDbData_1.2.11</span></span>
+<span><span class="co">##  [34] IRanges_2.36.0          S4Vectors_0.40.1        ggrepel_0.9.4          </span></span>
+<span><span class="co">##  [37] irlba_2.3.5.1           listenv_0.9.0           spatstat.utils_3.0-4   </span></span>
+<span><span class="co">##  [40] genefilter_1.84.0       goftest_1.2-3           RSpectra_0.16-1        </span></span>
+<span><span class="co">##  [43] spatstat.random_3.2-1   annotate_1.80.0         fitdistrplus_1.1-11    </span></span>
+<span><span class="co">##  [46] parallelly_1.36.0       leiden_0.4.3.1          codetools_0.2-19       </span></span>
+<span><span class="co">##  [49] tidyselect_1.2.0        farver_2.1.1            matrixStats_1.1.0      </span></span>
+<span><span class="co">##  [52] stats4_4.3.1            spatstat.explore_3.2-5  jsonlite_1.8.7         </span></span>
+<span><span class="co">##  [55] ellipsis_0.3.2          progressr_0.14.0        ggridges_0.5.4         </span></span>
+<span><span class="co">##  [58] survival_3.5-7          tools_4.3.1             ica_1.0-3              </span></span>
+<span><span class="co">##  [61] glue_1.6.2              gridExtra_2.3           xfun_0.41              </span></span>
+<span><span class="co">##  [64] mgcv_1.9-0              MatrixGenerics_1.14.0   GenomeInfoDb_1.38.0    </span></span>
+<span><span class="co">##  [67] withr_2.5.2             fastmap_1.1.1           fansi_1.0.5            </span></span>
+<span><span class="co">##  [70] digest_0.6.33           timechange_0.2.0        R6_2.5.1               </span></span>
+<span><span class="co">##  [73] mime_0.12               colorspace_2.1-0        scattermore_1.2        </span></span>
+<span><span class="co">##  [76] tensor_1.5              spatstat.data_3.0-3     RSQLite_2.3.3          </span></span>
+<span><span class="co">##  [79] RhpcBLASctl_0.23-42     utf8_1.2.4              generics_0.1.3         </span></span>
+<span><span class="co">##  [82] data.table_1.14.8       httr_1.4.7              htmlwidgets_1.6.2      </span></span>
+<span><span class="co">##  [85] uwot_0.1.16             pkgconfig_2.0.3         gtable_0.3.4           </span></span>
+<span><span class="co">##  [88] blob_1.2.4              lmtest_0.9-40           XVector_0.42.0         </span></span>
+<span><span class="co">##  [91] htmltools_0.5.7         dotCall64_1.1-0         scales_1.2.1           </span></span>
+<span><span class="co">##  [94] Biobase_2.62.0          png_0.1-8               knitr_1.45             </span></span>
+<span><span class="co">##  [97] tzdb_0.4.0              reshape2_1.4.4          nlme_3.1-163           </span></span>
+<span><span class="co">## [100] cachem_1.0.8            zoo_1.8-12              KernSmooth_2.23-22     </span></span>
+<span><span class="co">## [103] vipor_0.4.5             parallel_4.3.1          miniUI_0.1.1.1         </span></span>
+<span><span class="co">## [106] AnnotationDbi_1.64.1    ggrastr_1.0.2           pillar_1.9.0           </span></span>
+<span><span class="co">## [109] grid_4.3.1              vctrs_0.6.4             RANN_2.6.1             </span></span>
+<span><span class="co">## [112] promises_1.2.1          xtable_1.8-4            cluster_2.1.4          </span></span>
+<span><span class="co">## [115] beeswarm_0.4.0          evaluate_0.23           cli_3.6.1              </span></span>
+<span><span class="co">## [118] locfit_1.5-9.8          compiler_4.3.1          rlang_1.1.2            </span></span>
+<span><span class="co">## [121] crayon_1.5.2            future.apply_1.11.0     labeling_0.4.3         </span></span>
+<span><span class="co">## [124] ggbeeswarm_0.7.2        plyr_1.8.9              stringi_1.8.1          </span></span>
+<span><span class="co">## [127] viridisLite_0.4.2       deldir_1.0-9            BiocParallel_1.36.0    </span></span>
+<span><span class="co">## [130] munsell_0.5.0           Biostrings_2.70.1       lazyeval_0.2.2         </span></span>
+<span><span class="co">## [133] spatstat.geom_3.2-7     RcppHNSW_0.5.0          hms_1.1.3              </span></span>
+<span><span class="co">## [136] patchwork_1.1.3         bit64_4.0.5             future_1.33.0          </span></span>
+<span><span class="co">## [139] KEGGREST_1.42.0         statmod_1.5.0           shiny_1.8.0            </span></span>
+<span><span class="co">## [142] ROCR_1.0-11             igraph_1.5.1            memoise_2.0.1          </span></span>
+<span><span class="co">## [145] bit_4.0.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

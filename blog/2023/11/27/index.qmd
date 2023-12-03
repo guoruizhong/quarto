@@ -1,0 +1,315 @@
+---
+title: "Practise Seurat for single cell data analysis"
+date: 2023-11-27
+date-modified: last-modified
+categories:
+  - seurat
+# image: umap.png
+description: Use ggplot2 to make nice coordinate, colors, and size for plots generated from seruat object
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    # fig.width = 6, 
+    # fig.height = 3.8,
+    fig.align = "center", 
+    # fig.retina = 3,
+    out.width = "100%", 
+    warning = FALSE,
+    # evaluate = FALSE,
+    collapse = TRUE
+)
+```
+
+##  Packages
+```{r}
+# Load packages
+library(Seurat)
+library(harmony)
+library(Matrix)
+library(tidyverse)
+library(here)
+library(httpgd)
+```
+
+## Retrieve data
+
+1. Down load data GSE154778_RAW.tar from [here](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE154778) to data and unzip it.
+2. Preprocess sequencing data
+
+```{r}
+#| eval: false
+#| 
+# Change working directory
+setwd("./learn/2023_scRNA/data/GSE154778_RAW/")
+# getwd()
+# Check files
+fs <- list.files("./", "^GSM")
+# Get the sample names
+samples <- str_split(fs, "_", simplify = TRUE)[, 2]
+unique(samples)
+# Create folders for each sample, and rename
+lapply(
+  unique(samples), function(x) {
+    y  <- fs[grepl(x, fs)]
+    folder <- paste(str_split(y[1], "_", simplify = TRUE)[, 2], collapse = "")
+    dir.create(folder, recursive = TRUE)
+    file.rename(y[1], file.path(folder, "barcodes.tsv.gz"))
+    # Note the seurat version to check features.tsv.gz or genes.tsv.gz
+    file.rename(y[2], file.path(folder, "features.tsv.gz")) 
+    file.rename(y[3], file.path(folder, "matrix.mtx.gz"))
+  }
+)
+```
+## Load batch data
+
+```{r}
+#| eval: false
+# Change working directory
+setwd("./learn/2023_scRNA/data/GSE154778_RAW/")
+folders <- list.files("./")
+folders
+sceList <- lapply(
+  folders, function(folder) {
+    CreateSeuratObject(counts = Read10X(folder), project = folder)
+  }
+)
+```
+## Merage samples data
+
+
+### Directly merge
+
+```{r}
+#| eval: false
+# Use Seurat merge
+sce.all <- merge(
+  x = sceList[[1]],
+  y = c(sceList[[2]], sceList[[3]], sceList[[4]], sceList[[5]], sceList[[6]], 
+  sceList[[7]], sceList[[8]], sceList[[9]], sceList[[10]], sceList[[11]], 
+  sceList[[12]], sceList[[13]], sceList[[14]], sceList[[5]], sceList[[16]]),
+  ## Sample names
+  add.cell.ids = folders,  
+  project = "scRNA"
+)
+saveRDS(sce.all, here("learn", "2023_scRNA", "sce.all.rds"))
+```
+#### Filter
+
+```{r}
+sce.all <- readRDS(here("learn", "2023_scRNA", "sce.all.rds"))
+head(sce.all@meta.data)
+table(sce.all@meta.data$orig.ident)
+# Mitochandrial genes
+sce.all[["percent.mt"]] <- PercentageFeatureSet(sce.all, pattern = "^MT-")
+# Ribonucleoprotein 
+sce.all[["percent.rp"]] <- PercentageFeatureSet(sce.all, pattern = "^RP")
+
+# Specific gene set
+HB.genes <- c("HBA1","HBA2","HBB","HBD","HBE1","HBG1","HBG2","HBM","HBQ1","HBZ") 
+# Red blood cells genes
+sce.all[["percent.HB"]]<-PercentageFeatureSet(sce.all, features = HB.genes)
+
+head(sce.all@meta.data)
+```
+
+```{r}
+sce <- subset(
+    sce.all, subset = nFeature_RNA > 500 &
+        nFeature_RNA < 5000 & percent.mt < 30
+)
+VlnPlot(sce, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3)
+```
+#### Seurat workflow
+
+```{r}
+sce <- NormalizeData(sce)
+sce <- FindVariableFeatures(sce, selection.method = "vst", nfeatures = 2000)
+all.genes <- rownames(sce)
+sce <- ScaleData(sce, features = all.genes)
+sce <- RunPCA(sce, npcs = 50)
+sce <- FindNeighbors(sce, dims = 1:30)
+sce <- FindClusters(sce, resolution = 0.5)
+sce <- RunUMAP(sce, dims = 1:30)
+# sce <- RunTSNE(sce, dims = 1:30)
+```
+#### UMAP
+
+```{r}
+# Rename sample
+sce@meta.data$sample[sce@meta.data$orig.ident == "K16733"] <- "P01"
+sce@meta.data$sample[sce@meta.data$orig.ident == "Y00006"] <- "P02"
+sce@meta.data$sample[sce@meta.data$orig.ident == "T2"] <- "P03"
+sce@meta.data$sample[sce@meta.data$orig.ident == "T3"] <- "P04"
+sce@meta.data$sample[sce@meta.data$orig.ident == "T4"] <- "P05"
+sce@meta.data$sample[sce@meta.data$orig.ident == "T5"] <- "P06"
+sce@meta.data$sample[sce@meta.data$orig.ident == "T6"] <- "P07"
+sce@meta.data$sample[sce@meta.data$orig.ident == "T8"] <- "P08"
+sce@meta.data$sample[sce@meta.data$orig.ident == "T9"] <- "P09"
+sce@meta.data$sample[sce@meta.data$orig.ident == "T10"] <- "P10"
+sce@meta.data$sample[sce@meta.data$orig.ident == "Y00008"] <- "MET01"
+sce@meta.data$sample[sce@meta.data$orig.ident == "Y00013"] <- "MET02"
+sce@meta.data$sample[sce@meta.data$orig.ident == "Y00014"] <- "MET03"
+sce@meta.data$sample[sce@meta.data$orig.ident == "Y00016"] <- "MET04"
+sce@meta.data$sample[sce@meta.data$orig.ident == "Y00019"] <- "MET05"
+sce@meta.data$sample[sce@meta.data$orig.ident == "Y00027"] <- "MET06"
+
+# Add group information
+sce@meta.data$group <- ifelse( grepl("MET",sce@meta.data$sample ) ,"MET" ,"PT" )
+```
+
+```{r}
+# Global
+p1 <- DimPlot(
+  sce, reduction = "umap", pt.size=0.5, label = F,repel = TRUE
+)
+# Sample
+p2 <- DimPlot(
+  sce, reduction = "umap",group.by = "sample", pt.size=0.5, label = F,
+  repel = TRUE
+)
+# group
+p3 <- DimPlot(
+  sce, reduction = "umap",group.by = "group", pt.size=0.5, label = F,
+  repel = TRUE
+)
+
+p1 + p2 +p3
+```
+### Harmony to remove batch effect
+
+
+```{r}
+sce2 <- sce  |>  RunHarmony("sample", plot_convergence = TRUE)
+sce2
+# Same workflow
+sce2 <- sce2  |>  
+  RunUMAP(reduction = "harmony", dims = 1:30)  |>  
+  FindNeighbors(reduction = "harmony", dims = 1:30)  |>  
+  FindClusters(resolution = 0.5)  |>  
+  identity()
+
+p11 <- DimPlot(sce2, reduction = "umap", pt.size=0.5, label = F,repel = TRUE)
+p22 <- DimPlot(sce2, reduction = "umap",group.by = "sample", pt.size=0.5, label = F,repel = TRUE)
+p33 <- DimPlot(sce2, reduction = "umap",group.by = "group", pt.size=0.5, label = F,repel = TRUE)
+p11 + p22 +p33
+```
+
+## Visualize marker genes
+
+```{r}
+Marker  <-  list(
+  Epi = c("EPCAM"),
+  Endo = c("PECAM1","PLVAP"),
+  Fibroblast = c("COL3A1","COL1A1","COL1A2"),
+  IM = c("PTPRC"),
+  B = c("CD79A","CD79B","CD19"),
+  T = c("CD3D","CD3E","CD8A","CD4"),
+  Myeloid = c("C1QA","C1QB","CD163","CD1C")
+)
+
+Marker2 = c(
+    "EPCAM",
+    "PECAM1","PLVAP",
+    "COL3A1","COL1A1","COL1A2",
+    'PTPRC',
+    "CD79A","CD79B","CD19",
+    "CD3D","CD3E","CD8A","CD4",
+    "C1QA","C1QB","CD163","CD1C"
+)
+```
+
+```{r}
+DotPlot(sce2, features = Marker2, group.by = "RNA_snn_res.0.5")
+```
+
+```{r}
+VlnPlot(sce2, features = Marker2, pt.size = 0, ncol = 5)
+```
+
+
+```{r}
+FeaturePlot(
+    sce2,
+    features = c(
+        "EPCAM", "PECAM1", "COL3A1", 'PTPRC',
+        "CD79A", "CD79B", "CD3D", "CD3E", "C1QA", "C1QB"
+    )
+)
+```
+## Annotate clusters
+
+### Using Vector
+
+```{r}
+new.cluster.ids <- c(
+  'Epi','Epi','Myeloid','Fibroblast','Epi','Epi','Fibroblast','Epi','T','Epi','Fibroblast','Epi','Endo','un','Epi','Epi','Fibroblast','un','Fibroblast'
+)
+names(new.cluster.ids) <- levels(sce2)
+
+sce2 <- RenameIdents(sce2, new.cluster.ids)
+
+# Add to metadata, for 
+sce2@meta.data$new.cluster.ids <- Idents(sce2)
+
+DimPlot(sce2, reduction = "umap", label = TRUE, pt.size = 0.5) +      NoLegend()
+```
+### Directly assign
+
+```{r}
+Idents(sce2) <- "seurat_clusters"
+sce2 <- RenameIdents(sce2,
+    "0" = "Epi",
+    "1" = "Epi",
+    "2" = "Myeloid",
+    "3" = "Fibroblast",
+    "4" = "Epi",
+    "5" = "Epi",
+    "6" = "Fibroblast",
+    "7" = "Epi",
+    "8" = "T",
+    "9" = "Epi",
+    "10" = "Fibroblast",
+    "11" = "Epi",
+    "12" = "Endo",
+    "13" = "un",
+    "14" = "Epi",
+    "15" = "Epi",
+    "16" = "Fibroblast",
+    "17" = "un",
+    "18" = "Fibroblast"
+)
+sce2@meta.data$celltype <- Idents(sce2)
+DimPlot(sce2, reduction = "umap",label = TRUE, pt.size = 0.5) + 
+  NoLegend()
+```
+### Add annotation to meta data
+
+```{r}
+sce2$Anno <- "NA"
+celltype <- c(
+    'Epi', 'Epi', 'Myeloid', 'Fibroblast', 'Epi', 'Epi', 'Fibroblast', 'Epi', 'T', 'Epi', 'Fibroblast', 'Epi', 'Endo', 'un', 'Epi', 'Epi', 'Fibroblast', 'un', 'Fibroblast'
+)
+
+# Note:cluster start from 0
+# For loop to add
+sub_length <- length(unique(sce2$seurat_clusters)) - 1
+for (i in 0:sub_length) {
+    sce2$Anno[sce2$seurat_clusters == i] = celltype[i + 1]
+}
+
+# UMAP
+DimPlot(
+    sce2, reduction = "umap", group.by = 'Anno', label = TRUE, pt.size = 0.5) +
+    NoLegend()
+
+
+DimPlot(
+  sce2, reduction = "umap",label = TRUE, pt.size = 0.5
+) + 
+  NoLegend()
+
+head(sce2@meta.data)
+
+# save(sce2, here("learn", "2023_scRNA", "sce.anno.RData"))
+```

@@ -1,5 +1,5 @@
 ---
-title: "Learning Seruat scRNA-seq data analysis"
+title: "Learning Seruat for scRNA-seq data analysis"
 date: 2023-11-25
 date-modified: last-modified
 categories:

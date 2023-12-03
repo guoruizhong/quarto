@@ -76,7 +76,7 @@ These are the collections of things that I beleived useful in my daily researh w
 - [Data Viz with Python and R](https://datavizpyr.com/category/r/)
 
 ## Bioinformatics Training
-
+- [Bioinformatics for Biologists](https://biocorecrg.github.io/CRG_Bioinformatics_for_Biologists/)
 - [National Cancer Institute: Bioinformatics Training & Education Program](https://bioinformatics.ccr.cancer.gov/btep/)
 - [High dimensional statistics with R Introduction to high-dimensional data](https://carpentries-incubator.github.io/high-dimensional-stats-r/aio/index.html)
 - [Bioinformatics Training at the Harvard Chan Bioinformatics Core](https://hbctraining.github.io/main/)
@@ -89,6 +89,7 @@ These are the collections of things that I beleived useful in my daily researh w
 - <https://morphoscape.wordpress.com/category/tech/>
 - <https://albert-rapp.de/>
 - <https://jokergoo.github.io/>
+- <>
 
 ## Books
 

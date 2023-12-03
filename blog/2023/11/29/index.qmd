@@ -1,5 +1,5 @@
 ---
-title: "Explained htop visually"
+title: "Visual the usage of CPU and memory with htop"
 date: 2023-11-29
 date-modified: last-modified
 categories:

@@ -41,3 +41,5 @@ toc-title: "Contents"
 
 
 - [Anne Carpenter - CellProfiler software- Image-Based Cell Profiling](https://www.criver.com/eureka/image-based-cell-profiling)
+- [Image-Based Cell Profiling and Data Analysis](https://stuartgregoryhiggins.com/research/image-analysis/)
+- [Analysis workflow for IMC data](https://bodenmillergroup.github.io/IMCDataAnalysis/)

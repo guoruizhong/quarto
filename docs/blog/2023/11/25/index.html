@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Guorui Zhong">
 <meta name="description" content="The package that must to learn for scRNA-seq data analysis.">
-<title>Guorui Zhong - Learning Seruat scRNA-seq data analysis</title>
+<title>Guorui Zhong - Learning Seruat for scRNA-seq data analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -168,7 +168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div> <!-- /container-fluid -->
     </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full"><div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Learning Seruat scRNA-seq data analysis</h1>
+      <h1 class="title">Learning Seruat for scRNA-seq data analysis</h1>
                   <div>
         <div class="description">
           The package that must to learn for scRNA-seq data analysis.
@@ -200,7 +200,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">Saturday, November 25, 2023</p>
+        <p class="date-modified">Saturday, December 2, 2023</p>
       </div>
     </div>
       
@@ -403,7 +403,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="co">##   ..@ commands    :List of 1</span></span>
 <span><span class="co">##   .. ..$ NormalizeData.RNA:Formal class 'SeuratCommand' [package "SeuratObject"] with 5 slots</span></span>
 <span><span class="co">##   .. .. .. ..@ name       : chr "NormalizeData.RNA"</span></span>
-<span><span class="co">##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: "2023-11-25 11:16:06"</span></span>
+<span><span class="co">##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: "2023-12-02 20:25:51"</span></span>
 <span><span class="co">##   .. .. .. ..@ assay.used : chr "RNA"</span></span>
 <span><span class="co">##   .. .. .. ..@ call.string: chr [1:2] "NormalizeData(pbmc, normalization.method = \"LogNormalize\", " "    scale.factor = 10000)"</span></span>
 <span><span class="co">##   .. .. .. ..@ params     :List of 5</span></span>
@@ -633,24 +633,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="co"># reticulate::py_install(packages = "umap-learn")</span></span>
 <span></span>
 <span><span class="va">pbmc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/RunUMAP.html">RunUMAP</a></span><span class="op">(</span><span class="va">pbmc</span>, dims <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">## 11:19:17 UMAP embedding parameters a = 0.9922 b = 1.112</span></span>
+<span><span class="co">## 20:29:00 UMAP embedding parameters a = 0.9922 b = 1.112</span></span>
 <span><span class="co">## Found more than one class "dist" in cache; using the first, from namespace 'spam'</span></span>
 <span><span class="co">## Also defined by 'BiocGenerics'</span></span>
-<span><span class="co">## 11:19:17 Read 2638 rows and found 10 numeric columns</span></span>
-<span><span class="co">## 11:19:17 Using Annoy for neighbor search, n_neighbors = 30</span></span>
+<span><span class="co">## 20:29:00 Read 2638 rows and found 10 numeric columns</span></span>
+<span><span class="co">## 20:29:00 Using Annoy for neighbor search, n_neighbors = 30</span></span>
 <span><span class="co">## Found more than one class "dist" in cache; using the first, from namespace 'spam'</span></span>
 <span><span class="co">## Also defined by 'BiocGenerics'</span></span>
-<span><span class="co">## 11:19:17 Building Annoy index with metric = cosine, n_trees = 50</span></span>
+<span><span class="co">## 20:29:00 Building Annoy index with metric = cosine, n_trees = 50</span></span>
 <span><span class="co">## 0%   10   20   30   40   50   60   70   80   90   100%</span></span>
 <span><span class="co">## [----|----|----|----|----|----|----|----|----|----|</span></span>
 <span><span class="co">## **************************************************|</span></span>
-<span><span class="co">## 11:19:17 Writing NN index file to temp file /var/folders/2c/9q3pg2295195bp3gnrgbzrg40000gn/T//RtmpIyCfN9/file172aa6c9d2f66</span></span>
-<span><span class="co">## 11:19:17 Searching Annoy index using 1 thread, search_k = 3000</span></span>
-<span><span class="co">## 11:19:17 Annoy recall = 100%</span></span>
-<span><span class="co">## 11:19:18 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30</span></span>
-<span><span class="co">## 11:19:18 Initializing from normalized Laplacian + noise (using RSpectra)</span></span>
-<span><span class="co">## 11:19:18 Commencing optimization for 500 epochs, with 105140 positive edges</span></span>
-<span><span class="co">## 11:19:21 Optimization finished</span></span>
+<span><span class="co">## 20:29:01 Writing NN index file to temp file /var/folders/2c/9q3pg2295195bp3gnrgbzrg40000gn/T//Rtmp5bG7lx/file682262109276</span></span>
+<span><span class="co">## 20:29:01 Searching Annoy index using 1 thread, search_k = 3000</span></span>
+<span><span class="co">## 20:29:01 Annoy recall = 100%</span></span>
+<span><span class="co">## 20:29:01 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30</span></span>
+<span><span class="co">## 20:29:02 Initializing from normalized Laplacian + noise (using RSpectra)</span></span>
+<span><span class="co">## 20:29:02 Commencing optimization for 500 epochs, with 105140 positive edges</span></span>
+<span><span class="co">## 20:29:05 Optimization finished</span></span>
 <span></span>
 <span><span class="co"># Note that you can set `label = TRUE` or use the LabelClusters function to help label</span></span>
 <span><span class="co"># Individual clusters</span></span>
@@ -848,7 +848,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">## R version 4.3.1 (2023-06-16)</span></span>
 <span><span class="co">## Platform: aarch64-apple-darwin20 (64-bit)</span></span>
-<span><span class="co">## Running under: macOS Sonoma 14.1.1</span></span>
+<span><span class="co">## Running under: macOS Sonoma 14.1.2</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Matrix products: default</span></span>
 <span><span class="co">## BLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib </span></span>

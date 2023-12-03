@@ -1,8 +1,10 @@
 {
-  "hash": "d3e2154b53668a7d7ce713e20b271c86",
+  "hash": "8cf9a2af40d53e8da9570ed95b30cbb2",
   "result": {
-    "markdown": "---\ntitle: \"Explained htop visually\"\ndate: 2023-11-29\ndate-modified: last-modified\ncategories:\n  - linux\nimage: htop.jpg\ndescription: htop is an interactive process viewer and system monitor.\n---\n\n\n\n\n\nThe content is credited from [here](https://codeahoy.com/2017/01/20/hhtop-explained-visually/)\n\nLet’s start with the upper section. \n\n![](htop_top.jpg)\n\nHere’s the lower section of htop.\n\n![](htop_bottom.jpg)",
-    "supporting": [],
+    "markdown": "---\ntitle: \"Visual the usage of CPU and memory with htop\"\ndate: 2023-11-29\ndate-modified: last-modified\ncategories:\n  - linux\nimage: htop.jpg\ndescription: htop is an interactive process viewer and system monitor.\n---\n\n\n\n\n\nThe content is credited from [here](https://codeahoy.com/2017/01/20/hhtop-explained-visually/)\n\nLet’s start with the upper section. \n\n![](htop_top.jpg)\n\nHere’s the lower section of htop.\n\n![](htop_bottom.jpg)",
+    "supporting": [
+      "index_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

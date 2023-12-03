@@ -11,6 +11,6 @@
 quarto render
 ### add to the local git repository
 git add .
-git commit -m "htop"
+git commit -m "Seurat plot customization"
 ### push to the remote repository
 git push -u quarto main

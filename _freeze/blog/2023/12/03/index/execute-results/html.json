@@ -1,0 +1,14 @@
+{
+  "hash": "85e990ac098c60d64f58f8ae37c4db95",
+  "result": {
+    "markdown": "---\ntitle: \"Working with R, Cairo graphics, custom fonts, and ggplot\"\ndate: 2023-12-03\ndate-modified: last-modified\ncategories:\n  - ggplot2\n  - cairo\n# image: htop.jpg\ndescription: The Cairo graphics library makes it easy to embed custom fonts in PDFs and create high resolution PNGs (with either AGG or Cairo).\nexecute: \n  eval: false\n---\n\n\n\n\nThis content is credited from [here](https://www.andrewheiss.com/blog/2017/09/27/working-with-r-cairo-graphics-custom-fonts-and-ggplot/index.html).\n\nR and ggplot can create fantastic graphs, but the default Arial/Helvetica font is too boring and standard. You can change the font used in a plot fairly easily three different ways:\n\n1. All of the built-in ggplot themes have a `base_family` argument for setting the overall font family for the plot\n2. `element_text()` has a `family` argument for changing fonts on individual plot elements\n3. `geom_text()` and `annotate(geom = \"text\", ...)` have a `family` argument for changing fonts on text layers\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# Save the plot as a PDF with ggsave and Cairo\n# R will want to autocomplete cairo_pdf to cairo_pdf() (note the parentheses)\n# This will not work with the parentheses; ensure there aren't any\nggsave(p, filename = \"example.pdf\", device = cairo_pdf,\n       width = 4, height = 3, units = \"in\")\n\n# You can also save the plot as a high resolution PNG using \n# AGG or Cairo\n# With {ragg}\nggsave(p, filename = \"whatever.png\",\n       device = ragg::agg_png, res = 300,\n       width = 4, height = 3, units = \"in\")\n\n# With Cairo\nggsave(p, filename = \"whatever.png\",\n       device = png, type = \"cairo\", dpi = 300,\n       width = 4, height = 3, units = \"in\")\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

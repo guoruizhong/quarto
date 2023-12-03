@@ -1,0 +1,639 @@
+---
+title: "Customization of Seurat plots using ggplot2"
+date: 2023-12-02
+date-modified: last-modified
+categories:
+  - seurat
+image: umap.png
+description: The DimPlot, FeaturePlot, Dotplot, VlnPlot, and DoHeatmap from Seurat can be further customized with ggplot2.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    # fig.width = 6, 
+    # fig.height = 3.8,
+    fig.align = "center", 
+    # fig.retina = 3,
+    out.width = "100%", 
+    warning = FALSE,
+    # evaluate = FALSE,
+    collapse = TRUE
+)
+```
+## Packages
+```{r}
+#| warning: false
+
+library(here)
+library(tidyverse)
+library(Seurat)
+library(SingleR)
+library(ggrepel)
+library(ggthemes)
+library(ggnewscale)
+library(tidyverse)
+library(scCustomize)
+library(viridis)
+library(RColorBrewer)
+library(gridExtra)
+library(ComplexHeatmap)
+library(dittoSeq)
+library(Scillus)
+```
+## UMAP
+
+### Load Seurat object
+```{r}
+#| warning: false
+
+### Load data
+load(here("learn", "2023_scRNA", "pbmc_tutorial_singleR.RData"))
+load(here("learn", "2023_scRNA", "sce.anno.RData"))
+load(here("learn", "2023_scRNA", "all_markers.RData"))
+top5 <- all_markers |> group_by(cluster) |> top_n(5, avg_log2FC)
+
+### Check data
+head(pbmc, 2)
+head(sce2, 2)
+head(top5)
+
+```
+### Default seurat UMAP
+
+```{r}
+# View the UMAP
+DimPlot(pbmc, group.by = c("seurat_clusters", "labels"), reduction = "umap")
+```
+
+### UMAP with ggplot2
+
+```{r}
+# Find the UMAP data
+str(pbmc)
+# Retrieve UMAP data
+# Retrieve the coordinates of each cell, and cluster, celltype information
+umap <- pbmc@reductions$umap@cell.embeddings |> 
+  as.data.frame() |> 
+  cbind(cell_type = pbmc@meta.data$labels)
+
+head(umap)
+```
+```{r}
+# Define the colors
+allcolour <- c(
+    "#DC143C","#0000FF","#20B2AA","#FFA500","#9370DB","#98FB98","#F08080",
+    "#1E90FF","#7CFC00","#FFFF00", "#808000","#FF00FF","#FA8072","#7B68EE",
+    "#9400D3","#800080","#A0522D","#D2B48C","#D2691E","#87CEEB","#40E0D0",
+    "#5F9EA0","#FF1493","#0000CD","#008B8B","#FFE4B5","#8A2BE2","#228B22",
+    "#E9967A","#4682B4","#32CD32","#F0E68C","#FFFFE0","#EE82EE","#FF6347",
+    "#6A5ACD","#9932CC","#8B008B","#8B4513","#DEB887"
+)
+# ggplot2
+p <- ggplot(umap, aes(x = UMAP_1, y = UMAP_2, color = cell_type)) +
+    geom_point(size = 1, alpha = 1) +
+    ### MAP cluster with color
+    scale_color_manual(values = allcolour) +
+    ### Axis annotation
+    geom_segment(
+        aes(
+            x = min(umap$UMAP_1) , y = min(umap$UMAP_2) ,
+            xend = min(umap$UMAP_1) +3, yend = min(umap$UMAP_2)
+        ), colour = "black", linewidth = 1,arrow = arrow(length = unit(0.3,"cm"))
+    ) + 
+    geom_segment(
+        aes(
+            x = min(umap$UMAP_1)  , y = min(umap$UMAP_2)  ,
+            xend = min(umap$UMAP_1) , yend = min(umap$UMAP_2) + 3),
+            colour = "black", linewidth = 1,arrow = arrow(length = unit(0.3,"cm"))
+    ) +
+    annotate(
+        "text", x = min(umap$UMAP_1) +1.5, y = min(umap$UMAP_2) -1, 
+        label = "UMAP_1", color="black",size = 3, fontface="bold"
+    ) + 
+    annotate(
+        "text", x = min(umap$UMAP_1) -1, y = min(umap$UMAP_2) + 1.5, 
+        label = "UMAP_2", color="black",size = 3, fontface="bold" ,angle=90
+    ) + 
+    theme(
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_blank(),
+        axis.title = element_blank(),
+        axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        panel.background = element_rect(fill = "white"),
+        plot.background = element_rect(fill = "white"),
+        legend.title = element_blank(), 
+        legend.key=element_rect(fill= "white"),
+        legend.text = element_text(size = 20),
+        legend.key.size=unit(1, "cm")
+    ) +
+    ### legend label size
+    guides(color = guide_legend(override.aes = list(size=5)))
+### View it
+p
+```
+
+### Annotate cell type on UMAP
+
+```{r}
+# Calcualte the median coordinates of each cluster
+cell_type_med <- umap |>
+  group_by(cell_type) |>
+  summarise(UMAP_1 = median(UMAP_1),
+    UMAP_2 = median(UMAP_2)
+  )
+# Annotation
+p + geom_label_repel(
+    aes(label = cell_type, size = 20), fontface = "bold", data = cell_type_med,
+    point.padding = unit(0.5, "lines")
+)
+```
+## FeaturePlot
+
+### Default Seurat FeaturePlot
+```{r}
+DimPlot(pbmc, label = TRUE)|FeaturePlot(pbmc, features = "CD79A")
+FeaturePlot(pbmc, features = c("CD79A", "CD8A"), blend=TRUE)
+FeaturePlot(pbmc, features = c("CD79A","CD79B"), blend=TRUE)
+FeaturePlot(pbmc, features = c("CD79A","CD79B", "CD68", "CD163"))
+```
+
+### Feature with ggplot2
+
+```{r}
+mydata  <- FetchData(
+    pbmc,
+    vars = c("rna_CD79A", "rna_CD8A", "rna_CCR7", "UMAP_1", "UMAP_2")
+)
+head(mydata)
+
+### Single gene
+mydata |>
+    ggplot(aes(x = UMAP_1, y = UMAP_2)) +
+    geom_point(
+        data = mydata, aes(x = UMAP_1, y = UMAP_2,
+        color = rna_CD79A), size = 1
+    ) +
+    ### Increase the transprancy of gray dots
+    scale_color_gradient(
+        "rna_CD79A", low = alpha("grey", 0.1), 
+        high = alpha("red", 1)
+    ) +
+    ### Density
+    stat_density2d(aes(colour=rna_CD79A))
+```
+
+```{r}
+### Multiple genes in feature plot
+ggplot(mydata, aes(x = UMAP_1, y = UMAP_2)) +
+    geom_point(
+        data = mydata, aes(x = UMAP_1, y = UMAP_2, color = rna_CD79A), 
+        size = 1
+    ) +
+    scale_color_gradient(
+        "CD79A", low = alpha("grey", 0.1), high = alpha("purple", 1)
+    ) +
+    new_scale("color") +
+    geom_point(
+        data = mydata, aes(x = UMAP_1, y = UMAP_2, color = rna_CD8A), 
+        size = 1
+    ) +
+    scale_color_gradient(
+        "CD8A", low = alpha("grey", 0.1), high = alpha("red", 1)
+    ) +
+    new_scale("color") +
+    geom_point(
+        data = mydata, aes(x = UMAP_1, y = UMAP_2,color = rna_CCR7), 
+        size = 1
+    ) +
+    scale_color_gradient(
+        "CCR7", low = alpha("grey", 0.1), high = alpha("green", 1)
+    ) +
+    theme_bw()
+```
+
+## Dotplot
+
+
+### Deafult Dotplot within Seurat
+```{r}
+# Find marker genes
+# all_markers <- FindAllMarkers(object = sce2)
+# save(all_markers,file = here("learn", "2023_scRNA", "all_markers.RData"))
+
+DotPlot(sce2,features = unique(top5$gene) ,assay='RNA')
+```
+
+```{r}
+# Optimize colors, size, and direction
+p1 <- DotPlot(sce2, features = unique(top5$gene), assay = "RNA") + 
+  coord_flip() + 
+  labs(x = NULL,y = NULL) + 
+  guides(size = guide_legend("Percent Expression"))+
+  scale_color_gradientn(colours = c("#330066", "#336699", "#66CC66", "#FFCC33")) +
+  theme(
+    panel.grid = element_blank(), 
+    axis.text.x = element_text(angle = 45, hjust = 0.5,vjust = 0.5)
+  )
+p1
+```
+
+### Dotplot with Complexheatmap
+
+We can refer to details from [here](https://divingintogeneticsandgenomics.com/post/clustered-dotplot-for-single-cell-rnaseq/) for detailed parameters customization.
+
+```{r}
+# Retrieve data
+df <- p1$data
+head(df)
+
+# The matrix for the scaled expression 
+exp_mat <-df |> 
+  select(-pct.exp, -avg.exp) |>  
+  pivot_wider(names_from = id, values_from = avg.exp.scaled) |> 
+  as.data.frame()
+row.names(exp_mat) <- exp_mat$features.plot
+exp_mat <- exp_mat[, -1] |> as.matrix()
+head(exp_mat, 2)
+
+## The matrix for the percentage of cells express a gene
+percent_mat <- df |> 
+  select(-avg.exp, -avg.exp.scaled) |>  
+  pivot_wider(names_from = id, values_from = pct.exp) |> 
+  as.data.frame()
+ 
+row.names(percent_mat) <- percent_mat$features.plot  
+percent_mat <- percent_mat[, -1] |> as.matrix()
+head(percent_mat, 2)
+```
+
+```{r}
+#| eval: false
+
+# Complexheatmap
+## any value that is greater than 2 will be mapped to yellow
+col_fun <-  circlize::colorRamp2(c(-1, 0, 2), viridis(20)[c(1,10, 20)])
+cell_fun <- function(j, i, x, y, w, h, fill) {
+    grid.rect(x = x, y = y, width = w, height = h,
+        gp = gpar(col = NA, fill = NA))
+    grid.circle(x = x, y = y, r = percent_mat[i, j] / 100 * min(unit.c(w, h)),
+        gp = gpar(fill = col_fun(exp_mat[i, j]), col = NA))
+}
+
+# also do a kmeans clustering for the genes with k = 4
+Heatmap(
+    exp_mat,
+    heatmap_legend_param = list(title = "Average Expression"),
+    column_title = "clustered dotplot",
+    col = col_fun,
+    rect_gp = gpar(type = "none"),
+    cell_fun = cell_fun,
+    row_names_gp = gpar(fontsize = 3),
+    # row_km = 4,
+    border = "black"
+)
+```
+
+```{r}
+#| eval: false
+
+# Annotate celltype
+colnames(exp_mat)
+cluster_anno <- c("Epi", "Myeloid", "Fibroblast", "T", "Endo", "un")
+
+column_ha <- HeatmapAnnotation(
+    cluster_anno = cluster_anno,
+    col = list(cluster_anno = setNames(brewer.pal(6, "Paired"), unique(cluster_anno))
+    ),
+    na_col = "grey"
+)
+
+Heatmap(
+    exp_mat,
+    heatmap_legend_param = list(title = "Average Expression"),
+    column_title = "clustered dotplot",
+    col = col_fun,
+    rect_gp = gpar(type = "none"),
+    cell_fun = cell_fun,
+    row_names_gp = gpar(fontsize = 5),
+    # row_km = 4,
+    border = "black",
+    top_annotation = column_ha
+)
+
+```
+
+```{r}
+#| eval: false
+
+# Add legend
+layer_fun <- function(j, i, x, y, w, h, fill) {
+    grid.rect(
+        x = x, y = y, width = w, height = h, gp = gpar(col = NA, fill = NA)
+    )
+    grid.circle(
+        x = x, y = y, r = pindex(percent_mat, i, j) / 100 * unit(2, "mm"),
+        gp = gpar(fill = col_fun(pindex(exp_mat, i, j)), col = NA)
+    )
+}
+
+lgd_list = list(
+    Legend(
+        labels = c(0, 0.25, 0.5, 0.75, 1), title = "Percent Expressed",
+        graphics = list(
+            function(x, y, w, h) grid.circle(x = x, y = y, r = 0 * unit(2, "mm"),
+                gp = gpar(fill = "black")),
+            function(x, y, w, h) grid.circle(x = x, y = y, r = 0.25 * unit(2, "mm"),
+                gp = gpar(fill = "black")),
+            function(x, y, w, h) grid.circle(x = x, y = y, r = 0.5 * unit(2, "mm"),
+                gp = gpar(fill = "black")),
+            function(x, y, w, h) grid.circle(x = x, y = y, r = 0.75 * unit(2, "mm"),
+                gp = gpar(fill = "black")),
+            function(x, y, w, h) grid.circle(x = x, y = y, r = 1 * unit(2, "mm"),
+                gp = gpar(fill = "black"))
+        )
+    )
+)
+
+hp <- Heatmap(
+    exp_mat,
+    heatmap_legend_param = list(title = "expression"),
+    column_title = "clustered dotplot",
+    col = col_fun,
+    rect_gp = gpar(type = "none"),
+    layer_fun = layer_fun,
+    row_names_gp = gpar(fontsize = 5),
+    # row_km = 4,
+    border = "black",
+    top_annotation = column_ha
+)
+
+draw(hp, annotation_legend_list = lgd_list)
+```
+
+### Dotplot with scCustomize
+
+```{r}
+Clustered_DotPlot(seurat_object = sce2, features = unique(top5$gene))
+
+my36colors <- c(
+    '#E5D2DD', '#53A85F', '#F1BB72', '#F3B1A0', '#D6E7A3', '#57C3F3', '#476D87',
+    '#E95C59', '#E59CC4', '#AB3282', '#23452F', '#BD956A', '#8C549C', '#585658',
+    '#9FA3A8', '#E0D4CA', '#5F3D69', '#C5DEBA', '#58A4C3', '#E4C755', '#F7F398',
+    '#AA9A59', '#E63863', '#E39A35', '#C1E6F3', '#6778AE', '#91D0BE', '#B53E2B',
+    '#712820', '#DCC1DD', '#CCE0F5', '#CCC9E6', '#625D9E', '#68A180', '#3A6963',
+    '#968175'
+)
+
+Clustered_DotPlot(
+    seurat_object = sce2,
+    colors_use_exp = c('#330066', '#336699', '#66CC66', '#FFCC33'),
+    colors_use_idents = my36colors,
+    features = unique(top5$gene)
+)
+```
+
+## DoHeatmap
+
+### Deafult DoHeatmap with Seurat 
+
+```{r}
+DoHeatmap(sce2, top5$gene)
+```
+
+```{r}
+#| eval: false
+#| 
+# Customize label and color
+DoHeatmap(
+    sce2,
+    label = F, # remove label
+    features = as.character(unique(top5$gene)),
+    group.by = "celltype",
+    assay = "RNA",
+    group.colors = c(
+        "#C77CFF", "#7CAE00", "#00BFC4", "#F8766D", "#AB82FF", "#90EE90",
+        "#00CD00", "#008B8B", "#FFA500"
+    ) # Group color
+) +
+    scale_fill_gradientn(
+        colors = c("navy", "white", "firebrick3")
+    ) # heatmap color
+
+```
+
+### Complexheatmap or pheatmap
+```{r}
+# Retrieve matix
+# mat <- GetAssayData(pbmc,slot = "scale.data")
+```
+
+### dittoSeq
+
+```{r}
+#| eval: false
+# BiocManager::install("dittoSeq")
+
+dittoHeatmap(sce2, top5$gene,
+             annot.by = c("celltype", "sample","AUCell"))
+```
+### scillus
+
+```{r}
+#| eval: false
+#| 
+# devtools::install_github("xmc811/Scillus", ref = "development")
+# Use same colors of umap  
+my36colors <-c(
+  '#E5D2DD', '#53A85F', '#F1BB72', '#F3B1A0', '#D6E7A3', '#57C3F3', '#476D87',
+  '#E95C59', '#E59CC4', '#AB3282', '#23452F', '#BD956A', '#8C549C', '#585658',
+  '#9FA3A8', '#E0D4CA', '#5F3D69', '#C5DEBA', '#58A4C3', '#E4C755', '#F7F398',
+  '#AA9A59', '#E63863', '#E39A35', '#C1E6F3', '#6778AE', '#91D0BE', '#B53E2B',
+  '#712820', '#DCC1DD', '#CCE0F5',  '#CCC9E6', '#625D9E', '#68A180', '#3A6963',
+  '#968175'
+)
+
+plot_heatmap(dataset = sce2, 
+             markers = top5$gene,
+             sort_var = c("celltype","sample"),
+             anno_var = c("celltype","sample","percent.mt","AUCell"),
+             anno_colors = list(
+                "Set2",  # RColorBrewer palette
+                my36colors,  # color vecto
+                "Reds",
+                "Greens")
+)
+```
+
+## VlnPlot
+
+### Default Seurat VlnPlot
+
+```{r}
+# Few marker
+VlnPlot(sce2, features = c("CD3D","SPP1"))
+
+# All marker genes
+# VlnPlot(sce2, features = top5$gene)
+```
+
+### Stacked Vlnplot
+```{r}
+a <- VlnPlot(sce2, features = top5$gene, stack = TRUE, sort = TRUE) +
+  theme(legend.position = "none") + ggtitle("Identity on y-axis")
+
+# Flip
+b <- VlnPlot(sce2, features = top5$gene, stack = TRUE, sort = TRUE, flip = TRUE) +
+  theme(legend.position = "none") + ggtitle("Identity on x-axis")
+
+a + b
+```
+
+```{r}
+#| eval: false
+#| 
+# Optimize colors, size and direction
+my36colors <- c(
+    '#E5D2DD', '#53A85F', '#F1BB72', '#F3B1A0', '#D6E7A3', '#57C3F3', '#476D87',
+    '#E95C59', '#E59CC4', '#AB3282', '#23452F', '#BD956A', '#8C549C', '#585658',
+    '#9FA3A8', '#E0D4CA', '#5F3D69', '#C5DEBA', '#58A4C3', '#E4C755', '#F7F398',
+    '#AA9A59', '#E63863', '#E39A35', '#C1E6F3', '#6778AE', '#91D0BE', '#B53E2B',
+    '#712820', '#DCC1DD', '#CCE0F5', '#CCC9E6', '#625D9E', '#68A180', '#3A6963',
+    '#968175'
+)
+
+VlnPlot(
+    sce2, 
+    features = top_marker$gene,
+    stack = TRUE,
+    sort = TRUE,
+    cols = my36colors,
+    split.by = "celltype", # color for each cluster
+    flip = TRUE
+  ) +
+    theme(legend.position = "none") +
+    ggtitle("Identity on x-axis")
+```
+
+### VlnPlot with ggplot2
+
+```{r}
+#| eval: false
+#| 
+vln.dat  <- FetchData(sce2, c(top_marker$gene,"celltype","seurat_clusters"))
+
+vln.dat$Cell <- rownames(vln.dat)
+vln.dat.melt <- reshape2::melt(vln.dat, id.vars = c("Cell","seurat_clusters"), 
+                               measure.vars = top_marker$gene,
+                               variable.name = "gene", 
+                               value.name = "Expr") |>
+  group_by(seurat_clusters,gene) |> 
+  mutate(fillcolor=mean(Expr))
+
+# Plot 
+ggplot(vln.dat.melt, aes(factor(seurat_clusters), Expr, fill = gene)) +
+  geom_violin(scale = "width", adjust = 1, trim = TRUE) +
+  facet_grid(rows = vars(gene), scales = "free", switch = "y") 
+```
+```{r}
+#| eval: false
+#| 
+# Customize
+p1 <- ggplot(vln.dat.melt, aes(gene, Expr, fill = gene)) +
+  geom_violin(scale = "width", adjust = 1, trim = TRUE) +
+  scale_y_continuous(expand = c(0, 0), position="right", labels = function(x)
+    c(rep(x = "", times = length(x)-2), x[length(x) - 1], "")) +
+  facet_grid(rows = vars(seurat_clusters), scales = "free", switch = "y") +
+  scale_fill_manual(values = my36colors) + 
+  theme_cowplot(font_size = 12) +
+  theme(legend.position = "none", panel.spacing = unit(0, "lines"),
+        plot.title = element_text(hjust = 0.5),
+        panel.background = element_rect(fill = NA, color = "black"),
+        plot.margin = margin(7, 7, 0, 7, "pt"),
+        strip.background = element_blank(),
+        strip.text = element_text(face = "bold"),
+        strip.text.y.left = element_text(angle = 0),
+        axis.title.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, color = "black")
+        ) +
+  ggtitle("Feature on x-axis with annotation") + ylab("Expression Level")
+p1
+```
+
+
+```{r}
+#| eval: false
+#| 
+
+p2 <- ggplot(vln.dat.melt, aes(gene, Expr, fill = gene)) +
+  geom_violin(scale = "width", adjust = 1, trim = TRUE) +
+  scale_y_continuous(expand = c(0, 0), position="right", labels = function(x)
+    c(rep(x = "", times = length(x)-2), x[length(x) - 1], "")) +
+  facet_grid(rows = vars(seurat_clusters), scales = "free", switch = "y") +
+  scale_fill_manual(values = my36colors) + 
+  theme_cowplot(font_size = 12) +
+  theme(legend.position = "none", panel.spacing = unit(0, "lines"),
+        plot.title = element_text(hjust = 0.5),
+        panel.background = element_rect(fill = NA, color = "black"),
+        plot.margin = margin(7, 7, 0, 7, "pt"),
+        strip.background = element_blank(),
+        strip.text = element_text(face = "bold"),
+        strip.text.y.left = element_text(angle = 0),
+        axis.title.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank()
+  ) +
+  ggtitle("Feature on x-axis with annotation") + ylab("Expression Level")
+p2
+```
+
+```{r}
+#| eval: false
+#| 
+# Create grouping info
+df <- data.frame(x = levels(vln.dat.melt$gene), 
+                 group = c("A","A","B","B","B","B","B","C","C","C","D","D","D",
+                           "D","D","D","D","D"), 
+                 stringsAsFactors = FALSE)
+df$x <- factor(df$x, levels = levels(vln.dat.melt$gene))
+df$group <- factor(df$group)
+
+levels(df$group) = c("ECM-receptor interaction", "PI3K-Akt signaling pathway", 
+                     "MAPK signaling pathway", "Cell adhesion molecules")
+
+color <- c("cyan", "pink", "green", "darkorange")
+
+p3 <- ggplot(df, aes(x = x, y = 1, fill = group)) + geom_tile() + theme_bw(base_size = 12) +
+  scale_fill_manual(values = my36colors) + scale_y_continuous(expand = c(0, 0)) +
+  guides(fill = guide_legend(direction = "vertical", label.position = "right",
+                             title.theme = element_blank(), keyheight = 0.5, nrow = 2)) +
+  theme(legend.position = "bottom",
+        legend.justification = "left",
+        legend.margin = margin(0,0,0,0),
+        legend.box.margin = margin(-10,5,0,0),
+        panel.spacing = unit(0, "lines"),
+        panel.background = element_blank(),
+        panel.border = element_blank(),
+        plot.background = element_blank(),
+        plot.margin = margin(0, 7, 7, 7, "pt"),
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, color = "black"),
+        axis.title.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_blank()) + xlab("Feature")
+p3
+```
+
+```{r}
+#| eval: false
+#| 
+# Use plot_grid to join plots
+plot_grid(p2, p3, ncol = 1, rel_heights = c(0.78, 0.22), align = "v", axis = "lr")
+```
+
+## Reference
+
+1. <https://github.com/ycl6/StackedVlnPlot>
+2. <https://scillus.netlify.app/vignettes/plotting.html>
+3. <https://bioconductor.org/packages/devel/bioc/vignettes/dittoSeq/inst/doc/dittoSeq.html>
