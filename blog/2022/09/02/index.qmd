@@ -27,7 +27,7 @@ Treatment <- read_plates(here("learn", "data", "plater1.csv"),
 )
 Treatment
 
-Group <- read_plates("plater2.csv",
+Group <- read_plates(here("learn", "data", "plater2.csv"),
     plate_names = "ZG22006",
     well_ids_column = "Well.ID"
 )
