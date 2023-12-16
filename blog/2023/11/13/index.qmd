@@ -27,7 +27,7 @@ The code is adapted from [here](https://github.com/duzzio/Superplots_R_script)
 
 ```{r}
 ### Load packages
-pacman::p_load(ggplot2, dplyr, ggpubr, ggbeeswarm, readxl, rstatix)
+pacman::p_load(ggplot2, dplyr, ggpubr, ggbeeswarm, readxl, rstatix, here)
 
 ### Import dataset
 dataset <- read_excel(here("learn", "Superplots_R_script", "data.xlsx"))

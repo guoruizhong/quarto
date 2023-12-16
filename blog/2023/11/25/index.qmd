@@ -8,6 +8,11 @@ categories:
   - scRNA-seq
 image: umap.png
 description: The package that must to learn for scRNA-seq data analysis.
+execute: 
+  freeze: true
+#   # echo: false
+  warning: false
+#   eval: false
 ---
 
 ```{r setup, include=FALSE}
@@ -36,7 +41,7 @@ library(ggrepel)
 library(patchwork)
 
 # Load PBMC dataset
-pbmc_data <- Read10X(data.dir = "./learn/pbmc3k/hg19/")
+pbmc_data <- Read10X(data.dir = "./learn/2023_scRNA_Seurat/pbmc3k/hg19/")
 
 # Initialize the seurat boject witht raw (non-normalized data)
 pbmc <- CreateSeuratObject(
