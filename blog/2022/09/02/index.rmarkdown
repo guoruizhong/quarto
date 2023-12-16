@@ -15,7 +15,7 @@ knitr::opts_chunk$set(fig.width = 6, fig.height = 3.8,
 ```
 
 ```{r}
-pacman::p_load(plater)
+pacman::p_load(plater, tidyverse, here)
 ```
 
 ```{r}

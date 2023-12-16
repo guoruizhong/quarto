@@ -13,7 +13,7 @@ categories:
 ::: {.cell layout-align="center"}
 
 ```{.r .cell-code}
-pacman::p_load(plater)
+pacman::p_load(plater, tidyverse, here)
 ```
 :::
 
