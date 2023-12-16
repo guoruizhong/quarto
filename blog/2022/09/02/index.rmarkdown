@@ -20,7 +20,7 @@ pacman::p_load(plater)
 
 ```{r}
 # check_plater_format("data/palter.csv", sep = ",")
-Treatment <- read_plates("plater1.csv",
+Treatment <- read_plates(here("learn", "data", "plater1.csv"),
     plate_names = "ZG22006",
     well_ids_column = "Well.ID"
 )
