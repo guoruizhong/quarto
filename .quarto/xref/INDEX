@@ -829,5 +829,11 @@
   },
   "blog/2023/12/03/index.qmd": {
     "index.html": "b3ac28df"
+  },
+  "python/index.qmd": {
+    "index.html": "7a58b22e"
+  },
+  "r/index.qmd": {
+    "index.html": "5867a02c"
   }
 }

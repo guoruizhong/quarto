@@ -1,17 +1,19 @@
 ---
-title: "How to plot scatter plot with truncated axis"
+title: "Make scatter plot with truncated axis"
 date: 2022-05-02
-description: ""
+description: "Make scatter plot more beautiful with truncated axis"
 image: truncated.png
 categories:
-  - barplot
+  - r
+  - ggplot2
 ---
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(fig.width = 6, fig.height = 3.8,
+knitr::opts_chunk$set(
+  # fig.width = 6, fig.height = 3.8,
                       fig.align = "center", fig.retina = 3,
-                      out.width = "85%", collapse = TRUE)
+                      out.width = "100%", collapse = TRUE)
 ```
 
 
@@ -20,10 +22,11 @@ knitr::opts_chunk$set(fig.width = 6, fig.height = 3.8,
 #| warning: false
 library(readxl)
 library(tidyverse)
+library(here)
 library(ggh4x)
 library(latex2exp)
 
-fig1a <- read_excel("data.xlsx", sheet = "Figure_1A")
+fig1a <- read_excel(here("learn", "data", "data.xlsx"), sheet = "Figure_1A")
 fig1a %>% head()
 ```
 ```{r}
@@ -105,3 +108,4 @@ p2 <- fig1a %>%
 library(patchwork)
 p1 + p2 + labs(x = "Lean mass (g)") + theme(axis.title.x = element_text(hjust = -0.12))
 ```
+

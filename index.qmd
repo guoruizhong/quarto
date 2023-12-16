@@ -2,7 +2,7 @@
 title: "Guorui Zhong"
 about:
   template: jolla
-  image: /files/profiles/profile.jpg
+  image: /files/profiles/avatar.png
   links:
     - icon: twitter
       text: twitter

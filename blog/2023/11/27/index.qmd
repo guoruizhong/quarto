@@ -4,8 +4,13 @@ date: 2023-11-27
 date-modified: last-modified
 categories:
   - seurat
-# image: umap.png
-description: Use ggplot2 to make nice coordinate, colors, and size for plots generated from seruat object
+image: seurat_banner.jpg
+description: Practise scRNA data analysis with Genome Medicine using Seurat package.
+execute: 
+  freeze: true
+#   # echo: false
+  warning: false
+#   eval: false
 ---
 
 ```{r setup, include=FALSE}
@@ -34,14 +39,16 @@ library(httpgd)
 
 ## Retrieve data
 
-1. Down load data GSE154778_RAW.tar from [here](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE154778) to data and unzip it.
-2. Preprocess sequencing data
+- The source data is from [Single-cell transcriptome analysis of tumor and stromal compartments of pancreatic ductal adenocarcinoma primary tumors and metastatic lesions](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-020-00776-9)
+- Down load data GSE154778_RAW.tar from [here](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE154778) to data and unzip it.
+- Preprocess sequencing data
 
+![](practise.png)
 ```{r}
 #| eval: false
 #| 
 # Change working directory
-setwd("./learn/2023_scRNA/data/GSE154778_RAW/")
+setwd("./learn/2023_scRNA_Seurat/data/GSE154778_RAW/")
 # getwd()
 # Check files
 fs <- list.files("./", "^GSM")
@@ -66,7 +73,7 @@ lapply(
 ```{r}
 #| eval: false
 # Change working directory
-setwd("./learn/2023_scRNA/data/GSE154778_RAW/")
+setwd("./learn/2023_scRNA_Seurat/data/GSE154778_RAW/")
 folders <- list.files("./")
 folders
 sceList <- lapply(
@@ -92,12 +99,12 @@ sce.all <- merge(
   add.cell.ids = folders,  
   project = "scRNA"
 )
-saveRDS(sce.all, here("learn", "2023_scRNA", "sce.all.rds"))
+saveRDS(sce.all, here("learn", "2023_scRNA_Seurat", "sce.all.rds"))
 ```
 #### Filter
 
 ```{r}
-sce.all <- readRDS(here("learn", "2023_scRNA", "sce.all.rds"))
+sce.all <- readRDS(here("learn", "2023_scRNA_Seurat", "sce.all.rds"))
 head(sce.all@meta.data)
 table(sce.all@meta.data$orig.ident)
 # Mitochandrial genes

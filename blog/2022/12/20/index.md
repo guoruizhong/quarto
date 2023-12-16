@@ -277,3 +277,4 @@ linters: with_defaults(
 
 - [Quick list of useful R packages](https://support.posit.co/hc/en-us/articles/201057987-Quick-list-of-useful-R-packages)
 - [Managing R with .Rprofile, .Renviron, Rprofile.site, Renviron.site, rsession.conf, and repos.conf](https://support.posit.co/hc/en-us/articles/360047157094-Managing-R-with-Rprofile-Renviron-Rprofile-site-Renviron-site-rsession-conf-and-repos-conf)
+- [My Fully Remote Research Workflow in VS Code](https://medium.com/@parasu/my-fully-remote-research-workflow-in-vs-code-96bfbdc8d959)

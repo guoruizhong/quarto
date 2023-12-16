@@ -1,10 +1,46 @@
 ---
 title: Spatial
-date: 2019-09-09
-title-block-banner: "#212529"
+date: 2023-12-01
 date-modified: last-modified
-published-title: Last updated
+title-block-banner: "#212529"
+# published-title: Last updated
 toc: true
 toc-location: left
 toc-title: "Contents"
 ---
+
+## Motivation
+
+- Imaging-based phenotypic profiling enables systematic quantification of complex cellular phenotypes and tissue organizations under different treatment and disease conditions.
+
+## Accelerate drug development
+
+- Compare the morphology of cells from patients with and without disease, if we can find a difference in their profiles,  this can serve as a diagnostic tool.
+- Even better, we can test thousands of drugs to find any that are able to reverse the disease profile and make cells looks healthy again.
+
+
+## Image-based Cell Profiling workflow
+
+### Step1: Image analysis
+
+### Step2: Image quality control
+
+### Step3: Preprocessing extracted features
+
+### Step4: Dimensionality reduction
+
+### Step5: Single-cell data aggregation
+
+### Step6: Measuring profile similarity
+
+### Step7: Assay quality assessment
+
+### Step8: Downstream analysis
+
+
+
+## Reference
+
+- [Anne Carpenter - CellProfiler software- Image-Based Cell Profiling](https://www.criver.com/eureka/image-based-cell-profiling)
+- [Image-Based Cell Profiling and Data Analysis](https://stuartgregoryhiggins.com/research/image-analysis/)
+- [Analysis workflow for IMC data](https://bodenmillergroup.github.io/IMCDataAnalysis/)

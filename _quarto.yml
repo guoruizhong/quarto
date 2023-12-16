@@ -18,12 +18,12 @@ project:
 
 website:
   title: "Guorui Zhong"
-  image: "/files/profiles/z_512x512.png"
+  image: "/files/profiles/avatar.png"
   description: ""
   search: 
     location: navbar
     type: overlay
-  # favicon: "/files/profiles/z_512x512.png"
+  favicon: "/files/profiles/avatar.png"
   site-url: "https://guoruizhong.github.io/"
   repo-url: "https://github.com/guoruizhong/quarto"
   navbar:
@@ -33,17 +33,17 @@ website:
         file: "index.qmd"
       - text: "Blog"
         file: "blog/index.qmd"
+      - text: "R"
+        file: "r/index.qmd"
+      - text: "Python"
+        file: "python/index.qmd"
       - text: "Keyboard"
         file: "keyboard/index.qmd"
-      - text: "Wiki"
-        file: "wiki/index.qmd"
       - text: "CRISPR"
         file: "crispr/index.qmd"
-      - text: "Imaging"
-        file: "imaging/index.qmd"
       - text: "Spatial"
         file: "spatial/index.qmd"
-      - text: "Immune!"
+      - text: "Immunology"
         file: "immune/index.qmd"
     right: 
       - icon: journal-check

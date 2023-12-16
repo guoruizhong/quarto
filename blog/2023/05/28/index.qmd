@@ -1,11 +1,12 @@
 ---
-title: "R build-in shapes for ggplot2"
+title: "Tips for using shapes for ggplot2"
 date: 2023-05-28
 # date-modified: 2023-04-05
 categories:
   - ggplot2
   - shapes
 image: shape.png
+description: Change ggplot point shape values. Use special point shapes, including pch 21 and pch 24. The interesting feature of these point symbols is that you can change their background fill color and, their border line type and color
 ---
 
 ```{r setup, include=FALSE}
@@ -18,47 +19,38 @@ knitr::opts_chunk$set(
     collapse = TRUE
 )
 ```
+![](shape.png)
+In ggplot, point shapes can be specified in the function geom_point(). Key arguments include:
+
+- shape: numeric values as pch for setting plotting points shapes.
+- size: numeric values cex for changing points size
+- color: color name or code for points.
+
 
 ```{r}
-pacman::p_load(
-    tidyverse
-)
-theme_set(theme_bw(16))
+ggpubr::show_point_shapes()
+```
 
-### create the coordinate
-n_g <- 4
-pch_df <- data.frame(p = c(0:25)) %>%
-    mutate(x = rep(seq_len(ceiling(n() / n_g)),
-        each = n_g,
-        length.out = n()
-    )) %>%
-    group_by(x) %>%
-    mutate(y = 1:n())
-head(pch_df)
+```{r}
+library(ggplot2)
+# Change shape, color and size
+ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
+  geom_point(shape = 18, color = "#FC4E07", size = 3)+
+  theme_minimal()
 
-### plot shapes
-pch_df %>%
-    ggplot(aes(x = x, y = y, shape = p), ) +
-    scale_shape_identity() +
-    geom_point(size = 5, fill = "steelblue") +
-    scale_y_reverse() +
-    geom_text(aes(
-        x = x - 0.5, y = y,
-        label = paste0("pch =", p)
-    ), size = 3) +
-    labs(
-        title = "pch in R"
-    ) +
-    theme(
-        axis.title = element_blank(),
-        axis.text = element_blank(),
-        axis.ticks = element_blank(),
-        plot.caption = element_text(
-            size = 16,
-            color = "steelblue",
-            face = "bold"
-        )
-    )
+# Change background fill and line color
+ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
+  geom_point(shape = 21, fill = "lightgray",
+             color = "black", size = 3)+
+  theme_minimal()
+
+# Change point shapes and colors by groups
+ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
+  geom_point(aes(shape = Species, color = Species), size = 3) +
+  scale_shape_manual(values = c(5, 16, 17)) +
+  scale_color_manual(values = c("#00AFBB", "#E7B800", "#FC4E07"))+
+  theme_minimal() +
+  theme(legend.position = "top")
 ```
 
 ## Reference

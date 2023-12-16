@@ -218,4 +218,6 @@ To paste the copied text to the current window (as many times as you want), pres
 - <https://www.zdyn.net/system/hacks/2020/09/19/vscode-term-session.html>
 - <https://arcolinux.com/everthing-you-need-to-know-about-tmux-introduction/>
 - <https://www.barbarianmeetscoding.com/blog/jaimes-guide-to-tmux-the-most-awesome-tool-you-didnt-know-you-needed>
+- [Customizing TMUX for Efficiency and Aesthetics: Part 1](https://blog.yarsalabs.com/customising-tmux-part1/)
+- [Customizing TMUX for Efficiency and Aesthetics: Part 2](https://blog.yarsalabs.com/customising-tmux-part2/)
 

@@ -1,29 +1,30 @@
 ---
-title: "Colors for single cell data"
+title: "Use colorblind-friendly palette for visualization"
 date: 2023-12-01
 date-modified: last-modified
 categories:
-  - seurat
-# image: umap.png
-description: Use ggplot2 to make nice coordinate, colors, and size for plots generated from seruat object
-
-execute: 
-  eval: false
+  - colors
+image: colorblind_palette.jpg
+description: Use ggplot2 to make nice coordinate, colors, and size with friendly colors.
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-    # fig.width = 6, 
-    # fig.height = 3.8,
-    fig.align = "center", 
-    # fig.retina = 3,
-    out.width = "100%", 
-    warning = FALSE,
-    # evaluate = FALSE,
+    fig.align = "center", # fig.retina = 3,
+    out.width = "100%", warning = FALSE, # evaluate = FALSE,
     collapse = TRUE
 )
 ```
+## Color packages
+
+![](colorblind_palette.jpg)
+
 ```{r}
+#| warning: false
+#| message: false
+library(here)
+library(tidyverse)
+library(patchwork)
 library(ggsci)
 library(Seurat)
 library(RColorBrewer)
@@ -33,85 +34,131 @@ library(cols4all)
 library(RImagePalette)
 library(scales)
 ```
+
+
+## Basic colors 
+
+```{r}
+# gray colors
+cbp <- c("gray", "lightgray", "darkgray", "black")
+barplot(1:4, col = cbp)
+# 4 colors
+cbp <- c(
+  "#b8b8b8", "#02ff00", "#f9a506", "#ff3c31"
+)
+barplot(1:4, col = cbp)
+# 6 colors
+cbp <- c(
+  "#4C72B0", "#55A868", "#C44E52", "#8172B2", "#CCB974", "#64B5CD"
+)
+barplot(1:6, col = cbp)
+```
+
+```{r}
+# 8 colors
+cbp <- c(
+  "#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", 
+  "#D55E00", "#CC79A7"
+)
+barplot(1:8, col = cbp)
+# 9 colors
+cbp <- c(
+    "#000000", "#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", 
+    "#0072B2", "#D55E00", "#CC79A7"
+)
+barplot(1:9, col = cbp)
+```
 ## Color()
 
 ```{r}
-length(colors()) #657种颜色
-show_col(colors()[1:100])
-#配色来自：Nat Med. 2019 Aug;25(8):1251-1259. 
-mycolor<-c("#80d7e1","#e4cbf2","#ffb7ba","#bf5046","#b781d2","#ece7a3",
-            "#f5cbe1","#e6e5e3","#d2b5ab","#d9e3f5","#f29432","#9c9895")
-show_col(mycolor)
-DimPlot(pbmc5k, reduction = "umap",label=T)+ NoLegend() #读入任意创建好的seurat对象即可
-DimPlot(pbmc5k, reduction = "umap",cols=mycolor,label=T)+ NoLegend()
+load(here("learn", "2023_scRNA_Seurat", "pbmc_tutorial.RData"))
+# 657 colors
+length(colors())
+show_col(colors()[1:50])
+cbp <-c(
+  "#80d7e1","#e4cbf2","#ffb7ba","#bf5046","#b781d2","#ece7a3",          "#f5cbe1","#e6e5e3","#d2b5ab","#d9e3f5","#f29432","#9c9895"
+)
+show_col(cbp)
+## Single cell plot
+p1 <- DimPlot(pbmc, reduction = "umap",label = T) + NoLegend()
+p2 <- DimPlot(pbmc, reduction = "umap",cols = cbp,label = T)+ NoLegend()
+p1 + p2
 ```
 
-  
-```{r}
-devtools::install_github("joelcarlson/RImagePalette")
-library(RImagePalette)
-#加载图片
-lifeAquatic <- jpeg::readJPEG("color.jpg")#UMAP图片来自：Nat Med. 2019 Aug;25(8):1251-1259. 
-display_image(lifeAquatic)
-#可以调整n的值来得到不同数量的颜色
-mycolor <- image_palette(lifeAquatic, n=16) 
-show_col(mycolor)
-```
-
-
+## RColorBrewer
 ```{r}
 library(RColorBrewer)
 display.brewer.all()
-#调用单个调色板
-mycolor<-brewer.pal(9, "Set1")
-#调用多个调色板合并
-b1<-brewer.pal(9, "Set1")
-b2<-brewer.pal(8, "Set2")
-mycolor<-c(b1,b2) 
+col <- brewer.pal(9, "Set1")
+b1 <- brewer.pal(9, "Set1")
+b2 <- brewer.pal(8, "Set2")
+mycolor <- c(b1,b2) 
 ```
-
-
+## ggsci
 ```{r}
-library("ggsci")
-vignette("ggsci")
-DimPlot(pbmc5k, reduction = "umap",label=T)+ scale_color_nejm()+NoLegend()
-mycolor<-pal_nejm("default", alpha = 0.5)(8) 
+library(ggsci)
+# vignette("ggsci")
+DimPlot(pbmc, reduction = "umap", label = TRUE) + 
+  scale_color_nejm() +
+  NoLegend()
+mycolor <- pal_nejm("default", alpha = 0.5)(8) 
 ```
-
-
+## paletteer
 ```{r}
-install.packages("paletteer")
 library(paletteer)  
 paletteer_c("scico::berlin", n = 10)
 paletteer_d("RColorBrewer::Paired",n=12)
 paletteer_dynamic("cartography::green.pal", 20)
 ```
-
+## cols4all
 ```{r}
-remotes::install_github("mtennekes/cols4all")
+# remotes::install_github("mtennekes/cols4all")
 library(cols4all)
-#交互面板
-c4a_gui()
-#可以通过函数提取配色(色板名称+所需颜色数量)
+# c4a_gui()
 mycolor <-c4a("light24", 9)
 ```
 
-
 ```{r}
-#配色来自：Nat Med. 2019 Aug;25(8):1251-1259. 
-mycolor1<-c("#80d7e1","#e4cbf2","#ffb7ba","#bf5046","#b781d2","#ece7a3",
-            "#f5cbe1","#e6e5e3","#d2b5ab","#d9e3f5","#f29432","#9c9895")
-show_col(mycolor1,labels = F)
-#配色来自：Immunity. 2020 May 19;52(5):808-824.e7.
-mycolor2<-c("#e41e25","#307eb9","#4cb049","#974e9e","#f57f21","#f4ed35",
-            "#a65527","#9bc7e0","#b11f2b","#f6b293")
-show_col(mycolor2,labels = F)
-#配色来自：Cell. 2019 Oct 31;179(4):829-845.e20.
-mycolor3<-c("#b38a8f","#bba6a6","#d5b3a5","#e69db8","#c5ae8d","#87b2d4",
-            "#babb72","#4975a5","#499994","#8e8786","#93a95d","#f19538",
-            "#fcba75","#8ec872","#ad9f35","#8ec872","#d07794","#ff9796",
-            "#b178a3","#e56464","#6cb25e","#ca9abe","#d6b54c") 
-DimPlot(pbmc5k, reduction = "umap",group.by='seurat_clusters',label=T)+scale_color_manual(values = mycolor1)+NoLegend()
-DimPlot(pbmc5k, reduction = "umap",group.by='seurat_clusters',label=T)+scale_color_manual(values = mycolor2)+NoLegend()
-DimPlot(pbmc5k, reduction = "umap",group.by='seurat_clusters',label=T)+scale_color_manual(values = mycolor3)+NoLegend()
+# Color from：Nat Med. 2019 Aug;25(8):1251-1259. 
+cbp <-c(
+    "#80d7e1","#e4cbf2","#ffb7ba","#bf5046","#b781d2","#ece7a3",
+    "#f5cbe1","#e6e5e3","#d2b5ab","#d9e3f5","#f29432","#9c9895"
+)
+show_col(cbp, labels = TRUE)
+DimPlot(pbmc, reduction = "umap", group.by='seurat_clusters', label = T) +
+  scale_color_manual(values = cbp)+
+  NoLegend()
+
+# Color from：Immunity. 2020 May 19;52(5):808-824.e7.
+cbp <- c(
+   "#e41e25","#307eb9","#4cb049","#974e9e","#f57f21","#f4ed35",
+  "#a65527","#9bc7e0","#b11f2b","#f6b293"
+)
+show_col(cbp, labels = TRUE)
+DimPlot(pbmc, reduction = "umap", group.by='seurat_clusters', label=T) + 
+  scale_color_manual(values = cbp)+
+  NoLegend()
+
+# Color from：Cell. 2019 Oct 31;179(4):829-845.e20.
+cbp <- c(
+  "#b38a8f","#bba6a6","#d5b3a5","#e69db8","#c5ae8d","#87b2d4",
+  "#babb72","#4975a5","#499994","#8e8786","#93a95d","#f19538",
+  "#fcba75","#8ec872","#ad9f35","#8ec872","#d07794","#ff9796",
+  "#b178a3","#e56464","#6cb25e","#ca9abe","#d6b54c"
+)
+show_col(cbp, labels = TRUE)
+DimPlot(pbmc, reduction = "umap", group.by='seurat_clusters', label = T) + 
+  scale_color_manual(values = cbp) +
+  NoLegend()
+```
+
+## Pick color from images  
+```{r}
+#| eval: false
+# devtools::install_github("joelcarlson/RImagePalette")
+library(RImagePalette)
+lifeAquatic <- jpeg::readJPEG("color.jpg")
+display_image(lifeAquatic)
+mycolor <- image_palette(lifeAquatic, n=16) 
+show_col(mycolor)
 ```

@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2019-09-09">
+<meta name="dcterms.date" content="2023-12-01">
 
 <title>Guorui Zhong - Spatial</title>
 <style>
@@ -30,6 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="..//files/profiles/avatar.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -97,20 +98,20 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../r/index.html" rel="" target="">
+ <span class="menu-text">R</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../python/index.html" rel="" target="">
+ <span class="menu-text">Python</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../keyboard/index.html" rel="" target="">
  <span class="menu-text">Keyboard</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../wiki/index.html" rel="" target="">
- <span class="menu-text">Wiki</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="../crispr/index.html" rel="" target="">
  <span class="menu-text">CRISPR</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../imaging/index.html" rel="" target="">
- <span class="menu-text">Imaging</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="../spatial/index.html" rel="" target="" aria-current="page">
@@ -118,7 +119,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../immune/index.html" rel="" target="">
- <span class="menu-text">Immune!</span></a>
+ <span class="menu-text">Immunology</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
@@ -157,16 +158,16 @@ ul.task-list li input[type="checkbox"] {
 
       
       <div>
-      <div class="quarto-title-meta-heading">Last updated</div>
+      <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">September 9, 2019</p>
+        <p class="date">December 1, 2023</p>
       </div>
     </div>
     
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">November 10, 2023</p>
+        <p class="date-modified">December 16, 2023</p>
       </div>
     </div>
       
@@ -176,7 +177,26 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link active" data-scroll-target="#motivation">Motivation</a></li>
+  <li><a href="#accelerate-drug-development" id="toc-accelerate-drug-development" class="nav-link" data-scroll-target="#accelerate-drug-development">Accelerate drug development</a></li>
+  <li><a href="#image-based-cell-profiling-workflow" id="toc-image-based-cell-profiling-workflow" class="nav-link" data-scroll-target="#image-based-cell-profiling-workflow">Image-based Cell Profiling workflow</a>
+  <ul class="collapse">
+  <li><a href="#step1-image-analysis" id="toc-step1-image-analysis" class="nav-link" data-scroll-target="#step1-image-analysis">Step1: Image analysis</a></li>
+  <li><a href="#step2-image-quality-control" id="toc-step2-image-quality-control" class="nav-link" data-scroll-target="#step2-image-quality-control">Step2: Image quality control</a></li>
+  <li><a href="#step3-preprocessing-extracted-features" id="toc-step3-preprocessing-extracted-features" class="nav-link" data-scroll-target="#step3-preprocessing-extracted-features">Step3: Preprocessing extracted features</a></li>
+  <li><a href="#step4-dimensionality-reduction" id="toc-step4-dimensionality-reduction" class="nav-link" data-scroll-target="#step4-dimensionality-reduction">Step4: Dimensionality reduction</a></li>
+  <li><a href="#step5-single-cell-data-aggregation" id="toc-step5-single-cell-data-aggregation" class="nav-link" data-scroll-target="#step5-single-cell-data-aggregation">Step5: Single-cell data aggregation</a></li>
+  <li><a href="#step6-measuring-profile-similarity" id="toc-step6-measuring-profile-similarity" class="nav-link" data-scroll-target="#step6-measuring-profile-similarity">Step6: Measuring profile similarity</a></li>
+  <li><a href="#step7-assay-quality-assessment" id="toc-step7-assay-quality-assessment" class="nav-link" data-scroll-target="#step7-assay-quality-assessment">Step7: Assay quality assessment</a></li>
+  <li><a href="#step8-downstream-analysis" id="toc-step8-downstream-analysis" class="nav-link" data-scroll-target="#step8-downstream-analysis">Step8: Downstream analysis</a></li>
+  </ul></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
+  </ul>
+</nav>
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
@@ -188,8 +208,56 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+<section id="motivation" class="level2">
+<h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
+<ul>
+<li>Imaging-based phenotypic profiling enables systematic quantification of complex cellular phenotypes and tissue organizations under different treatment and disease conditions.</li>
+</ul>
+</section>
+<section id="accelerate-drug-development" class="level2">
+<h2 class="anchored" data-anchor-id="accelerate-drug-development">Accelerate drug development</h2>
+<ul>
+<li>Compare the morphology of cells from patients with and without disease, if we can find a difference in their profiles, this can serve as a diagnostic tool.</li>
+<li>Even better, we can test thousands of drugs to find any that are able to reverse the disease profile and make cells looks healthy again.</li>
+</ul>
+</section>
+<section id="image-based-cell-profiling-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="image-based-cell-profiling-workflow">Image-based Cell Profiling workflow</h2>
+<section id="step1-image-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="step1-image-analysis">Step1: Image analysis</h3>
+</section>
+<section id="step2-image-quality-control" class="level3">
+<h3 class="anchored" data-anchor-id="step2-image-quality-control">Step2: Image quality control</h3>
+</section>
+<section id="step3-preprocessing-extracted-features" class="level3">
+<h3 class="anchored" data-anchor-id="step3-preprocessing-extracted-features">Step3: Preprocessing extracted features</h3>
+</section>
+<section id="step4-dimensionality-reduction" class="level3">
+<h3 class="anchored" data-anchor-id="step4-dimensionality-reduction">Step4: Dimensionality reduction</h3>
+</section>
+<section id="step5-single-cell-data-aggregation" class="level3">
+<h3 class="anchored" data-anchor-id="step5-single-cell-data-aggregation">Step5: Single-cell data aggregation</h3>
+</section>
+<section id="step6-measuring-profile-similarity" class="level3">
+<h3 class="anchored" data-anchor-id="step6-measuring-profile-similarity">Step6: Measuring profile similarity</h3>
+</section>
+<section id="step7-assay-quality-assessment" class="level3">
+<h3 class="anchored" data-anchor-id="step7-assay-quality-assessment">Step7: Assay quality assessment</h3>
+</section>
+<section id="step8-downstream-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="step8-downstream-analysis">Step8: Downstream analysis</h3>
+</section>
+</section>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<ul>
+<li><a href="https://www.criver.com/eureka/image-based-cell-profiling">Anne Carpenter - CellProfiler software- Image-Based Cell Profiling</a></li>
+<li><a href="https://stuartgregoryhiggins.com/research/image-analysis/">Image-Based Cell Profiling and Data Analysis</a></li>
+<li><a href="https://bodenmillergroup.github.io/IMCDataAnalysis/">Analysis workflow for IMC data</a></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
