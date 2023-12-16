@@ -1,14 +1,13 @@
----
-title: "Make heatmap using ComplexHeatmap"
-date: 2023-05-03
-# date-modified: 2023-04-05
-categories:
-  - complexheatmap
-  - unsupervised
-image: heatmap.png
-description: Heatmap (or heat map) is way to visualize hierarchical clustering. It’s also called a false colored image, where data values are transformed to color scale.
----
-```{r setup, include=FALSE}
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 knitr::opts_chunk$set(
     # fig.width = 6, 
     # fig.height = 3.8,
@@ -17,21 +16,21 @@ knitr::opts_chunk$set(
     # out.width = "85%", 
     collapse = TRUE
 )
-```
-
-
-Heat maps allow us to simultaneously visualize clusters of samples and features. First hierarchical clustering is done of both the rows and the columns of the data matrix. The columns/rows of the data matrix are re-ordered according to the hierarchical clustering result, putting similar observations close to each other. The blocks of ‘high’ and ‘low’ values are adjacent in the data matrix. Finally, a color scheme is applied for the visualization and the data matrix is displayed. Visualizing the data matrix in this way can help to find the variables that appear to be characteristic for each sample cluster.
-
-```{r, load-libraries-data, warning=FALSE, message=FALSE}
+#
+#
+#
+#
+#
+#
 library(tidyverse)
 require(RColorBrewer)
 require(ComplexHeatmap)
 require(circlize)
 require(digest)
 require(cluster)
-```
-
-```{r}
+#
+#
+#
 # expr <- readRDS(system.file(package = "ComplexHeatmap", "extdata", "gene_expression.rds"))
 # head(expr)
 # mat <- as.matrix(expr[, grep("cell", colnames(expr))])
@@ -88,10 +87,13 @@ require(cluster)
 
 # draw(ht_list)
 ```
-## Reference
-
-1. [ComplexHeatmap Complete Reference](https://jokergoo.github.io/ComplexHeatmap-reference/book/index.html)
-2. [Heatmap in R: Static and Interactive Visualization](https://www.datanovia.com/en/lessons/heatmap-in-r-static-and-interactive-visualization/#r-packagesfunctions-for-drawing-heatmaps)
-3. <https://github.com/kevinblighe/E-MTAB-6141>
-4. [Test Hierarchical Clustering](https://rpubs.com/shbrief/hclust_varying_k)
-
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#

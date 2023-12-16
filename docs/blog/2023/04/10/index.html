@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Guorui Zhong">
+<meta name="description" content="The solution is to set the default terminal provider on the remote settings to be tmux, and have it attach to either an existing session named main, or create a new one if it doesn’t exist.">
 
 <title>Guorui Zhong - Using Tmux and Screen for Persistent Terminal in VSCode Remote Session</title>
 <style>
@@ -132,18 +133,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../r/index.html" rel="" target="">
- <span class="menu-text">R</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../../../python/index.html" rel="" target="">
- <span class="menu-text">Python</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../../../keyboard/index.html" rel="" target="">
- <span class="menu-text">Keyboard</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="../../../../crispr/index.html" rel="" target="">
  <span class="menu-text">CRISPR</span></a>
   </li>  
@@ -154,6 +143,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="../../../../immune/index.html" rel="" target="">
  <span class="menu-text">Immunology</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../keyboard/index.html" rel="" target="">
+ <span class="menu-text">Keyboard</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../python/index.html" rel="" target="">
+ <span class="menu-text">Python</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../r/index.html" rel="" target="">
+ <span class="menu-text">R</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
@@ -184,7 +185,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Using Tmux and Screen for Persistent Terminal in VSCode Remote Session</h1>
-                                <div class="quarto-categories">
+                  <div>
+        <div class="description">
+          The solution is to set the default terminal provider on the remote settings to be tmux, and have it attach to either an existing session named main, or create a new one if it doesn’t exist.
+        </div>
+      </div>
+                          <div class="quarto-categories">
                 <div class="quarto-category">linux</div>
                 <div class="quarto-category">tmux</div>
                 <div class="quarto-category">screen</div>
@@ -212,7 +218,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">Thursday, December 7, 2023</p>
+        <p class="date-modified">Saturday, December 16, 2023</p>
       </div>
     </div>
       
@@ -258,7 +264,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>The solution is to set the default terminal provider on the remote settings to be tmux, and have it attach to either an existing session named main, or create a new one if it doesn’t exist.</p>
 <section id="tmux" class="level2">
 <h2 class="anchored" data-anchor-id="tmux">Tmux</h2>
 <section id="shortcuts" class="level3">

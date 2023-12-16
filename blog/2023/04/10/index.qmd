@@ -7,8 +7,9 @@ categories:
   - tmux
   - screen
 image: tmux_introduction.png
+description: The solution is to set the default terminal provider on the remote settings to be tmux, and have it attach to either an existing session named main, or create a new one if it doesn't exist.
 ---
-The solution is to set the default terminal provider on the remote settings to be tmux, and have it attach to either an existing session named main, or create a new one if it doesn't exist. 
+ 
 
 ## Tmux 
 

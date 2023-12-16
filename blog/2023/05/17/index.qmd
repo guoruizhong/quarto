@@ -7,6 +7,7 @@ categories:
   - unsupervised
   - dimensional reduction
 image: p.png
+description: Principle component methods are used to summarize and viusalize the information contained in a large multivariate datasets.
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
@@ -20,7 +21,7 @@ knitr::opts_chunk$set(
 ```
 ![](pca.png)
 
-Principle component methods are used to summarize and viusalize the information contained in a large multivariate datasets.
+
 
 Principle component analysis is used to extract the important information from a multivariate data table and to express this information as a set of few new variables called principle components. These new variables correspond to a linear combination of the originals. The number of principal components is less than or equal to the number of original variables.
 
