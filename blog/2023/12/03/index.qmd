@@ -3,6 +3,7 @@ title: "Save ggplot2 plots with custom fonts using Cairo graphics across OS"
 date: 2023-12-03
 date-modified: last-modified
 categories:
+  - r
   - ggplot2
   - cairo
 image: cairo.png

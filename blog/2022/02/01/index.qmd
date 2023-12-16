@@ -20,9 +20,10 @@ knitr::opts_chunk$set(fig.width = 6, fig.height = 3.8,
 ```{r}
 #| warning: false
 library(tidyverse)
+library(here)
 library(ggsignif)
 library(ggh4x)
-dfb <- read.csv("221001_barplot.csv", header = FALSE)
+dfb <- read.csv(here("learn", "data", "221001_barplot.csv"), header = FALSE)
 dfb
 dfb.1 <- dfb %>%
     pivot_longer(!V1) %>%

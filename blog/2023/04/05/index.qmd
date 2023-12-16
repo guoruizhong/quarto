@@ -8,8 +8,6 @@ image: scale.png
 description: Data normalization methods are used to make variables, measured in different scales, have comparable values. This preprocessing steps is important for clustering and heatmap visualization, principal component analysis and other machine learning algorithms based on distance measures.
 ---
 
-
-
 This article describes the following data rescaling approaches:
 
     Standard scaling or standardization

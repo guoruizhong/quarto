@@ -3,6 +3,7 @@ title: "General workflow for RNAseq data analysis with R"
 date: 2023-09-11
 date-modified: last-modified
 categories:
+  - r
   - rnaseq
 image: workflow.png
 # draft: true

@@ -2,6 +2,7 @@
 title: "ggplot2 with p-value and significant level"
 date: 2023-03-06
 categories:
+  - r
   - p-value
   - ggplot2
 image: plot.png

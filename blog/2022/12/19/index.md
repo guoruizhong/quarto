@@ -6,7 +6,6 @@ description: ""
 image: linux.jpg
 categories:
   - linux
-  - bash
 ---
 
 After working at Bioinformatics Institute for 3 years, I gradullly relizaed that it’s essential to learn Linux as:

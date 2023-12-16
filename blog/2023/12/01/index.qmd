@@ -4,6 +4,7 @@ date: 2023-12-01
 date-modified: last-modified
 categories:
   - colors
+  - ggplot2
 image: colorblind_palette.jpg
 description: Use ggplot2 to make nice coordinate, colors, and size with friendly colors.
 ---

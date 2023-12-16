@@ -3,6 +3,7 @@ title: "Support Vector Machine"
 date: 2023-11-05
 date-modified: last-modified
 categories:
+  - r
   - svm
 image: svm.png
 description: SVM takes groups of observations and construct boundaries to predict which group future observations belong to based on their measurements.

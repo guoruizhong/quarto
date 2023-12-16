@@ -4,7 +4,6 @@ date: 2021-01-02
 description: "Commonly used greek letters when using markdown" 
 image: greek_letters.png
 categories:
-- letters
 - markdown
 ---
 

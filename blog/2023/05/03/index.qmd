@@ -3,6 +3,7 @@ title: "Make heatmap using ComplexHeatmap"
 date: 2023-05-03
 # date-modified: 2023-04-05
 categories:
+  - r
   - complexheatmap
   - unsupervised
 image: heatmap.png

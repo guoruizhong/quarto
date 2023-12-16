@@ -3,6 +3,7 @@ title: "Learning PCA, tSNE and UMAP from simple example"
 date: 2023-05-27
 date-modified: last-modified
 categories:
+  - r
   - pca
   - tsne
   - umap

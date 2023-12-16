@@ -4,6 +4,7 @@ date: 2023-12-02
 date-modified: last-modified
 categories:
   - seurat
+  - ggplot2
 image: umap.png
 description: The DimPlot, FeaturePlot, Dotplot, VlnPlot, and DoHeatmap from Seurat can be further customized with ggplot2.
 ---

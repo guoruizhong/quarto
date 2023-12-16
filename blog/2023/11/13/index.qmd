@@ -3,6 +3,7 @@ title: "Using ggbeeswarm plot to represent categorical data"
 date: 2023-11-13
 date-modified: last-modified
 categories:
+  - r
   - ggbeeswarm
 image: beeswarm.png
 description: The plot shows all data points with a color-code for each replicate, as well as the averages of each replicate, the total average and the SEM.

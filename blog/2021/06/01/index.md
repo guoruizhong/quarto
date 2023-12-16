@@ -4,7 +4,6 @@ date: 2021-06-01
 image: greekscape.jpg
 categories:
 - inkscape
-- letters
 ---
 
 To get Greek letters in Inkscape, go into text mode and type Ctrl+U and the 4-digit unicode for the desired Greek letter.

@@ -3,6 +3,7 @@ title: "Learning Harmony to integrate single cell RNA-seq data for batch borrect
 date: 2023-11-26
 date-modified: last-modified
 categories:
+  - r
   - scRNA-seq
 image: harmony.jpg
 # draft: true

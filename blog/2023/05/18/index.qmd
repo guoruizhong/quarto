@@ -3,6 +3,7 @@ title: "PCA Graph Customization"
 date: 2023-05-18
 # date-modified: 2023-04-05
 categories:
+  - r
   - pca
   - unsupervised
   - dimensional reduction
