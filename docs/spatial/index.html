@@ -72,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="floating nav-fixed">
+<body class="floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -167,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">December 16, 2023</p>
+        <p class="date-modified">December 17, 2023</p>
       </div>
     </div>
       
@@ -181,19 +181,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#motivation" id="toc-motivation" class="nav-link active" data-scroll-target="#motivation">Motivation</a></li>
-  <li><a href="#accelerate-drug-development" id="toc-accelerate-drug-development" class="nav-link" data-scroll-target="#accelerate-drug-development">Accelerate drug development</a></li>
-  <li><a href="#image-based-cell-profiling-workflow" id="toc-image-based-cell-profiling-workflow" class="nav-link" data-scroll-target="#image-based-cell-profiling-workflow">Image-based Cell Profiling workflow</a>
-  <ul class="collapse">
-  <li><a href="#step1-image-analysis" id="toc-step1-image-analysis" class="nav-link" data-scroll-target="#step1-image-analysis">Step1: Image analysis</a></li>
-  <li><a href="#step2-image-quality-control" id="toc-step2-image-quality-control" class="nav-link" data-scroll-target="#step2-image-quality-control">Step2: Image quality control</a></li>
-  <li><a href="#step3-preprocessing-extracted-features" id="toc-step3-preprocessing-extracted-features" class="nav-link" data-scroll-target="#step3-preprocessing-extracted-features">Step3: Preprocessing extracted features</a></li>
-  <li><a href="#step4-dimensionality-reduction" id="toc-step4-dimensionality-reduction" class="nav-link" data-scroll-target="#step4-dimensionality-reduction">Step4: Dimensionality reduction</a></li>
-  <li><a href="#step5-single-cell-data-aggregation" id="toc-step5-single-cell-data-aggregation" class="nav-link" data-scroll-target="#step5-single-cell-data-aggregation">Step5: Single-cell data aggregation</a></li>
-  <li><a href="#step6-measuring-profile-similarity" id="toc-step6-measuring-profile-similarity" class="nav-link" data-scroll-target="#step6-measuring-profile-similarity">Step6: Measuring profile similarity</a></li>
-  <li><a href="#step7-assay-quality-assessment" id="toc-step7-assay-quality-assessment" class="nav-link" data-scroll-target="#step7-assay-quality-assessment">Step7: Assay quality assessment</a></li>
-  <li><a href="#step8-downstream-analysis" id="toc-step8-downstream-analysis" class="nav-link" data-scroll-target="#step8-downstream-analysis">Step8: Downstream analysis</a></li>
-  </ul></li>
+  <li><a href="#latest-review" id="toc-latest-review" class="nav-link active" data-scroll-target="#latest-review">Latest Review</a></li>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation">Motivation</a></li>
+  <li><a href="#typical-analysis-workflow" id="toc-typical-analysis-workflow" class="nav-link" data-scroll-target="#typical-analysis-workflow">Typical Analysis workflow</a></li>
   <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
   </ul>
 </nav>
@@ -203,50 +193,61 @@ ul.task-list li input[type="checkbox"] {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
 
 
+<section id="latest-review" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="latest-review">Latest Review</h2>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="spatial_cancer.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption margin-caption">Enabling technologies from : Seferbekova, Zaira, Artem Lomakin, Lucy R. Yates, and Moritz Gerstung. “Spatial Biology of Cancer Evolution.” Nature Reviews Genetics 24, no. 5 (May 2023): 295–313. https://doi.org/10.1038/s41576-022-00553-x.</figcaption>
+</figure>
+</div>
+<ul>
+<li>BaSISS, base-specific ISS;</li>
+<li>CODEX, co-detection by indexing;</li>
+<li>corrFISH, correlation FISH;</li>
+<li>DBiT-seq, deterministic barcoding in tissue for spatial omics sequencing;</li>
+<li>epiMERFISH, epigenetic MERFISH; FISSEQ, fluorescent ISS; HDST, high-definition spatial transcriptomics;</li>
+<li>hybISS, hybridization-based ISS;</li>
+<li>ImmunoSABER, immunostaining with signal amplification by exchange reaction;</li>
+<li>MIBI-TOF, MIBI by time of flight;</li>
+<li>osmFISH, ouroboros smFISH, pciSeq, probabilistic cell typing by ISS;</li>
+<li>smFISH, single-molecule FISH; ST, spatial transcriptomics;</li>
+<li>STARmap, spatially resolved transcript amplicon readout mapping;</li>
+<li>Stereo-seq, spatial enhanced resolution omics sequencing;</li>
+<li>TSCS, topographic single-cell sequencing; Visium HD, Visium high definition.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="spatial_analysis.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption margin-caption">Spatial omic analysis from : Seferbekova, Zaira, Artem Lomakin, Lucy R. Yates, and Moritz Gerstung. “Spatial Biology of Cancer Evolution.” Nature Reviews Genetics 24, no. 5 (May 2023): 295–313. https://doi.org/10.1038/s41576-022-00553-x.</figcaption>
+</figure>
+</div>
+</section>
 <section id="motivation" class="level2">
 <h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
 <ul>
-<li>Imaging-based phenotypic profiling enables systematic quantification of complex cellular phenotypes and tissue organizations under different treatment and disease conditions.</li>
+<li><p>Imaging-based phenotypic profiling enables systematic quantification of complex cellular phenotypes and tissue organizations under different treatment and disease conditions.</p></li>
+<li><p>Compare the morphology of cells from patients with and without disease, if we can find a difference in their profiles, this can serve as a diagnostic tool.</p></li>
+<li><p>Even better, we can test thousands of drugs to find any that are able to reverse the disease profile and make cells looks healthy again.</p></li>
 </ul>
 </section>
-<section id="accelerate-drug-development" class="level2">
-<h2 class="anchored" data-anchor-id="accelerate-drug-development">Accelerate drug development</h2>
+<section id="typical-analysis-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="typical-analysis-workflow">Typical Analysis workflow</h2>
 <ul>
-<li>Compare the morphology of cells from patients with and without disease, if we can find a difference in their profiles, this can serve as a diagnostic tool.</li>
-<li>Even better, we can test thousands of drugs to find any that are able to reverse the disease profile and make cells looks healthy again.</li>
+<li>Step1: Image analysis</li>
+<li>Step2: Image quality control</li>
+<li>Step3: Preprocessing extracted features</li>
+<li>Step4: Dimensionality reduction</li>
+<li>Step5: Single-cell data aggregation</li>
+<li>Step6: Measuring profile similarity</li>
+<li>Step7: Assay quality assessment</li>
+<li>Step8: Downstream analysis</li>
 </ul>
-</section>
-<section id="image-based-cell-profiling-workflow" class="level2">
-<h2 class="anchored" data-anchor-id="image-based-cell-profiling-workflow">Image-based Cell Profiling workflow</h2>
-<section id="step1-image-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="step1-image-analysis">Step1: Image analysis</h3>
-</section>
-<section id="step2-image-quality-control" class="level3">
-<h3 class="anchored" data-anchor-id="step2-image-quality-control">Step2: Image quality control</h3>
-</section>
-<section id="step3-preprocessing-extracted-features" class="level3">
-<h3 class="anchored" data-anchor-id="step3-preprocessing-extracted-features">Step3: Preprocessing extracted features</h3>
-</section>
-<section id="step4-dimensionality-reduction" class="level3">
-<h3 class="anchored" data-anchor-id="step4-dimensionality-reduction">Step4: Dimensionality reduction</h3>
-</section>
-<section id="step5-single-cell-data-aggregation" class="level3">
-<h3 class="anchored" data-anchor-id="step5-single-cell-data-aggregation">Step5: Single-cell data aggregation</h3>
-</section>
-<section id="step6-measuring-profile-similarity" class="level3">
-<h3 class="anchored" data-anchor-id="step6-measuring-profile-similarity">Step6: Measuring profile similarity</h3>
-</section>
-<section id="step7-assay-quality-assessment" class="level3">
-<h3 class="anchored" data-anchor-id="step7-assay-quality-assessment">Step7: Assay quality assessment</h3>
-</section>
-<section id="step8-downstream-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="step8-downstream-analysis">Step8: Downstream analysis</h3>
-</section>
 </section>
 <section id="reference" class="level2">
 <h2 class="anchored" data-anchor-id="reference">Reference</h2>

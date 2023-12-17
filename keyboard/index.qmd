@@ -1,5 +1,5 @@
 ---
-title: Keyboard
+title: Commonly used Keyboard Shortcuts
 date: 2023-01-01
 date-modified: last-modified
 title-block-banner: "#212529"
@@ -9,10 +9,9 @@ toc-location: left
 toc-title: "Contents"
 ---
 
-![](keyboard.jpg)
+<!-- ![](keyboard.jpg) -->
 
 ## Zsh/Bash
-
 
 ```bash
 Ctrl + A              # Move the cursor to the beginning of the line                       

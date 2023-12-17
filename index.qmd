@@ -4,12 +4,17 @@ about:
   template: jolla
   image: /files/profiles/avatar.png
   links:
-    - icon: twitter
-      text: twitter
-      href: https://twitter.com
+    - icon: journal-check
+      # text: Google
+      aria-label: linkedin
+      href: https://scholar.google.com/citations?user=g0MfTPMAAAAJ&hl=en
     - icon: github
-      text: Github
-      href: https://github.com
+      # text: Github
+      aria-label: linkedin
+      href: https://guoruizhong.github.io/
+    - icon: linkedin
+      aria-label: linkedin
+      href: https://www.linkedin.com/in/guorui-zhong-754761185/
 ---
 
 <!-- Finley Malloc is the Chief Data Scientist at Wengo Analytics. When not innovating on data platforms, Finley enjoys spending  time unicycling and playing with her pet iguana. -->

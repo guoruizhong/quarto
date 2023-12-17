@@ -100,28 +100,28 @@
   {
     "objectID": "r/index.html",
     "href": "r/index.html",
-    "title": "R",
+    "title": "R Programming",
     "section": "",
-    "text": "ls()            # list the variables in the workspace\nrm()            # remove the variable from workspace\nrm(list = ls()) # remove all the variables from the workspace\n.libPaths()     # R installation site\ncolnames(installed.packages())   # list the installed packages\nhelp(package=\"\")   # Check the functions of R library\nsystem.file(package=“dagdata”)   # Extract the location of package\nlist.files()   # List the filename under specific directory\ndir()          # \ngetwd()        # Check working directory\nsetwd()        # Change working directory\ndata()         # Load built-in dataset\nview()         # View the entire dataset\ntail()         # Just show the last 6 rows\nclass()        # Check the class of an R object\nstr()          # Display internal structure of an R object\nlength()       # Give length of a vector\ndim()          # View the number of rows and columns of a matrix or a data frame\nnames()        # List names of variables in a data frame\nset.seed()     # Generate random number seed to make sure the results do not change."
+    "text": "dir()                            # Show the directory\ngetwd()                          # Check working directory\nsetwd()                          # Change working directory\ndata()                           # Load built-in dataset\nview()                           # View the entire dataset\ntail()                           # Just show the last 6 rows\nclass()                          # Check the class of an R object\nstr()                            # Display internal structure of an R object\nlength()                         # Give length of a vector\ndim()                            # View the number of rows and columns of a matrix or a data frame\nnames()                          # List names of variables in a data frame\nset.seed()                       # Generate random number seed to make sure the results do not change.\nls()                             # list the variables in the workspace\nrm()                             # remove the variable from workspace\nrm(list = ls())                  # remove all the variables from the workspace\nlist.files()                     # List the filename under specific directory\n.libPaths()                      # R installation site\nhelp(package=\"\")                 # Check the functions of R library\nsystem.file(package=“dagdata”)   # Extract the location of package\ncolnames(installed.packages())   # list the installed packages"
   },
   {
-    "objectID": "r/index.html#basic-functions",
-    "href": "r/index.html#basic-functions",
-    "title": "R",
+    "objectID": "r/index.html#basic-concepts",
+    "href": "r/index.html#basic-concepts",
+    "title": "R Programming",
     "section": "",
-    "text": "ls()            # list the variables in the workspace\nrm()            # remove the variable from workspace\nrm(list = ls()) # remove all the variables from the workspace\n.libPaths()     # R installation site\ncolnames(installed.packages())   # list the installed packages\nhelp(package=\"\")   # Check the functions of R library\nsystem.file(package=“dagdata”)   # Extract the location of package\nlist.files()   # List the filename under specific directory\ndir()          # \ngetwd()        # Check working directory\nsetwd()        # Change working directory\ndata()         # Load built-in dataset\nview()         # View the entire dataset\ntail()         # Just show the last 6 rows\nclass()        # Check the class of an R object\nstr()          # Display internal structure of an R object\nlength()       # Give length of a vector\ndim()          # View the number of rows and columns of a matrix or a data frame\nnames()        # List names of variables in a data frame\nset.seed()     # Generate random number seed to make sure the results do not change."
+    "text": "dir()                            # Show the directory\ngetwd()                          # Check working directory\nsetwd()                          # Change working directory\ndata()                           # Load built-in dataset\nview()                           # View the entire dataset\ntail()                           # Just show the last 6 rows\nclass()                          # Check the class of an R object\nstr()                            # Display internal structure of an R object\nlength()                         # Give length of a vector\ndim()                            # View the number of rows and columns of a matrix or a data frame\nnames()                          # List names of variables in a data frame\nset.seed()                       # Generate random number seed to make sure the results do not change.\nls()                             # list the variables in the workspace\nrm()                             # remove the variable from workspace\nrm(list = ls())                  # remove all the variables from the workspace\nlist.files()                     # List the filename under specific directory\n.libPaths()                      # R installation site\nhelp(package=\"\")                 # Check the functions of R library\nsystem.file(package=“dagdata”)   # Extract the location of package\ncolnames(installed.packages())   # list the installed packages"
   },
   {
-    "objectID": "r/index.html#best-practise",
-    "href": "r/index.html#best-practise",
-    "title": "R",
-    "section": "Best practise",
-    "text": "Best practise\n\nVariables = my_variable\nFunctions = RunThisStuffs()\nConstants = CONSTANTS\nUse 4 spaces (and not tab) for indentations\nAlways writing documentation above function definition\nA function should not be longer than one screen\nAvoid using for loop, learn lapply and vector operations\nNever ever use hard-coded variables in functions\n\n### ====== to divide function blocks\n\n### ------ to divide parts in a function\nName and style code consistently\n\nrm(list =ls()) and gc() to tidy up its memory\nDon’t save a session history\nKeep track of sessionInfo() in project folder\nUse version control"
+    "objectID": "r/index.html#best-practise-for-r-coding",
+    "href": "r/index.html#best-practise-for-r-coding",
+    "title": "R Programming",
+    "section": "Best practise for R coding",
+    "text": "Best practise for R coding\n\nVariables = my_variable\nFunctions = RunThisStuffs()\nConstants = CONSTANTS\nUse 4 spaces (and not tab) for indentations\nAlways writing documentation above function definition\nA function should not be longer than one screen\nAvoid using for loop, learn lapply and vector operations\nNever ever use hard-coded variables in functions\n\n### ====== to divide function blocks\n\n### ------ to divide parts in a function\nName and style code consistently\n\nrm(list =ls()) and gc() to tidy up its memory\nDon’t save a session history\nKeep track of sessionInfo() in project folder\nUse version control"
   },
   {
     "objectID": "r/index.html#reference",
     "href": "r/index.html#reference",
-    "title": "R",
+    "title": "R Programming",
     "section": "Reference",
     "text": "Reference\n\nAn Introduction to Statistical Learning\nR for Data Science (2e)\nR Graphics Cookbook, 2nd edition\nAdvanced R\nggplot2: Elegant Graphics for Data Analysis\nFunctional Programming\nThe Epidemiologist R Handbook\nModern Statistics for Modern Biology\nData Analysis and Prediction Algorithms with R\nBioinformatics Training & Education Program\nSaving R Graphics across OSs\nTutorial on Advanced Stats and Machine Learning with R\nPublication ready plots using ggpubr\ndatanovia\nData Analysis in Genome Biology\nData Viz with Python and R\nPH525x series - Biomedical Data Science"
   },
@@ -142,21 +142,21 @@
   {
     "objectID": "crispr/index.html",
     "href": "crispr/index.html",
-    "title": "CRISPR",
+    "title": "CRISPR-Cas Tools",
     "section": "",
     "text": "Guide Design Resources\nNew CRISPR Method Allows Scientists to Understand Impact of Subtle Mutations\nCRISPR Transfection Protocols Guide: How To Select The Best Method\nHow To Use CRISPR: Your Guide to Successful Genome Engineering\nThe Ultimate Guide To CRISPR: Mechanism, Applications, Methods & More\nIrregular Protein Expression After CRISPR Edits: Troubleshooting Tips\nCRISPR Editing in Primary Cells"
   },
   {
     "objectID": "crispr/index.html#design",
     "href": "crispr/index.html#design",
-    "title": "CRISPR",
+    "title": "CRISPR-Cas Tools",
     "section": "",
     "text": "Guide Design Resources\nNew CRISPR Method Allows Scientists to Understand Impact of Subtle Mutations\nCRISPR Transfection Protocols Guide: How To Select The Best Method\nHow To Use CRISPR: Your Guide to Successful Genome Engineering\nThe Ultimate Guide To CRISPR: Mechanism, Applications, Methods & More\nIrregular Protein Expression After CRISPR Edits: Troubleshooting Tips\nCRISPR Editing in Primary Cells"
   },
   {
     "objectID": "crispr/index.html#protocol",
     "href": "crispr/index.html#protocol",
-    "title": "CRISPR",
+    "title": "CRISPR-Cas Tools",
     "section": "Protocol",
     "text": "Protocol\n\nCrispR screen analysis using R and Bioconductor"
   },
@@ -1437,56 +1437,70 @@
   {
     "objectID": "immune/index.html",
     "href": "immune/index.html",
-    "title": "Immune!",
+    "title": "Learning Immunology!",
     "section": "",
     "text": "Lymphatic system"
   },
   {
+    "objectID": "keyboard/index.html",
+    "href": "keyboard/index.html",
+    "title": "Commonly used Keyboard Shortcuts",
+    "section": "",
+    "text": "Ctrl + A              # Move the cursor to the beginning of the line                       \nCtrl + E              # Move the cursor to the end of the line                             \nOpt  + ←              # Move the cursor one word backward                                  \nOpt  + →              # Move the cursor one word forward                                   \n←                     # Move the cursor one character backward                             \n→                     # Move the cursor one character forward                              \n\nCtrl + U              # Delete the current line                                            \nCtrl + K              # Delete from the cursor to the end of the line                      \nCtrl + L              # Clear the screen                                                   \nCtrl + W              # Delete one word backward                                           \nCtrl + D              # Delete one character forward                                       \nFn   + Backspace      # Delete one character forward                                       \nBackspace             # Delete one character backward                                      \n\nCtrl + _              # Undo the last change                                               \nCtrl + C              # Terminate the running foreground process                           \nCtrl + Z              # Suspend the running foreground process                             \nCtrl + D              # Exit current shell                                                 \n↑                     # Recall the previous command in history                             \n↓                     # Recall the next command in history                                 \nCtrl + R              # Search the command history                                         \nCtrl + G              # Escape from command search mode                                    \n!!                    # Execute the last typed command                                     \n!pw                   # Execute the last command in history that begins with pw            \nTAB                   # Auto-complete the typed command                                    \nTAB TAB               # Show list of commands                                              \nTAB TAB TAB ...       # Cycle through matched commands"
+  },
+  {
     "objectID": "keyboard/index.html#zshbash",
     "href": "keyboard/index.html#zshbash",
-    "title": "Keyboard",
-    "section": "Zsh/Bash",
-    "text": "Zsh/Bash\nCtrl + A              # Move the cursor to the beginning of the line                       \nCtrl + E              # Move the cursor to the end of the line                             \nOpt  + ←              # Move the cursor one word backward                                  \nOpt  + →              # Move the cursor one word forward                                   \n←                     # Move the cursor one character backward                             \n→                     # Move the cursor one character forward                              \n\nCtrl + U              # Delete the current line                                            \nCtrl + K              # Delete from the cursor to the end of the line                      \nCtrl + L              # Clear the screen                                                   \nCtrl + W              # Delete one word backward                                           \nCtrl + D              # Delete one character forward                                       \nFn   + Backspace      # Delete one character forward                                       \nBackspace             # Delete one character backward                                      \n\nCtrl + _              # Undo the last change                                               \nCtrl + C              # Terminate the running foreground process                           \nCtrl + Z              # Suspend the running foreground process                             \nCtrl + D              # Exit current shell                                                 \n↑                     # Recall the previous command in history                             \n↓                     # Recall the next command in history                                 \nCtrl + R              # Search the command history                                         \nCtrl + G              # Escape from command search mode                                    \n!!                    # Execute the last typed command                                     \n!pw                   # Execute the last command in history that begins with pw            \nTAB                   # Auto-complete the typed command                                    \nTAB TAB               # Show list of commands                                              \nTAB TAB TAB ...       # Cycle through matched commands"
+    "title": "Commonly used Keyboard Shortcuts",
+    "section": "",
+    "text": "Ctrl + A              # Move the cursor to the beginning of the line                       \nCtrl + E              # Move the cursor to the end of the line                             \nOpt  + ←              # Move the cursor one word backward                                  \nOpt  + →              # Move the cursor one word forward                                   \n←                     # Move the cursor one character backward                             \n→                     # Move the cursor one character forward                              \n\nCtrl + U              # Delete the current line                                            \nCtrl + K              # Delete from the cursor to the end of the line                      \nCtrl + L              # Clear the screen                                                   \nCtrl + W              # Delete one word backward                                           \nCtrl + D              # Delete one character forward                                       \nFn   + Backspace      # Delete one character forward                                       \nBackspace             # Delete one character backward                                      \n\nCtrl + _              # Undo the last change                                               \nCtrl + C              # Terminate the running foreground process                           \nCtrl + Z              # Suspend the running foreground process                             \nCtrl + D              # Exit current shell                                                 \n↑                     # Recall the previous command in history                             \n↓                     # Recall the next command in history                                 \nCtrl + R              # Search the command history                                         \nCtrl + G              # Escape from command search mode                                    \n!!                    # Execute the last typed command                                     \n!pw                   # Execute the last command in history that begins with pw            \nTAB                   # Auto-complete the typed command                                    \nTAB TAB               # Show list of commands                                              \nTAB TAB TAB ...       # Cycle through matched commands"
   },
   {
     "objectID": "keyboard/index.html#tmux",
     "href": "keyboard/index.html#tmux",
-    "title": "Keyboard",
+    "title": "Commonly used Keyboard Shortcuts",
     "section": "Tmux",
     "text": "Tmux\n### Change defautl prefix in .tmux.conf\nset-option -g prefix C-a\nbind-key C-a send-prefix\n\n### To enter copy mode, drag mouse to select text first, then paste with \nCtrl + A + ]\n\n### Sessions\ntmux list-sessions\ntmux attach-session -t target-session\nCtrl + A + s     # Switch between seesion\nCtrl + A + l     # Switch to the lastest session, regardless of whether it was detached or attached\nCtrl + A + d     # Detach from linux screen session\n\n### Windows\nCtrl + A + w     # List all windows (the current window is marked with \"*\").\nCtrl + A + ,     # Rename current window\nCtrl + A + →     # Switch to the next window.                                \nCtrl + A + ←     # Switch to the previous window.                            \nCtrl + A + c     # create a new window.                         \nCtrl + A + q     # kill the current window.                                  \n\n### Panes\nShift + ↑     # Switch to the pane above the current one\nShift + ↓     # Switch to the pane below the current one\nShift + ←     # Switch to the pane left of the current one\nShift + →     # Switch to the pane right of the current one\nCtrl + A + x     # kill the current pane."
   },
   {
     "objectID": "keyboard/index.html#screen",
     "href": "keyboard/index.html#screen",
-    "title": "Keyboard",
+    "title": "Commonly used Keyboard Shortcuts",
     "section": "Screen",
     "text": "Screen\n### General commands\nscreen                   # start a screen session\nscreen -S session_name   # start a named session\nscreen -r                # reattach to a linux screen\nscreen -ls               # list the current running screen session\n\n### Shortcuts\nCtrl + A + C            # create a new window (with shell).\nCtrl + A + K            # kill the current window.\nCtrl + A + W            # list all windows (the current window is marked with \"*\") .\nCtrl + A + 0-9          # go to a window numbered 0-9 .\nCtrl + A + N            # go to the next window.\nCtrl + A  Ctrl + A      # toggle between the current and previous window.\nCtrl + A + A            # rename the current window.\nCtrl + A + S            # split current region horizontally into two regions.\nCtrl + A + |            # split current region vertically into two regions.\nCtrl + A + Tab          # switch the input focus to the next region.\nCtrl + A + Ctrl + A     # toggle between the current and previous windows\nCtrl + A + Q            # close all regions but the current one.\nCtrl + A + X            # close the current region.\nCtrl + A + D            # detach from linux screen session\nCtrl + A + [            # start copy mode\nCtrl + A + ]            # paste copied text\nCtrl + A + ?            # help, display  a list commands\nCtrl + A + Ctrl + \\     # quit screen"
   },
   {
     "objectID": "keyboard/index.html#vim",
     "href": "keyboard/index.html#vim",
-    "title": "Keyboard",
+    "title": "Commonly used Keyboard Shortcuts",
     "section": "Vim",
     "text": "Vim\n### Modes\ni    # Switch to insert mode, so you can type\nesc  # Swith to command mode (normal mode)\n\n### Saving and quiting\n:w   # Write (save)\n:q   # Quit\n:wq  # write and quit\n:q!  # Quit without saving\n\n### Using arrow keys\nh        # Left\nj        # Down\nk        # Up \nl        # Right\n\n###\nw        # Next word \nb        # Previous word\n\n/text    # Serach for text\ngg       # Go to the first line\nG        # Go to the last line\n33G      # go to line 33\n\n###"
   },
   {
     "objectID": "keyboard/index.html#vscode",
     "href": "keyboard/index.html#vscode",
-    "title": "Keyboard",
+    "title": "Commonly used Keyboard Shortcuts",
     "section": "VSCode",
     "text": "VSCode\n\nMac\n### General\nCmd  +  Shift + P      # Command Palette                       \nCmd  +  ,              # Open settings                         \nCmd  +  K  Cmd + S     # Keyboard shoutcuts                    \nCmd  +  B              # Toggle sidebar                        \n\n### Terminal\nCmd   + `              # Open/close the terminal                     \nCmd   + Shift + `      # Create a new the terminal                     \nCtrl  + Pgup           # Switch between terminal\nCtrl  + Pgdn           # Switch between terminal\nCmd   + \\              # Split pane within a terminal\n\n### Editor\nCmd   + Shift + N      # Open new window                       \nCmd   + Shift + W      # Close window                          \nCmd   + W              # Close tab                             \nCmd   + \\              # Split the editor                            \nCmd   + Shift + Tab    # Navigate tabs                         \nCmd   + 1 / 2 / 3      # Navigate tab groups                   \nCtrl  + 1 / 2 / 3      # Navigate window groups                   \n\n### Text\nCmd   + Opt + ↑ / ↓    # Multiple cursor                       \nCmd   + Shift + ↑ / ↓  # Select text                           \nOpt   + ↑ / ↓          # Move the line Up / Down               \nShift + Opt + ↑ / ↓    # Copy line Up / Down                   \nCmd   + D              # Select word                           \nCmd   + L              # Select current line                   \nCmd   + Shift + L      # Select similar occurrences            \nCmd   + Shift + K      # Delete current line                   \nCmd   + Backspace      # Delete one word backward              \nOpt   + Backspace      # Delete one word backward              \n\nCmd   + /              # Comment lines                         \nCmd   + G              # Navigate to  line                     \nCmd   + Opt + [  /  ]  # Code folding                          \nCmd   + [  /  ]        # Indent / outdent lines                \nCmd   + K   Cmd + F    # Format selected code                  \nShift + Opt + F        # Format document                       \nOpt   + ← / →          # Go to the start / end of the word     \nCmd   + ← / →          # Go to the start / end of the line     \nCmd   + ↑ / ↓          # Go to beginning or end of file        \nCmd   + Shift + F      # Search files                          \nCmd   + F              # Find text                             \nCmd   + Opt + F        # Replace text                          \n\n\nWindows\nCtrl + Shift + P         # Command Palette                   \nCtrl + ,                 # Open settings                     \nCtrl + K   Ctrl + S      # Keyboard shoutcuts                \nCtrl + B                 # Toggle sidebar                    \n\nCtrl + Shift + N         # Open new window                   \nCtrl + Shift + W         # Close window                      \nCtrl + W                 # Close tab                         \nCtrl  + J                # Open the terminal                 \nCtrl + \\                 # Split view                        \nCtrl + Shift + Tab       # Navigate tabs                     \nCtrl + 1 / 2 / 3         # Navigate tab groups               \n\nCtrl + Opt + ↑ / ↓       # Multiple cursor                   \nCtrl + Shift + ↑ / ↓     # Select text                       \nAlt + ↑ / ↓              # Move the line Up / Down           \nShift + Alt + ↑ / ↓      # Copy line Up / Down               \nCtrl + D                 # Select word                       \nCtrl + L                 # Select current line               \nCtrl + Shift + L         # Select similar occurrences        \nCtrl + Shift + K         # Delete current line               \nCtrl + Backspace         # Delete one word backward          \nAlt + Backspace          # Delete one word backward          \nCtrl + G                 # Navigate to  line                 \n\nCtrl + /                 # Comment lines                     \nCtrl + Shift + [ / ]     # Code folding                      \nCtrl + [  /  ]           # Indent / outdent lines            \nCtrl + K   Ctrl + F      # Format selected code              \nShift + Alt + F          # Format document                   \nAlt + ← / →              # Go to the start / end of the word \nCtrl + ← / →             # Go to the start / end of the line \nCtrl + ↑ / ↓             # Go to beginning or end of file    \nCtrl + Shift + F         # Search files                      \nCtrl + F                 # Find text                         \nCtrl + H                 # Replace text"
   },
   {
-    "objectID": "python/index.html#basic-functions",
-    "href": "python/index.html#basic-functions",
-    "title": "Python",
-    "section": "Basic functions",
-    "text": "Basic functions\ntype() # what type of a variable\nlen() # length of \nrange()\nlist()\ntuple()\ndict()\nstrings # a sequence of letter\nimmutable: Number (数字), String(字符), Tuple (元组)\nmutable: List（列表）, Dictionary（字典）, Set(集合)\n# Conidtional execution\nif / elif / else\n\n# Comparison operators\n## Numerical comparison operators include:\n&lt;       # less than\n&gt;       # greater than\n&lt;=      # less than or equal to\n&gt;=      # greater than or equal to\n==      # equal to\n!=      # not equal to\n## String comparison operators include:\n==      # equal to\n!=      # not equal to\n## Logical Operators\nand, or, not\n\n# Iteration/Lopps\nfor          # used when the number of possible iterations are known in advance\nwhile        # used when the number of possible iterations can not be defined in advance\nbreak        # it stops the iteration immediately and moves on to the statement that follows the looping\ncontinue     # it skips the rest of the steps but moves on to the next iteration\ntry / except # Exceptions are errors that are found during execution of the Python program"
+    "objectID": "python/index.html",
+    "href": "python/index.html",
+    "title": "Python Programming",
+    "section": "",
+    "text": "Number\nString\nTuple\nList: Mutable, container\nDictionary: Mutable, container\nSet: Mutable, container\nNone: empty value\n\ntuple = (1, 2, 3)\nlist = [1, 2, 3]\ndict = {\"ele1\":1, \"ele2\":2, \"ele3\":3}\n\n\n\nNumerical Operators: - &lt; : less than - &gt; : greater than - &lt;= : less than or equal to - &gt;= : greater than or equal to - == : equal to - != : not equal to\nString Operators: - == : equal to - != : not equal to\nLogical Operators: - and - or - not\n\n\n\nConditional execution in Python is achieved using the if/else construct (if and else are reserved words).\n# Conidtional execution\nx = 10\nif x &gt; 10:\n    print(\"I am a big number\")\nelse:\n    print(\"I am a small number\")\n\n# Multi-way if/else\nx = 10\nif x &gt; 10:\n    print(\"I am a big number\")\nelif x &gt; 5:\n    print(\"I am kind of small\")\nelse:\n    print(\"I am really number\")\n\n\n\nTwo looping constructs in Python\n\nFor : used when the number of possible iterations (repetitions) are known in advance\nWhile: used when the number of possible iterations (repetitions) can not be defined in advance. Can lead to infinite loops, if conditions are not handled properly\n\nfor customer in [“John”, “Mary”, “Jane”]:\n    print(“Hello ”, customer)\n    print(“Please pay”)\n    collectCash()\n    giveGoods()\n\nhour_of_day = 9\nwhile hour_of_day &lt; 17:\n    moveToWarehouse()\n    locateGoods()\n    moveGoodsToShip()\n    hour_of_day = getCurrentTime()\nWhat happens if you need to stop early? We use the break keyword to do this.\nIt stops the iteration immediately and moves on to the statement that follows the looping\nwhile hour_of_day &lt; 17:\n    if shipIsFull() == True:\n        break\n    moveToWarehouse()\n    locateGoods()\n    moveGoodsToShip()\n    hour_of_day = getCurrentTime()\ncollectPay()\nWhat happens when you want to just skip the rest of the steps? We can use the continue keyword for this.\nIt skips the rest of the steps but moves on to the next iteration.\nfor customer in [\"John\", \"Mary\", \"Jane\"]:\n    print(“Hello ”, customer)\n    print(“Please pay”)\n    paid = collectCash()\n    if paid == false:\n        continue\n    giveGoods()\n\n\n\n\nExceptions are errors that are found during execution of the Python program.\nThey typically cause the program to fail.\nHowever we can handle them using the ‘try/except’ construct.\n\nnum = input(\"Please enter a number: \")\ntry:\n    num = int(num)\n    print(\"number squared is \" + str(num**2))\nexcept:\n    print(\"You did not enter a valid number\")\n\n\n\nhelp()\ntype()\nlen() \nrange()\nlist()      \ntuple()\ndict()"
+  },
+  {
+    "objectID": "python/index.html#basic-concepts",
+    "href": "python/index.html#basic-concepts",
+    "title": "Python Programming",
+    "section": "",
+    "text": "Number\nString\nTuple\nList: Mutable, container\nDictionary: Mutable, container\nSet: Mutable, container\nNone: empty value\n\ntuple = (1, 2, 3)\nlist = [1, 2, 3]\ndict = {\"ele1\":1, \"ele2\":2, \"ele3\":3}\n\n\n\nNumerical Operators: - &lt; : less than - &gt; : greater than - &lt;= : less than or equal to - &gt;= : greater than or equal to - == : equal to - != : not equal to\nString Operators: - == : equal to - != : not equal to\nLogical Operators: - and - or - not\n\n\n\nConditional execution in Python is achieved using the if/else construct (if and else are reserved words).\n# Conidtional execution\nx = 10\nif x &gt; 10:\n    print(\"I am a big number\")\nelse:\n    print(\"I am a small number\")\n\n# Multi-way if/else\nx = 10\nif x &gt; 10:\n    print(\"I am a big number\")\nelif x &gt; 5:\n    print(\"I am kind of small\")\nelse:\n    print(\"I am really number\")\n\n\n\nTwo looping constructs in Python\n\nFor : used when the number of possible iterations (repetitions) are known in advance\nWhile: used when the number of possible iterations (repetitions) can not be defined in advance. Can lead to infinite loops, if conditions are not handled properly\n\nfor customer in [“John”, “Mary”, “Jane”]:\n    print(“Hello ”, customer)\n    print(“Please pay”)\n    collectCash()\n    giveGoods()\n\nhour_of_day = 9\nwhile hour_of_day &lt; 17:\n    moveToWarehouse()\n    locateGoods()\n    moveGoodsToShip()\n    hour_of_day = getCurrentTime()\nWhat happens if you need to stop early? We use the break keyword to do this.\nIt stops the iteration immediately and moves on to the statement that follows the looping\nwhile hour_of_day &lt; 17:\n    if shipIsFull() == True:\n        break\n    moveToWarehouse()\n    locateGoods()\n    moveGoodsToShip()\n    hour_of_day = getCurrentTime()\ncollectPay()\nWhat happens when you want to just skip the rest of the steps? We can use the continue keyword for this.\nIt skips the rest of the steps but moves on to the next iteration.\nfor customer in [\"John\", \"Mary\", \"Jane\"]:\n    print(“Hello ”, customer)\n    print(“Please pay”)\n    paid = collectCash()\n    if paid == false:\n        continue\n    giveGoods()\n\n\n\n\nExceptions are errors that are found during execution of the Python program.\nThey typically cause the program to fail.\nHowever we can handle them using the ‘try/except’ construct.\n\nnum = input(\"Please enter a number: \")\ntry:\n    num = int(num)\n    print(\"number squared is \" + str(num**2))\nexcept:\n    print(\"You did not enter a valid number\")\n\n\n\nhelp()\ntype()\nlen() \nrange()\nlist()      \ntuple()\ndict()"
   },
   {
     "objectID": "python/index.html#reference",
     "href": "python/index.html#reference",
-    "title": "Python",
+    "title": "Python Programming",
     "section": "Reference",
     "text": "Reference\n\nhttps://www.py4e.com/\nhttps://omgenomics.com/\nhttps://www.coursera.org/learn/bioinformatics\nhttp://do1.dr-chuck.com/pythonlearn/EN_us/pythonlearn.pdf\nhttps://www.py4e.com/html3\nhttp://do1.dr-chuck.com/pythonlearn/EN_us/pythonlearn.epub\nPrimer on Python for R Users"
   },
@@ -1495,28 +1509,28 @@
     "href": "spatial/index.html",
     "title": "Spatial",
     "section": "",
-    "text": "Imaging-based phenotypic profiling enables systematic quantification of complex cellular phenotypes and tissue organizations under different treatment and disease conditions."
+    "text": "Enabling technologies from : Seferbekova, Zaira, Artem Lomakin, Lucy R. Yates, and Moritz Gerstung. “Spatial Biology of Cancer Evolution.” Nature Reviews Genetics 24, no. 5 (May 2023): 295–313. https://doi.org/10.1038/s41576-022-00553-x.\n\n\n\nBaSISS, base-specific ISS;\nCODEX, co-detection by indexing;\ncorrFISH, correlation FISH;\nDBiT-seq, deterministic barcoding in tissue for spatial omics sequencing;\nepiMERFISH, epigenetic MERFISH; FISSEQ, fluorescent ISS; HDST, high-definition spatial transcriptomics;\nhybISS, hybridization-based ISS;\nImmunoSABER, immunostaining with signal amplification by exchange reaction;\nMIBI-TOF, MIBI by time of flight;\nosmFISH, ouroboros smFISH, pciSeq, probabilistic cell typing by ISS;\nsmFISH, single-molecule FISH; ST, spatial transcriptomics;\nSTARmap, spatially resolved transcript amplicon readout mapping;\nStereo-seq, spatial enhanced resolution omics sequencing;\nTSCS, topographic single-cell sequencing; Visium HD, Visium high definition.\n\n\n\n\nSpatial omic analysis from : Seferbekova, Zaira, Artem Lomakin, Lucy R. Yates, and Moritz Gerstung. “Spatial Biology of Cancer Evolution.” Nature Reviews Genetics 24, no. 5 (May 2023): 295–313. https://doi.org/10.1038/s41576-022-00553-x."
+  },
+  {
+    "objectID": "spatial/index.html#latest-review",
+    "href": "spatial/index.html#latest-review",
+    "title": "Spatial",
+    "section": "",
+    "text": "Enabling technologies from : Seferbekova, Zaira, Artem Lomakin, Lucy R. Yates, and Moritz Gerstung. “Spatial Biology of Cancer Evolution.” Nature Reviews Genetics 24, no. 5 (May 2023): 295–313. https://doi.org/10.1038/s41576-022-00553-x.\n\n\n\nBaSISS, base-specific ISS;\nCODEX, co-detection by indexing;\ncorrFISH, correlation FISH;\nDBiT-seq, deterministic barcoding in tissue for spatial omics sequencing;\nepiMERFISH, epigenetic MERFISH; FISSEQ, fluorescent ISS; HDST, high-definition spatial transcriptomics;\nhybISS, hybridization-based ISS;\nImmunoSABER, immunostaining with signal amplification by exchange reaction;\nMIBI-TOF, MIBI by time of flight;\nosmFISH, ouroboros smFISH, pciSeq, probabilistic cell typing by ISS;\nsmFISH, single-molecule FISH; ST, spatial transcriptomics;\nSTARmap, spatially resolved transcript amplicon readout mapping;\nStereo-seq, spatial enhanced resolution omics sequencing;\nTSCS, topographic single-cell sequencing; Visium HD, Visium high definition.\n\n\n\n\nSpatial omic analysis from : Seferbekova, Zaira, Artem Lomakin, Lucy R. Yates, and Moritz Gerstung. “Spatial Biology of Cancer Evolution.” Nature Reviews Genetics 24, no. 5 (May 2023): 295–313. https://doi.org/10.1038/s41576-022-00553-x."
   },
   {
     "objectID": "spatial/index.html#motivation",
     "href": "spatial/index.html#motivation",
     "title": "Spatial",
-    "section": "",
-    "text": "Imaging-based phenotypic profiling enables systematic quantification of complex cellular phenotypes and tissue organizations under different treatment and disease conditions."
+    "section": "Motivation",
+    "text": "Motivation\n\nImaging-based phenotypic profiling enables systematic quantification of complex cellular phenotypes and tissue organizations under different treatment and disease conditions.\nCompare the morphology of cells from patients with and without disease, if we can find a difference in their profiles, this can serve as a diagnostic tool.\nEven better, we can test thousands of drugs to find any that are able to reverse the disease profile and make cells looks healthy again."
   },
   {
-    "objectID": "spatial/index.html#accelerate-drug-development",
-    "href": "spatial/index.html#accelerate-drug-development",
+    "objectID": "spatial/index.html#typical-analysis-workflow",
+    "href": "spatial/index.html#typical-analysis-workflow",
     "title": "Spatial",
-    "section": "Accelerate drug development",
-    "text": "Accelerate drug development\n\nCompare the morphology of cells from patients with and without disease, if we can find a difference in their profiles, this can serve as a diagnostic tool.\nEven better, we can test thousands of drugs to find any that are able to reverse the disease profile and make cells looks healthy again."
-  },
-  {
-    "objectID": "spatial/index.html#image-based-cell-profiling-workflow",
-    "href": "spatial/index.html#image-based-cell-profiling-workflow",
-    "title": "Spatial",
-    "section": "Image-based Cell Profiling workflow",
-    "text": "Image-based Cell Profiling workflow\n\nStep1: Image analysis\n\n\nStep2: Image quality control\n\n\nStep3: Preprocessing extracted features\n\n\nStep4: Dimensionality reduction\n\n\nStep5: Single-cell data aggregation\n\n\nStep6: Measuring profile similarity\n\n\nStep7: Assay quality assessment\n\n\nStep8: Downstream analysis"
+    "section": "Typical Analysis workflow",
+    "text": "Typical Analysis workflow\n\nStep1: Image analysis\nStep2: Image quality control\nStep3: Preprocessing extracted features\nStep4: Dimensionality reduction\nStep5: Single-cell data aggregation\nStep6: Measuring profile similarity\nStep7: Assay quality assessment\nStep8: Downstream analysis"
   },
   {
     "objectID": "spatial/index.html#reference",

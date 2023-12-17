@@ -1,5 +1,5 @@
 ---
-title: R
+title: R Programming
 date: 2020-09-09
 title-block-banner: "#212529"
 date-modified: last-modified
@@ -11,42 +11,42 @@ toc-title: "Contents"
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-    # fig.width = 6, 
-    # fig.height = 3.8,
-    fig.align = "center", 
-    # fig.retina = 3,
-    out.width = "100%", 
-    warning = FALSE,
-    # evaluate = FALSE,
-    collapse = TRUE
+    # evaluate = FALSE, # fig.width = 6, # fig.height = 3.8, # fig.retina = 3,
+    fig.align = "center", out.width = "100%", warning = FALSE, collapse = TRUE
 )
 ```
-## Basic functions
+## Basic concepts
+
+### Data structure
+
+![](R_data_structure.png)
+
+### General functions
 
 ```r
-ls()            # list the variables in the workspace
-rm()            # remove the variable from workspace
-rm(list = ls()) # remove all the variables from the workspace
-.libPaths()     # R installation site
-colnames(installed.packages())   # list the installed packages
-help(package="")   # Check the functions of R library
+dir()                            # Show the directory
+getwd()                          # Check working directory
+setwd()                          # Change working directory
+data()                           # Load built-in dataset
+view()                           # View the entire dataset
+tail()                           # Just show the last 6 rows
+class()                          # Check the class of an R object
+str()                            # Display internal structure of an R object
+length()                         # Give length of a vector
+dim()                            # View the number of rows and columns of a matrix or a data frame
+names()                          # List names of variables in a data frame
+set.seed()                       # Generate random number seed to make sure the results do not change.
+ls()                             # list the variables in the workspace
+rm()                             # remove the variable from workspace
+rm(list = ls())                  # remove all the variables from the workspace
+list.files()                     # List the filename under specific directory
+.libPaths()                      # R installation site
+help(package="")                 # Check the functions of R library
 system.file(package=“dagdata”)   # Extract the location of package
-list.files()   # List the filename under specific directory
-dir()          # 
-getwd()        # Check working directory
-setwd()        # Change working directory
-data()         # Load built-in dataset
-view()         # View the entire dataset
-tail()         # Just show the last 6 rows
-class()        # Check the class of an R object
-str()          # Display internal structure of an R object
-length()       # Give length of a vector
-dim()          # View the number of rows and columns of a matrix or a data frame
-names()        # List names of variables in a data frame
-set.seed()     # Generate random number seed to make sure the results do not change.
+colnames(installed.packages())   # list the installed packages
 ```
 
-## Best practise
+## Best practise for R coding
 
 - Variables = my_variable
 - Functions = RunThisStuffs()

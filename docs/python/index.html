@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2023-12-16">
 
-<title>Guorui Zhong - Python</title>
+<title>Guorui Zhong - Python Programming</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -183,7 +183,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Python</h1>
+      <h1 class="title">Python Programming</h1>
                       </div>
   </div>
     
@@ -201,7 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">December 16, 2023</p>
+        <p class="date-modified">December 17, 2023</p>
       </div>
     </div>
       
@@ -215,8 +215,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#data-structures" id="toc-data-structures" class="nav-link active" data-scroll-target="#data-structures">Data structures</a></li>
-  <li><a href="#basic-functions" id="toc-basic-functions" class="nav-link" data-scroll-target="#basic-functions">Basic functions</a></li>
+  <li><a href="#basic-concepts" id="toc-basic-concepts" class="nav-link active" data-scroll-target="#basic-concepts">Basic concepts</a>
+  <ul class="collapse">
+  <li><a href="#data-structure" id="toc-data-structure" class="nav-link" data-scroll-target="#data-structure">Data structure</a></li>
+  <li><a href="#variable" id="toc-variable" class="nav-link" data-scroll-target="#variable">Variable</a></li>
+  <li><a href="#operators" id="toc-operators" class="nav-link" data-scroll-target="#operators">Operators</a></li>
+  <li><a href="#conditional-execution" id="toc-conditional-execution" class="nav-link" data-scroll-target="#conditional-execution">Conditional execution</a></li>
+  <li><a href="#iterationlopps" id="toc-iterationlopps" class="nav-link" data-scroll-target="#iterationlopps">Iteration/Lopps</a></li>
+  <li><a href="#exceptions" id="toc-exceptions" class="nav-link" data-scroll-target="#exceptions">Exceptions</a></li>
+  <li><a href="#general-functions" id="toc-general-functions" class="nav-link" data-scroll-target="#general-functions">General functions</a></li>
+  </ul></li>
   <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
   </ul>
 </nav>
@@ -231,44 +239,115 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="data-structures" class="level2">
-<h2 class="anchored" data-anchor-id="data-structures">Data structures</h2>
+<section id="basic-concepts" class="level2">
+<h2 class="anchored" data-anchor-id="basic-concepts">Basic concepts</h2>
+<section id="data-structure" class="level3">
+<h3 class="anchored" data-anchor-id="data-structure">Data structure</h3>
 <p><img src="types.png" class="img-fluid"></p>
 </section>
-<section id="basic-functions" class="level2">
-<h2 class="anchored" data-anchor-id="basic-functions">Basic functions</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>() <span class="co"># what type of a variable</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>() <span class="co"># length of </span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">range</span>()</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>()</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">tuple</span>()</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">dict</span>()</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>strings <span class="co"># a sequence of letter</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>immutable: Number (数字), String(字符), Tuple (元组)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>mutable: List（列表）, Dictionary（字典）, Set(集合)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="variable" class="level3">
+<h3 class="anchored" data-anchor-id="variable">Variable</h3>
+<ul>
+<li><code>Number</code></li>
+<li><code>String</code></li>
+<li><code>Tuple</code></li>
+<li><code>List</code>: Mutable, container</li>
+<li><code>Dictionary</code>: Mutable, container</li>
+<li><code>Set</code>: Mutable, container</li>
+<li><code>None</code>: empty value</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">tuple</span> <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span> <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">dict</span> <span class="op">=</span> {<span class="st">"ele1"</span>:<span class="dv">1</span>, <span class="st">"ele2"</span>:<span class="dv">2</span>, <span class="st">"ele3"</span>:<span class="dv">3</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="operators" class="level3">
+<h3 class="anchored" data-anchor-id="operators">Operators</h3>
+<p>Numerical Operators: - <code>&lt;</code> : less than - <code>&gt;</code> : greater than - <code>&lt;=</code> : less than or equal to - <code>&gt;=</code> : greater than or equal to - <code>==</code> : equal to - <code>!=</code> : not equal to</p>
+<p>String Operators: - <code>==</code> : equal to - <code>!=</code> : not equal to</p>
+<p>Logical Operators: - and - or - not</p>
+</section>
+<section id="conditional-execution" class="level3">
+<h3 class="anchored" data-anchor-id="conditional-execution">Conditional execution</h3>
+<p>Conditional execution in Python is achieved using the if/else construct (if and else are reserved words).</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conidtional execution</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">/</span> <span class="cf">elif</span> <span class="op">/</span> <span class="cf">else</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparison operators</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">## Numerical comparison operators include:</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>       <span class="co"># less than</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span>       <span class="co"># greater than</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;=</span>      <span class="co"># less than or equal to</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;=</span>      <span class="co"># greater than or equal to</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">==</span>      <span class="co"># equal to</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="op">!=</span>      <span class="co"># not equal to</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">## String comparison operators include:</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="op">==</span>      <span class="co"># equal to</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">!=</span>      <span class="co"># not equal to</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">## Logical Operators</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="kw">and</span>, <span class="kw">or</span>, <span class="kw">not</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Iteration/Lopps</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>          <span class="co"># used when the number of possible iterations are known in advance</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span>        <span class="co"># used when the number of possible iterations can not be defined in advance</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="cf">break</span>        <span class="co"># it stops the iteration immediately and moves on to the statement that follows the looping</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="cf">continue</span>     <span class="co"># it skips the rest of the steps but moves on to the next iteration</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span> <span class="op">/</span> <span class="cf">except</span> <span class="co"># Exceptions are errors that are found during execution of the Python program</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">10</span>:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"I am a big number"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"I am a small number"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Multi-way if/else</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">10</span>:</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"I am a big number"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> x <span class="op">&gt;</span> <span class="dv">5</span>:</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"I am kind of small"</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"I am really number"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="iterationlopps" class="level3">
+<h3 class="anchored" data-anchor-id="iterationlopps">Iteration/Lopps</h3>
+<p>Two looping constructs in Python</p>
+<ul>
+<li><p><code>For</code> : used when the number of possible iterations (repetitions) are known in advance</p></li>
+<li><p><code>While</code>: used when the number of possible iterations (repetitions) can not be defined in advance. Can lead to infinite loops, if conditions are not handled properly</p></li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> customer <span class="kw">in</span> [“John”, “Mary”, “Jane”]:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(“Hello ”, customer)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(“Please pay”)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    collectCash()</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    giveGoods()</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>hour_of_day <span class="op">=</span> <span class="dv">9</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> hour_of_day <span class="op">&lt;</span> <span class="dv">17</span>:</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    moveToWarehouse()</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    locateGoods()</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    moveGoodsToShip()</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    hour_of_day <span class="op">=</span> getCurrentTime()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>What happens if you need to stop early? We use the <code>break</code> keyword to do this.</p>
+<p>It stops the iteration immediately and moves on to the statement that follows the looping</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> hour_of_day <span class="op">&lt;</span> <span class="dv">17</span>:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> shipIsFull() <span class="op">==</span> <span class="va">True</span>:</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    moveToWarehouse()</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    locateGoods()</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    moveGoodsToShip()</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    hour_of_day <span class="op">=</span> getCurrentTime()</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>collectPay()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>What happens when you want to just skip the rest of the steps? We can use the <code>continue</code> keyword for this.</p>
+<p>It skips the rest of the steps but moves on to the next iteration.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> customer <span class="kw">in</span> [<span class="st">"John"</span>, <span class="st">"Mary"</span>, <span class="st">"Jane"</span>]:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(“Hello ”, customer)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(“Please pay”)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    paid <span class="op">=</span> collectCash()</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> paid <span class="op">==</span> false:</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    giveGoods()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="exceptions" class="level3">
+<h3 class="anchored" data-anchor-id="exceptions">Exceptions</h3>
+<ul>
+<li>Exceptions are errors that are found during execution of the Python program.</li>
+<li>They typically cause the program to fail.</li>
+<li>However we can handle them using the ‘try/except’ construct.</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>num <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Please enter a number: "</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    num <span class="op">=</span> <span class="bu">int</span>(num)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"number squared is "</span> <span class="op">+</span> <span class="bu">str</span>(num<span class="op">**</span><span class="dv">2</span>))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span>:</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"You did not enter a valid number"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="general-functions" class="level3">
+<h3 class="anchored" data-anchor-id="general-functions">General functions</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>()</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>() </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">range</span>()</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>()      </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="bu">tuple</span>()</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">dict</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 </section>
 <section id="reference" class="level2">
 <h2 class="anchored" data-anchor-id="reference">Reference</h2>

@@ -9,33 +9,46 @@ toc-location: left
 toc-title: "Contents"
 ---
 
+
+## Latest Review
+
+![Enabling technologies from : Seferbekova, Zaira, Artem Lomakin, Lucy R. Yates, and Moritz Gerstung. “Spatial Biology of Cancer Evolution.” Nature Reviews Genetics 24, no. 5 (May 2023): 295–313. https://doi.org/10.1038/s41576-022-00553-x.](spatial_cancer.png)
+
+- BaSISS, base-specific ISS; 
+- CODEX, co-detection by indexing; 
+- corrFISH, correlation FISH; 
+- DBiT-seq, deterministic barcoding in tissue for spatial omics sequencing; 
+- epiMERFISH, epigenetic MERFISH; FISSEQ, fluorescent ISS; HDST, high-definition spatial transcriptomics; 
+- hybISS, hybridization-based ISS; 
+- ImmunoSABER, immunostaining with signal amplification by exchange reaction; 
+- MIBI-TOF, MIBI by time of flight; 
+- osmFISH, ouroboros smFISH, pciSeq, probabilistic cell typing by ISS; 
+- smFISH, single-molecule FISH; ST, spatial transcriptomics; 
+- STARmap, spatially resolved transcript amplicon readout mapping; 
+- Stereo-seq, spatial enhanced resolution omics sequencing; 
+- TSCS, topographic single-cell sequencing; Visium HD, Visium high definition.
+
+
+![Spatial omic analysis from : Seferbekova, Zaira, Artem Lomakin, Lucy R. Yates, and Moritz Gerstung. “Spatial Biology of Cancer Evolution.” Nature Reviews Genetics 24, no. 5 (May 2023): 295–313. https://doi.org/10.1038/s41576-022-00553-x.](spatial_analysis.png)
+
+
 ## Motivation
 
 - Imaging-based phenotypic profiling enables systematic quantification of complex cellular phenotypes and tissue organizations under different treatment and disease conditions.
 
-## Accelerate drug development
-
 - Compare the morphology of cells from patients with and without disease, if we can find a difference in their profiles,  this can serve as a diagnostic tool.
 - Even better, we can test thousands of drugs to find any that are able to reverse the disease profile and make cells looks healthy again.
 
+## Typical Analysis workflow
 
-## Image-based Cell Profiling workflow
-
-### Step1: Image analysis
-
-### Step2: Image quality control
-
-### Step3: Preprocessing extracted features
-
-### Step4: Dimensionality reduction
-
-### Step5: Single-cell data aggregation
-
-### Step6: Measuring profile similarity
-
-### Step7: Assay quality assessment
-
-### Step8: Downstream analysis
+- Step1: Image analysis
+- Step2: Image quality control
+- Step3: Preprocessing extracted features
+- Step4: Dimensionality reduction
+- Step5: Single-cell data aggregation
+- Step6: Measuring profile similarity
+- Step7: Assay quality assessment
+- Step8: Downstream analysis
 
 
 
