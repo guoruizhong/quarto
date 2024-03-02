@@ -377,25 +377,25 @@ metadata |>
 
 ```{r}
 ## Visualize the number UMIs/transcripts per cell
-metadata |>  
-  	ggplot(aes(color=sample, x=nUMI, fill= sample)) + 
-  	geom_density(alpha = 0.2) + 
-  	scale_x_log10() + 
-  	theme_classic() +
-  	ylab("Cell density") +
-  	geom_vline(xintercept = 500)
+# metadata |>  
+#   	ggplot(aes(color=sample, x=nUMI, fill= sample)) + 
+#   	geom_density(alpha = 0.2) + 
+#   	scale_x_log10() + 
+#   	theme_classic() +
+#   	ylab("Cell density") +
+#   	geom_vline(xintercept = 500)
 ```
 
 ### Genes detected per cell
 
 ```{r}
 ## Visualize the distribution of genes detected per cell via histogram
-metadata |>  
-  	ggplot(aes(color=sample, x=nGene, fill= sample)) + 
-  	geom_density(alpha = 0.2) + 
-  	theme_classic() +
-  	scale_x_log10() + 
-  	geom_vline(xintercept = 300)
+# metadata |>  
+#   	ggplot(aes(color=sample, x=nGene, fill= sample)) + 
+#   	geom_density(alpha = 0.2) + 
+#   	theme_classic() +
+#   	scale_x_log10() + 
+#   	geom_vline(xintercept = 300)
 ```
 
 ### Complexity

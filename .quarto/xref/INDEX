@@ -838,5 +838,200 @@
   },
   "blog/2024/02/25/index.qmd": {
     "index.html": "bbd63b29"
+  },
+  "scrna/index.qmd": {
+    "index.html": "53bfb913"
+  },
+  "blog/2023/12/02/index.knit.md": {
+    "index.knit.html": "7883abc4"
+  },
+  "projects/IMCDataAnalysis/CHANGELOG.md": {
+    "CHANGELOG.html": "3359db7f"
+  },
+  "projects/IMCDataAnalysis/publication/protocol.md": {
+    "protocol.html": "ba05c323"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionI/homework/sessionI_hw.md": {
+    "sessionI_hw.html": "5b333e7f"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionI/homework/sessionI_hw_answer_key.md": {
+    "sessionI_hw_answer_key.html": "367c1de3"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionI/old_readme.md": {
+    "old_readme.html": "46f15603"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionII/homework/sessionII_hw.md": {
+    "sessionII_hw.html": "9588fd78"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionII/lessons/basic_plots_in_r.md": {
+    "basic_plots_in_r.html": "d921b926"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionII/old_readme.md": {
+    "old_readme.html": "6a639c69"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionIII/homework/sessionIII_hw.md": {
+    "sessionIII_hw.html": "0f81f640"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionIII/homework/sessionIII_hw_answer_key.md": {
+    "sessionIII_hw_answer_key.html": "40d0b062"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionIII/lessons/Ensembl_biomart.md": {
+    "Ensembl_biomart.html": "1ba97c5a"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionIII/lessons/functional_analysis.md": {
+    "functional_analysis.html": "a1d62e1b"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionIII/lessons/functional_analysis_other_methods.md": {
+    "functional_analysis_other_methods.html": "dccc84f2"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionIII/lessons/principal_component_analysis.md": {
+    "principal_component_analysis.html": "c2080116"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionIII/old_readme.md": {
+    "old_readme.html": "4ed2f394"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionIV/homework/sessionIV_hw.md": {
+    "sessionIV_hw.html": "aae4e790"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionIV/homework/sessionIV_hw_answer_key.md": {
+    "sessionIV_hw_answer_key.html": "272488c8"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionIV/homework/sessionIV_scrnaseq_hw.md": {
+    "sessionIV_scrnaseq_hw.html": "d84b0b51"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionIV/homework/sessionIV_scrnaseq_hw_answer_key.md": {
+    "sessionIV_scrnaseq_hw_answer_key.html": "8f63a7d4"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionIV/lessons/SC_clustering_analysis.md": {
+    "SC_clustering_analysis.html": "43fd09ca"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionIV/lessons/SC_marker_identification.md": {
+    "SC_marker_identification.html": "bae11248"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionIV/lessons/SC_pre-QC.md": {
+    "SC_pre-QC.html": "bbf18eff"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionIV/lessons/SC_quality_control_analysis.md": {
+    "SC_quality_control_analysis.html": "90a9d5b9"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionIV/lessons/bcbio_nextgen.md": {
+    "bcbio_nextgen.html": "f2403ab1"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionIV/lessons/biological_databases_NCBI.md": {
+    "biological_databases_NCBI.html": "e956355d"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionIV/lessons/biological_databases_UCSC.md": {
+    "biological_databases_UCSC.html": "2a2791b7"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionIV/lessons/sailfish.md": {
+    "sailfish.html": "fd16bdd8"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionIV/old_readme.md": {
+    "old_readme.html": "a623df68"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/chip-seq-directory.md": {
+    "chip-seq-directory.html": "e678660a"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/homework/sessionV_hw.md": {
+    "sessionV_hw.html": "d7e8eff7"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/homework/sessionV_hw_answer_key.md": {
+    "sessionV_hw_answer_key.html": "66629a4a"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/lessons/01_Intro_chipseq_data_organization.md": {
+    "01_Intro_chipseq_data_organization.html": "2784cf3b"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/lessons/02_QC_FASTQC.md": {
+    "02_QC_FASTQC.html": "54da56f9"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/lessons/03_align_and_filtering.md": {
+    "03_align_and_filtering.html": "8bf07d13"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/lessons/04_peak_calling_macs.md": {
+    "04_peak_calling_macs.html": "1883aa6e"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/lessons/05_combine_chipQC_and_metrics.md": {
+    "05_combine_chipQC_and_metrics.html": "e7ad37df"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/lessons/06_handling-replicates-bedtools.md": {
+    "06_handling-replicates-bedtools.html": "53d29198"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/lessons/07_handling-replicates-idr.md": {
+    "07_handling-replicates-idr.html": "6a738523"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/lessons/08_diffbind_differential_peaks.md": {
+    "08_diffbind_differential_peaks.html": "a6648d50"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/lessons/10_data_visualization.md": {
+    "10_data_visualization.html": "de11dbb6"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/lessons/11_qualitative_assessment_IGV.md": {
+    "11_qualitative_assessment_IGV.html": "a721ace4"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/lessons/12_annotation_functional_analysis.md": {
+    "12_annotation_functional_analysis.html": "6c7fd8d0"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/lessons/12_functional_analysis.md": {
+    "12_functional_analysis.html": "dba9c385"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/lessons/CC_metrics_extra.md": {
+    "CC_metrics_extra.html": "21dbc492"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/lessons/ChIPQC_quality_report_R.md": {
+    "ChIPQC_quality_report_R.html": "3f92c84e"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/lessons/OLD_QC_quality_metrics.md": {
+    "OLD_QC_quality_metrics.html": "bbd487f6"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/lessons/QC_quality_metrics.md": {
+    "QC_quality_metrics.html": "d9cff03d"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/lessons/align_filter_automation.md": {
+    "align_filter_automation.html": "8319cb74"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/lessons/compare_callers_IGV.md": {
+    "compare_callers_IGV.html": "213ad493"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/lessons/integrating_rna-seq_and_chip-seq.md": {
+    "integrating_rna-seq_and_chip-seq.html": "78d5a442"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/lessons/orchestra_mounting.md": {
+    "orchestra_mounting.html": "05a6e244"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/lessons/peak_calling_spp.md": {
+    "peak_calling_spp.html": "f5e198d6"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/lessons/qc_deeptools.md": {
+    "qc_deeptools.html": "61abda3f"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionV/old_readme.md": {
+    "old_readme.html": "f35a8b1e"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionVI/lessons/01_alignment.md": {
+    "01_alignment.html": "dbe95437"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionVI/lessons/02_variant-calling.md": {
+    "02_variant-calling.html": "26eff22a"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionVI/lessons/03_annotation-snpeff.md": {
+    "03_annotation-snpeff.html": "c607e847"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionVI/lessons/04_prioritization-gemini.md": {
+    "04_prioritization-gemini.html": "3e9de99b"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionVI/lessons/LICENSE_SWC_git_materials.md": {
+    "LICENSE_SWC_git_materials.html": "0f7737b6"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionVI/lessons/R_automation.md": {
+    "R_automation.html": "87a994d9"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionVI/lessons/extra_bash_tools.md": {
+    "extra_bash_tools.html": "eebc383e"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionVI/lessons/extra_github_rstudio.md": {
+    "extra_github_rstudio.html": "dae6b08c"
+  },
+  "projects/In-depth-NGS-Data-Analysis-Course/sessionVI/lessons/knitr_rmarkdown.md": {
+    "knitr_rmarkdown.html": "25993b16"
   }
 }

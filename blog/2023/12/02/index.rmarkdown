@@ -202,31 +202,31 @@ mydata |>
 
 ```{r}
 ### Multiple genes in feature plot
-ggplot(mydata, aes(x = UMAP_1, y = UMAP_2)) +
-    geom_point(
-        data = mydata, aes(x = UMAP_1, y = UMAP_2, color = rna_CD79A), 
-        size = 1
-    ) +
-    scale_color_gradient(
-        "CD79A", low = alpha("grey", 0.1), high = alpha("purple", 1)
-    ) +
-    new_scale("color") +
-    geom_point(
-        data = mydata, aes(x = UMAP_1, y = UMAP_2, color = rna_CD8A), 
-        size = 1
-    ) +
-    scale_color_gradient(
-        "CD8A", low = alpha("grey", 0.1), high = alpha("red", 1)
-    ) +
-    new_scale("color") +
-    geom_point(
-        data = mydata, aes(x = UMAP_1, y = UMAP_2,color = rna_CCR7), 
-        size = 1
-    ) +
-    scale_color_gradient(
-        "CCR7", low = alpha("grey", 0.1), high = alpha("green", 1)
-    ) +
-    theme_bw()
+# ggplot(mydata, aes(x = UMAP_1, y = UMAP_2)) +
+#     geom_point(
+#         data = mydata, aes(x = UMAP_1, y = UMAP_2, color = rna_CD79A), 
+#         size = 1
+#     ) +
+#     scale_color_gradient(
+#         "CD79A", low = alpha("grey", 0.1), high = alpha("purple", 1)
+#     ) +
+#     new_scale("color") +
+#     geom_point(
+#         data = mydata, aes(x = UMAP_1, y = UMAP_2, color = rna_CD8A), 
+#         size = 1
+#     ) +
+#     scale_color_gradient(
+#         "CD8A", low = alpha("grey", 0.1), high = alpha("red", 1)
+#     ) +
+#     new_scale("color") +
+#     geom_point(
+#         data = mydata, aes(x = UMAP_1, y = UMAP_2,color = rna_CCR7), 
+#         size = 1
+#     ) +
+#     scale_color_gradient(
+#         "CCR7", low = alpha("grey", 0.1), high = alpha("green", 1)
+#     ) +
+#     theme_bw()
 ```
 
 

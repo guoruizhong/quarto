@@ -615,18 +615,250 @@ mydata |>
 :::
 :::
 
+::: {.cell layout-align="center"}
+
+```{.r .cell-code}
+### Multiple genes in feature plot
+# ggplot(mydata, aes(x = UMAP_1, y = UMAP_2)) +
+#     geom_point(
+#         data = mydata, aes(x = UMAP_1, y = UMAP_2, color = rna_CD79A), 
+#         size = 1
+#     ) +
+#     scale_color_gradient(
+#         "CD79A", low = alpha("grey", 0.1), high = alpha("purple", 1)
+#     ) +
+#     new_scale("color") +
+#     geom_point(
+#         data = mydata, aes(x = UMAP_1, y = UMAP_2, color = rna_CD8A), 
+#         size = 1
+#     ) +
+#     scale_color_gradient(
+#         "CD8A", low = alpha("grey", 0.1), high = alpha("red", 1)
+#     ) +
+#     new_scale("color") +
+#     geom_point(
+#         data = mydata, aes(x = UMAP_1, y = UMAP_2,color = rna_CCR7), 
+#         size = 1
+#     ) +
+#     scale_color_gradient(
+#         "CCR7", low = alpha("grey", 0.1), high = alpha("green", 1)
+#     ) +
+#     theme_bw()
+```
+:::
 
 
+## Dotplot
 
 
+### Deafult Dotplot within Seurat
+
+::: {.cell layout-align="center"}
+
+```{.r .cell-code}
+# Find marker genes
+# all_markers <- FindAllMarkers(object = sce2)
+# save(all_markers,file = here("learn", "2023_scRNA", "all_markers.RData"))
+
+DotPlot(sce2,features = unique(top5$gene) ,assay='RNA')
+```
+
+::: {.cell-output-display}
+![](index_files/figure-html/unnamed-chunk-10-1.png){fig-align='center' width=100%}
+:::
+:::
+
+::: {.cell layout-align="center"}
+
+```{.r .cell-code}
+# Optimize colors, size, and direction
+p1 <- DotPlot(sce2, features = unique(top5$gene), assay = "RNA") + 
+  coord_flip() + 
+  labs(x = NULL,y = NULL) + 
+  guides(size = guide_legend("Percent Expression"))+
+  scale_color_gradientn(colours = c("#330066", "#336699", "#66CC66", "#FFCC33")) +
+  theme(
+    panel.grid = element_blank(), 
+    axis.text.x = element_text(angle = 45, hjust = 0.5,vjust = 0.5)
+  )
+## Scale for colour is already present.
+## Adding another scale for colour, which will replace the existing scale.
+p1
+```
+
+::: {.cell-output-display}
+![](index_files/figure-html/unnamed-chunk-11-1.png){fig-align='center' width=100%}
+:::
+:::
 
 
+### Dotplot with Complexheatmap
+
+We can refer to details from [here](https://divingintogeneticsandgenomics.com/post/clustered-dotplot-for-single-cell-rnaseq/) for detailed parameters customization.
 
 
+::: {.cell layout-align="center"}
+
+```{.r .cell-code}
+# Retrieve data
+df <- p1$data
+head(df)
+##               avg.exp   pct.exp features.plot id avg.exp.scaled
+## REG4       7.70481043 17.174382          REG4  0       2.500000
+## BPIFB1     0.30669602  6.860158        BPIFB1  0       2.500000
+## FABP1      0.29179596  3.118254         FABP1  0       2.500000
+## SLC9A4     0.01901309  1.751019        SLC9A4  0       2.500000
+## AC073218.2 0.03103152  1.655073    AC073218.2  0       1.137072
+## SPRR1A     0.07460096  3.837851        SPRR1A  0       0.208155
+
+# The matrix for the scaled expression 
+exp_mat <-df |> 
+  select(-pct.exp, -avg.exp) |>  
+  pivot_wider(names_from = id, values_from = avg.exp.scaled) |> 
+  as.data.frame()
+row.names(exp_mat) <- exp_mat$features.plot
+exp_mat <- exp_mat[, -1] |> as.matrix()
+head(exp_mat, 2)
+##          0          1          2          3          4        5          6
+## REG4   2.5  1.0681259 -0.6492553 -0.6766277  0.4956595 1.826576 -0.4005466
+## BPIFB1 2.5 -0.1015123 -0.4099583 -0.5370206 -0.3309614 1.039651 -0.6032213
+##                 7          8          9         10        11         12
+## REG4   -0.3648312 -0.6411552  0.3682808 -0.4876358 0.3408992 -0.6358072
+## BPIFB1  0.4017002 -0.5414065 -0.2597756 -0.5685453 1.6007798 -0.6318396
+##                13         14        15         16         17         18
+## REG4   -0.7044399 -0.7832735 0.5617191 -0.7888883 -0.5395693 -0.7888883
+## BPIFB1 -0.6318396 -0.6318396 1.1110916 -0.6318396 -0.6318396 -0.6318396
+
+## The matrix for the percentage of cells express a gene
+percent_mat <- df |> 
+  select(-avg.exp, -avg.exp.scaled) |>  
+  pivot_wider(names_from = id, values_from = pct.exp) |> 
+  as.data.frame()
+ 
+row.names(percent_mat) <- percent_mat$features.plot  
+percent_mat <- percent_mat[, -1] |> as.matrix()
+head(percent_mat, 2)
+##                0         1        2         3        4         5         6
+## REG4   17.174382 11.642157 5.015480 3.2281731 7.209302 16.111851 7.9301075
+## BPIFB1  6.860158  2.389706 1.114551 0.7336757 2.015504  3.062583 0.2688172
+##                7         8         9        10        11       12       13 14
+## REG4   11.367673 2.5782689 12.406948 7.1090047 12.244898 5.797101 2.380952  1
+## BPIFB1  6.571936 0.3683241  1.736973 0.4739336  8.843537 0.000000 0.000000  0
+##              15 16       17 18
+## REG4   9.278351  0 8.571429  0
+## BPIFB1 7.216495  0 0.000000  0
+```
+:::
+
+::: {.cell layout-align="center"}
+
+```{.r .cell-code}
+# Complexheatmap
+## any value that is greater than 2 will be mapped to yellow
+col_fun <-  circlize::colorRamp2(c(-1, 0, 2), viridis(20)[c(1,10, 20)])
+cell_fun <- function(j, i, x, y, w, h, fill) {
+    grid.rect(x = x, y = y, width = w, height = h,
+        gp = gpar(col = NA, fill = NA))
+    grid.circle(x = x, y = y, r = percent_mat[i, j] / 100 * min(unit.c(w, h)),
+        gp = gpar(fill = col_fun(exp_mat[i, j]), col = NA))
+}
+
+# also do a kmeans clustering for the genes with k = 4
+Heatmap(
+    exp_mat,
+    heatmap_legend_param = list(title = "Average Expression"),
+    column_title = "clustered dotplot",
+    col = col_fun,
+    rect_gp = gpar(type = "none"),
+    cell_fun = cell_fun,
+    row_names_gp = gpar(fontsize = 3),
+    # row_km = 4,
+    border = "black"
+)
+```
+:::
+
+::: {.cell layout-align="center"}
+
+```{.r .cell-code}
+# Annotate celltype
+colnames(exp_mat)
+cluster_anno <- c("Epi", "Myeloid", "Fibroblast", "T", "Endo", "un")
+
+column_ha <- HeatmapAnnotation(
+    cluster_anno = cluster_anno,
+    col = list(cluster_anno = setNames(brewer.pal(6, "Paired"), unique(cluster_anno))
+    ),
+    na_col = "grey"
+)
+
+Heatmap(
+    exp_mat,
+    heatmap_legend_param = list(title = "Average Expression"),
+    column_title = "clustered dotplot",
+    col = col_fun,
+    rect_gp = gpar(type = "none"),
+    cell_fun = cell_fun,
+    row_names_gp = gpar(fontsize = 5),
+    # row_km = 4,
+    border = "black",
+    top_annotation = column_ha
+)
+
+```
+:::
+
+::: {.cell layout-align="center"}
+
+```{.r .cell-code}
+# Add legend
+layer_fun <- function(j, i, x, y, w, h, fill) {
+    grid.rect(
+        x = x, y = y, width = w, height = h, gp = gpar(col = NA, fill = NA)
+    )
+    grid.circle(
+        x = x, y = y, r = pindex(percent_mat, i, j) / 100 * unit(2, "mm"),
+        gp = gpar(fill = col_fun(pindex(exp_mat, i, j)), col = NA)
+    )
+}
+
+lgd_list = list(
+    Legend(
+        labels = c(0, 0.25, 0.5, 0.75, 1), title = "Percent Expressed",
+        graphics = list(
+            function(x, y, w, h) grid.circle(x = x, y = y, r = 0 * unit(2, "mm"),
+                gp = gpar(fill = "black")),
+            function(x, y, w, h) grid.circle(x = x, y = y, r = 0.25 * unit(2, "mm"),
+                gp = gpar(fill = "black")),
+            function(x, y, w, h) grid.circle(x = x, y = y, r = 0.5 * unit(2, "mm"),
+                gp = gpar(fill = "black")),
+            function(x, y, w, h) grid.circle(x = x, y = y, r = 0.75 * unit(2, "mm"),
+                gp = gpar(fill = "black")),
+            function(x, y, w, h) grid.circle(x = x, y = y, r = 1 * unit(2, "mm"),
+                gp = gpar(fill = "black"))
+        )
+    )
+)
+
+hp <- Heatmap(
+    exp_mat,
+    heatmap_legend_param = list(title = "expression"),
+    column_title = "clustered dotplot",
+    col = col_fun,
+    rect_gp = gpar(type = "none"),
+    layer_fun = layer_fun,
+    row_names_gp = gpar(fontsize = 5),
+    # row_km = 4,
+    border = "black",
+    top_annotation = column_ha
+)
+
+draw(hp, annotation_legend_list = lgd_list)
+```
+:::
 
 
-
-
+### Dotplot with scCustomize
 
 
 
