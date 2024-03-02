@@ -1,9 +1,0 @@
----
-title: ""
-search: false
-listing:
-  feed: true
-  contents:
-    - "blog/**/index.qmd"
-    - "blog/**/index.qmd"
----

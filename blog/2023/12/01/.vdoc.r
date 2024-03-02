@@ -72,7 +72,7 @@ p5 <- barplot(1:9, col = cbp)
 #
 #
 #
-load(here("learn", "2023_scRNA_Seurat", "pbmc_tutorial.RData"))
+load(here("projects", "2023_scRNA_Seurat", "pbmc_tutorial.RData"))
 # 657 colors
 length(colors())
 show_col(colors()[1:50])

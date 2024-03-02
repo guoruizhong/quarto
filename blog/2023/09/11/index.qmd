@@ -120,13 +120,13 @@ library(enrichplot) # great for making the standard GSEA enrichment plots
 ```{r}
 ### load study design
 targets <- read_tsv(
-    here("learn", "DIY_Transcriptomics", "config", "studydesign.txt")
+    here("projects", "DIY_Transcriptomics", "config", "studydesign.txt")
 )
 targets
 
 ### create file paths for the abundance files
 path <- file.path(
-    "learn", "DIY_Transcriptomics", "data", "fastq", targets$sample, "abundance.tsv"
+    "projects", "DIY_Transcriptomics", "data", "fastq", targets$sample, "abundance.tsv"
 )
 path
 
@@ -879,7 +879,7 @@ mroast(
 ### Repeat with an actual gene set collection
 ### camera requires collections to be presented as a list, rather than a tibble, so we must read in our signatures using the 'getGmt' function
 broadSet_C2_ALL <- getGmt(
-    here("learn", "DIY_Transcriptomics", "data", "c2.all.v7.2.symbols.gmt"),
+    here("projects", "DIY_Transcriptomics", "data", "c2.all.v7.2.symbols.gmt"),
     geneIdType = SymbolIdentifier()
 )
 

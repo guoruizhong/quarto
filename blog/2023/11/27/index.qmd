@@ -48,7 +48,7 @@ library(httpgd)
 #| eval: false
 #| 
 # Change working directory
-setwd("./learn/2023_scRNA_Seurat/data/GSE154778_RAW/")
+setwd("./projects/2023_scRNA_Seurat/data/GSE154778_RAW/")
 # getwd()
 # Check files
 fs <- list.files("./", "^GSM")
@@ -73,7 +73,7 @@ lapply(
 ```{r}
 #| eval: false
 # Change working directory
-setwd("./learn/2023_scRNA_Seurat/data/GSE154778_RAW/")
+setwd("./projects/2023_scRNA_Seurat/data/GSE154778_RAW/")
 folders <- list.files("./")
 folders
 sceList <- lapply(
@@ -99,12 +99,12 @@ sce.all <- merge(
   add.cell.ids = folders,  
   project = "scRNA"
 )
-saveRDS(sce.all, here("learn", "2023_scRNA_Seurat", "sce.all.rds"))
+saveRDS(sce.all, here("projects", "2023_scRNA_Seurat", "sce.all.rds"))
 ```
 #### Filter
 
 ```{r}
-sce.all <- readRDS(here("learn", "2023_scRNA_Seurat", "sce.all.rds"))
+sce.all <- readRDS(here("projects", "2023_scRNA_Seurat", "sce.all.rds"))
 head(sce.all@meta.data)
 table(sce.all@meta.data$orig.ident)
 # Mitochandrial genes

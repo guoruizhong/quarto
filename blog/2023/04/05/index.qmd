@@ -1,5 +1,5 @@
 ---
-title: "Normalize and Standardize Data in R "
+title: "The best way to perform feature scaling using R"
 date: 2023-04-05
 date-modified: 2023-04-05
 categories:
@@ -15,6 +15,10 @@ This article describes the following data rescaling approaches:
     Percentile transformation
 
 ![](scale.png)
+
+## What is feature scaling (normalization)?
+
+In short, feature scaling means to scale the data into a fixed range — generally between 0 and 1. Normalization is normally performed when doing a multivariate analysis where you want each feature (variable) to contribute equally to the analysis.
 
 ## Standard scaling
 

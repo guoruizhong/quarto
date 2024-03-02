@@ -34,7 +34,7 @@ library(ggrepel)
 library(patchwork)
 
 # Load PBMC dataset
-pbmc_data <- Read10X(data.dir = "./learn/pbmc3k/hg19/")
+pbmc_data <- Read10X(data.dir = "./projects/pbmc3k/hg19/")
 
 # Initialize the seurat boject witht raw (non-normalized data)
 pbmc <- CreateSeuratObject(

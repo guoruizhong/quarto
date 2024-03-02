@@ -23,7 +23,7 @@ library(tidyverse)
 library(here)
 library(ggsignif)
 library(ggh4x)
-dfb <- read.csv(here("learn", "data", "221001_barplot.csv"), header = FALSE)
+dfb <- read.csv(here("projects", "data", "221001_barplot.csv"), header = FALSE)
 dfb
 dfb.1 <- dfb %>%
     pivot_longer(!V1) %>%

@@ -29,7 +29,7 @@ knitr::opts_chunk$set(
 pacman::p_load(ggplot2, dplyr, ggpubr, ggbeeswarm, readxl, rstatix)
 
 ### Import dataset
-dataset <- read_excel(here("learn", "Superplots_R_script", "data.xlsx"))
+dataset <- read_excel(here("projects", "Superplots_R_script", "data.xlsx"))
 
 ## Defines a colorblind-friendly palette
 cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")

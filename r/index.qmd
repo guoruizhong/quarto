@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
     fig.align = "center", out.width = "100%", warning = FALSE, collapse = TRUE
 )
 ```
+
 ## Basic concepts
 
 ### Data structure

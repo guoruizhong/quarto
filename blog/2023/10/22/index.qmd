@@ -44,7 +44,7 @@ Seurat object allow us to store all the steps and results along the whole analys
 
 ```{r}
 ### read in the matrix and rename its row names and colnames by gene symbols and cell barcodes, repectively.
-counts <- Read10X(data.dir = "learn/scRNAseq_analysis_vignette/data/DS1/")
+counts <- Read10X(data.dir = "projects/scRNAseq_analysis_vignette/data/DS1/")
 seurat <- CreateSeuratObject(counts, project = "DS1")
 ```
 
@@ -53,13 +53,13 @@ Alternatively, do this manually
 #| eval: false
 
 library(Matrix)
-counts <- readMM("learn/scRNAseq_analysis_vignette/data/DS1/matrix.mtx.gz")
+counts <- readMM("projects/scRNAseq_analysis_vignette/data/DS1/matrix.mtx.gz")
 barcodes <- read.table(
-    "learn/scRNAseq_analysis_vignette/data/DS1/barcodes.tsv.gz", 
+    "projects/scRNAseq_analysis_vignette/data/DS1/barcodes.tsv.gz", 
     stringsAsFactors = FALSE
     )[, 1]
 features <- read.csv(
-    "learn/scRNAseq_analysis_vignette/data/DS1/features.tsv.gz", 
+    "projects/scRNAseq_analysis_vignette/data/DS1/features.tsv.gz", 
     stringsAsFactors = FALSE, sep = "\t", header = FALSE
     )
 rownames(counts) <- make.unique(features[, 2])

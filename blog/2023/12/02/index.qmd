@@ -48,9 +48,9 @@ library(Scillus)
 #| warning: false
 
 ### Load data
-load(here("learn", "2023_scRNA_Seurat", "pbmc_tutorial_singleR.RData"))
-load(here("learn", "2023_scRNA_Seurat", "sce.anno.RData"))
-load(here("learn", "2023_scRNA_Seurat", "all_markers.RData"))
+load(here("projects", "2023_scRNA_Seurat", "pbmc_tutorial_singleR.RData"))
+load(here("projects", "2023_scRNA_Seurat", "sce.anno.RData"))
+load(here("projects", "2023_scRNA_Seurat", "all_markers.RData"))
 top5 <- all_markers |> group_by(cluster) |> top_n(5, avg_log2FC)
 
 ### Check data

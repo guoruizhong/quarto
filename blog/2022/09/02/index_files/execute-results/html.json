@@ -1,0 +1,16 @@
+{
+  "hash": "69c21e14f38cce51080abdce40f52e47",
+  "result": {
+    "markdown": "---\ntitle: \"Add experimental conditions to multi-well plates\"\ndate: 2022-09-02\ndescription: \"Tools for interacting with data from experiments done in microtiter plates. Easily read in plate-shaped data and convert it to tidy format, combine plate-shaped data with tidy data, and view tidy data in plate shape.\"\nimage: f1.jpg\ncategories:\n  - r\n  - plate\n---\n\n\n\n::: {.cell layout-align=\"center\"}\n\n```{.r .cell-code}\npacman::p_load(plater, tidyverse, here)\n```\n:::\n\n::: {.cell layout-align=\"center\"}\n\n```{.r .cell-code}\n# check_plater_format(\"data/palter.csv\", sep = \",\")\nTreatment <- read_plates(here(\"learn\", \"data\", \"plater1.csv\"),\n    plate_names = \"ZG22006\",\n    well_ids_column = \"Well.ID\"\n)\nTreatment\n## # A tibble: 16 × 3\n##    Plate   Well.ID Treatment\n##    <chr>   <chr>   <chr>    \n##  1 ZG22006 C03     DMSO     \n##  2 ZG22006 C04     Eto_1    \n##  3 ZG22006 C05     Eto_10   \n##  4 ZG22006 C06     Eto_100  \n##  5 ZG22006 D03     DMSO     \n##  6 ZG22006 D04     Eto_1    \n##  7 ZG22006 D05     Eto_10   \n##  8 ZG22006 D06     Eto_100  \n##  9 ZG22006 E03     DMSO     \n## 10 ZG22006 E04     Eto_1    \n## 11 ZG22006 E05     Eto_10   \n## 12 ZG22006 E06     Eto_100  \n## 13 ZG22006 F03     DMSO     \n## 14 ZG22006 F04     Eto_1    \n## 15 ZG22006 F05     Eto_10   \n## 16 ZG22006 F06     Eto_100\n\nGroup <- read_plates(here(\"learn\", \"data\", \"plater2.csv\"),\n    plate_names = \"ZG22006\",\n    well_ids_column = \"Well.ID\"\n)\nGroup\n## # A tibble: 32 × 4\n##    Plate   Well.ID Treatment Group  \n##    <chr>   <chr>   <chr>     <chr>  \n##  1 ZG22006 C03     DMSO      WT     \n##  2 ZG22006 C04     Eto_1     WT     \n##  3 ZG22006 C05     Eto_10    WT     \n##  4 ZG22006 C06     Eto_100   WT     \n##  5 ZG22006 C07     DMSO      Variant\n##  6 ZG22006 C08     Eto_1     Variant\n##  7 ZG22006 C09     Eto_10    Variant\n##  8 ZG22006 C10     Eto_100   Variant\n##  9 ZG22006 D03     DMSO      WT     \n## 10 ZG22006 D04     Eto_1     WT     \n## # ℹ 22 more rows\n```\n:::\n\n\n## Reference\n\n1. [From a million nested ifelses to the plater package](https://ropensci.org/blog/2017/02/06/plater-blog-post)\n2. [Getting started with plater](https://cran.r-project.org/web/packages/plater/vignettes/plater-basics.html)\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

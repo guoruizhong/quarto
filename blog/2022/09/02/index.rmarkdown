@@ -14,7 +14,6 @@ knitr::opts_chunk$set(fig.width = 6, fig.height = 3.8,
                       out.width = "85%", collapse = TRUE)
 ```
 
-
 ```{r}
 pacman::p_load(plater, tidyverse, here)
 ```
@@ -34,7 +33,9 @@ Group <- read_plates(here("learn", "data", "plater2.csv"),
 Group
 ```
 
+
 ## Reference
 
 1. [From a million nested ifelses to the plater package](https://ropensci.org/blog/2017/02/06/plater-blog-post)
 2. [Getting started with plater](https://cran.r-project.org/web/packages/plater/vignettes/plater-basics.html)
+
