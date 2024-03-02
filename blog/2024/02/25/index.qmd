@@ -7,6 +7,9 @@ categories:
   - scrna
 image: ./projects/scRNA-seq_online/img/scRNA-seq_cell_diversity.png
 description: All the learning materials are from credited or adapted from Harvard Chan Bioinformatics Core. 
+execute: 
+  freeze: true
+
 ---
 
 ::: {.callout-note}
