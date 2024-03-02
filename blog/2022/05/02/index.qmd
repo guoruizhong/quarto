@@ -26,7 +26,7 @@ library(here)
 library(ggh4x)
 library(latex2exp)
 
-fig1a <- read_excel(here("learn", "data", "data.xlsx"), sheet = "Figure_1A")
+fig1a <- read_excel(here("projects", "data", "data.xlsx"), sheet = "Figure_1A")
 fig1a %>% head()
 ```
 ```{r}
