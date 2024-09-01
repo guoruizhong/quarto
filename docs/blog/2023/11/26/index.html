@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Guorui Zhong">
+<meta name="description" content="Harmony allow integrating data across several variables (for example, by experimental batch and by condition), and significant gain in speed and lower memory requirements for integration of large datasets.">
+<title>Guorui Zhong - Learning Harmony to integrate single cell RNA-seq data for batch borrection and meta analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><style>
+
+      .quarto-title-block .quarto-title-banner {
+        background: #212529;
+      }
+</style>
+</head>
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">Guorui Zhong</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../../../index.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../blog/index.html" rel="" target="">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../crispr/index.html" rel="" target="">
+ <span class="menu-text">CRISPR</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../keyboard/index.html" rel="" target="">
+ <span class="menu-text">Keyboard</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../python/index.html" rel="" target="">
+ <span class="menu-text">Python</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../r/index.html" rel="" target="">
+ <span class="menu-text">R</span></a>
+  </li>  
+</ul>
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item compact">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=g0MfTPMAAAAJ&amp;hl=en" rel="" target=""><i class="bi bi-journal-check" role="img" aria-label="journal-check">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/guorui-zhong-754761185/" rel="" target=""><i class="bi bi-linkedin" role="img" aria-label="linkedin">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/guoruizhong" rel="" target=""><i class="bi bi-github" role="img" aria-label="github">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+<div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Learning Harmony to integrate single cell RNA-seq data for batch borrection and meta analysis</h1>
+                  <div>
+        <div class="description">
+          Harmony allow integrating data across several variables (for example, by experimental batch and by condition), and significant gain in speed and lower memory requirements for integration of large datasets.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">r</div>
+                <div class="quarto-category">scRNA-seq</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p><a href="https://guoruizhong.github.io/">Guorui Zhong</a> <a href="https://orcid.org/0000-0002-1955-2847" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">Sunday, November 26, 2023</p>
+      </div>
+    </div>
+    
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">Saturday, December 16, 2023</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Contents</h2>
+   
+  <ul>
+<li><a href="#harmony-to-integrating-cell-line-datasets-from-10x" id="toc-harmony-to-integrating-cell-line-datasets-from-10x" class="nav-link active" data-scroll-target="#harmony-to-integrating-cell-line-datasets-from-10x">Harmony to integrating cell line datasets from 10X</a></li>
+  <li><a href="#mudan" id="toc-mudan" class="nav-link" data-scroll-target="#mudan">MUDAN</a></li>
+  <li>
+<a href="#using-harmony-with-seurat" id="toc-using-harmony-with-seurat" class="nav-link" data-scroll-target="#using-harmony-with-seurat">Using Harmony with Seurat</a>
+  <ul>
+<li><a href="#run-harmony" id="toc-run-harmony" class="nav-link" data-scroll-target="#run-harmony">Run Harmony</a></li>
+  <li><a href="#down-stream-analysis" id="toc-down-stream-analysis" class="nav-link" data-scroll-target="#down-stream-analysis">Down stream analysis</a></li>
+  </ul>
+</li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
+  <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info">Session info</a></li>
+  </ul></nav>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content"><div class="cell" data-layout-align="center">
+
+</div>
+<section id="harmony-to-integrating-cell-line-datasets-from-10x" class="level2"><h2 class="anchored" data-anchor-id="harmony-to-integrating-cell-line-datasets-from-10x">Harmony to integrating cell line datasets from 10X</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">cell_lines</span><span class="op">)</span></span>
+<span><span class="va">scaled_pcs</span> <span class="op">&lt;-</span> <span class="va">cell_lines</span><span class="op">$</span><span class="va">scaled_pcs</span></span>
+<span><span class="va">meta_data</span> <span class="op">&lt;-</span> <span class="va">cell_lines</span><span class="op">$</span><span class="va">meta_data</span></span>
+<span><span class="co">### cells cluster by dataset initially</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">do_scatter</span><span class="op">(</span><span class="va">scaled_pcs</span>, <span class="va">meta_data</span>, <span class="st">"dataset"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Colored by dataset"</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">do_scatter</span><span class="op">(</span><span class="va">scaled_pcs</span>, <span class="va">meta_data</span>, <span class="st">"cell_type"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Colored by cell type"</span><span class="op">)</span></span>
+<span><span class="co">### combine plot</span></span>
+<span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Run harmonoy to remove the influence of dataset-of origin from ceel embeddings. After Harmony, the datasets are now mixed and the cell types are still separate.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">harmony_embeddings</span> <span class="op">&lt;-</span> <span class="fu">harmony</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/harmony/man/RunHarmony.html">RunHarmony</a></span><span class="op">(</span></span>
+<span>    <span class="va">scaled_pcs</span>, <span class="va">meta_data</span>, <span class="st">"dataset"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">do_scatter</span><span class="op">(</span><span class="va">harmony_embeddings</span>, <span class="va">meta_data</span>, <span class="st">"dataset"</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Colored by dataset"</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">do_scatter</span><span class="op">(</span><span class="va">harmony_embeddings</span>, <span class="va">meta_data</span>, <span class="st">"cell_type"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Colored by cell type"</span><span class="op">)</span></span>
+<span><span class="co">### combine plot</span></span>
+<span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="mudan" class="level2"><h2 class="anchored" data-anchor-id="mudan">MUDAN</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### get data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"pbmcA"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"pbmcB"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">pbmcA</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">pbmcB</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### downsize the number of cells in each PBMC dataset</span></span>
+<span><span class="va">pbmcA</span> <span class="op">&lt;-</span> <span class="va">pbmcA</span><span class="op">[</span>, <span class="fl">500</span><span class="op">]</span> <span class="co"># take 500 cells</span></span>
+<span><span class="va">pbmcB</span> <span class="op">&lt;-</span> <span class="va">pbmcB</span><span class="op">[</span>, <span class="fl">2000</span><span class="op">]</span> <span class="co"># take 500 cells</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Combine the two datasets into one cell by gene counts matrix and use a meta vector to keep track of which cell belongs to which sample</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### combine into one coutns matrix</span></span>
+<span><span class="va">genes_int</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sets.html">intersect</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">pbmcA</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">pbmcB</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">cd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">pbmcA</span><span class="op">[</span><span class="va">genes_int</span>, <span class="op">]</span>, <span class="va">pbmcB</span><span class="op">[</span><span class="va">genes_int</span>, <span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### meta data</span></span>
+<span><span class="va">meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"pbmcA"</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">pbmcA</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"pbmcB"</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">pbmcB</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">meta</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">pbmcA</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">pbmcB</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">meta</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">cd</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span>
+<span><span class="va">meta</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Given this counts matrix, we can normalize our data, derive principal components, and perform dimensionality reduction using tSNE. However, we see prominent separation by sample due to batch effects.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### CPM normalization</span></span>
+<span><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu">MUDAN</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MUDAN/man/normalizeCounts.html">normalizeCounts</a></span><span class="op">(</span><span class="va">cd</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### variance normalize, identify overdispersed genes</span></span>
+<span><span class="va">matnorm_info</span> <span class="op">&lt;-</span> <span class="fu">MUDAN</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MUDAN/man/normalizeVariance.html">normalizeVariance</a></span><span class="op">(</span><span class="va">mat</span>, details <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### log transform</span></span>
+<span><span class="va">matnorm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span><span class="op">(</span><span class="va">matnorm_info</span><span class="op">$</span><span class="va">mat</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### 30 PCs on over dispersed genes</span></span>
+<span><span class="va">pcs</span> <span class="op">&lt;-</span> <span class="fu">MUDAN</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MUDAN/man/getPcs.html">getPcs</a></span><span class="op">(</span></span>
+<span>    <span class="va">matnorm</span><span class="op">[</span><span class="va">matnorm_info</span><span class="op">$</span><span class="va">ods</span>, <span class="op">]</span>,</span>
+<span>    nGenes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">matnorm_info</span><span class="op">$</span><span class="va">ods</span><span class="op">)</span>,</span>
+<span>    nPcs <span class="op">=</span> <span class="fl">30</span>, </span>
+<span>    verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">### TSNE embedding with regular PCS</span></span>
+<span><span class="va">emb</span> <span class="op">&lt;-</span> <span class="fu">Rtsne</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Rtsne/man/Rtsne.html">Rtsne</a></span><span class="op">(</span></span>
+<span>    <span class="va">pcs</span>,</span>
+<span>    is_distance <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>    perplexity <span class="op">=</span> <span class="fl">30</span>, </span>
+<span>    num_threads <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>    verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span><span class="op">$</span><span class="va">Y</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">emb</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">pcs</span><span class="op">)</span></span>
+<span><span class="co">### plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">MUDAN</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MUDAN/man/plotEmbedding.html">plotEmbedding</a></span><span class="op">(</span></span>
+<span>    <span class="va">emb</span>, groups <span class="op">=</span> <span class="va">meta</span>, show.legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    xlab <span class="op">=</span> <span class="cn">NA</span>, ylab <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>    main <span class="op">=</span> <span class="st">"Regular tSNE Embedding"</span>,</span>
+<span>    verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Indeed, when we inspect certain cell-type specific marker genes (MS4A1/CD20 for B-cells, CD3E for T-cells, FCGR3A/CD16 for NK cells, macrophages, and monocytes, CD14 for dendritic cells, macrophages, and monocytes), we see that cells are separating by batch rather than by their expected cell-types.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MS4A1"</span>, <span class="st">"CD3E"</span>, <span class="st">"FCGR3A"</span>, <span class="st">"CD14"</span><span class="op">)</span>,</span>
+<span>        <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>            <span class="va">gexp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span><span class="op">(</span><span class="va">mat</span><span class="op">[</span><span class="va">x</span>, <span class="op">]</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span></span>
+<span>            <span class="fu">plotEmbedding</span><span class="op">(</span></span>
+<span>                <span class="va">emb</span>, col <span class="op">=</span> <span class="va">gexp</span>, xlab <span class="op">=</span> <span class="st">"NA"</span>,</span>
+<span>                ylab <span class="op">=</span> <span class="cn">NA</span>, main <span class="op">=</span> <span class="va">x</span>,</span>
+<span>                verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>            <span class="op">)</span></span>
+<span>        <span class="op">}</span></span>
+<span>    <span class="op">)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If we were attempt to identify cell-types using clustering analysis at this step, we would identify a number of sample-specific clusters driven by batch effects.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">annot_bad</span> <span class="op">&lt;-</span> <span class="fu">getComMembership</span><span class="op">(</span><span class="va">pcs</span>, k <span class="op">=</span> <span class="fl">30</span>, method <span class="op">=</span> <span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://r.igraph.org/reference/cluster_louvain.html">cluster_louvain</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">plotEmbedding</span><span class="op">(</span></span>
+<span>    <span class="va">emb</span>, groups <span class="op">=</span> <span class="va">annot_bad</span>, show.legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    xlab <span class="op">=</span> <span class="cn">NA</span>, ylab <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>    main <span class="op">=</span> <span class="st">"Jointly-indentified cell clusters"</span>,</span>
+<span>    verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### look at cell-type proportion per sample</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">annot_bad</span>, <span class="va">meta</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">meta</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Look at cell-type proportions per sample</span></span>
+<span><span class="co"># print(t(table(annot_bad, meta))/as.numeric(table(meta)))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="using-harmony-with-seurat" class="level2"><h2 class="anchored" data-anchor-id="using-harmony-with-seurat">Using Harmony with Seurat</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### load required data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"pbmc_stim"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### generate seurat object</span></span>
+<span><span class="va">pbmc</span> <span class="op">&lt;-</span> <span class="fu">CreateSeuratObject</span><span class="op">(</span></span>
+<span>    counts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">pbmc.stim</span>, <span class="va">pbmc.ctrl</span><span class="op">)</span>,</span>
+<span>    project <span class="op">=</span> <span class="st">"PBMC"</span>,</span>
+<span>    min.cells <span class="op">=</span> <span class="fl">5</span></span>
+<span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co">### separete conditions</span></span>
+<span><span class="va">pbmc</span><span class="op">@</span><span class="va">meta.data</span><span class="op">$</span><span class="va">stim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"STIM"</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">pbmc.stim</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"CTRL"</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">pbmc.ctrl</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### generate a union of highly variable genes</span></span>
+<span><span class="va">pbmc</span> <span class="op">&lt;-</span> <span class="va">pbmc</span> <span class="op">|&gt;</span> <span class="fu">Seurat</span><span class="fu">::</span><span class="fu"><a href="https://satijalab.org/seurat/reference/NormalizeData.html">NormalizeData</a></span><span class="op">(</span>verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">VariableFeatures</span><span class="op">(</span><span class="va">pbmc</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">pbmc</span><span class="op">@</span><span class="va">meta.data</span><span class="op">)</span>, <span class="va">pbmc</span><span class="op">@</span><span class="va">meta.data</span><span class="op">$</span><span class="va">stim</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">cells_use</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">pbmc</span><span class="op">[</span>,<span class="va">cells_use</span><span class="op">]</span> <span class="op">%&gt;%</span></span>
+<span>        <span class="fu">FindVariableFeatures</span><span class="op">(</span>selection.method <span class="op">=</span> <span class="st">"vst"</span>, nfeatures <span class="op">=</span> <span class="fl">2000</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>        <span class="fu">VariableFeatures</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">unlist</span> <span class="op">%&gt;%</span> <span class="va">unique</span></span>
+<span><span class="co">## Finding variable features for layer counts</span></span>
+<span><span class="co">## Finding variable features for layer counts</span></span>
+<span></span>
+<span><span class="va">pbmc</span> <span class="op">&lt;-</span> <span class="va">pbmc</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu">ScaleData</span><span class="op">(</span>verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu">RunPCA</span><span class="op">(</span>features <span class="op">=</span> <span class="fu">VariableFeatures</span><span class="op">(</span><span class="va">pbmc</span><span class="op">)</span>, npcs <span class="op">=</span> <span class="fl">20</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Clear difference between the datasets in the uncorrected PCs</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">DimPlot</span><span class="op">(</span>object <span class="op">=</span> <span class="va">pbmc</span>, reduction <span class="op">=</span> <span class="st">"pca"</span>, pt.size <span class="op">=</span> <span class="fl">.1</span>, group.by <span class="op">=</span> <span class="st">"stim"</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">VlnPlot</span><span class="op">(</span>object <span class="op">=</span> <span class="va">pbmc</span>, features <span class="op">=</span> <span class="st">"PC_1"</span>, group.by <span class="op">=</span> <span class="st">"stim"</span>, pt.size <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span></span>
+<span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">p1</span>,<span class="va">p2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="run-harmony" class="level3"><h3 class="anchored" data-anchor-id="run-harmony">Run Harmony</h3>
+<p>Harmony works on an existing matrix with cell embeddings and outputs its transformed version with the datasets aligned according to some user-defined experimental conditions.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### run harmony to perform integrated analysis</span></span>
+<span><span class="va">pbmc</span> <span class="op">&lt;-</span> <span class="fu">RunHarmony</span><span class="op">(</span><span class="va">pbmc</span>, <span class="st">"stim"</span>, plot_convergence <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">## Transposing data matrix</span></span>
+<span><span class="co">## Initializing state using k-means centroids initialization</span></span>
+<span><span class="co">## Harmony 1/10</span></span>
+<span><span class="co">## Harmony 2/10</span></span>
+<span><span class="co">## Harmony 3/10</span></span>
+<span><span class="co">## Harmony 4/10</span></span>
+<span><span class="co">## Harmony 5/10</span></span>
+<span><span class="co">## Harmony 6/10</span></span>
+<span><span class="co">## Harmony 7/10</span></span>
+<span><span class="co">## Harmony 8/10</span></span>
+<span><span class="co">## Harmony 9/10</span></span>
+<span><span class="co">## Harmony converged after 9 iterations</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### directly access the new harmony embeddings</span></span>
+<span><span class="va">harmony_embeddings</span> <span class="op">&lt;-</span> <span class="fu">Embeddings</span><span class="op">(</span><span class="va">pbmc</span>, <span class="st">"harmony"</span><span class="op">)</span></span>
+<span><span class="va">harmony_embeddings</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span>
+<span><span class="co">##                  harmony_1   harmony_2   harmony_3 harmony_4    harmony_5</span></span>
+<span><span class="co">## ATCACTTGCTCGAA-1 -6.472885 -0.03395769 -3.37113988  4.104260  0.001600968</span></span>
+<span><span class="co">## CCGGAGACTGTGAC-1 -6.901013  1.59104949 -6.36127179  4.635761 -5.605371816</span></span>
+<span><span class="co">## CAAGCCCTGTTAGC-1 -6.774086 -1.21811545 -6.49162911 -9.135284 -0.197759676</span></span>
+<span><span class="co">## GAGGTACTAACGGG-1 -7.435499 -0.23169621  0.07052885  2.031633 -2.190562901</span></span>
+<span><span class="co">## CGCGGATGCCACAA-1 14.686943  4.38600212 -4.49637985  1.595446 -1.448223157</span></span>
+<span></span>
+<span><span class="co">### inspection of the modalities</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">DimPlot</span><span class="op">(</span>object <span class="op">=</span> <span class="va">pbmc</span>, reduction <span class="op">=</span> <span class="st">"harmony"</span>, pt.size <span class="op">=</span> <span class="fl">.1</span>, group.by <span class="op">=</span> <span class="st">"stim"</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">VlnPlot</span><span class="op">(</span>object <span class="op">=</span> <span class="va">pbmc</span>, features <span class="op">=</span> <span class="st">"harmony_1"</span>, group.by <span class="op">=</span> <span class="st">"stim"</span>, pt.size <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span></span>
+<span><span class="fu">plot_grid</span><span class="op">(</span><span class="va">p1</span>,<span class="va">p2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Plot genes correlated with the harmonized PCs</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">DimHeatmap</span><span class="op">(</span>object <span class="op">=</span> <span class="va">pbmc</span>, reduction <span class="op">=</span> <span class="st">"harmony"</span>, cells <span class="op">=</span> <span class="fl">500</span>, dims <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="down-stream-analysis" class="level3"><h3 class="anchored" data-anchor-id="down-stream-analysis">Down stream analysis</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pbmc</span> <span class="op">&lt;-</span> <span class="va">pbmc</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="co">### perform clustering using the harmonized vectors of cells</span></span>
+<span>    <span class="fu">FindNeighbors</span><span class="op">(</span>reduction <span class="op">=</span> <span class="st">"harmony"</span>, dims <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu">FindClusters</span><span class="op">(</span>resolution <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">## Computing nearest neighbor graph</span></span>
+<span><span class="co">## Computing SNN</span></span>
+<span><span class="co">## Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Number of nodes: 2000</span></span>
+<span><span class="co">## Number of edges: 85805</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Running Louvain algorithm...</span></span>
+<span><span class="co">## Maximum modularity in 10 random starts: 0.8883</span></span>
+<span><span class="co">## Number of communities: 10</span></span>
+<span><span class="co">## Elapsed time: 0 seconds</span></span>
+<span><span class="co">### TSNE</span></span>
+<span><span class="va">pbmc</span> <span class="op">&lt;-</span> <span class="va">pbmc</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">RunTSNE</span><span class="op">(</span>reduction <span class="op">=</span> <span class="st">"harmony"</span><span class="op">)</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">DimPlot</span><span class="op">(</span><span class="va">pbmc</span>, reduction <span class="op">=</span> <span class="st">"tsne"</span>, group.by <span class="op">=</span> <span class="st">"stim"</span>, pt.size <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">DimPlot</span><span class="op">(</span><span class="va">pbmc</span>, reduction <span class="op">=</span> <span class="st">"tsne"</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, pt.size <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span></span>
+<span><span class="fu">plot_grid</span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>One important observation is to assess that the harmonized data contain biological states of the cells. Therefore by checking the following genes we can see that biological cell states are preserved after harmonization.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">FeaturePlot</span><span class="op">(</span>object <span class="op">=</span> <span class="va">pbmc</span>, features<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CD3D"</span>, <span class="st">"SELL"</span>, <span class="st">"CREM"</span>, <span class="st">"CD8A"</span>, <span class="st">"GNLY"</span>, <span class="st">"CD79A"</span>, <span class="st">"FCGR3A"</span>, <span class="st">"CCL2"</span>, <span class="st">"PPBP"</span><span class="op">)</span>, </span>
+<span>            min.cutoff <span class="op">=</span> <span class="st">"q9"</span>, cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"lightgrey"</span>, <span class="st">"blue"</span><span class="op">)</span>, pt.size <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### UMAP</span></span>
+<span><span class="va">pbmc</span> <span class="op">&lt;-</span> <span class="va">pbmc</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu">RunUMAP</span><span class="op">(</span>reduction <span class="op">=</span> <span class="st">"harmony"</span>, dims <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span>
+<span><span class="co">## 20:34:54 UMAP embedding parameters a = 0.9922 b = 1.112</span></span>
+<span><span class="co">## Found more than one class "dist" in cache; using the first, from namespace 'BiocGenerics'</span></span>
+<span><span class="co">## Also defined by 'spam'</span></span>
+<span><span class="co">## 20:34:54 Read 2000 rows and found 20 numeric columns</span></span>
+<span><span class="co">## 20:34:54 Using Annoy for neighbor search, n_neighbors = 30</span></span>
+<span><span class="co">## Found more than one class "dist" in cache; using the first, from namespace 'BiocGenerics'</span></span>
+<span><span class="co">## Also defined by 'spam'</span></span>
+<span><span class="co">## 20:34:54 Building Annoy index with metric = cosine, n_trees = 50</span></span>
+<span><span class="co">## 0%   10   20   30   40   50   60   70   80   90   100%</span></span>
+<span><span class="co">## [----|----|----|----|----|----|----|----|----|----|</span></span>
+<span><span class="co">## **************************************************|</span></span>
+<span><span class="co">## 20:34:54 Writing NN index file to temp file /var/folders/2c/9q3pg2295195bp3gnrgbzrg40000gn/T//RtmpBhrb7C/file51ff59f4665b</span></span>
+<span><span class="co">## 20:34:54 Searching Annoy index using 1 thread, search_k = 3000</span></span>
+<span><span class="co">## 20:34:54 Annoy recall = 100%</span></span>
+<span><span class="co">## 20:34:54 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30</span></span>
+<span><span class="co">## 20:34:55 Initializing from normalized Laplacian + noise (using RSpectra)</span></span>
+<span><span class="co">## 20:34:55 Commencing optimization for 500 epochs, with 83254 positive edges</span></span>
+<span><span class="co">## 20:34:57 Optimization finished</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">DimPlot</span><span class="op">(</span><span class="va">pbmc</span>, reduction <span class="op">=</span> <span class="st">"umap"</span>, group.by <span class="op">=</span> <span class="st">"stim"</span>, pt.size <span class="op">=</span> <span class="fl">.1</span>, split.by <span class="op">=</span> <span class="st">'stim'</span><span class="op">)</span></span>
+<span><span class="co">### identify shared cell types with clustering analysis</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">DimPlot</span><span class="op">(</span><span class="va">pbmc</span>, reduction <span class="op">=</span> <span class="st">"umap"</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, pt.size <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span></span>
+<span><span class="fu">plot_grid</span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section></section><section id="reference" class="level2"><h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<ul>
+<li><a href="https://portals.broadinstitute.org/harmony/index.html" class="uri">https://portals.broadinstitute.org/harmony/index.html</a></li>
+<li><a href="https://hbctraining.github.io/scRNA-seq_online/lessons/06a_integration_harmony.html">Single-cell RNA-seq: Integration with Harmony</a></li>
+</ul></section><section id="session-info" class="level2"><h2 class="anchored" data-anchor-id="session-info">Session info</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">## R version 4.3.1 (2023-06-16)</span></span>
+<span><span class="co">## Platform: aarch64-apple-darwin20 (64-bit)</span></span>
+<span><span class="co">## Running under: macOS Sonoma 14.2</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Matrix products: default</span></span>
+<span><span class="co">## BLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib </span></span>
+<span><span class="co">## LAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## locale:</span></span>
+<span><span class="co">## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## time zone: Asia/Singapore</span></span>
+<span><span class="co">## tzcode source: internal</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## attached base packages:</span></span>
+<span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## other attached packages:</span></span>
+<span><span class="co">##  [1] cowplot_1.1.1      here_1.0.1         lubridate_1.9.3    forcats_1.0.0     </span></span>
+<span><span class="co">##  [5] stringr_1.5.1      dplyr_1.1.4        purrr_1.0.2        readr_2.1.4       </span></span>
+<span><span class="co">##  [9] tidyr_1.3.0        tibble_3.2.1       ggplot2_3.4.4      tidyverse_2.0.0   </span></span>
+<span><span class="co">## [13] Seurat_5.0.1       SeuratObject_5.0.1 sp_2.1-2           MUDAN_0.1.0       </span></span>
+<span><span class="co">## [17] Matrix_1.6-3       harmony_1.1.0      Rcpp_1.0.11       </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## loaded via a namespace (and not attached):</span></span>
+<span><span class="co">##   [1] RcppAnnoy_0.0.21        splines_4.3.1           later_1.3.1            </span></span>
+<span><span class="co">##   [4] bitops_1.0-7            polyclip_1.10-6         XML_3.99-0.15          </span></span>
+<span><span class="co">##   [7] fastDummies_1.7.3       lifecycle_1.0.4         rprojroot_2.0.4        </span></span>
+<span><span class="co">##  [10] edgeR_4.0.1             globals_0.16.2          lattice_0.22-5         </span></span>
+<span><span class="co">##  [13] MASS_7.3-60             magrittr_2.0.3          limma_3.58.1           </span></span>
+<span><span class="co">##  [16] plotly_4.10.3           rmarkdown_2.25          yaml_2.3.7             </span></span>
+<span><span class="co">##  [19] httpuv_1.6.12           sctransform_0.4.1       spam_2.10-0            </span></span>
+<span><span class="co">##  [22] spatstat.sparse_3.0-3   reticulate_1.34.0       pbapply_1.7-2          </span></span>
+<span><span class="co">##  [25] DBI_1.1.3               RColorBrewer_1.1-3      abind_1.4-5            </span></span>
+<span><span class="co">##  [28] zlibbioc_1.48.0         Rtsne_0.16              BiocGenerics_0.48.1    </span></span>
+<span><span class="co">##  [31] RCurl_1.98-1.13         sva_3.50.0              GenomeInfoDbData_1.2.11</span></span>
+<span><span class="co">##  [34] IRanges_2.36.0          S4Vectors_0.40.2        ggrepel_0.9.4          </span></span>
+<span><span class="co">##  [37] irlba_2.3.5.1           listenv_0.9.0           spatstat.utils_3.0-4   </span></span>
+<span><span class="co">##  [40] genefilter_1.84.0       goftest_1.2-3           RSpectra_0.16-1        </span></span>
+<span><span class="co">##  [43] spatstat.random_3.2-2   annotate_1.80.0         fitdistrplus_1.1-11    </span></span>
+<span><span class="co">##  [46] parallelly_1.36.0       leiden_0.4.3.1          codetools_0.2-19       </span></span>
+<span><span class="co">##  [49] tidyselect_1.2.0        farver_2.1.1            matrixStats_1.1.0      </span></span>
+<span><span class="co">##  [52] stats4_4.3.1            spatstat.explore_3.2-5  jsonlite_1.8.7         </span></span>
+<span><span class="co">##  [55] ellipsis_0.3.2          progressr_0.14.0        ggridges_0.5.4         </span></span>
+<span><span class="co">##  [58] survival_3.5-7          tools_4.3.1             ica_1.0-3              </span></span>
+<span><span class="co">##  [61] glue_1.6.2              gridExtra_2.3           xfun_0.41              </span></span>
+<span><span class="co">##  [64] mgcv_1.9-0              MatrixGenerics_1.14.0   GenomeInfoDb_1.38.0    </span></span>
+<span><span class="co">##  [67] withr_2.5.2             fastmap_1.1.1           fansi_1.0.5            </span></span>
+<span><span class="co">##  [70] digest_0.6.33           timechange_0.2.0        R6_2.5.1               </span></span>
+<span><span class="co">##  [73] mime_0.12               colorspace_2.1-0        scattermore_1.2        </span></span>
+<span><span class="co">##  [76] tensor_1.5              spatstat.data_3.0-3     RSQLite_2.3.3          </span></span>
+<span><span class="co">##  [79] RhpcBLASctl_0.23-42     utf8_1.2.4              generics_0.1.3         </span></span>
+<span><span class="co">##  [82] data.table_1.14.8       httr_1.4.7              htmlwidgets_1.6.3      </span></span>
+<span><span class="co">##  [85] uwot_0.1.16             pkgconfig_2.0.3         gtable_0.3.4           </span></span>
+<span><span class="co">##  [88] blob_1.2.4              lmtest_0.9-40           XVector_0.42.0         </span></span>
+<span><span class="co">##  [91] htmltools_0.5.7         dotCall64_1.1-1         scales_1.3.0           </span></span>
+<span><span class="co">##  [94] Biobase_2.62.0          png_0.1-8               knitr_1.45             </span></span>
+<span><span class="co">##  [97] tzdb_0.4.0              reshape2_1.4.4          nlme_3.1-163           </span></span>
+<span><span class="co">## [100] cachem_1.0.8            zoo_1.8-12              KernSmooth_2.23-22     </span></span>
+<span><span class="co">## [103] vipor_0.4.5             parallel_4.3.1          miniUI_0.1.1.1         </span></span>
+<span><span class="co">## [106] AnnotationDbi_1.64.1    ggrastr_1.0.2           pillar_1.9.0           </span></span>
+<span><span class="co">## [109] grid_4.3.1              vctrs_0.6.5             RANN_2.6.1             </span></span>
+<span><span class="co">## [112] promises_1.2.1          xtable_1.8-4            cluster_2.1.4          </span></span>
+<span><span class="co">## [115] beeswarm_0.4.0          evaluate_0.23           cli_3.6.1              </span></span>
+<span><span class="co">## [118] locfit_1.5-9.8          compiler_4.3.1          rlang_1.1.2            </span></span>
+<span><span class="co">## [121] crayon_1.5.2            future.apply_1.11.0     labeling_0.4.3         </span></span>
+<span><span class="co">## [124] ggbeeswarm_0.7.2        plyr_1.8.9              stringi_1.8.2          </span></span>
+<span><span class="co">## [127] viridisLite_0.4.2       deldir_2.0-2            BiocParallel_1.36.0    </span></span>
+<span><span class="co">## [130] munsell_0.5.0           Biostrings_2.70.1       lazyeval_0.2.2         </span></span>
+<span><span class="co">## [133] spatstat.geom_3.2-7     RcppHNSW_0.5.0          hms_1.1.3              </span></span>
+<span><span class="co">## [136] patchwork_1.1.3         bit64_4.0.5             future_1.33.0          </span></span>
+<span><span class="co">## [139] KEGGREST_1.42.0         statmod_1.5.0           shiny_1.8.0            </span></span>
+<span><span class="co">## [142] ROCR_1.0-11             igraph_1.5.1            memoise_2.0.1          </span></span>
+<span><span class="co">## [145] bit_4.0.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center"><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2021-2024 Guorui Zhong ~ Made with <a href="https://www.r-project.org/"><i class="fa-brands fa-r-project" aria-label="r-project"></i></a> and <a href="https://quarto.org/">Quarto</a></span></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

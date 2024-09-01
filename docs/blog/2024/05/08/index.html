@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Guorui Zhong">
+<meta name="description" content="Raw SomaScan Assay data may contain systematic biases from many sources, such as variation introduced by the readout, pipetting errors, inherent sample variation, or consumable reagent changes. Standardization is an important tool for removing nuisance variance">
+<title>Guorui Zhong - Normalization example for SomaLogic proteomic data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><style>
+
+      .quarto-title-block .quarto-title-banner {
+        background: #212529;
+      }
+</style>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+</head>
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">Guorui Zhong</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../../../index.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../blog/index.html" rel="" target="">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../crispr/index.html" rel="" target="">
+ <span class="menu-text">CRISPR</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../keyboard/index.html" rel="" target="">
+ <span class="menu-text">Keyboard</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../python/index.html" rel="" target="">
+ <span class="menu-text">Python</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../r/index.html" rel="" target="">
+ <span class="menu-text">R</span></a>
+  </li>  
+</ul>
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item compact">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=g0MfTPMAAAAJ&amp;hl=en" rel="" target=""><i class="bi bi-journal-check" role="img" aria-label="journal-check">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/guorui-zhong-754761185/" rel="" target=""><i class="bi bi-linkedin" role="img" aria-label="linkedin">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/guoruizhong" rel="" target=""><i class="bi bi-github" role="img" aria-label="github">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+<div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Normalization example for SomaLogic proteomic data</h1>
+                  <div>
+        <div class="description">
+          Raw SomaScan Assay data may contain systematic biases from many sources, such as variation introduced by the readout, pipetting errors, inherent sample variation, or consumable reagent changes. Standardization is an important tool for removing nuisance variance
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">proteomic</div>
+                <div class="quarto-category">normalization</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p><a href="https://guoruizhong.github.io/">Guorui Zhong</a> <a href="https://orcid.org/0000-0002-1955-2847" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">Wednesday, May 8, 2024</p>
+      </div>
+    </div>
+    
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">Thursday, May 9, 2024</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Contents</h2>
+   
+  <ul>
+<li><a href="#intial-setup" id="toc-intial-setup" class="nav-link active" data-scroll-target="#intial-setup">Intial setup</a></li>
+  <li><a href="#step0-load-data" id="toc-step0-load-data" class="nav-link" data-scroll-target="#step0-load-data">Step0: Load data</a></li>
+  <li><a href="#step1-hybridization-control-normalization" id="toc-step1-hybridization-control-normalization" class="nav-link" data-scroll-target="#step1-hybridization-control-normalization">Step1: Hybridization control normalization</a></li>
+  <li><a href="#step2-median-signal-normalization-on-calibrators" id="toc-step2-median-signal-normalization-on-calibrators" class="nav-link" data-scroll-target="#step2-median-signal-normalization-on-calibrators">Step2: Median signal normalization on calibrators</a></li>
+  <li><a href="#step3-plate-scale-normalization" id="toc-step3-plate-scale-normalization" class="nav-link" data-scroll-target="#step3-plate-scale-normalization">Step3: Plate-scale normalization</a></li>
+  <li><a href="#step4-inter-plate-calibration" id="toc-step4-inter-plate-calibration" class="nav-link" data-scroll-target="#step4-inter-plate-calibration">Step4: Inter-plate calibration</a></li>
+  <li><a href="#step6-median-signal-normalization-on-all-sample-types" id="toc-step6-median-signal-normalization-on-all-sample-types" class="nav-link" data-scroll-target="#step6-median-signal-normalization-on-all-sample-types">Step6: Median signal normalization on all sample types</a></li>
+  <li><a href="#save-results" id="toc-save-results" class="nav-link" data-scroll-target="#save-results">Save results</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
+  </ul></nav>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content"><section id="intial-setup" class="level2"><h2 class="anchored" data-anchor-id="intial-setup">Intial setup</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span></span>
+<span><span class="co">## here() starts at /Users/zhonggr/Library/CloudStorage/OneDrive-Personal/quarto</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fs.r-lib.org">fs</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="co">## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──</span></span>
+<span><span class="co">## ✔ dplyr     1.1.4     ✔ readr     2.1.5</span></span>
+<span><span class="co">## ✔ forcats   1.0.0     ✔ stringr   1.5.1</span></span>
+<span><span class="co">## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1</span></span>
+<span><span class="co">## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1</span></span>
+<span><span class="co">## ✔ purrr     1.0.2</span></span>
+<span><span class="co">## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──</span></span>
+<span><span class="co">## ✖ dplyr::filter() masks stats::filter()</span></span>
+<span><span class="co">## ✖ dplyr::lag()    masks stats::lag()</span></span>
+<span><span class="co">## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</span></span>
+<span></span>
+<span><span class="co">### Project dir</span></span>
+<span><span class="va">dir</span>  <span class="op">&lt;-</span>  <span class="st">"projects/2024_Plasma7k_SomaScan"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="step0-load-data" class="level2"><h2 class="anchored" data-anchor-id="step0-load-data">Step0: Load data</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Normalization methods</span></span>
+<span><span class="va">norm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"raw"</span>, <span class="st">"hyb"</span>, <span class="st">"hyb.msnCal"</span>, <span class="st">"hyb.msnCal.ps"</span>, <span class="st">"hyb.msnCal.ps.cal"</span>, </span>
+<span>    <span class="st">"hyb.msnCal.ps.cal.msnAll"</span></span>
+<span>    <span class="op">)</span></span>
+<span><span class="va">n_norm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">norm</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### Container to save normalized data</span></span>
+<span><span class="va">RFU</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span><span class="st">"list"</span>, <span class="va">n_norm</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### Load sample meta as matrix</span></span>
+<span><span class="va">samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="va">dir</span>, <span class="st">"data/sample.txt"</span><span class="op">)</span>, header <span class="op">=</span> <span class="cn">T</span>, quote <span class="op">=</span> <span class="st">""</span>, </span>
+<span>    comment.char <span class="op">=</span> <span class="st">""</span>, sep <span class="op">=</span> <span class="st">"\t"</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### 1806 human plasma samples,  2050 sample and controls across 22 plates</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">samples</span><span class="op">)</span></span>
+<span><span class="co">## [1] 2050   32</span></span>
+<span><span class="va">samples</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span>
+<span><span class="co">##      PlateId    PlateRunDate ScannerID    PlatePosition SlideId       </span></span>
+<span><span class="co">## [1,] "P0031168" "2021-12-03" "SG12344217" "A1"          "258633829464"</span></span>
+<span><span class="co">## [2,] "P0031168" "2021-12-03" "SG12344217" "A10"         "258633829473"</span></span>
+<span><span class="co">## [3,] "P0031168" "2021-12-03" "SG12344217" "A11"         "258633829518"</span></span>
+<span><span class="co">## [4,] "P0031168" "2021-12-03" "SG12344217" "A12"         "258633829519"</span></span>
+<span><span class="co">## [5,] "P0031168" "2021-12-03" "SG12344217" "A2"          "258633829465"</span></span>
+<span><span class="va">n_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">samples</span><span class="op">)</span></span>
+<span><span class="va">plates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">samples</span><span class="op">[</span>, <span class="st">"PlateId"</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">n_plate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">plates</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### Load feature meta</span></span>
+<span><span class="va">somamers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="va">dir</span>, <span class="st">"data/somamer.txt"</span><span class="op">)</span>, header <span class="op">=</span> <span class="cn">T</span>, quote <span class="op">=</span> <span class="st">""</span>, </span>
+<span>    comment.char <span class="op">=</span> <span class="st">""</span>, sep <span class="op">=</span> <span class="st">"\t"</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### Total 7596 SOMAmers (feature); 7288 human protein, others are control</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">somamers</span><span class="op">)</span></span>
+<span><span class="co">## [1] 7596   13</span></span>
+<span><span class="va">somamers</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">13</span><span class="op">]</span></span>
+<span><span class="co">##      SeqId      SeqIdVersion SomaId     Target  UniProt  EntrezGeneID</span></span>
+<span><span class="co">## [1,] "10000-28" " 3"         "SL019233" "CRBB2" "P43320" "1415"      </span></span>
+<span><span class="co">## [2,] "10001-7"  " 3"         "SL002564" "c-Raf" "P04049" "5894"      </span></span>
+<span><span class="co">## [3,] "10003-15" " 3"         "SL019245" "ZNF41" "P51814" "7592"      </span></span>
+<span><span class="co">## [4,] "10006-25" " 3"         "SL019228" "ELK1"  "P19419" "2002"      </span></span>
+<span><span class="co">## [5,] "10008-43" " 3"         "SL019234" "GUC1A" "P43080" "2978"      </span></span>
+<span><span class="co">##      EntrezGeneSymbol Organism Units Type      Dilution</span></span>
+<span><span class="co">## [1,] "CRYBB2"         "Human"  "RFU" "Protein" "2e+01" </span></span>
+<span><span class="co">## [2,] "RAF1"           "Human"  "RFU" "Protein" "2e+01" </span></span>
+<span><span class="co">## [3,] "ZNF41"          "Human"  "RFU" "Protein" "5e-01" </span></span>
+<span><span class="co">## [4,] "ELK1"           "Human"  "RFU" "Protein" "2e+01" </span></span>
+<span><span class="co">## [5,] "GUCA1A"         "Human"  "RFU" "Protein" "2e+01" </span></span>
+<span><span class="co">##      Cal_Interplate_Ref_Pass1 Cal_Interplate_Ref_Pass2</span></span>
+<span><span class="co">## [1,] "8.879371e+02"           "8.942875e+02"          </span></span>
+<span><span class="co">## [2,] "3.963486e+02"           "3.980628e+02"          </span></span>
+<span><span class="co">## [3,] "2.260907e+02"           "2.241294e+02"          </span></span>
+<span><span class="co">## [4,] "8.352066e+02"           "8.344351e+02"          </span></span>
+<span><span class="co">## [5,] "7.299779e+02"           "7.297289e+02"</span></span>
+<span><span class="va">n_somamer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">somamers</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### Load SomaScan raw assay data matrix (2050 x 7596)</span></span>
+<span><span class="va">RFU</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="va">dir</span>, <span class="st">"data/RFU_raw.txt"</span><span class="op">)</span>, header <span class="op">=</span> <span class="cn">F</span>, sep <span class="op">=</span> <span class="st">"\t"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### 2050x7596</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">RFU</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">## [1] 2050 7596</span></span>
+<span><span class="va">RFU</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span>
+<span><span class="co">##         V1    V2    V3    V4     V5</span></span>
+<span><span class="co">## [1,] 748.8 325.4 217.1 572.0  720.7</span></span>
+<span><span class="co">## [2,] 577.5 385.4 325.7 634.8  731.0</span></span>
+<span><span class="co">## [3,] 526.8 318.6 203.0 581.3  618.0</span></span>
+<span><span class="co">## [4,] 508.4 422.7 213.1 641.2  688.2</span></span>
+<span><span class="co">## [5,] 450.5 290.5 202.2 580.2 2294.6</span></span>
+<span></span>
+<span><span class="co">### Dilution groups</span></span>
+<span><span class="va">dilution</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.005</span>, <span class="fl">0.5</span>, <span class="fl">20</span><span class="op">)</span></span>
+<span><span class="va">dilution_lab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"0_005"</span>, <span class="st">"0_5"</span>, <span class="st">"20"</span><span class="op">)</span></span>
+<span><span class="va">n_dilution</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">dilution</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="step1-hybridization-control-normalization" class="level2"><h2 class="anchored" data-anchor-id="step1-hybridization-control-normalization">Step1: Hybridization control normalization</h2>
+<p>Hybridization control normalization is designed to adjust for nui- sance variance on the basis of individual wells. Each well contains nHCE = 12 HCE (Hybridization Control Elu‑ tion) SOMAmers at different concentrations spanning more than 3 orders of magnitude. By comparing each observed HCE probe to its corresponding reference value, and then calculating the median over all HCE probes, we obtain the scale factor for the i-th well, i.e.</p>
+<p>Notice that this normalization step is performed independently for each well; once the scale factor is determined, all SOMAmer RFUs in the well are multiplied by the same scale factor.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### well = sample</span></span>
+<span><span class="co">### Get idx for Hybridization feature </span></span>
+<span><span class="va">somamer_HCE</span> <span class="op">&lt;-</span> <span class="va">somamers</span><span class="op">[</span>, <span class="st">"Type"</span><span class="op">]</span> <span class="op">==</span> <span class="st">"Hybridization Control Elution"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">somamer_HCE</span><span class="op">)</span></span>
+<span><span class="co">## somamer_HCE</span></span>
+<span><span class="co">## FALSE  TRUE </span></span>
+<span><span class="co">##  7584    12</span></span>
+<span></span>
+<span><span class="co">### 12 control SOMAmer reagents addded to the eluate just prior to readout</span></span>
+<span><span class="va">n_HCE</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">somamer_HCE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### Get hybridization control data: 1) Subset only the HYBs for all samples</span></span>
+<span><span class="va">RFU_HCE</span> <span class="op">&lt;-</span> <span class="va">RFU</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span>, <span class="va">somamer_HCE</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co">### Use another container to save hybridization normalized data</span></span>
+<span><span class="va">RFU</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">RFU</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co">### Empty container to save scale factor for hyb </span></span>
+<span><span class="va">hyb_scale_factor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">n_sample</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### Empty container to save ratio</span></span>
+<span><span class="va">HCE_ratio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">n_sample</span> <span class="op">*</span> <span class="va">n_HCE</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">n_HCE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### Loop through plates</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i_plate</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n_plate</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>    <span class="co">### Get current sample index from current plate</span></span>
+<span>    <span class="va">sample_idx</span> <span class="op">&lt;-</span> <span class="va">samples</span><span class="op">[</span>, <span class="st">"PlateId"</span><span class="op">]</span> <span class="op">==</span> <span class="va">plates</span><span class="op">[</span><span class="va">i_plate</span><span class="op">]</span></span>
+<span></span>
+<span>    <span class="co">### Get current sample data from current plate</span></span>
+<span>    <span class="va">RFU_plate</span> <span class="op">&lt;-</span> <span class="va">RFU</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="va">sample_idx</span>, <span class="op">]</span></span>
+<span></span>
+<span>    <span class="co">### Current plate ratio</span></span>
+<span>    <span class="va">HCE_ratio_plate</span> <span class="op">&lt;-</span> <span class="va">HCE_ratio</span><span class="op">[</span><span class="va">sample_idx</span>, <span class="op">]</span></span>
+<span></span>
+<span>    <span class="co">### Current plate hyb scale factor</span></span>
+<span>    <span class="va">hyb_scale_factor_plate</span> <span class="op">&lt;-</span> <span class="va">hyb_scale_factor</span><span class="op">[</span><span class="va">sample_idx</span><span class="op">]</span></span>
+<span></span>
+<span>    <span class="co">### Calculate the median of each HYB for calibrators</span></span>
+<span>    <span class="va">hyb_intra_ref</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">RFU_HCE</span><span class="op">[</span><span class="va">sample_idx</span>, <span class="op">]</span>, <span class="fl">2</span>, <span class="va">median</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co">### Loop through sample within the plate for HCE</span></span>
+<span>    <span class="kw">for</span> <span class="op">(</span><span class="va">i_sample</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">sample_idx</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>        </span>
+<span>        <span class="co">### Calculate the ratio</span></span>
+<span>        <span class="va">HCE_ratio_plate</span><span class="op">[</span><span class="va">i_sample</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">hyb_intra_ref</span> <span class="op">/</span> <span class="va">RFU_plate</span><span class="op">[</span><span class="va">i_sample</span>, <span class="va">somamer_HCE</span><span class="op">]</span></span>
+<span>        </span>
+<span>        <span class="co">### Use the median of HCE somamers as scale factor for each sample</span></span>
+<span>        <span class="va">hyb_scale_factor_plate</span><span class="op">[</span><span class="va">i_sample</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">HCE_ratio_plate</span><span class="op">[</span><span class="va">i_sample</span>, <span class="op">]</span><span class="op">)</span></span>
+<span>       </span>
+<span>        <span class="co">### Apply the same scale factor for all features by each sample</span></span>
+<span>        <span class="va">RFU_plate</span><span class="op">[</span><span class="va">i_sample</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">hyb_scale_factor_plate</span><span class="op">[</span><span class="va">i_sample</span><span class="op">]</span> <span class="op">*</span> <span class="va">RFU_plate</span><span class="op">[</span><span class="va">i_sample</span>, <span class="op">]</span></span>
+<span>    <span class="op">}</span></span>
+<span></span>
+<span>    <span class="va">HCE_ratio</span><span class="op">[</span><span class="va">sample_idx</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">HCE_ratio_plate</span></span>
+<span>    <span class="va">hyb_scale_factor</span><span class="op">[</span><span class="va">sample_idx</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">hyb_scale_factor_plate</span></span>
+<span>    <span class="va">RFU</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="va">sample_idx</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">RFU_plate</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">HCE_ratio</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span></span>
+<span><span class="co">##           [,1]      [,2]      [,3]     [,4]      [,5]      [,6]      [,7]</span></span>
+<span><span class="co">## [1,] 0.9028951 0.8465086 0.8636644 0.840359 0.8238109 0.8347273 0.8409453</span></span>
+<span><span class="co">## [2,] 1.0688565 1.0757213 1.0718344 1.074034 1.0761508 1.0865276 1.0898142</span></span>
+<span><span class="co">## [3,] 1.1755157 1.0443237 1.0618485 1.027817 1.0278632 1.0458846 1.0242561</span></span>
+<span><span class="co">## [4,] 1.2409731 1.0985134 1.1283522 1.093489 1.0620677 1.0887500 1.0404074</span></span>
+<span><span class="co">## [5,] 0.9606874 0.8826018 0.8870467 0.870571 0.8706513 0.8889404 0.8772853</span></span>
+<span><span class="co">##           [,8]      [,9]     [,10]     [,11]     [,12]</span></span>
+<span><span class="co">## [1,] 0.8245079 0.8392952 0.8265836 0.8554753 0.8322683</span></span>
+<span><span class="co">## [2,] 1.0839455 1.1161029 1.0670241 1.0616821 1.1057077</span></span>
+<span><span class="co">## [3,] 1.0360929 1.0523256 1.0140127 1.0951655 1.0508598</span></span>
+<span><span class="co">## [4,] 1.0976469 1.0806892 1.0949106 1.1302752 1.1075787</span></span>
+<span><span class="co">## [5,] 0.8698039 0.8517074 0.8504274 0.9175154 0.8744776</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="step2-median-signal-normalization-on-calibrators" class="level2"><h2 class="anchored" data-anchor-id="step2-median-signal-normalization-on-calibrators">Step2: Median signal normalization on calibrators</h2>
+<p>Median signal normalization is an intra-plate normalization procedure performed within wells of the same sample class (i.e.&nbsp;separately for buffer, QC, calibrator, and experimental samples) and within SOMAmers of the same dilution grouping (i.e.&nbsp;20%, 0.5%, and 0.005%).</p>
+<p>It is intended to remove sample-to-sample differences in total RFU brightness that may be due to differences in overall protein concentration, pipetting variation, variation in reagent concentrations, assay timing, and other sources of variability within a group of otherwise comparable samples. Since RFU brightness differs significantly across SOMAmers, median signal normalization proceeds in two steps.</p>
+<ul>
+<li>First, the median RFU of each SOMAmer is determined (across all samples of the same sample type) and sample RFUs are divided by it. The ratio corresponding to the i-th sample and α-th SOMAmer is thus given by Performing median signal normalization on experimental samples before inter-plate calibration presents the risk of enhancing plate-to-plate differences. Thus, in this step, we restrict median signal normalization to calibrators only.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">RFU</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span> <span class="op">=</span> <span class="va">RFU</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="va">SF_medNormInt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">n_sample</span> <span class="op">*</span> <span class="va">n_dilution</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">n_dilution</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### Only do the normalization on calibrator samples</span></span>
+<span><span class="va">sample_type</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Calibrator"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### Loop throuh plate</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i_plate</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">plates</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    </span>
+<span>    <span class="va">sel1</span>  <span class="op">&lt;-</span>  <span class="va">samples</span><span class="op">[</span>, <span class="st">"PlateId"</span><span class="op">]</span> <span class="op">==</span> <span class="va">plates</span><span class="op">[</span><span class="va">i_plate</span><span class="op">]</span></span>
+<span>    </span>
+<span>    <span class="co">### Loop through sample type</span></span>
+<span>    <span class="kw">for</span> <span class="op">(</span><span class="va">i_sample_type</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sample_type</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>        </span>
+<span>        <span class="co">### Get the Calibrator sample idx</span></span>
+<span>        <span class="va">sel2</span>  <span class="op">&lt;-</span>  <span class="va">samples</span><span class="op">[</span>, <span class="st">"SampleType"</span><span class="op">]</span> <span class="op">==</span> <span class="va">sample_type</span><span class="op">[</span><span class="va">i_sample_type</span><span class="op">]</span></span>
+<span>        </span>
+<span>        <span class="va">sample_idx</span>  <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">sel1</span> <span class="op">&amp;</span> <span class="va">sel2</span><span class="op">)</span></span>
+<span>        </span>
+<span>        <span class="co">### Loop through dilution</span></span>
+<span>        <span class="kw">for</span> <span class="op">(</span><span class="va">i_dilution</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n_dilution</span><span class="op">)</span> <span class="op">{</span></span>
+<span>            </span>
+<span>            <span class="va">sel_somamer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">somamers</span><span class="op">[</span>, <span class="st">"Dilution"</span><span class="op">]</span><span class="op">)</span> <span class="op">==</span> <span class="va">dilution</span><span class="op">[</span><span class="va">i_dilution</span><span class="op">]</span></span>
+<span>            </span>
+<span>            <span class="va">dat</span>  <span class="op">&lt;-</span>  <span class="va">RFU</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="va">sample_idx</span>, <span class="va">sel_somamer</span>, drop <span class="op">=</span> <span class="cn">F</span><span class="op">]</span></span>
+<span>            </span>
+<span>            <span class="va">dat2</span> <span class="op">&lt;-</span> <span class="va">dat</span></span>
+<span>            </span>
+<span>            <span class="co">### Loop throuhg dilution somamers</span></span>
+<span>            <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>                <span class="co">### Get the median of dilution somamer  </span></span>
+<span>                <span class="va">dat2</span><span class="op">[</span>, <span class="va">i</span><span class="op">]</span>  <span class="op">&lt;-</span>  <span class="va">dat2</span><span class="op">[</span>, <span class="va">i</span><span class="op">]</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">[</span>, <span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span>            <span class="op">}</span></span>
+<span></span>
+<span>            <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>                </span>
+<span>                <span class="va">SF_medNormInt</span><span class="op">[</span><span class="va">sample_idx</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">i_dilution</span><span class="op">]</span> <span class="op">=</span> <span class="fl">1</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span><span class="op">)</span></span>
+<span>                </span>
+<span>                <span class="va">dat</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">=</span> <span class="va">dat</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">*</span> <span class="va">SF_medNormInt</span><span class="op">[</span><span class="va">sample_idx</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">i_dilution</span><span class="op">]</span></span>
+<span>            <span class="op">}</span></span>
+<span></span>
+<span>            <span class="va">RFU</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="va">sample_idx</span>, <span class="va">sel_somamer</span><span class="op">]</span>  <span class="op">&lt;-</span>  <span class="va">dat</span></span>
+<span>        <span class="op">}</span></span>
+<span>    <span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">RFU</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span>
+<span><span class="co">##            V1       V2       V3       V4        V5       V6       V7       V8</span></span>
+<span><span class="co">## [1,] 628.8625 273.2797 182.3265 480.3811  605.2634 300.3222 1951.674 1160.725</span></span>
+<span><span class="co">## [2,] 621.3531 414.6658 350.4324 683.0042  786.5093 445.3299 3063.620 2156.176</span></span>
+<span><span class="co">## [3,] 550.5609 332.9702 212.1561 607.5190  645.8744 331.9251 2623.734 1432.524</span></span>
+<span><span class="co">## [4,] 557.3481 463.3970 233.6170 702.9339  754.4590 373.1733 2593.796 1444.457</span></span>
+<span><span class="co">## [5,] 394.5846 254.4436 177.1032 508.1864 2009.7976 243.4075 1846.358 1060.342</span></span>
+<span><span class="co">##            V9       V10</span></span>
+<span><span class="co">## [1,] 354.1551  721.9994</span></span>
+<span><span class="co">## [2,] 521.5062 1008.0445</span></span>
+<span><span class="co">## [3,] 431.5235  832.8435</span></span>
+<span><span class="co">## [4,] 431.6050  932.3851</span></span>
+<span><span class="co">## [5,] 312.3393  608.3873</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="step3-plate-scale-normalization" class="level2"><h2 class="anchored" data-anchor-id="step3-plate-scale-normalization">Step3: Plate-scale normalization</h2>
+<p>Plate-scale normalization aims to control for variance in total signal intensity from plate to plate. No protein spikes are added to the calibrator; the procedure solely relies on the endogenous levels of each protein within the set of calibrator replicates</p>
+<p>We utilize an internal reference determined by the median across all calibrators on all plates, i.e.</p>
+<p><span class="math display">\[
+\begin{aligned} RFU_{\alpha }^{Cal,ref}\equiv \text {median}\left\{ RFU_{i\alpha }^{Cal,obs} \right\} _{i=1,\ldots ,n_{Cal}}^{p=1,\ldots ,n_p}\ . \end{aligned}
+\]</span></p>
+<p>For the - SOMAmer on the p- plate, <span class="math display">\[
+\begin{aligned} SF_\alpha ^p = RFU_\alpha ^{Cal,ref}/\text {median}\left\{ RFU_{i\alpha }^{Cal,obs} \right\} _{i=1,\ldots ,n_{Cal}}^p\ . \end{aligned}
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">RFU</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span> <span class="op">=</span> <span class="va">RFU</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">SF</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">n_plate</span> <span class="op">*</span> <span class="va">n_somamer</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">n_somamer</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### Get calibrator sample idx</span></span>
+<span><span class="va">sel_cal</span> <span class="op">&lt;-</span> <span class="va">samples</span><span class="op">[</span>, <span class="st">"SampleType"</span><span class="op">]</span> <span class="op">==</span> <span class="st">"Calibrator"</span></span>
+<span></span>
+<span><span class="va">cal_interplate_ref</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">n_somamer</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### Loop through features</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i_somamer</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n_somamer</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="co">### Get the median of control</span></span>
+<span>    <span class="va">cal_interplate_ref</span><span class="op">[</span><span class="va">i_somamer</span><span class="op">]</span>  <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">RFU</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="va">sel_cal</span>, <span class="va">i_somamer</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="kw">for</span> <span class="op">(</span><span class="va">i_plate</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n_plate</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>        <span class="va">sel_plate</span> <span class="op">=</span> <span class="va">samples</span><span class="op">[</span>, <span class="st">"PlateId"</span><span class="op">]</span> <span class="op">==</span> <span class="va">plates</span><span class="op">[</span><span class="va">i_plate</span><span class="op">]</span></span>
+<span>        </span>
+<span>        <span class="va">cal_intraplate_ref</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">RFU</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="va">sel_cal</span> <span class="op">&amp;</span> <span class="va">sel_plate</span>, <span class="va">i_somamer</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span>        <span class="va">SF</span><span class="op">[</span><span class="va">i_plate</span>, <span class="va">i_somamer</span><span class="op">]</span> <span class="op">=</span> <span class="va">cal_interplate_ref</span><span class="op">[</span><span class="va">i_somamer</span><span class="op">]</span> <span class="op">/</span> <span class="va">cal_intraplate_ref</span></span>
+<span>    <span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">SF_plateScale</span>  <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">SF</span>, <span class="fl">1</span>, <span class="va">median</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i_plate</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n_plate</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>    <span class="va">sel_plate</span> <span class="op">=</span> <span class="va">samples</span><span class="op">[</span>, <span class="st">"PlateId"</span><span class="op">]</span> <span class="op">==</span> <span class="va">plates</span><span class="op">[</span><span class="va">i_plate</span><span class="op">]</span></span>
+<span></span>
+<span>    <span class="va">RFU</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="va">sel_plate</span>, <span class="op">]</span> <span class="op">=</span> <span class="va">RFU</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="va">sel_plate</span>, <span class="op">]</span> <span class="op">*</span> <span class="va">SF_plateScale</span><span class="op">[</span><span class="va">i_plate</span><span class="op">]</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>n order to correct the overall brightness level of the p- plate, we calculate the plate-scale scale factor as the median of across all SOMAmers, i.e.</p>
+</section><section id="step4-inter-plate-calibration" class="level2"><h2 class="anchored" data-anchor-id="step4-inter-plate-calibration">Step4: Inter-plate calibration</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">RFU</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">RFU</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">SF_cal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">n_plate</span> <span class="op">*</span> <span class="va">n_somamer</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">n_somamer</span><span class="op">)</span></span>
+<span><span class="va">sel_cal</span> <span class="op">&lt;-</span> <span class="va">samples</span><span class="op">[</span>, <span class="st">"SampleType"</span><span class="op">]</span> <span class="op">==</span> <span class="st">"Calibrator"</span></span>
+<span></span>
+<span><span class="co">### New interplate reference</span></span>
+<span><span class="va">cal_interplate_ref_N</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">n_somamer</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i_somamer</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n_somamer</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    </span>
+<span>    <span class="va">cal_interplate_ref_N</span><span class="op">[</span><span class="va">i_somamer</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">RFU</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="va">sel_cal</span>, <span class="va">i_somamer</span><span class="op">]</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="kw">for</span> <span class="op">(</span><span class="va">i_plate</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n_plate</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    </span>
+<span>        <span class="va">sel_plate</span> <span class="op">&lt;-</span> <span class="va">samples</span><span class="op">[</span>, <span class="st">"PlateId"</span><span class="op">]</span> <span class="op">==</span> <span class="va">plates</span><span class="op">[</span><span class="va">i_plate</span><span class="op">]</span></span>
+<span>    </span>
+<span>        <span class="va">cal_intraplate_ref</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">RFU</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="va">sel_cal</span> <span class="op">&amp;</span> <span class="va">sel_plate</span>, <span class="va">i_somamer</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span>        <span class="va">SF_cal</span><span class="op">[</span><span class="va">i_plate</span>, <span class="va">i_somamer</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">cal_interplate_ref_N</span><span class="op">[</span><span class="va">i_somamer</span><span class="op">]</span> <span class="op">/</span> <span class="va">cal_intraplate_ref</span></span>
+<span>        </span>
+<span>        <span class="va">RFU</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="va">sel_plate</span>, <span class="va">i_somamer</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">RFU</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="va">sel_plate</span>, <span class="va">i_somamer</span><span class="op">]</span> <span class="op">*</span> <span class="va">SF_cal</span><span class="op">[</span><span class="va">i_plate</span>, <span class="va">i_somamer</span><span class="op">]</span></span>
+<span>    <span class="op">}</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="step6-median-signal-normalization-on-all-sample-types" class="level2"><h2 class="anchored" data-anchor-id="step6-median-signal-normalization-on-all-sample-types">Step6: Median signal normalization on all sample types</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">RFU</span><span class="op">[[</span><span class="fl">6</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">RFU</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">SF_medNormFull</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">n_sample</span> <span class="op">*</span> <span class="va">n_dilution</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">n_dilution</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">sample_type</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"QC"</span>, <span class="st">"Sample"</span>, <span class="st">"Buffer"</span>, <span class="st">"Calibrator"</span><span class="op">)</span></span>
+<span><span class="va">n_sampl_type</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sample_type</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i_sample_type</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sample_type</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    </span>
+<span>    <span class="va">sample_idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">samples</span><span class="op">[</span>, <span class="st">"SampleType"</span><span class="op">]</span> <span class="op">==</span> <span class="va">sample_type</span><span class="op">[</span><span class="va">i_sample_type</span><span class="op">]</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="kw">for</span> <span class="op">(</span><span class="va">i_dilution</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n_dilution</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>        <span class="va">sel_somamer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">somamers</span><span class="op">[</span>, <span class="st">"Dilution"</span><span class="op">]</span><span class="op">)</span> <span class="op">==</span> <span class="va">dilution</span><span class="op">[</span><span class="va">i_dilution</span><span class="op">]</span></span>
+<span>        </span>
+<span>        <span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">RFU</span><span class="op">[[</span><span class="fl">6</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="va">sample_idx</span>, <span class="va">sel_somamer</span>, drop <span class="op">=</span> <span class="cn">F</span><span class="op">]</span></span>
+<span>        </span>
+<span>        <span class="va">dat2</span> <span class="op">&lt;-</span> <span class="va">dat</span></span>
+<span>        </span>
+<span>        <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>            </span>
+<span>            <span class="va">dat2</span><span class="op">[</span>, <span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">dat2</span><span class="op">[</span>, <span class="va">i</span><span class="op">]</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">[</span>, <span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span>        <span class="op">}</span></span>
+<span></span>
+<span>        <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>        </span>
+<span>            <span class="va">SF_medNormFull</span><span class="op">[</span><span class="va">sample_idx</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">i_dilution</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span><span class="op">)</span></span>
+<span>        </span>
+<span>            <span class="va">dat</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">=</span> <span class="va">dat</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">*</span> <span class="va">SF_medNormFull</span><span class="op">[</span><span class="va">sample_idx</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">i_dilution</span><span class="op">]</span></span>
+<span>        <span class="op">}</span></span>
+<span></span>
+<span>        <span class="va">RFU</span><span class="op">[[</span><span class="fl">6</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="va">sample_idx</span>, <span class="va">sel_somamer</span><span class="op">]</span>  <span class="op">&lt;-</span>  <span class="va">dat</span></span>
+<span>    <span class="op">}</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="save-results" class="level2"><h2 class="anchored" data-anchor-id="save-results">Save results</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Save normalized results</span></span>
+<span><span class="fu"><a href="https://fs.r-lib.org/reference/create.html">dir_create</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="va">dir</span>, <span class="st">"results"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i_norm</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="va">n_norm</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">outfile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://fs.r-lib.org/reference/path.html">path</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="va">dir</span>, <span class="st">"results"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"RFU_"</span>, <span class="va">norm</span><span class="op">[</span><span class="va">i_norm</span><span class="op">]</span>, <span class="st">".txt"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/write.html">write</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">RFU</span><span class="op">[[</span><span class="va">i_norm</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">n_somamer</span>, file <span class="op">=</span> <span class="va">outfile</span>, sep <span class="op">=</span> <span class="st">"\t"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">### Save sample scale factors</span></span>
+<span><span class="va">outfile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://fs.r-lib.org/reference/path.html">path</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="va">dir</span>, <span class="st">"results"</span>, <span class="st">"samples_SF.txt"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">header</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">samples</span><span class="op">)</span>, <span class="st">"hyb_scale_factor"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"SF_msnCal_d"</span>, <span class="va">dilution_lab</span><span class="op">)</span>, </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"SF_msnAll_d"</span>, <span class="va">dilution_lab</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">header</span>, <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">samples</span>, <span class="va">hyb_scale_factor</span>, <span class="va">SF_medNormInt</span>, <span class="va">SF_medNormFull</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/write.html">write</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span>, file <span class="op">=</span> <span class="va">outfile</span>, sep <span class="op">=</span> <span class="st">"\t"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### Save feature scale factor</span></span>
+<span><span class="va">outfile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://fs.r-lib.org/reference/path.html">path</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="va">dir</span>, <span class="st">"results"</span>, <span class="st">"somamers_SF.txt"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">header</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">somamers</span><span class="op">)</span>, <span class="st">"Cal_Interplate_Ref_Pass1"</span>, <span class="st">"Cal_Interplate_Ref_Pass2"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span></span>
+<span>    <span class="va">header</span>, </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">somamers</span>, <span class="va">cal_interplate_ref</span>, <span class="va">cal_interplate_ref_N</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/write.html">write</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span>, file <span class="op">=</span> <span class="va">outfile</span>, sep <span class="op">=</span> <span class="st">"\t"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### Save plate scale factor</span></span>
+<span><span class="va">outfile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://fs.r-lib.org/reference/path.html">path</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="va">dir</span>, <span class="st">"results"</span>, <span class="st">"plates_SF.txt"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">header</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Plate"</span>, <span class="st">"SF_plateScale"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"SF_cal_"</span>, <span class="va">somamers</span><span class="op">[</span>, <span class="st">"SeqId"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">header</span>, <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">plate</span>, <span class="va">SF_plateScale</span>, <span class="va">SF_cal</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/write.html">write</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span>, file <span class="op">=</span> <span class="va">outfile</span>, sep <span class="op">=</span> <span class="st">"\t"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="reference" class="level2"><h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<ul>
+<li><a href="https://osf.io/srgef/">Assessment of Variability in the Plasma 7k SomaScan Proteomics Assay</a></li>
+</ul>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center"><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2021-2024 Guorui Zhong ~ Made with <a href="https://www.r-project.org/"><i class="fa-brands fa-r-project" aria-label="r-project"></i></a> and <a href="https://quarto.org/">Quarto</a></span></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

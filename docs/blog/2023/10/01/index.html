@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Guorui Zhong">
+
+<title>Guorui Zhong - General understanding of scRNA-seq data analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>
+
+      .quarto-title-block .quarto-title-banner {
+        background: #212529;
+      }
+</style>
+
+
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">Guorui Zhong</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../index.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../blog/index.html" rel="" target="">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../crispr/index.html" rel="" target="">
+ <span class="menu-text">CRISPR</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../keyboard/index.html" rel="" target="">
+ <span class="menu-text">Keyboard</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../python/index.html" rel="" target="">
+ <span class="menu-text">Python</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../r/index.html" rel="" target="">
+ <span class="menu-text">R</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=g0MfTPMAAAAJ&amp;hl=en" rel="" target=""><i class="bi bi-journal-check" role="img" aria-label="journal-check">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/guorui-zhong-754761185/" rel="" target=""><i class="bi bi-linkedin" role="img" aria-label="linkedin">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/guoruizhong" rel="" target=""><i class="bi bi-github" role="img" aria-label="github">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">General understanding of scRNA-seq data analysis</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">scRNA-seq</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p><a href="https://guoruizhong.github.io/">Guorui Zhong</a> <a href="https://orcid.org/0000-0002-1955-2847" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">Sunday, October 1, 2023</p>
+      </div>
+    </div>
+    
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">Monday, October 16, 2023</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#experimental-scrna-seq-workflow" id="toc-experimental-scrna-seq-workflow" class="nav-link active" data-scroll-target="#experimental-scrna-seq-workflow">Experimental scRNA-seq workflow</a></li>
+  <li><a href="#file-formats-produced-by-sequencing" id="toc-file-formats-produced-by-sequencing" class="nav-link" data-scroll-target="#file-formats-produced-by-sequencing">File formats produced by sequencing</a></li>
+  <li><a href="#quality-control-of-raw-reads" id="toc-quality-control-of-raw-reads" class="nav-link" data-scroll-target="#quality-control-of-raw-reads">Quality control of raw reads</a></li>
+  <li><a href="#mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules" id="toc-mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules" class="nav-link" data-scroll-target="#mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules">Mapping reads to cellular barcodes and origin mRNA molecules</a></li>
+  <li><a href="#normalization-for-quantification-of-expression" id="toc-normalization-for-quantification-of-expression" class="nav-link" data-scroll-target="#normalization-for-quantification-of-expression">Normalization for quantification of expression</a></li>
+  <li><a href="#estimate-confounding-factors" id="toc-estimate-confounding-factors" class="nav-link" data-scroll-target="#estimate-confounding-factors">Estimate confounding factors</a></li>
+  <li><a href="#data-correction-and-integration" id="toc-data-correction-and-integration" class="nav-link" data-scroll-target="#data-correction-and-integration">Data correction and integration</a></li>
+  <li><a href="#feature-selection-and-dimensionality-reduction" id="toc-feature-selection-and-dimensionality-reduction" class="nav-link" data-scroll-target="#feature-selection-and-dimensionality-reduction">Feature selection and dimensionality reduction</a></li>
+  <li><a href="#cluster-analysis" id="toc-cluster-analysis" class="nav-link" data-scroll-target="#cluster-analysis">Cluster analysis</a>
+  <ul>
+  <li><a href="#identifying-clusters" id="toc-identifying-clusters" class="nav-link" data-scroll-target="#identifying-clusters">Identifying Clusters</a></li>
+  <li><a href="#cluster-annotation" id="toc-cluster-annotation" class="nav-link" data-scroll-target="#cluster-annotation">Cluster annotation</a></li>
+  <li><a href="#compositional-analysis" id="toc-compositional-analysis" class="nav-link" data-scroll-target="#compositional-analysis">Compositional analysis</a></li>
+  <li><a href="#trajectory-inference" id="toc-trajectory-inference" class="nav-link" data-scroll-target="#trajectory-inference">Trajectory inference</a></li>
+  </ul></li>
+  <li><a href="#gene-level-downstream-analysis" id="toc-gene-level-downstream-analysis" class="nav-link" data-scroll-target="#gene-level-downstream-analysis">Gene-level downstream analysis</a>
+  <ul>
+  <li><a href="#differential-expression-testing" id="toc-differential-expression-testing" class="nav-link" data-scroll-target="#differential-expression-testing">Differential expression testing</a></li>
+  <li><a href="#gene-set-analsysis" id="toc-gene-set-analsysis" class="nav-link" data-scroll-target="#gene-set-analsysis">Gene set analsysis</a></li>
+  <li><a href="#gene-regulatory-networks" id="toc-gene-regulatory-networks" class="nav-link" data-scroll-target="#gene-regulatory-networks">Gene regulatory networks</a></li>
+  </ul></li>
+  <li><a href="#analysis-platforms" id="toc-analysis-platforms" class="nav-link" data-scroll-target="#analysis-platforms">Analysis platforms</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="experimental-scrna-seq-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="experimental-scrna-seq-workflow">Experimental scRNA-seq workflow</h2>
+<p><img src="experimental.png" class="img-fluid"></p>
+<p>Typical workflows including:</p>
+<ol type="1">
+<li>Single cell dissociation
+<ul>
+<li>tissue is digested</li>
+</ul></li>
+<li>Single cell isolation
+<ul>
+<li>errors can occur that lead to empty droplets, doublets, multiplets, non-viables cells</li>
+</ul></li>
+<li>Library construction
+<ul>
+<li>well or droplet contains the chemicals to break down the cell membrances</li>
+<li>intra cellular mRNA is captured, reverse-transcribed to cDNA molecules and amplified</li>
+<li>Uniqiue molecular identifed (UMI) allow us to distinguish between amplified copies of the same mRNA molecule and reads from separate mRNA molecules transcribed from the same gene</li>
+<li>Amplification before sequencing is to increase its probility of being measured</li>
+</ul></li>
+<li>Sequencing
+<ul>
+<li>cDNA libraries are labelled with cellular barcodes</li>
+<li>libraries are pooled together</li>
+</ul></li>
+</ol>
+</section>
+<section id="file-formats-produced-by-sequencing" class="level2">
+<h2 class="anchored" data-anchor-id="file-formats-produced-by-sequencing">File formats produced by sequencing</h2>
+<p><img src="text.png" class="img-fluid"></p>
+<p><img src="asc.png" class="img-fluid"></p>
+</section>
+<section id="quality-control-of-raw-reads" class="level2">
+<h2 class="anchored" data-anchor-id="quality-control-of-raw-reads">Quality control of raw reads</h2>
+<p>Quality control is performed to ensure that the data quality is sufficient for downstream analysis. The QC can be performed in cell level, transcript level and count data directly.</p>
+<p>To check the integrity of cel, <code>cell QC</code> is commonly performed based on three covariates:</p>
+<ol type="1">
+<li>Count depth: the number of counts per barcode</li>
+<li>The number of genes per barcode</li>
+<li>The fraction of counts from mitochondrial genes per barcode</li>
+</ol>
+<ul>
+<li><p>Make sure all cellular bacode data correspond to viable cells</p></li>
+<li><p>all reads assigned to the same barcode may not correspond to reads from the cells as a barcode may mistakenly tag multiple cells (doublet) or may not tag any cells (empty droplet)</p></li>
+</ul>
+<p>The distribution of these QC covariates are examined for outlier peaks that filtered out by thresholding. Condieration any of these three QC covariates in isolation can lead to misinterpretation of cellular signals. These thresholds shoule be set as permissive as possible to avoid filtering out viable cell populations unintentionally.</p>
+<ul>
+<li><p>Cells with high a comparatively high fraction of mitochandrial counts maybe involved in respiratory process</p></li>
+<li><p>Cells with low counts and/or genes may correspond to quiecent cells population</p></li>
+<li><p>Cells with high counts maybe larger in size</p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Perform QC by finding outlier peaks in the number of genes, the count depth and the fraction of mitochondrial reads. Consider these covariates jointly instead of separtely</li>
+<li>Be as permissive of QC thresholding as possible, and revisit QC if downstream clustering cannot be interpreted</li>
+<li>If the distribution of QC covariates differ between samples, QC thresholds should be determined separately for each sample to account for sample quality differences.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules" class="level2">
+<h2 class="anchored" data-anchor-id="mapping-reads-to-cellular-barcodes-and-origin-mrna-molecules">Mapping reads to cellular barcodes and origin mRNA molecules</h2>
+<p><img src="alignment.png" class="img-fluid"></p>
+<p>Tools that same as those used in bulk RNA-seq are available for this procedure, including:</p>
+<ul>
+<li>Burrows-Wheeler Aligner (BWA)</li>
+<li>STAR</li>
+<li>Kallisto</li>
+<li>Sailfish</li>
+<li>Salmon</li>
+</ul>
+<p>Only reads that map to exonic loci with high mapping quality are considered for generation of the gene expression matrix.</p>
+</section>
+<section id="normalization-for-quantification-of-expression" class="level2">
+<h2 class="anchored" data-anchor-id="normalization-for-quantification-of-expression">Normalization for quantification of expression</h2>
+<p>Why need to do normaliztion?</p>
+<p>Each count in a count matrix represents the successful capture, reverse transciption, and sequencing of a molecule of cellular mRNA. <strong>Count depths</strong> for identical cellss can differ due to the variability inherent in each of these steps. These variables are usually difficult to estimate and thus typically modeled as fixed effects. Thus, when gene expression is compared betwen cells based on count data, any difference may have arisen solely due to sampling effects. So Normalization address this issue by scaling count data to obtain correct relative gene expression abundances between cells.</p>
+<p><img src="rpkm.png" class="img-fluid"></p>
+<p>These three metrics attempt to normalize for sequencing depth and gene length. Here’s how you do it for RPKM:</p>
+<ol type="1">
+<li>Count up the total reads in a sample and divide that number by 1,000,000 – this is our “per million” scaling factor.</li>
+<li>Divide the read counts by the “per million” scaling factor. This normalizes for sequencing depth, giving you reads per million (RPM)</li>
+<li>Divide the RPM values by the length of the gene, in kilobases. This gives you RPKM.</li>
+</ol>
+<p>FPKM is very similar to RPKM. RPKM was made for single-end RNA-seq, where every read corresponded to a single fragment that was sequenced. FPKM was made for paired-end RNA-seq. With paired-end RNA-seq, two reads can correspond to a single fragment, or, if one read in the pair did not map, one read can correspond to a single fragment. The only difference between RPKM and FPKM is that FPKM takes into account that two reads can map to one fragment (and so it doesn’t count this fragment twice).</p>
+<p><img src="normalization.png" class="img-fluid"></p>
+<p>TPM is very similar to RPKM and FPKM. The only difference is the order of operations. Here’s how you calculate TPM:</p>
+<ol type="1">
+<li>Divide the read counts by the length of each gene in kilobases. This gives you reads per kilobase (RPK).</li>
+<li>Count up all the RPK values in a sample and divide this number by 1,000,000. This is your “per million” scaling factor.</li>
+<li>Divide the RPK values by the “per million” scaling factor. This gives you TPM.</li>
+</ol>
+<p>When calculating TPM, the only difference is that you normalize for gene length first, and then normalize for sequencing depth second. However, the effects of this difference are quite profound.</p>
+<p>When you use TPM, the sum of all TPMs in each sample are the same. This makes it easier to compare the proportion of reads that mapped to a gene in each sample. In contrast, with RPKM and FPKM, the sum of the normalized reads in each sample may be different, and this makes it harder to compare samples directly.</p>
+<p>Here’s an example. If the TPM for gene A in Sample 1 is 3.33 and the TPM in sample B is 3.33, then I know that the exact same proportion of total reads mapped to gene A in both samples. This is because the sum of the TPMs in both samples always add up to the same number (so the denominator required to calculate the proportions is the same, regardless of what sample you are looking at.)</p>
+<p>With RPKM or FPKM, the sum of normalized reads in each sample can be different. Thus, if the RPKM for gene A in Sample 1 is 3.33 and the RPKM in Sample 2 is 3.33, I would not know if the same proportion of reads in Sample 1 mapped to gene A as in Sample 2. This is because the denominator required to calculate the proportion could be different for the two samples.</p>
+<p>Using RPKM/FPKM normalization, the total number of RPKM/FPKM normalized counts for each sample will be different. Therefore, you cannot compare the normalized counts for each gene equally between samples.</p>
+<table class="table">
+<caption>Several common normalization methods exist to account for these differences:</caption>
+<thead>
+<tr class="header">
+<th>Normalization method</th>
+<th>Description</th>
+<th>Accounted factors</th>
+<th>Recommendations for use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>CPM</strong> (counts per million)</td>
+<td>counts scaled by total number of reads</td>
+<td>sequencing depth</td>
+<td>gene count comparisons between replicates of the same samplegroup; <strong>NOT for within sample comparisons or DE analysis</strong></td>
+</tr>
+<tr class="even">
+<td><strong>TPM</strong> (transcripts per kilobase million)</td>
+<td>counts per length of transcript (kb) per million reads mapped</td>
+<td>sequencing depth and gene length</td>
+<td>gene count comparisons within a sample or between samples of the same sample group; <strong>NOT for DE analysis</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>RPKM/FPKM</strong> (reads/fragments per kilobase of exon per million reads/fragments mapped)</td>
+<td>similar to TPM</td>
+<td>sequencing depth and gene length</td>
+<td>gene count comparisons between genes within a sample; <strong>NOT for between sample comparisons or DE analysis</strong></td>
+</tr>
+<tr class="even">
+<td>DESeq2’s <strong>median of ratios</strong> [<a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-10-r106">1</a>]</td>
+<td>counts divided by sample-specific size factors determined by median ratio of gene counts relative to geometric mean per gene</td>
+<td>sequencing depth and RNA composition</td>
+<td>gene count comparisons between samples and for <strong>DE analysis</strong>; <strong>NOT for within sample comparisons</strong></td>
+</tr>
+<tr class="odd">
+<td>EdgeR’s <strong>trimmed mean of M values (TMM)</strong> [<a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-3-r25">2</a>]</td>
+<td>uses a weighted trimmed mean of the log expression ratios between samples</td>
+<td>sequencing depth, RNA composition</td>
+<td>gene count comparisons between samples and for <strong>DE analysis</strong>; <strong>NOT for within sample comparisons</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Source - <a href="https://www.youtube.com/watch?v=TTUrtCY2k-w&amp;embeds_referring_euri=https%3A%2F%2Fwww.rna-seqblog.com%2F&amp;source_ve_path=MjM4NTE&amp;feature=emb_title">StatQuest</a>, <a href="https://www.rna-seqblog.com/rpkm-fpkm-and-tpm-clearly-explained/">RPKM, FPKM and TPM, clearly explained</a>, <a href="https://hbctraining.github.io/DGE_workshop_salmon/lessons/02_DGE_count_normalization.html">Count normalization with DESeq2</a></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>While TPM and RPKM/FPKM normalization methods both account for sequencing depth and gene length, RPKM/FPKM are not recommended. <strong>The reason is that the normalized count values output by the RPKM/FPKM method are not comparable between samples.</strong></li>
+<li>Normalized data should be log(x=1)-transformed for use with downstream analysis methods that assume data are normally distributed</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="estimate-confounding-factors" class="level2">
+<h2 class="anchored" data-anchor-id="estimate-confounding-factors">Estimate confounding factors</h2>
+<p>The observed read counts are affected by a combination of different factors, including biological variables and technical noise.</p>
+<p>Batch effects, systematic differences that are unrelated to any biological variation and result from sample preparation conditions, are often prominent.</p>
+<p><img src="confunding.png" class="img-fluid"></p>
+</section>
+<section id="data-correction-and-integration" class="level2">
+<h2 class="anchored" data-anchor-id="data-correction-and-integration">Data correction and integration</h2>
+<p>Normalized data may still contain unwanted variability. Data correction targets further technical and biological variability covariates suchs as</p>
+<p>Biological effects: - Cell cycle effects on transcriptome - mitochondrial gene expression</p>
+<p>Technical effects: - Count depth - Batch effect - Dropout (noise)</p>
+<p>Consider the correction for biological and technical covariates separtely as these are used for different purpose and present unique challenge.</p>
+</section>
+<section id="feature-selection-and-dimensionality-reduction" class="level2">
+<h2 class="anchored" data-anchor-id="feature-selection-and-dimensionality-reduction">Feature selection and dimensionality reduction</h2>
+</section>
+<section id="cluster-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="cluster-analysis">Cluster analysis</h2>
+<p>After pre-processing, we can perform downstream anslysis to extract biological insights and describe the underlying biological system. These descriptions are obtained by fitting interpretable models to the data.</p>
+<ul>
+<li>Group of cells with similary gene expression profiles representing cell-type clusters</li>
+<li>Small changes in gene expression between similar cells denoting continuous (differentiation) trajectories</li>
+<li>Genes with correlated expression profiles indicating co-regulation</li>
+</ul>
+<section id="identifying-clusters" class="level3">
+<h3 class="anchored" data-anchor-id="identifying-clusters">Identifying Clusters</h3>
+<p>Cluster analysis methods attempt to explain the heterogenity in the data based on a categorization of cells into groups.</p>
+<p>Clusters are obtained by grouping cells based on the similarity of their gene expression profiles.</p>
+<p>Similarity scores:</p>
+<ul>
+<li>Euclidean distance</li>
+<li>Clustering algorithms
+<ul>
+<li>K-means</li>
+</ul></li>
+<li>Community detection
+<ul>
+<li>K-Nearest Neighbour</li>
+</ul></li>
+</ul>
+</section>
+<section id="cluster-annotation" class="level3">
+<h3 class="anchored" data-anchor-id="cluster-annotation">Cluster annotation</h3>
+<p>Marker genes characterize the cluster and are used to annotate it with a meanningful biological label.</p>
+<p>::: {.callout-note “Cell identities”} - It is not always clear what constitutes a cell type - cells of the same cell type in different states maybe detected in separte clusters :::</p>
+<ul>
+<li>Reference databases</li>
+<li>Marker genes from the literature</li>
+<li>Data-drived marker genes
+<ul>
+<li>Focus on up-regulated genes in the cluster as marker genes are expected to have strong differential expression effects</li>
+<li>rank-sum test or t-test to rank genes</li>
+<li>Top-ranked genes are regarded as marker genes</li>
+</ul></li>
+</ul>
+<p>P-values are often inflated, which can lead to an overestimation of the number of marker genes. However, the ranking of genes based on p-values is unaffected</p>
+</section>
+<section id="compositional-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="compositional-analysis">Compositional analysis</h3>
+<p>Compositional data analysis revolves around the proporations of cells that fall into each cell-identity cluster.</p>
+</section>
+<section id="trajectory-inference" class="level3">
+<h3 class="anchored" data-anchor-id="trajectory-inference">Trajectory inference</h3>
+<p>Trajectory analysis in the data are regarded as a snapshot of a dynamic process, which investigate the underlying process.</p>
+<p>The biological processes that drive the development of the observed heterogenity are continuous process.</p>
+<p>Trajectory inference methods interpret single-cell data as a snapshot of a continuous process. This process is reconstructed by finding paths through cellular space that minimize transcriptional changes between neighbouring cells. The ordering of cells along these paths is described by a pseudotime variable. While this variable is related to transcriptional distances from a root cell, tt is often inter- preted as a proxy for developmental time</p>
+</section>
+</section>
+<section id="gene-level-downstream-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="gene-level-downstream-analysis">Gene-level downstream analysis</h2>
+<section id="differential-expression-testing" class="level3">
+<h3 class="anchored" data-anchor-id="differential-expression-testing">Differential expression testing</h3>
+<p>DE is to answer the question whether any genes are differntially expressed between two experimental conditions</p>
+<p>Tools are commonly used:</p>
+<ul>
+<li>DESeq2</li>
+<li>EdgeR</li>
+<li>limma</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>DE testing should not be performed on corrected data (denoised, batch corrected, etc), but instead on measured data with technical covariates included in the model</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="gene-set-analsysis" class="level3">
+<h3 class="anchored" data-anchor-id="gene-set-analsysis">Gene set analsysis</h3>
+<p>To further interpret the long list of candidate genes that maybe differentially expressed between treated and control cells, we can group the genes into sets based on characteristics and testing whether these characteristics are overrepresented in the candidate gene list.</p>
+<p>Common biological processes labels:</p>
+<ul>
+<li>MSigDB</li>
+<li>Gene Ontology</li>
+<li>KEGG</li>
+<li>Reactome</li>
+</ul>
+</section>
+<section id="gene-regulatory-networks" class="level3">
+<h3 class="anchored" data-anchor-id="gene-regulatory-networks">Gene regulatory networks</h3>
+<p>The expression level of a gene is determined by a complex interplay of regulatory interactions with other genes and small molecules.</p>
+<p>Gene regulatory network inference is performed based on measurement of gene co-expression such as correlation, mutual information, or via regression models.</p>
+</section>
+</section>
+<section id="analysis-platforms" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-platforms">Analysis platforms</h2>
+<ul>
+<li>Scater (R, Strength in QC and pre-processing)</li>
+<li>Seurat (R, Comprehensive)</li>
+<li>scanpy (Python-based)</li>
+</ul>
+</section>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<ul>
+<li><a href="https://hbctraining.github.io/In-depth-NGS-Data-Analysis-Course/sessionIV/lessons/SC_pre-QC.html">Single-cell RNA-seq: raw sequencing data to counts</a></li>
+<li><a href="https://learn.gencore.bio.nyu.edu/ngs-file-formats/">File formats produced by sequencing</a></li>
+<li><a href="https://rnaseq.uoregon.edu/">RNA-seqlopedia</a> - Created by the Univ. of Orgeon, this is a great resource for understanding the entire RNAseq workflow.</li>
+<li><a href="http://education.knoweng.org/sequenceng/">SequencEnG - An interactive learning resource for next-generation sequencing (NGS) techniques</a></li>
+<li><a href="https://learn.gencore.bio.nyu.edu/">Next-Generation Sequencing Analysis</a> - provide hands on experience with analyzing next generation sequencing. Standard pipelines are presented that provide the user with and step-by-step guide to using state of the art bioinformatics tools</li>
+<li><a href="https://www.10xgenomics.com/support/single-cell-gene-expression">Single Cell Gene Expression</a></li>
+<li><a href="https://blog.bioturing.com/2022/02/15/the-essence-of-scrna-seq-clustering/">The Essence of scRNA-Seq Clustering: Why and How to Do it Right</a></li>
+<li><a href="https://distill.pub/2016/misread-tsne/">How to Use t-SNE Effectively</a></li>
+<li><a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006907">Ten quick tips for effective dimensionality reduction</a></li>
+<li><a href="http://mengnote.labspot.com/2012/12/calculate-correct-hypergeometric-p.html">Hypergeometric test and Fisher’s exact test</a></li>
+<li><a href="https://hbctraining.github.io/main/">Bioinformatics Training at the Harvard Chan Bioinformatics Core</a></li>
+<li><a href="https://broadinstitute.github.io/2019_scWorkshop/">ANALYSIS OF SINGLE CELL RNA-SEQ DATA</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center"><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2021-2024 Guorui Zhong ~ Made with <a href="https://www.r-project.org/"><i class="fa-brands fa-r-project" aria-label="r-project"></i></a> and <a href="https://quarto.org/">Quarto</a></span></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

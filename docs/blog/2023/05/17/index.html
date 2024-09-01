@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Guorui Zhong">
+<meta name="description" content="Principle component methods are used to summarize and viusalize the information contained in a large multivariate datasets.">
+<title>Guorui Zhong - Perform Principal Component Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><style>
+
+      .quarto-title-block .quarto-title-banner {
+        background: #212529;
+      }
+</style>
+</head>
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">Guorui Zhong</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../../../index.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../blog/index.html" rel="" target="">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../crispr/index.html" rel="" target="">
+ <span class="menu-text">CRISPR</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../keyboard/index.html" rel="" target="">
+ <span class="menu-text">Keyboard</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../python/index.html" rel="" target="">
+ <span class="menu-text">Python</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../r/index.html" rel="" target="">
+ <span class="menu-text">R</span></a>
+  </li>  
+</ul>
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item compact">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=g0MfTPMAAAAJ&amp;hl=en" rel="" target=""><i class="bi bi-journal-check" role="img" aria-label="journal-check">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/guorui-zhong-754761185/" rel="" target=""><i class="bi bi-linkedin" role="img" aria-label="linkedin">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/guoruizhong" rel="" target=""><i class="bi bi-github" role="img" aria-label="github">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+<div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Perform Principal Component Analysis</h1>
+                  <div>
+        <div class="description">
+          Principle component methods are used to summarize and viusalize the information contained in a large multivariate datasets.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">r</div>
+                <div class="quarto-category">pca</div>
+                <div class="quarto-category">unsupervised</div>
+                <div class="quarto-category">dimensional reduction</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p><a href="https://guoruizhong.github.io/">Guorui Zhong</a> <a href="https://orcid.org/0000-0002-1955-2847" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">Wednesday, May 17, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Contents</h2>
+   
+  <ul>
+<li><a href="#compute-pca" id="toc-compute-pca" class="nav-link active" data-scroll-target="#compute-pca">Compute PCA</a></li>
+  <li><a href="#variances" id="toc-variances" class="nav-link" data-scroll-target="#variances">Variances</a></li>
+  <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables">Variables</a></li>
+  <li><a href="#individuals" id="toc-individuals" class="nav-link" data-scroll-target="#individuals">Individuals</a></li>
+  <li><a href="#other-dimensions" id="toc-other-dimensions" class="nav-link" data-scroll-target="#other-dimensions">Other Dimensions</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
+  </ul></nav>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content"><p><img src="pca.png" class="img-fluid"></p>
+<p>Principle component analysis is used to extract the important information from a multivariate data table and to express this information as a set of few new variables called principle components. These new variables correspond to a linear combination of the originals. The number of principal components is less than or equal to the number of original variables.</p>
+<p>PCA assumes that the directions with the largest variances are the most “important” (i.e, the most principal).</p>
+<p>Technically speaking, the amount of variance retained by each principal component is measured by the so-called eigenvalue.</p>
+<p>Note that, the PCA method is particularly useful when the variables within the data set are highly correlated. Correlation indicates that there is redundancy in the data. Due to this redundancy, PCA can be used to reduce the original variables into a smaller number of new variables ( = principal components) explaining most of the variance in the original variables.</p>
+<p>Taken together, the main purpose of principal component analysis is to:</p>
+<ul>
+<li>identify hidden pattern in a data set,</li>
+<li>reduce the dimensionnality of the data by removing the noise and redundancy in the data,</li>
+<li>identify correlated variables</li>
+</ul>
+<p><img src="pca2.png" class="img-fluid"></p>
+<section id="compute-pca" class="level2"><h2 class="anchored" data-anchor-id="compute-pca">Compute PCA</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Load packages</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/trinker/pacman">pacman</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span></span>
+<span>    <span class="va">tidyverse</span>,  <span class="co"># tidy data</span></span>
+<span>    <span class="va">FactoMineR</span>, <span class="co"># compute principal component methods</span></span>
+<span>    <span class="va">factoextra</span>,  <span class="co"># extract, visualize and interpretate the results</span></span>
+<span>    <span class="va">corrplot</span>  <span class="co"># visualize cos2 of variables</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### subset active individuals and active variables</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">decathlon2</span><span class="op">)</span></span>
+<span><span class="va">decathlon2_active</span> <span class="op">&lt;-</span> <span class="va">decathlon2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">23</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">decathlon2_active</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="co">##         X100m Long.jump Shot.put High.jump X400m X110m.hurdle</span></span>
+<span><span class="co">## SEBRLE  11.04      7.58    14.83      2.07 49.81        14.69</span></span>
+<span><span class="co">## CLAY    10.76      7.40    14.26      1.86 49.37        14.05</span></span>
+<span><span class="co">## BERNARD 11.02      7.23    14.25      1.92 48.93        14.99</span></span>
+<span><span class="co">## YURKOV  11.34      7.09    15.19      2.10 50.42        15.31</span></span>
+<span></span>
+<span><span class="co">### compute pca</span></span>
+<span><span class="va">res_pca</span> <span class="op">&lt;-</span> <span class="fu">PCA</span><span class="op">(</span><span class="va">decathlon2_active</span>, graph <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">res_pca</span></span>
+<span><span class="co">## **Results for the Principal Component Analysis (PCA)**</span></span>
+<span><span class="co">## The analysis was performed on 23 individuals, described by 10 variables</span></span>
+<span><span class="co">## *The results are available in the following objects:</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##    name               description                          </span></span>
+<span><span class="co">## 1  "$eig"             "eigenvalues"                        </span></span>
+<span><span class="co">## 2  "$var"             "results for the variables"          </span></span>
+<span><span class="co">## 3  "$var$coord"       "coord. for the variables"           </span></span>
+<span><span class="co">## 4  "$var$cor"         "correlations variables - dimensions"</span></span>
+<span><span class="co">## 5  "$var$cos2"        "cos2 for the variables"             </span></span>
+<span><span class="co">## 6  "$var$contrib"     "contributions of the variables"     </span></span>
+<span><span class="co">## 7  "$ind"             "results for the individuals"        </span></span>
+<span><span class="co">## 8  "$ind$coord"       "coord. for the individuals"         </span></span>
+<span><span class="co">## 9  "$ind$cos2"        "cos2 for the individuals"           </span></span>
+<span><span class="co">## 10 "$ind$contrib"     "contributions of the individuals"   </span></span>
+<span><span class="co">## 11 "$call"            "summary statistics"                 </span></span>
+<span><span class="co">## 12 "$call$centre"     "mean of the variables"              </span></span>
+<span><span class="co">## 13 "$call$ecart.type" "standard error of the variables"    </span></span>
+<span><span class="co">## 14 "$call$row.w"      "weights for the individuals"        </span></span>
+<span><span class="co">## 15 "$call$col.w"      "weights for the variables"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="variances" class="level2"><h2 class="anchored" data-anchor-id="variances">Variances</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### eigenvalues measure the amount of variation retained by each principal component</span></span>
+<span><span class="va">eig_val</span> <span class="op">&lt;-</span> <span class="fu">get_eigenvalue</span><span class="op">(</span><span class="va">res_pca</span><span class="op">)</span></span>
+<span><span class="va">eig_val</span></span>
+<span><span class="co">##        eigenvalue variance.percent cumulative.variance.percent</span></span>
+<span><span class="co">## Dim.1   4.1242133        41.242133                    41.24213</span></span>
+<span><span class="co">## Dim.2   1.8385309        18.385309                    59.62744</span></span>
+<span><span class="co">## Dim.3   1.2391403        12.391403                    72.01885</span></span>
+<span><span class="co">## Dim.4   0.8194402         8.194402                    80.21325</span></span>
+<span><span class="co">## Dim.5   0.7015528         7.015528                    87.22878</span></span>
+<span><span class="co">## Dim.6   0.4228828         4.228828                    91.45760</span></span>
+<span><span class="co">## Dim.7   0.3025817         3.025817                    94.48342</span></span>
+<span><span class="co">## Dim.8   0.2744700         2.744700                    97.22812</span></span>
+<span><span class="co">## Dim.9   0.1552169         1.552169                    98.78029</span></span>
+<span><span class="co">## Dim.10  0.1219710         1.219710                   100.00000</span></span>
+<span></span>
+<span><span class="co">### scree plot to visualize the eigenvalues</span></span>
+<span><span class="fu">fviz_eig</span><span class="op">(</span><span class="va">res_pca</span>, addlabels <span class="op">=</span> <span class="cn">TRUE</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="variables" class="level2"><h2 class="anchored" data-anchor-id="variables">Variables</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### graph of variables</span></span>
+<span><span class="va">var</span> <span class="op">&lt;-</span> <span class="fu">get_pca_var</span><span class="op">(</span><span class="va">res_pca</span><span class="op">)</span></span>
+<span><span class="va">var</span></span>
+<span><span class="co">## Principal Component Analysis Results for variables</span></span>
+<span><span class="co">##  ===================================================</span></span>
+<span><span class="co">##   Name       Description                                    </span></span>
+<span><span class="co">## 1 "$coord"   "Coordinates for the variables"                </span></span>
+<span><span class="co">## 2 "$cor"     "Correlations between variables and dimensions"</span></span>
+<span><span class="co">## 3 "$cos2"    "Cos2 for the variables"                       </span></span>
+<span><span class="co">## 4 "$contrib" "contributions of the variables"</span></span>
+<span><span class="co">### coordinates of variables to create a scatter plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">var</span><span class="op">$</span><span class="va">coord</span><span class="op">)</span></span>
+<span><span class="co">##                   Dim.1       Dim.2      Dim.3       Dim.4      Dim.5</span></span>
+<span><span class="co">## X100m        -0.8506257 -0.17939806  0.3015564  0.03357320 -0.1944440</span></span>
+<span><span class="co">## Long.jump     0.7941806  0.28085695 -0.1905465 -0.11538956  0.2331567</span></span>
+<span><span class="co">## Shot.put      0.7339127  0.08540412  0.5175978  0.12846837 -0.2488129</span></span>
+<span><span class="co">## High.jump     0.6100840 -0.46521415  0.3300852  0.14455012  0.4027002</span></span>
+<span><span class="co">## X400m        -0.7016034  0.29017826  0.2835329  0.43082552  0.1039085</span></span>
+<span><span class="co">## X110m.hurdle -0.7641252 -0.02474081  0.4488873 -0.01689589  0.2242200</span></span>
+<span></span>
+<span><span class="co">### represents the quality of representation for variables on the factor map. </span></span>
+<span><span class="co">### It’s calculated as the squared coordinates: var.cos2 = var.coord * var.coord.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">var</span><span class="op">$</span><span class="va">cos2</span><span class="op">)</span></span>
+<span><span class="co">##                  Dim.1        Dim.2      Dim.3        Dim.4      Dim.5</span></span>
+<span><span class="co">## X100m        0.7235641 0.0321836641 0.09093628 0.0011271597 0.03780845</span></span>
+<span><span class="co">## Long.jump    0.6307229 0.0788806285 0.03630798 0.0133147506 0.05436203</span></span>
+<span><span class="co">## Shot.put     0.5386279 0.0072938636 0.26790749 0.0165041211 0.06190783</span></span>
+<span><span class="co">## High.jump    0.3722025 0.2164242070 0.10895622 0.0208947375 0.16216747</span></span>
+<span><span class="co">## X400m        0.4922473 0.0842034209 0.08039091 0.1856106269 0.01079698</span></span>
+<span><span class="co">## X110m.hurdle 0.5838873 0.0006121077 0.20149984 0.0002854712 0.05027463</span></span>
+<span></span>
+<span><span class="co">### contains the contributions (in percentage) of the variables to the principal components. </span></span>
+<span><span class="co">### The contribution of a variable (var) to a given principal component is (in percentage) : (var.cos2 * 100) / (total cos2 of the component).</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">var</span><span class="op">$</span><span class="va">contrib</span><span class="op">)</span></span>
+<span><span class="co">##                  Dim.1      Dim.2     Dim.3       Dim.4     Dim.5</span></span>
+<span><span class="co">## X100m        17.544293  1.7505098  7.338659  0.13755240  5.389252</span></span>
+<span><span class="co">## Long.jump    15.293168  4.2904162  2.930094  1.62485936  7.748815</span></span>
+<span><span class="co">## Shot.put     13.060137  0.3967224 21.620432  2.01407269  8.824401</span></span>
+<span><span class="co">## High.jump     9.024811 11.7715838  8.792888  2.54987951 23.115504</span></span>
+<span><span class="co">## X400m        11.935544  4.5799296  6.487636 22.65090599  1.539012</span></span>
+<span><span class="co">## X110m.hurdle 14.157544  0.0332933 16.261261  0.03483735  7.166193</span></span>
+<span></span>
+<span><span class="co">### plot variables. it shows the relationship between all variables</span></span>
+<span><span class="fu">fviz_pca_var</span><span class="op">(</span><span class="va">res_pca</span>, col.var <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### quality of representation</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">var</span><span class="op">$</span><span class="va">cos2</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="co">##               Dim.1       Dim.2      Dim.3      Dim.4      Dim.5</span></span>
+<span><span class="co">## X100m     0.7235641 0.032183664 0.09093628 0.00112716 0.03780845</span></span>
+<span><span class="co">## Long.jump 0.6307229 0.078880629 0.03630798 0.01331475 0.05436203</span></span>
+<span><span class="co">## Shot.put  0.5386279 0.007293864 0.26790749 0.01650412 0.06190783</span></span>
+<span><span class="co">## High.jump 0.3722025 0.216424207 0.10895622 0.02089474 0.16216747</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">var</span><span class="op">$</span><span class="va">cos2</span>, is.corr<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### bar plot total cos2 of variables on Dim.1 and Dim.2</span></span>
+<span><span class="fu">fviz_cos2</span><span class="op">(</span><span class="va">res_pca</span>, choice <span class="op">=</span> <span class="st">"var"</span>, axes <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### Color by cos2 values: quality on the factor map</span></span>
+<span><span class="fu">fviz_pca_var</span><span class="op">(</span></span>
+<span>  <span class="va">res_pca</span>, </span>
+<span>  col.var <span class="op">=</span> <span class="st">"cos2"</span>,</span>
+<span>  gradient.cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span><span class="op">)</span>, </span>
+<span>  repel <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># Avoid text overlapping</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### Change the transparency by cos2 values</span></span>
+<span><span class="fu">fviz_pca_var</span><span class="op">(</span><span class="va">res_pca</span>, alpha.var <span class="op">=</span> <span class="st">"cos2"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### contribution of variables to PCs</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">var</span><span class="op">$</span><span class="va">contrib</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="co">##               Dim.1      Dim.2     Dim.3     Dim.4     Dim.5</span></span>
+<span><span class="co">## X100m     17.544293  1.7505098  7.338659 0.1375524  5.389252</span></span>
+<span><span class="co">## Long.jump 15.293168  4.2904162  2.930094 1.6248594  7.748815</span></span>
+<span><span class="co">## Shot.put  13.060137  0.3967224 21.620432 2.0140727  8.824401</span></span>
+<span><span class="co">## High.jump  9.024811 11.7715838  8.792888 2.5498795 23.115504</span></span>
+<span></span>
+<span><span class="co">### highlight the most contributing variables for each dimension</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">var</span><span class="op">$</span><span class="va">contrib</span>, is.corr<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-6.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># Contributions of variables to PC1</span></span>
+<span><span class="fu">fviz_contrib</span><span class="op">(</span><span class="va">res_pca</span>, choice <span class="op">=</span> <span class="st">"var"</span>, axes <span class="op">=</span> <span class="fl">1</span>, top <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-7.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># Contributions of variables to PC2</span></span>
+<span><span class="fu">fviz_contrib</span><span class="op">(</span><span class="va">res_pca</span>, choice <span class="op">=</span> <span class="st">"var"</span>, axes <span class="op">=</span> <span class="fl">2</span>, top <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-8.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### total contribution to PC1 and PC2 </span></span>
+<span><span class="fu">fviz_contrib</span><span class="op">(</span><span class="va">res_pca</span>, choice <span class="op">=</span> <span class="st">"var"</span>, axes <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, top <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-9.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### highlight most important variables on the correlation plot</span></span>
+<span><span class="fu">fviz_pca_var</span><span class="op">(</span></span>
+<span>  <span class="va">res_pca</span>, </span>
+<span>  col.var <span class="op">=</span> <span class="st">"contrib"</span>,</span>
+<span>  gradient.cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-10.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### Change the transparency by contrib values</span></span>
+<span><span class="fu">fviz_pca_var</span><span class="op">(</span><span class="va">res_pca</span>, alpha.var <span class="op">=</span> <span class="st">"contrib"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-11.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### color variables by custom continus variable</span></span>
+<span><span class="co"># Create a random continuous variable of length 10</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="va">my_cont_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="co">### Color variables by the continuous variable</span></span>
+<span><span class="fu">fviz_pca_var</span><span class="op">(</span></span>
+<span>  <span class="va">res_pca</span>, </span>
+<span>  col.var <span class="op">=</span> <span class="va">my_cont_var</span>,</span>
+<span>  gradient.cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"yellow"</span>, <span class="st">"red"</span><span class="op">)</span>,</span>
+<span>  legend.title <span class="op">=</span> <span class="st">"Cont.Var"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-12.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### color by groups, create a grouping variables using kmeans</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="va">res_km</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/kmeans.html">kmeans</a></span><span class="op">(</span><span class="va">var</span><span class="op">$</span><span class="va">coord</span>, centers <span class="op">=</span> <span class="fl">3</span>, nstart <span class="op">=</span> <span class="fl">25</span><span class="op">)</span></span>
+<span><span class="va">grp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">res_km</span><span class="op">$</span><span class="va">cluster</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Color variables by groups</span></span>
+<span><span class="fu">fviz_pca_var</span><span class="op">(</span></span>
+<span>  <span class="va">res_pca</span>, </span>
+<span>  col.var <span class="op">=</span> <span class="va">grp</span>, </span>
+<span>  palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#0073C2FF"</span>, <span class="st">"#EFC000FF"</span>, <span class="st">"#868686FF"</span><span class="op">)</span>,</span>
+<span>  legend.title <span class="op">=</span> <span class="st">"Cluster"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-3-13.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### dimension description</span></span>
+<span><span class="va">res_desc</span> <span class="op">&lt;-</span> <span class="fu">dimdesc</span><span class="op">(</span><span class="va">res_pca</span>, axes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>, proba <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="co"># Description of dimension 1</span></span>
+<span><span class="va">res_desc</span><span class="op">$</span><span class="va">Dim.1</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Link between the variable and the continuous variables (R-square)</span></span>
+<span><span class="co">## =================================================================================</span></span>
+<span><span class="co">##              correlation      p.value</span></span>
+<span><span class="co">## Long.jump      0.7941806 6.059893e-06</span></span>
+<span><span class="co">## Discus         0.7432090 4.842563e-05</span></span>
+<span><span class="co">## Shot.put       0.7339127 6.723102e-05</span></span>
+<span><span class="co">## High.jump      0.6100840 1.993677e-03</span></span>
+<span><span class="co">## Javeline       0.4282266 4.149192e-02</span></span>
+<span><span class="co">## X400m         -0.7016034 1.910387e-04</span></span>
+<span><span class="co">## X110m.hurdle  -0.7641252 2.195812e-05</span></span>
+<span><span class="co">## X100m         -0.8506257 2.727129e-07</span></span>
+<span><span class="co"># Description of dimension 2</span></span>
+<span><span class="va">res_desc</span><span class="op">$</span><span class="va">Dim.2</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Link between the variable and the continuous variables (R-square)</span></span>
+<span><span class="co">## =================================================================================</span></span>
+<span><span class="co">##            correlation      p.value</span></span>
+<span><span class="co">## Pole.vault   0.8074511 3.205016e-06</span></span>
+<span><span class="co">## X1500m       0.7844802 9.384747e-06</span></span>
+<span><span class="co">## High.jump   -0.4652142 2.529390e-02</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="individuals" class="level2"><h2 class="anchored" data-anchor-id="individuals">Individuals</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### extract results for individuals</span></span>
+<span><span class="va">ind</span> <span class="op">&lt;-</span> <span class="fu">get_pca_ind</span><span class="op">(</span><span class="va">res_pca</span><span class="op">)</span></span>
+<span><span class="va">ind</span></span>
+<span><span class="co">## Principal Component Analysis Results for individuals</span></span>
+<span><span class="co">##  ===================================================</span></span>
+<span><span class="co">##   Name       Description                       </span></span>
+<span><span class="co">## 1 "$coord"   "Coordinates for the individuals" </span></span>
+<span><span class="co">## 2 "$cos2"    "Cos2 for the individuals"        </span></span>
+<span><span class="co">## 3 "$contrib" "contributions of the individuals"</span></span>
+<span><span class="co"># Coordinates of individuals</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ind</span><span class="op">$</span><span class="va">coord</span><span class="op">)</span></span>
+<span><span class="co">##                Dim.1      Dim.2      Dim.3       Dim.4       Dim.5</span></span>
+<span><span class="co">## SEBRLE     0.1955047  1.5890567  0.6424912  0.08389652  1.16829387</span></span>
+<span><span class="co">## CLAY       0.8078795  2.4748137 -1.3873827  1.29838232 -0.82498206</span></span>
+<span><span class="co">## BERNARD   -1.3591340  1.6480950  0.2005584 -1.96409420  0.08419345</span></span>
+<span><span class="co">## YURKOV    -0.8889532 -0.4426067  2.5295843  0.71290837  0.40782264</span></span>
+<span><span class="co">## ZSIVOCZKY -0.1081216 -2.0688377 -1.3342591 -0.10152796 -0.20145217</span></span>
+<span><span class="co">## McMULLEN   0.1212195 -1.0139102 -0.8625170  1.34164291  1.62151286</span></span>
+<span><span class="co">### Quality of individuals</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ind</span><span class="op">$</span><span class="va">cos2</span><span class="op">)</span></span>
+<span><span class="co">##                 Dim.1      Dim.2       Dim.3       Dim.4        Dim.5</span></span>
+<span><span class="co">## SEBRLE    0.007530179 0.49747323 0.081325232 0.001386688 0.2689026575</span></span>
+<span><span class="co">## CLAY      0.048701249 0.45701660 0.143628117 0.125791741 0.0507850580</span></span>
+<span><span class="co">## BERNARD   0.197199804 0.28996555 0.004294015 0.411819183 0.0007567259</span></span>
+<span><span class="co">## YURKOV    0.096109800 0.02382571 0.778230322 0.061812637 0.0202279796</span></span>
+<span><span class="co">## ZSIVOCZKY 0.001574385 0.57641944 0.239754152 0.001388216 0.0054654972</span></span>
+<span><span class="co">## McMULLEN  0.002175437 0.15219499 0.110137872 0.266486530 0.3892621478</span></span>
+<span><span class="co">### Contributions of individuals</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ind</span><span class="op">$</span><span class="va">contrib</span><span class="op">)</span></span>
+<span><span class="co">##                Dim.1      Dim.2      Dim.3       Dim.4       Dim.5</span></span>
+<span><span class="co">## SEBRLE    0.04029447  5.9714533  1.4483919  0.03734589  8.45894063</span></span>
+<span><span class="co">## CLAY      0.68805664 14.4839248  6.7537381  8.94458283  4.21794385</span></span>
+<span><span class="co">## BERNARD   1.94740183  6.4234107  0.1411345 20.46819433  0.04393073</span></span>
+<span><span class="co">## YURKOV    0.83308415  0.4632733 22.4517396  2.69663605  1.03075263</span></span>
+<span><span class="co">## ZSIVOCZKY 0.01232413 10.1217143  6.2464325  0.05469230  0.25151025</span></span>
+<span><span class="co">## McMULLEN  0.01549089  2.4310854  2.6102794  9.55055888 16.29493304</span></span>
+<span></span>
+<span><span class="co">### quality and contribution</span></span>
+<span><span class="co">### individuals that are similar are grouped together on the plot</span></span>
+<span><span class="fu">fviz_pca_ind</span><span class="op">(</span></span>
+<span>  <span class="va">res_pca</span>, </span>
+<span>  col.ind <span class="op">=</span> <span class="st">"cos2"</span>, </span>
+<span>  gradient.cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span><span class="op">)</span>,</span>
+<span>  repel <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># Avoid text overlapping (slow if many points)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### change the point size according to the cos2 of corresponding individuals</span></span>
+<span><span class="fu">fviz_pca_ind</span><span class="op">(</span></span>
+<span>  <span class="va">res_pca</span>, </span>
+<span>  pointsize <span class="op">=</span> <span class="st">"cos2"</span>, </span>
+<span>  pointshape <span class="op">=</span> <span class="fl">21</span>, </span>
+<span>  fill <span class="op">=</span> <span class="st">"#E7B800"</span>,</span>
+<span>  repel <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># Avoid text overlapping (slow if many points)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### change both point size and color by cos2</span></span>
+<span><span class="fu">fviz_pca_ind</span><span class="op">(</span></span>
+<span>  <span class="va">res_pca</span>, </span>
+<span>  col.ind <span class="op">=</span> <span class="st">"cos2"</span>, </span>
+<span>  pointsize <span class="op">=</span> <span class="st">"cos2"</span>,</span>
+<span>  gradient.cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span><span class="op">)</span>,</span>
+<span>  repel <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># Avoid text overlapping (slow if many points)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### total contribution on PC1 and PC2</span></span>
+<span><span class="fu">fviz_contrib</span><span class="op">(</span><span class="va">res_pca</span>, choice <span class="op">=</span> <span class="st">"ind"</span>, axes <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-4-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">### color by custom continus variable</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="va">my_cont_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">23</span><span class="op">)</span></span>
+<span><span class="co"># Color individuals by the continuous variable</span></span>
+<span><span class="fu">fviz_pca_ind</span><span class="op">(</span></span>
+<span>  <span class="va">res_pca</span>, </span>
+<span>  col.ind <span class="op">=</span> <span class="va">my_cont_var</span>,</span>
+<span>  gradient.cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"yellow"</span>, <span class="st">"red"</span><span class="op">)</span>,</span>
+<span>  legend.title <span class="op">=</span> <span class="st">"Cont.Var"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-4-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="other-dimensions" class="level2"><h2 class="anchored" data-anchor-id="other-dimensions">Other Dimensions</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### visualize variables/individuals on dimension 2 and 3</span></span>
+<span></span>
+<span><span class="co"># Variables on dimensions 2 and 3</span></span>
+<span><span class="fu">fviz_pca_var</span><span class="op">(</span><span class="va">res_pca</span>, axes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Individuals on dimensions 2 and 3</span></span>
+<span><span class="fu">fviz_pca_ind</span><span class="op">(</span><span class="va">res_pca</span>, axes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="reference" class="level2"><h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<ul>
+<li><a href="http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials/">Principal Component Methods in R: Practical Guide</a></li>
+<li><a href="https://www.r-bloggers.com/2017/02/factoextra-r-package-easy-multivariate-data-analyses-and-elegant-visualization/">Factoextra R Package: Easy Multivariate Data Analyses and Elegant Visualization</a></li>
+</ul>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center"><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2021-2024 Guorui Zhong ~ Made with <a href="https://www.r-project.org/"><i class="fa-brands fa-r-project" aria-label="r-project"></i></a> and <a href="https://quarto.org/">Quarto</a></span></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

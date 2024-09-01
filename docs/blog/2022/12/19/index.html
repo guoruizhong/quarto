@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Guorui Zhong">
+
+<title>Guorui Zhong - Learn Linux basic for computing</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>
+
+      .quarto-title-block .quarto-title-banner {
+        background: #212529;
+      }
+</style>
+
+
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">Guorui Zhong</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../index.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../blog/index.html" rel="" target="">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../crispr/index.html" rel="" target="">
+ <span class="menu-text">CRISPR</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../keyboard/index.html" rel="" target="">
+ <span class="menu-text">Keyboard</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../python/index.html" rel="" target="">
+ <span class="menu-text">Python</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../r/index.html" rel="" target="">
+ <span class="menu-text">R</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=g0MfTPMAAAAJ&amp;hl=en" rel="" target=""><i class="bi bi-journal-check" role="img" aria-label="journal-check">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/guorui-zhong-754761185/" rel="" target=""><i class="bi bi-linkedin" role="img" aria-label="linkedin">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/guoruizhong" rel="" target=""><i class="bi bi-github" role="img" aria-label="github">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Learn Linux basic for computing</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">linux</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p><a href="https://guoruizhong.github.io/">Guorui Zhong</a> <a href="https://orcid.org/0000-0002-1955-2847" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">Monday, December 19, 2022</p>
+      </div>
+    </div>
+    
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">Saturday, December 16, 2023</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#unix-shortcuts" id="toc-unix-shortcuts" class="nav-link active" data-scroll-target="#unix-shortcuts">Unix Shortcuts</a></li>
+  <li><a href="#copy-and-paste" id="toc-copy-and-paste" class="nav-link" data-scroll-target="#copy-and-paste">Copy and paste</a></li>
+  <li><a href="#navigation" id="toc-navigation" class="nav-link" data-scroll-target="#navigation">Navigation</a></li>
+  <li><a href="#viewing-text-files" id="toc-viewing-text-files" class="nav-link" data-scroll-target="#viewing-text-files">Viewing Text files</a></li>
+  <li><a href="#informative" id="toc-informative" class="nav-link" data-scroll-target="#informative">Informative</a></li>
+  <li><a href="#files-and-directories" id="toc-files-and-directories" class="nav-link" data-scroll-target="#files-and-directories">Files and Directories</a></li>
+  <li><a href="#permissions-and-ownship" id="toc-permissions-and-ownship" class="nav-link" data-scroll-target="#permissions-and-ownship">Permissions and Ownship</a></li>
+  <li><a href="#finding-things" id="toc-finding-things" class="nav-link" data-scroll-target="#finding-things">Finding things</a></li>
+  <li><a href="#help" id="toc-help" class="nav-link" data-scroll-target="#help">Help</a></li>
+  <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables">Variables</a></li>
+  <li><a href="#process-management" id="toc-process-management" class="nav-link" data-scroll-target="#process-management">Process management</a></li>
+  <li><a href="#screen-session" id="toc-screen-session" class="nav-link" data-scroll-target="#screen-session">Screen session</a></li>
+  <li><a href="#vim-basics" id="toc-vim-basics" class="nav-link" data-scroll-target="#vim-basics">Vim Basics</a>
+  <ul>
+  <li><a href="#modifiers" id="toc-modifiers" class="nav-link" data-scroll-target="#modifiers">Modifiers</a></li>
+  <li><a href="#moving-around" id="toc-moving-around" class="nav-link" data-scroll-target="#moving-around">Moving Around</a></li>
+  <li><a href="#lines" id="toc-lines" class="nav-link" data-scroll-target="#lines">Lines</a></li>
+  <li><a href="#multiple-files" id="toc-multiple-files" class="nav-link" data-scroll-target="#multiple-files">Multiple Files</a></li>
+  <li><a href="#spell-checking" id="toc-spell-checking" class="nav-link" data-scroll-target="#spell-checking">Spell Checking</a></li>
+  <li><a href="#syntax-highlighting" id="toc-syntax-highlighting" class="nav-link" data-scroll-target="#syntax-highlighting">Syntax Highlighting</a></li>
+  <li><a href="#undo-and-redo" id="toc-undo-and-redo" class="nav-link" data-scroll-target="#undo-and-redo">Undo and Redo</a></li>
+  <li><a href="#deleting" id="toc-deleting" class="nav-link" data-scroll-target="#deleting">Deleting</a></li>
+  <li><a href="#copy-and-paste-1" id="toc-copy-and-paste-1" class="nav-link" data-scroll-target="#copy-and-paste-1">Copy and Paste</a></li>
+  <li><a href="#search" id="toc-search" class="nav-link" data-scroll-target="#search">Search</a></li>
+  <li><a href="#replacements" id="toc-replacements" class="nav-link" data-scroll-target="#replacements">Replacements</a></li>
+  <li><a href="#utilities" id="toc-utilities" class="nav-link" data-scroll-target="#utilities">Utilities</a></li>
+  <li><a href="#settings" id="toc-settings" class="nav-link" data-scroll-target="#settings">Settings</a></li>
+  <li><a href="#help-1" id="toc-help-1" class="nav-link" data-scroll-target="#help-1">Help</a></li>
+  </ul></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>After working at Bioinformatics Institute for 3 years, I gradullly relizaed that it’s essential to learn Linux as:</p>
+<ul>
+<li>All the job-related files/data are stored in the the remote server</li>
+<li>It’s required to use remote sever to process thousands of images I generated from wet-lab (segmentation, feature extraction)</li>
+<li>Free access to hundreds of scientific software tools (often more up-to-date)</li>
+<li>Multiuser, multitasking &amp; remote access</li>
+<li>Better performance, advanced parallel computing on LINUX clusters</li>
+</ul>
+<p>So I start to learn Linux for computional biology from：</p>
+<ol type="1">
+<li><a href="https://hpcc.ucr.edu/manuals/linux_basics/" class="uri">https://hpcc.ucr.edu/manuals/linux_basics/</a></li>
+<li><a href="https://linuxconfig.org/linux-commands" class="uri">https://linuxconfig.org/linux-commands</a></li>
+<li><a href="https://biohpc.cornell.edu/lab/doc/linux_workshop_part1.pdf">Linux for biologists</a></li>
+</ol>
+<p>The following content are credited from the <a href="https://girke.bioinformatics.ucr.edu/GEN242/">GEN242</a></p>
+<section id="unix-shortcuts" class="level2">
+<h2 class="anchored" data-anchor-id="unix-shortcuts">Unix Shortcuts</h2>
+<ul>
+<li>Ctrl + A # cursor to beginning of command line</li>
+<li>Ctrl + E # cursor to end of command line</li>
+<li>Ctrl + L # clear the screen</li>
+<li>Ctrl + U # clear the line before the cursor position</li>
+<li>Ctrl + K # clear the line after the cursor</li>
+<li>Ctrl + C # kill the command that is currently running</li>
+<li>Ctrl + D # exit the current shell</li>
+<li>Ctrl + W # cut last word</li>
+<li>Ctrl + Y # Paste (“yank”) content that was cut earlier (by Ctrl-w or Ctrl-k)</li>
+<li>Alt + F # move the cursor forward one word</li>
+<li>Alt + B # move the cursor backward one word</li>
+</ul>
+</section>
+<section id="copy-and-paste" class="level2">
+<h2 class="anchored" data-anchor-id="copy-and-paste">Copy and paste</h2>
+<table class="table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 41%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Linux (xterm)</th>
+<th>Windows</th>
+<th>Mac (Terminal)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td># Copy CTRL+SHIFT+C<br># Paste CTRL+SHIFT+V</td>
+<td># Copy by highlighting with mouse <br># Paste SHIFT+INSERT</td>
+<td># Copy COMMAND+c <br># Paste COMMAND+v</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="navigation" class="level2">
+<h2 class="anchored" data-anchor-id="navigation">Navigation</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span>               <span class="co"># "Print working directory"; show your current path</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>                <span class="co"># "List" contents of current directory</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span>             <span class="co"># Similar to ls, but provides additional info on files and directories</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-a</span>             <span class="co"># List all files, including hidden files (.name) as well</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-R</span>             <span class="co"># Lists subdirectories recursively</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-t</span>             <span class="co"># Lists files in chronological order</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="op">&lt;</span>dir_name<span class="op">&gt;</span>     # <span class="st">"Change directory"</span> to specified path</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span>                <span class="co"># Brings you to your home directory</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~              <span class="co"># Also bring you to your home directory</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..             <span class="co"># Moves one directory up</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ../../         <span class="co"># Moves two directories up (and so on)</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="at">-</span>              <span class="co"># Go back to you were previously (before the last directory change)</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ex">↑</span>                 <span class="co"># Up arrow key scrolls backwards through command history</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ex">↓</span>                 <span class="co"># Down arrow key scrolls forwards through command history</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="bu">history</span>           <span class="co"># Shows all commands you have used recently</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>The tab (⇥) key auto completes commands or file names if there is only one option.</li>
+<li>Hitting the tab (⇥) key twice will list multiple options.</li>
+</ul>
+</section>
+<section id="viewing-text-files" class="level2">
+<h2 class="anchored" data-anchor-id="viewing-text-files">Viewing Text files</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span>              <span class="co"># Progressively print a file to the screen.</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>               <span class="co"># Concatenate and print files.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span>                <span class="co"># Line, word, and byte (character) count of a file. </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>              <span class="co"># Sort the lines of a file and print the result to the screen.</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">uniq</span>              <span class="co"># Show only the unique lines of a file.</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">file</span>              <span class="co"># Determine the type of a file.</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>              <span class="co"># Print the head (i.e., first few lines) of a file.</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>              <span class="co"># Print the tail (i.e., last few lines) of a file.</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">diff</span>              <span class="co"># Show the differences between two files.</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>               <span class="co"># Selecting columns</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">tr</span>                <span class="co"># Substituting characters</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>              <span class="co"># finds all the lines of a file that match a given pattern.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="informative" class="level2">
+<h2 class="anchored" data-anchor-id="informative">Informative</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">file</span> <span class="op">&lt;</span>file-name<span class="op">&gt;</span>  # Show type of file <span class="er">(</span><span class="ex">text,</span> binary, compressed, etc...<span class="kw">)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span>                <span class="co"># Shows your user name and associated groups</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hostname</span>          <span class="co"># Shows the name of the machine your shell is currently on</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">### Other useful unix commands</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-h</span> /scratch                <span class="co"># Show local disk space for /scratch, do not use for /rhome or /bigdata</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">free</span> <span class="at">-h</span>                       <span class="co"># Show memory of current machine</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">bc</span>                            <span class="co"># Command-line calculator (to exit type 'quit')</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="op">&lt;</span>URL<span class="op">&gt;</span>                    # Download a file or directory from the web</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> <span class="op">&lt;</span>FILENAME1<span class="op">&gt;</span> <span class="op">&lt;</span>FILENAME2<span class="op">&gt;</span> # Creates symbolic link <span class="er">(</span><span class="ex">shortcut,</span> or alias<span class="kw">)</span> <span class="cf">for</span> file <span class="ex">or</span> directory</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-sh</span> .                      <span class="co"># Shows size of current directory</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-sh</span> <span class="op">&lt;</span>FILENAME<span class="op">&gt;</span>             # Shows size of individual file</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-s</span> <span class="pp">*</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-nr</span>            <span class="co"># Shows size of each file within current directory, sorted by size</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span>                            <span class="co"># Check size of storage pool</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span>                            <span class="co"># Check size of file or directory</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="ex">check_quota</span>                   <span class="co"># Check quota for home and bigdata</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="files-and-directories" class="level2">
+<h2 class="anchored" data-anchor-id="files-and-directories">Files and Directories</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="op">&lt;</span>dir_name<span class="op">&gt;</span>   # Creates specified directory</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rmdir</span> <span class="op">&lt;</span>dir_name<span class="op">&gt;</span>   # Removes empty directory</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span>              <span class="co"># Update teh date of last access to file</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="op">&lt;</span>file_name<span class="op">&gt;</span>     # Removes file_name</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> <span class="op">&lt;</span>dir_name<span class="op">&gt;</span>   # Removes directory including its contents, but asks for confirmation</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> <span class="op">&lt;</span>dir_name<span class="op">&gt;</span>  # Same as above, but turns confirmation off. Use with caution</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="op">&lt;</span>name<span class="op">&gt;</span> <span class="op">&lt;</span>path<span class="op">&gt;</span>   # Copy file/directory as specified in path <span class="er">(</span><span class="ex">-r</span> to include content in directories<span class="kw">)</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> <span class="op">&lt;</span>name1<span class="op">&gt;</span> <span class="op">&lt;</span>name2<span class="op">&gt;</span> # Renames directories or files</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> <span class="op">&lt;</span>name<span class="op">&gt;</span> <span class="op">&lt;</span>path<span class="op">&gt;</span>   # Moves file/directory as specified in path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="permissions-and-ownship" class="level2">
+<h2 class="anchored" data-anchor-id="permissions-and-ownship">Permissions and Ownship</h2>
+<p><img src="fig_permissions.jpg" class="img-fluid"></p>
+<p><img src="permission_code.png" class="img-fluid"></p>
+<ul>
+<li><strong>user (u)</strong> - User ownership of a file/directory. This user has the special right to change the permission bits and group ownership.</li>
+<li><strong>group (g)</strong> - Group ownership of a file/directory. Members of this group may be assigned greater access rights than non-members.</li>
+<li><strong>other (o)</strong> - Everyone else that isn’t the owning user or from the owning group.</li>
+</ul>
+<table class="table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Letter</th>
+<th>Number</th>
+<th>File</th>
+<th>Directory</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Read</td>
+<td>r</td>
+<td>4</td>
+<td>View the contents</td>
+<td>View the listings</td>
+</tr>
+<tr class="even">
+<td>Write</td>
+<td>w</td>
+<td>2</td>
+<td>Modify the contents</td>
+<td>Create a new file, or rename or delete existing files</td>
+</tr>
+<tr class="odd">
+<td>Execute</td>
+<td>x</td>
+<td>1</td>
+<td>Execute a program/script</td>
+<td>Traversal rights</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Checking permissions</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[zhonggr@nucleus</span> ~]$ ls <span class="at">-la</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">total</span> 688</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">drwx------</span>  14 zhonggr users   4096 Dec 17 12:04 .</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x.</span> 28 root    root    4096 Aug  9 21:57 ..</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-------</span>   1 zhonggr users  11428 Dec 19 14:30 .bash_history</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span>   1 zhonggr users     18 Sep  9  2019 .bash_logout</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span>   1 zhonggr users    141 Sep  9  2019 .bash_profile</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span>   1 zhonggr users    376 Dec 17 12:04 .bashrc</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span>   3 zhonggr users   4096 Dec 17 10:54 biosoft</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="ex">drwx------</span>   6 zhonggr users   4096 Nov 16 13:19 .cache</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-rw-r--</span>   1 zhonggr users    101 Mar 18  2022 .cellXpress2</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="ex">drwx------</span>   4 zhonggr users   4096 Mar 15  2022 .config</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span>   1 zhonggr users   3287 Sep  9  2019 .conkyrc</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span>   1 zhonggr mail     302 Dec 13 12:39 dead.letter</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span>   2 zhonggr users   4096 Sep  9  2019 Desktop</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span>   1 zhonggr users     29 Nov 16 13:08 .gitconfig</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-------</span>   1 zhonggr users     20 Dec 17 10:30 .lesshst</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="ex">drwx------</span>   4 zhonggr users   4096 Nov 16 21:15 .local</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span>   4 zhonggr users   4096 Sep  9  2019 .mozilla</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="ex">drwx------</span>   3 zhonggr users   4096 Jul 14 12:58 .nv</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span>   3 zhonggr users   4096 Nov 16 11:12 R</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span>   1 zhonggr users 585671 Dec 18 20:54 .radian_history</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="ex">drwx------</span>   2 zhonggr users   4096 Nov 16 10:58 .ssh</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="ex">d---------</span>   2 zhonggr users   4096 Dec 17 10:25 test</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-------</span>   1 zhonggr users   2350 Dec 17 12:04 .viminfo</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span>   2 zhonggr users   4096 Nov 16 17:01 .vscode-R</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span>   5 zhonggr users   4096 Dec 18 20:45 .vscode-server</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span>   1 zhonggr users    223 Dec 17 10:57 .wget-hsts</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span>   1 zhonggr users     38 Sep  9  2019 .xsession</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Assign write and execute permissions to user and group</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> ug+rx test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[zhonggr@nucleus</span> ~]$ ls <span class="at">-la</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">total</span> 688</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">drwx------</span>  14 zhonggr users   4096 Dec 17 12:04 .</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x.</span> 28 root    root    4096 Aug  9 21:57 ..</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-------</span>   1 zhonggr users  11428 Dec 19 14:30 .bash_history</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span>   1 zhonggr users     18 Sep  9  2019 .bash_logout</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span>   1 zhonggr users    141 Sep  9  2019 .bash_profile</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span>   1 zhonggr users    376 Dec 17 12:04 .bashrc</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span>   3 zhonggr users   4096 Dec 17 10:54 biosoft</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="ex">drwx------</span>   6 zhonggr users   4096 Nov 16 13:19 .cache</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-rw-r--</span>   1 zhonggr users    101 Mar 18  2022 .cellXpress2</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="ex">drwx------</span>   4 zhonggr users   4096 Mar 15  2022 .config</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span>   1 zhonggr users   3287 Sep  9  2019 .conkyrc</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span>   1 zhonggr mail     302 Dec 13 12:39 dead.letter</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span>   2 zhonggr users   4096 Sep  9  2019 Desktop</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span>   1 zhonggr users     29 Nov 16 13:08 .gitconfig</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-------</span>   1 zhonggr users     20 Dec 17 10:30 .lesshst</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="ex">drwx------</span>   4 zhonggr users   4096 Nov 16 21:15 .local</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span>   4 zhonggr users   4096 Sep  9  2019 .mozilla</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="ex">drwx------</span>   3 zhonggr users   4096 Jul 14 12:58 .nv</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span>   3 zhonggr users   4096 Nov 16 11:12 R</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span>   1 zhonggr users 585671 Dec 18 20:54 .radian_history</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="ex">drwx------</span>   2 zhonggr users   4096 Nov 16 10:58 .ssh</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="ex">dr-xr-x---</span>   2 zhonggr users   4096 Dec 17 10:25 test</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-------</span>   1 zhonggr users   2350 Dec 17 12:04 .viminfo</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span>   2 zhonggr users   4096 Nov 16 17:01 .vscode-R</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span>   5 zhonggr users   4096 Dec 18 20:45 .vscode-server</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span>   1 zhonggr users    223 Dec 17 10:57 .wget-hsts</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span>   1 zhonggr users     38 Sep  9  2019 .xsession</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Change ownership</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> <span class="op">&lt;</span>user<span class="op">&gt;</span> <span class="op">&lt;</span>file or dir<span class="op">&gt;</span>         # changes user ownership</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">chgrp</span> <span class="op">&lt;</span>group<span class="op">&gt;</span> <span class="op">&lt;</span>file or dir<span class="op">&gt;</span>        # changes group ownership</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> <span class="op">&lt;</span>user<span class="op">&gt;</span>:<span class="op">&lt;</span>group<span class="op">&gt;</span> <span class="op">&lt;</span>file or dir<span class="op">&gt;</span> # changes user <span class="kw">&amp;</span> <span class="ex">group</span> ownership</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="finding-things" class="level2">
+<h2 class="anchored" data-anchor-id="finding-things">Finding things</h2>
+<p>Useful <code>find</code> arguments:</p>
+<ul>
+<li><code>-user &lt;userName&gt;</code></li>
+<li><code>-group &lt;groupName&gt;</code></li>
+<li><code>-ctime &lt;number of days ago changed&gt;</code></li>
+<li><code>-exec &lt;command to run on each file&gt; {} \;</code></li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Find text</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"pattern"</span> <span class="op">&lt;</span>FILENAME<span class="op">&gt;</span>                              # Provides lines in a file where <span class="st">"pattern"</span> appears</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-H</span> <span class="st">"pattern"</span>                                      <span class="co"># -H prints out file name in front of pattern</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> ~ <span class="at">-name</span> <span class="st">"*.txt"</span> <span class="at">-exec</span> grep <span class="at">-H</span> <span class="st">"pattern"</span> {} <span class="dt">\;</span>     <span class="co"># Search lines where "pattern" appears in files with names that end with ".txt"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Find application</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> <span class="op">&lt;</span>APPLICATION_NAME<span class="op">&gt;</span>                # Location of application</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">whereis</span> <span class="op">&lt;</span>APPLICATION_NAME<span class="op">&gt;</span>              # Searches for executables in set of directories</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ex">rpm</span> <span class="at">-qa</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"pattern"</span>                <span class="co"># List all RPM packages and filter based on "pattern"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="help" class="level2">
+<h2 class="anchored" data-anchor-id="help">Help</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span> <span class="op">&lt;</span>COMMAND<span class="op">&gt;</span>    # Show help for a Bash command</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">man</span> <span class="op">&lt;</span>COMMAND<span class="op">&gt;</span>     # Show the manual page for a program <span class="er">(</span><span class="ex">press</span> the <span class="st">'q'</span> key to exit<span class="kw">)</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>COMMAND<span class="op">&gt;</span> --help  <span class="co"># Show help documentation for command</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>COMMAND<span class="op">&gt;</span> -h      <span class="co"># Show help documentation for command</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="variables" class="level2">
+<h2 class="anchored" data-anchor-id="variables">Variables</h2>
+<p>Some softwares utilize this feature and require that specific environment variables be set. For example, every time you login, the following variables are set by default:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Default Variables</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$HOME</span>               <span class="co">#Contains your home path</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$USER</span>               <span class="co">#Contains your username</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$PATH</span>               <span class="co">#Contains paths of executables</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$LD_LIBRARY_PATH</span>    <span class="co">#Contains paths of library dependencies</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To see a list of all variables currently set in your shell, use the <code>env</code> command. You can also <code>grep</code> through this list to find variables, like so:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">env</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> home</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Or if you are in a <code>Slurm</code> job, you can find all related <code>Slurm</code> variables:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">env</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> slurm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Try to choose unique names when setting variables. It is best to not overwrite a variable that is already set, unless on purpose.</p>
+<p>To set a variable in your current shell, you can do so like this:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Setting variables</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="va">MYVAR</span><span class="op">=</span><span class="st">'Something Important'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote">
+<p>Notice that there is no spaces around the <code>=</code> sign.</p>
+</blockquote>
+<p>If you would like to set a variable that is carried over to all other commands or sub-shells, then it must be <code>exported</code>:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">MYVAR</span><span class="op">=</span><span class="st">'Something Important'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="process-management" class="level2">
+<h2 class="anchored" data-anchor-id="process-management">Process management</h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">### User</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">top</span>               <span class="co"># view top consumers of memory and CPU (press 1 to see per-CPU statistics)</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="ex">htop</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">who</span>               <span class="co"># Shows who is logged into system</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">w</span>                 <span class="co"># Shows which users are logged into system and what they are doing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Process</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span>                         <span class="co"># Shows processes running by user</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> <span class="at">-e</span>                      <span class="co"># Shows all processes on system; try also '-a' and '-x' arguments</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> ux <span class="at">-u</span> <span class="op">&lt;</span>USERNAME<span class="op">&gt;</span>        # Shows all processes owned by user</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> axjf                    <span class="co"># Shows the child-parent hierarchy of all processes</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> <span class="at">-o</span> %t <span class="at">-p</span> <span class="op">&lt;</span>PID<span class="op">&gt;</span>          # Shows how long a particular process was running.</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>                           <span class="co"># (E.g. 6-04:30:50 means 6 days 4 hours ...)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here are two common utilities for displaying processes, sorting, and even killing them:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">top</span>            <span class="co"># Basic text based interface for exploring and managing processes</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="ex">htop</span>           <span class="co"># Text based interface for exploring and managing processes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#### Background Resume Cancel</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">CTRL+z</span> ENTER         <span class="co"># Suspend a process in the background</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="bu">fg</span>                   <span class="co"># Resume a suspended process and brings it into foreground</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="bu">bg</span>                   <span class="co"># Resume a suspended process but keeps it running in the background</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="ex">CTRL+c</span>               <span class="co"># Cancel the process that is currently running in the foreground</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#### PID</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$!</span>              <span class="co"># Get PID of last executed command</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#### Killing</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">kill</span> <span class="at">-l</span>              <span class="co"># List all of the signals that can be sent to a process</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">kill</span> <span class="op">&lt;</span>PID<span class="op">&gt;</span>           # Kill a specific process with process ID using SIGTERM</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="bu">kill</span> <span class="at">-9</span> <span class="op">&lt;</span>PID<span class="op">&gt;</span>        # Violently kill process with process ID using SIGKILL, may corrupt files</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>More on Terminating Processes <a href="https://www.digitalocean.com/community/tutorials/how-to-use-ps-kill-and-nice-to-manage-processes-in-linux">DigitalOcean - How To Use ps, kill, and nice to Manage Processes in Linux</a></p>
+</section>
+<section id="screen-session" class="level2">
+<h2 class="anchored" data-anchor-id="screen-session">Screen session</h2>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span>                   <span class="co"># start a screen session</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-S</span> session_name   <span class="co"># start a named session</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-r</span>                <span class="co"># reattach to a linux screen</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-ls</span>               <span class="co"># list the current running screen session</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Common commands for managing Linux Screen Windows:</p>
+<ul>
+<li>Ctrl + A + C # create a new window (with shell).</li>
+<li>Ctrl + A + ” # list all windows.</li>
+<li>Ctrl + A + 0 # switch to window 0 (by number).</li>
+<li>Ctrl + A + A # rename the current window.</li>
+<li>Ctrl + A + S # split current region horizontally into two regions.</li>
+<li>Ctrl + A + | # split current region vertically into two regions.</li>
+<li>Ctrl + A + Tab # switch the input focus to the next region.</li>
+<li>Ctrl + A + Ctrl + A # toggle between the current and previous windows</li>
+<li>Ctrl + A + Q # close all regions but the current one.</li>
+<li>Ctrl + A + X # close the current region.</li>
+<li>Ctrl + A + D # detach from linux screen session</li>
+</ul>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-ls</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">## Output</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="ex">There</span> are screens on:</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">10835.pts-0.linuxize-desktop</span>   <span class="er">(</span><span class="ex">Detached</span><span class="kw">)</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">10366.pts-0.linuxize-desktop</span>   <span class="er">(</span><span class="ex">Detached</span><span class="kw">)</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span> Sockets in /run/screens/S-linuxize.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If want to restore screen 10835.pts-0, then</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-r</span> 10835</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="vim-basics" class="level2">
+<h2 class="anchored" data-anchor-id="vim-basics">Vim Basics</h2>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> <span class="op">&lt;</span>my_file_name<span class="op">&gt;</span> # open/create file with vim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Once you are in Vim the most important commands are <code>i</code> , <code>:</code> and <code>ESC</code>.</li>
+<li><code>i</code> key brings you into the insert mode for typing.</li>
+<li><code>ESC</code> brings you out of there.</li>
+<li><code>:</code> key starts the command mode at the bottom of the screen.</li>
+</ul>
+<p>In the following text, all commands starting with <code>:</code> need to be typed in the command mode. All other commands are typed in the normal mode after hitting the <code>ESC</code> key.</p>
+<section id="modifiers" class="level3">
+<h3 class="anchored" data-anchor-id="modifiers">Modifiers</h3>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i</span>                   <span class="co"># INSERT MODE</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ESC</span>                 <span class="co"># NORMAL (NON-EDITING) MODE</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="bu">:</span>                   <span class="co"># Commands start with ':'</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="ex">:w</span>                  <span class="co"># Save command; if you are in editing mode you have to hit ESC first!!</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="ex">:q</span>                  <span class="co"># Quit file, don't save</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="ex">:q!</span>                 <span class="co"># Exits WITHOUT saving any changes you have made</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="ex">:wq</span>                 <span class="co"># Save and quit</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="ex">R</span>                   <span class="co"># Replace MODE</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="ex">r</span>                   <span class="co"># Replace only one character under cursor</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="ex">q:</span>                  <span class="co"># History of commands (from NORMAL MODE!), to reexecute one of them, select and hit enter!</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="ex">:w</span> new_filename     <span class="co"># Saves into new file</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="ex">:#,#w</span> new_filename  <span class="co"># Saves specific lines (#,#) to new file</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="ex">:#</span>                  <span class="co"># Go to specified line number</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="moving-around" class="level3">
+<h3 class="anchored" data-anchor-id="moving-around">Moving Around</h3>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span>               <span class="co"># Moves cursor to end of line</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="ex">A</span>               <span class="co"># Same as $, but switches to insert mode</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span>               <span class="co"># Zero moves cursor to beginning of line</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="ex">CTRL-g</span>          <span class="co"># Shows file name and current line you are on</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="ex">SHIFT-G</span>         <span class="co"># Brings you to bottom of file</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="lines" class="level3">
+<h3 class="anchored" data-anchor-id="lines">Lines</h3>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">:set</span> wrap       <span class="co"># Wrap lines around the screen if too long</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="ex">:set</span> nowrap     <span class="co"># No line wrapping</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="ex">:set</span> number     <span class="co"># Shows line numbers</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="ex">:set</span> nonumber   <span class="co"># No line numbers</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="multiple-files" class="level3">
+<h3 class="anchored" data-anchor-id="multiple-files">Multiple Files</h3>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> <span class="at">-o</span> <span class="pp">*</span>.txt    <span class="co"># Opens many files at once and displays them with horizontal</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Split, '-O' does vertical split</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> <span class="pp">*</span>.txt       <span class="co"># Opens many files at once; ':n' switches between files</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">:wall</span> or :qall    <span class="co"># Write or quit all open files</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="ex">:args</span> <span class="pp">*</span>.txt       <span class="co"># Places all the relevant files in the argument list</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="ex">:all</span>              <span class="co"># Splits all files in the argument list (buffer) horizontally</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="ex">CTRL-w</span>            <span class="co"># Switch between windows</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="ex">:split</span>            <span class="co"># Shows same file in two windows</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="ex">:split</span> <span class="op">&lt;</span>file-to-open<span class="op">&gt;</span> # Opens second file in new window</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="ex">:vsplit</span>           <span class="co"># Splits windows vertically, very useful for tables, ":set scrollbind" let's you scroll all open windows simultaneously</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="ex">:close</span>            <span class="co"># Closes current window</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="ex">:only</span>             <span class="co"># Closes all windows except current one</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="spell-checking" class="level3">
+<h3 class="anchored" data-anchor-id="spell-checking">Spell Checking</h3>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">:set</span> spell           <span class="co"># Turns on spell checking</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="ex">:set</span> nospell         <span class="co"># Turns spell checking off</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="bu">:</span>! dict <span class="op">&lt;</span>word<span class="op">&gt;</span>       # Meaning of word</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="bu">:</span>! wn <span class="st">'word'</span> <span class="at">-over</span>   <span class="co"># Synonyms of word</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="syntax-highlighting" class="level3">
+<h3 class="anchored" data-anchor-id="syntax-highlighting">Syntax Highlighting</h3>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">:set</span> filetype=perl   <span class="co"># Turns on syntax coloring for a chosen programming language.</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="ex">:syn</span> on              <span class="co"># Turns syntax highlighting on</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="ex">:syn</span> off             <span class="co"># Turns syntax highlighting off</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="undo-and-redo" class="level3">
+<h3 class="anchored" data-anchor-id="undo-and-redo">Undo and Redo</h3>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">u</span>          <span class="co"># Undo last command</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="ex">U</span>          <span class="co"># Undo all changes on current line</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="ex">CTRL-R</span>     <span class="co"># Redo one change which was undone</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="deleting" class="level3">
+<h3 class="anchored" data-anchor-id="deleting">Deleting</h3>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">x</span>       <span class="co"># Deletes what is under cursor</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="ex">dw</span>      <span class="co"># Deletes from curser to end of word including the space</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="ex">de</span>      <span class="co"># Deletes from curser to end of word NOT including the space</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="ex">cw</span>      <span class="co"># Deletes rest of word and lets you then insert, hit ESC to continue with NORMAL mode</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="ex">c$</span>      <span class="co"># Deletes rest of line and lets you then insert, hit ESC to continue with with NORMAL mode</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="ex">d$</span>      <span class="co"># Deletes from cursor to the end of the line</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dd</span>      <span class="co"># Deletes entire line</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="ex">2dd</span>     <span class="co"># Deletes next two lines, continues: 3dd, 4dd and so on.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="copy-and-paste-1" class="level3">
+<h3 class="anchored" data-anchor-id="copy-and-paste-1">Copy and Paste</h3>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ex">yy</span>    <span class="co"># Copies line, for copying several lines do 2yy, 3yy and so on</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="ex">p</span>     <span class="co"># Pastes clipboard behind cursor</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="search" class="level3">
+<h3 class="anchored" data-anchor-id="search">Search</h3>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/my_pattern</span>    <span class="co"># Searches for my_pattern downwards, type n for next match</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="ex">?my_pattern</span>    <span class="co"># Searches for my_pattern upwards, type n for next match</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="ex">:set</span> ic        <span class="co"># Switches to ignore case search (case insensitive)</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="ex">:set</span> hls       <span class="co"># Switches to highlight search (highlights search hits)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="replacements" class="level3">
+<h3 class="anchored" data-anchor-id="replacements">Replacements</h3>
+<p>Great intro: <a href="http://www.scootersoftware.com/RegEx.html">A Tao of Regular Expressions</a></p>
+<p>Quick reference to some replacement techniques:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">:s/old_pat/new_pat/</span>                      <span class="co"># Replaces first occurrence in a line</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="ex">:s/old_pat/new_pat/g</span>                     <span class="co"># Replaces all occurrence in a line</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="ex">:s/old_pat/new_pat/gc</span>                    <span class="co"># Add 'c' to ask for confirmation</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="ex">:#,#s/old_pat/new_pat/g</span>                  <span class="co"># Replaces all occurrence between line numbers: #,#</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="ex">:%s/old_pat/new_pat/g</span>                    <span class="co"># Replaces all occurrence in file</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="ex">:%s/\(pattern1\)\(pattern2\)/\1test\2/g</span>  <span class="co"># Regular expression to insert, you need here '\' in front of parentheses (&lt;# Perl)</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="ex">:%s/\(pattern.*\)/\1</span> my_tag/g            <span class="co"># Appends something to line containing pattern (&lt;# .+ from Perl is .* in VIM)</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="ex">:%s/\(pattern\)\(.*\)/\1/g</span>               <span class="co"># Removes everything in lines after pattern</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="ex">:%s/\(At\dg\d\d\d\d\d\.\d\)\(.*\)/\1\t\2/g</span>  <span class="co"># Inserts tabs between At1g12345.1 and Description</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="ex">:%s/\n/new_pattern/g</span>                     <span class="co"># Replaces return signs</span></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="ex">:%s/pattern/\r/g</span>                         <span class="co"># Replace pattern with return signs!!</span></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="ex">:%s/\(\n\)/\1\1/g</span>                        <span class="co"># Insert additional return signs</span></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="ex">:%s/\(^At\dg\d\d\d\d\d.\d\t.\{-}\t.\{-}\t.\{-}\t.\{-}\t\).\{-}\t/\1/g</span>  <span class="co"># Replaces content between 5th and 6th tab (5th column), '{-}' turns off 'greedy' behavior</span></span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="ex">:#,#s/\(</span> <span class="dt">\{</span>-} <span class="dt">\|\.\|\n\)</span>/\1/g            <span class="co"># Performs simple word count in specified range of text</span></span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a><span class="ex">:%s/\(E\{6,\}\)/</span><span class="op">&lt;</span>font color=<span class="st">"green"</span><span class="op">&gt;</span><span class="dt">\1</span><span class="op">&lt;</span><span class="dt">\/</span>font<span class="op">&gt;</span>/g  <span class="co"># Highlight pattern in html colors, here highlighting of &gt;= 6 occurences of Es</span></span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a><span class="ex">:%s/\([A-Z]\)/\l\1/g</span>                     <span class="co"># Change uppercase to lowercase, '%s/\([A-Z]\)/\u\1/g' does the opposite</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Uses ‘global’ command to apply replace function only on those lines that match a certain pattern. The ‘copy $’ command after the pipe ‘|’ prints all matching lines at the end of the file.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">:g/my_pattern/</span> s/\(<span class="pp">[</span><span class="ss">A</span><span class="pp">-</span><span class="ss">Z</span><span class="pp">]</span><span class="dt">\)</span>/\l\1/g <span class="kw">|</span> <span class="ex">copy</span> $</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Command ‘args’ places all relevant files in the argument list (buffer); ‘all’ displays each file in separate split window; command ‘argdo’ applies replacement to all files in argument list (buffer); flag ‘e’ is necessary to avoid stop at error messages for files with no matches; command ‘update’ saves all changes to files that were updated.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">:args</span> <span class="pp">*</span>.txt <span class="kw">|</span> <span class="ex">all</span> <span class="kw">|</span> <span class="ex">argdo</span> %s/\old_pat/new_pat/ge <span class="kw">|</span> <span class="ex">update</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="utilities" class="level3">
+<h3 class="anchored" data-anchor-id="utilities">Utilities</h3>
+<ul>
+<li>Matching Parentheses
+<ul>
+<li>Place cursor on (, [ or { and type % # cursor moves to matching parentheses</li>
+</ul></li>
+<li>Printing and Inserting Files
+<ul>
+<li><code>:ha # Prints entire file</code></li>
+<li><code>:#,#ha # Prints specified lines: #,#</code></li>
+<li><code>:r &lt;filename&gt; # Inserts content of specified file after cursor</code></li>
+</ul></li>
+<li>Convert Text File to HTML Format
+<ul>
+<li><code>:runtime! syntax/2html.vim # Run this command with open file in Vim</code></li>
+</ul></li>
+<li>Shell Commands in Vim
+<ul>
+<li><code>:!&lt;SHELL_COMMAND&gt; &lt;ENTER&gt; # Executes any shell command, hit &lt;enter&gt; to return</code></li>
+<li><code>:sh # Switches window to shell, 'exit' switches back to vim</code></li>
+</ul></li>
+<li>Using Vim as Table Editor
+<ul>
+<li><code>v</code> starts visual mode for selecting characters</li>
+<li><code>V</code> starts visual mode for selecting lines`</li>
+<li><code>CTRL-V</code> starts visual mode for selecting blocks (use CTRL-q in gVim under Windows). This allows column-wise selections and operations like inserting and deleting columns. To restrict substitute commands to a column, one can select it and switch to the command-line by typing <code>:</code>. After this the substitution syntax for a selected block looks like this: <code>'&lt;,'&gt;s///.</code></li>
+<li><code>:set scrollbind</code> starts simultaneous scrolling of ‘vsplitted’ files. To set to horizontal binding of files, use command <code>:set scrollopt=hor</code> (after first one). Run all these commands before the <code>:split</code> command.</li>
+<li><code>:AlignCtrl I= \t</code> then <code>:%Align</code> This allows to align tables by column separators (here ’) when the <a href="http://vim.sourceforge.net/scripts/script.php?script_id=294">Align utility from Charles Campbell’s</a> is installed. To sort table rows by selected lines or block, perform the visual select and then hit F3 key. The rest is interactive. To enable this function, one has to include in the <code>.vimrc</code> file the <a href="https://cluster.hpcc.ucr.edu/~tgirke/Documents/UNIX/vim/vim_sort_fct.txt">Vim sort script</a> from Gerald Lai.</li>
+</ul></li>
+</ul>
+</section>
+<section id="settings" class="level3">
+<h3 class="anchored" data-anchor-id="settings">Settings</h3>
+<p>The default settings in Vim are controlled by the <code>.vimrc</code> file in your home directory.</p>
+<ul>
+<li>see last chapter of vimtutor (start from shell)</li>
+<li>useful <a href="http://phuzz.org/vimrc.html">.vimrc sample</a></li>
+<li>when vim starts to respond very slowly then one may need to delete the <code>.viminf*</code> files in home directory</li>
+</ul>
+</section>
+<section id="help-1" class="level3">
+<h3 class="anchored" data-anchor-id="help-1">Help</h3>
+<ul>
+<li>Online Help
+<ul>
+<li>Find help on the web. Google will find answers to most questions on <strong>vi</strong> and <strong>vim</strong> (try searching for both terms).</li>
+<li><a href="https://engineering.purdue.edu/ECN/Support/KB/Docs/ViTextEditorTutorial">Purdue University Vi Tutorial</a></li>
+<li>Animated Vim Tutorial: https://linuxconfig.org/vim-tutorial</li>
+<li>Useful list of vim commands:
+<ul>
+<li><a href="http://www.fprintf.net/vimCheatSheet.html">Vim Commands Cheat Sheet</a></li>
+<li><a href="http://tnerual.eriogerg.free.fr/vimqrc.pdf">VimCard</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<p>You can run a tutor from the command Line:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vimtutor</span>      <span class="co"># Open vim tutorial from shell, ":q" to quit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can also get help from within Vim:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="ex">:help</span>                <span class="co"># opens help within vim, hit :q to get back to your file</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="ex">:help</span> <span class="op">&lt;</span>topic<span class="op">&gt;</span>        # opens help on specified topic</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="ex">:help_topic</span><span class="kw">|</span> <span class="ex">CTRL-]</span>  <span class="co"># when you are in help this command opens help topic specified between |...|,</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>                     <span class="co"># CTRL-t brings you back to last topic</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="ex">:help</span> <span class="op">&lt;</span>topic<span class="op">&gt;</span> CTRL-D <span class="co"># gives list of help topics that contain key word</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="bu">:</span> <span class="op">&lt;</span>up-down keys<span class="op">&gt;</span>     # like in shell you get recent commands!!!!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<ul>
+<li><a href="https://protocols.hostmicrobe.org/bash">Bash basics</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center"><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2021-2024 Guorui Zhong ~ Made with <a href="https://www.r-project.org/"><i class="fa-brands fa-r-project" aria-label="r-project"></i></a> and <a href="https://quarto.org/">Quarto</a></span></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
