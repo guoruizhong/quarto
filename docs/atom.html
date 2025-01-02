@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Guorui Zhong - Guorui Zhong’s blog</title>
+<title>Guorui Zhong’s blog – Guorui Zhong</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -36,10 +36,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-cee8642dd6abb73bb51e0193ec9c0780.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a122eddc3d35102178d4fe042f5b75d5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -48,7 +48,12 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -57,6 +62,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -93,73 +99,100 @@ ul.task-list li input[type="checkbox"] {
   })
   </script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="alternate" type="application/rss+xml" title="Guorui Zhong's blog" href="atom.xml"></head>
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="alternate" type="application/rss+xml" title="Guorui Zhong's blog" href="atom.xml" data-external="1"></head>
 
 <body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Guorui Zhong</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html" rel="" target="">
- <span class="menu-text">About</span></a>
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./blog/index.html" rel="" target="">
- <span class="menu-text">Blog</span></a>
+    <a class="nav-link" href="./blog/index.html"> 
+<span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./crispr/index.html" rel="" target="">
- <span class="menu-text">CRISPR</span></a>
+    <a class="nav-link" href="./crispr/index.html"> 
+<span class="menu-text">CRISPR</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./keyboard/index.html" rel="" target="">
- <span class="menu-text">Keyboard</span></a>
+    <a class="nav-link" href="./keyboard/index.html"> 
+<span class="menu-text">Keyboard</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./python/index.html" rel="" target="">
- <span class="menu-text">Python</span></a>
+    <a class="nav-link" href="./python/index.html"> 
+<span class="menu-text">Python</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./r/index.html" rel="" target="">
- <span class="menu-text">R</span></a>
+    <a class="nav-link" href="./r/index.html"> 
+<span class="menu-text">R</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://scholar.google.com/citations?user=g0MfTPMAAAAJ&amp;hl=en" rel="" target=""><i class="bi bi-journal-check" role="img" aria-label="journal-check">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=g0MfTPMAAAAJ&amp;hl=en"> <i class="bi bi-journal-check" role="img" aria-label="journal-check">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/guorui-zhong-754761185/" rel="" target=""><i class="bi bi-linkedin" role="img" aria-label="linkedin">
+    <a class="nav-link" href="https://www.linkedin.com/in/guorui-zhong-754761185/"> <i class="bi bi-linkedin" role="img" aria-label="linkedin">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/guoruizhong" rel="" target=""><i class="bi bi-github" role="img" aria-label="github">
+    <a class="nav-link" href="https://github.com/guoruizhong"> <i class="bi bi-github" role="img" aria-label="github">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -186,7 +219,9 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+
 </header>
+
 
 
 
@@ -194,25 +229,65 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="parallel" data-listing-date-sort="1717516800000" data-listing-file-modified-sort="1718884708346" data-listing-date-modified-sort="1718884708000" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="0" data-categories="c3Zt" data-listing-date-sort="1719763200000" data-listing-file-modified-sort="1725583400000" data-listing-date-modified-sort="1725583400000" data-listing-reading-time-sort="1" data-listing-word-count-sort="116">
 <div class="thumbnail">
-<p><a href="./blog/2024/06/05/index.html"> <img src="./blog/2024/06/05/mapping.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2024/07/01/index.html" class="no-external"></a></p><a href="./blog/2024/07/01/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./blog/2024/07/01/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2024/06/05/index.html">
 <h3 class="no-anchor listing-title">
-Parallel Processing in R
+<a href="./blog/2024/07/01/index.html" class="no-external">Simple SVM classification example in R</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2024/07/01/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-
+<a href="./blog/2024/07/01/index.html" class="no-external">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">parallel</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">lme4</span><span class="op">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: Matrix</code></pre>
 </div>
 </a>
 </div>
+</div>
 <div class="metadata">
-<a href="./blog/2024/06/05/index.html">
+<a href="./blog/2024/07/01/index.html" class="no-external">
+<div class="listing-date">
+Jul 1, 2024
+</div>
+<div class="listing-author">
+Guorui Zhong
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="cGFyYWxsZWw=" data-listing-date-sort="1717516800000" data-listing-file-modified-sort="1718884708346" data-listing-date-modified-sort="1718884708000" data-listing-reading-time-sort="1" data-listing-word-count-sort="116">
+<div class="thumbnail">
+<p><a href="./blog/2024/06/05/index.html" class="no-external"></a></p><a href="./blog/2024/06/05/index.html" class="no-external">
+<p><img loading="lazy" src="./blog/2024/06/05/mapping.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2024/06/05/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./blog/2024/06/05/index.html" class="no-external">Parallel Processing in R</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./blog/2024/06/05/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./blog/2024/06/05/index.html" class="no-external">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">parallel</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">lme4</span><span class="op">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: Matrix</code></pre>
+</div>
+</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./blog/2024/06/05/index.html" class="no-external">
 <div class="listing-date">
 Jun 5, 2024
 </div>
@@ -222,25 +297,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="density" data-listing-date-sort="1715356800000" data-listing-file-modified-sort="1715690497729" data-listing-date-modified-sort="1715690497000" data-listing-reading-time-sort="7">
+<div class="quarto-post image-right" data-index="2" data-categories="ZGVuc2l0eQ==" data-listing-date-sort="1715356800000" data-listing-file-modified-sort="1715690497729" data-listing-date-modified-sort="1715690497000" data-listing-reading-time-sort="7" data-listing-word-count-sort="1260">
 <div class="thumbnail">
-<p><a href="./blog/2024/05/13/index.html"> <img src="./blog/2024/05/13/2d_density.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2024/05/13/index.html" class="no-external"></a></p><a href="./blog/2024/05/13/index.html" class="no-external">
+<p><img loading="lazy" src="./blog/2024/05/13/2d_density.jpg" class="thumbnail-image"></p>
+</a><p><a href="./blog/2024/05/13/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2024/05/13/index.html">
 <h3 class="no-anchor listing-title">
-Plot scatter plot with 2D density
+<a href="./blog/2024/05/13/index.html" class="no-external">Plot scatter plot with 2D density</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2024/05/13/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>2d density plot is helpful for examining the connection between 2 numerical variables. It divides the plot area into several little fragments to prevent overlapping (as in the scatterplot next to it) and shows the number of points in each fragment.</p>
+<a href="./blog/2024/05/13/index.html" class="no-external">2d density plot is helpful for examining the connection between 2 numerical variables. It divides the plot area into several little fragments to prevent overlapping (as in the scatterplot next to it) and shows the number of points in each fragment.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2024/05/13/index.html">
+<a href="./blog/2024/05/13/index.html" class="no-external">
 <div class="listing-date">
 May 11, 2024
 </div>
@@ -250,25 +325,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="proteomic,normalization" data-listing-date-sort="1715097600000" data-listing-file-modified-sort="1715259889263" data-listing-date-modified-sort="1715259889000" data-listing-reading-time-sort="11">
+<div class="quarto-post image-right" data-index="3" data-categories="cHJvdGVvbWljJTJDbm9ybWFsaXphdGlvbg==" data-listing-date-sort="1715097600000" data-listing-file-modified-sort="1715259889263" data-listing-date-modified-sort="1715259889000" data-listing-reading-time-sort="11" data-listing-word-count-sort="2081">
 <div class="thumbnail">
-<p><a href="./blog/2024/05/08/index.html"> <img src="./blog/2024/05/08/somalogic.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2024/05/08/index.html" class="no-external"></a></p><a href="./blog/2024/05/08/index.html" class="no-external">
+<p><img loading="lazy" src="./blog/2024/05/08/somalogic.jpg" class="thumbnail-image"></p>
+</a><p><a href="./blog/2024/05/08/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2024/05/08/index.html">
 <h3 class="no-anchor listing-title">
-Normalization example for SomaLogic proteomic data
+<a href="./blog/2024/05/08/index.html" class="no-external">Normalization example for SomaLogic proteomic data</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2024/05/08/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>Raw SomaScan Assay data may contain systematic biases from many sources, such as variation introduced by the readout, pipetting errors, inherent sample variation, or consumable reagent changes. Standardization is an important tool for removing nuisance variance</p>
+<a href="./blog/2024/05/08/index.html" class="no-external">Raw SomaScan Assay data may contain systematic biases from many sources, such as variation introduced by the readout, pipetting errors, inherent sample variation, or consumable reagent changes. Standardization is an important tool for removing nuisance variance</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2024/05/08/index.html">
+<a href="./blog/2024/05/08/index.html" class="no-external">
 <div class="listing-date">
 May 8, 2024
 </div>
@@ -278,25 +353,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="mIF" data-listing-date-sort="1713369600000" data-listing-file-modified-sort="1715257661483" data-listing-date-modified-sort="1715257661000" data-listing-reading-time-sort="48">
+<div class="quarto-post image-right" data-index="4" data-categories="bUlG" data-listing-date-sort="1713369600000" data-listing-file-modified-sort="1715257661483" data-listing-date-modified-sort="1715257661000" data-listing-reading-time-sort="48" data-listing-word-count-sort="9496">
 <div class="thumbnail">
-<p><a href="./blog/2024/04/18/index.html"> <img src="./blog/2024/04/18/image-profile.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2024/04/18/index.html" class="no-external"></a></p><a href="./blog/2024/04/18/index.html" class="no-external">
+<p><img loading="lazy" src="./blog/2024/04/18/image-profile.jpg" class="thumbnail-image"></p>
+</a><p><a href="./blog/2024/04/18/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2024/04/18/index.html">
 <h3 class="no-anchor listing-title">
-Multiplex image-based phenotypic data analysis
+<a href="./blog/2024/04/18/index.html" class="no-external">Multiplex image-based phenotypic data analysis</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2024/04/18/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-IMC example data is from here
+<a href="./blog/2024/04/18/index.html" class="no-external">IMC example data is from here</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2024/04/18/index.html">
+<a href="./blog/2024/04/18/index.html" class="no-external">
 <div class="listing-date">
 Apr 18, 2024
 </div>
@@ -306,25 +381,32 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="scrna,paper" data-listing-date-sort="1712073600000" data-listing-file-modified-sort="1714394883478" data-listing-date-modified-sort="1714394883000" data-listing-reading-time-sort="38">
+<div class="quarto-post image-right" data-index="5" data-categories="c2NybmElMkNwYXBlcg==" data-listing-date-sort="1712073600000" data-listing-file-modified-sort="1714394883478" data-listing-date-modified-sort="1714394883000" data-listing-reading-time-sort="38" data-listing-word-count-sort="7451">
 <div class="thumbnail">
-<p><a href="./blog/2024/04/03/index.html"> <img src="./blog/2024/04/03/BCexh.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2024/04/03/index.html" class="no-external"></a></p><a href="./blog/2024/04/03/index.html" class="no-external">
+<p><img loading="lazy" src="./blog/2024/04/03/BCexh.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2024/04/03/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2024/04/03/index.html">
 <h3 class="no-anchor listing-title">
-A comprehensive single-cell map of T cell exhaustion-associated immune environments in human breast cancer
+<a href="./blog/2024/04/03/index.html" class="no-external">A comprehensive single-cell map of T cell exhaustion-associated immune environments in human breast cancer</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2024/04/03/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-
+<a href="./blog/2024/04/03/index.html" class="no-external">
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Install and Load required packages</span></span>
+<span><span class="co"># if (!any(rownames(installed.packages()) == "DoubletFinder")){</span></span>
+<span><span class="co">#   remotes::install_github('chris-mcginnis-ucsf/DoubletFinder')</span></span>
+<span><span class="co"># }</span></span>
+<span></span>
+<span><span class="kw">…</span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="kw"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="kw"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="kw"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="kw"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="kw"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="kw"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="kw"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="kw"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="kw"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="kw"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="kw"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="kw"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="kw"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="kw"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="kw"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="kw"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="kw"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="kw"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="kw"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="kw"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span></span><span><span class="fu"></span><span class="op"></span><span class="op"></span><span class="fl"></span><span class="op"></span></span><span><span class="va"></span><span class="op"></span><span class="fu"></span><span class="op"></span><span class="st"></span><span class="op"></span></span></code></pre></div></div></a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2024/04/03/index.html">
+<a href="./blog/2024/04/03/index.html" class="no-external">
 <div class="listing-date">
 Apr 3, 2024
 </div>
@@ -334,25 +416,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="seurat,scrna" data-listing-date-sort="1710691200000" data-listing-file-modified-sort="1712749014000" data-listing-date-modified-sort="1712749014000" data-listing-reading-time-sort="13">
+<div class="quarto-post image-right" data-index="6" data-categories="c2V1cmF0JTJDc2NybmE=" data-listing-date-sort="1710691200000" data-listing-file-modified-sort="1712749014000" data-listing-date-modified-sort="1712749014000" data-listing-reading-time-sort="13" data-listing-word-count-sort="2498">
 <div class="thumbnail">
-<p><a href="./blog/2024/03/01/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+<p><a href="./blog/2024/03/01/index.html" class="no-external"></a></p><a href="./blog/2024/03/01/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./blog/2024/03/01/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2024/03/01/index.html">
 <h3 class="no-anchor listing-title">
-Seurat V5 | 10X course example
+<a href="./blog/2024/03/01/index.html" class="no-external">Seurat V5 | 10X course example</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2024/03/01/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-Seurat Example
+<a href="./blog/2024/03/01/index.html" class="no-external">Seurat Example</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2024/03/01/index.html">
+<a href="./blog/2024/03/01/index.html" class="no-external">
 <div class="listing-date">
 Mar 18, 2024
 </div>
@@ -362,25 +444,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="scrna" data-listing-date-sort="1710432000000" data-listing-file-modified-sort="1715260499239" data-listing-date-modified-sort="1715260499000" data-listing-reading-time-sort="5">
+<div class="quarto-post image-right" data-index="7" data-categories="c2NybmE=" data-listing-date-sort="1710432000000" data-listing-file-modified-sort="1715260499239" data-listing-date-modified-sort="1715260499000" data-listing-reading-time-sort="5" data-listing-word-count-sort="975">
 <div class="thumbnail">
-<p><a href="./blog/2024/03/15/index.html"> <img src="./blog/2024/03/15/singlecellexperiment.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2024/03/15/index.html" class="no-external"></a></p><a href="./blog/2024/03/15/index.html" class="no-external">
+<p><img loading="lazy" src="./blog/2024/03/15/singlecellexperiment.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2024/03/15/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2024/03/15/index.html">
 <h3 class="no-anchor listing-title">
-Analysis of single cell RNA-seq data with {SingleCellExperiment}
+<a href="./blog/2024/03/15/index.html" class="no-external">Analysis of single cell RNA-seq data with {SingleCellExperiment}</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2024/03/15/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>Using SingleCellExperiment object to analysis single cell data</p>
+<a href="./blog/2024/03/15/index.html" class="no-external">Using SingleCellExperiment object to analysis single cell data</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2024/03/15/index.html">
+<a href="./blog/2024/03/15/index.html" class="no-external">
 <div class="listing-date">
 Mar 15, 2024
 </div>
@@ -390,25 +472,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="scrna" data-listing-date-sort="1710259200000" data-listing-file-modified-sort="1713941181000" data-listing-date-modified-sort="1713941181000" data-listing-reading-time-sort="7">
+<div class="quarto-post image-right" data-index="8" data-categories="c2NybmE=" data-listing-date-sort="1710259200000" data-listing-file-modified-sort="1713941181000" data-listing-date-modified-sort="1713941181000" data-listing-reading-time-sort="7" data-listing-word-count-sort="1259">
 <div class="thumbnail">
-<p><a href="./blog/2024/03/13/index.html"> <img src="./blog/2024/03/13/workflow.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2024/03/13/index.html" class="no-external"></a></p><a href="./blog/2024/03/13/index.html" class="no-external">
+<p><img loading="lazy" src="./blog/2024/03/13/workflow.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2024/03/13/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2024/03/13/index.html">
 <h3 class="no-anchor listing-title">
-SingleCellExperiment | Practise Single-cell RNA-seq data analysis
+<a href="./blog/2024/03/13/index.html" class="no-external">SingleCellExperiment | Practise Single-cell RNA-seq data analysis</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2024/03/13/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-All the contents are credited or adapted from Orchestrating Single-Cell Analysis with Bioconductor for leaning purpose.
+<a href="./blog/2024/03/13/index.html" class="no-external">All the contents are credited or adapted from Orchestrating Single-Cell Analysis with Bioconductor for leaning purpose.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2024/03/13/index.html">
+<a href="./blog/2024/03/13/index.html" class="no-external">
 <div class="listing-date">
 Mar 13, 2024
 </div>
@@ -418,25 +500,65 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-categories="r,ggplot2,cairo" data-listing-date-sort="1701532800000" data-listing-file-modified-sort="1702726788000" data-listing-date-modified-sort="1702726788000" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="9" data-categories="ciUyQ3Njcm5hJTJDcHNldWRvYnVsaw==" data-listing-date-sort="1701964800000" data-listing-file-modified-sort="1728184270886" data-listing-date-modified-sort="1728184270000" data-listing-reading-time-sort="4" data-listing-word-count-sort="751">
 <div class="thumbnail">
-<p><a href="./blog/2023/12/03/index.html"> <img src="./blog/2023/12/03/cairo.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/12/08/index.html" class="no-external"></a></p><a href="./blog/2023/12/08/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./blog/2023/12/08/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/12/03/index.html">
 <h3 class="no-anchor listing-title">
-Save ggplot2 plots with custom fonts using Cairo graphics across OS
+<a href="./blog/2023/12/08/index.html" class="no-external">Pseudobulk differential expression analysis</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/12/08/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>The Cairo graphics library makes it easy to embed custom fonts in PDFs and create high resolution PNGs (with either AGG or Cairo).</p>
+<a href="./blog/2023/12/08/index.html" class="no-external">
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Load packages</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">ExperimentHub</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">Seurat</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">DESeq2</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">data.table</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">tidyverse</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## retrieve data</span></span>
+<span><span class="va">eh</span> <span class="op">&lt;-</span> <span class="fu">ExperimentHub</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">…</span><span class="op"></span><span class="va"></span><span class="st"></span><span class="op"></span></span><span></span><span><span class="va"></span><span class="op"></span><span class="va"></span><span class="op"></span><span class="st"></span><span class="op"></span><span class="op"></span></span><span><span class="va"></span><span class="op"></span><span class="fu"></span><span class="op"></span><span class="va"></span><span class="op"></span><span class="cn"></span><span class="op"></span></span><span><span class="fu"></span><span class="op"></span><span class="va"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span></span><span><span class="co"></span></span><span><span class="va"></span><span class="op"></span><span class="va"></span><span class="op"></span><span class="fu"></span><span class="op"></span><span class="va"></span><span class="op"></span><span class="st"></span><span class="op"></span></span><span><span class="fu"></span><span class="op"></span><span class="va"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span></span><span><span class="co"></span></span><span><span class="va"></span><span class="op"></span><span class="fu"></span><span class="op"></span></span><span><span class="va"></span></span><span><span class="op"></span><span class="va"></span><span class="op"></span><span class="fl"></span><span class="op"></span><span class="va"></span><span class="op"></span><span class="fl"></span><span class="op"></span></span><span><span class="va"></span><span class="op"></span><span class="fl"></span><span class="op"></span></span><span><span class="va"></span><span class="op"></span><span class="fl"></span><span class="op"></span></span><span><span class="va"></span><span class="op"></span><span class="st"></span></span><span><span class="op"></span></span><span><span class="fu"></span><span class="op"></span><span class="fu"></span><span class="op"></span><span class="va"></span><span class="op"></span><span class="op"></span><span class="fu"></span><span class="op"></span><span class="va"></span><span class="op"></span><span class="st"></span><span class="op"></span></span><span></span><span><span class="co"></span></span><span><span class="va"></span><span class="op"></span><span class="fu"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="va"></span><span class="op"></span><span class="fu"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="va"></span><span class="op"></span><span class="fu"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="va"></span><span class="op"></span><span class="fu"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="fu"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="va"></span><span class="op"></span><span class="fu"></span><span class="op"></span><span class="va"></span><span class="op"></span><span class="fl"></span><span class="op"></span><span class="fl"></span><span class="op"></span></span><span></span><span><span class="co"></span></span><span><span class="va"></span><span class="op"></span><span class="fu"></span><span class="op"></span></span><span><span class="va"></span><span class="op"></span><span class="st"></span><span class="op"></span><span class="st"></span><span class="op"></span><span class="cn"></span></span><span><span class="op"></span></span><span><span class="va"></span><span class="op"></span><span class="fu"></span><span class="op"></span><span class="va"></span><span class="op"></span><span class="st"></span><span class="op"></span><span class="st"></span><span class="op"></span></span><span></span><span><span class="va"></span><span class="op"></span><span class="va"></span></span><span></span><span><span class="co"></span></span></code></pre></div></div></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./blog/2023/12/08/index.html" class="no-external">
+<div class="listing-date">
+Dec 8, 2023
+</div>
+<div class="listing-author">
+Guorui Zhong
 </div>
 </a>
 </div>
+</div>
+<div class="quarto-post image-right" data-index="10" data-categories="ciUyQ2dncGxvdDIlMkNjYWlybw==" data-listing-date-sort="1701532800000" data-listing-file-modified-sort="1702726788000" data-listing-date-modified-sort="1702726788000" data-listing-reading-time-sort="2" data-listing-word-count-sort="281">
+<div class="thumbnail">
+<p><a href="./blog/2023/12/03/index.html" class="no-external"></a></p><a href="./blog/2023/12/03/index.html" class="no-external">
+<p><img loading="lazy" src="./blog/2023/12/03/cairo.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/12/03/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./blog/2023/12/03/index.html" class="no-external">Save ggplot2 plots with custom fonts using Cairo graphics across OS</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./blog/2023/12/03/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./blog/2023/12/03/index.html" class="no-external">The Cairo graphics library makes it easy to embed custom fonts in PDFs and create high resolution PNGs (with either AGG or Cairo).</a>
+</div>
+</div>
 <div class="metadata">
-<a href="./blog/2023/12/03/index.html">
+<a href="./blog/2023/12/03/index.html" class="no-external">
 <div class="listing-date">
 Dec 3, 2023
 </div>
@@ -446,25 +568,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="seurat,ggplot2" data-listing-date-sort="1701446400000" data-listing-file-modified-sort="1714397248888" data-listing-date-modified-sort="1714397248000" data-listing-reading-time-sort="18">
+<div class="quarto-post image-right" data-index="11" data-categories="c2V1cmF0JTJDZ2dwbG90Mg==" data-listing-date-sort="1701446400000" data-listing-file-modified-sort="1714397248888" data-listing-date-modified-sort="1714397248000" data-listing-reading-time-sort="18" data-listing-word-count-sort="3469">
 <div class="thumbnail">
-<p><a href="./blog/2023/12/02/index.html"> <img src="./blog/2023/12/02/umap.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/12/02/index.html" class="no-external"></a></p><a href="./blog/2023/12/02/index.html" class="no-external">
+<p><img loading="lazy" src="./blog/2023/12/02/umap.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/12/02/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/12/02/index.html">
 <h3 class="no-anchor listing-title">
-Customization of Seurat plots using ggplot2
+<a href="./blog/2023/12/02/index.html" class="no-external">Customization of Seurat plots using ggplot2</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/12/02/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>The DimPlot, FeaturePlot, Dotplot, VlnPlot, and DoHeatmap from Seurat can be further customized with ggplot2.</p>
+<a href="./blog/2023/12/02/index.html" class="no-external">The DimPlot, FeaturePlot, Dotplot, VlnPlot, and DoHeatmap from Seurat can be further customized with ggplot2.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/12/02/index.html">
+<a href="./blog/2023/12/02/index.html" class="no-external">
 <div class="listing-date">
 Dec 2, 2023
 </div>
@@ -474,25 +596,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="10" data-categories="colors,ggplot2" data-listing-date-sort="1701360000000" data-listing-file-modified-sort="1704895636000" data-listing-date-modified-sort="1704895636000" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="12" data-categories="Y29sb3JzJTJDZ2dwbG90Mg==" data-listing-date-sort="1701360000000" data-listing-file-modified-sort="1704895636000" data-listing-date-modified-sort="1704895636000" data-listing-reading-time-sort="2" data-listing-word-count-sort="313">
 <div class="thumbnail">
-<p><a href="./blog/2023/12/01/index.html"> <img src="./blog/2023/12/01/colorblind_palette.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/12/01/index.html" class="no-external"></a></p><a href="./blog/2023/12/01/index.html" class="no-external">
+<p><img loading="lazy" src="./blog/2023/12/01/colorblind_palette.jpg" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/12/01/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/12/01/index.html">
 <h3 class="no-anchor listing-title">
-Use colorblind-friendly palette for visualization
+<a href="./blog/2023/12/01/index.html" class="no-external">Use colorblind-friendly palette for visualization</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/12/01/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>Use ggplot2 to make nice coordinate, colors, and size with friendly colors.</p>
+<a href="./blog/2023/12/01/index.html" class="no-external">Use ggplot2 to make nice coordinate, colors, and size with friendly colors.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/12/01/index.html">
+<a href="./blog/2023/12/01/index.html" class="no-external">
 <div class="listing-date">
 Dec 1, 2023
 </div>
@@ -502,25 +624,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="11" data-categories="linux" data-listing-date-sort="1701187200000" data-listing-file-modified-sort="1702710614000" data-listing-date-modified-sort="1702710614000" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="13" data-categories="bGludXg=" data-listing-date-sort="1701187200000" data-listing-file-modified-sort="1702710614000" data-listing-date-modified-sort="1702710614000" data-listing-reading-time-sort="1" data-listing-word-count-sort="74">
 <div class="thumbnail">
-<p><a href="./blog/2023/11/29/index.html"> <img src="./blog/2023/11/29/htop.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/11/29/index.html" class="no-external"></a></p><a href="./blog/2023/11/29/index.html" class="no-external">
+<p><img loading="lazy" src="./blog/2023/11/29/htop.jpg" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/11/29/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/11/29/index.html">
 <h3 class="no-anchor listing-title">
-Visual the usage of CPU and memory with htop
+<a href="./blog/2023/11/29/index.html" class="no-external">Visual the usage of CPU and memory with htop</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/11/29/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>htop is an interactive process viewer and system monitor.</p>
+<a href="./blog/2023/11/29/index.html" class="no-external">htop is an interactive process viewer and system monitor.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/11/29/index.html">
+<a href="./blog/2023/11/29/index.html" class="no-external">
 <div class="listing-date">
 Nov 29, 2023
 </div>
@@ -530,25 +652,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="12" data-categories="seurat" data-listing-date-sort="1701014400000" data-listing-file-modified-sort="1704895639000" data-listing-date-modified-sort="1704895639000" data-listing-reading-time-sort="5">
+<div class="quarto-post image-right" data-index="14" data-categories="c2V1cmF0" data-listing-date-sort="1701014400000" data-listing-file-modified-sort="1704895639000" data-listing-date-modified-sort="1704895639000" data-listing-reading-time-sort="5" data-listing-word-count-sort="997">
 <div class="thumbnail">
-<p><a href="./blog/2023/11/27/index.html"> <img src="./blog/2023/11/27/seurat_banner.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/11/27/index.html" class="no-external"></a></p><a href="./blog/2023/11/27/index.html" class="no-external">
+<p><img loading="lazy" src="./blog/2023/11/27/seurat_banner.jpg" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/11/27/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/11/27/index.html">
 <h3 class="no-anchor listing-title">
-Practise Seurat for single cell data analysis
+<a href="./blog/2023/11/27/index.html" class="no-external">Practise Seurat for single cell data analysis</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/11/27/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>Practise scRNA data analysis with Genome Medicine using Seurat package.</p>
+<a href="./blog/2023/11/27/index.html" class="no-external">Practise scRNA data analysis with Genome Medicine using Seurat package.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/11/27/index.html">
+<a href="./blog/2023/11/27/index.html" class="no-external">
 <div class="listing-date">
 Nov 27, 2023
 </div>
@@ -558,25 +680,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="13" data-categories="r,scRNA-seq" data-listing-date-sort="1700928000000" data-listing-file-modified-sort="1702726738000" data-listing-date-modified-sort="1702726738000" data-listing-reading-time-sort="10">
+<div class="quarto-post image-right" data-index="15" data-categories="ciUyQ3NjUk5BLXNlcQ==" data-listing-date-sort="1700928000000" data-listing-file-modified-sort="1702726738000" data-listing-date-modified-sort="1702726738000" data-listing-reading-time-sort="10" data-listing-word-count-sort="1947">
 <div class="thumbnail">
-<p><a href="./blog/2023/11/26/index.html"> <img src="./blog/2023/11/26/harmony.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/11/26/index.html" class="no-external"></a></p><a href="./blog/2023/11/26/index.html" class="no-external">
+<p><img loading="lazy" src="./blog/2023/11/26/harmony.jpg" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/11/26/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/11/26/index.html">
 <h3 class="no-anchor listing-title">
-Learning Harmony to integrate single cell RNA-seq data for batch borrection and meta analysis
+<a href="./blog/2023/11/26/index.html" class="no-external">Learning Harmony to integrate single cell RNA-seq data for batch borrection and meta analysis</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/11/26/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>Harmony allow integrating data across several variables (for example, by experimental batch and by condition), and significant gain in speed and lower memory requirements for integration of large datasets.</p>
+<a href="./blog/2023/11/26/index.html" class="no-external">Harmony allow integrating data across several variables (for example, by experimental batch and by condition), and significant gain in speed and lower memory requirements for integration of large datasets.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/11/26/index.html">
+<a href="./blog/2023/11/26/index.html" class="no-external">
 <div class="listing-date">
 Nov 26, 2023
 </div>
@@ -586,25 +708,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="14" data-categories="r,seurat,scRNA-seq" data-listing-date-sort="1700841600000" data-listing-file-modified-sort="1702730781000" data-listing-date-modified-sort="1702730781000" data-listing-reading-time-sort="6">
+<div class="quarto-post image-right" data-index="16" data-categories="ciUyQ3NldXJhdCUyQ3NjUk5BLXNlcQ==" data-listing-date-sort="1700841600000" data-listing-file-modified-sort="1702730781000" data-listing-date-modified-sort="1702730781000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1012">
 <div class="thumbnail">
-<p><a href="./blog/2023/11/25/index.html"> <img src="./blog/2023/11/25/umap.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/11/25/index.html" class="no-external"></a></p><a href="./blog/2023/11/25/index.html" class="no-external">
+<p><img loading="lazy" src="./blog/2023/11/25/umap.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/11/25/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/11/25/index.html">
 <h3 class="no-anchor listing-title">
-Learning Seruat for scRNA-seq data analysis
+<a href="./blog/2023/11/25/index.html" class="no-external">Learning Seruat for scRNA-seq data analysis</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/11/25/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>The package that must to learn for scRNA-seq data analysis.</p>
+<a href="./blog/2023/11/25/index.html" class="no-external">The package that must to learn for scRNA-seq data analysis.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/11/25/index.html">
+<a href="./blog/2023/11/25/index.html" class="no-external">
 <div class="listing-date">
 Nov 25, 2023
 </div>
@@ -614,25 +736,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="15" data-categories="r,ggbeeswarm" data-listing-date-sort="1699804800000" data-listing-file-modified-sort="1702729191000" data-listing-date-modified-sort="1702729191000" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="17" data-categories="ciUyQ2dnYmVlc3dhcm0=" data-listing-date-sort="1699804800000" data-listing-file-modified-sort="1702729191000" data-listing-date-modified-sort="1702729191000" data-listing-reading-time-sort="3" data-listing-word-count-sort="592">
 <div class="thumbnail">
-<p><a href="./blog/2023/11/13/index.html"> <img src="./blog/2023/11/13/beeswarm.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/11/13/index.html" class="no-external"></a></p><a href="./blog/2023/11/13/index.html" class="no-external">
+<p><img loading="lazy" src="./blog/2023/11/13/beeswarm.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/11/13/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/11/13/index.html">
 <h3 class="no-anchor listing-title">
-Using ggbeeswarm plot to represent categorical data
+<a href="./blog/2023/11/13/index.html" class="no-external">Using ggbeeswarm plot to represent categorical data</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/11/13/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>The plot shows all data points with a color-code for each replicate, as well as the averages of each replicate, the total average and the SEM.</p>
+<a href="./blog/2023/11/13/index.html" class="no-external">The plot shows all data points with a color-code for each replicate, as well as the averages of each replicate, the total average and the SEM.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/11/13/index.html">
+<a href="./blog/2023/11/13/index.html" class="no-external">
 <div class="listing-date">
 Nov 13, 2023
 </div>
@@ -642,53 +764,31 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="16" data-categories="r,svm" data-listing-date-sort="1699459200000" data-listing-file-modified-sort="1716678696536" data-listing-date-modified-sort="1716678696000" data-listing-reading-time-sort="5">
+<div class="quarto-post image-right" data-index="18" data-categories="cg==" data-listing-date-sort="1698940800000" data-listing-file-modified-sort="1700137019000" data-listing-date-modified-sort="1700137019000" data-listing-reading-time-sort="1" data-listing-word-count-sort="92">
 <div class="thumbnail">
-<p><a href="./blog/2023/11/09/index.html"> <img src="./blog/2023/11/09/svm.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/11/03/index.html" class="no-external"></a></p><a href="./blog/2023/11/03/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./blog/2023/11/03/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/11/09/index.html">
 <h3 class="no-anchor listing-title">
-Support Vector Machine
+<a href="./blog/2023/11/03/index.html" class="no-external">Best Practise for R programming</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/11/03/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>SVM takes groups of observations and construct boundaries to predict which group future observations belong to based on their measurements.</p>
+<a href="./blog/2023/11/03/index.html" class="no-external">
+<li>Variables = my_variable</li>
+<li>Functions = RunThisStuffs()</li>
+<li>Constants = CONSTANTS</li>
+<li>Use 4 spaces (and not tab) for indentations</li>
+<li>Always writing documentation above function definition</li>
+<li>…</li><li></li><li></li><li><code></code></li><li><code></code></li><li></li><li><code></code><code></code></li><li></li><li><code></code></li><li></li></a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/11/09/index.html">
-<div class="listing-date">
-Nov 9, 2023
-</div>
-<div class="listing-author">
-Guorui Zhong
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="17" data-categories="r" data-listing-date-sort="1698940800000" data-listing-file-modified-sort="1700137019000" data-listing-date-modified-sort="1700137019000" data-listing-reading-time-sort="1">
-<div class="thumbnail">
-<p><a href="./blog/2023/11/03/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./blog/2023/11/03/index.html">
-<h3 class="no-anchor listing-title">
-Best Practise for R programming
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./blog/2023/11/03/index.html">
+<a href="./blog/2023/11/03/index.html" class="no-external">
 <div class="listing-date">
 Nov 3, 2023
 </div>
@@ -698,25 +798,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="18" data-categories="scRNA-seq" data-listing-date-sort="1696089600000" data-listing-file-modified-sort="1697440375000" data-listing-date-modified-sort="1697440375000" data-listing-reading-time-sort="12">
+<div class="quarto-post image-right" data-index="19" data-categories="c2NSTkEtc2Vx" data-listing-date-sort="1696089600000" data-listing-file-modified-sort="1697440375000" data-listing-date-modified-sort="1697440375000" data-listing-reading-time-sort="12" data-listing-word-count-sort="2384">
 <div class="thumbnail">
-<p><a href="./blog/2023/10/01/index.html"> <img src="./blog/2023/10/01/scRNAseq.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/10/01/index.html" class="no-external"></a></p><a href="./blog/2023/10/01/index.html" class="no-external">
+<p><img loading="lazy" src="./blog/2023/10/01/scRNAseq.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/10/01/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/10/01/index.html">
 <h3 class="no-anchor listing-title">
-General understanding of scRNA-seq data analysis
+<a href="./blog/2023/10/01/index.html" class="no-external">General understanding of scRNA-seq data analysis</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/10/01/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-Typical workflows including:
+<a href="./blog/2023/10/01/index.html" class="no-external">Typical workflows including:</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/10/01/index.html">
+<a href="./blog/2023/10/01/index.html" class="no-external">
 <div class="listing-date">
 Oct 1, 2023
 </div>
@@ -726,25 +826,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="19" data-categories="vim,linux" data-listing-date-sort="1691683200000" data-listing-file-modified-sort="1694096025000" data-listing-date-modified-sort="1694096025000" data-listing-reading-time-sort="4">
+<div class="quarto-post image-right" data-index="20" data-categories="dmltJTJDbGludXg=" data-listing-date-sort="1691683200000" data-listing-file-modified-sort="1694096025000" data-listing-date-modified-sort="1694096025000" data-listing-reading-time-sort="4" data-listing-word-count-sort="702">
 <div class="thumbnail">
-<p><a href="./blog/2023/08/11/index.html"> <img src="./blog/2023/08/11/vim.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/08/11/index.html" class="no-external"></a></p><a href="./blog/2023/08/11/index.html" class="no-external">
+<p><img loading="lazy" src="./blog/2023/08/11/vim.jpg" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/08/11/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/08/11/index.html">
 <h3 class="no-anchor listing-title">
-Commonly used Vim commands
+<a href="./blog/2023/08/11/index.html" class="no-external">Commonly used Vim commands</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/08/11/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>a list of essential Vim commands that could be used every day</p>
+<a href="./blog/2023/08/11/index.html" class="no-external">a list of essential Vim commands that could be used every day</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/08/11/index.html">
+<a href="./blog/2023/08/11/index.html" class="no-external">
 <div class="listing-date">
 Aug 11, 2023
 </div>
@@ -754,25 +854,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="20" data-categories="batch effect" data-listing-date-sort="1691510400000" data-listing-file-modified-sort="1699530649000" data-listing-date-modified-sort="1699530649000" data-listing-reading-time-sort="6">
+<div class="quarto-post image-right" data-index="21" data-categories="YmF0Y2glMjBlZmZlY3Q=" data-listing-date-sort="1691510400000" data-listing-file-modified-sort="1699530649000" data-listing-date-modified-sort="1699530649000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1108">
 <div class="thumbnail">
-<p><a href="./blog/2023/08/09/index.html"> <img src="./blog/2023/08/09/index.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/08/09/index.html" class="no-external"></a></p><a href="./blog/2023/08/09/index.html" class="no-external">
+<p><img loading="lazy" src="./blog/2023/08/09/index.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/08/09/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/08/09/index.html">
 <h3 class="no-anchor listing-title">
-Combat to remove batch effects in high-throughput experiments
+<a href="./blog/2023/08/09/index.html" class="no-external">Combat to remove batch effects in high-throughput experiments</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/08/09/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>Comat models batch effects as multiplicative and additive noise to the biological signal and uses a Bayesian framework to fit linear models that factor such noise out of the readouts.</p>
+<a href="./blog/2023/08/09/index.html" class="no-external">Comat models batch effects as multiplicative and additive noise to the biological signal and uses a Bayesian framework to fit linear models that factor such noise out of the readouts.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/08/09/index.html">
+<a href="./blog/2023/08/09/index.html" class="no-external">
 <div class="listing-date">
 Aug 9, 2023
 </div>
@@ -782,25 +882,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="21" data-categories="r,renv" data-listing-date-sort="1691424000000" data-listing-file-modified-sort="1694159773000" data-listing-date-modified-sort="1694159773000" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="22" data-categories="ciUyQ3JlbnY=" data-listing-date-sort="1691424000000" data-listing-file-modified-sort="1694159773000" data-listing-date-modified-sort="1694159773000" data-listing-reading-time-sort="1" data-listing-word-count-sort="165">
 <div class="thumbnail">
-<p><a href="./blog/2023/08/08/index.html"> <img src="./blog/2023/08/08/renv.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/08/08/index.html" class="no-external"></a></p><a href="./blog/2023/08/08/index.html" class="no-external">
+<p><img loading="lazy" src="./blog/2023/08/08/renv.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/08/08/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/08/08/index.html">
 <h3 class="no-anchor listing-title">
-Using renv to manage R environment for reproducible coding
+<a href="./blog/2023/08/08/index.html" class="no-external">Using renv to manage R environment for reproducible coding</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/08/08/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-R works by defaultly by installing packages to a central library and shares them between the projects. It sounds like a good and time-saving feature. After all, you don’t…
+<a href="./blog/2023/08/08/index.html" class="no-external">R works by defaultly by installing packages to a central library and shares them between the projects. It sounds like a good and time-saving feature. After all, you don’t…</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/08/08/index.html">
+<a href="./blog/2023/08/08/index.html" class="no-external">
 <div class="listing-date">
 Aug 8, 2023
 </div>
@@ -810,25 +910,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="22" data-categories="linux,conda" data-listing-date-sort="1691337600000" data-listing-file-modified-sort="1697463342000" data-listing-date-modified-sort="1697463342000" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="23" data-categories="bGludXglMkNjb25kYQ==" data-listing-date-sort="1691337600000" data-listing-file-modified-sort="1697463342000" data-listing-date-modified-sort="1697463342000" data-listing-reading-time-sort="3" data-listing-word-count-sort="402">
 <div class="thumbnail">
-<p><a href="./blog/2023/08/07/index.html"> <img src="./blog/2023/08/07/conda.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/08/07/index.html" class="no-external"></a></p><a href="./blog/2023/08/07/index.html" class="no-external">
+<p><img loading="lazy" src="./blog/2023/08/07/conda.jpg" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/08/07/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/08/07/index.html">
 <h3 class="no-anchor listing-title">
-Install Conda to manage R/Python environments and packages
+<a href="./blog/2023/08/07/index.html" class="no-external">Install Conda to manage R/Python environments and packages</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/08/07/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>Sometimes, We need to install R in the Linux server, but we don’t the root permission</p>
+<a href="./blog/2023/08/07/index.html" class="no-external">Sometimes, We need to install R in the Linux server, but we don’t the root permission</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/08/07/index.html">
+<a href="./blog/2023/08/07/index.html" class="no-external">
 <div class="listing-date">
 Aug 7, 2023
 </div>
@@ -838,25 +938,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="23" data-categories="r,pca,plsda,supervised" data-listing-date-sort="1688486400000" data-listing-file-modified-sort="1702726619000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9">
+<div class="quarto-post image-right" data-index="24" data-categories="ciUyQ3BjYSUyQ3Bsc2RhJTJDc3VwZXJ2aXNlZA==" data-listing-date-sort="1688486400000" data-listing-file-modified-sort="1702726619000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1649">
 <div class="thumbnail">
-<p><a href="./blog/2023/07/05/index.html"> <img src="./blog/2023/07/05/plsda.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/07/05/index.html" class="no-external"></a></p><a href="./blog/2023/07/05/index.html" class="no-external">
+<p><img loading="lazy" src="./blog/2023/07/05/plsda.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/07/05/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/07/05/index.html">
 <h3 class="no-anchor listing-title">
-Learning [ropls] for multivariate analysis and feature selection of omics data
+<a href="./blog/2023/07/05/index.html" class="no-external">Learning [ropls] for multivariate analysis and feature selection of omics data</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/07/05/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-PCA (also called eigenvector analysis) is unsupervised pattern recognition technique mostly utilized as data reduction and modelling technique. It determines the degree or…
+<a href="./blog/2023/07/05/index.html" class="no-external">PCA (also called eigenvector analysis) is unsupervised pattern recognition technique mostly utilized as data reduction and modelling technique. It determines the degree or…</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/07/05/index.html">
+<a href="./blog/2023/07/05/index.html" class="no-external">
 <div class="listing-date">
 Jul 5, 2023
 </div>
@@ -866,25 +966,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="24" data-categories="r" data-listing-date-sort="1688400000000" data-listing-file-modified-sort="1702728654000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="25" data-categories="cg==" data-listing-date-sort="1688400000000" data-listing-file-modified-sort="1702728654000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="514">
 <div class="thumbnail">
-<p><a href="./blog/2023/07/04/index.html"> <img src="./blog/2023/07/04/pca.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/07/04/index.html" class="no-external"></a></p><a href="./blog/2023/07/04/index.html" class="no-external">
+<p><img loading="lazy" data-src="./blog/2023/07/04/pca.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/07/04/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/07/04/index.html">
 <h3 class="no-anchor listing-title">
-Analyze Omics data using [structToolbox]
+<a href="./blog/2023/07/04/index.html" class="no-external">Analyze Omics data using [structToolbox]</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/07/04/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-The MTBLS79 dataset represents a systematic evaluation of the reproducibility of a multi-batch direct-infusion mass spectrometry (DIMS)-based metabolomics study of cardiac…
+<a href="./blog/2023/07/04/index.html" class="no-external">The MTBLS79 dataset represents a systematic evaluation of the reproducibility of a multi-batch direct-infusion mass spectrometry (DIMS)-based metabolomics study of cardiac…</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/07/04/index.html">
+<a href="./blog/2023/07/04/index.html" class="no-external">
 <div class="listing-date">
 Jul 4, 2023
 </div>
@@ -894,25 +994,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="25" data-categories="r,regex" data-listing-date-sort="1686153600000" data-listing-file-modified-sort="1702726593000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="26" data-categories="ciUyQ3JlZ2V4" data-listing-date-sort="1686153600000" data-listing-file-modified-sort="1702726593000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="216">
 <div class="thumbnail">
-<p><a href="./blog/2023/06/08/index.html"> <img data-src="./blog/2023/06/08/reg.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/06/08/index.html" class="no-external"></a></p><a href="./blog/2023/06/08/index.html" class="no-external">
+<p><img loading="lazy" data-src="./blog/2023/06/08/reg.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/06/08/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/06/08/index.html">
 <h3 class="no-anchor listing-title">
-Regular expression with R
+<a href="./blog/2023/06/08/index.html" class="no-external">Regular expression with R</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/06/08/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-Regular expressions are also called regex or regexp. A regex is a text string that defines a search…
+<a href="./blog/2023/06/08/index.html" class="no-external">Regular expressions are also called regex or regexp. A regex is a text string that defines a search pattern. Regex can be used to manipulate and extract information from…</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/06/08/index.html">
+<a href="./blog/2023/06/08/index.html" class="no-external">
 <div class="listing-date">
 Jun 8, 2023
 </div>
@@ -922,25 +1022,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="26" data-categories="r,ggplot2,shapes" data-listing-date-sort="1685203200000" data-listing-file-modified-sort="1702726584000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="27" data-categories="ciUyQ2dncGxvdDIlMkNzaGFwZXM=" data-listing-date-sort="1685203200000" data-listing-file-modified-sort="1702726584000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="193">
 <div class="thumbnail">
-<p><a href="./blog/2023/05/28/index.html"> <img data-src="./blog/2023/05/28/shape.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/05/28/index.html" class="no-external"></a></p><a href="./blog/2023/05/28/index.html" class="no-external">
+<p><img loading="lazy" data-src="./blog/2023/05/28/shape.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/05/28/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/05/28/index.html">
 <h3 class="no-anchor listing-title">
-Tips for using shapes for ggplot2
+<a href="./blog/2023/05/28/index.html" class="no-external">Tips for using shapes for ggplot2</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/05/28/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>Change ggplot point shape values. Use special point shapes, including pch 21 and pch 24. The interesting feature of these point symbols is that you can change their background fill color and, their border line type and color</p>
+<a href="./blog/2023/05/28/index.html" class="no-external">Change ggplot point shape values. Use special point shapes, including pch 21 and pch 24. The interesting feature of these point symbols is that you can change their background fill color and, their border line type and color</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/05/28/index.html">
+<a href="./blog/2023/05/28/index.html" class="no-external">
 <div class="listing-date">
 May 28, 2023
 </div>
@@ -950,25 +1050,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="27" data-categories="plsda,supervised" data-listing-date-sort="1685203200000" data-listing-file-modified-sort="1694160547000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="28" data-categories="cGxzZGElMkNzdXBlcnZpc2Vk" data-listing-date-sort="1685203200000" data-listing-file-modified-sort="1694160547000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="45">
 <div class="thumbnail">
-<p><a href="./blog/2023/06/07/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+<p><a href="./blog/2023/06/07/index.html" class="no-external"></a></p><a href="./blog/2023/06/07/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./blog/2023/06/07/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/06/07/index.html">
 <h3 class="no-anchor listing-title">
-PCA, PLS-DA and OPLS-DA analysis using [ropls]
+<a href="./blog/2023/06/07/index.html" class="no-external">PCA, PLS-DA and OPLS-DA analysis using [ropls]</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/06/07/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-
+<a href="./blog/2023/06/07/index.html" class="no-external"></a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/06/07/index.html">
+<a href="./blog/2023/06/07/index.html" class="no-external">
 <div class="listing-date">
 May 28, 2023
 </div>
@@ -978,25 +1078,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="28" data-categories="r,pca,unsupervised,dimensional reduction" data-listing-date-sort="1684339200000" data-listing-file-modified-sort="1702726553000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="quarto-post image-right" data-index="29" data-categories="ciUyQ3BjYSUyQ3Vuc3VwZXJ2aXNlZCUyQ2RpbWVuc2lvbmFsJTIwcmVkdWN0aW9u" data-listing-date-sort="1684339200000" data-listing-file-modified-sort="1702726553000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="721">
 <div class="thumbnail">
-<p><a href="./blog/2023/05/18/index.html"> <img data-src="./blog/2023/05/18/pca_biplot.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/05/18/index.html" class="no-external"></a></p><a href="./blog/2023/05/18/index.html" class="no-external">
+<p><img loading="lazy" data-src="./blog/2023/05/18/pca_biplot.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/05/18/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/05/18/index.html">
 <h3 class="no-anchor listing-title">
-PCA Graph Customization
+<a href="./blog/2023/05/18/index.html" class="no-external">PCA Graph Customization</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/05/18/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>Arguments to customize the PCA graph of variables and individuals.</p>
+<a href="./blog/2023/05/18/index.html" class="no-external">Arguments to customize the PCA graph of variables and individuals.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/05/18/index.html">
+<a href="./blog/2023/05/18/index.html" class="no-external">
 <div class="listing-date">
 May 18, 2023
 </div>
@@ -1006,25 +1106,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="29" data-categories="r,pca,unsupervised,dimensional reduction" data-listing-date-sort="1684252800000" data-listing-file-modified-sort="1702726546000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="quarto-post image-right" data-index="30" data-categories="ciUyQ3BjYSUyQ3Vuc3VwZXJ2aXNlZCUyQ2RpbWVuc2lvbmFsJTIwcmVkdWN0aW9u" data-listing-date-sort="1684252800000" data-listing-file-modified-sort="1702726546000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="877">
 <div class="thumbnail">
-<p><a href="./blog/2023/05/17/index.html"> <img data-src="./blog/2023/05/17/p.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/05/17/index.html" class="no-external"></a></p><a href="./blog/2023/05/17/index.html" class="no-external">
+<p><img loading="lazy" data-src="./blog/2023/05/17/p.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/05/17/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/05/17/index.html">
 <h3 class="no-anchor listing-title">
-Perform Principal Component Analysis
+<a href="./blog/2023/05/17/index.html" class="no-external">Perform Principal Component Analysis</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/05/17/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>Principle component methods are used to summarize and viusalize the information contained in a large multivariate datasets.</p>
+<a href="./blog/2023/05/17/index.html" class="no-external">Principle component methods are used to summarize and viusalize the information contained in a large multivariate datasets.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/05/17/index.html">
+<a href="./blog/2023/05/17/index.html" class="no-external">
 <div class="listing-date">
 May 17, 2023
 </div>
@@ -1034,25 +1134,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="30" data-categories="r,complexheatmap,unsupervised" data-listing-date-sort="1683043200000" data-listing-file-modified-sort="1702726527000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="quarto-post image-right" data-index="31" data-categories="ciUyQ2NvbXBsZXhoZWF0bWFwJTJDdW5zdXBlcnZpc2Vk" data-listing-date-sort="1683043200000" data-listing-file-modified-sort="1702726527000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="631">
 <div class="thumbnail">
-<p><a href="./blog/2023/05/03/index.html"> <img data-src="./blog/2023/05/03/heatmap.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/05/03/index.html" class="no-external"></a></p><a href="./blog/2023/05/03/index.html" class="no-external">
+<p><img loading="lazy" data-src="./blog/2023/05/03/heatmap.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/05/03/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/05/03/index.html">
 <h3 class="no-anchor listing-title">
-Make heatmap using ComplexHeatmap
+<a href="./blog/2023/05/03/index.html" class="no-external">Make heatmap using ComplexHeatmap</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/05/03/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>Heatmap (or heat map) is way to visualize hierarchical clustering. It’s also called a false colored image, where data values are transformed to color scale.</p>
+<a href="./blog/2023/05/03/index.html" class="no-external">Heatmap (or heat map) is way to visualize hierarchical clustering. It’s also called a false colored image, where data values are transformed to color scale.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/05/03/index.html">
+<a href="./blog/2023/05/03/index.html" class="no-external">
 <div class="listing-date">
 May 3, 2023
 </div>
@@ -1062,25 +1162,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="31" data-categories="linux,tmux,screen" data-listing-date-sort="1681056000000" data-listing-file-modified-sort="1702723945000" data-listing-date-modified-sort="1702723945000" data-listing-reading-time-sort="8">
+<div class="quarto-post image-right" data-index="32" data-categories="bGludXglMkN0bXV4JTJDc2NyZWVu" data-listing-date-sort="1681056000000" data-listing-file-modified-sort="1702723945000" data-listing-date-modified-sort="1702723945000" data-listing-reading-time-sort="8" data-listing-word-count-sort="1478">
 <div class="thumbnail">
-<p><a href="./blog/2023/04/10/index.html"> <img data-src="./blog/2023/04/10/tmux_introduction.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/04/10/index.html" class="no-external"></a></p><a href="./blog/2023/04/10/index.html" class="no-external">
+<p><img loading="lazy" data-src="./blog/2023/04/10/tmux_introduction.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/04/10/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/04/10/index.html">
 <h3 class="no-anchor listing-title">
-Using Tmux and Screen for Persistent Terminal in VSCode Remote Session
+<a href="./blog/2023/04/10/index.html" class="no-external">Using Tmux and Screen for Persistent Terminal in VSCode Remote Session</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/04/10/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>The solution is to set the default terminal provider on the remote settings to be tmux, and have it attach to either an existing session named main, or create a new one if it doesn’t exist.</p>
+<a href="./blog/2023/04/10/index.html" class="no-external">The solution is to set the default terminal provider on the remote settings to be tmux, and have it attach to either an existing session named main, or create a new one if it doesn’t exist.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/04/10/index.html">
+<a href="./blog/2023/04/10/index.html" class="no-external">
 <div class="listing-date">
 Apr 10, 2023
 </div>
@@ -1090,25 +1190,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="32" data-categories="r" data-listing-date-sort="1680624000000" data-listing-file-modified-sort="1703992033000" data-listing-date-modified-sort="1680624000000" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="33" data-categories="cg==" data-listing-date-sort="1680624000000" data-listing-file-modified-sort="1703992033000" data-listing-date-modified-sort="1680624000000" data-listing-reading-time-sort="2" data-listing-word-count-sort="339">
 <div class="thumbnail">
-<p><a href="./blog/2023/04/05/index.html"> <img data-src="./blog/2023/04/05/scale.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/04/05/index.html" class="no-external"></a></p><a href="./blog/2023/04/05/index.html" class="no-external">
+<p><img loading="lazy" data-src="./blog/2023/04/05/scale.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/04/05/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/04/05/index.html">
 <h3 class="no-anchor listing-title">
-The best way to perform feature scaling using R
+<a href="./blog/2023/04/05/index.html" class="no-external">The best way to perform feature scaling using R</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/04/05/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>Data normalization methods are used to make variables, measured in different scales, have comparable values. This preprocessing steps is important for clustering and heatmap visualization, principal component analysis and other machine learning algorithms based on distance measures.</p>
+<a href="./blog/2023/04/05/index.html" class="no-external">Data normalization methods are used to make variables, measured in different scales, have comparable values. This preprocessing steps is important for clustering and heatmap visualization, principal component analysis and other machine learning algorithms based on distance measures.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/04/05/index.html">
+<a href="./blog/2023/04/05/index.html" class="no-external">
 <div class="listing-date">
 Apr 5, 2023
 </div>
@@ -1118,25 +1218,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="33" data-categories="r,p-value,ggplot2" data-listing-date-sort="1680192000000" data-listing-file-modified-sort="1702726486000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7">
+<div class="quarto-post image-right" data-index="34" data-categories="ciUyQ3AtdmFsdWUlMkNnZ3Bsb3Qy" data-listing-date-sort="1680192000000" data-listing-file-modified-sort="1702726486000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1384">
 <div class="thumbnail">
-<p><a href="./blog/2023/03/31/index.html"> <img data-src="./blog/2023/03/31/plot.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/03/31/index.html" class="no-external"></a></p><a href="./blog/2023/03/31/index.html" class="no-external">
+<p><img loading="lazy" data-src="./blog/2023/03/31/plot.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/03/31/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/03/31/index.html">
 <h3 class="no-anchor listing-title">
-Add p-value and significant level at facet boxplot
+<a href="./blog/2023/03/31/index.html" class="no-external">Add p-value and significant level at facet boxplot</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/03/31/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-How to compute and add p-values to basic ggplots using the rstatix and the ggpubr R packages.
+<a href="./blog/2023/03/31/index.html" class="no-external">How to compute and add p-values to basic ggplots using the rstatix and the ggpubr R packages.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/03/31/index.html">
+<a href="./blog/2023/03/31/index.html" class="no-external">
 <div class="listing-date">
 Mar 31, 2023
 </div>
@@ -1146,25 +1246,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="34" data-categories="r,ggplot2,p-value" data-listing-date-sort="1680105600000" data-listing-file-modified-sort="1702726470000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8">
+<div class="quarto-post image-right" data-index="35" data-categories="ciUyQ2dncGxvdDIlMkNwLXZhbHVl" data-listing-date-sort="1680105600000" data-listing-file-modified-sort="1702726470000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1597">
 <div class="thumbnail">
-<p><a href="./blog/2023/03/30/index.html"> <img data-src="./blog/2023/03/30/plot.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/03/30/index.html" class="no-external"></a></p><a href="./blog/2023/03/30/index.html" class="no-external">
+<p><img loading="lazy" data-src="./blog/2023/03/30/plot.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/03/30/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/03/30/index.html">
 <h3 class="no-anchor listing-title">
-Add p-values onto basic barplot or boxplot
+<a href="./blog/2023/03/30/index.html" class="no-external">Add p-values onto basic barplot or boxplot</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/03/30/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-How to compute and add p-values to basic ggplots using the rstatix and the ggpubr R packages.
+<a href="./blog/2023/03/30/index.html" class="no-external">How to compute and add p-values to basic ggplots using the rstatix and the ggpubr R packages.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/03/30/index.html">
+<a href="./blog/2023/03/30/index.html" class="no-external">
 <div class="listing-date">
 Mar 30, 2023
 </div>
@@ -1174,25 +1274,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="35" data-categories="r,barplot" data-listing-date-sort="1678464000000" data-listing-file-modified-sort="1702726440000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="36" data-categories="ciUyQ2JhcnBsb3Q=" data-listing-date-sort="1678464000000" data-listing-file-modified-sort="1702726440000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="420">
 <div class="thumbnail">
-<p><a href="./blog/2023/03/11/index.html"> <img data-src="./blog/2023/03/11/plot.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/03/11/index.html" class="no-external"></a></p><a href="./blog/2023/03/11/index.html" class="no-external">
+<p><img loading="lazy" data-src="./blog/2023/03/11/plot.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/03/11/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/03/11/index.html">
 <h3 class="no-anchor listing-title">
-Barplot with negative and positive value
+<a href="./blog/2023/03/11/index.html" class="no-external">Barplot with negative and positive value</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/03/11/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-Coloring Negative and Positive Bars Differently using ggplot2
+<a href="./blog/2023/03/11/index.html" class="no-external">Coloring Negative and Positive Bars Differently using ggplot2</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/03/11/index.html">
+<a href="./blog/2023/03/11/index.html" class="no-external">
 <div class="listing-date">
 Mar 11, 2023
 </div>
@@ -1202,25 +1302,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="36" data-categories="r,ggplot2" data-listing-date-sort="1678204800000" data-listing-file-modified-sort="1702726431000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="37" data-categories="ciUyQ2dncGxvdDI=" data-listing-date-sort="1678204800000" data-listing-file-modified-sort="1702726431000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="598">
 <div class="thumbnail">
-<p><a href="./blog/2023/03/08/index.html"> <img data-src="./blog/2023/03/08/plot.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/03/08/index.html" class="no-external"></a></p><a href="./blog/2023/03/08/index.html" class="no-external">
+<p><img loading="lazy" data-src="./blog/2023/03/08/plot.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/03/08/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/03/08/index.html">
 <h3 class="no-anchor listing-title">
-Ridgeline plots in ggplot2
+<a href="./blog/2023/03/08/index.html" class="no-external">Ridgeline plots in ggplot2</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/03/08/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-Visualizing changes in distributions over time or space nicely usning ggrigges.
+<a href="./blog/2023/03/08/index.html" class="no-external">Visualizing changes in distributions over time or space nicely usning ggrigges.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/03/08/index.html">
+<a href="./blog/2023/03/08/index.html" class="no-external">
 <div class="listing-date">
 Mar 8, 2023
 </div>
@@ -1230,25 +1330,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="37" data-categories="r,ggplot2" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1702726404000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="38" data-categories="ciUyQ2dncGxvdDI=" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1702726404000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="422">
 <div class="thumbnail">
-<p><a href="./blog/2023/03/01/index.html"> <img data-src="./blog/2023/03/01/barplot.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/03/01/index.html" class="no-external"></a></p><a href="./blog/2023/03/01/index.html" class="no-external">
+<p><img loading="lazy" data-src="./blog/2023/03/01/barplot.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/03/01/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/03/01/index.html">
 <h3 class="no-anchor listing-title">
-Equalizing Bar Widths
+<a href="./blog/2023/03/01/index.html" class="no-external">Equalizing Bar Widths</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/03/01/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-Make the widths of bars to be same when the level of subgroups are not equal
+<a href="./blog/2023/03/01/index.html" class="no-external">Make the widths of bars to be same when the level of subgroups are not equal</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/03/01/index.html">
+<a href="./blog/2023/03/01/index.html" class="no-external">
 <div class="listing-date">
 Mar 6, 2023
 </div>
@@ -1258,25 +1358,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="38" data-categories="r,p-value,ggplot2" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1702726422000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7">
+<div class="quarto-post image-right" data-index="39" data-categories="ciUyQ3AtdmFsdWUlMkNnZ3Bsb3Qy" data-listing-date-sort="1678032000000" data-listing-file-modified-sort="1702726422000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1302">
 <div class="thumbnail">
-<p><a href="./blog/2023/03/06/index.html"> <img data-src="./blog/2023/03/06/plot.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/03/06/index.html" class="no-external"></a></p><a href="./blog/2023/03/06/index.html" class="no-external">
+<p><img loading="lazy" data-src="./blog/2023/03/06/plot.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/03/06/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/03/06/index.html">
 <h3 class="no-anchor listing-title">
-ggplot2 with p-value and significant level
+<a href="./blog/2023/03/06/index.html" class="no-external">ggplot2 with p-value and significant level</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/03/06/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-A sample example to add p-value and significant level to barpot.
+<a href="./blog/2023/03/06/index.html" class="no-external">A sample example to add p-value and significant level to barpot.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/03/06/index.html">
+<a href="./blog/2023/03/06/index.html" class="no-external">
 <div class="listing-date">
 Mar 6, 2023
 </div>
@@ -1286,25 +1386,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="39" data-categories="r,ggplot2" data-listing-date-sort="1677945600000" data-listing-file-modified-sort="1702726395000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="quarto-post image-right" data-index="40" data-categories="ciUyQ2dncGxvdDI=" data-listing-date-sort="1677945600000" data-listing-file-modified-sort="1702726395000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="984">
 <div class="thumbnail">
-<p><a href="./blog/2023/03/05/index.html"> <img data-src="./blog/2023/03/05/plot.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2023/03/05/index.html" class="no-external"></a></p><a href="./blog/2023/03/05/index.html" class="no-external">
+<p><img loading="lazy" data-src="./blog/2023/03/05/plot.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2023/03/05/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2023/03/05/index.html">
 <h3 class="no-anchor listing-title">
-Scatter plot with ggplot2
+<a href="./blog/2023/03/05/index.html" class="no-external">Scatter plot with ggplot2</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2023/03/05/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-Make a nice scatter plot
+<a href="./blog/2023/03/05/index.html" class="no-external">Make a nice scatter plot</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2023/03/05/index.html">
+<a href="./blog/2023/03/05/index.html" class="no-external">
 <div class="listing-date">
 Mar 5, 2023
 </div>
@@ -1314,25 +1414,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="40" data-categories="r,plate" data-listing-date-sort="1659283200000" data-listing-file-modified-sort="1702726275000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="41" data-categories="ciUyQ3BsYXRl" data-listing-date-sort="1659283200000" data-listing-file-modified-sort="1702726275000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="192">
 <div class="thumbnail">
-<p><a href="./blog/2022/08/01/index.html"> <img data-src="./blog/2022/08/01/platetools.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2022/08/01/index.html" class="no-external"></a></p><a href="./blog/2022/08/01/index.html" class="no-external">
+<p><img loading="lazy" data-src="./blog/2022/08/01/platetools.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2022/08/01/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2022/08/01/index.html">
 <h3 class="no-anchor listing-title">
-View data from 96/384 multi-well plates
+<a href="./blog/2022/08/01/index.html" class="no-external">View data from 96/384 multi-well plates</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2022/08/01/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>plater makes it easy to work with data from experiments performed in plates.</p>
+<a href="./blog/2022/08/01/index.html" class="no-external">plater makes it easy to work with data from experiments performed in plates.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2022/08/01/index.html">
+<a href="./blog/2022/08/01/index.html" class="no-external">
 <div class="listing-date">
 Aug 1, 2022
 </div>
@@ -1342,25 +1442,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="41" data-categories="r,ggplot2" data-listing-date-sort="1651420800000" data-listing-file-modified-sort="1709363021000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="42" data-categories="ciUyQ2dncGxvdDI=" data-listing-date-sort="1651420800000" data-listing-file-modified-sort="1709363021000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="577">
 <div class="thumbnail">
-<p><a href="./blog/2022/05/02/index.html"> <img data-src="./blog/2022/05/02/truncated.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2022/05/02/index.html" class="no-external"></a></p><a href="./blog/2022/05/02/index.html" class="no-external">
+<p><img loading="lazy" data-src="./blog/2022/05/02/truncated.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2022/05/02/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2022/05/02/index.html">
 <h3 class="no-anchor listing-title">
-Make scatter plot with truncated axis
+<a href="./blog/2022/05/02/index.html" class="no-external">Make scatter plot with truncated axis</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2022/05/02/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>Make scatter plot more beautiful with truncated axis</p>
+<a href="./blog/2022/05/02/index.html" class="no-external">Make scatter plot more beautiful with truncated axis</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2022/05/02/index.html">
+<a href="./blog/2022/05/02/index.html" class="no-external">
 <div class="listing-date">
 May 2, 2022
 </div>
@@ -1370,25 +1470,33 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="42" data-categories="barplot,p-value" data-listing-date-sort="1643644800000" data-listing-file-modified-sort="1704895647000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="quarto-post image-right" data-index="43" data-categories="YmFycGxvdCUyQ3AtdmFsdWU=" data-listing-date-sort="1643644800000" data-listing-file-modified-sort="1704895647000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="761">
 <div class="thumbnail">
-<p><a href="./blog/2022/02/01/index.html"> <img data-src="./blog/2022/02/01/barplot.png" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2022/02/01/index.html" class="no-external"></a></p><a href="./blog/2022/02/01/index.html" class="no-external">
+<p><img loading="lazy" data-src="./blog/2022/02/01/barplot.png" class="thumbnail-image"></p>
+</a><p><a href="./blog/2022/02/01/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2022/02/01/index.html">
 <h3 class="no-anchor listing-title">
-Add errorbar and p-value on barplot with ggsignif
+<a href="./blog/2022/02/01/index.html" class="no-external">Add errorbar and p-value on barplot with ggsignif</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2022/02/01/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-
+<a href="./blog/2022/02/01/index.html" class="no-external">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">tidyverse</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">here</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">ggsignif</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">ggh4x</span><span class="op">)</span></span>
+<span><span class="va">dfb</span> <span class="op">&lt;-</span> <span class="fu">read.csv</span><span class="op">(</span><span class="fu">here</span><span class="op">(</span><span class="st">"projects"</span>, <span class="st">"data"</span>, <span class="st">"221001_barplot.csv"</span><span class="op">)</span>, header <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">dfb</span></span>
+<span><span class="co">##                   …</span></span><span><span class="co"></span></span><span><span class="co"></span></span><span><span class="co"></span></span><span><span class="co"></span></span><span><span class="va"></span><span class="op"></span><span class="va"></span><span class="op"></span></span><span><span class="fu"></span><span class="op"></span><span class="op"></span><span class="va"></span><span class="op"></span><span class="op"></span></span><span><span class="fu"></span><span class="op"></span><span class="va"></span><span class="va"></span><span class="op"></span><span class="op"></span></span><span><span class="fu"></span><span class="op"></span><span class="op"></span></span><span><span class="va"></span></span><span><span class="co"></span></span><span><span class="co"></span></span><span><span class="co"></span></span><span><span class="co"></span></span><span><span class="co"></span></span><span><span class="co"></span></span><span><span class="co"></span></span><span><span class="co"></span></span><span><span class="co"></span></span><span><span class="co"></span></span><span><span class="co"></span></span><span><span class="co"></span></span><span><span class="co"></span></span><span><span class="co"></span></span></code></pre></div></div></a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2022/02/01/index.html">
+<a href="./blog/2022/02/01/index.html" class="no-external">
 <div class="listing-date">
 Feb 1, 2022
 </div>
@@ -1398,25 +1506,25 @@ Guorui Zhong
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="43" data-categories="colors" data-listing-date-sort="1642780800000" data-listing-file-modified-sort="1702698149000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="44" data-categories="Y29sb3Jz" data-listing-date-sort="1642780800000" data-listing-file-modified-sort="1702698149000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="62">
 <div class="thumbnail">
-<p><a href="./blog/2022/01/22/index.html"> <img data-src="./blog/2022/01/22/colorblind_palette.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./blog/2022/01/22/index.html" class="no-external"></a></p><a href="./blog/2022/01/22/index.html" class="no-external">
+<p><img loading="lazy" data-src="./blog/2022/01/22/colorblind_palette.jpg" class="thumbnail-image"></p>
+</a><p><a href="./blog/2022/01/22/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./blog/2022/01/22/index.html">
 <h3 class="no-anchor listing-title">
-Use colorblind-friendly palette for visualization
+<a href="./blog/2022/01/22/index.html" class="no-external">Use colorblind-friendly palette for visualization</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./blog/2022/01/22/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>Use friendly colors in a graph with ggplot2</p>
+<a href="./blog/2022/01/22/index.html" class="no-external">Use friendly colors in a graph with ggplot2</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./blog/2022/01/22/index.html">
+<a href="./blog/2022/01/22/index.html" class="no-external">
 <div class="listing-date">
 Jan 22, 2022
 </div>
@@ -1469,18 +1577,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1512,11 +1609,48 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/guoruizhong\.github\.io\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1526,8 +1660,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1539,7 +1682,129 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1583,6 +1848,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1608,6 +1874,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1673,12 +1965,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center"><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2021-2024 Guorui Zhong ~ Made with <a href="https://www.r-project.org/"><i class="fa-brands fa-r-project" aria-label="r-project"></i></a> and <a href="https://quarto.org/">Quarto</a></span></div>
+    <div class="nav-footer-center">
+<p><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2021-2024 Guorui Zhong ~ Made with <a href="https://www.r-project.org/"><i class="fa-brands fa-r-project" aria-label="r-project"></i></a> and <a href="https://quarto.org/">Quarto</a></span></p>
+</div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+
 
 
 
